@@ -1,0 +1,70 @@
+.login_page {
+  h1 {
+    text-align: center;
+    margin-top: 100px;
+  }
+}
+
+.login_form {
+  max-width: 550px;
+  margin: 0 auto;
+  margin-top: 50px;
+
+  .login_inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input {
+      padding: 12px 20px;
+      border: 1px solid #000;
+      border-radius: 10px;
+    }
+  }
+
+  .forgot_pass {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .submit_login {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+
+    .remember_me {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    button {
+      background: #000;
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 10px;
+      width: 350px;
+    }
+  }
+}
+
+.google {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: #f7f7f7;
+  max-width: 120px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  margin: 0 auto;
+}

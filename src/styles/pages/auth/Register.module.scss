@@ -1,0 +1,46 @@
+.register_page {
+  h1 {
+    text-align: center;
+    margin-top: 100px;
+  }
+
+  .register_form {
+    margin: 0 auto;
+    max-width: 550px;
+    margin-top: 50px;
+
+    .register_inputs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        input {
+          padding: 12px 20px;
+          border: 1px solid #000;
+          border-radius: 10px;
+        }
+      }
+    }
+
+    .register_btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+
+      button {
+        background: #000;
+        color: #fff;
+        padding: 14px 36px;
+        border-radius: 10px;
+        width: 350px;
+      }
+    }
+  }
+}
