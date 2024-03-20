@@ -1,0 +1,31 @@
+.heroSection_page {
+  .heroSection_info {
+    h1 {
+      color: var(--black, #001526);
+      font-family: Helvetica;
+      font-size: 65px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+    .heroSection_info_span{
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      span {
+        /* Regular - 16 */
+        font-family: Helvetica;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+      }
+      div {
+        width: 3px;
+        align-self: stretch;
+        border-radius: 100px;
+        background: var(--orange, #FF7C00);
+      }
+    }
+  }
+}
