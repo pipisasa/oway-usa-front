@@ -2,19 +2,23 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useRouter } from "next/router";
+import AdminLayout from "../admin/AdminLayout";
 
 export default function Layout({ children }) {
-  const location = useRouter();
-  const path = location.pathname;
+  const router = useRouter();
+  const path = router.pathname;
 
-  const showHeaderAndFooter =
-    !path.startsWith("/admin") && !path.startsWith("/auth");
+  const isAdminPage = path.startsWith("/admin");
+
+  if (isAdminPage) {
+    return <AdminLayout>{children}</AdminLayout>;
+  }
 
   return (
     <>
-      {showHeaderAndFooter && <Header />}
+      <Header />
       <main className="container">{children}</main>
-      {showHeaderAndFooter && <Footer />}
+      <Footer />
     </>
   );
 }
