@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import s from "@/styles/admin/AddUsersModal.module.scss";
-import Modal from "../shared/Modal";
+import s from "@/styles/admin/Modal.module.scss";
+import Modal from "../../shared/Modal";
 
 export default function AddUsersModal() {
   const [isOpen, setIsOpen] = useState(false);

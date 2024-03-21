@@ -1,5 +1,5 @@
 import React from "react";
-import s from "@/styles/admin/AddUsersModal.module.scss";
+import s from "@/styles/admin/Modal.module.scss";
 import { RxCross2 } from "react-icons/rx";
 
 const Modal = ({ isOpen, onClose, children }) => {
