@@ -13,7 +13,7 @@ export default function Layout({ children }) {
   return (
     <>
       {showHeaderAndFooter && <Header />}
-      <main className="container">{children}</main>
+      <main>{children}</main>
       {showHeaderAndFooter && <Footer />}
     </>
   );

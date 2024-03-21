@@ -4,6 +4,11 @@ import { Inter } from "next/font/google";
 import Register from "./auth/register";
 import HeroSection from "../components/screens/main/HeroSection";
 import Login from "./auth/login";
+import Shops from "../components/screens/main/Shops";
+import TrackNumber from "../components/shared/TrackNumber";
+import Mission from "../components/screens/main/Mission";
+import AboutUs from "../components/screens/main/AboutUs";
+import StepWork from "../components/screens/main/StepWork";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +22,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
         <HeroSection/>
+        <Shops/>
+        <TrackNumber/>
+        <Mission/>
+        <AboutUs/>
+        <StepWork/>
       <main>hello world</main>
     </>
   );
