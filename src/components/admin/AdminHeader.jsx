@@ -3,7 +3,8 @@ import s from "@/styles/admin/AdminLayout.module.scss";
 import { useRouter } from "next/router";
 import { Avatar, Badge, Button } from "@nextui-org/react";
 import { NotificationIcon } from "./NotificationIcon";
-import AddUsersModal from "./AddUsersModal";
+import AddUsersModal from "./modals/AddUsersModal";
+import NotificationsModal from "./modals/NotificationsModal";
 
 export default function AdminHeader() {
   const router = useRouter();
@@ -30,14 +31,21 @@ export default function AdminHeader() {
     }
   };
 
+  const renderModal = () => {
+    if (router.pathname === "/admin/users") {
+      return <AddUsersModal />;
+    } else if (router.pathname === "/admin/notifications") {
+      return <NotificationsModal />;
+    }
+    return null;
+  };
+
   return (
     <header className={s.header}>
       <h3>{getPageHeader()}</h3>
 
       <div className={s.notification}>
-        <div>
-          <AddUsersModal />
-        </div>
+        <div>{renderModal()}</div>
         <Badge content="13" shape="circle" color="danger">
           <Button
             radius="full"
