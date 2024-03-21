@@ -2,11 +2,11 @@ import React from "react";
 import s from "@/styles/admin/AdminLayout.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Avatar, Badge, Button } from "@nextui-org/react";
-import { NotificationIcon } from "./NotificationIcon";
+import AdminHeader from "./AdminHeader";
 
 export default function AdminLayout({ children }) {
   const router = useRouter();
+
   const isActive = (path) => router.pathname === path;
 
   const links = [
@@ -40,31 +40,7 @@ export default function AdminLayout({ children }) {
         </div>
 
         <div className={s.admin_pages}>
-          <header className={s.header}>
-            <h3>
-              Здравствуйте, <span>(Имя)</span> 👋
-            </h3>
-
-            <div className={s.notification}>
-              <Badge content="13" shape="circle" color="danger">
-                <Button
-                  radius="full"
-                  isIconOnly
-                  aria-label="more than 99 notifications"
-                  variant="light"
-                  onClick={() => router.push("/admin/notifications")}
-                >
-                  <NotificationIcon size={24} />
-                </Button>
-              </Badge>
-
-              <Avatar
-                isBordered
-                radius="sm"
-                src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
-              />
-            </div>
-          </header>
+          <AdminHeader />
           <main>{children}</main>
         </div>
       </div>
