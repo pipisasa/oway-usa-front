@@ -5,6 +5,7 @@ import { Avatar, Badge, Button } from "@nextui-org/react";
 import { NotificationIcon } from "./NotificationIcon";
 import AddUsersModal from "./modals/AddUsersModal";
 import NotificationsModal from "./modals/NotificationsModal";
+import AddShopsModal from "./modals/AddShopsModal";
 
 export default function AdminHeader() {
   const router = useRouter();
@@ -36,6 +37,8 @@ export default function AdminHeader() {
       return <AddUsersModal />;
     } else if (router.pathname === "/admin/notifications") {
       return <NotificationsModal />;
+    } else if (router.pathname === "/admin/shops-catalog") {
+      return <AddShopsModal />;
     }
     return null;
   };

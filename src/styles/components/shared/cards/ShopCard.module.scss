@@ -1,0 +1,37 @@
+.card {
+  border-radius: 12px;
+  background: var(--white, #fff);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .cards_img {
+    height: 80px;
+    min-width: 80px;
+    border-radius: 12px;
+    background: #000;
+  }
+
+  .card_text {
+    h2 {
+      color: var(--black, #001526);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--black, #001526);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 140%;
+      margin-top: 10px;
+    }
+  }
+}
+
+.cards_list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
