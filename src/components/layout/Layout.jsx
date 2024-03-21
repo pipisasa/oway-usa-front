@@ -10,14 +10,20 @@ export default function Layout({ children }) {
 
   const isAdminPage = path.startsWith("/admin");
 
+  const isAuthPage = path.startsWith("/auth");
+
   if (isAdminPage) {
     return <AdminLayout>{children}</AdminLayout>;
+  }
+
+  if (isAuthPage) {
+    return <>{children}</>;
   }
 
   return (
     <>
       <Header />
-      <main className="container">{children}</main>
+      <main>{children}</main>
       <Footer />
     </>
   );
