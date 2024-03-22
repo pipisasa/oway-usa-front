@@ -9,6 +9,13 @@ import TrackNumber from "../components/shared/TrackNumber";
 import Mission from "../components/screens/main/Mission";
 import AboutUs from "../components/screens/main/AboutUs";
 import StepWork from "../components/screens/main/StepWork";
+import MoreInfo from "../components/screens/main/MoreInfo";
+import Advantage from "../components/screens/main/ Advantage";
+import MoreServices from "../components/screens/main/MoreServices";
+import Calculator from "../components/shared/Calculator";
+import Join from "../components/screens/main/Join";
+import Faq from "../components/partials/Faq";
+import Contacts from "../components/partials/Contacts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +34,13 @@ export default function Home() {
         <Mission/>
         <AboutUs/>
         <StepWork/>
+      <MoreInfo/>
+        <Advantage/>
+        <MoreServices/>
+        <Calculator/>
+        <Join/>
+      <Faq/>
+        <Contacts/>
       <main>hello world</main>
     </>
   );
