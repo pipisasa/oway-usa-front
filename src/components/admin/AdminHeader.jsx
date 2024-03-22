@@ -7,6 +7,7 @@ import AddUsersModal from "./modals/AddUsersModal";
 import NotificationsModal from "./modals/NotificationsModal";
 import AddShopsModal from "./modals/AddShopsModal";
 import ProductsModal from "./modals/ProductsModal";
+import WarehouseProductsModal from "./modals/WarehousesProductsModal";
 
 export default function AdminHeader() {
   const router = useRouter();
@@ -42,6 +43,8 @@ export default function AdminHeader() {
       return <AddShopsModal />;
     } else if (router.pathname === "/admin/products") {
       return <ProductsModal />;
+    } else if (router.pathname === "/admin/warehouses") {
+      return <WarehouseProductsModal />;
     }
     return null;
   };
