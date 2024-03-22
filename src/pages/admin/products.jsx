@@ -1,5 +1,10 @@
+import ProductsList from "@/components/admin/ProductsList";
 import React from "react";
 
 export default function AdminProductsPage() {
-  return <div>products</div>;
+  return (
+    <div>
+      <ProductsList />
+    </div>
+  );
 }
