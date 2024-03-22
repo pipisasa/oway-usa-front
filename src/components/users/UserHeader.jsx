@@ -6,18 +6,17 @@ import { NotificationIcon } from "./NotificationIcon";
 import AddUsersModal from "./modals/AddUsersModal";
 import NotificationsModal from "./modals/NotificationsModal";
 import AddShopsModal from "./modals/AddShopsModal";
-import ProductsModal from "./modals/ProductsModal";
 
-export default function AdminHeader() {
+export default function UsersHeader() {
   const router = useRouter();
 
   const links = [
-    { href: "/admin", label: "Главная" },
-    { href: "/admin/users", label: "Пользователи" },
-    { href: "/admin/notifications", label: "Уведомления" },
-    { href: "/admin/products", label: "Товары" },
-    { href: "/admin/warehouses", label: "Управление складами" },
-    { href: "/admin/shops-catalog", label: "Каталог сайтов" },
+    { href: "/user", label: "Главная" },
+    { href: "/user/biling", label: "Билин" },
+    { href: "/user/notifications", label: "Уведомления" },
+    { href: "/user/warehouses", label: "Адерса складов" },
+    { href: "/user/tracking", label: "Отслеживание доставки" },
+    { href: "/user/settings", label: "Настройки" },
   ];
 
   const getPageHeader = () => {
@@ -40,8 +39,6 @@ export default function AdminHeader() {
       return <NotificationsModal />;
     } else if (router.pathname === "/admin/shops-catalog") {
       return <AddShopsModal />;
-    } else if (router.pathname === "/admin/products") {
-      return <ProductsModal />;
     }
     return null;
   };
