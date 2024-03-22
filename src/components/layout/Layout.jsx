@@ -3,6 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { useRouter } from "next/router";
 import AdminLayout from "../admin/AdminLayout";
+import UsersLayout from "../users/UserLayout";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -12,8 +13,14 @@ export default function Layout({ children }) {
 
   const isAuthPage = path.startsWith("/auth");
 
+  const isUserPage = path.startsWith("/user");
+
   if (isAdminPage) {
     return <AdminLayout>{children}</AdminLayout>;
+  }
+
+  if (isUserPage) {
+    return <UsersLayout>{children}</UsersLayout>;
   }
 
   if (isAuthPage) {

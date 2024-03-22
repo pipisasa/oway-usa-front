@@ -1,0 +1,25 @@
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    padding-bottom: 8px;
+  }
+
+  .active_tabs {
+    border-bottom: 3px solid #027ddb;
+    width: 100%;
+    color: var(--blue, #027ddb);
+    font-size: 14px;
+    line-height: 140%;
+  }
+
+  .not_active_tabs {
+    border-bottom: 1px solid #aed5f3;
+    width: 100%;
+    color: var(--blue_light, #aed5f3);
+    font-size: 14px;
+    line-height: 140%;
+  }
+}

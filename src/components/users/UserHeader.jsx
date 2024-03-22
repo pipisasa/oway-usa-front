@@ -2,17 +2,17 @@ import React from "react";
 import s from "@/styles/admin/AdminLayout.module.scss";
 import { useRouter } from "next/router";
 import { Avatar, Badge, Button } from "@nextui-org/react";
-import { NotificationIcon } from "./NotificationIcon";
-import AddUsersModal from "./modals/AddUsersModal";
-import NotificationsModal from "./modals/NotificationsModal";
-import AddShopsModal from "./modals/AddShopsModal";
+import { NotificationIcon } from "../admin/NotificationIcon";
+import AddUsersModal from "../admin/modals/AddUsersModal";
+import NotificationsModal from "../admin/modals/NotificationsModal";
+import AddShopsModal from "../admin/modals/AddShopsModal";
 
 export default function UsersHeader() {
   const router = useRouter();
 
   const links = [
     { href: "/user", label: "Главная" },
-    { href: "/user/biling", label: "Билин" },
+    { href: "/user/biling", label: "Билинг" },
     { href: "/user/notifications", label: "Уведомления" },
     { href: "/user/warehouses", label: "Адерса складов" },
     { href: "/user/tracking", label: "Отслеживание доставки" },
@@ -20,10 +20,10 @@ export default function UsersHeader() {
   ];
 
   const getPageHeader = () => {
-    if (router.pathname === "/admin") {
+    if (router.pathname === "/user") {
       return (
         <>
-          Здравствуйте, <span>(Имя)</span> 👋
+          Здравствуйте, <span>Акбар</span> 👋
         </>
       );
     } else {
@@ -55,7 +55,7 @@ export default function UsersHeader() {
             isIconOnly
             aria-label="13 notifications"
             variant="light"
-            onClick={() => router.push("/admin/notifications")}
+            onClick={() => router.push("/user/notifications")}
           >
             <NotificationIcon size={24} />
           </Button>

@@ -2,7 +2,7 @@ import React from "react";
 import s from "@/styles/admin/AdminLayout.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import AdminHeader from "./AdminHeader";
+import UsersHeader from "./UserHeader";
 
 export default function UsersLayout({ children }) {
   const router = useRouter();
@@ -11,7 +11,7 @@ export default function UsersLayout({ children }) {
 
   const links = [
     { href: "/user", label: "Главная" },
-    { href: "/user/biling", label: "Билин" },
+    { href: "/user/biling", label: "Билинг" },
     { href: "/user/notifications", label: "Уведомления" },
     { href: "/user/warehouses", label: "Адерса складов" },
     { href: "/user/tracking", label: "Отслеживание доставки" },
@@ -40,7 +40,7 @@ export default function UsersLayout({ children }) {
         </div>
 
         <div className={s.admin_pages}>
-          <AdminHeader />
+          <UsersHeader />
           <main>{children}</main>
         </div>
       </div>
