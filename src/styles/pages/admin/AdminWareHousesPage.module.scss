@@ -1,0 +1,78 @@
+.warehouses_page {
+  position: relative;
+
+  .search {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+    background: var(--white, #fff);
+    width: 260px;
+    margin-bottom: 16px;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+  }
+
+  table {
+    padding: 24px;
+    border-radius: 12px;
+    background: var(--white, #fff);
+    width: 100%;
+    border-collapse: collapse;
+
+    .btn {
+      border-radius: 12px;
+      border: 1px solid var(--blue, #027ddb);
+      padding: 10px 36px;
+      color: var(--black, #001526);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #027ddb;
+      color: #fff;
+    }
+
+    thead {
+      tr {
+        th {
+          color: var(--black, #001526);
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 140%;
+          padding: 24px;
+          text-align: left;
+          border-bottom: 1px solid #a2a2a2;
+        }
+      }
+    }
+    tbody {
+      tr {
+        border-bottom: 1px solid #a2a2a2;
+
+        td {
+          color: var(--black, #001526);
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 140%;
+          padding: 24px;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}

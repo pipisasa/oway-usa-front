@@ -3,6 +3,7 @@
   align-items: start;
 
   .sidebar {
+    position: fixed;
     padding: 20px 30px;
     border-right: 1px solid var(--bue_light_2, #f7f9fc);
     background: var(--white, #fff);
@@ -92,11 +93,13 @@
 }
 
 .admin_pages {
-  width: 100vw;
-  height: 100vh;
+  margin-left: 296px; /* Сместить контент вправо, чтобы не перекрывался sidebar */
+  width: calc(100vw - 296px); /* Уменьшить ширину на ширину sidebar */
   background: var(--bue_light_2, #f7f9fc);
 
   main {
+    overflow-y: auto; /* Добавить вертикальный скролл */
+    height: 100vh; /* Задать высоту для возможности скролла */
     padding: 24px;
   }
 }

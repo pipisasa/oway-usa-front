@@ -41,7 +41,7 @@ export default function AdminLayout({ children }) {
 
         <div className={s.admin_pages}>
           <AdminHeader />
-          <main>{children}</main>
+          <main className={s.admin_page_content}>{children}</main>
         </div>
       </div>
     </>

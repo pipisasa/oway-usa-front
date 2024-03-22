@@ -1,0 +1,87 @@
+.step {
+  .steps_progress img {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  button {
+    border-radius: 12px;
+    background: var(--blue, #027ddb);
+    padding: 14px 36px;
+    color: var(--white, #fff);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    margin-top: 20px;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .first_block {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: start;
+
+      input {
+        border-radius: 8px;
+        border: 1px solid var(--gray, #a4a4a4);
+        padding: 12px 20px;
+        width: 100%;
+      }
+
+      label {
+        color: var(--black, #001526);
+        font-family: Helvetica;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+      }
+    }
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: start;
+
+    input {
+      border-radius: 8px;
+      border: 1px solid var(--gray, #a4a4a4);
+      padding: 12px 20px;
+      width: 100%;
+    }
+
+    label {
+      color: var(--black, #001526);
+      font-family: Helvetica;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%;
+    }
+  }
+
+  .notification {
+    margin-top: 20px;
+
+    .switch {
+      border-radius: 8px;
+      border: 1px solid var(--gray, #a4a4a4);
+      padding: 12px 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
