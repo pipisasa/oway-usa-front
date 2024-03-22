@@ -1,0 +1,35 @@
+.card_block {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 12px;
+  background: var(--white, #fff);
+
+  .card_img {
+    width: 48px;
+    height: 48px;
+    background: #000;
+    border-radius: 12px;
+  }
+
+  .card_text {
+    h2 {
+      color: var(--black, #001526);
+      font-size: 16px;
+      line-height: 140%;
+    }
+
+    p {
+      color: var(--black, #001526);
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+}
+
+.products_list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
