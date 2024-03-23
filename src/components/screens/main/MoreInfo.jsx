@@ -1,8 +1,8 @@
 import React from "react";
 import s from "@/styles/screens/main/MoreInfo.module.scss";
-export default function MoreInfo() {
+export default function MoreInfo(props) {
   return (
-      <div  className={s.more_info}>
+      <div  className={props?.menu === "menu" ? s.more_info : s.more_info_culc}>
         <div className={`${s.more_info_container} container`}>
         <div className={s.more_info_inner}>
             <p>Важная информация!</p>

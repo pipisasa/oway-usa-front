@@ -34,8 +34,8 @@ export default function Home() {
       <Mission />
       <AboutUs />
       <StepWork />
-      <MoreInfo />
-      <Advantage />
+      <MoreInfo menu='menu' />
+      <Advantage p='Наши преимущества' h2='Легкость и доступность совершения покупок' menu='menu' />
       <MoreServices />
       <Calculator />
       <Join />
