@@ -6,6 +6,7 @@ import { NotificationIcon } from "../admin/NotificationIcon";
 import AddUsersModal from "../admin/modals/AddUsersModal";
 import NotificationsModal from "../admin/modals/NotificationsModal";
 import AddShopsModal from "../admin/modals/AddShopsModal";
+import BankCardsModal from "./modals/BankCardsModal";
 
 export default function UsersHeader() {
   const router = useRouter();
@@ -33,8 +34,8 @@ export default function UsersHeader() {
   };
 
   const renderModal = () => {
-    if (router.pathname === "/admin/users") {
-      return <AddUsersModal />;
+    if (router.pathname === "/user/biling") {
+      return <BankCardsModal />;
     } else if (router.pathname === "/admin/notifications") {
       return <NotificationsModal />;
     } else if (router.pathname === "/admin/shops-catalog") {
