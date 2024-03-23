@@ -1,5 +1,10 @@
+import BankCardsList from "@/components/admin/BankCardsList";
 import React from "react";
 
 export default function BilingPage() {
-  return <div>biling</div>;
+  return (
+    <section>
+      <BankCardsList />
+    </section>
+  );
 }
