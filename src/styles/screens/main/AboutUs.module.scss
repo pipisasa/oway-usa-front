@@ -25,12 +25,7 @@
         font-weight: 400;
         line-height: 140%;
       }
-      div {
-        width: 3px;
-        align-self: stretch;
-        border-radius: 100px;
-        background: var(--orange, #FF7C00);
-      }
+
       strong {
         color: var(--blue, #027DDB);
         /* Bold - 40 */
@@ -39,6 +34,30 @@
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+      }
+      .about_info_div {
+        align-self: stretch;
+        border-radius: 100px;
+        background: var(--orange, #FF7C00);
+        width: 3px !important;
+      }
+      .about_info_div1 {
+        align-self: stretch;
+        border-radius: 100px;
+        background: var(--orange, #FF7C00);
+        width: 5.5px !important;
+      }
+      .about_info_div2 {
+        align-self: stretch;
+        border-radius: 100px;
+        background: var(--orange, #FF7C00);
+        width: 5.2px !important;
+      }
+      .about_info_div3 {
+        align-self: stretch;
+        border-radius: 100px;
+        background: var(--orange, #FF7C00);
+        width: 4.3px !important;
       }
     }
   }

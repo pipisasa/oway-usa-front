@@ -8,7 +8,7 @@ export default function MoreInfo() {
             <p>Важная информация!</p>
             <h2>При заказе б/у товара, особенно с площадок, таких как eBay, рекомендуем оформить страховку.</h2>
             <div className={s.more_info_inner_span}>
-                <div></div>
+                <div  className={s.more_info_inner_div}></div>
                 <span>Особенно актуально для хрупких предметов — добавьте комментарий при оформлении заказа. Это обеспечит защиту от потери, недоставки или кражи вложений. </span>
             </div>
             <div className={s.more_info_inner_block}>
