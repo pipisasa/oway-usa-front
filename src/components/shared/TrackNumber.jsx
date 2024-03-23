@@ -5,8 +5,10 @@ export default function TrackNumber() {
   return (
       <div className={`${s.track} container`}>
         <div className={s.track_info}>
-          <span>Отслеживание доставки</span>
-          <h1>Отслеживайте свою доставку по введенному трек-номеру</h1>
+            <div>
+                <span>Отслеживание доставки</span>
+                <h1>Отслеживайте свою доставку по введенному трек-номеру</h1>
+            </div>
           <div className={s.track_info_input}>
             <span>Трек-номер</span>
             <input type="text" placeholder="Введите трек номер"/>
