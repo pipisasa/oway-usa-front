@@ -1,0 +1,59 @@
+.heroSection_page {
+  width: 100%;
+  height: calc(100vh - 130px);
+  border-radius: 0px 0px 64px 64px;
+  background: var(--bue_light_2, #F7F9FC);
+
+
+  .heroSection_info {
+    width: 90%;
+    padding-top: 60px;
+
+    h1 {
+      font-family: Helvetica;
+      font-size: 58px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+
+
+      strong {
+        font-size: 58px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 70px;
+      }
+
+    }
+
+    .heroSection_info_span{
+      width: 468px;
+      display: flex;
+      margin-top: 16px;
+      span {
+        /* Regular - 16 */
+        font-family: Helvetica;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+
+        strong {
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 140%;
+        }
+      }
+    }
+    .button {
+      padding: 14px 36px;
+      color: #fff;
+      border-radius: 12px;
+      background: var(--blue, #027DDB);
+      cursor: pointer;
+      margin-top: 24px;
+      font-size: 16px;
+    }
+  }
+}
