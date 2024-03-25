@@ -10,10 +10,9 @@ export default function Layout({ children }) {
   const path = router.pathname;
 
   const isAdminPage = path.startsWith("/admin");
-
-  const isAuthPage = path.startsWith("/auth");
-
   const isUserPage = path.startsWith("/user");
+  const isAuthPage = path.startsWith("/auth");
+  const isHomePage = path === "/";
 
   if (isAdminPage) {
     return <AdminLayout>{children}</AdminLayout>;
@@ -28,10 +27,10 @@ export default function Layout({ children }) {
   }
 
   return (
-    <>
-      <Header />
-      <main>{children}</main>
-      <Footer />
-    </>
+      <>
+        {!isHomePage && <Header />}
+        <main>{children}</main>
+        <Footer />
+      </>
   );
 }
