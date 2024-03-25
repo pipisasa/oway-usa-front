@@ -31,10 +31,20 @@ export default function Header() {
               </nav>
               <div className={s.auth_btn}>
                   <Link href="/auth/register">
-                      <button className={s.register}>Зарегистрироваться</button>
+                      <div  className={s.auth_btn_reg}>
+                          <button className={s.register}>Зарегистрироваться</button>
+                          <img src="/assets/icons/userBlue.svg" alt=""/>
+                      </div>
                   </Link>
                   <Link href="/auth/login">
-                      <button className={s.login}>Вход</button>
+                      <div>
+                          <button className={s.login}>
+                              <span>Вход</span>
+                              <img src="/assets/icons/rightIcon.svg" alt=""/>
+                          </button>
+
+                      </div>
+
                   </Link>
               </div>
           </header>
