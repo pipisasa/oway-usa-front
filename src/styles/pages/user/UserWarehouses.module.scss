@@ -1,0 +1,66 @@
+.warehouse_page {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .warehouse_card {
+    border-radius: 12px;
+    background: var(--Colors-Grey-White, #fff);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    h3 {
+      color: var(--black, #001526);
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .card {
+      display: flex;
+      gap: 12px;
+
+      .block {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          img {
+            width: 24px;
+            height: 24px;
+          }
+
+          span {
+            color: var(--black, #001526);
+            font-size: 12px;
+            font-weight: 300;
+          }
+
+          p {
+            color: var(--black, #001526);
+            font-size: 16px;
+            font-weight: 400;
+            text-wrap: nowrap;
+          }
+        }
+      }
+    }
+
+    .copy_btn {
+      button {
+        border-radius: 12px;
+        background: var(--blue, #027ddb);
+        padding: 14px 36px;
+        width: 100%;
+        color: var(--white, var(--Colors-Grey-White, #fff));
+        font-size: 16px;
+        line-height: 140%;
+      }
+    }
+  }
+}
