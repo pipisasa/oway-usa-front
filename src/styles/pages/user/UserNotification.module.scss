@@ -1,0 +1,62 @@
+.notifications_page {
+  display: flex;
+  align-items: start;
+  gap: 20px;
+
+  .notifications_block {
+    display: flex;
+    width: 724px;
+    padding: 24px;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 12px;
+    background: var(--Colors-Grey-White, #fff);
+
+    .ntf_list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .notifications_header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 32px;
+
+      .notif_tabs {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .active_tab {
+          color: var(--blue, #027ddb);
+          font-size: 14px;
+          line-height: 140%;
+          padding-bottom: 8px;
+          border-bottom: 3px solid #027ddb;
+          width: 100%;
+        }
+        .not_active_tab {
+          color: var(--blue, #aed5f3);
+          font-size: 14px;
+          line-height: 140%;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #aed5f3;
+          width: 100%;
+        }
+      }
+
+      .check_all_notif {
+        border-radius: 12px;
+        background: var(--blue, #027ddb);
+        padding: 10px 20px;
+        color: var(--white, var(--Colors-Grey-White, #fff));
+        font-size: 14px;
+        line-height: 140%;
+        min-width: 283px;
+      }
+    }
+  }
+}

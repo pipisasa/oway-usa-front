@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
-import Modal from "../../shared/Modal";
+import Modal from "../../Modal";
 
 export default function AddShopsModal() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import s from "@/styles/pages/user/UserMain.module.scss";
-import OnTheWay from "@/components/users/tabs/OnTheWay";
-import TableTabs from "@/components/users/tabs/TableTabs";
-import ReadyIssued from "@/components/users/tabs/ReadyIssued";
-import Delivered from "@/components/users/tabs/Delivered";
+import OnTheWay from "@/components/shared/users/tabs/OnTheWay";
+import TableTabs from "@/components/shared/users/tabs/TableTabs";
+import ReadyIssued from "@/components/shared/users/tabs/ReadyIssued";
+import Delivered from "@/components/shared/users/tabs/Delivered";
 
 export default function UserMainPage() {
   const [activeTab, setActiveTab] = useState("onTheWay");
