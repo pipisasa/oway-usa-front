@@ -3,7 +3,6 @@ import s from "@/styles/admin/AdminLayout.module.scss";
 import { useRouter } from "next/router";
 import { Avatar, Badge, Button } from "@nextui-org/react";
 import { NotificationIcon } from "../admin/NotificationIcon";
-import AddUsersModal from "../admin/modals/AddUsersModal";
 import NotificationsModal from "../admin/modals/NotificationsModal";
 import AddShopsModal from "../admin/modals/AddShopsModal";
 import BankCardsModal from "./modals/BankCardsModal";
@@ -61,6 +60,10 @@ export default function UsersHeader() {
             <NotificationIcon size={24} />
           </Button>
         </Badge>
+
+        <div className={s.user_code}>
+          <span>#AIBALOH</span>
+        </div>
 
         <Avatar
           isBordered

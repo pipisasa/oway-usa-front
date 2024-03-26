@@ -2,8 +2,8 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useRouter } from "next/router";
-import AdminLayout from "../admin/AdminLayout";
-import UsersLayout from "../users/UserLayout";
+import AdminLayout from "../shared/admin/AdminLayout";
+import UsersLayout from "../shared/users/UserLayout";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -27,10 +27,10 @@ export default function Layout({ children }) {
   }
 
   return (
-      <>
-        {!isHomePage && <Header />}
-        <main>{children}</main>
-        <Footer />
-      </>
+    <>
+      {!isHomePage && <Header />}
+      <main>{children}</main>
+      <Footer />
+    </>
   );
 }

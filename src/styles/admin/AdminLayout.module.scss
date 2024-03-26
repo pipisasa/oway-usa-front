@@ -70,6 +70,18 @@
       display: flex;
       align-items: center;
       gap: 20px;
+
+      .user_code {
+        span {
+          color: var(--blue, #027ddb);
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 18px;
+          border-radius: 8px;
+          border: 1px solid var(--blue_light_3, #e7efff);
+          padding: 8px 16px;
+        }
+      }
     }
 
     h3 {

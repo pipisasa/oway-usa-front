@@ -1,5 +1,5 @@
 import React from "react";
-import ProductsCard from "../shared/cards/ProductsCard";
+import ProductsCard from "../cards/ProductsCard";
 import s from "@/styles/components/shared/cards/ProdustCard.module.scss";
 
 export default function ProductsList() {

@@ -1,0 +1,35 @@
+.settings_block {
+  display: flex;
+  padding: 24px;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 12px;
+  background: var(--Colors-Grey-White, #fff);
+  width: 352px;
+
+  h3 {
+    color: var(--black, #001526);
+    font-size: 16px;
+    line-height: 140%;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #aed5f3;
+  }
+
+  .ntf_btns {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      button {
+        color: var(--black, #001526);
+        font-size: 14px;
+        line-height: 140%;
+      }
+    }
+  }
+}
