@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import s from "@/styles/screens/main/Advantage.module.scss";
 const calc = [
     {
+        icon:'/assets/icons/adv_world.svg',
         img: '/assets/icons/container.png',
         text: 'Фактический вес',
         answer: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
     },
     {
+        icon:'/assets/icons/adv_date.svg',
         img: '/assets/icons/container.png',
         text: 'Объемный вес',
         answer: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
     },
     {
+        icon:'/assets/icons/adv_box.svg',
         img: '/assets/icons/container.png',
         text: 'Гиперобъемный вес',
         answer: 'Ты работаем с понедельника по пятницу с 9:00 до 18:00.',
@@ -20,16 +23,19 @@ const calc = [
 
 const menu = [
     {
+        icon:'/assets/icons/adv_world.svg',
         img: '/assets/icons/container.png',
         text: 'Глобальный выбор товаров',
         answer: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
     },
     {
+        icon:'/assets/icons/adv_date.svg',
         img: '/assets/icons/container.png',
         text: 'Экономия времени и усилий',
         answer: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
     },
     {
+        icon:'/assets/icons/adv_box.svg',
         img: '/assets/icons/container.png',
         text: 'Международная доставка с удобством',
         answer: 'Мы работаем с понедельника по пятницу с 9:00 до 18:00.',
@@ -55,31 +61,41 @@ export default function Advantage(props) {
                             className={`${s["menu-item"]} ${selectedItem === 1 ? s.active : ""}`}
                             onClick={() => handleItemClick(1)}
                         >
-                            {props?.menu === "menu" ?
-                                menu[0]?.text
-                                :
-                                calc[0]?.text
-                            }
+                            <img src={calc[0]?.icon} alt=""/>
+                            <span>
+                                {props?.menu === "menu" ?
+                                    menu[0]?.text
+                                    :
+                                    calc[0]?.text
+                                }
+                            </span>
                         </div>
                         <div
                             className={`${s["menu-item"]} ${selectedItem === 2 ? s.active : ""}`}
                             onClick={() => handleItemClick(2)}
                         >
-                            {props?.menu === "menu" ?
-                                menu[1]?.text
-                                :
-                                calc[1]?.text
-                            }
+                            <img src={calc[1]?.icon} alt=""/>
+                            <span>
+                                {props?.menu === "menu" ?
+                                    menu[1]?.text
+                                    :
+                                    calc[1]?.text
+                                }
+                            </span>
                         </div>
                         <div
                             className={`${s["menu-item"]} ${selectedItem === 3 ? s.active : ""}`}
                             onClick={() => handleItemClick(3)}
                         >
-                            {props?.menu === "menu" ?
-                                menu[2]?.text
-                                :
-                                calc[2]?.text
-                            }
+                            <img src={calc[2]?.icon} alt=""/>
+                            <span>
+                                {props?.menu === "menu" ?
+                                    menu[2]?.text
+                                    :
+                                    calc[2]?.text
+                                }
+                            </span>
+
                         </div>
                     </div>
                 </div>

@@ -11,12 +11,12 @@ export default function Contacts() {
 
             <div className={s.contact_inner_block_infos}>
               <div className={s.contact_inner_block_info}>
-                  <span>logo</span>
+                  <img src="assets/icons/contact_address.svg" alt=""/>
                   <p>Address</p>
                   <h3>4730d Kimball Ave</h3>
               </div>
               <div className={s.contact_inner_block_info}>
-                  <span>logo</span>
+                  <img src="assets/icons/contact_city.svg" alt=""/>
                   <p>City</p>
                   <h3>Chicago</h3>
               </div>
@@ -24,12 +24,12 @@ export default function Contacts() {
 
             <div className={s.contact_inner_block_infos}>
               <div className={s.contact_inner_block_info}>
-                  <span>logo</span>
+                  <img src="assets/icons/contact_america.svg" alt=""/>
                   <p>State</p>
                   <h3>Illinois</h3>
               </div>
               <div className={s.contact_inner_block_info}>
-                  <span>logo</span>
+                  <img src="assets/icons/contact_zip-code.svg" alt=""/>
                   <p>Zip code</p>
                   <h3>60625</h3>
               </div>
@@ -37,12 +37,12 @@ export default function Contacts() {
 
             <div className={s.contact_inner_block_infos}>
               <div className={s.contact_inner_block_info}>
-                  <span>logo</span>
+                  <img src="assets/icons/contact_call.svg" alt=""/>
                   <p>Number</p>
                   <h3>872 710 07 10 </h3>
               </div>
               <div className={s.contact_inner_block_info}>
-                  <span>logo</span>
+                  <img src="assets/icons/contact_email.svg" alt=""/>
                   <p>Mail</p>
                   <h3>owayusa1@gmail.com</h3>
               </div>
@@ -55,12 +55,12 @@ export default function Contacts() {
 
                 <div className={s.contact_inner_block_infos}>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/contact_address.svg" alt=""/>
                         <p>Address</p>
                         <h3>1550 Oak Brook</h3>
                     </div>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/contact_city.svg" alt=""/>
                         <p>City</p>
                         <h3>205</h3>
                     </div>
@@ -68,12 +68,12 @@ export default function Contacts() {
 
                 <div className={s.contact_inner_block_infos}>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/contact_america.svg" alt=""/>
                         <p>State</p>
                         <h3>Illinois</h3>
                     </div>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/contact_zip-code.svg" alt=""/>
                         <p>Zip code</p>
                         <h3>60625</h3>
                     </div>
@@ -81,12 +81,12 @@ export default function Contacts() {
 
                 <div className={s.contact_inner_block_infos}>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/module.svg" alt=""/>
                         <p>Number</p>
                         <h3>872 710 07 10 </h3>
                     </div>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/contact_call.svg" alt=""/>
                         <p>Mail</p>
                         <h3>owayusa1@gmail.com</h3>
                     </div>
@@ -99,12 +99,12 @@ export default function Contacts() {
 
                 <div className={s.contact_inner_block_infos}>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/contact_address.svg" alt=""/>
                         <p>Address</p>
                         <h3>4730d Kimball Ave</h3>
                     </div>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/contact_city.svg" alt=""/>
                         <p>City</p>
                         <h3>Chicago</h3>
                     </div>
@@ -112,12 +112,12 @@ export default function Contacts() {
 
                 <div className={s.contact_inner_block_infos}>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/contact_america.svg" alt=""/>
                         <p>State</p>
                         <h3>Illinois</h3>
                     </div>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/contact_zip-code.svg" alt=""/>
                         <p>Zip code</p>
                         <h3>60625</h3>
                     </div>
@@ -125,12 +125,12 @@ export default function Contacts() {
 
                 <div className={s.contact_inner_block_infos}>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/module.svg" alt=""/>
                         <p>Number</p>
                         <h3>872 710 07 10 </h3>
                     </div>
                     <div className={s.contact_inner_block_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/contact_call.svg" alt=""/>
                         <p>Mail</p>
                         <h3>owayusa1@gmail.com</h3>
                     </div>

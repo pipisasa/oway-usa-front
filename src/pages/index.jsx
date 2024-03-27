@@ -16,6 +16,8 @@ import Calculator from "../components/shared/Calculator";
 import Join from "../components/screens/main/Join";
 import Faq from "../components/partials/Faq";
 import Contacts from "../components/partials/Contacts";
+import Purchase from "../components/shared/Purchase";
+import CurrentProducts from "../components/screens/main/CurrentProducts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +32,8 @@ export default function Home() {
       </Head>
       <HeroSection />
       <Shops />
+      <Purchase/>
+      <CurrentProducts/>
       <TrackNumber />
       <Mission />
       <AboutUs />

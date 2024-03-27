@@ -43,25 +43,30 @@ export default function Faq() {
     };
   return (
       <div className={`${s.faq} container`}>
-          <span>FAQ</span>
-          <h1>Часто задаваемые вопросы</h1>
-          <div className={s.questions}>
-              {data.map((item, index) => (
-                  <div key={index} className={`${s.faqItem} ${expanded === index ? s.expanded : ''}`}>
-                      <div className={s.question} onClick={() => toggleAnswer(index)}>
-                          <h3>{item.question}</h3>
-                          <span>{expanded === index ?
-                              <div>-</div>
-                              :
-                              <div>+</div>
-                          }</span>
+          <div className={s.faq_inner}>
+              <span>FAQ</span>
+              <h1>Часто задаваемые вопросы</h1>
+              <div className={s.questions}>
+                  {data.map((item, index) => (
+                      <div key={index} className={`${s.faqItem} ${expanded === index ? s.expanded : ''}`}>
+                          <div className={s.question} onClick={() => toggleAnswer(index)}>
+                              <h3>{item.question}</h3>
+                              <span>{expanded === index ?
+                                  <div>-</div>
+                                  :
+                                  <div>+</div>
+                              }</span>
+                          </div>
+                          <div className={s.answers}></div>
+                          <div className={s.answer}>
+                              <p>{item.answer}</p>
+                          </div>
                       </div>
-                      <div className={s.answers}></div>
-                      <div className={s.answer}>
-                          <p>{item.answer}</p>
-                      </div>
-                  </div>
-              ))}
+                  ))}
+              </div>
+          </div>
+          <div className={s.faq_img}>
+              <img src="assets/icons/faq_door.png" alt=""/>
           </div>
       </div>
   )

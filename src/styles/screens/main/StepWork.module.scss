@@ -8,6 +8,11 @@
     margin-top: 60px;
     padding-top: 60px;
     position: relative;
+    .step_img {
+      position: absolute;
+      right: -60px;
+      top: 20px;
+    }
     h2 {
       font-size: 40px;
       font-style: normal;

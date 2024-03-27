@@ -1,0 +1,22 @@
+.button {
+  display: flex;
+  padding: 14px 36px;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 12px;
+  background: var(--blue, #027DDB);
+  cursor: pointer;
+  margin-top: 24px;
+  font-size: 16px;
+  gap: 20px;
+
+  span {
+    font-family: Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    color: white;
+  }
+}
