@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import s from "@/styles/users/Tabs.module.scss";
-import UserData from "@/components/users/settings/UserData";
-import ChangePassword from "@/components/users/settings/ChangePassword";
+import UserData from "@/components/shared/users/settings/UserData";
+import ChangePassword from "@/components/shared/users/settings/ChangePassword";
 
 export default function UserSettingsPage() {
   const [activeTab, setActiveTab] = useState("userData");

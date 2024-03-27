@@ -1,7 +1,7 @@
 import React from "react";
 import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import { Pagination } from "@nextui-org/react";
-import WarehousesProductsTable from "@/components/admin/WarehousesProductsTable";
+import WarehousesProductsTable from "@/components/shared/admin/WarehousesProductsTable";
 
 export default function AdminWarehousesPage() {
   return (

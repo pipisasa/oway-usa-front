@@ -1,5 +1,5 @@
 import React from "react";
-import BankCards from "../shared/cards/BankCards";
+import BankCards from "../cards/BankCards";
 import s from "@/styles/components/shared/cards/BankCards.module.scss";
 
 export default function BankCardsList() {

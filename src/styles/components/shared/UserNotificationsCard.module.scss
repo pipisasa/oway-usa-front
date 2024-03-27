@@ -1,0 +1,48 @@
+.card {
+  border-radius: 12px;
+  background: var(--bue_light_2, #f7f9fc);
+  display: flex;
+  padding: 24px;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+
+  .card_title {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+
+    .ntf_img {
+      width: 48px;
+      height: 48px;
+      background-color: #001526;
+      border-radius: 10px;
+    }
+
+    .ntf_text {
+      h3 {
+        color: var(--black, #001526);
+        font-size: 16px;
+        line-height: 140%;
+      }
+
+      p {
+        color: var(--black, #001526);
+        font-size: 14px;
+        line-height: 140%;
+      }
+    }
+  }
+
+  .card_date {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      color: var(--black, #001526);
+      text-align: right;
+      font-size: 14px;
+      line-height: 140%;
+    }
+  }
+}
