@@ -15,7 +15,9 @@ export default function TrackNumber() {
           </div>
           <button className={s.button}>Проверить</button>
         </div>
-        <div className={s.track_img}></div>
+        <div className={s.track_img}>
+            <img src="assets/images/dron.png" alt=""/>
+        </div>
       </div>
   )
 }

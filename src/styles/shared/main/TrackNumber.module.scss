@@ -1,5 +1,10 @@
 .track {
- margin-top: 68px;
+ margin-top: 120px;
+  .track_img {
+    position: absolute;
+    right: 85px;
+    top:-90px;
+  }
   .track_info {
     display: flex;
     width: 650px;

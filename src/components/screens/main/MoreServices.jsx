@@ -6,12 +6,13 @@ export default function MoreServices() {
         <div className={`${s.service_container} container`}>
           <span>Дополнительные услуги</span>
           <h2>Наши дополнительные <br/> сервисы</h2>
+
           <div className={s.services_inner}>
             <div  className={s.services_inner_top}>
-              <div>
+              <div style={{width:"420px"}}>
                 <div className={s.services_span}>
                   <div></div>
-                  <span>Проверка техники на работоспособность</span>
+                  <span className={s.services_span_each}>Проверка техники на работоспособность</span>
                 </div>
               </div>
               <div className={s.services_inner_top_block}>
@@ -25,11 +26,12 @@ export default function MoreServices() {
                 </div>
               </div>
             </div>
+
             <div className={s.services_inner_down}>
-              <div>
+              <div style={{width:"420px"}}>
                 <div className={s.services_span}>
                   <div></div>
-                  <span>Проверка электроники на включение/выключение </span>
+                  <span className={s.services_span_each}>Проверка электроники на включение/выключение </span>
                 </div>
               </div>
               <div className={s.services_inner_down_block}>

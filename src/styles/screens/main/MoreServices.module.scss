@@ -39,22 +39,29 @@
         justify-content: space-between;
         gap: 20px;
 
-
         .services_inner_top_block {
           width: 873px;
         }
         div {
+
           .services_span {
             display: flex;
             align-items: center;
             gap: 20px;
             margin-top: 32px;
             span {
-              /* Regular - 16 */
               font-family: Helvetica;
               font-size: 16px;
               font-style: normal;
               font-weight: 400;
+              line-height: 140%;
+
+            }
+            .services_span_each {
+              font-family: Helvetica;
+              font-size: 18px;
+              font-style: normal;
+              font-weight: 700;
               line-height: 140%;
             }
             .services_inner_top_block_div {
@@ -80,20 +87,25 @@
         width: 100%;
         gap: 20px;
         div {
-
           .services_span {
             display: flex;
             align-items: center;
             gap: 20px;
             margin-top: 50px;
 
-
             span {
-              /* Regular - 16 */
               font-family: Helvetica;
               font-size: 16px;
               font-style: normal;
               font-weight: 400;
+              line-height: 140%;
+
+            }
+            .services_span_each {
+              font-family: Helvetica;
+              font-size: 18px;
+              font-style: normal;
+              font-weight: 700;
               line-height: 140%;
             }
             div {

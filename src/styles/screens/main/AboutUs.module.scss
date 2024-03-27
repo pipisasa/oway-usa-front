@@ -1,5 +1,10 @@
 .about {
   margin-top: 129px;
+  .about_img {
+    position: absolute;
+    right: 178px;
+    top: -90px;
+  }
   .about_info {
     width: 650px;
     h1 {
@@ -12,52 +17,56 @@
       line-height: normal;
       margin-top: 12px;
     }
-    .about_info_span {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+    .about_info_spans {
+      gap: 16px;
       margin-top: 32px;
-      span {
-        /* Regular - 16 */
-        font-family: Helvetica;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 140%;
-      }
+      .about_info_span {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 16px;
+        span {
+          /* Regular - 16 */
+          font-family: Helvetica;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 140%;
+        }
 
-      strong {
-        color: var(--blue, #027DDB);
-        /* Bold - 40 */
-        font-family: Helvetica;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-      }
-      .about_info_div {
-        align-self: stretch;
-        border-radius: 100px;
-        background: var(--orange, #FF7C00);
-        width: 3px !important;
-      }
-      .about_info_div1 {
-        align-self: stretch;
-        border-radius: 100px;
-        background: var(--orange, #FF7C00);
-        width: 5.5px !important;
-      }
-      .about_info_div2 {
-        align-self: stretch;
-        border-radius: 100px;
-        background: var(--orange, #FF7C00);
-        width: 5.2px !important;
-      }
-      .about_info_div3 {
-        align-self: stretch;
-        border-radius: 100px;
-        background: var(--orange, #FF7C00);
-        width: 4.3px !important;
+        strong {
+          color: var(--blue, #027DDB);
+          /* Bold - 40 */
+          font-family: Helvetica;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+        }
+        .about_info_div {
+          align-self: stretch;
+          border-radius: 100px;
+          background: var(--orange, #FF7C00);
+          width: 3px !important;
+        }
+        .about_info_div1 {
+          align-self: stretch;
+          border-radius: 100px;
+          background: var(--orange, #FF7C00);
+          width: 5.5px !important;
+        }
+        .about_info_div2 {
+          align-self: stretch;
+          border-radius: 100px;
+          background: var(--orange, #FF7C00);
+          width: 5.2px !important;
+        }
+        .about_info_div3 {
+          align-self: stretch;
+          border-radius: 100px;
+          background: var(--orange, #FF7C00);
+          width: 4.3px !important;
+        }
       }
     }
   }
