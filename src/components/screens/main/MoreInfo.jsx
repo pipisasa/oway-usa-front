@@ -15,19 +15,19 @@ export default function MoreInfo(props) {
                 <h3>Стоимость страховки зависит от ценности товара в посылке:</h3>
                 <div className={s.more_info_inner_block_info}>
                     <div className={s.more_info_inner_block_infos}>
-                        <div></div>
+                        <img src="assets/icons/info_icon.svg" alt=""/>
                         <p>до $100 — $3</p>
                     </div>
                     <div className={s.more_info_inner_block_infos}>
-                        <div></div>
+                        <img src="assets/icons/info_icon.svg" alt=""/>
                         <p>до $500 — $5</p>
                     </div>
                     <div className={s.more_info_inner_block_infos}>
-                        <div></div>
+                        <img src="assets/icons/info_icon.svg" alt=""/>
                         <p>до $1000 — $7.5</p>
                     </div>
                     <div className={s.more_info_inner_block_infos}>
-                        <div></div>
+                        <img src="assets/icons/info_icon.svg" alt=""/>
                         <p>от $1000 — $15</p>
                     </div>
                 </div>
@@ -37,7 +37,9 @@ export default function MoreInfo(props) {
                 <span>Обязательна для всех служб доставки, кроме USPS и Новой Почты.</span>
             </div>
         </div>
-        <div></div>
+        <div className={s.info_img}>
+            <img src="assets/images/info_box.png" width={548} height={548} alt=""/>
+        </div>
         </div>
       </div>
   );

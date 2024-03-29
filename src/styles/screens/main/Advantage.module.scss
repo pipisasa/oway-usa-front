@@ -31,11 +31,17 @@
         margin-top: 32px;
 
         .menu-item {
+          display: flex;
+          align-items: center;
           padding: 24px;
           cursor: pointer;
           font-weight: 700;
           font-size: 18px;
           margin: 8px 0 8px 0;
+          gap: 16px;
+          span {
+
+          }
 
           &.active {
             display: flex;
@@ -118,7 +124,10 @@
         margin-top: 32px;
 
         .menu-item {
+          display: flex;
           padding: 24px;
+          align-items: center;
+          gap: 16px;
           cursor: pointer;
           font-weight: 700;
           font-size: 18px;

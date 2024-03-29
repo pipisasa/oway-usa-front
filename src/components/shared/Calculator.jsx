@@ -37,28 +37,28 @@ export default function Calculator() {
                 </div>
                 <div className={s.calc_inner_infos}>
                     <div  className={s.calc_inner_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/calc_icon.svg" alt=""/>
                         <div>
                             <h3>Доставка из США в РФ - <strong>1кг - 16$</strong> стандарт</h3>
                             <p>Срок доставки 10-15 дней</p>
                         </div>
                     </div>
                     <div className={s.calc_inner_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/calc_icon.svg" alt=""/>
                         <div>
                             <h3>Доставка из Турции в РФ - <strong>1кг - 9.5$</strong> стандарт</h3>
                             <p>Срок доставки 5-7 дней</p>
                         </div>
                     </div>
                     <div className={s.calc_inner_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/calc_icon.svg" alt=""/>
                         <div>
                             <h3>Доставка из Туркции в РФ -<strong> 1кг - 12$</strong> экспресс</h3>
                             <p>Срок доставки 2-3 дня</p>
                         </div>
                     </div>
                     <div className={s.calc_inner_info}>
-                        <span>logo</span>
+                        <img src="assets/icons/calc_icon.svg" alt=""/>
                         <div>
                             <h3>Доставка из США в КР - <strong>1кг - 12$</strong> экспресс</h3>
                             <p>Срок доставки 7-9 дня</p>

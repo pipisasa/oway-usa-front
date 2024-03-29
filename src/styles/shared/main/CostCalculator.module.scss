@@ -5,6 +5,13 @@
   padding-bottom: 120px;
 
   .calc_container {
+    .calc_img {
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      z-index: 1;
+      transform: rotate(9.779deg);
+    }
 
     h1 {
       color: var(--black, #001526);
@@ -127,12 +134,15 @@
         gap: 20px;
         flex: 1 0 0;
         border-radius: 16px;
-        background: var(--white, #FFF);
+        border: 1px solid var(--blue_light, #AED5F3);
+        background: rgba(255, 255, 255, 0.24);
+        backdrop-filter: blur(8px);
         height: 100%;
+        z-index: 3;
 
         .calc_inner_info {
           display: flex;
-          justify-content: space-between;
+          gap:20px;
           span {
             margin-right: 12px;
           }
@@ -151,7 +161,7 @@
               line-height: normal;
 
               strong {
-                color: var(--black, #001526);
+                color: #027DDB;
                 font-family: Helvetica;
                 font-size: 18px;
                 font-style: normal;
