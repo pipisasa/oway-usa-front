@@ -25,7 +25,7 @@ export default function AdminHeader() {
     if (router.pathname === "/admin") {
       return (
         <>
-          Здравствуйте, <span>(Имя)</span> 👋
+          Здравствуйте, <span>Администратор</span> 👋
         </>
       );
     } else {

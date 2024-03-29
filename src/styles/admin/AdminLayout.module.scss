@@ -34,12 +34,19 @@
           color: #fff;
         }
 
+        .active_icon {
+          filter: brightness(0) invert(1);
+        }
+
         li {
           list-style-type: none;
           padding: 20px 16px;
           cursor: pointer;
           border-radius: 12px;
           transition: 0.3s;
+          display: flex;
+          align-items: center;
+          gap: 12px;
 
           a {
             text-decoration: none;

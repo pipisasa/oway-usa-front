@@ -1,0 +1,43 @@
+.tracking_form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 12px;
+  background: var(--Colors-Grey-White, #fff);
+  padding: 24px;
+  max-width: 538px;
+
+  h3 {
+    color: var(--black, #001526);
+    font-size: 20px;
+    line-height: 140%;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    label {
+      color: var(--black, #001526);
+      font-size: 14px;
+    }
+
+    input {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--gray, #a4a4a4);
+      color: var(--gray, #a4a4a4);
+      font-size: 14px;
+    }
+  }
+
+  button {
+    padding: 14px 36px;
+    border-radius: 12px;
+    background: var(--blue, #027ddb);
+    color: var(--white, var(--Colors-Grey-White, #fff));
+    font-size: 16px;
+    line-height: 140%;
+  }
+}
