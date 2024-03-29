@@ -10,12 +10,36 @@ export default function UsersLayout({ children }) {
   const isActive = (path) => router.pathname === path;
 
   const links = [
-    { href: "/user", label: "Главная" },
-    { href: "/user/biling", label: "Билинг" },
-    { href: "/user/notifications", label: "Уведомления" },
-    { href: "/user/warehouses", label: "Адерса складов" },
-    { href: "/user/tracking", label: "Отслеживание доставки" },
-    { href: "/user/settings", label: "Настройки" },
+    {
+      href: "/user",
+      label: "Главная",
+      icons: "/assets/icons/user-icons/главная.svg",
+    },
+    {
+      href: "/user/biling",
+      label: "Билинг",
+      icons: "/assets/icons/user-icons/biling.svg",
+    },
+    {
+      href: "/user/notifications",
+      label: "Уведомления",
+      icons: "/assets/icons/user-icons/уведомления.svg",
+    },
+    {
+      href: "/user/warehouses",
+      label: "Адерса складов",
+      icons: "/assets/icons/user-icons/склад.svg",
+    },
+    {
+      href: "/user/tracking",
+      label: "Отслеживание доставки",
+      icons: "/assets/icons/user-icons/доставка.svg",
+    },
+    {
+      href: "/user/settings",
+      label: "Настройки",
+      icons: "/assets/icons/user-icons/настройки.svg",
+    },
   ];
 
   return (
@@ -31,6 +55,11 @@ export default function UsersLayout({ children }) {
               {links.map((link) => (
                 <Link key={link.label} href={link.href}>
                   <li className={isActive(link.href) ? s.active : ""}>
+                    <img
+                      src={link.icons}
+                      alt="icons"
+                      className={isActive(link.href) ? s.active_icon : ""}
+                    />
                     {link.label}
                   </li>
                 </Link>

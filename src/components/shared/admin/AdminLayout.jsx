@@ -10,12 +10,36 @@ export default function AdminLayout({ children }) {
   const isActive = (path) => router.pathname === path;
 
   const links = [
-    { href: "/admin", label: "Главная" },
-    { href: "/admin/users", label: "Пользователи" },
-    { href: "/admin/notifications", label: "Уведомления" },
-    { href: "/admin/products", label: "Товары" },
-    { href: "/admin/warehouses", label: "Управление складами" },
-    { href: "/admin/shops-catalog", label: "Каталог сайтов" },
+    {
+      href: "/admin",
+      label: "Главная",
+      icon: "/assets/icons/admin-icons/главная.svg",
+    },
+    {
+      href: "/admin/users",
+      label: "Пользователи",
+      icon: "/assets/icons/admin-icons/пользователи.svg",
+    },
+    {
+      href: "/admin/notifications",
+      label: "Уведомления",
+      icon: "/assets/icons/admin-icons/уведомления.svg",
+    },
+    {
+      href: "/admin/products",
+      label: "Товары",
+      icon: "/assets/icons/admin-icons/товары.svg",
+    },
+    {
+      href: "/admin/warehouses",
+      label: "Управление складами",
+      icon: "/assets/icons/admin-icons/склад.svg",
+    },
+    {
+      href: "/admin/shops-catalog",
+      label: "Каталог сайтов",
+      icon: "/assets/icons/admin-icons/сайты.svg",
+    },
   ];
 
   return (
@@ -31,6 +55,11 @@ export default function AdminLayout({ children }) {
               {links.map((link) => (
                 <Link key={link.label} href={link.href}>
                   <li className={isActive(link.href) ? s.active : ""}>
+                    <img
+                      src={link.icon}
+                      alt="icons"
+                      className={isActive(link.href) ? s.active_icon : ""}
+                    />
                     {link.label}
                   </li>
                 </Link>

@@ -1,45 +1,98 @@
 .register_page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 141px;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+
+  .right_img {
+    width: 494px;
+    height: 494px;
+    flex-shrink: 0;
+    position: absolute;
+    right: -140px;
+    top: 50%; /* Устанавливаем начальную точку на середину по вертикали */
+    transform: translateY(-50%); /* Смещаем элемент на 50% его высоты вверх */
+  }
+
+  .left_img {
+    width: 494px;
+    height: 494px;
+    flex-shrink: 0;
+    position: absolute;
+    left: -150px;
+    top: 50%; /* Устанавливаем начальную точку на середину по вертикали */
+    transform: translateY(-50%); /* Смещаем элемент на 50% его высоты вверх */
+  }
+
   h1 {
     text-align: center;
     margin-top: 100px;
+    color: var(--black, #001526);
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 60px;
   }
 
-  .register_form {
+  .steps {
     margin: 0 auto;
-    max-width: 550px;
-    margin-top: 50px;
+    padding-top: 24px;
+  }
 
-    .register_inputs {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+  .logo {
+    img {
+      margin: 0 auto;
+      width: 152px;
+      height: 80px;
+    }
+  }
 
-      div {
+  section {
+    margin: 0 auto;
+    .register_form {
+      width: 550px;
+      margin-top: 24px;
+
+      .register_inputs {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 20px;
 
-        input {
-          padding: 12px 20px;
-          border: 1px solid #000;
-          border-radius: 10px;
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          input {
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--gray, #a4a4a4);
+          }
         }
       }
-    }
 
-    .register_btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      margin-top: 20px;
+      .register_btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-top: 20px;
 
-      button {
-        background: #000;
-        color: #fff;
-        padding: 14px 36px;
-        border-radius: 10px;
-        width: 350px;
+        button {
+          border-radius: 12px;
+          background: var(--blue, #027ddb);
+          padding: 14px 36px;
+          color: var(--white, var(--Colors-Grey-White, #fff));
+          font-size: 16px;
+          line-height: 140%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 14px;
+          width: 350px;
+        }
       }
     }
   }
