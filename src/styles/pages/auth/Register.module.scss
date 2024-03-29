@@ -41,6 +41,10 @@
     padding-top: 24px;
   }
 
+  .ppp {
+    text-align: center;
+  }
+
   .logo {
     img {
       margin: 0 auto;
@@ -54,6 +58,27 @@
     .register_form {
       width: 550px;
       margin-top: 24px;
+
+      .activation_inputs {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 32px;
+
+        input {
+          border-radius: 8px;
+          border: 1px solid var(--main-grey, #5f6c86);
+          padding: 12px 20px;
+          max-width: 51px;
+          font-size: 15px;
+          font-weight: 700;
+        }
+      }
+
+      p {
+        text-align: center;
+      }
 
       .register_inputs {
         display: flex;
