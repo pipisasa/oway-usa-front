@@ -4,7 +4,14 @@
   border-radius: 0px 0px 64px 64px;
   background: var(--bue_light_2, #F7F9FC);
 
+  .heroSection_img {
+    width: 560px;
+    height: 560px;
+    position: absolute;
+    top: 120px;
+    right: -60px;
 
+  }
   .heroSection_info {
     width: 90%;
     padding-top: 60px;
@@ -22,6 +29,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: 70px;
+        color: var(--blue, #027DDB);
       }
 
     }

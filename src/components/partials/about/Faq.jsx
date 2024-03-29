@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import s from "@/styles/partials/Faq.module.scss";
-import FaqItem from "./FaqItem";
+import FaqItem from "../FaqItem";
 
 const data = [
     {
-        question: 'Вопрос',
+        question: 'Вопросc',
         answer: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
     },
     {
@@ -32,20 +32,21 @@ const data = [
 
 
 export default function Faq() {
-  return (
-      <div className={`${s.faq} container`}>
-          <div className={s.faq_inner}>
-              <span>FAQ</span>
-              <h1>Часто задаваемые вопросы</h1>
-              <div className={s.questions}>
-                  {data.map((item, index) => (
-                      <FaqItem key={index} item={item} index={index}/>
-                  ))}
-              </div>
-          </div>
-          <div className={s.faq_img}>
-              <img src="assets/icons/faq_door.png" alt=""/>
-          </div>
-      </div>
-  )
+    return (
+        <div className={`${s.faq} container`}>
+            <div className={s.faq_inner}>
+                <span>FAQ</span>
+                <h1>Дополнительные вопросы <br/>
+                    и ответы на них</h1>
+                <div className={s.questions}>
+                    {data.map((item, index) => (
+                        <FaqItem key={index} item={item} index={index}/>
+                    ))}
+                </div>
+            </div>
+            <div className={s.faq_air}>
+                <img src="assets/images/aboutAir.png" width={697} height={697} alt=""/>
+            </div>
+        </div>
+    )
 }
