@@ -10,7 +10,7 @@ export default function Step2({ onSubmit, setUserData }) {
       password: e.target.password.value,
       password2: e.target.password2.value,
     });
-    onSubmit(); // Здесь вызывается submitRegistration из Register
+    onSubmit();
   };
   return (
     <>
