@@ -4,25 +4,45 @@ import Step1 from "@/components/shared/auth/Step1";
 import Step2 from "@/components/shared/auth/Step2";
 import ConfirmRegistrations from "@/components/shared/auth/ConfirmRegistrations";
 import { useRouter } from "next/router";
+import { useRegister } from "@/hooks/auth/useRegister";
 
 export default function Register() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [userData, setUserData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    password: "",
+    password2: "",
+  });
+  const { register } = useRegister();
   const router = useRouter();
 
   const nextStep = () => {
     setCurrentStep(currentStep + 1);
   };
 
+  const handleUserData = (newData) => {
+    setUserData((prevData) => ({ ...prevData, ...newData }));
+  };
+
+  const submitRegistration = () => {
+    register(userData); // отправляем данные на сервер
+  };
+
   const renderStep = () => {
     switch (currentStep) {
       case 1:
-        return <Step1 onSubmit={nextStep} />;
+        return <Step1 onSubmit={nextStep} setUserData={handleUserData} />;
       case 2:
-        return <Step2 onSubmit={nextStep} />;
+        return (
+          <Step2 onSubmit={submitRegistration} setUserData={handleUserData} />
+        );
       case 3:
         return <ConfirmRegistrations onSubmit={nextStep} />;
       default:
-        return <Step1 onSubmit={nextStep} />;
+        return <Step1 onSubmit={nextStep} setUserData={handleUserData} />;
     }
   };
 
