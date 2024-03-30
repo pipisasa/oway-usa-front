@@ -30,11 +30,8 @@ export const useRegister = () => {
         }
       );
 
-      // Обработка успешного ответа
-      // Например, можно перенаправить пользователя на страницу входа или показать сообщение об успешной регистрации
       console.log("Успешная регистрация:", response.data);
-
-      // Здесь можно добавить дополнительную логику, например, перенаправление на страницу входа
+      router.push("/auth/account-activation");
     } catch (error) {
       console.error("Ошибка регистрации:", error.response.data);
       setError(error.response.data);

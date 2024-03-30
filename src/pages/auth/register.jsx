@@ -28,7 +28,7 @@ export default function Register() {
   };
 
   const submitRegistration = () => {
-    register(userData); // отправляем данные на сервер
+    register(userData);
   };
 
   const renderStep = () => {
@@ -39,8 +39,6 @@ export default function Register() {
         return (
           <Step2 onSubmit={submitRegistration} setUserData={handleUserData} />
         );
-      case 3:
-        return <ConfirmRegistrations onSubmit={nextStep} />;
       default:
         return <Step1 onSubmit={nextStep} setUserData={handleUserData} />;
     }
