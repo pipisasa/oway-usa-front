@@ -3,10 +3,11 @@ import s from "@/styles/admin/AdminLayout.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import UsersHeader from "./UserHeader";
+import useLogout from "@/hooks/auth/useLogout";
 
 export default function UsersLayout({ children }) {
   const router = useRouter();
-
+  const logout = useLogout();
   const isActive = (path) => router.pathname === path;
 
   const links = [
@@ -64,6 +65,10 @@ export default function UsersLayout({ children }) {
                   </li>
                 </Link>
               ))}
+              <button onClick={logout} className={s.logout}>
+                <img src="/assets/icons/logout.svg" alt="logout" />
+                Выйти
+              </button>
             </ul>
           </nav>
         </div>

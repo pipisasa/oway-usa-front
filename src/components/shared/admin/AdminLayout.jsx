@@ -64,6 +64,10 @@ export default function AdminLayout({ children }) {
                   </li>
                 </Link>
               ))}
+              <button className={s.logout}>
+                <img src="/assets/icons/logout.svg" alt="logout" />
+                Выйти
+              </button>
             </ul>
           </nav>
         </div>
