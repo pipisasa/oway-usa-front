@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "@/styles/pages/auth/Login.module.scss";
 import Link from "next/link";
+import useLogin from "@/hooks/auth/useLogin"; // Импортируем кастомный хук useLogin
 
 export default function Login() {
+  const { login, error } = useLogin();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    await login(email, password);
+  };
+
   return (
     <main className={s.login_page}>
       <img className={s.left_img} src="/assets/images/40.png" alt="" />
@@ -11,21 +21,35 @@ export default function Login() {
           <img src="/assets/icons/owayUSE.svg" alt="OWAY USA" />
         </div>
         <h1>Авторизация</h1>
-        <form className={s.login_form}>
+        <form className={s.login_form} onSubmit={handleLogin}>
           <div className={s.login_inputs}>
             <div>
-              <label htmlFor="">Электронная почта</label>
-              <input type="email" placeholder="Введите почту" />
+              <label htmlFor="email">Электронная почта</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Введите почту"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div>
-              <label htmlFor="">Пароль</label>
-              <input type="password" placeholder="Введите пароль" />
+              <label htmlFor="password">Пароль</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Введите пароль"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
           </div>
+          {error && <div className={s.error}>{error}</div>}{" "}
+          {/* Отображение ошибок авторизации */}
           <div className={s.forgot_pass}>
             <div className={s.remember_me}>
               <input type="checkbox" />
-              <label htmlFor="">Запомнить пароль</label>
+              <label htmlFor="remember-me">Запомнить пароль</label>
             </div>
             <Link href="/">Забыли пароль?</Link>
           </div>

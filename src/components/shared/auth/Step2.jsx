@@ -2,10 +2,15 @@ import React from "react";
 import s from "@/styles/pages/auth/Register.module.scss";
 import Link from "next/link";
 
-export default function Step2({ onSubmit }) {
+export default function Step2({ onSubmit, setUserData }) {
   const handleSubmit = (e) => {
-    e.preventDefault(); // Предотвращаем стандартное поведение формы
-    onSubmit(); // Переходим к следующему шагу
+    e.preventDefault();
+    setUserData({
+      email: e.target.email.value,
+      password: e.target.password.value,
+      password2: e.target.password2.value,
+    });
+    onSubmit(); // Здесь вызывается submitRegistration из Register
   };
   return (
     <>
@@ -14,15 +19,23 @@ export default function Step2({ onSubmit }) {
         <div className={s.register_inputs}>
           <div>
             <label htmlFor="">Электронная почта</label>
-            <input type="email" placeholder="Введите Электронную почту" />
+            <input
+              id="email"
+              type="email"
+              placeholder="Введите Электронную почту"
+            />
           </div>
           <div>
             <label htmlFor="">Пароль</label>
-            <input type="password" placeholder="Введите пароль" />
+            <input id="password" type="password" placeholder="Введите пароль" />
           </div>
           <div>
             <label htmlFor="">Повторите пароль</label>
-            <input type="password" placeholder="Введите пароль повторно" />
+            <input
+              id="password2"
+              type="password"
+              placeholder="Введите пароль повторно"
+            />
           </div>
         </div>
         <div className={s.register_btn}>

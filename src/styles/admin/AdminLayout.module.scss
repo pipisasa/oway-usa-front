@@ -24,6 +24,19 @@
     nav {
       margin-top: 56px;
 
+      .logout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--red, #ff1414);
+        font-size: 14px;
+        line-height: 140%;
+        position: absolute;
+        bottom: 30px;
+        width: 70%;
+      }
+
       ul {
         display: flex;
         flex-direction: column;
