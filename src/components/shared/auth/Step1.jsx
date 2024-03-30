@@ -2,10 +2,15 @@ import React from "react";
 import s from "@/styles/pages/auth/Register.module.scss";
 import Link from "next/link";
 
-export default function Step1({ onSubmit }) {
+export default function Step1({ onSubmit, setUserData }) {
   const handleSubmit = (e) => {
-    e.preventDefault(); // Предотвращаем стандартное поведение формы
-    onSubmit(); // Переходим к следующему шагу
+    e.preventDefault();
+    setUserData({
+      first_name: e.target.first_name.value,
+      last_name: e.target.last_name.value,
+      phone_number: e.target.phone_number.value,
+    });
+    onSubmit(); // Переход к следующему шагу
   };
   return (
     <>
@@ -14,15 +19,19 @@ export default function Step1({ onSubmit }) {
         <div className={s.register_inputs}>
           <div>
             <label htmlFor="">Имя</label>
-            <input type="text" placeholder="Введите Имя" />
+            <input id="first_name" type="text" placeholder="Введите Имя" />
           </div>
           <div>
             <label htmlFor="">Фамилия</label>
-            <input type="text" placeholder="Введите Фамилия" />
+            <input id="last_name" type="text" placeholder="Введите Фамилия" />
           </div>
           <div>
             <label htmlFor="">Номер телефона</label>
-            <input type="text" placeholder="Введите номер телефона" />
+            <input
+              id="phone_number"
+              type="text"
+              placeholder="Введите номер телефона"
+            />
           </div>
         </div>
         <div className={s.register_btn}>

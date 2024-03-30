@@ -4,9 +4,11 @@ import OnTheWay from "@/components/shared/users/tabs/OnTheWay";
 import TableTabs from "@/components/shared/users/tabs/TableTabs";
 import ReadyIssued from "@/components/shared/users/tabs/ReadyIssued";
 import Delivered from "@/components/shared/users/tabs/Delivered";
+import useUserData from "@/hooks/user/useUserData";
 
 export default function UserMainPage() {
   const [activeTab, setActiveTab] = useState("onTheWay");
+  const { userData, loading, error } = useUserData();
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -15,12 +17,22 @@ export default function UserMainPage() {
   return (
     <section className={s.user_page}>
       <div className={s.user_info}>
-        <h2>Кудайбергенов Акбар</h2>
-        <div>
-          <p>+7 (747) 123-12-12</p>
-          <p>dzholdaspaevalim@gmail.com</p>
-          <p>Казахстан, Караганда, Кузембаева 32, кв. 12</p>
-        </div>
+        {loading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>Error: {error}</div>
+        ) : (
+          <>
+            <h2>
+              {userData?.last_name} {userData?.first_name}
+            </h2>
+            <div>
+              <p>{userData?.phone}</p>
+              <p>{userData?.email}</p>
+              <p>{userData?.address}</p>
+            </div>
+          </>
+        )}
       </div>
       <TableTabs onTabClick={handleTabClick} activeTab={activeTab} />
       {activeTab === "onTheWay" && <OnTheWay />}
@@ -28,4 +40,20 @@ export default function UserMainPage() {
       {activeTab === "delivered" && <Delivered />}
     </section>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const token = req.cookies.accessToken;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
 }

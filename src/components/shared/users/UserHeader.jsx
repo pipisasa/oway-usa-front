@@ -6,9 +6,11 @@ import { NotificationIcon } from "../admin/NotificationIcon";
 import NotificationsModal from "../admin/modals/NotificationsModal";
 import AddShopsModal from "../admin/modals/AddShopsModal";
 import BankCardsModal from "./modals/BankCardsModal";
+import useUserData from "@/hooks/user/useUserData";
 
 export default function UsersHeader() {
   const router = useRouter();
+  const { userData, loading, error } = useUserData();
 
   const links = [
     { href: "/user", label: "Главная" },
@@ -23,7 +25,8 @@ export default function UsersHeader() {
     if (router.pathname === "/user") {
       return (
         <>
-          Здравствуйте, <span>Акбар</span> 👋
+          Здравствуйте,{" "}
+          <span>{loading ? "загрузка..." : userData?.first_name}</span> 👋
         </>
       );
     } else {
@@ -42,6 +45,8 @@ export default function UsersHeader() {
     }
     return null;
   };
+
+  if (error) return <div className={s.header}>Error: {error}</div>;
 
   return (
     <header className={s.header}>
@@ -62,7 +67,7 @@ export default function UsersHeader() {
         </Badge>
 
         <div className={s.user_code}>
-          <span>#AIBALOH</span>
+          <span>#{loading ? "загрузка..." : userData?.unique_id}</span>
         </div>
 
         <Avatar
