@@ -33,7 +33,7 @@ export default function Home() {
       <HeroSection />
       <Shops />
       <Purchase/>
-      <CurrentProducts/>
+      {/*<CurrentProducts/>*/}
       <TrackNumber />
       <Mission />
       <AboutUs />
