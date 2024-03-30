@@ -1,0 +1,103 @@
+
+
+  .faqItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 16px 16px 20px;
+    border-radius: 16px;
+    border: 1px solid var(--blue_light, #AED5F3);
+    background: var(--white, #FFF);
+
+    .question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+
+      h3 {
+        color: var(--dark, #1D1A1A);
+        font-family: Helvetica;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px; /* 125% */
+        margin: 0;
+      }
+
+      span {
+        font-size: 24px;
+        line-height: 1;
+
+        div {
+          display: flex;
+          width: 28px;
+          height: 28px;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          border-radius: 1000px;
+          background: var(--blue, #027DDB);
+          color: white;
+
+        }
+      }
+    }
+
+    .answer {
+      padding: 16px 0  0 0;
+      display: none;
+
+
+      p {
+        margin: 0;
+        color: var(--white, #FFF);
+        /* Regular - 14 */
+        font-family: Helvetica;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+      }
+    }
+
+    &.expanded {
+      background: var(--blue, #027DDB);
+
+      .question {
+        background-color: var(--blue_light, #027DDB);
+        padding: 0 0  16px 0;
+
+        h3 {
+          color: white;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 700;
+        }
+
+        span {
+          div {
+            background: white;
+            color: var(--blue, #027DDB);
+          }
+        }
+      }
+      .answers {
+        width: 100%;
+        height: 2px;
+        border-bottom: solid 1px #b3daf5;
+        opacity: 0.32;
+
+      }
+
+      .answer {
+        display: block;
+        color: var(--white, #FFF);
+        font-family: Helvetica;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+      }
+    }
+  }

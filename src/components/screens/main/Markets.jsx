@@ -1,5 +1,6 @@
 import React from "react";
 import s from "@/styles/screens/main/Markets.module.scss";
+import Button from "../../partials/Button";
 
 export default function Markets() {
     return (
@@ -11,11 +12,10 @@ export default function Markets() {
                     <div className={s.heroSection_info_span}>
                         <span><strong>Amazon</strong> — американская компания, крупнейшая в мире на рынках платформ электронной коммерции и публично-облачных вычислений по выручке и рыночной капитализации.</span>
                     </div>
-
-                    <button className={s.button}>Посетить сайт</button>
+                    <Button button='Посетить сайт'/>
                 </div>
-                <div>
-                    <img src="" alt=""/>
+                <div className={s.heroSection_img}>
+                    <img src="assets/images/marketsBox.png" alt=""/>
                 </div>
             </div>
         </div>
