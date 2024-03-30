@@ -17,7 +17,8 @@ import Join from "../components/screens/main/Join";
 import Faq from "../components/partials/Faq";
 import Contacts from "../components/partials/Contacts";
 import Purchase from "../components/shared/Purchase";
-import CurrentProducts from "../components/screens/main/CurrentProducts";
+import CurrentProducts from "../components/screens/main/ProductSlider";
+import ProductSlider from "../components/screens/main/ProductSlider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,14 +33,18 @@ export default function Home() {
       </Head>
       <HeroSection />
       <Shops />
-      <Purchase/>
-      <CurrentProducts/>
+      <Purchase />
+      <ProductSlider />
       <TrackNumber />
       <Mission />
       <AboutUs />
       <StepWork />
-      <MoreInfo menu='menu' />
-      <Advantage p='Наши преимущества' h2='Легкость и доступность совершения покупок' menu='menu' />
+      <MoreInfo menu="menu" />
+      <Advantage
+        p="Наши преимущества"
+        h2="Легкость и доступность совершения покупок"
+        menu="menu"
+      />
       <MoreServices />
       <Calculator />
       <Join />
