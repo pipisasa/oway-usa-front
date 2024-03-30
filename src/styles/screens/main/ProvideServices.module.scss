@@ -1,0 +1,98 @@
+.service {
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  .service_header {
+
+    span {
+      color: var(--black, #001526);
+      font-family: Helvetica;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+    h1 {
+      color: var(--black, #001526);
+      font-family: Helvetica;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+  .services_block{
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 20px;
+
+    .services_block_left {
+      display: flex;
+      width: 425px;
+      align-items: flex-start;
+      gap: 20px;
+      flex-shrink: 0;
+
+      span {
+        color: var(--black, #001526);
+        font-family: Helvetica;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%;
+      }
+      div {
+        width: 3px;
+        flex-shrink: 0;
+        align-self: stretch;
+        border-radius: 100px;
+        background: var(--orange, #FF7C00);
+      }
+    }
+    .services_block_span {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      flex: 1 0 0;
+      div {
+        img {
+          border-radius: 12px;
+        }
+      }
+      button {
+        display: flex;
+        width: 348px;
+        padding: 14px 36px;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        border-radius: 12px;
+        border: 1px solid var(--blue, #027DDB);
+      }
+
+      .services_block_span_div {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        align-self: stretch;
+        span {
+          color: var(--black, #001526);
+          font-family: Helvetica;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 140%;
+        }
+        div {
+          width: 2px;
+          align-self: stretch;
+          border-radius: 100px;
+          background: var(--orange, #FF7C00);
+        }
+      }
+    }
+  }
+}
