@@ -31,12 +31,16 @@ const data = [
 ];
 
 
-export default function Faq() {
+export default function Faq({margin}) {
   return (
-      <div className={`${s.faq} container`}>
+      <div className={`${s.faq} container`} style={margin === 'no' ? {paddingTop:"40px"} : {marginTop:"120px"}}>
           <div className={s.faq_inner}>
-              <span>FAQ</span>
-              <h1>Часто задаваемые вопросы</h1>
+              {margin === 'no' ?
+                  null
+                  :
+                  <span>FAQ</span>
+              }
+              <h1 className={margin === 'no' ? s.h1 : s.faq_h1}>Часто задаваемые вопросы</h1>
               <div className={s.questions}>
                   {data.map((item, index) => (
                       <FaqItem key={index} item={item} index={index}/>

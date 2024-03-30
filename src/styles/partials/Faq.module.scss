@@ -1,5 +1,4 @@
 .faq {
-  margin-top: 120px;
   .faq_img {
     position: absolute;
     right: 27px;
@@ -11,15 +10,25 @@
     top: -40px;
   }
   .faq_inner {
-    h1 {
+    .faq_h1 {
       color: var(--black, #001526);
-      /* Bold - 40 */
+
       font-family: Helvetica;
       font-size: 40px;
       font-style: normal;
       font-weight: 700;
       line-height: normal;
       margin-top: 12px;
+    }
+    .h1 {
+      color: var(--black, #001526);
+      font-family: Helvetica;
+      font-size: 58px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-top: 12px;
+      margin-bottom: 32px;
     }
 
     .questions {
