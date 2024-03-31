@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import s from "@/styles/screens/main/CurrentProducts.module.scss";
 import TopProductCard from "@/components/shared/cards/TopProductCard";
+import useProducts from "@/hooks/admin/useProducts";
 
 export default function ProductSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 10; // Общее количество слайдов
-  const productNames = [
-    "CAKEDECOR.KZ форма PS286-28, сталь",
-    "Название продукта 2",
-    "Название продукта 3",
-    "Название продукта 4",
-    "Название продукта 5",
-    "Название продукта 6",
-    "Название продукта 7",
-    "Название продукта 8",
-    "Название продукта 9",
-    "Название продукта 10",
-  ];
+  const { products, isLoading, error, deleteProduct } = useProducts();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(null);
+
+  const handleEditProduct = (product) => {
+    setCurrentProduct(product);
+    setIsModalOpen(true);
+  };
+
+  if (isLoading) return <p>Загрузка...</p>;
+  if (error) return <p>Ошибка: {error}</p>;
 
   const handlePrevSlide = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -43,12 +44,18 @@ export default function ProductSlider() {
         </div>
       </div>
       <div className={s.current_block}>
-        {productNames.map((productName, index) => (
+        {products.map((product) => (
           <div
-            key={index}
-            className={`${s.slide} ${index === currentIndex ? s.active : ""}`}
+            key={product.id}
+            className={`${s.slide} ${
+              product.id === currentIndex ? s.active : ""
+            }`}
           >
-            <TopProductCard productName={productName} />
+            <TopProductCard
+              title={product.title}
+              link={product.link}
+              image={product.image}
+            />
           </div>
         ))}
       </div>
