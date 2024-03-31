@@ -27,9 +27,17 @@ export default function Register() {
     setUserData((prevData) => ({ ...prevData, ...newData }));
   };
 
-  const submitRegistration = () => {
-    register(userData); // отправляем данные на сервер
+  const submitRegistration = async (newData) => {
+    const combinedData = {
+      ...userData,
+      ...newData,
+    };
+    if (newData.email) {
+      await register(combinedData);
+    }
+    localStorage.setItem("email", combinedData.email);
   };
+
 
   const renderStep = () => {
     switch (currentStep) {
@@ -39,8 +47,6 @@ export default function Register() {
         return (
           <Step2 onSubmit={submitRegistration} setUserData={handleUserData} />
         );
-      case 3:
-        return <ConfirmRegistrations onSubmit={nextStep} />;
       default:
         return <Step1 onSubmit={nextStep} setUserData={handleUserData} />;
     }

@@ -10,7 +10,7 @@ export default function Step1({ onSubmit, setUserData }) {
       last_name: e.target.last_name.value,
       phone_number: e.target.phone_number.value,
     });
-    onSubmit(); // Переход к следующему шагу
+    onSubmit();
   };
   return (
     <>

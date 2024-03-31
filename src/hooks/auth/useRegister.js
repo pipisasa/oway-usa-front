@@ -1,10 +1,12 @@
 // hooks/useRegister.js
 import { useState } from "react";
 import axios from "axios";
+import {useRouter} from "next/router";
 
 export const useRegister = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const router = useRouter()
 
   const register = async ({
     first_name,
@@ -30,14 +32,11 @@ export const useRegister = () => {
         }
       );
 
-      // Обработка успешного ответа
-      // Например, можно перенаправить пользователя на страницу входа или показать сообщение об успешной регистрации
-      console.log("Успешная регистрация:", response.data);
-
-      // Здесь можно добавить дополнительную логику, например, перенаправление на страницу входа
+      console.log("Успешная регистрация:", response?.data);
+      router.push("/auth/account-activation");
     } catch (error) {
-      console.error("Ошибка регистрации:", error.response.data);
-      setError(error.response.data);
+      console.error("Ошибка регистрации:", error?.response?.data);
+      setError(error?.response?.data);
     } finally {
       setIsLoading(false);
     }
