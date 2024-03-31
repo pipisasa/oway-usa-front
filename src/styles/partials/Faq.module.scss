@@ -1,7 +1,14 @@
 .faq {
+  display: flex;
+  justify-content: space-between;
   .faq_img {
-    position: absolute;
+    //position: absolute;
     right: 27px;
+    top: 40px;
+  }
+  .faq_img1 {
+    //position: absolute;
+    left: 27px;
     top: 40px;
   }
   .faq_air {
@@ -10,6 +17,12 @@
     top: -40px;
   }
   .faq_inner {
+    display: flex;
+    width: 874px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+
     .faq_h1 {
       color: var(--black, #001526);
 
