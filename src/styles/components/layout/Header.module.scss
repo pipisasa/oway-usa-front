@@ -76,6 +76,11 @@
       border-radius: 12px;
       background: var(--blue, #027DDB);
       cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #01579b; /* новый цвет фона при наведении */
+      }
     }
 
     .register {

@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
+  overflow: hidden; /* Скрыть нижний скролл */
 
   .current_header {
     display: flex;
@@ -47,8 +48,9 @@
     align-items: flex-start;
     gap: 20px;
     align-self: stretch;
-    overflow-x: auto;
+    overflow-x: hidden; /* Скрыть горизонтальный скролл */
     scroll-snap-type: x mandatory;
+    padding-bottom: 20px; /* Добавить отступ равный ширине вертикального скроллбара */
   }
 
   .slide {
