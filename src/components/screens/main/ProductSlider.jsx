@@ -5,16 +5,9 @@ import useProducts from "@/hooks/admin/useProducts";
 
 export default function ProductSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSlides = 10; // Общее количество слайдов
+  const totalSlides = 10;
   const { products, isLoading, error, deleteProduct } = useProducts();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentProduct, setCurrentProduct] = useState(null);
-
-  const handleEditProduct = (product) => {
-    setCurrentProduct(product);
-    setIsModalOpen(true);
-  };
+  const [loadingStates, setLoadingStates] = useState({});
 
   if (isLoading) return <p>Загрузка...</p>;
   if (error) return <p>Ошибка: {error}</p>;

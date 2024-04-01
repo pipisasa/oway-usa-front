@@ -10,6 +10,7 @@ const links = [
     { href: "/markets", label: "Магазин" },
     { href: "/about", label: "О компании" },
     { href: "/faq", label: "Вопросы/ответы" },
+    { href: "/services", label: "Услуги" },
 ];
 export default function HeroSection() {
     const router = useRouter()

@@ -27,9 +27,17 @@ export default function Register() {
     setUserData((prevData) => ({ ...prevData, ...newData }));
   };
 
-  const submitRegistration = () => {
-    register(userData);
+  const submitRegistration = async (newData) => {
+    const combinedData = {
+      ...userData,
+      ...newData,
+    };
+    if (newData.email) {
+      await register(combinedData);
+    }
+    localStorage.setItem("email", combinedData.email);
   };
+
 
   const renderStep = () => {
     switch (currentStep) {

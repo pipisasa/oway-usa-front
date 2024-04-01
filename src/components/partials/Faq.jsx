@@ -34,6 +34,11 @@ const data = [
 export default function Faq({margin}) {
   return (
       <div className={`${s.faq} container`} style={margin === 'no' ? {paddingTop:"40px"} : {marginTop:"120px"}}>
+          {margin !== "no" && (
+              <div className={s.faq_img}>
+                  <img src="assets/icons/faq_door.png" alt=""/>
+              </div>
+          )}
           <div className={s.faq_inner}>
               {margin === 'no' ?
                   null
@@ -47,9 +52,11 @@ export default function Faq({margin}) {
                   ))}
               </div>
           </div>
-          <div className={s.faq_img}>
-              <img src="assets/icons/faq_door.png" alt=""/>
-          </div>
+          {margin === "no" && (
+              <div className={s.faq_img1}>
+                  <img src="assets/icons/faq_door.png" alt=""/>
+              </div>
+          )}
       </div>
   )
 }

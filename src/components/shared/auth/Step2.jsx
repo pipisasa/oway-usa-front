@@ -5,13 +5,14 @@ import Link from "next/link";
 export default function Step2({ onSubmit, setUserData }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUserData({
+    const newData = {
       email: e.target.email.value,
       password: e.target.password.value,
       password2: e.target.password2.value,
-    });
-    onSubmit();
+    };
+    onSubmit(newData);
   };
+
   return (
     <>
       <img className={s.steps} src="/assets/images/step2.svg" alt="step1" />
