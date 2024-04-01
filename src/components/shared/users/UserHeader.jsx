@@ -7,10 +7,12 @@ import NotificationsModal from "../admin/modals/NotificationsModal";
 import AddShopsModal from "../admin/modals/AddShopsModal";
 import BankCardsModal from "./modals/BankCardsModal";
 import useUserData from "@/hooks/user/useUserData";
+import useNotification from "../../../hooks/user/useNotification";
 
 export default function UsersHeader() {
   const router = useRouter();
   const { userData, loading, error } = useUserData();
+  const {products} = useNotification()
 
   const links = [
     { href: "/user", label: "Главная" },
@@ -54,7 +56,7 @@ export default function UsersHeader() {
 
       <div className={s.notification}>
         <div>{renderModal()}</div>
-        <Badge content="13" shape="circle" color="danger">
+        <Badge content={products?.total_not_checked_notifications} shape="circle" color="danger">
           <Button
             radius="full"
             isIconOnly

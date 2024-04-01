@@ -56,15 +56,6 @@ export default function Contacts() {
                   <h3>owayusa1@gmail.com</h3>
               </div>
             </div>
-              {!state ?
-                  (<div className={s.contact_inner_block_auth}>
-                      <div className={s.contact_inner_block_auth_inner}>
-                          <span>Адрес онлайн заказов в Delaware <br/> после регистрации</span>
-                          <Button path={'auth/login'} button='Зарегистрироваться'/>
-                      </div>
-                  </div>)
-                  : null
-              }
           </div>
 
 
@@ -109,15 +100,6 @@ export default function Contacts() {
                         <h3>owayusa1@gmail.com</h3>
                     </div>
                 </div>
-                {!state ?
-                    (<div className={s.contact_inner_block_auth}>
-                        <div className={s.contact_inner_block_auth_inner}>
-                            <span>Адрес онлайн заказов в Delaware <br/> после регистрации</span>
-                            <Button path={'auth/login'} button='Зарегистрироваться'/>
-                        </div>
-                    </div>)
-                    : null
-                }
             </div>
 
 
@@ -173,7 +155,6 @@ export default function Contacts() {
                 }
             </div>
         </div>
-
       </div>
   )
 }
