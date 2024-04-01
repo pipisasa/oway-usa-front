@@ -1,13 +1,16 @@
 import React from "react";
 import s from "@/styles/partials/card/CurrentCard.module.scss";
+import Link from "next/link";
 
-export default function TopProductCard({ productName }) {
+export default function TopProductCard({ title, link, image }) {
   return (
-    <div className={s.card}>
-      <div className={s.card_img}>
-        <img src="assets/images/cakedecor.png" alt="" />
+    <Link href="#" target="__blank">
+      <div className={s.card}>
+        <div className={s.card_img}>
+          <img src="" alt="img" />
+        </div>
+        <p>title</p>
       </div>
-      <p>{productName}</p>
-    </div>
+    </Link>
   );
 }

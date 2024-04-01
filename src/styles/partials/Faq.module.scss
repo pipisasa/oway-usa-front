@@ -59,8 +59,8 @@
         flex-direction: column;
         padding: 16px 16px 16px 20px;
         border-radius: 16px;
-        border: 1px solid var(--blue_light, #AED5F3);
-        background: var(--white, #FFF);
+        border: 1px solid var(--blue_light, #aed5f3);
+        background: var(--white, #fff);
 
         .question {
           display: flex;
@@ -69,7 +69,7 @@
           cursor: pointer;
 
           h3 {
-            color: var(--dark, #1D1A1A);
+            color: var(--dark, #1d1a1a);
             /* Bold - 16 */
             font-family: Helvetica;
             font-size: 16px;
@@ -77,7 +77,6 @@
             font-weight: 700;
             line-height: 20px; /* 125% */
             margin: 0;
-
           }
 
           span {
@@ -92,21 +91,19 @@
               align-items: center;
               gap: 10px;
               border-radius: 1000px;
-              background: var(--blue, #027DDB);
+              background: var(--blue, #027ddb);
               color: white;
-
             }
           }
         }
 
         .answer {
-          padding: 16px 0  0 0;
+          padding: 16px 0 0 0;
           display: none;
-
 
           p {
             margin: 0;
-            color: var(--white, #FFF);
+            color: var(--white, #fff);
             /* Regular - 14 */
             font-family: Helvetica;
             font-size: 14px;
@@ -117,11 +114,11 @@
         }
 
         &.expanded {
-          background: var(--blue, #027DDB);
+          background: var(--blue, #027ddb);
 
           .question {
-            background-color: var(--blue_light, #027DDB);
-            padding: 0 0  16px 0;
+            background-color: var(--blue_light, #027ddb);
+            padding: 0 0 16px 0;
 
             h3 {
               color: white;
@@ -133,7 +130,7 @@
             span {
               div {
                 background: white;
-                color: var(--blue, #027DDB);
+                color: var(--blue, #027ddb);
               }
             }
           }
@@ -142,12 +139,11 @@
             height: 2px;
             border-bottom: solid 1px #b3daf5;
             opacity: 0.32;
-
           }
 
           .answer {
             display: block;
-            color: var(--white, #FFF);
+            color: var(--white, #fff);
             font-family: Helvetica;
             font-size: 14px;
             font-style: normal;
@@ -156,8 +152,6 @@
           }
         }
       }
-
     }
   }
-
 }

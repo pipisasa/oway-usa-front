@@ -32,28 +32,28 @@ export default function ProductSlider() {
   };
 
   return (
-      <div className={`${s.current} container`}>
-        <div className={s.current_header}>
-          <div className={s.current_header_title}>
-            <p>Интересные товары</p>
-            <h1>Подборка последних актуальных товаров</h1>
-          </div>
-          <div className={s.current_header_icon}>
-            <button onClick={handlePrevSlide}>
-              <img src="assets/icons/arrowLeft.svg" alt="" />
-            </button>
-            <button onClick={handleNextSlide}>
-              <img src="assets/icons/arrowRight.svg" alt="" />
-            </button>
-          </div>
+    <div className={`${s.current} container`}>
+      <div className={s.current_header}>
+        <div className={s.current_header_title}>
+          <p>Интересные товары</p>
+          <h1>Подборка последних актуальных товаров</h1>
         </div>
-        <div ref={sliderRef} className={s.current_block}>
-          {productNames.map((productName, index) => (
-              <div key={index} className={s.slide}>
-                <TopProductCard productName={productName} />
-              </div>
-          ))}
+        <div className={s.current_header_icon}>
+          <button onClick={handlePrevSlide}>
+            <img src="assets/icons/arrowLeft.svg" alt="" />
+          </button>
+          <button onClick={handleNextSlide}>
+            <img src="assets/icons/arrowRight.svg" alt="" />
+          </button>
         </div>
       </div>
+      <div ref={sliderRef} className={s.current_block}>
+        {productNames.map((productName, index) => (
+          <div key={index} className={s.slide}>
+            <TopProductCard productName={productName} />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
