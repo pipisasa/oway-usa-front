@@ -1,5 +1,6 @@
 import React from "react";
 import s from "@/styles/shared/main/TrackNumber.module.scss";
+import Button from "../partials/Button";
 
 export default function TrackNumber() {
   return (
@@ -13,7 +14,7 @@ export default function TrackNumber() {
             <span>Трек-номер</span>
             <input type="text" placeholder="Введите трек номер"/>
           </div>
-          <button className={s.button}>Проверить</button>
+            <Button button='Проверить'/>
         </div>
         <div className={s.track_img}>
             <img src="assets/images/dron.png" alt=""/>

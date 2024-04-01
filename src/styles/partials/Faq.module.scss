@@ -1,6 +1,7 @@
 .faq {
   display: flex;
   justify-content: space-between;
+  padding-top: 120px;
   .faq_img {
     //position: absolute;
     right: 27px;
@@ -31,7 +32,6 @@
       font-style: normal;
       font-weight: 700;
       line-height: normal;
-      margin-top: 12px;
     }
     .h1 {
       color: var(--black, #001526);

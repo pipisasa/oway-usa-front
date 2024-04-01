@@ -36,7 +36,7 @@ export default function Faq() {
         <div className={`${s.faq} container`}>
             <div className={s.faq_inner}>
                 <span>FAQ</span>
-                <h1>Дополнительные вопросы <br/>
+                <h1 className={s.faq_h1}>Дополнительные вопросы <br/>
                     и ответы на них</h1>
                 <div className={s.questions}>
                     {data.map((item, index) => (
