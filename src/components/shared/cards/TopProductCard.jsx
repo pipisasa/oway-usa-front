@@ -4,12 +4,12 @@ import Link from "next/link";
 
 export default function TopProductCard({ title, link, image }) {
   return (
-    <Link href={link} target="__blank">
+    <Link href="#" target="__blank">
       <div className={s.card}>
         <div className={s.card_img}>
-          <img src={image} alt="" />
+          <img src="" alt="img" />
         </div>
-        <p>{title}</p>
+        <p>title</p>
       </div>
     </Link>
   );

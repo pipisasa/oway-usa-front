@@ -7,6 +7,8 @@
   padding: 24px;
   max-width: 538px;
 
+
+
   h3 {
     color: var(--black, #001526);
     font-size: 20px;
@@ -39,5 +41,10 @@
     color: var(--white, var(--Colors-Grey-White, #fff));
     font-size: 16px;
     line-height: 140%;
+
+    &:hover {
+      background-color: #01579b;
+      transition: background-color 0.3s;
+    }
   }
 }

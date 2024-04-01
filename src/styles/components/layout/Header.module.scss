@@ -44,11 +44,20 @@
 
         a.active::after {
           background-color: #027DDB; /* Цвет подсветки */
+          color: #027DDB;
         }
 
         a.active[href="/"] {
           color: #027DDB; /* Цвет ссылки "Главная" */
+          background-color: #027DDB;
         }
+
+      }
+      .active {
+        /* Цвет подсветки */
+        color: #027ddb;
+        border-bottom: solid 2px #027ddb;
+
       }
     }
   }
@@ -76,6 +85,11 @@
       border-radius: 12px;
       background: var(--blue, #027DDB);
       cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #01579b;
+      }
     }
 
     .register {

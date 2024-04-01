@@ -1,13 +1,20 @@
 .heroSection_img {
   position: absolute;
-  right:0;
+  right: 0;
   top: 130px;
 }
 
 .header_hero {
   width: 100%;
-  background: linear-gradient(259deg, #FF5E97 -2.07%, #027DDB 27.75%, #00B4AC 54.31%, #FF7C02 84.67%, #FFD832 106.36%);
-  height: 810px;
+  background: linear-gradient(
+    259deg,
+    #ff5e97 -2.07%,
+    #027ddb 27.75%,
+    #00b4ac 54.31%,
+    #ff7c02 84.67%,
+    #ffd832 106.36%
+  );
+  height: 720px;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
 
   .header {
@@ -24,7 +31,7 @@
 
         li {
           list-style: none;
-          color: #FFFFFF;
+          color: #ffffff;
           font-family: Helvetica;
           font-size: 14px;
           font-style: normal;
@@ -50,11 +57,11 @@
           }
 
           a.active::after {
-            background-color: #FFFFFF;
+            background-color: #ffffff;
           }
 
           a.active[href="/"] {
-            color: #FFFFFF;
+            color: #ffffff;
             opacity: 1;
           }
         }
@@ -65,9 +72,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap:20px;
+      gap: 20px;
 
-      .auth_btn_reg{
+      .auth_btn_reg {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -75,7 +82,7 @@
       }
 
       button {
-        color: var(--white, #FFF);
+        color: var(--white, #fff);
         font-size: 14px;
         font-weight: 400;
         line-height: 140%;
@@ -88,8 +95,13 @@
         gap: 10px;
         padding: 10px 20px;
         border-radius: 12px;
-        background: var(--blue, #027DDB);
+        background: var(--blue, #027ddb);
         cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #01579b;
+        }
 
         span {
           color: #fff;
@@ -115,7 +127,7 @@
         font-weight: 400;
         line-height: normal;
         strong {
-          color: var(--white, var(--Colors-Grey-White, #FFF));
+          color: var(--white, var(--Colors-Grey-White, #fff));
           font-family: Helvetica;
           font-size: 80px;
           font-style: normal;
@@ -123,7 +135,7 @@
           line-height: normal;
         }
       }
-      .heroSection_info_span{
+      .heroSection_info_span {
         display: flex;
         align-items: center;
         gap: 20px;
@@ -140,7 +152,7 @@
           width: 3px;
           align-self: stretch;
           border-radius: 100px;
-          background: var(--orange, #FF7C00);
+          background: var(--orange, #ff7c00);
         }
       }
       .button {
@@ -153,14 +165,18 @@
         background: #fff;
         cursor: pointer;
         margin-top: 32px;
+        transition: background-color 0.3s;
+        color: var(--blue, #027ddb);
 
         span {
-          color:var(--blue, #027DDB);
           font-size: 16px;
           font-weight: 400;
+        }
+        &:hover {
+          background-color: #01579b; /* новый цвет фона при наведении */
+          color: white;
         }
       }
     }
   }
 }
-

@@ -34,7 +34,6 @@ export default function Home() {
       <HeroSection />
       <Shops />
       <Purchase />
-      <ProductSlider />
       <TrackNumber />
       <Mission />
       <AboutUs />

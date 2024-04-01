@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import s from "@/styles/shared/main/Calculator.module.scss";
+import Button from "../partials/Button";
 
 export default function Calculator() {
   const [countryFrom, setCountryFrom] = useState("");
@@ -10,6 +11,7 @@ export default function Calculator() {
   const [deliveryTime, setDeliveryTime] = useState("");
 
   const calculateCostAndTime = () => {
+    console.log('fhjdsd')
     if (
       countryFrom === "USA" &&
       countryTo === "Russian" &&
@@ -125,7 +127,7 @@ export default function Calculator() {
               <input type="text" value={deliveryTime} readOnly />
             </div>
           </div>
-          <button onClick={calculateCostAndTime}>Рассчитать</button>
+          <Button button='Рассчитать' onClick={calculateCostAndTime}/>
         </div>
         <div className={s.calc_inner_infos}>
           <div className={s.calc_inner_info}>

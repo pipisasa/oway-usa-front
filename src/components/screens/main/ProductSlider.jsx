@@ -1,23 +1,34 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import s from "@/styles/screens/main/CurrentProducts.module.scss";
 import TopProductCard from "@/components/shared/cards/TopProductCard";
-import useProducts from "@/hooks/admin/useProducts";
 
 export default function ProductSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSlides = 10;
-  const { products, isLoading, error, deleteProduct } = useProducts();
-  const [loadingStates, setLoadingStates] = useState({});
-
-  if (isLoading) return <p>Загрузка...</p>;
-  if (error) return <p>Ошибка: {error}</p>;
-
+  const slideWidth = 300;
+  const sliderRef = useRef(null);
+  const productNames = [
+    "CAKEDECOR.KZ форма PS286-28, сталь",
+    "Название продукта 2",
+    "Название продукта 3",
+    "Название продукта 4",
+    "Название продукта 5",
+    "Название продукта 6",
+    "Название продукта 7",
+    "Название продукта 8",
+    "Название продукта 9",
+    "Название продукта 10",
+  ];
   const handlePrevSlide = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    sliderRef.current.scrollBy({
+      left: -slideWidth,
+      behavior: "smooth",
+    });
   };
 
   const handleNextSlide = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, totalSlides - 1));
+    sliderRef.current.scrollBy({
+      left: slideWidth, // Прокрутить на ширину одного слайда
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -36,19 +47,10 @@ export default function ProductSlider() {
           </button>
         </div>
       </div>
-      <div className={s.current_block}>
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className={`${s.slide} ${
-              product.id === currentIndex ? s.active : ""
-            }`}
-          >
-            <TopProductCard
-              title={product.title}
-              link={product.link}
-              image={product.image}
-            />
+      <div ref={sliderRef} className={s.current_block}>
+        {productNames.map((productName, index) => (
+          <div key={index} className={s.slide}>
+            <TopProductCard productName={productName} />
           </div>
         ))}
       </div>

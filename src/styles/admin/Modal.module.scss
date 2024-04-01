@@ -14,6 +14,11 @@
     font-style: normal;
     font-weight: 400;
     line-height: 140%;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #01579b;
+    }
   }
 
   .btn_center {
@@ -39,6 +44,11 @@
       width: 350px;
       display: flex;
       justify-content: center;
+
+      &:hover {
+        background-color: #01579b;
+        transition: background-color 0.3s;
+      }
     }
   }
 
