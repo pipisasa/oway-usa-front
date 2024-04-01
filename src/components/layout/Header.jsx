@@ -24,8 +24,8 @@ export default function Header() {
               <nav>
                   <ul>
                       {links.map((link, index) => (
-                          <li key={index}>
-                              <Link className={router.pathname === link.href ? s.active : ""} href={link.href}>{link.label}</Link>
+                          <li className={router.pathname === link.href ? s.active : ""} key={index}>
+                              <Link  href={link.href}>{link.label}</Link>
                           </li>
                       ))}
                   </ul>
