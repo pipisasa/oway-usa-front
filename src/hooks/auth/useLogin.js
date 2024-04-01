@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { setCookie } from "@/utils/cookieHelpers";
 import { useRouter } from "next/router";
+import { setCookie } from "@/utils/cookieHelpers";
 
 const useLogin = () => {
   const [error, setError] = useState(null);
@@ -23,7 +23,13 @@ const useLogin = () => {
 
       if (response.ok) {
         setCookie("accessToken", data.access);
-        router.push("/user");
+
+        if (data.is_admin) {
+          setCookie("isAdmin", "true");
+          router.push("/admin");
+        } else {
+          router.push("/user");
+        }
       } else {
         setError(data.detail || "Произошла ошибка при авторизации");
       }

@@ -27,7 +27,7 @@ export default function UserMainPage() {
               {userData?.last_name} {userData?.first_name}
             </h2>
             <div>
-              <p>{userData?.phone}</p>
+              <p>{userData?.phone_number}</p>
               <p>{userData?.email}</p>
               <p>{userData?.address}</p>
             </div>
