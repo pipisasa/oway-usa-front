@@ -2,7 +2,6 @@ import React from "react";
 import s from "@/styles/screens/main/HeroSection.module.scss";
 import Link from "next/link";
 import {useRouter} from "next/router";
-import {divider} from "@nextui-org/react";
 const links = [
     { href: "/", label: "Главная" },
     { href: "/calculator", label: "Калькулятор" },
