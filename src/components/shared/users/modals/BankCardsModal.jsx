@@ -10,6 +10,8 @@ export default function BankCardsModal() {
   const [end_date, setEnd_date] = useState("");
   const [full_name, setFull_name] = useState("");
   const [cardType, setCardType] = useState("");
+  const [cvv, setCvv] = useState("");
+
   const yearInputRef = useRef()
   const { billingAdd } = useBillingAdd();
 
@@ -56,8 +58,8 @@ export default function BankCardsModal() {
 
   const handleYearChange = (e) => {
     let year = e.target.value.replace(/\D/g, ""); // Убираем все символы, кроме цифр
-    if (year.length > 2) {
-      year = year.slice(0, 2); // Ограничиваем длину до двух символов
+    if (year.length > 4) {
+      year = year.slice(0, 4); // Ограничиваем длину до двух символов
     }
 
     setEnd_year(year);
@@ -65,8 +67,8 @@ export default function BankCardsModal() {
 
 
   const submitBilling = () => {
-    const formattedEnd_date = `20${end_year}-${end_month}`;
-    billingAdd({ number, end_date: formattedEnd_date, full_name });
+    const formattedEnd_date = `${end_month}-${end_year}`;
+    billingAdd({ number, end_date: formattedEnd_date, full_name , cvv});
   };
   return (
       <div className={s.modal}>
@@ -103,14 +105,14 @@ export default function BankCardsModal() {
                       className={s.input_year}
                       type="text"
                       placeholder="YY"
-                      maxLength="2"
+                      maxLength="4"
                       onChange={handleYearChange}
                   />
                 </div>
               </div>
               <div className={s.input_field}>
                 <label>CVV код</label>
-                <input type="text" placeholder="CVV" />
+                <input value={cvv} type="text" onChange={(e) => setCvv(e.target.value)} placeholder="CVV" />
               </div>
             </div>
 
