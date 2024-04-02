@@ -38,8 +38,60 @@ const useBillingData = (name) => {
 
         fetchUserData();
     }, []);
+    const deleteBilling = async (productId) => {
+        setLoading(true);
+        setError(null);
 
-    return { billingData, loading, error };
+        try {
+            const accessToken = getCookie("accessToken");
+            const response = await axios.delete(
+                `http://18.222.184.72:8000/api/billing/delete/${productId}/`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            );
+
+            setBillingData((currentProducts) =>
+                currentProducts.filter((product) => product.id !== productId)
+            );
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+    const updateBilling = async (productId, formData) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const accessToken = getCookie("accessToken");
+            const response = await axios.patch(
+                `http://18.222.184.72:8000/api/billing/update/${productId}/`,
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            );
+
+            const updatedProduct = response.data;
+            setBillingData((currentProducts) =>
+                currentProducts.map((product) =>
+                    product.id === productId ? { ...product, ...updatedProduct } : product
+                )
+            );
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { billingData,deleteBilling, updateBilling, loading, error };
 };
 
 export default useBillingData;

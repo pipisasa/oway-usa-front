@@ -8,10 +8,7 @@ export const useBillingAdd = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const billingAdd = async ({ number, end_date, full_name }) => {
-        const year = end_date.slice(-2);
-        const month = end_date.substring(0, 2);
-        const formattedEndDate = `20${year}-${month}-01`;
+    const billingAdd = async ({ number, end_date, full_name, cvv }) => {
         setIsLoading(true);
         setError(null);
         const accessToken = getCookie('accessToken');
@@ -26,8 +23,9 @@ export const useBillingAdd = () => {
                 "http://18.222.184.72:8000/api/billing/add/",
                 {
                     number,
-                    end_date:formattedEndDate,
+                    end_date,
                     full_name,
+                    cvv
                     },
                 {
                     headers: {
@@ -43,6 +41,7 @@ export const useBillingAdd = () => {
             setIsLoading(false);
         }
     };
+
 
     return { billingAdd, isLoading, error };
 };
