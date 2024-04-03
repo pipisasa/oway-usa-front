@@ -3,41 +3,77 @@ import axios from 'axios';
 import { getCookie } from '@/utils/cookieHelpers';
 import { useEffect, useState } from 'react';
 
-const useBillingData = (name) => {
+const useBillingData = () => {
     const [billingData, setBillingData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    console.log(name,"name")
+
+    const fetchUserData = async () => {
+        const accessToken = getCookie('accessToken');
+        if (!accessToken) {
+            setError('No access token found');
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const response = await axios.get(
+                'http://18.222.184.72:8000/api/billing/my_billings/',
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            );
+
+            console.log(response.data,'response.data')
+            setBillingData(prevData => response.data);
+            console.log(billingData,"billingData")
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            const accessToken = getCookie('accessToken');
-            if (!accessToken) {
-                setError('No access token found');
-                setLoading(false);
-                return;
-            }
-
-            try {
-                const response = await axios.get(
-                    'http://18.222.184.72:8000/api/billing/my_billings/',
-                    {
-                        headers: {
-                            Authorization: `Bearer ${accessToken}`,
-                        },
-                    }
-                );
-
-                setBillingData(response.data);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchUserData();
     }, []);
+
+
+    const billingAdd = async ({ number, end_date, full_name, cvv }) => {
+        setLoading(true);
+        setError(null);
+        const accessToken = getCookie('accessToken');
+        if (!accessToken) {
+            setError('No access token found');
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const response = await axios.post(
+                "http://18.222.184.72:8000/api/billing/add/",
+                {
+                    number,
+                    end_date,
+                    full_name,
+                    cvv
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            );
+            fetchUserData();
+        } catch (error) {
+            console.error("Ошибка:", error?.response?.data);
+            setError(error?.response?.data);
+        } finally {
+            setLoading(false);
+        }
+    };
     const deleteBilling = async (productId) => {
         setLoading(true);
         setError(null);
@@ -56,6 +92,7 @@ const useBillingData = (name) => {
             setBillingData((currentProducts) =>
                 currentProducts.filter((product) => product.id !== productId)
             );
+            await fetchUserData()
         } catch (error) {
             setError(error.message);
         } finally {
@@ -84,14 +121,18 @@ const useBillingData = (name) => {
                     product.id === productId ? { ...product, ...updatedProduct } : product
                 )
             );
+            await fetchUserData()
         } catch (error) {
             setError(error.message);
         } finally {
             setLoading(false);
         }
     };
+    useEffect(() => {
+        fetchUserData();
+    }, []);
 
-    return { billingData,deleteBilling, updateBilling, loading, error };
+    return {billingAdd,fetchUserData, billingData,deleteBilling, updateBilling, loading, error };
 };
 
 export default useBillingData;

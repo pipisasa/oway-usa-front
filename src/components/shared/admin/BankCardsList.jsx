@@ -1,17 +1,20 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import BankCards from "../cards/BankCards";
 import s from "@/styles/components/shared/cards/BankCards.module.scss";
-import useUserData from "../../../hooks/user/useUserData";
 import useBillingData from "../../../hooks/billing/useBillingData";
 import BankCardsEditModal from "../users/modals/BankCardsEditModal";
 
 export default function BankCardsList() {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
-    const {userData} = useUserData()
-    console.log(userData,"userData")
-    const {billingData, deleteBilling} = useBillingData(userData?.first_name)
-    console.log(billingData,"billingData")
+    const {billingData, deleteBilling, fetchUserData} = useBillingData()
+
+    useEffect(() => {
+        if (!billingData) {
+            fetchUserData();
+        }
+    }, [billingData]);
+    console.log(billingData,"billingData23")
     const handleDelete = async (cardId) => {
         try {
             await deleteBilling(cardId);

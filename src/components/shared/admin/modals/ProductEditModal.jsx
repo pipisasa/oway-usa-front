@@ -28,19 +28,18 @@ export default function EditProductsModal({ isOpen, toggleModal, product }) {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("link", link);
-    if (selectedImage) {
+    if (selectedImage instanceof File) {
       formData.append("image", selectedImage);
     }
     await updateProduct(product.id, formData);
     toggleModal();
   };
-
   return (
     <div className={s.modal}>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <div className={s.modalContent}>
           <h3>Редактировать товар</h3>
-          <form onSubmit={handleSubmit} className={s.notifications_form}>
+          <form onSubmit={handleSubmit} encType="multipart/form-data" className={s.notifications_form}>
             <div>
               <label htmlFor="productTitle">Название товара</label>
               <input
