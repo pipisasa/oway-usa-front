@@ -3,6 +3,7 @@ import React, {useRef, useState} from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import { useBillingAdd } from "../../../../hooks/billing/useBillingAdd";
+import useBillingData from "../../../../hooks/billing/useBillingData";
 
 export default function BankCardsModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +14,7 @@ export default function BankCardsModal() {
   const [cvv, setCvv] = useState("");
 
   const yearInputRef = useRef()
-  const { billingAdd } = useBillingAdd();
+  const { billingAdd } = useBillingData();
 
   const toggleModal = () => setIsOpen(!isOpen);
 
@@ -69,6 +70,8 @@ export default function BankCardsModal() {
   const submitBilling = () => {
     const formattedEnd_date = `${end_month}-${end_year}`;
     billingAdd({ number, end_date: formattedEnd_date, full_name , cvv});
+    toggleModal()
+
   };
   return (
       <div className={s.modal}>
@@ -112,7 +115,7 @@ export default function BankCardsModal() {
               </div>
               <div className={s.input_field}>
                 <label>CVV код</label>
-                <input value={cvv} type="text" onChange={(e) => setCvv(e.target.value)} placeholder="CVV" />
+                <input value={cvv} type="text" maxLength="3" onChange={(e) => setCvv(e.target.value)} placeholder="CVV" />
               </div>
             </div>
 

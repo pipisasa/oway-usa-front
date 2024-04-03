@@ -1,7 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
+import useWarehouses from "../../../hooks/admin/useWarehouses";
 
 export default function WarehousesProductsTable() {
+  const { warehouses, fetchWarehouses, isLoading, error } = useWarehouses();
+  useEffect(() => {
+    fetchWarehouses();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   return (
     <table>
       <thead>
@@ -17,42 +30,20 @@ export default function WarehousesProductsTable() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Iphone 15 </td>
-          <td>09203201</td>
-          <td>Караганда, Бухар Жырау 32, кв. 23</td>
-          <td>Казахстан</td>
-          <td>30кг. 50г.</td>
-          <td>№32123232</td>
-          <td>Готов к выдаче</td>
-          <td>
-            <button className={s.btn}>Подробнее</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Iphone 15 </td>
-          <td>09203201</td>
-          <td>Караганда, Бухар Жырау 32, кв. 23</td>
-          <td>Казахстан</td>
-          <td>30кг. 50г.</td>
-          <td>№32123232</td>
-          <td>Готов к выдаче</td>
-          <td>
-            <button className={s.btn}>Подробнее</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Iphone 15 </td>
-          <td>09203201</td>
-          <td>Караганда, Бухар Жырау 32, кв. 23</td>
-          <td>Казахстан</td>
-          <td>30кг. 50г.</td>
-          <td>№32123232</td>
-          <td>Готов к выдаче</td>
-          <td>
-            <button className={s.btn}>Подробнее</button>
-          </td>
-        </tr>
+      {warehouses?.results?.map((warehouse) => (
+          <tr key={warehouse.id}>
+            <td>{warehouse.name}</td>
+            <td>{warehouse.track_number}</td>
+            <td>{warehouse.address}</td>
+            <td>{warehouse.country}</td>
+            <td>{warehouse.weight}</td>
+            <td>{warehouse.track_number}</td>
+            <td>{warehouse.status}</td>
+            <td>
+              <button className={s.btn}>Подробнее</button>
+            </td>
+          </tr>
+      ))}
       </tbody>
     </table>
   );
