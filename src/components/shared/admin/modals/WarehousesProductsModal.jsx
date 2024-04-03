@@ -146,17 +146,6 @@ const Step1 = ({ formData, handleChange, handleImageChange, nextStep }) => (
                     />
                 </div>
                 <div>
-                    <label htmlFor="">ID товара</label>
-                    <input
-                        type="text"
-                        name="track_number"
-                        id="track_number"
-                        placeholder="Введите ID товара"
-                        value={formData.track_number}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
                     <label htmlFor="">Адрес заказа</label>
                     <input
                         type="text"

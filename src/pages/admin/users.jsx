@@ -4,13 +4,12 @@ import { Pagination } from "@nextui-org/react";
 import useUsers from "../../hooks/admin/useUsers";
 
 export default function AdminUsersPage() {
-  const {users, isLoading } = useUsers()
-  console.log(users.results)
+  const { users, isLoading } = useUsers();
+  console.log(users.results);
 
   if (isLoading) {
     return <div>Загрузка...</div>;
   }
-
 
   return (
     <div className={s.users_page}>
@@ -25,7 +24,7 @@ export default function AdminUsersPage() {
           </tr>
         </thead>
         <tbody>
-        {users?.results?.map((user) => (
+          {users?.results?.map((user) => (
             <tr key={user.id}>
               <td>{user.first_name}</td>
               <td>{user.last_name}</td>
@@ -35,7 +34,7 @@ export default function AdminUsersPage() {
                 <button className={s.btn}>Подробнее</button>
               </td>
             </tr>
-        ))}
+          ))}
         </tbody>
       </table>
       <div className={s.pagination}>
@@ -43,4 +42,20 @@ export default function AdminUsersPage() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const token = req.cookies.accessToken;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
 }
