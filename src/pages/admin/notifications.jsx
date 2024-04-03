@@ -55,7 +55,6 @@ export default function AdminNotificationPage() {
                             <img src="/assets/icons/edit.svg" alt=""/>
                         </button>
                     </div>
-
                 </div>
             ))}
             {isEditing && (
