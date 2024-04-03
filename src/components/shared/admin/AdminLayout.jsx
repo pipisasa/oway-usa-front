@@ -3,9 +3,11 @@ import s from "@/styles/admin/AdminLayout.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import AdminHeader from "./AdminHeader";
+import useLogout from "@/hooks/auth/useLogout";
 
 export default function AdminLayout({ children }) {
   const router = useRouter();
+  const logout = useLogout();
 
   const isActive = (path) => router.pathname === path;
 
@@ -64,7 +66,7 @@ export default function AdminLayout({ children }) {
                   </li>
                 </Link>
               ))}
-              <button className={s.logout}>
+              <button onClick={logout} className={s.logout}>
                 <img src="/assets/icons/logout.svg" alt="logout" />
                 Выйти
               </button>
