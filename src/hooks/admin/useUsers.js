@@ -2,26 +2,26 @@ import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
 
-const useNotification = () => {
+const useUsersAdmin = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
-    const [products, setProducts] = useState([]);
+    const [users, setUsers] = useState([]);
 
-    const fetchNotification = async () => {
+    const fetchUsers = async () => {
         const accessToken = getCookie("accessToken");
         setIsLoading(true);
         setError(null);
         try {
             const response = await axios.get(
-                "http://18.222.184.72:8000/api/notifications/list/",
+                "http://18.222.184.72:8000/api/add_user_for_admin/list/",
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
                     }
                 }
             );
-            setProducts(response.data);
+            setUsers(response.data);
         } catch (err) {
             setError(err.message);
         } finally {
@@ -31,15 +31,18 @@ const useNotification = () => {
 
 
     useEffect(() => {
-        fetchNotification();
+        fetchUsers();
     }, []);
 
-    const addNotification = async (title, description, icon) => {
+    const addUsers = async (first_name, last_name, email, phone_number, password, password2) => {
         const accessToken = getCookie("accessToken");
         const formData = new FormData();
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("icon", icon);
+        formData.append("first_name", first_name);
+        formData.append("last_name", last_name);
+        formData.append("email", email);
+        formData.append("phone_number", phone_number);
+        formData.append("password", password);
+        formData.append("password2", password2);
 
         setIsLoading(true);
         setError(null);
@@ -47,16 +50,17 @@ const useNotification = () => {
 
         try {
             const response = await axios.post(
-                "http://18.222.184.72:8000/api/notifications/create_notification/",
+                "http://18.222.184.72:8000/api/add_user_for_admin/add/",
                 formData,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
+                        "Content-Type": "multipart/form-data",
                     },
                 }
             );
 
-            await fetchNotification();
+            await fetchUsers();
             setIsSuccess(true);
         } catch (error) {
             setError(error.message);
@@ -66,7 +70,8 @@ const useNotification = () => {
         }
     };
 
-    const deleteNotification = async (productId) => {
+
+    const deleteUsers = async (productId) => {
         setIsLoading(true);
         setError(null);
 
@@ -81,10 +86,10 @@ const useNotification = () => {
                 }
             );
 
-            setProducts((currentProducts) =>
+            setUsers((currentProducts) =>
                 currentProducts.filter((product) => product.id !== productId)
             );
-            fetchNotification()
+            fetchUsers()
         } catch (error) {
             setError(error.message);
         } finally {
@@ -92,7 +97,7 @@ const useNotification = () => {
         }
     };
 
-    const updateNotification = async (productId, formData) => {
+    const updateUsers = async (productId, formData) => {
         setIsLoading(true);
         setError(null);
 
@@ -107,9 +112,9 @@ const useNotification = () => {
                     },
                 }
             );
-            fetchNotification()
+            fetchUsers()
             const updatedProduct = response.data;
-            setProducts((currentProducts) =>
+            setUsers((currentProducts) =>
                 currentProducts.map((product) =>
                     product.id === productId ? { ...product, ...updatedProduct } : product
                 )
@@ -122,13 +127,13 @@ const useNotification = () => {
     };
 
     return {
-        products,
-        addNotification,
-        deleteNotification,
-        updateNotification,
+        users,
+        addUsers,
+        deleteUsers,
+        updateUsers,
         error,
         isLoading,
     };
 };
 
-export default useNotification;
+export default useUsersAdmin;

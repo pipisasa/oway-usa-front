@@ -4,7 +4,7 @@ import useNotification from "../../hooks/admin/useNotification";
 import NotificationsEditModal from "../../components/shared/admin/modals/NotificationsEditModal";
 
 export default function AdminNotificationPage() {
-    const { products, deleteNotification, updateNotification } = useNotification();
+    const {products, deleteNotification, updateNotification, isLoading } = useNotification();
     const [isEditing, setIsEditing] = useState(false);
     const [selectedNotification, setSelectedNotification] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,6 +34,9 @@ export default function AdminNotificationPage() {
             setSelectedNotification(null);
         }
     };
+    if (isLoading) {
+        return <div>Загрузка...</div>;
+    }
 
     return (
         <main className={s.noti_page}>
@@ -44,8 +47,15 @@ export default function AdminNotificationPage() {
                         <h3>{product.title}</h3>
                         <p>{product.description}</p>
                     </div>
-                    <button onClick={() => handleDelete(product.id)}>Delete</button>
-                    <button onClick={() => handleUpdate(product.id)}>Update</button>
+                    <div>
+                        <button onClick={() => handleDelete(product.id)}>
+                            <img src="/assets/icons/delete.svg" alt=""/>
+                        </button>
+                        <button className={s.button} onClick={() => handleUpdate(product.id)}>
+                            <img src="/assets/icons/edit.svg" alt=""/>
+                        </button>
+                    </div>
+
                 </div>
             ))}
             {isEditing && (

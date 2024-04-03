@@ -4,36 +4,42 @@
   padding: 24px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
+  div {
+    display: flex;
+    gap: 10px;
+    button {
+      display: flex;
+      padding: 8px 9px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 5px;
+      background: var(--bg_red, #FFE7E7);
+      img {
+        width: 12px;
+        height: 12px;
+      }
+    }
+    .card_button {
+      display: flex;
+      padding: 8px 9px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 5px;
+      background: var(--blue_light_3, #E7EFFF);
+      img {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
 
-  button {
-    display: flex;
-    padding: 8px 9px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 5px;
-    background: var(--bg_red, #FFE7E7);
-    img {
-      width: 12px;
-      height: 12px;
-    }
-  }
-  .card_button {
-    display: flex;
-    padding: 8px 9px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 5px;
-    background: var(--blue_light_3, #E7EFFF);
-    img {
-      width: 12px;
-      height: 12px;
-    }
-  }
 
   span {
+    width: 322px;
     color: var(--black, #001526);
     font-size: 24px;
     line-height: 140%;

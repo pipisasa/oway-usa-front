@@ -12,12 +12,14 @@ export default function BankCards({ card, onDelete, onUpdate }) {
         <div className={s.card_block}>
             <img src={`/assets/icons/${getCardType(card.number)}.svg`} alt="" />
             <span>{formatCardNumber(card.number)}</span>
-            <button onClick={handleEditClick} className={s.card_button}>
-                <img src="/assets/icons/edit.svg" alt=""/>
-            </button>
-            <button onClick={handleDelete}>
-                <img src="/assets/icons/delete.svg" alt=""/>
-            </button>
+           <div>
+               <button onClick={handleEditClick} className={s.card_button}>
+                   <img src="/assets/icons/edit.svg" alt=""/>
+               </button>
+               <button onClick={handleDelete}>
+                   <img src="/assets/icons/delete.svg" alt=""/>
+               </button>
+           </div>
         </div>
     );
 }

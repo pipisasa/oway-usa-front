@@ -12,26 +12,64 @@
     padding: 24px;
     border-radius: 12px;
     background: var(--white, #fff);
+    justify-content: space-between;
 
+     div {
+       display: flex;
+       gap: 10px;
+
+       button {
+         display: flex;
+         padding: 8px 9px;
+         justify-content: center;
+         align-items: center;
+         gap: 10px;
+         border-radius: 5px;
+         background: var(--bg_red, #FFE7E7);
+         img {
+           width: 12px;
+           height: 12px;
+         }
+       }
+       .button {
+         display: flex;
+         padding: 8px 9px;
+         justify-content: center;
+         align-items: center;
+         gap: 10px;
+         border-radius: 5px;
+         background: var(--blue_light_3, #E7EFFF);
+         img {
+           width: 12px;
+           height: 12px;
+         }
+       }
+     }
     img {
       width: 48px;
       height: 48px;
       border-radius: 12px;
     }
 
+
     .text {
+      width: 322px;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      gap: 4px;
       h3 {
         color: var(--black, #001526);
-        text-align: center;
         font-size: 16px;
         line-height: 140%;
       }
-
       p {
         color: var(--black, #001526);
         font-size: 14px;
         line-height: 140%;
       }
+
+
     }
   }
 }
