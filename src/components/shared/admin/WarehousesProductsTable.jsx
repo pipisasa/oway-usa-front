@@ -20,7 +20,6 @@ export default function WarehousesProductsTable() {
       <thead>
         <tr>
           <th>Нзвание товара</th>
-          <th>ID Товара</th>
           <th>Адрес заказа</th>
           <th>Страна получения</th>
           <th>Вес</th>
@@ -33,12 +32,12 @@ export default function WarehousesProductsTable() {
       {warehouses?.results?.map((warehouse) => (
           <tr key={warehouse.id}>
             <td>{warehouse.name}</td>
-            <td>{warehouse.track_number}</td>
             <td>{warehouse.address}</td>
-            <td>{warehouse.country}</td>
+            <td>{warehouse.country.name}</td>
             <td>{warehouse.weight}</td>
             <td>{warehouse.track_number}</td>
-            <td>{warehouse.status}</td>
+            <td>{warehouse.status.name}</td>
+            <td>{warehouse.comments}</td>
             <td>
               <button className={s.btn}>Подробнее</button>
             </td>
