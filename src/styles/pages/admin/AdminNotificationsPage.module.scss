@@ -13,6 +13,27 @@
     border-radius: 12px;
     background: var(--white, #fff);
 
+    .btns {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      img {
+        width: 12px;
+      }
+
+      .edit {
+        border-radius: 5px;
+        background: var(--blue_light_3, #e7efff);
+        padding: 9px;
+      }
+      .delete {
+        padding: 9px;
+        border-radius: 5px;
+        background: var(--bg_red, #ffe7e7);
+      }
+    }
+
     img {
       width: 48px;
       height: 48px;

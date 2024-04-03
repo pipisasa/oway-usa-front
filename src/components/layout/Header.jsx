@@ -1,7 +1,8 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import s from "@/styles/components/layout/Header.module.scss";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
+import { getCookie } from "@/utils/cookieHelpers";
 
 const links = [
   { href: "/", label: "Главная" },
@@ -14,42 +15,69 @@ const links = [
 ];
 
 export default function Header() {
-    const router = useRouter()
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = getCookie("accessToken");
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   return (
-      <div className={s.header_back}>
-          <header className={`${s.header} container`}>
+    <div className={s.header_back}>
+      <header className={`${s.header} container`}>
+        <div>
+          <img
+            src="/assets/icons/owayUSE.svg"
+            width={92}
+            height={48}
+            alt="logo"
+          />
+        </div>
+        <nav>
+          <ul>
+            {links.map((link, index) => (
+              <li
+                className={router.pathname === link.href ? s.active : ""}
+                key={index}
+              >
+                <Link href={link.href}>{link.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        {isAuthenticated ? (
+          <div className={s.auth_btn}>
+            <Link href="/user">
               <div>
-                  <img src="/assets/icons/owayUSE.svg" width={92} height={48} alt="logo" />
+                <button className={s.login}>
+                  <span>Личный кабинет</span>
+                  <img src="/assets/icons/rightIcon.svg" alt="" />
+                </button>
               </div>
-              <nav>
-                  <ul>
-                      {links.map((link, index) => (
-                          <li className={router.pathname === link.href ? s.active : ""} key={index}>
-                              <Link  href={link.href}>{link.label}</Link>
-                          </li>
-                      ))}
-                  </ul>
-              </nav>
-              <div className={s.auth_btn}>
-                  <Link href="/auth/register">
-                      <div  className={s.auth_btn_reg}>
-                          <button className={s.register}>Зарегистрироваться</button>
-                          <img src="/assets/icons/userBlue.svg" alt=""/>
-                      </div>
-                  </Link>
-                  <Link href="/auth/login">
-                      <div>
-                          <button className={s.login}>
-                              <span>Вход</span>
-                              <img src="/assets/icons/rightIcon.svg" alt=""/>
-                          </button>
-
-                      </div>
-
-                  </Link>
+            </Link>
+          </div>
+        ) : (
+          <div className={s.auth_btn}>
+            <Link href="/auth/register">
+              <div className={s.auth_btn_reg}>
+                <button className={s.register}>Зарегистрироваться</button>
+                <img src="/assets/icons/userBlue.svg" alt="" />
               </div>
-          </header>
-       </div>
-
+            </Link>
+            <Link href="/auth/login">
+              <div>
+                <button className={s.login}>
+                  <span>Вход</span>
+                  <img src="/assets/icons/rightIcon.svg" alt="" />
+                </button>
+              </div>
+            </Link>
+          </div>
+        )}
+      </header>
+    </div>
   );
 }
