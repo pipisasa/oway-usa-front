@@ -13,13 +13,22 @@ export default function AddUsersModal() {
     phone_number: "",
     password: "",
     password2: "",
+    front_image: null,
+    back_image: null,
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if (name === "front_image" || name === "back_image") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: e.target.files[0], // Store the file object
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +38,9 @@ export default function AddUsersModal() {
         formData.email,
         formData.phone_number,
         formData.password,
-        formData.password2
+        formData.password2,
+        formData.front_image,
+        formData.back_image
     );
     toggleModal();
     setFormData({
@@ -39,7 +50,10 @@ export default function AddUsersModal() {
       phone_number: "",
       password: "",
       password2: "",
+      front_image: null,
+      back_image: null
     });
+
   };
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -121,11 +135,21 @@ export default function AddUsersModal() {
             </div>
             <div>
               <label htmlFor="">Лицевая сторона паспорта</label>
-              <input type="file" placeholder="Введите номер телефон" />
+              <input
+                  type="file"
+                  id="front_image"
+                  name="front_image"
+                  onChange={handleChange}
+              />
             </div>
             <div>
               <label htmlFor="">Обратная сторона паспорта</label>
-              <input type="file" placeholder="Введите номер телефон" />
+              <input
+                  type="file"
+                  id="back_image"
+                  name="back_image"
+                  onChange={handleChange}
+              />
             </div>
           </div>
           <div className={s.btn_center}>
