@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import s from "@/styles/users/Tabs.module.scss";
 import UserData from "@/components/shared/users/settings/UserData";
 import ChangePassword from "@/components/shared/users/settings/ChangePassword";
+import useUserData from "@/hooks/user/useUserData";
 
 export default function UserSettingsPage() {
   const [activeTab, setActiveTab] = useState("userData");
+  const { userData, loading, error } = useUserData();
 
   return (
     <section className={s.container}>
@@ -34,7 +36,7 @@ export default function UserSettingsPage() {
       </div>
       <div className={s.user_code}>
         <label htmlFor="">Код получателя</label>
-        <span>AIBALOH</span>
+        <span>#{loading ? "Loading..." : userData.unique_id}</span>
       </div>
     </section>
   );

@@ -18,6 +18,7 @@ export default function AdminHeader() {
     { href: "/admin/notifications", label: "Уведомления" },
     { href: "/admin/products", label: "Товары" },
     { href: "/admin/warehouses", label: "Управление складами" },
+    { href: "/admin/requests", label: "Входящие запросы" },
     { href: "/admin/shops-catalog", label: "Каталог сайтов" },
   ];
 
@@ -55,7 +56,7 @@ export default function AdminHeader() {
 
       <div className={s.notification}>
         <div>{renderModal()}</div>
-        <Badge content="13" shape="circle" color="danger">
+        <Badge shape="circle" color="danger">
           <Button
             radius="full"
             isIconOnly
