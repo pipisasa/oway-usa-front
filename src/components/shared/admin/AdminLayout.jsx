@@ -38,6 +38,11 @@ export default function AdminLayout({ children }) {
       icon: "/assets/icons/admin-icons/склад.svg",
     },
     {
+      href: "/admin/requests",
+      label: "Входящие запросы",
+      icon: "/assets/icons/admin-icons/requests.svg",
+    },
+    {
       href: "/admin/shops-catalog",
       label: "Каталог сайтов",
       icon: "/assets/icons/admin-icons/сайты.svg",
