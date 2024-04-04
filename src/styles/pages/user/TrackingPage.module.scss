@@ -7,8 +7,6 @@
   padding: 24px;
   max-width: 538px;
 
-
-
   h3 {
     color: var(--black, #001526);
     font-size: 20px;
@@ -45,6 +43,83 @@
     &:hover {
       background-color: #01579b;
       transition: background-color 0.3s;
+    }
+  }
+}
+
+.track_results {
+  border-radius: 12px;
+  background: var(--Colors-Grey-White, #fff);
+  padding: 24px;
+  gap: 24px;
+  display: flex;
+  justify-content: center;
+
+  .event {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-right: 100px;
+
+    .time {
+      h5 {
+        color: var(--black, #001526);
+        font-size: 16px;
+        text-align: right;
+        margin-bottom: 5px;
+      }
+
+      span {
+        color: var(--black, #001526);
+        text-align: right;
+        font-size: 12px;
+      }
+    }
+
+    .img {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .firma {
+      color: var(--black, #001526);
+      font-size: 16px;
+
+      span {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .track_results div .event:last-child {
+    .img .img2 {
+      display: none;
+    }
+  }
+
+  .main_info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-left: 24px;
+    border-left: 1px solid #e7efff;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      label {
+        color: var(--black, #001526);
+        font-size: 12px;
+        line-height: 16px;
+      }
+      span {
+        color: var(--black, #001526);
+        font-size: 16px;
+        line-height: 140%;
+      }
     }
   }
 }
