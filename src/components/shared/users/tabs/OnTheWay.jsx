@@ -1,8 +1,11 @@
 import React from "react";
 import s from "@/styles/components/shared/UsersProductTable.module.scss";
 import { Pagination } from "@nextui-org/react";
+import useWarehouses from "../../../../hooks/admin/useWarehouses";
 
 export default function OnTheWay() {
+  const {warehouses} = useWarehouses()
+  console.log(warehouses, "warehouses")
   return (
     <div className={s.product_table}>
       <table>

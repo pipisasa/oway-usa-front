@@ -42,39 +42,42 @@ export default function AdminNotificationPage() {
   }
 
   return (
-    <main className={s.noti_page}>
-      {products.map((product, index) => (
-        <div key={index} className={s.notification}>
-          <img src={product.icon} alt="" />
-          <div className={s.text}>
-            <h3>{product.title}</h3>
-            <p>{product.description}</p>
-          </div>
-          <div>
-            <button onClick={() => handleDelete(product.id)}>
-              <img src="/assets/icons/delete.svg" alt="" />
-            </button>
-            <button
-              className={s.button}
-              onClick={() => handleUpdate(product.id)}
-            >
-              <img src="/assets/icons/edit.svg" alt="" />
-            </button>
-          </div>
+
+        <div className={s.noti_page}>
+          {products.map((product, index) => (
+              <div key={index} className={s.notification}>
+                <img src={product.icon} alt="" />
+                <div className={s.text}>
+                  <h3>{product.title}</h3>
+                  <p>{product.description}</p>
+                </div>
+                <div>
+                  <button onClick={() => handleDelete(product.id)}>
+                    <img src="/assets/icons/delete.svg" alt="" />
+                  </button>
+                  <button
+                      className={s.button}
+                      onClick={() => handleUpdate(product.id)}
+                  >
+                    <img src="/assets/icons/edit.svg" alt="" />
+                  </button>
+                </div>
+              </div>
+          ))}
+          {isEditing && (
+              <NotificationsEditModal
+                  onUpdate={(formData) => {
+                    updateNotification(selectedNotification.id, formData);
+                    toggleModal(false);
+                  }}
+                  isOpen={isModalOpen}
+                  onClose={() => toggleModal(false)}
+                  notification={selectedNotification}
+              />
+          )}
         </div>
-      ))}
-      {isEditing && (
-        <NotificationsEditModal
-          onUpdate={(formData) => {
-            updateNotification(selectedNotification.id, formData);
-            toggleModal(false);
-          }}
-          isOpen={isModalOpen}
-          onClose={() => toggleModal(false)}
-          notification={selectedNotification}
-        />
-      )}
-    </main>
+
+
   );
 }
 
@@ -90,6 +93,5 @@ export async function getServerSideProps(context) {
       },
     };
   }
-
   return { props: {} };
 }

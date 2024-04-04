@@ -21,7 +21,9 @@ const useNotification = () => {
                     }
                 }
             );
+            console.log(response.data,"response.data")
             setProducts(response.data);
+            console.log(products,"products")
         } catch (err) {
             setError(err.message);
         } finally {
