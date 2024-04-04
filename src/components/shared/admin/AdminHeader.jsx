@@ -56,7 +56,7 @@ export default function AdminHeader() {
 
       <div className={s.notification}>
         <div>{renderModal()}</div>
-        <Badge content="13" shape="circle" color="danger">
+        <Badge shape="circle" color="danger">
           <Button
             radius="full"
             isIconOnly

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import s from "@/styles/pages/auth/Login.module.scss";
 import Link from "next/link";
-import useLogin from "@/hooks/auth/useLogin"; // Импортируем кастомный хук useLogin
+import useLogin from "@/hooks/auth/useLogin";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const { login, error } = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ export default function Login() {
     <main className={s.login_page}>
       <img className={s.left_img} src="/assets/images/40.png" alt="" />
       <section className={s.login_section}>
-        <div className={s.logo}>
+        <div onClick={() => router.push("/")} className={s.logo}>
           <img src="/assets/icons/owayUSE.svg" alt="OWAY USA" />
         </div>
         <h1>Авторизация</h1>
@@ -44,8 +46,7 @@ export default function Login() {
               />
             </div>
           </div>
-          {error && <div className={s.error}>{error}</div>}{" "}
-          {/* Отображение ошибок авторизации */}
+          {error && <p className={s.error}>{error}</p>}{" "}
           <div className={s.forgot_pass}>
             <div className={s.remember_me}>
               <input type="checkbox" />
