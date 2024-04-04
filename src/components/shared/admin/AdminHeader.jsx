@@ -18,6 +18,7 @@ export default function AdminHeader() {
     { href: "/admin/notifications", label: "Уведомления" },
     { href: "/admin/products", label: "Товары" },
     { href: "/admin/warehouses", label: "Управление складами" },
+    { href: "/admin/requests", label: "Входящие запросы" },
     { href: "/admin/shops-catalog", label: "Каталог сайтов" },
   ];
 

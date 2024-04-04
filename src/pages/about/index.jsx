@@ -12,16 +12,16 @@ import Faq from "../../components/partials/about/Faq";
 import AboutClient from "../../components/screens/main/AboutClient";
 
 export default function AboutPage() {
-    return (
-        <div>
-            <About/>
-            <AboutMission/>
-            <MissionTarget/>
-            <AboutBusiness/>
-            <AboutWorld/>
-            <Faq/>
-            <AboutClient/>
-            <Contacts/>
-        </div>
-    );
+  return (
+    <div>
+      <About />
+      <AboutMission />
+      <MissionTarget />
+      <AboutBusiness />
+      <AboutWorld />
+      <Faq />
+      <AboutClient />
+      <Contacts />
+    </div>
+  );
 }

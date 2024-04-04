@@ -1,28 +1,52 @@
 import React, { useState, useEffect } from "react";
 import s from "@/styles/users/UserData.module.scss";
+import useUserData from "@/hooks/user/useUserData";
 
 export default function UserData() {
-  const defaultUserData = {
-    username: "Akbar",
-    surname: "Kudaibergenov",
-    phone_number: "+996990777820",
-    email: "akbar@gmail.com",
-  };
-
+  const { userData, loading, error, updateUserData } = useUserData();
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState(defaultUserData);
+  const [formData, setFormData] = useState({
+    username: "",
+    surname: "",
+    phone_number: "",
+    email: "",
+    address: "",
+  });
 
   useEffect(() => {
-    setFormData(defaultUserData);
-  }, []);
+    if (userData) {
+      setFormData({
+        username: userData.first_name || "",
+        surname: userData.last_name || "",
+        phone_number: userData.phone_number || "",
+        email: userData.email || "",
+        address: userData.address || "",
+      });
+    }
+  }, [userData]);
 
   const handleEdit = () => setIsEditing(true);
+
   const handleCancel = () => {
     setIsEditing(false);
-    setFormData(defaultUserData);
   };
-  const handleSave = (e) => {
+
+  const handleSave = async (e) => {
     e.preventDefault();
+
+    const dataToSend = new FormData();
+    dataToSend.append("first_name", formData.username);
+    dataToSend.append("last_name", formData.surname);
+    dataToSend.append("phone_number", formData.phone_number);
+    dataToSend.append("address", formData.address);
+    const frontImageInput = document.querySelector('input[name="front_image"]');
+    const backImageInput = document.querySelector('input[name="back_image"]');
+    if (frontImageInput.files[0])
+      dataToSend.append("front_image", frontImageInput.files[0]);
+    if (backImageInput.files[0])
+      dataToSend.append("back_image", backImageInput.files[0]);
+
+    await updateUserData(dataToSend, true);
     setIsEditing(false);
   };
 
@@ -42,7 +66,13 @@ export default function UserData() {
           <input
             type="text"
             name="username"
-            value={formData.username}
+            value={
+              isEditing
+                ? formData.username
+                : loading
+                ? "Loading..."
+                : userData.first_name
+            }
             onChange={handleChange}
             disabled={!isEditing}
           />
@@ -52,7 +82,13 @@ export default function UserData() {
           <input
             type="text"
             name="surname"
-            value={formData.surname}
+            value={
+              isEditing
+                ? formData.surname
+                : loading
+                ? "Loading..."
+                : userData.last_name
+            }
             onChange={handleChange}
             disabled={!isEditing}
           />
@@ -62,7 +98,13 @@ export default function UserData() {
           <input
             type="text"
             name="phone_number"
-            value={formData.phone_number}
+            value={
+              isEditing
+                ? formData.phone_number
+                : loading
+                ? "Loading..."
+                : userData.phone_number
+            }
             onChange={handleChange}
             disabled={!isEditing}
           />
@@ -72,7 +114,47 @@ export default function UserData() {
           <input
             type="text"
             name="email"
-            value={formData.email}
+            value={
+              isEditing
+                ? formData.email
+                : loading
+                ? "Loading..."
+                : userData.email
+            }
+            onChange={handleChange}
+            disabled={true}
+          />
+        </div>
+        <div>
+          <label>Лицевая сторона паспорта</label>
+          <input
+            type="file"
+            name="front_image"
+            onChange={handleChange}
+            disabled={!isEditing}
+          />
+        </div>
+        <div>
+          <label>Обратная сторона паспорта</label>
+          <input
+            type="file"
+            name="back_image"
+            onChange={handleChange}
+            disabled={!isEditing}
+          />
+        </div>
+        <div>
+          <label>Адрес</label>
+          <input
+            type="text"
+            name="address"
+            value={
+              isEditing
+                ? formData.address
+                : loading
+                ? "Loading..."
+                : userData.address
+            }
             onChange={handleChange}
             disabled={!isEditing}
           />
