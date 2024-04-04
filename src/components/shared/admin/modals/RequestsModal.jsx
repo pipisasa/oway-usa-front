@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "@/styles/admin/RequestsModal.module.scss";
 import { RxCross1 } from "react-icons/rx";
+import useRequests from "@/hooks/admin/useRequests";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function RequestsModal({ data, onClose }) {
+  const { updateRequest } = useRequests();
+
+  const [price, setPrice] = useState(data.price || "");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("price", price);
+
+    if (event.target.payment_confirmation.files[0]) {
+      formData.append(
+        "payment_confirmation",
+        event.target.payment_confirmation.files[0]
+      );
+    }
+
+    await updateRequest(data.id, formData);
+    onClose();
+  };
+
+  const handlePriceChange = (event) => {
+    setPrice(event.target.value);
+  };
   return (
     <div
       className={s.modal_backdrop}
@@ -17,14 +43,18 @@ export default function RequestsModal({ data, onClose }) {
           <div className={s.left_block}>
             <div className={s.input_label}>
               <label>Фотография</label>
-              <img src={data.purchase_image} alt="" />
+              <img src={`${API_URL}${data.purchase_image}`} alt="" />
             </div>
             <div className={s.input_label}>
               <label htmlFor="">Статус запроса</label>
               <button>В ожидании</button>
             </div>
           </div>
-          <form className={s.form}>
+          <form
+            onSubmit={handleSubmit}
+            className={s.form}
+            encType="multipart/form-data"
+          >
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
                 <label htmlFor="url">Ссылка на товар</label>
@@ -58,12 +88,18 @@ export default function RequestsModal({ data, onClose }) {
               </div>
               <div className={s.input_label}>
                 <label htmlFor="price">Цена</label>
-                <input id="price" value={data.price || ""} />
+                <input
+                  id="price"
+                  name="price"
+                  type="text"
+                  value={price}
+                  onChange={handlePriceChange}
+                />
               </div>
             </div>
             <div className={s.input_label}>
-              <label htmlFor="">Подтверждение оплаты</label>
-              <input id="" type="file" />
+              <label htmlFor="payment_confirmation">Подтверждение оплаты</label>
+              <input id="payment_confirmation" type="file" />
             </div>
             <div className={s.flex_inputs}>
               <div className={s.input_label}>

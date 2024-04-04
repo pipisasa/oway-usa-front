@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import s from "@/styles/pages/auth/Register.module.scss";
 import Step1 from "@/components/shared/auth/Step1";
 import Step2 from "@/components/shared/auth/Step2";
-import ConfirmRegistrations from "@/components/shared/auth/ConfirmRegistrations";
 import { useRouter } from "next/router";
 import { useRegister } from "@/hooks/auth/useRegister";
 
@@ -37,7 +36,6 @@ export default function Register() {
     }
     localStorage.setItem("email", combinedData.email);
   };
-
 
   const renderStep = () => {
     switch (currentStep) {

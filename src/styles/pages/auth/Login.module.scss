@@ -6,6 +6,12 @@
   position: relative;
   overflow: hidden;
 
+  .error {
+    color: red;
+    margin-top: 16px;
+    text-align: center;
+  }
+
   .right_img {
     width: 494px;
     height: 494px;

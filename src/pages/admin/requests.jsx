@@ -4,9 +4,11 @@ import { Pagination } from "@nextui-org/react";
 import useRequests from "@/hooks/admin/useRequests";
 import RequestsModal from "@/components/shared/admin/modals/RequestsModal";
 
-export default function IncommingRequests() {
-  const { data, isLoading, error } = useRequests();
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+export default function IncommingRequests() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data, isLoading, error } = useRequests(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
 
@@ -39,18 +41,33 @@ export default function IncommingRequests() {
           </tr>
         </thead>
         <tbody>
-          {data.map((request, index) => (
-            <tr key={index}>
+          {data.results.map((request) => (
+            <tr key={request.id}>
               <td className={s.purchase_image}>
-                <img src={request.purchase_image} alt="Product" />
+                <img
+                  src={`${API_URL}${request.purchase_image}`}
+                  alt="Product"
+                />
               </td>
               <td>{request.name_of_purchase}</td>
               <td>
                 {request.price === null ? "Цена не указана" : request.price}
               </td>
-              <td>{request.request_date}</td>
-              <td>{request.requestStatus}</td>
-              <td>{request.paymentStatus}</td>
+              <td>{request.created_at}</td>
+              <td>
+                {request.request_status === false ? (
+                  <p style={{ color: "red" }}>В ожидании</p>
+                ) : (
+                  <p style={{ color: "#06DB02" }}>Обработан</p>
+                )}
+              </td>
+              <td>
+                {request.is_paid === false ? (
+                  <p style={{ color: "red" }}>Не оплачено</p>
+                ) : (
+                  <p style={{ color: "#06DB02" }}>Оплечено</p>
+                )}
+              </td>
               <td>
                 <button
                   className={s.btn}
@@ -64,7 +81,12 @@ export default function IncommingRequests() {
         </tbody>
       </table>
       <div className={s.pagination}>
-        <Pagination variant="bordered" total={10} initialPage={1} />
+        <Pagination
+          variant="bordered"
+          total={Math.ceil(data.count / 10)}
+          initialPage={1}
+          onChange={(page) => setCurrentPage(page)}
+        />
       </div>
     </div>
   );
