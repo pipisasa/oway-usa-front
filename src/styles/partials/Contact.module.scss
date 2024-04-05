@@ -3,21 +3,17 @@
 
   h1 {
     color: var(--black, #001526);
-    font-family: Helvetica;
     font-size: 32px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
     margin-top: 12px;
   }
+
   p {
     color: var(--black, #001526);
-    font-family: Helvetica;
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
   }
+
   .contact_inner {
     display: flex;
     justify-content: space-between;
@@ -31,18 +27,16 @@
       align-items: flex-start;
       gap: 20px;
       border-radius: 12px;
-      background: var(--bue_light_2, #F7F9FC);
+      background: var(--bue_light_2, #f7f9fc);
       margin-top: 32px;
       position: relative;
 
       h2 {
         color: var(--black, #001526);
-        font-family: Helvetica;
         font-size: 24px;
-        font-style: normal;
         font-weight: 700;
-        line-height: normal;
       }
+
       .contact_inner_block_auth {
         width: 90%;
         height: 82%;
@@ -52,7 +46,7 @@
         position: absolute;
         bottom: 0px;
         border-radius: 12px;
-        background: rgba(255, 255, 255, 0.30);
+        background: rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(6px);
 
         .contact_inner_block_auth_inner {
@@ -63,9 +57,7 @@
 
           span {
             text-align: center;
-            font-family: Helvetica;
             font-size: 18px;
-            font-style: normal;
             font-weight: 400;
             line-height: 140%;
           }
@@ -73,12 +65,10 @@
       }
       h3 {
         color: var(--black, #001526);
-        font-family: Helvetica;
         font-size: 18px;
-        font-style: normal;
         font-weight: 700;
-        line-height: normal;
       }
+
       .contact_inner_block_infos {
         display: flex;
         align-items: flex-start;
@@ -95,23 +85,33 @@
 
           h3 {
             color: var(--black, #001526);
-            font-family: Helvetica;
             font-size: 16px;
-            font-style: normal;
             font-weight: 400;
-            line-height: normal;
           }
           p {
             color: var(--black, #001526);
-            font-family: Helvetica;
             font-size: 12px;
-            font-style: normal;
             font-weight: 300;
-            line-height: normal;
           }
         }
       }
     }
   }
+}
 
+@media (max-width: 1024px) {
+  .contact_inner {
+    display: flex;
+    flex-direction: column;
+
+    .contact_inner_block {
+      width: 100% !important;
+    }
+  }
+}
+
+@media (max-width: 748px) {
+  .contacts {
+    margin-top: 32px;
+  }
 }

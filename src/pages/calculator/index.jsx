@@ -6,14 +6,17 @@ import CostCalculator from "../../components/shared/CostCalculator";
 import ProductSlider from "../../components/screens/main/ProductSlider";
 
 export default function CalculatorPage() {
-    return (
-        <div>
-            <CostCalculator/>
-            <Advantage p='Расчет веса' h2='Как рассчитываются фактический и объемный вес.' menu='calc'/>
-            <ProductSlider/>
-            <MoreInfo menu='calc'/>
-            <Contacts/>
-            
-        </div>
-    );
+  return (
+    <div>
+      <CostCalculator />
+      <Advantage
+        p="Расчет веса"
+        h2="Как рассчитываются фактический и объемный вес."
+        menu="calc"
+      />
+      <ProductSlider />
+      <MoreInfo menu="calc" />
+      <Contacts />
+    </div>
+  );
 }

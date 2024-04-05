@@ -1,7 +1,7 @@
 .calc {
   padding-top: 40px;
   border-radius: 0px 0px 64px 64px;
-  background: var(--bue_light_2, #F7F9FC);
+  background: var(--bue_light_2, #f7f9fc);
   padding-bottom: 120px;
 
   .calc_container {
@@ -15,28 +15,24 @@
 
     h1 {
       color: var(--black, #001526);
-      /* Bold - 32 */
-      font-family: Helvetica;
       font-size: 64px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
       width: 50%;
     }
+
     .calc_inner {
       display: flex;
       justify-content: space-between;
       margin-top: 12px;
-
       gap: 20px;
 
       .calc_inner_forms {
         width: 650px;
         gap: 15px;
+
         .calc_inner_forms_inputs {
           display: flex;
           justify-content: space-between;
-          gap:20px;
+          gap: 20px;
 
           div {
             display: flex;
@@ -47,30 +43,25 @@
 
             input {
               border-radius: 8px;
-              border: 1px solid var(--blue_light, #AED5F3);
+              border: 1px solid var(--blue_light, #aed5f3);
               padding: 12px 20px;
-              background: var(--white, #FFF);
+              background: var(--white, #fff);
               width: 100%;
               font-size: 14px;
-              font-weight: 400;
-
             }
 
             label {
               color: var(--black, #001526);
-              font-family: Helvetica;
               font-size: 14px;
-              font-style: normal;
-              font-weight: 400;
               line-height: 140%;
-              //margin-top: 12px;
             }
           }
         }
         .calc_inner_forms_inputss {
           display: flex;
           justify-content: space-between;
-          gap:20px;
+          gap: 20px;
+          width: 100%;
 
           div {
             display: flex;
@@ -81,20 +72,15 @@
 
             input {
               border-radius: 8px;
-              border: 1px solid var(--blue_light, #AED5F3);
+              border: 1px solid var(--blue_light, #aed5f3);
               padding: 20px 20px;
               width: 100%;
               font-size: 14px;
-              font-weight: 400;
-
             }
 
             label {
               color: var(--black, #001526);
-              font-family: Helvetica;
               font-size: 14px;
-              font-style: normal;
-              font-weight: 400;
               line-height: 140%;
               margin-top: 12px;
             }
@@ -108,19 +94,15 @@
 
           input {
             border-radius: 8px;
-            border: 1px solid var(--blue_light, #AED5F3);
+            border: 1px solid var(--blue_light, #aed5f3);
             padding: 12px 20px;
             width: 100%;
             font-size: 14px;
-            font-weight: 400;
           }
 
           label {
             color: var(--black, #001526);
-            font-family: Helvetica;
             font-size: 14px;
-            font-style: normal;
-            font-weight: 400;
             line-height: 140%;
             margin-top: 20px;
           }
@@ -134,7 +116,7 @@
         gap: 20px;
         flex: 1 0 0;
         border-radius: 16px;
-        border: 1px solid var(--blue_light, #AED5F3);
+        border: 1px solid var(--blue_light, #aed5f3);
         background: rgba(255, 255, 255, 0.24);
         backdrop-filter: blur(8px);
         height: 100%;
@@ -142,7 +124,7 @@
 
         .calc_inner_info {
           display: flex;
-          gap:20px;
+          gap: 20px;
           span {
             margin-right: 12px;
           }
@@ -154,26 +136,63 @@
 
             h3 {
               color: var(--black, #001526);
-              font-family: Helvetica;
               font-size: 18px;
-              font-style: normal;
-              font-weight: 400;
-              line-height: normal;
 
               strong {
-                color: #027DDB;
-                font-family: Helvetica;
+                color: #027ddb;
                 font-size: 18px;
-                font-style: normal;
                 font-weight: 700;
-                line-height: normal;
               }
             }
           }
         }
       }
     }
-
   }
+}
 
+@media (max-width: 1024px) {
+  .calc {
+    .calc_img {
+      display: none;
+    }
+
+    .calc_inner {
+      display: flex;
+      flex-direction: column;
+
+      .calc_inner_forms {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .calc {
+    padding-top: 0px;
+    padding-bottom: 32px;
+
+    .calc_container {
+      h1 {
+        color: var(--black, #001526);
+        font-size: 40px;
+      }
+
+      .calc_inner {
+        .calc_inner_infos {
+          .calc_inner_info {
+            div {
+              h3 {
+                font-size: 12px;
+              }
+              p {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
