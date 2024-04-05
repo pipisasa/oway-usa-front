@@ -1,5 +1,6 @@
 .feed {
   margin-top: 120px;
+
   .calc_img {
     position: absolute;
     right: 0;
@@ -7,14 +8,13 @@
     z-index: 1;
   }
   .feed_container {
-
     .feed_info {
-
       display: flex;
       width: 800px;
       flex-direction: column;
       align-items: flex-start;
       gap: 32px;
+
       .feed_header {
         display: flex;
         flex-direction: column;
@@ -38,7 +38,7 @@
           line-height: normal;
         }
       }
-      .feed_input{
+      .feed_input {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -46,36 +46,36 @@
         align-self: stretch;
         width: 100%;
 
-          .feed_input_block {
+        .feed_input_block {
+          display: flex;
+          align-items: flex-start;
+          gap: 20px;
+          align-self: stretch;
+          width: 100%;
+          div {
             display: flex;
+            flex-direction: column;
             align-items: flex-start;
-            gap: 20px;
-            align-self: stretch;
-            width: 100%;
-            div {
+            gap: 12px;
+            flex: 1 0 0;
+            label {
+              font-family: Helvetica;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 140%;
+            }
+            input {
               display: flex;
-              flex-direction: column;
-              align-items: flex-start;
+              padding: 12px 20px;
+              align-items: center;
               gap: 12px;
-              flex: 1 0 0;
-              label {
-                font-family: Helvetica;
-                font-size: 14px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 140%;
-              }
-              input {
-                display: flex;
-                padding: 12px 20px;
-                align-items: center;
-                gap: 12px;
-                align-self: stretch;
-                border-radius: 8px;
-                border: 1px solid var(--gray, #A4A4A4);
-              }
+              align-self: stretch;
+              border-radius: 8px;
+              border: 1px solid var(--gray, #a4a4a4);
             }
           }
+        }
         .feed_input_block1 {
           display: flex;
           flex-direction: column;
@@ -90,7 +90,7 @@
             font-weight: 400;
             line-height: 140%;
             strong {
-              color: var(--red, #FF1414);
+              color: var(--red, #ff1414);
               font-family: Helvetica;
               font-size: 18px;
               font-style: normal;
@@ -98,23 +98,23 @@
               line-height: normal;
             }
           }
-            div {
+          div {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            align-self: stretch;
+            input {
               display: flex;
-              align-items: flex-start;
+              padding: 12px 20px;
+              align-items: center;
               gap: 12px;
               align-self: stretch;
-              input {
-                display: flex;
-                padding: 12px 20px;
-                align-items: center;
-                gap: 12px;
-                align-self: stretch;
-                border-radius: 8px;
-                border: 1px solid var(--gray, #A4A4A4);
-                width: 100%;
-              }
+              border-radius: 8px;
+              border: 1px solid var(--gray, #a4a4a4);
+              width: 100%;
             }
           }
+        }
         .feed_input_blocks {
           display: flex;
           flex-direction: column;
@@ -136,173 +136,25 @@
             gap: 12px;
             align-self: stretch;
             border-radius: 8px;
-            border: 1px solid var(--gray, #A4A4A4);
+            border: 1px solid var(--gray, #a4a4a4);
           }
         }
       }
     }
-
-  //  h1 {
-  //    color: var(--black, #001526);
-  //    /* Bold - 32 */
-  //    font-family: Helvetica;
-  //    font-size: 64px;
-  //    font-style: normal;
-  //    font-weight: 400;
-  //    line-height: normal;
-  //    width: 50%;
-  //  }
-  //  .calc_inner {
-  //    display: flex;
-  //    justify-content: space-between;
-  //    margin-top: 12px;
-  //
-  //    gap: 20px;
-  //
-  //    .calc_inner_forms {
-  //      width: 650px;
-  //      gap: 15px;
-  //      .calc_inner_forms_inputs {
-  //        display: flex;
-  //        justify-content: space-between;
-  //        gap:20px;
-  //
-  //        div {
-  //          display: flex;
-  //          flex-direction: column;
-  //          gap: 12px;
-  //          align-items: start;
-  //          width: 100%;
-  //
-  //          input {
-  //            border-radius: 8px;
-  //            border: 1px solid var(--blue_light, #AED5F3);
-  //            padding: 12px 20px;
-  //            background: var(--white, #FFF);
-  //            width: 100%;
-  //            font-size: 14px;
-  //            font-weight: 400;
-  //
-  //          }
-  //
-  //          label {
-  //            color: var(--black, #001526);
-  //            font-family: Helvetica;
-  //            font-size: 14px;
-  //            font-style: normal;
-  //            font-weight: 400;
-  //            line-height: 140%;
-  //            //margin-top: 12px;
-  //          }
-  //        }
-  //      }
-  //      .calc_inner_forms_inputss {
-  //        display: flex;
-  //        justify-content: space-between;
-  //        gap:20px;
-  //
-  //        div {
-  //          display: flex;
-  //          flex-direction: column;
-  //          gap: 12px;
-  //          align-items: start;
-  //          width: 100%;
-  //
-  //          input {
-  //            border-radius: 8px;
-  //            border: 1px solid var(--blue_light, #AED5F3);
-  //            padding: 20px 20px;
-  //            width: 100%;
-  //            font-size: 14px;
-  //            font-weight: 400;
-  //
-  //          }
-  //
-  //          label {
-  //            color: var(--black, #001526);
-  //            font-family: Helvetica;
-  //            font-size: 14px;
-  //            font-style: normal;
-  //            font-weight: 400;
-  //            line-height: 140%;
-  //            margin-top: 12px;
-  //          }
-  //        }
-  //      }
-  //      .calc_inner_forms_input {
-  //        display: flex;
-  //        flex-direction: column;
-  //        gap: 12px;
-  //        align-items: start;
-  //
-  //        input {
-  //          border-radius: 8px;
-  //          border: 1px solid var(--blue_light, #AED5F3);
-  //          padding: 12px 20px;
-  //          width: 100%;
-  //          font-size: 14px;
-  //          font-weight: 400;
-  //        }
-  //
-  //        label {
-  //          color: var(--black, #001526);
-  //          font-family: Helvetica;
-  //          font-size: 14px;
-  //          font-style: normal;
-  //          font-weight: 400;
-  //          line-height: 140%;
-  //          margin-top: 20px;
-  //        }
-  //      }
-  //    }
-  //    .calc_inner_infos {
-  //      display: flex;
-  //      padding: 28px;
-  //      flex-direction: column;
-  //      align-items: flex-start;
-  //      gap: 20px;
-  //      flex: 1 0 0;
-  //      border-radius: 16px;
-  //      border: 1px solid var(--blue_light, #AED5F3);
-  //      background: rgba(255, 255, 255, 0.24);
-  //      backdrop-filter: blur(8px);
-  //      height: 100%;
-  //      z-index: 3;
-  //
-  //      .calc_inner_info {
-  //        display: flex;
-  //        gap:20px;
-  //        span {
-  //          margin-right: 12px;
-  //        }
-  //
-  //        div {
-  //          p {
-  //            margin-top: 10px;
-  //          }
-  //
-  //          h3 {
-  //            color: var(--black, #001526);
-  //            font-family: Helvetica;
-  //            font-size: 18px;
-  //            font-style: normal;
-  //            font-weight: 400;
-  //            line-height: normal;
-  //
-  //            strong {
-  //              color: #027DDB;
-  //              font-family: Helvetica;
-  //              font-size: 18px;
-  //              font-style: normal;
-  //              font-weight: 700;
-  //              line-height: normal;
-  //            }
-  //          }
-  //        }
-  //      }
-  //    }
-  //  }
-  //
   }
+}
 
+@media (max-width: 1024px) {
+  .feed {
+    margin-top: 32px;
+    .calc_img {
+      display: none;
+    }
+
+    .feed_container {
+      .feed_info {
+        width: 100%;
+      }
+    }
+  }
 }

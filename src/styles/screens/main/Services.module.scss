@@ -61,3 +61,21 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .services_img {
+    display: none;
+  }
+
+  .heroSection_page {
+    height: 462px;
+    .heroSection_info {
+      width: 100%;
+      h1 {
+        font-size: 40px;
+        line-height: 48px;
+        padding-top: 32px;
+      }
+    }
+  }
+}
