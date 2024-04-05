@@ -1,54 +1,48 @@
 import React from "react";
 import s from "@/styles/pages/auth/Register.module.scss";
 import Link from "next/link";
+import {useForm} from "react-hook-form";
 
 export default function Step2({ onSubmit, setUserData }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newData = {
-      email: e.target.email.value,
-      password: e.target.password.value,
-      password2: e.target.password2.value,
-    };
-    onSubmit(newData);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmitHandler = (data) => {
+    setUserData(data);
+    onSubmit(data);
   };
 
   return (
-    <>
-      <img className={s.steps} src="/assets/images/step2.svg" alt="step1" />
-      <form className={s.register_form} onSubmit={handleSubmit}>
-        <div className={s.register_inputs}>
-          <div>
-            <label htmlFor="">Электронная почта</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Введите Электронную почту"
-            />
+      <>
+        <img className={s.steps} src="/assets/images/step2.svg" alt="step1" />
+        <form className={s.register_form} onSubmit={handleSubmit(onSubmitHandler)}>
+          <div className={s.register_inputs}>
+            <div className={errors.email ? s.error : ''}>
+              <label htmlFor="email">Электронная почта</label>
+              <input id="email" type="email" placeholder="Введите Электронную почту" {...register("email", { required: true })} />
+              {errors.email && <div>это поле обязательно к заполнению!</div>}
+            </div>
+            <div className={errors.password ? s.error : ''}>
+              <label htmlFor="password">Пароль</label>
+              <input id="password" type="password" placeholder="Введите пароль" {...register("password", { required: true })} />
+              {errors.password && <div>это поле обязательно к заполнению!</div>}
+            </div>
+            <div className={errors.password2 ? s.error : ''}>
+              <label htmlFor="password2">Повторите пароль</label>
+              <input id="password2" type="password" placeholder="Введите пароль повторно" {...register("password2", { required: true })} />
+              {errors.password2 && <div>это поле обязательно к заполнению!</div>}
+            </div>
           </div>
-          <div>
-            <label htmlFor="">Пароль</label>
-            <input id="password" type="password" placeholder="Введите пароль" />
-          </div>
-          <div>
-            <label htmlFor="">Повторите пароль</label>
-            <input
-              id="password2"
-              type="password"
-              placeholder="Введите пароль повторно"
-            />
-          </div>
-        </div>
-        <div className={s.register_btn}>
-          <button type="submit">
-            Продолжить
-            <img src="/assets/icons/next-icon.svg" alt="next" />
-          </button>
-          <span>
+          <div className={s.register_btn}>
+            <button type="submit">
+              Продолжить
+              <img src="/assets/icons/next-icon.svg" alt="next" />
+            </button>
+            <span>
             Вы имеете аккаунт? <Link href="/auth/login">Авторизаваться</Link>
           </span>
-        </div>
-      </form>
-    </>
+          </div>
+        </form>
+      </>
   );
 }
+

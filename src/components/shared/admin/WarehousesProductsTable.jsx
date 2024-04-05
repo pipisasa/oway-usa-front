@@ -3,6 +3,7 @@ import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import useWarehouses from "../../../hooks/admin/useWarehouses";
 import Modal from "../Modal";
 import {RxCross2} from "react-icons/rx";
+
 export default function WarehousesProductsTable() {
   const { warehouses, fetchWarehouses, isLoading, error } = useWarehouses();
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
