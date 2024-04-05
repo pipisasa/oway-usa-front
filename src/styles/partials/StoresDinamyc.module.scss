@@ -1,21 +1,24 @@
 .mission {
   margin-top: 138px;
 
-    h1 {
-      font-family: Helvetica;
-      font-size: 40px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      margin-top: 12px;
-      width: 627px;
-    }
-    span {
-      font-family: Helvetica;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 140%;
-    }
+  h1 {
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 12px;
+    max-width: 627px;
+  }
+  span {
+    font-size: 16px;
+    line-height: 140%;
+  }
+}
 
+@media (max-width: 1024px) {
+  .mission {
+    margin-top: 32px;
+
+    h1 {
+      font-size: 24px;
+    }
+  }
 }

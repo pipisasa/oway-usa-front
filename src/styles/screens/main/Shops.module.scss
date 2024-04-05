@@ -4,3 +4,11 @@
   align-items: center;
   margin-top: 120px;
 }
+
+@media (max-width: 748px) {
+  .shops {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 0px;
+  }
+}
