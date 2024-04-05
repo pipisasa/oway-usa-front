@@ -1,61 +1,122 @@
 import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
+import useShops from "../../../../hooks/admin/useShops";
 
 export default function AddShopsModal() {
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [country, setCountry] = useState("");
+  const [logo, setLogo] = useState(null);
+  const [description, setDescription] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+
+  const {addShops} = useShops()
 
   const toggleModal = () => setIsOpen(!isOpen);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await addShops(name,category,country,logo,description);
+      toggleModal(); // закрыть модальное окно после успешного добавления
+    } catch (error) {
+      console.error("Ошибка при добавлении сайта:", error);
+    }
+  };
+
   return (
-    <div className={s.modal}>
-      <button onClick={toggleModal} className={s.add_btn}>
-        Добавить сайт
-      </button>
-      <Modal isOpen={isOpen} onClose={toggleModal}>
-        <h3>Добавить сайт</h3>
-        <form>
-          <div className={s.shops_form}>
-            <div className={s.first_input_block}>
-              <div>
-                <label htmlFor="">Название сайта</label>
-                <input type="text" placeholder="Введите название" />
+      <div className={s.modal}>
+        <button onClick={toggleModal} className={s.add_btn}>
+          Добавить сайт
+        </button>
+        <Modal isOpen={isOpen} onClose={toggleModal}>
+          <h3>Добавить сайт</h3>
+          <form onSubmit={handleSubmit}>
+            <div className={s.shops_form}>
+              <div className={s.first_input_block}>
+                <div>
+                  <label htmlFor="name">Название сайта</label>
+                  <input
+                      id="name"
+                      type="text"
+                      placeholder="Введите название"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+                {/*<div>*/}
+                {/*  <label htmlFor="link">Ссылка сайта</label>*/}
+                {/*  <input*/}
+                {/*      id="link"*/}
+                {/*      type="text"*/}
+                {/*      placeholder="Вставьте ссылку"*/}
+                {/*      value={link}*/}
+                {/*      onChange={(e) => setLink(e.target.value)}*/}
+                {/*  />*/}
+                {/*</div>*/}
+
+                <div>
+                  <label htmlFor="category">Категория</label>
+                  <select
+                      id="category"
+                      name="category"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                  >
+                    <option value="">Выберите категорию</option>
+                    <option value="2">Автозапчасти</option>
+                  </select>
+                </div>
+
+
+                <div>
+                  <label htmlFor="country">Страна</label>
+                  <select
+                      id="country"
+                      name="country"
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                  >
+                    <option value="">Выберите страну</option>
+                    <option value="2">Турция</option>
+                  </select>
+                </div>
               </div>
-              <div>
-                <label htmlFor="">Ссылка сайта</label>
-                <input type="text" placeholder="Вставьте ссылку" />
-              </div>
-              <div>
-                <label htmlFor="">Категория</label>
-                <input type="text" placeholder="Укажите категорию" />
-              </div>
-              <div>
-                <label htmlFor="">Страна</label>
-                <input type="text" placeholder="Выберите страну" />
+              <div className={s.second_input_block}>
+                <div>
+                  <label htmlFor="logo">Логотип</label>
+                  <input
+                      id="logo"
+                      type="file"
+                      placeholder="Вставьте картинку"
+                      onChange={(e) => setLogo(e.target.files[0])}
+                  />
+                  <p>
+                    Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ |
+                    512x512
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="description">Комментарий</label>
+                  <input
+                      id="description"
+                      type="text"
+                      placeholder="Комментарий"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
-            <div className={s.second_input_block}>
-              <div>
-                <label htmlFor="">Логотип</label>
-                <input type="file" placeholder="Вставьте картинку" />
-                <p>
-                  Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ |
-                  512x512
-                </p>
-              </div>
-              <div>
-                <label htmlFor="">Комментарий</label>
-                <input type="password" placeholder="Комментарий" />
-              </div>
+            <div className={s.btn_center}>
+              <button type="submit" className={s.submit_btn}>
+                Добавить сайт
+              </button>
             </div>
-          </div>
-          <div className={s.btn_center}>
-            <button type="submit" className={s.submit_btn}>
-              Добавить сайт
-            </button>
-          </div>
-        </form>
-      </Modal>
-    </div>
+          </form>
+        </Modal>
+      </div>
   );
 }

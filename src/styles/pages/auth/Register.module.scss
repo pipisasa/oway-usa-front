@@ -87,6 +87,22 @@
         flex-direction: column;
         gap: 20px;
 
+        .error {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          label {
+            color: var(--gray, #ff0000);
+          }
+          input {
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--gray, #ff0000);
+          }
+          div {
+            color: var(--gray, #ff0000);
+          }
+        }
         div {
           display: flex;
           flex-direction: column;
@@ -96,6 +112,9 @@
             padding: 12px 20px;
             border-radius: 8px;
             border: 1px solid var(--gray, #a4a4a4);
+          }
+          .error {
+            color:red
           }
         }
       }

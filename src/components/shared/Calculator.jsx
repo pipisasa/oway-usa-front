@@ -11,7 +11,7 @@ export default function Calculator() {
   const [deliveryTime, setDeliveryTime] = useState("");
 
   const calculateCostAndTime = () => {
-    console.log('fhjdsd')
+
     if (
       countryFrom === "USA" &&
       countryTo === "Russian" &&

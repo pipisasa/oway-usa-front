@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import s from "@/styles/admin/CountryTabs.module.scss";
+import useCountries from "../../../../hooks/admin/useCountries";
 
 export default function CountryTabs() {
   const [activeTab, setActiveTab] = useState("Все");
+  const {countries} = useCountries()
 
   return (
     <div className={s.tabs}>
@@ -12,20 +14,16 @@ export default function CountryTabs() {
       >
         Все
       </button>
-      <button
-        className={activeTab === "США" ? s.active : ""}
-        onClick={() => setActiveTab("США")}
-      >
-        <img src="/assets/icons/usa.svg" alt="США" />
-        США
-      </button>
-      <button
-        className={activeTab === "Турция" ? s.active : ""}
-        onClick={() => setActiveTab("Турция")}
-      >
-        <img src="/assets/icons/turkey.svg" alt="Турция" />
-        Турция
-      </button>
+        {countries.map((country) => (
+            <button
+                key={country.id}
+                className={activeTab === country.name ? s.active : ""}
+                onClick={() => setActiveTab(country.name)}
+            >
+                <img width={16} height={16} src={country.icon} alt={country.name} />
+                {country.name}
+            </button>
+        ))}
     </div>
   );
 }

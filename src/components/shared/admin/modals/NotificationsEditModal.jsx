@@ -48,7 +48,6 @@ export default function NotificationsEditModal({ isOpen, onClose, notification }
 
     return (
         <div className={s.modal}>
-
             <Modal isOpen={isOpen} onClose={onClose}>
                 <h3>Редактировать уведомление</h3>
                 <form onSubmit={handleSubmit} className={s.notifications_form}>
