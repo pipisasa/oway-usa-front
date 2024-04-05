@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
-  overflow: hidden; /* Скрыть нижний скролл */
+  overflow: hidden;
 
   .current_header {
     display: flex;
@@ -56,5 +56,32 @@
   .slide {
     flex: 0 0 auto;
     scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 1024px) {
+  .current {
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 748px) {
+  .current {
+    .current_header {
+      .current_header_icon button {
+        img {
+          width: 80px !important;
+        }
+      }
+      .current_header_title {
+        p {
+          font-size: 14px !important;
+        }
+
+        h1 {
+          font-size: 24px !important;
+        }
+      }
+    }
   }
 }

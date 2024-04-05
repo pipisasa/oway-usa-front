@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import s from "@/styles/components/layout/Header.module.scss";
 import { useRouter } from "next/router";
 import { getCookie } from "@/utils/cookieHelpers";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const links = [
   { href: "/", label: "Главная" },
@@ -77,6 +78,11 @@ export default function Header() {
             </Link>
           </div>
         )}
+        <div className={s.burger_menu}>
+          <button>
+            <RxHamburgerMenu size={25} />
+          </button>
+        </div>
       </header>
     </div>
   );
