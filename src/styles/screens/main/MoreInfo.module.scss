@@ -1,23 +1,23 @@
 .more_info {
   width: 100%;
   height: 100%;
-  background: var(--bue_light_2, #F7F9FC);
+  background: var(--bue_light_2, #f7f9fc);
   padding-top: 120px;
-  .more_info_container{
-      .info_img {
-        position: absolute;
-        right: -60px;
-        top: -60px;
-      }
-    .more_info_inner{
+
+  .more_info_container {
+    .info_img {
+      position: absolute;
+      right: -60px;
+      top: -60px;
+    }
+
+    .more_info_inner {
       width: 730px;
+
       h2 {
         color: var(--black, #001526);
-        font-family: Helvetica;
         font-size: 32px;
-        font-style: normal;
         font-weight: 700;
-        line-height: normal;
         margin-top: 12px;
       }
 
@@ -26,27 +26,27 @@
         align-items: center;
         gap: 20px;
         margin-top: 20px;
+
         span {
-          /* Regular - 16 */
-          font-family: Helvetica;
           font-size: 16px;
-          font-style: normal;
-          font-weight: 400;
           line-height: 140%;
         }
-        .more_info_inner_div{
+
+        .more_info_inner_div {
           width: 5px;
           align-self: stretch;
           border-radius: 100px;
-          background: var(--orange, #FF7C00);
+          background: var(--orange, #ff7c00);
         }
+
         div {
           width: 3px;
           align-self: stretch;
           border-radius: 100px;
-          background: var(--orange, #FF7C00);
+          background: var(--orange, #ff7c00);
         }
       }
+
       .more_info_inner_block {
         width: 90%;
         display: flex;
@@ -55,18 +55,14 @@
         align-items: flex-start;
         gap: 20px;
         border-radius: 16px;
-        background: var(--white, #FFF);
+        background: var(--white, #fff);
         box-shadow: 3px 3px 10px 0px rgba(0, 21, 38, 0.05);
         margin-top: 20px;
 
         h3 {
           color: var(--black, #001526);
-          font-family: Helvetica;
           font-size: 18px;
-          font-style: normal;
           font-weight: 700;
-          line-height: normal;
-
         }
         .more_info_inner_block_info {
           display: flex;
@@ -80,7 +76,6 @@
           }
         }
       }
-
     }
   }
 }
@@ -88,24 +83,23 @@
 .more_info_culc {
   width: 100%;
   height: 100%;
-  background: var(--white, #FFF);
+  background: var(--white, #fff);
   padding-top: 120px;
-  .more_info_container{
+
+  .more_info_container {
     .info_img {
       position: absolute;
       right: -60px;
       top: -60px;
     }
-    .more_info_inner{
+
+    .more_info_inner {
       width: 730px;
+
       h2 {
         color: var(--black, #001526);
-        /* Bold - 32 */
-        font-family: Helvetica;
         font-size: 32px;
-        font-style: normal;
         font-weight: 700;
-        line-height: normal;
         margin-top: 12px;
       }
 
@@ -114,27 +108,25 @@
         align-items: center;
         gap: 20px;
         margin-top: 20px;
+
         span {
-          /* Regular - 16 */
-          font-family: Helvetica;
           font-size: 16px;
-          font-style: normal;
-          font-weight: 400;
           line-height: 140%;
         }
-        .more_info_inner_div{
+        .more_info_inner_div {
           width: 5px;
           align-self: stretch;
           border-radius: 100px;
-          background: var(--orange, #FF7C00);
+          background: var(--orange, #ff7c00);
         }
         div {
           width: 3px;
           align-self: stretch;
           border-radius: 100px;
-          background: var(--orange, #FF7C00);
+          background: var(--orange, #ff7c00);
         }
       }
+
       .more_info_inner_block {
         width: 90%;
         display: flex;
@@ -143,18 +135,14 @@
         align-items: flex-start;
         gap: 20px;
         border-radius: 16px;
-        background: var(--bue_light_2, #F7F9FC);
+        background: var(--bue_light_2, #f7f9fc);
         box-shadow: 3px 3px 10px 0px rgba(0, 21, 38, 0.05);
         margin-top: 20px;
 
         h3 {
           color: var(--black, #001526);
-          font-family: Helvetica;
           font-size: 18px;
-          font-style: normal;
           font-weight: 700;
-          line-height: normal;
-
         }
         .more_info_inner_block_info {
           display: flex;
@@ -165,6 +153,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             div {
               width: 20px;
               height: 20px;
@@ -175,7 +164,42 @@
           }
         }
       }
+    }
+  }
+}
 
+@media (max-width: 1024px) {
+  .more_info {
+    padding-top: 32px;
+  }
+  .more_info_culc {
+    padding-top: 32px;
+    .more_info_container {
+      .info_img {
+        display: none;
+      }
+
+      .more_info_inner {
+        width: 100%;
+
+        .more_info_inner_block {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 748px) {
+  .more_info_inner {
+    h2 {
+      font-size: 24px !important;
+      line-height: 140% !important;
+    }
+
+    .more_info_inner_block_info {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
     }
   }
 }

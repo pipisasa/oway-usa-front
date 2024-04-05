@@ -25,10 +25,7 @@ const useBillingData = () => {
                     },
                 }
             );
-
-            console.log(response.data,'response.data')
             setBillingData(prevData => response.data);
-            console.log(billingData,"billingData")
         } catch (error) {
             setError(error.message);
         } finally {

@@ -4,21 +4,10 @@ import TopProductCard from "@/components/shared/cards/TopProductCard";
 import useProducts from "../../../hooks/admin/useProducts";
 
 export default function ProductSlider() {
-  const {products, isLoading} = useProducts()
+  const { products, isLoading } = useProducts();
   const slideWidth = 300;
   const sliderRef = useRef(null);
-  const productNames = [
-    "CAKEDECOR.KZ форма PS286-28, сталь",
-    "Название продукта 2",
-    "Название продукта 3",
-    "Название продукта 4",
-    "Название продукта 5",
-    "Название продукта 6",
-    "Название продукта 7",
-    "Название продукта 8",
-    "Название продукта 9",
-    "Название продукта 10",
-  ];
+
   const handlePrevSlide = () => {
     sliderRef.current.scrollBy({
       left: -slideWidth,
@@ -28,7 +17,7 @@ export default function ProductSlider() {
 
   const handleNextSlide = () => {
     sliderRef.current.scrollBy({
-      left: slideWidth, // Прокрутить на ширину одного слайда
+      left: slideWidth,
       behavior: "smooth",
     });
   };
@@ -52,14 +41,15 @@ export default function ProductSlider() {
       <div ref={sliderRef} className={s.current_block}>
         {products.map((products, index) => (
           <div key={products?.id} className={s.slide}>
-            {isLoading ? (<div>Loading...</div>)
-                :
-                <TopProductCard
-                    image={products?.image}
-                    title={products?.title}
-                    link={products?.link}
-                />
-            }
+            {isLoading ? (
+              <div>Loading...</div>
+            ) : (
+              <TopProductCard
+                image={products?.image}
+                title={products?.title}
+                link={products?.link}
+              />
+            )}
           </div>
         ))}
       </div>

@@ -5,7 +5,6 @@ import useWarehouses from "../../../../hooks/admin/useWarehouses";
 
 export default function OnTheWay() {
   const {warehouses} = useWarehouses()
-  console.log(warehouses, "warehouses")
   return (
     <div className={s.product_table}>
       <table>

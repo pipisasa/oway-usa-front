@@ -1,13 +1,17 @@
 .header_back {
-  background: var(--bue_light_2, #F7F9FC);
+  background: var(--bue_light_2, #f7f9fc);
 }
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 0;
-  background: var(--bue_light_2, #F7F9FC);
+  background: var(--bue_light_2, #f7f9fc);
 
+  .burger_menu {
+    display: none;
+  }
 
   nav {
     ul {
@@ -18,7 +22,6 @@
       li {
         list-style: none;
         color: var(--black, #001526);
-        /* Regular - 14 */
         font-family: Helvetica;
         font-size: 14px;
         font-style: normal;
@@ -43,21 +46,18 @@
         }
 
         a.active::after {
-          background-color: #027DDB; /* Цвет подсветки */
-          color: #027DDB;
+          background-color: #027ddb;
+          color: #027ddb;
         }
 
         a.active[href="/"] {
-          color: #027DDB; /* Цвет ссылки "Главная" */
-          background-color: #027DDB;
+          color: #027ddb;
+          background-color: #027ddb;
         }
-
       }
       .active {
-        /* Цвет подсветки */
         color: #027ddb;
         border-bottom: solid 2px #027ddb;
-
       }
     }
   }
@@ -67,13 +67,12 @@
     align-items: center;
     gap: 20px;
 
-    .auth_btn_reg{
+    .auth_btn_reg {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 10px;
     }
-
 
     .login {
       display: flex;
@@ -83,7 +82,7 @@
       padding: 10px 20px;
       color: #fff;
       border-radius: 12px;
-      background: var(--blue, #027DDB);
+      background: var(--blue, #027ddb);
       cursor: pointer;
       transition: background-color 0.3s;
 
@@ -95,6 +94,25 @@
     .register {
       background: none;
       cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .header {
+    .burger_menu {
+      display: initial;
+    }
+    nav {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .header {
+    .auth_btn {
+      display: none;
     }
   }
 }

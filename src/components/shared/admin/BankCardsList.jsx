@@ -14,7 +14,7 @@ export default function BankCardsList() {
             fetchUserData();
         }
     }, [billingData]);
-    console.log(billingData,"billingData23")
+
     const handleDelete = async (cardId) => {
         try {
             await deleteBilling(cardId);

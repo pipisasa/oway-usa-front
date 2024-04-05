@@ -1,12 +1,9 @@
-
 .join {
   margin-top: 120px;
-  .join_img {
+  display: flex;
+
+  .join_img img {
     width: 598px;
-    height: 598px;
-    position: absolute;
-    right: 0;
-    top: 0;
   }
 
   .join_info {
@@ -15,6 +12,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+
     p {
       font-family: Helvetica;
       font-size: 16px;
@@ -24,19 +22,13 @@
     }
     h1 {
       color: var(--black, #001526);
-      font-family: Helvetica;
       font-size: 28px;
-      font-style: normal;
       font-weight: 700;
-      line-height: normal;
       span {
-        color: var(--orange, #FF7C00);
-        font-family: Helvetica;
+        color: var(--orange, #ff7c00);
         font-size: 28px;
-        font-style: normal;
         font-weight: 700;
-        line-height: normal;
-        border-bottom: solid var(--orange, #FF7C00) 3px;
+        border-bottom: solid var(--orange, #ff7c00) 3px;
       }
     }
 
@@ -46,11 +38,7 @@
       gap: 16px;
 
       span {
-        /* Regular - 16 */
-        font-family: Helvetica;
         font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
         line-height: 140%;
       }
       .join_info_div {
@@ -59,7 +47,7 @@
         padding: 0;
         align-self: stretch;
         border-radius: 100px;
-        background: var(--orange, #FF7C00);
+        background: var(--orange, #ff7c00);
       }
       div {
         width: 5px;
@@ -67,9 +55,41 @@
         padding: 0;
         align-self: stretch;
         border-radius: 100px;
-        background: var(--orange, #FF7C00);
+        background: var(--orange, #ff7c00);
       }
     }
+  }
+}
 
+@media (max-width: 1024px) {
+  .join {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 32px;
+
+    .join_info {
+      width: 100%;
+    }
+
+    .join_img img {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 728px) {
+  .join {
+    .join_info {
+      h1 {
+        font-size: 20px;
+        line-height: 140%;
+
+        span {
+          font-size: 20px;
+          line-height: 140%;
+        }
+      }
+    }
   }
 }

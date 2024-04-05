@@ -8,10 +8,8 @@ export default function Purchase() {
   const { handleChange, submitPurchase, isSubmitted } = usePurchase();
   const [isOpen, setIsOpen] = useState(false);
   const {register, handleSubmit,  formState: { errors }  } = useForm();
-  console.log(errors,"errors")
 
   const onSubmitHandler = async (data) => {
-    console.log(data,"data")
     await submitPurchase({
       full_name: data.full_name,
       url: data.url,
@@ -29,10 +27,6 @@ export default function Purchase() {
   const closeModal = () => {
     setIsOpen(false);
   };
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
-
 
   useEffect(() => {
     if (isSubmitted) {
