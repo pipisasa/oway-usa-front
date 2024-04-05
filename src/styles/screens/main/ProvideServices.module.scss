@@ -3,26 +3,22 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  .service_header {
 
+  .service_header {
     span {
       color: var(--black, #001526);
-      font-family: Helvetica;
       font-size: 16px;
-      font-style: normal;
       font-weight: 400;
-      line-height: normal;
+      padding-bottom: 8px;
     }
     h1 {
       color: var(--black, #001526);
-      font-family: Helvetica;
       font-size: 32px;
-      font-style: normal;
       font-weight: 700;
-      line-height: normal;
     }
   }
-  .services_block{
+
+  .services_block {
     display: flex;
     width: 100%;
     align-items: flex-start;
@@ -37,9 +33,7 @@
 
       span {
         color: var(--black, #001526);
-        font-family: Helvetica;
         font-size: 18px;
-        font-style: normal;
         font-weight: 700;
         line-height: 140%;
       }
@@ -48,7 +42,7 @@
         flex-shrink: 0;
         align-self: stretch;
         border-radius: 100px;
-        background: var(--orange, #FF7C00);
+        background: var(--orange, #ff7c00);
       }
     }
     .services_block_span {
@@ -70,7 +64,7 @@
         align-items: center;
         gap: 14px;
         border-radius: 12px;
-        border: 1px solid var(--blue, #027DDB);
+        border: 1px solid var(--blue, #027ddb);
       }
 
       .services_block_span_div {
@@ -90,9 +84,20 @@
           width: 2px;
           align-self: stretch;
           border-radius: 100px;
-          background: var(--orange, #FF7C00);
+          background: var(--orange, #ff7c00);
         }
       }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .service {
+    margin-top: 32px;
+    .services_block {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
     }
   }
 }
