@@ -9,11 +9,13 @@
     top: 0;
     right: 88px;
   }
+
   .heroSection_img1 {
     position: absolute;
     top: 80px;
     right: 120px;
   }
+
   .heroSection_info {
     width: 561px;
 
@@ -81,6 +83,28 @@
       background: var(--blue, #027ddb);
       cursor: pointer;
       margin-top: 32px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .heroSection_page {
+    .heroSection_img1 {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 748px) {
+  .heroSection_page {
+    height: 350px;
+    .heroSection_info {
+      width: 100%;
+
+      h1 {
+        padding-top: 30px;
+        font-size: 40px;
+      }
     }
   }
 }
