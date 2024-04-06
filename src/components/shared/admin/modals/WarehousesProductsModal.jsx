@@ -230,7 +230,7 @@ const Step2 = ({ formData, handleChange, nextStep }) => (
                     <option value="5">Отправлен</option>
                     <option value="4">Получен на складе отправителя</option>
                     <option value="3">Готов к выдаче</option>
-
+                    <option value="8">Доставлено</option>
                 </select>
             </div>
             <div>
