@@ -1,41 +1,44 @@
 .step {
   width: 100%;
   height: 100%;
-  border-radius: 64px 64px 0  0 ;
-  background: var(--bue_light_2, #F7F9FC);
+  border-radius: 64px 64px 0 0;
+  background: var(--bue_light_2, #f7f9fc);
   margin-top: 120px;
+
   .step_container {
     margin-top: 60px;
     padding-top: 60px;
     position: relative;
+
     .step_img {
       position: absolute;
       right: -60px;
       top: 20px;
     }
+
     h2 {
       font-size: 40px;
       font-style: normal;
       font-weight: 700;
       margin-top: 12px;
     }
+
     span {
       margin-bottom: 60px;
     }
+
     .step_blocks {
       display: flex;
       justify-content: start;
       margin-top: 40px;
 
-
       .step_block {
-        width: 650px;
+        max-width: 650px;
         padding: 40px;
         border-radius: 16px;
-        background: var(--white, #FFF);
+        background: var(--white, #fff);
         box-shadow: 3px 3px 10px 0px rgba(0, 21, 38, 0.05);
         z-index: 99;
-
 
         h3 {
           font-size: 24px;
@@ -74,7 +77,7 @@
         opacity: 0.06;
         position: absolute;
         left: -50px;
-        top:-90px
+        top: -90px;
       }
     }
     .step_blocks2 {
@@ -92,9 +95,7 @@
         opacity: 0.06;
         position: absolute;
         left: 220px;
-        top:-50px
-
-
+        top: -50px;
       }
     }
     .step_blocks3 {
@@ -111,7 +112,7 @@
         opacity: 0.06;
         position: absolute;
         left: 540px;
-        top:-70px
+        top: -70px;
       }
     }
     .step_blocks4 {
@@ -127,8 +128,8 @@
         line-height: 140%;
         opacity: 0.06;
         position: absolute;
-        left:150px;
-        top:30px
+        left: 150px;
+        top: 30px;
       }
     }
     .step_blocks5 {
@@ -145,7 +146,7 @@
         opacity: 0.06;
         position: absolute;
         left: -100px;
-        top:170px
+        top: 170px;
       }
     }
     .step_blocks6 {
@@ -162,6 +163,19 @@
         opacity: 0.06;
         position: absolute;
         left: 200px;
+      }
+    }
+  }
+}
+
+@media (max-width: 690px) {
+  .step {
+    .step_container {
+      .step_img {
+        display: none;
+      }
+      .step_span {
+        display: none !important;
       }
     }
   }

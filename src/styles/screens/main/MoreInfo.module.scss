@@ -174,6 +174,24 @@
   }
   .more_info_culc {
     padding-top: 32px;
+
+    .more_info_container {
+      .info_img {
+        display: none;
+      }
+
+      .more_info_inner {
+        width: 100%;
+
+        .more_info_inner_block {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .more_info {
+    padding-top: 32px;
+
     .more_info_container {
       .info_img {
         display: none;
