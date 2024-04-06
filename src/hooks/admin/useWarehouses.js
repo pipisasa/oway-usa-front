@@ -14,7 +14,7 @@ const useWarehouses = () => {
         setError(null);
         try {
             const response = await axios.get(
-                "http://18.222.184.72:8000/api/warehouses/my/",
+                "http://18.222.184.72:8000/api/warehouses/list/",
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,

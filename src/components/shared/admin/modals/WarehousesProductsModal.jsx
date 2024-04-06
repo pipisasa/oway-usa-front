@@ -225,7 +225,12 @@ const Step2 = ({ formData, handleChange, nextStep }) => (
                     onChange={handleChange}
                 >
                     <option value="">Выберите статус</option>
-                    <option value="1">Получен на складе отправителя</option>
+                    <option value="7">Отправлено курьерской службой</option>
+                    <option value="6">Получен на складе получателя</option>
+                    <option value="5">Отправлен</option>
+                    <option value="4">Получен на складе отправителя</option>
+                    <option value="3">Готов к выдаче</option>
+
                 </select>
             </div>
             <div>
