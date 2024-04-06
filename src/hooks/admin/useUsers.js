@@ -9,25 +9,22 @@ const axiosInstance = axios.create({
     },
 });
 
-const useUsersAdmin = () => {
+const useUsersAdmin = (currentPage) => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
     const [users, setUsers] = useState([]);
-    const [totalCount, setTotalCount] = useState(0);
 
-    const fetchUsers = async (page) => {
+    const fetchUsers = async () => {
         const accessToken = getCookie("accessToken");
         setIsLoading(true);
         setError(null);
         try {
-            const response = await axiosInstance.get(`list/?page=${page}`, {
+            const response = await axiosInstance.get(`list/?page=${currentPage}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
             setUsers(response.data);
-            setTotalCount(response.data.count);
         } catch (err) {
             setError(err.message);
         } finally {
@@ -37,7 +34,7 @@ const useUsersAdmin = () => {
 
     useEffect(() => {
         fetchUsers();
-    }, []);
+    }, [currentPage]);
 
     const addUsers = async (
         first_name,
@@ -118,7 +115,6 @@ const useUsersAdmin = () => {
 
     return {
         users,
-        totalCount,
         addUsers,
         deleteUsers,
         updateUsers,
