@@ -2,28 +2,28 @@ import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
 
-const useNotification = () => {
+const useShops = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [products, setProducts] = useState([]);
 
-    const fetchNotification = async () => {
+    const fetchShops = async () => {
         const accessToken = getCookie("accessToken");
         setIsLoading(true);
         setError(null);
         try {
             const response = await axios.get(
-                "http://18.222.184.72:8000/api/notifications/list/",
+                "http://18.222.184.72:8000/api/catalog/sites/list/",
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
                     }
                 }
             );
-
+            console.log(response.data,"response.data")
             setProducts(response.data);
-
+            console.log(products,"products")
         } catch (err) {
             setError(err.message);
         } finally {
@@ -33,15 +33,17 @@ const useNotification = () => {
 
 
     useEffect(() => {
-        fetchNotification();
+        fetchShops();
     }, []);
 
-    const addNotification = async (title, description, icon) => {
+    const addShops = async (name,category,country,logo,description) => {
         const accessToken = getCookie("accessToken");
         const formData = new FormData();
-        formData.append("title", title);
+        formData.append("name", name);
+        formData.append("category", category);
+        formData.append("country", country);
+        formData.append("logo", logo);
         formData.append("description", description);
-        formData.append("icon", icon);
 
         setIsLoading(true);
         setError(null);
@@ -49,16 +51,17 @@ const useNotification = () => {
 
         try {
             const response = await axios.post(
-                "http://18.222.184.72:8000/api/notifications/create_notification/",
+                "http://18.222.184.72:8000/api/catalog/sites/create/",
                 formData,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
+                        "Content-Type": "multipart/form-data", // Add this line to specify the content type
                     },
                 }
             );
 
-            await fetchNotification();
+            await fetchShops();
             setIsSuccess(true);
         } catch (error) {
             setError(error.message);
@@ -68,14 +71,15 @@ const useNotification = () => {
         }
     };
 
-    const deleteNotification = async (productId) => {
+
+    const deleteShops = async (productId) => {
         setIsLoading(true);
         setError(null);
 
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.delete(
-                `http://18.222.184.72:8000/api/notifications/delete_notification/${productId}/`,
+                `http://18.222.184.72:8000/api/catalog/sites/delete/${productId}/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -84,9 +88,11 @@ const useNotification = () => {
             );
 
             setProducts((currentProducts) =>
-                currentProducts.filter((product) => product.id !== productId)
+                Array.isArray(currentProducts)
+                    ? currentProducts.filter((product) => product.id !== productId)
+                    : []
             );
-            fetchNotification()
+            fetchShops()
         } catch (error) {
             setError(error.message);
         } finally {
@@ -94,14 +100,14 @@ const useNotification = () => {
         }
     };
 
-    const updateNotification = async (productId, formData) => {
+    const updateShops = async (productId, formData) => {
         setIsLoading(true);
         setError(null);
 
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.patch(
-                `http://18.222.184.72:8000/api/notifications/update_notification/${productId}/`,
+                `http://18.222.184.72:8000/api/catalog/sites/update/${productId}/`,
                 formData,
                 {
                     headers: {
@@ -109,7 +115,7 @@ const useNotification = () => {
                     },
                 }
             );
-            fetchNotification()
+            fetchShops()
             const updatedProduct = response.data;
             setProducts((currentProducts) =>
                 currentProducts.map((product) =>
@@ -125,12 +131,12 @@ const useNotification = () => {
 
     return {
         products,
-        addNotification,
-        deleteNotification,
-        updateNotification,
+        addShops,
+        deleteShops,
+        updateShops,
         error,
         isLoading,
     };
 };
 
-export default useNotification;
+export default useShops;

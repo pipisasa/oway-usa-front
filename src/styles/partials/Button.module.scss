@@ -10,7 +10,7 @@
   margin-top: 24px;
   font-size: 16px;
   gap: 20px;
-  transition: background-color 0.3s; /* добавляем плавный переход для цвета фона */
+  transition: background-color 0.3s;
 
   span {
     font-family: Helvetica;
@@ -21,8 +21,7 @@
     color: white;
   }
 
-  /* hover эффект */
   &:hover {
-    background-color: #01579b; /* новый цвет фона при наведении */
+    background-color: #01579b;
   }
 }

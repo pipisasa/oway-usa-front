@@ -39,8 +39,6 @@ export default function AccountActivation({ onSubmit }) {
     e.preventDefault();
     const code = inputRefs.map(inputRef => inputRef.current.value).join("");
     const email = localStorage.getItem("email");
-    console.log(code,"code")
-    console.log(email,"email")
     activation(email, code);
   };
 

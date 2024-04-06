@@ -31,7 +31,6 @@ const formatCardNumber = (value) => {
     return onlyNums.replace(/(\d{4})(?=\d)/g, "$1 "); // Разделить номер карты на блоки по 4 цифры
 };
 function getCardType(number) {
-    console.log(number,"number")
     const cardNumber = number.toString(); // Преобразуем в строку, чтобы использовать метод startsWith
     if (cardNumber?.startsWith("4")) {
         return "visa";

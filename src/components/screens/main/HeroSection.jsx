@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/screens/main/HeroSection.module.scss";
-import { useRouter } from "next/router";
 import { getCookie } from "@/utils/cookieHelpers";
 import Header2 from "@/components/layout/Header2";
 
 export default function HeroSection() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   useEffect(() => {
     const token = getCookie("accessToken");
     if (token) {

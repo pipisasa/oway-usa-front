@@ -27,19 +27,23 @@ const usePurchase = () => {
     }
   };
 
-  const submitPurchase = async () => {
+  const submitPurchase = async (data) => {
     const formData = new FormData();
-    Object.keys(purchaseData).forEach((key) => {
-      formData.append(key, purchaseData[key]);
+    Object.keys(data).forEach((key) => {
+      if (key === 'purchase_image') {
+        formData.append(key, data[key][0]); // Добавляем только первый файл из массива файлов
+      } else {
+        formData.append(key, data[key]);
+      }
     });
 
     try {
       const response = await fetch(
-        "http://18.222.184.72:8000/api/purchase/add/",
-        {
-          method: "POST",
-          body: formData,
-        }
+          "http://18.222.184.72:8000/api/purchase/add/",
+          {
+            method: "POST",
+            body: formData,
+          }
       );
       if (!response.ok) throw new Error("Ошибка при отправке данных");
       setPurchaseData(initialState); // Сброс формы
@@ -48,6 +52,7 @@ const usePurchase = () => {
       console.error("Ошибка:", error);
     }
   };
+
 
   return { handleChange, submitPurchase, purchaseData, isSubmitted };
 };
