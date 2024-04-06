@@ -1,9 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import Register from "./auth/register";
 import HeroSection from "../components/screens/main/HeroSection";
-import Login from "./auth/login";
 import Shops from "../components/screens/main/Shops";
 import TrackNumber from "../components/shared/TrackNumber";
 import Mission from "../components/screens/main/Mission";
@@ -19,6 +17,7 @@ import Contacts from "../components/partials/Contacts";
 import Purchase from "../components/shared/Purchase";
 import CurrentProducts from "../components/screens/main/ProductSlider";
 import ProductSlider from "../components/screens/main/ProductSlider";
+import CostCalculator from "@/components/shared/CostCalculator";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,7 +44,7 @@ export default function Home() {
         menu="menu"
       />
       <MoreServices />
-      <Calculator />
+      <CostCalculator />
       <Join />
       <Faq />
       <Contacts />

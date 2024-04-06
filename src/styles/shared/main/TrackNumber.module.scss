@@ -1,37 +1,38 @@
 .track {
- margin-top: 120px;
+  margin-top: 120px;
+
   .track_img {
     position: absolute;
     right: 85px;
-    top:-90px;
+    top: -90px;
   }
+
   .track_info {
     display: flex;
     width: 650px;
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
+
     div {
       h1 {
-      font-family: Helvetica;
-      font-size: 40px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      margin-top: 12px;
-    }
+        font-family: Helvetica;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-top: 12px;
+      }
 
       span {
         font-size: 16px;
       }
-
     }
-
-
 
     .track_info_input {
       display: flex;
       flex-direction: column;
+
       span {
         font-size: 14px;
         font-style: normal;
@@ -42,9 +43,9 @@
         width: 400px;
         padding: 12px 20px;
         border-radius: 8px;
-        border: 1px solid var(--gray, #A4A4A4);
+        border: 1px solid var(--gray, #a4a4a4);
         font-size: 14px;
-        color: #A4A4A4;
+        color: #a4a4a4;
         margin-top: 12px;
       }
     }
@@ -52,8 +53,27 @@
       padding: 14px 36px;
       color: #fff;
       border-radius: 12px;
-      background: var(--blue, #027DDB);
+      background: var(--blue, #027ddb);
       cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .track {
+    margin-top: 32px;
+    .track_img {
+      display: none;
+    }
+
+    .track_info {
+      width: 100%;
+
+      div {
+        h1 {
+          font-size: 24px;
+        }
+      }
     }
   }
 }

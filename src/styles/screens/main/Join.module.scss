@@ -1,10 +1,8 @@
 .join {
   margin-top: 120px;
-  .join_img {
-    position: absolute;
-    right: 127px;
-    top: -120px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   .join_info {
     width: 730px;
@@ -15,12 +13,8 @@
 
     h1 {
       color: var(--black, #001526);
-      /* Bold - 32 */
-      font-family: Helvetica;
       font-size: 32px;
-      font-style: normal;
       font-weight: 700;
-      line-height: normal;
     }
 
     div {
@@ -29,11 +23,7 @@
       gap: 16px;
 
       span {
-        /* Regular - 16 */
-        font-family: Helvetica;
         font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
         line-height: 140%;
       }
       .join_info_div {
@@ -42,7 +32,7 @@
         padding: 0;
         align-self: stretch;
         border-radius: 100px;
-        background: var(--orange, #FF7C00);
+        background: var(--orange, #ff7c00);
       }
       div {
         width: 5px;
@@ -50,17 +40,25 @@
         padding: 0;
         align-self: stretch;
         border-radius: 100px;
-        background: var(--orange, #FF7C00);
+        background: var(--orange, #ff7c00);
       }
     }
     button {
       padding: 14px 36px;
       color: #fff;
       border-radius: 12px;
-      background: var(--blue, #027DDB);
+      background: var(--blue, #027ddb);
       cursor: pointer;
       margin-top: 12px;
     }
+  }
+}
 
+@media (max-width: 768px) {
+  .join {
+    margin-top: 32px;
+    .join_img {
+      display: none;
+    }
   }
 }

@@ -59,7 +59,7 @@ export default function UserWarehousesPage() {
               </div>
               <div>
                 <img
-                  src="/assets/icons/states-of-america.svg"
+                  src="/assets/icons/united-states-of-america.svg"
                   alt="locations"
                 />
                 <span>Штат</span>

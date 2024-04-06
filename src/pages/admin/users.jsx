@@ -1,27 +1,31 @@
-
 import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminUsersPage.module.scss";
 import { Pagination } from "@nextui-org/react";
-import useUsers from "../../hooks/admin/useUsers";
 import Modal from "../../components/shared/Modal";
 import { RxCross2 } from "react-icons/rx";
+import useUsersAdmin from "@/hooks/admin/useUsers";
 
 const PAGE_SIZE = 7;
 
 export default function AdminUsersPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { users, isLoading } = useUsers(currentPage);
+  const { users, isLoading, fetchUsers } = useUsersAdmin(currentPage);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [isLoadingPage, setIsLoadingPage] = useState(false);
 
+  useEffect(() => {
+    setIsLoadingPage(true);
+    fetchUsers(currentPage).then(() => setIsLoadingPage(false));
+  }, [currentPage]);
 
   if (isLoading) {
     return <div>Загрузка...</div>;
   }
 
   return (
-      <div className={s.users_page}>
-        <table>
-          <thead>
+    <div className={s.users_page}>
+      <table>
+        <thead>
           <tr>
             <th>Имя</th>
             <th>Фамилия</th>
@@ -29,71 +33,64 @@ export default function AdminUsersPage() {
             <th>Номер телефона</th>
             <th>Данные ID паспорта</th>
           </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
           {users?.results?.map((user) => (
-              user.id !== 1 && (
-                <tr key={user.id}>
-                  <td>{user.first_name}</td>
-                  <td>{user.last_name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phone_number}</td>
-                  <td>
-                    <button
-                      className={s.btn}
-                      onClick={() => setSelectedUser(user)}
-                    >
-                      Подробнее
-                    </button>
-                  </td>
-                </tr>
-              )
+            <tr key={user.id}>
+              <td>{user.first_name}</td>
+              <td>{user.last_name}</td>
+              <td>{user.email}</td>
+              <td>{user.phone_number}</td>
+              <td>
+                <button className={s.btn} onClick={() => setSelectedUser(user)}>
+                  Подробнее
+                </button>
+              </td>
+            </tr>
           ))}
-          </tbody>
-        </table>
-        {selectedUser && (
-            <div className={s.modal}>
-              <Modal isOpen={selectedUser} onClose={() => setSelectedUser(null)}>
-                <div className={s.modalContent}>
-                  <div className={s.btn_center}>
-                    <button
-                        onClick={() => setSelectedUser(null)}
-                        className={s.close_btn}
-                    >
-                      <RxCross2 size={20} />
-                    </button>
-                  </div>
-                  <h3>Данные ID паспорта</h3>
-                  <div>
+        </tbody>
+      </table>
+      {selectedUser && (
+        <div className={s.modal}>
+          <Modal isOpen={selectedUser} onClose={() => setSelectedUser(null)}>
+            <div className={s.modalContent}>
+              <div className={s.btn_center}>
+                <button
+                  onClick={() => setSelectedUser(null)}
+                  className={s.close_btn}
+                >
+                  <RxCross2 size={20} />
+                </button>
+              </div>
+              <h3>Данные ID паспорта</h3>
+              <div>
+                {selectedUser.front_image && selectedUser.back_image ? (
+                  <>
                     <img
-                        src={
-                          selectedUser
-                              ? `http://18.222.184.72:8000/${selectedUser?.front_image}`
-                              : "assets/images/electronic.png"
-                        }
-                        alt=""
+                      src={`http://18.222.184.72:8000/${selectedUser.front_image}`}
+                      alt=""
                     />
                     <img
-                        src={
-                          selectedUser
-                              ? `http://18.222.184.72:8000/${selectedUser?.back_image}`
-                              : "assets/images/electronic.png"
-                        }
-                        alt=""
+                      src={`http://18.222.184.72:8000/${selectedUser.back_image}`}
+                      alt=""
                     />
-                  </div>
-                </div>
-              </Modal>
+                  </>
+                ) : (
+                  <p>Пользователь не загрузил паспортные данные</p>
+                )}
+              </div>
             </div>
-        )}
-            <div className={s.pagination}>
-              <Pagination
-                 variant="bordered"
-                 total={Math.ceil(users?.count / 10)}
-                 initialPage={1}
-                 onChange={(page) => setCurrentPage(page)}
-             />
-            </div>
+          </Modal>
+        </div>
+      )}
+      <div className={s.pagination}>
+        <Pagination
+          variant="bordered"
+          total={Math.ceil(users.count / PAGE_SIZE)}
+          initialPage={currentPage}
+          onChange={(page) => setCurrentPage(page)}
+        />
       </div>
+    </div>
   );
 }

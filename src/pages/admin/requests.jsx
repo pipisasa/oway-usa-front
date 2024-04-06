@@ -83,8 +83,8 @@ export default function IncommingRequests() {
       <div className={s.pagination}>
         <Pagination
           variant="bordered"
-          total={Math.ceil(data.count / 10)}
-          initialPage={1}
+          total={Math.ceil(data.count / 5)}
+          initialPage={currentPage}
           onChange={(page) => setCurrentPage(page)}
         />
       </div>
