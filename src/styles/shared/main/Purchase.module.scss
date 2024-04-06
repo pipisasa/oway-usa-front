@@ -1,7 +1,6 @@
 .purchase {
   margin-top: 120px;
   gap: 20px;
-
   .button {
     display: flex;
     padding: 14px 36px;
@@ -29,17 +28,14 @@
       background-color: #01579b; /* новый цвет фона при наведении */
     }
   }
-
   .purchase_img {
     position: absolute;
     right: -60px;
     top: -60px;
   }
-
   .purchase_container {
     max-width: 873px;
   }
-
   .purchase_header {
     h1 {
       color: var(--black, #001526);
@@ -61,7 +57,6 @@
 
   .purchase_inner {
     margin-top: 24px;
-
     .purchase_inner_froms {
       display: flex;
       justify-content: space-between;
@@ -160,7 +155,6 @@
         }
       }
     }
-
     .errorr {
       display: flex;
       flex-direction: column;
@@ -190,7 +184,6 @@
         color: red;
       }
     }
-
     .purchase_inner_from {
       display: flex;
       flex-direction: column;
@@ -217,7 +210,6 @@
         }
       }
     }
-
     .error {
       display: flex;
       flex-direction: column;
@@ -248,7 +240,6 @@
         }
       }
     }
-
     .purchase_inner_form {
       display: flex;
       flex-direction: column;
