@@ -1,4 +1,3 @@
-// AdminUsersPage.js
 
 import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminUsersPage.module.scss";
@@ -10,19 +9,9 @@ import { RxCross2 } from "react-icons/rx";
 const PAGE_SIZE = 7;
 
 export default function AdminUsersPage() {
-  const { users, isLoading, fetchUsers } = useUsers();
-  const [selectedUser, setSelectedUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoadingPage, setIsLoadingPage] = useState(false);
-
-  useEffect(() => {
-    fetchUsers(currentPage); // Pass currentPage to fetchUsers
-  }, [currentPage]);
-
-  const handlePaginationChange = (page) => {
-    setIsLoadingPage(true);
-    setCurrentPage(page);
-  };
+  const { users, isLoading } = useUsers(currentPage);
+  const [selectedUser, setSelectedUser] = useState(null);
 
 
   if (isLoading) {
@@ -43,20 +32,22 @@ export default function AdminUsersPage() {
           </thead>
           <tbody>
           {users?.results?.map((user) => (
-              <tr key={user.id}>
-                <td>{user.first_name}</td>
-                <td>{user.last_name}</td>
-                <td>{user.email}</td>
-                <td>{user.phone_number}</td>
-                <td>
-                  <button
+              user.id !== 1 && (
+                <tr key={user.id}>
+                  <td>{user.first_name}</td>
+                  <td>{user.last_name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone_number}</td>
+                  <td>
+                    <button
                       className={s.btn}
                       onClick={() => setSelectedUser(user)}
-                  >
-                    Подробнее
-                  </button>
-                </td>
-              </tr>
+                    >
+                      Подробнее
+                    </button>
+                  </td>
+                </tr>
+              )
           ))}
           </tbody>
         </table>
@@ -95,17 +86,14 @@ export default function AdminUsersPage() {
               </Modal>
             </div>
         )}
-        {users && (
             <div className={s.pagination}>
               <Pagination
-                  variant="bordered"
-                  total={Math.ceil(users.count / PAGE_SIZE)}
-                  currentPage={currentPage}
-                  onChange={handlePaginationChange}
-                  disabled={isLoadingPage}
-              />
+                 variant="bordered"
+                 total={Math.ceil(users?.count / 10)}
+                 initialPage={1}
+                 onChange={(page) => setCurrentPage(page)}
+             />
             </div>
-        )}
       </div>
   );
 }
