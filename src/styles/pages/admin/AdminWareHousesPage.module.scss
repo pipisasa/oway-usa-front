@@ -17,6 +17,7 @@
     justify-content: end;
     margin-top: 20px;
   }
+
   .modal {
     position: fixed;
     top: 0;
@@ -115,13 +116,14 @@
           line-height: 140%;
           padding: 24px;
           text-align: left;
-          border-bottom: 1px solid #a2a2a2;
+          border-bottom: 1px solid #027ddb33;
         }
       }
     }
+
     tbody {
       tr {
-        border-bottom: 1px solid #a2a2a2;
+        border-bottom: 1px solid #027ddb33;
 
         td {
           color: var(--black, #001526);

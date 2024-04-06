@@ -1,9 +1,20 @@
 import React from "react";
 import s from "@/styles/shared/main/CostCalculator.module.scss";
+import { useRouter } from "next/router";
 
 export default function CostCalculator() {
+  const router = useRouter();
+
+  const calcStyle = {};
+  if (router.pathname === "/") {
+    calcStyle.background = "var(--bue_light_2, #fff)";
+    calcStyle.marginTop = "120px";
+  } else if (router.pathname === "/calculator") {
+    calcStyle.background = "var(--bue_light_2, #f7f9fc)";
+  }
+
   return (
-    <div className={s.calc}>
+    <div className={s.calc} style={calcStyle}>
       <div className={`${s.calc_container} container`}>
         <h1>Калькулятор стоимости</h1>
         <div className={s.calc_inner}>

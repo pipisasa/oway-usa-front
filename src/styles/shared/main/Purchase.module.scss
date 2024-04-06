@@ -24,7 +24,6 @@
       color: white;
     }
 
-    /* hover эффект */
     &:hover {
       background-color: #01579b; /* новый цвет фона при наведении */
     }
@@ -35,7 +34,7 @@
     top: -60px;
   }
   .purchase_container {
-    width: 873px;
+    max-width: 873px;
   }
   .purchase_header {
     h1 {
@@ -183,7 +182,6 @@
       }
       p {
         color: red;
-
       }
     }
     .purchase_inner_from {
@@ -268,6 +266,17 @@
           color: red;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .purchase {
+    input {
+      width: 100% !important;
+    }
+    .purchase_img {
+      display: none;
     }
   }
 }
