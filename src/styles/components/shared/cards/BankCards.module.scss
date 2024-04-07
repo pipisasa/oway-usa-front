@@ -54,6 +54,10 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+
+  .mobile_btn {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -61,5 +65,26 @@
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 20px;
+  }
+
+  .card_block {
+    padding: 16px;
+
+    span {
+      font-size: 18px;
+    }
+  }
+
+  .cards_list {
+    .mobile_btn {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      span {
+        font-size: 20px;
+        line-height: 140%;
+      }
+    }
   }
 }
