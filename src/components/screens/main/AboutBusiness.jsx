@@ -1,5 +1,6 @@
 import React from "react";
 import s from "@/styles/screens/main/AboutBusiness.module.scss";
+import { Slider } from "@/components/partials/Slider";
 
 export default function AboutBusiness() {
   return (
@@ -35,33 +36,62 @@ export default function AboutBusiness() {
         </div>
       </div>
       <div className={s.mission_blocks}>
-        <div className={s.mission_block}>
-          <img src="assets/icons/mission_notebook.svg" alt="" />
-          <h3>
-            Привлекательные <br /> цены
-          </h3>
-        </div>
-        <div className={s.mission_block}>
-          <img src="assets/icons/mission_book.svg" alt="" />
-          <h3>
-            Адекватные
-            <br /> сроки
-          </h3>
-        </div>
-        <div className={s.mission_block}>
-          <img src="assets/icons/mission_box.svg" alt="" />
-          <h3>
-            Высочайшую <br />
-            надежность
-          </h3>
-        </div>
-        <div className={s.mission_block}>
-          <img src="assets/icons/mission_box.svg" alt="" />
-          <h3>
-            Высокий уровень
-            <br /> безопасности
-          </h3>
-        </div>
+        <div className={s.mission_block1}>
+            <img src="assets/icons/mission_notebook.svg" alt="" />
+            <h3>
+              Привлекательные <br /> цены
+            </h3>
+          </div>
+          <div className={s.mission_block1}>
+            <img src="assets/icons/mission_book.svg" alt="" />
+            <h3>
+              Адекватные
+              <br /> сроки
+            </h3>
+          </div>
+          <div className={s.mission_block1}>
+            <img src="assets/icons/mission_box.svg" alt="" />
+            <h3>
+              Высочайшую <br />
+              надежность
+            </h3>
+          </div>
+          <div className={s.mission_block1}>
+            <img src="assets/icons/mission_box.svg" alt="" />
+            <h3>
+              Высокий уровень
+              <br /> безопасности
+            </h3>
+          </div>
+        <Slider>
+          <div className={s.mission_block}>
+            <img src="assets/icons/mission_notebook.svg" alt="" />
+            <h3>
+              Привлекательные <br /> цены
+            </h3>
+          </div>
+          <div className={s.mission_block}>
+            <img src="assets/icons/mission_book.svg" alt="" />
+            <h3>
+              Адекватные
+              <br /> сроки
+            </h3>
+          </div>
+          <div className={s.mission_block}>
+            <img src="assets/icons/mission_box.svg" alt="" />
+            <h3>
+              Высочайшую <br />
+              надежность
+            </h3>
+          </div>
+          <div className={s.mission_block}>
+            <img src="assets/icons/mission_box.svg" alt="" />
+            <h3>
+              Высокий уровень
+              <br /> безопасности
+            </h3>
+          </div>
+        </Slider>
       </div>
     </div>
   );

@@ -1,0 +1,46 @@
+// qwe.module.scss
+
+.slider {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 450px; /* Максимальная ширина слайдера */
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .slide {
+    display: none;
+  }
+  
+  .slide.active {
+    display: block;
+  }
+  
+  .indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .indicator {
+    width: 20px;
+    height: 7px;
+    background-color: rgba(2, 125, 219, 0.527);
+    border-radius: 5px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .indicator.active {
+    width: 40px;
+    height: 10px;
+    background-color: #027DDB;
+  }
+
+  @media screen and (min-width: 600px) {
+    .slider {
+        display: none;
+    }
+  }
