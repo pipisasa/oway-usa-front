@@ -3,6 +3,7 @@ import BankCards from "../cards/BankCards";
 import s from "@/styles/components/shared/cards/BankCards.module.scss";
 import useBillingData from "../../../hooks/billing/useBillingData";
 import BankCardsEditModal from "../users/modals/BankCardsEditModal";
+import BankCardsModal from "../users/modals/BankCardsModal";
 
 export default function BankCardsList() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -29,6 +30,10 @@ export default function BankCardsList() {
 
   return (
     <div className={s.cards_list}>
+      <div className={s.mobile_btn}>
+        <span>Оплата</span>
+        <BankCardsModal />
+      </div>
       {billingData?.map((card) => (
         <BankCards
           key={card.id}

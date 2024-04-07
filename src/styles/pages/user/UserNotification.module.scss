@@ -38,6 +38,7 @@
           border-bottom: 3px solid #027ddb;
           width: 100%;
         }
+
         .not_active_tab {
           color: var(--blue, #aed5f3);
           font-size: 14px;
@@ -80,6 +81,7 @@
 @media (max-width: 768px) {
   .notifications_page {
     .notifications_block {
+      padding: 16px;
       .notifications_header {
         flex-direction: column;
 

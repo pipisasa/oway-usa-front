@@ -43,15 +43,15 @@ export default function TrackingPage() {
     <section>
       {!detailedTrackingInfo && (
         <form className={s.tracking_form} onSubmit={handleTrack}>
-          <h3>Введите трек номер для отслеживания доставки</h3>
+          <h3>Введите трак номер для отслеживания доставки</h3>
           <div>
-            <label htmlFor="trackingNumber">Трек-номер</label>
+            <label htmlFor="trackingNumber">Трак-номер</label>
             <input
               type="text"
               id="trackingNumber"
               value={trackingNumber}
               onChange={(e) => setTrackingNumber(e.target.value)}
-              placeholder="Введите трек-номер"
+              placeholder="Введите трак-номер"
               required
             />
           </div>
