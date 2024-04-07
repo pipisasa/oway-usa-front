@@ -19,7 +19,8 @@
     justify-content: space-between;
     margin-bottom: 120px;
 
-    .contact_inner_block {
+    .contact_inner_block,
+    .contact_inner_block1 {
       display: flex;
       width: 427px;
       padding: 24px;
@@ -113,5 +114,10 @@
 @media (max-width: 748px) {
   .contacts {
     margin-top: 32px;
+    .contact_inner{
+      .contact_inner_block{
+        display: none;
+      }
+    }
   }
 }

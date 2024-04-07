@@ -48,7 +48,8 @@
       margin-top: 40px;
       gap: 20px;
 
-      .mission_block {
+      .mission_block,
+      .mission_block1{
         width: 100%;
         padding: 24px;
         border-radius: 16px;
@@ -91,6 +92,10 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      .mission_block1{
+        display: none;
+      }
+    
     }
   }
 }
