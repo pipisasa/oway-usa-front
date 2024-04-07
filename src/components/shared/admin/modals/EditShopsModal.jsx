@@ -8,6 +8,7 @@ import useCountries from "../../../../hooks/admin/useCountries";
 
 export default function EditShopsModal({ isOpen, onClose, shop }) {
     const [name, setName] = useState(shop?.name || "");
+    const [url, setUrl] = useState(shop?.url || "");
     const [category, setCategory] = useState(shop?.category || "");
     const [country, setCountry] = useState(shop?.country || "");
     const [logo, setLogo] = useState(null);
@@ -22,6 +23,7 @@ export default function EditShopsModal({ isOpen, onClose, shop }) {
         try {
             const formData = new FormData();
             formData.append("name", name);
+            formData.append("url", url);
             formData.append("description", description);
             formData.append("country", country?.id);
             formData.append("category", category?.id);
@@ -50,6 +52,16 @@ export default function EditShopsModal({ isOpen, onClose, shop }) {
                                     placeholder="Введите название"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="url">Ссылка сайта</label>
+                                <input
+                                    id="url"
+                                    type="text"
+                                    placeholder="Вставьте ссылку"
+                                    value={url}
+                                    onChange={(e) => setUrl(e.target.value)}
                                 />
                             </div>
 

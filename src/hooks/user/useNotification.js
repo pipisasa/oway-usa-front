@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const useNotification = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +21,7 @@ const useNotification = () => {
         }
         try {
             const response = await axios.get(
-                "http://18.222.184.72:8000/api/notifications/my_notification/",
+                `${API_URL}/api/notifications/my_notification/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`
@@ -40,7 +42,7 @@ const useNotification = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.put(
-                `http://18.222.184.72:8000/api/notifications/check_all/`,
+                `${API_URL}/api/notifications/check_all/`,
                 {},
                 {
                     headers: {

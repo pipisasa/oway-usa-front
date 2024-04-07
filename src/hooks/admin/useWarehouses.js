@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const useWarehouses = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,12 +16,12 @@ const useWarehouses = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://18.222.184.72:8000/api/warehouses/list/",
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+          `${API_URL}/api/warehouses/list/`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
       );
       setWarehouses(response.data);
     } catch (err) {
@@ -34,16 +36,16 @@ const useWarehouses = () => {
   }, []);
 
   const addWarehouses = async (
-    name,
-    address,
-    weight,
-    track_number,
-    price,
-    country,
-    status,
-    image,
-    comments,
-    unique_id_user
+      name,
+      address,
+      weight,
+      track_number,
+      price,
+      country,
+      status,
+      image,
+      comments,
+      unique_id_user
   ) => {
     const accessToken = getCookie("accessToken");
     const formData = new FormData();
@@ -64,14 +66,14 @@ const useWarehouses = () => {
 
     try {
       const response = await axios.post(
-        "http://18.222.184.72:8000/api/warehouses/create/",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
+          `${API_URL}/api/warehouses/create/`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
       );
 
       await fetchWarehouses();
@@ -91,16 +93,16 @@ const useWarehouses = () => {
     try {
       const accessToken = getCookie("accessToken");
       const response = await axios.delete(
-        `http://18.222.184.72:8000/api/warehouses/delete_notification/${productId}/`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+          `${API_URL}/api/warehouses/delete_notification/${productId}/`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
       );
 
       setWarehouses((currentProducts) =>
-        currentProducts.filter((product) => product.id !== productId)
+          currentProducts.filter((product) => product.id !== productId)
       );
       fetchWarehouses();
     } catch (error) {
@@ -117,20 +119,20 @@ const useWarehouses = () => {
     try {
       const accessToken = getCookie("accessToken");
       const response = await axios.patch(
-        `http://18.222.184.72:8000/api/warehouses/update_notification/${productId}/`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+          `${API_URL}/api/warehouses/update_notification/${productId}/`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
       );
       fetchWarehouses();
       const updatedProduct = response.data;
       setWarehouses((currentProducts) =>
-        currentProducts.map((product) =>
-          product.id === productId ? { ...product, ...updatedProduct } : product
-        )
+          currentProducts.map((product) =>
+              product.id === productId ? { ...product, ...updatedProduct } : product
+          )
       );
     } catch (error) {
       setError(error.message);

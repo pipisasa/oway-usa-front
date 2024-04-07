@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const useShops = () => {
     const [error, setError] = useState(null);
@@ -14,16 +15,15 @@ const useShops = () => {
         setError(null);
         try {
             const response = await axios.get(
-                "http://18.222.184.72:8000/api/catalog/sites/list/",
+                `${API_URL}/api/catalog/sites/list/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
                     }
                 }
             );
-            console.log(response.data,"response.data")
+
             setProducts(response.data);
-            console.log(products,"products")
         } catch (err) {
             setError(err.message);
         } finally {
@@ -31,12 +31,11 @@ const useShops = () => {
         }
     };
 
-
     useEffect(() => {
         fetchShops();
     }, []);
 
-    const addShops = async (name,category,country,logo,description) => {
+    const addShops = async (name, category, country, logo, description, url) => {
         const accessToken = getCookie("accessToken");
         const formData = new FormData();
         formData.append("name", name);
@@ -44,6 +43,7 @@ const useShops = () => {
         formData.append("country", country);
         formData.append("logo", logo);
         formData.append("description", description);
+        formData.append("url", url);
 
         setIsLoading(true);
         setError(null);
@@ -51,12 +51,12 @@ const useShops = () => {
 
         try {
             const response = await axios.post(
-                "http://18.222.184.72:8000/api/catalog/sites/create/",
+                `${API_URL}/api/catalog/sites/create/`,
                 formData,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
-                        "Content-Type": "multipart/form-data", // Add this line to specify the content type
+                        "Content-Type": "multipart/form-data",
                     },
                 }
             );
@@ -71,7 +71,6 @@ const useShops = () => {
         }
     };
 
-
     const deleteShops = async (productId) => {
         setIsLoading(true);
         setError(null);
@@ -79,7 +78,7 @@ const useShops = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.delete(
-                `http://18.222.184.72:8000/api/catalog/sites/delete/${productId}/`,
+                `${API_URL}/api/catalog/sites/delete/${productId}/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -88,11 +87,9 @@ const useShops = () => {
             );
 
             setProducts((currentProducts) =>
-                Array.isArray(currentProducts)
-                    ? currentProducts.filter((product) => product.id !== productId)
-                    : []
+                currentProducts.filter((product) => product.id !== productId)
             );
-            fetchShops()
+            fetchShops();
         } catch (error) {
             setError(error.message);
         } finally {
@@ -107,7 +104,7 @@ const useShops = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.patch(
-                `http://18.222.184.72:8000/api/catalog/sites/update/${productId}/`,
+                `${API_URL}/api/catalog/sites/update/${productId}/`,
                 formData,
                 {
                     headers: {
@@ -115,7 +112,7 @@ const useShops = () => {
                     },
                 }
             );
-            fetchShops()
+            fetchShops();
             const updatedProduct = response.data;
             setProducts((currentProducts) =>
                 currentProducts.map((product) =>

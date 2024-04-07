@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const useNotification = () => {
     const [error, setError] = useState(null);
@@ -14,7 +15,7 @@ const useNotification = () => {
         setError(null);
         try {
             const response = await axios.get(
-                "http://18.222.184.72:8000/api/notifications/list/",
+                `${API_URL}/api/notifications/list/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -49,7 +50,7 @@ const useNotification = () => {
 
         try {
             const response = await axios.post(
-                "http://18.222.184.72:8000/api/notifications/create_notification/",
+                `${API_URL}/api/notifications/create_notification/`,
                 formData,
                 {
                     headers: {
@@ -75,7 +76,7 @@ const useNotification = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.delete(
-                `http://18.222.184.72:8000/api/notifications/delete_notification/${productId}/`,
+                `${API_URL}/api/notifications/delete_notification/${productId}/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -101,7 +102,7 @@ const useNotification = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.patch(
-                `http://18.222.184.72:8000/api/notifications/update_notification/${productId}/`,
+                `${API_URL}/api/notifications/update_notification/${productId}/`,
                 formData,
                 {
                     headers: {
