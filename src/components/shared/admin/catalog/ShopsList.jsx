@@ -10,6 +10,7 @@ export default function ShopsList({ selectedCategory, selectedCountry }) {
     const [isEditing, setIsEditing] = useState(false);
     const [selectedNotification, setSelectedNotification] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    console.log(products,"45")
 
 
 

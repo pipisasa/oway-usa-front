@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const useWarehousesUser = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +16,7 @@ const useWarehousesUser = () => {
         setError(null);
         try {
             const response = await axios.get(
-                "http://18.222.184.72:8000/api/warehouses/my/",
+                `${API_URL}/api/warehouses/my/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -54,7 +56,7 @@ const useWarehousesUser = () => {
 
         try {
             const response = await axios.post(
-                "http://18.222.184.72:8000/api/warehouses/create/",
+                `${API_URL}/api/warehouses/create/`,
                 formData,
                 {
                     headers: {
@@ -82,7 +84,7 @@ const useWarehousesUser = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.delete(
-                `http://18.222.184.72:8000/api/warehouses/delete_notification/${productId}/`,
+                `${API_URL}/api/warehouses/delete_notification/${productId}/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -108,7 +110,7 @@ const useWarehousesUser = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.patch(
-                `http://18.222.184.72:8000/api/warehouses/update_notification/${productId}/`,
+                `${API_URL}/api/warehouses/update_notification/${productId}/`,
                 formData,
                 {
                     headers: {

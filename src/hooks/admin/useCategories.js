@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const useCategories = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +14,7 @@ const useCategories = () => {
         setError(null);
         try {
             const response = await axios.get(
-                "http://18.222.184.72:8000/api/categories/list/",
+                `${API_URL}/api/categories/list/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -35,7 +35,7 @@ const useCategories = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.delete(
-                `http://18.222.184.72:8000/api/categories/delete/${productId}/`,
+                `${API_URL}/api/categories/delete/${productId}/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -60,7 +60,7 @@ const useCategories = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.patch(
-                `http://18.222.184.72:8000/api/categories/update/${productId}/`,
+                `${API_URL}/api/categories/update/${productId}/`,
                 formData,
                 {
                     headers: {
@@ -97,7 +97,7 @@ const useCategories = () => {
 
         try {
             const response = await axios.post(
-                "http://18.222.184.72:8000/api/categories/create/",
+                `${API_URL}/api/categories/create/`,
                 formData,
                 {
                     headers: {

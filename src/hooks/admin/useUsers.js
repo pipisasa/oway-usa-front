@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const axiosInstance = axios.create({
-  baseURL: "http://18.222.184.72:8000/api/add_user_for_admin/",
+  baseURL: `${API_URL}/api/add_user_for_admin/`,
   headers: {
     "Content-Type": "multipart/form-data",
   },
@@ -40,14 +41,14 @@ const useUsersAdmin = (currentPage) => {
   }, []);
 
   const addUsers = async (
-    first_name,
-    last_name,
-    email,
-    phone_number,
-    password,
-    password2,
-    front_image,
-    back_image
+      first_name,
+      last_name,
+      email,
+      phone_number,
+      password,
+      password2,
+      front_image,
+      back_image
   ) => {
     const accessToken = getCookie("accessToken");
     const formData = new FormData();

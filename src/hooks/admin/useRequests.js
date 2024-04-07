@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const useRequests = (currentPage) => {
   const [data, setData] = useState({ results: [], count: 0 });
@@ -9,7 +10,7 @@ const useRequests = (currentPage) => {
   useEffect(() => {
     const fetchData = async () => {
       const accessToken = getCookie("accessToken");
-      const url = `http://18.222.184.72:8000/api/purchase/list/?page=${currentPage}`;
+      const url = `${API_URL}/api/purchase/list/?page=${currentPage}`;
       try {
         const response = await fetch(url, {
           headers: {
@@ -37,15 +38,15 @@ const useRequests = (currentPage) => {
     const accessToken = getCookie("accessToken");
     try {
       const response = await fetch(
-        `http://18.222.184.72:8000/api/purchase/update/${id}/`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify(updatedData),
-        }
+          `${API_URL}/api/purchase/update/${id}/`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify(updatedData),
+          }
       );
 
       if (!response.ok) {

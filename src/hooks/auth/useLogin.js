@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { setCookie } from "@/utils/cookieHelpers";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const useLogin = () => {
   const [error, setError] = useState(null);
   const router = useRouter();
@@ -9,14 +11,14 @@ const useLogin = () => {
   const login = async (email, password) => {
     try {
       const response = await fetch(
-        "http://18.222.184.72:8000/api/users/login/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
+          `${API_URL}/api/users/login/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          }
       );
 
       const data = await response.json();
@@ -24,7 +26,7 @@ const useLogin = () => {
       if (response.ok) {
         setCookie("accessToken", data.access);
 
-        if (data.is_admin) {
+        if (data?.is_admin) {
           setCookie("isAdmin", "true");
           router.push("/admin");
         } else {

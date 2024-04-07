@@ -1,7 +1,8 @@
-// useUserData.js
 import axios from 'axios';
 import { getCookie } from '@/utils/cookieHelpers';
 import { useEffect, useState } from 'react';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const useBillingData = () => {
     const [billingData, setBillingData] = useState(null);
@@ -18,7 +19,7 @@ const useBillingData = () => {
 
         try {
             const response = await axios.get(
-                'http://18.222.184.72:8000/api/billing/my_billings/',
+                `${API_URL}/api/billing/my_billings/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -50,7 +51,7 @@ const useBillingData = () => {
 
         try {
             const response = await axios.post(
-                "http://18.222.184.72:8000/api/billing/add/",
+                `${API_URL}/api/billing/add/`,
                 {
                     number,
                     end_date,
@@ -78,7 +79,7 @@ const useBillingData = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.delete(
-                `http://18.222.184.72:8000/api/billing/delete/${productId}/`,
+                `${API_URL}/api/billing/delete/${productId}/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -103,7 +104,7 @@ const useBillingData = () => {
         try {
             const accessToken = getCookie("accessToken");
             const response = await axios.patch(
-                `http://18.222.184.72:8000/api/billing/update/${productId}/`,
+                `${API_URL}/api/billing/update/${productId}/`,
                 formData,
                 {
                     headers: {
