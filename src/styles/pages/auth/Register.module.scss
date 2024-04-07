@@ -15,7 +15,6 @@
     right: -140px;
     top: 50%; /* Устанавливаем начальную точку на середину по вертикали */
     transform: translateY(-50%); /* Смещаем элемент на 50% его высоты вверх */
-    display: none;
   }
 
   .left_img {
@@ -26,7 +25,6 @@
     left: -150px;
     top: 50%; /* Устанавливаем начальную точку на середину по вертикали */
     transform: translateY(-50%); /* Смещаем элемент на 50% его высоты вверх */
-    display: none;
   }
 
   h1 {
@@ -114,7 +112,7 @@
             border: 1px solid var(--gray, #a4a4a4);
           }
           .error {
-            color:red
+            color: red;
           }
         }
       }
@@ -139,6 +137,28 @@
           gap: 14px;
           width: 350px;
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .register_page {
+    .right_img {
+      display: none;
+    }
+
+    .left_img {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .register_page {
+    section {
+      .register_form {
+        width: 100%;
       }
     }
   }

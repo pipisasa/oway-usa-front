@@ -17,7 +17,6 @@
     flex-shrink: 0;
     position: absolute;
     right: -140px;
-    display: none;
   }
 
   .left_img {
@@ -26,7 +25,6 @@
     flex-shrink: 0;
     position: absolute;
     left: -150px;
-    display: none;
   }
 
   h1 {
@@ -165,4 +163,23 @@
   padding: 12px 20px;
   border-radius: 10px;
   margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .login_page {
+    .right_img {
+      display: none;
+    }
+
+    .left_img {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .login_section {
+    width: 100%;
+    padding: 0 20px;
+  }
 }
