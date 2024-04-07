@@ -58,3 +58,19 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column-reverse;
+
+    .user_code {
+      width: 100%;
+      padding: 16px;
+    }
+
+    .settings {
+      width: 100%;
+      padding: 16px;
+    }
+  }
+}

@@ -7,6 +7,8 @@
   justify-content: space-between;
   gap: 20px;
   
+  width: 100%;
+
   div {
     display: flex;
     gap: 10px;
@@ -18,7 +20,8 @@
       align-items: center;
       gap: 10px;
       border-radius: 5px;
-      background: var(--bg_red, #FFE7E7);
+      background: var(--bg_red, #ffe7e7);
+
       img {
         width: 12px;
         height: 12px;
@@ -32,7 +35,8 @@
       align-items: center;
       gap: 10px;
       border-radius: 5px;
-      background: var(--blue_light_3, #E7EFFF);
+      background: var(--blue_light_3, #e7efff);
+
       img {
         width: 12px;
         height: 12px;
@@ -40,9 +44,7 @@
     }
   }
 
-
   span {
-    width: 322px;
     color: var(--black, #001526);
     font-size: 24px;
     line-height: 140%;
@@ -53,4 +55,37 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+
+  .mobile_btn {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards_list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+
+  .card_block {
+    padding: 16px;
+
+    span {
+      font-size: 18px;
+    }
+  }
+
+  .cards_list {
+    .mobile_btn {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      span {
+        font-size: 20px;
+        line-height: 140%;
+      }
+    }
+  }
 }

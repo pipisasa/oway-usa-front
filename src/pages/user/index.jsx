@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import s from "@/styles/pages/user/UserMain.module.scss";
 import OnTheWay from "@/components/shared/users/tabs/OnTheWay";
 import TableTabs from "@/components/shared/users/tabs/TableTabs";
-import ReadyIssued from "@/components/shared/users/tabs/ReadyIssued";
 import Delivered from "@/components/shared/users/tabs/Delivered";
 import useUserData from "@/hooks/user/useUserData";
 
@@ -27,16 +26,24 @@ export default function UserMainPage() {
               {userData?.last_name} {userData?.first_name}
             </h2>
             <div>
-              <p>{userData?.phone_number}</p>
-              <p>{userData?.email}</p>
-              <p>{userData?.address}</p>
+              <p>
+                <img src="/assets/icons/phone-call.svg" alt="phone number" />
+                {userData?.phone_number}
+              </p>
+              <p>
+                <img src="/assets/icons/email.svg" alt="email" />
+                {userData?.email}
+              </p>
+              <p>
+                <img src="/assets/icons/locations.svg" alt="address" />
+                {userData?.address}
+              </p>
             </div>
           </>
         )}
       </div>
       <TableTabs onTabClick={handleTabClick} activeTab={activeTab} />
       {activeTab === "onTheWay" && <OnTheWay />}
-      {/* {activeTab === "readyIssued" && <ReadyIssued />} */}
       {activeTab === "delivered" && <Delivered />}
     </section>
   );
