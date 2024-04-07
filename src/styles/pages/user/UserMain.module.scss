@@ -5,7 +5,7 @@
 
   .user_info {
     display: flex;
-    width: 1096px;
+    max-width: 1096px;
     padding: 24px;
     flex-direction: column;
     align-items: flex-start;
@@ -25,6 +25,15 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--black, #001526);
+      font-size: 18px;
+      line-height: 140%;
     }
   }
 }

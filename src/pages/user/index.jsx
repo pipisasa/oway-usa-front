@@ -27,9 +27,18 @@ export default function UserMainPage() {
               {userData?.last_name} {userData?.first_name}
             </h2>
             <div>
-              <p>{userData?.phone_number}</p>
-              <p>{userData?.email}</p>
-              <p>{userData?.address}</p>
+              <p>
+                <img src="/assets/icons/phone-call.svg" alt="phone number" />
+                {userData?.phone_number}
+              </p>
+              <p>
+                <img src="/assets/icons/email.svg" alt="email" />
+                {userData?.email}
+              </p>
+              <p>
+                <img src="/assets/icons/locations.svg" alt="address" />
+                {userData?.address}
+              </p>
             </div>
           </>
         )}
