@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
 import useShops from "../../../../hooks/admin/useShops";
+import useCategories from "@/hooks/admin/useCategories";
+import useCountries from "@/hooks/admin/useCountries";
 
 export default function AddShopsModal() {
   const [name, setName] = useState("");
@@ -11,6 +13,8 @@ export default function AddShopsModal() {
   const [description, setDescription] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
+  const {categories} = useCategories()
+  const {countries} = useCountries()
   const {addShops} = useShops()
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -66,7 +70,9 @@ export default function AddShopsModal() {
                       onChange={(e) => setCategory(e.target.value)}
                   >
                     <option value="">Выберите категорию</option>
-                    <option value="2">Автозапчасти</option>
+                    {categories.map((category) => (
+                         <option key={category.id} value={category.id}>{category.name}</option>
+                     ))}
                   </select>
                 </div>
 
@@ -80,7 +86,9 @@ export default function AddShopsModal() {
                       onChange={(e) => setCountry(e.target.value)}
                   >
                     <option value="">Выберите страну</option>
-                    <option value="2">Турция</option>
+                    {countries.map((country) => (
+                         <option key={country.id} value={country.id}>{country.name}</option>
+                     ))}
                   </select>
                 </div>
               </div>
