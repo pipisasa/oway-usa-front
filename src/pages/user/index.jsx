@@ -45,7 +45,7 @@ export default function UserMainPage() {
       </div>
       <TableTabs onTabClick={handleTabClick} activeTab={activeTab} />
       {activeTab === "onTheWay" && <OnTheWay />}
-      {activeTab === "readyIssued" && <ReadyIssued />}
+      {/* {activeTab === "readyIssued" && <ReadyIssued />} */}
       {activeTab === "delivered" && <Delivered />}
     </section>
   );
