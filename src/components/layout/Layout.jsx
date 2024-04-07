@@ -46,7 +46,7 @@ export default function Layout({ children }) {
 
   return (
     <>
-      {!isHomePage && <Header />}
+      <Header />
       <main>{children}</main>
       <Footer />
     </>
