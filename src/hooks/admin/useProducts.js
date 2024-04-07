@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const useProducts = () => {
   const [error, setError] = useState(null);
@@ -12,7 +13,7 @@ const useProducts = () => {
     setError(null);
     try {
       const response = await fetch(
-        "http://18.222.184.72:8000/api/products/list/"
+          `${API_URL}/api/products/list/`
       );
       if (!response.ok)
         throw new Error("Не удалось загрузить список продуктов");
@@ -42,14 +43,14 @@ const useProducts = () => {
 
     try {
       const response = await fetch(
-        "http://18.222.184.72:8000/api/products/add/",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: formData,
-        }
+          `${API_URL}/api/products/add/`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            body: formData,
+          }
       );
 
       if (!response.ok) {
@@ -73,13 +74,13 @@ const useProducts = () => {
     try {
       const accessToken = getCookie("accessToken");
       const response = await fetch(
-        `http://18.222.184.72:8000/api/products/delete_update/${productId}/`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+          `${API_URL}/api/products/delete_update/${productId}/`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
       );
 
       if (!response.ok) {
@@ -87,7 +88,7 @@ const useProducts = () => {
       }
 
       setProducts((currentProducts) =>
-        currentProducts.filter((product) => product.id !== productId)
+          currentProducts.filter((product) => product.id !== productId)
       );
     } catch (error) {
       setError(error.message);
@@ -103,14 +104,14 @@ const useProducts = () => {
     try {
       const accessToken = getCookie("accessToken");
       const response = await fetch(
-        `http://18.222.184.72:8000/api/products/delete_update/${productId}/`,
-        {
-          method: "PATCH",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: formData,
-        }
+          `${API_URL}/api/products/delete_update/${productId}/`,
+          {
+            method: "PATCH",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            body: formData,
+          }
       );
 
       if (!response.ok) {
@@ -119,9 +120,9 @@ const useProducts = () => {
 
       const updatedProduct = await response.json();
       setProducts((currentProducts) =>
-        currentProducts.map((product) =>
-          product.id === productId ? { ...product, ...updatedProduct } : product
-        )
+          currentProducts.map((product) =>
+              product.id === productId ? { ...product, ...updatedProduct } : product
+          )
       );
     } catch (error) {
       setError(error.message);

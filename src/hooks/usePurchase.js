@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const usePurchase = () => {
   const initialState = {
     full_name: "",
@@ -39,7 +41,7 @@ const usePurchase = () => {
 
     try {
       const response = await fetch(
-          "http://18.222.184.72:8000/api/purchase/add/",
+          `${API_URL}/api/purchase/add/`,
           {
             method: "POST",
             body: formData,

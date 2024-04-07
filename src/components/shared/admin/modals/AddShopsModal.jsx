@@ -11,6 +11,8 @@ export default function AddShopsModal() {
   const [country, setCountry] = useState("");
   const [logo, setLogo] = useState(null);
   const [description, setDescription] = useState("");
+  const [url, setUrl] = useState("");
+
   const [isOpen, setIsOpen] = useState(false);
 
   const {categories} = useCategories()
@@ -23,8 +25,8 @@ export default function AddShopsModal() {
     e.preventDefault();
 
     try {
-      await addShops(name,category,country,logo,description);
-      toggleModal(); // закрыть модальное окно после успешного добавления
+      await addShops(name,category,country,logo,description, url);
+      toggleModal();
     } catch (error) {
       console.error("Ошибка при добавлении сайта:", error);
     }
@@ -50,16 +52,16 @@ export default function AddShopsModal() {
                       onChange={(e) => setName(e.target.value)}
                   />
                 </div>
-                {/*<div>*/}
-                {/*  <label htmlFor="link">Ссылка сайта</label>*/}
-                {/*  <input*/}
-                {/*      id="link"*/}
-                {/*      type="text"*/}
-                {/*      placeholder="Вставьте ссылку"*/}
-                {/*      value={link}*/}
-                {/*      onChange={(e) => setLink(e.target.value)}*/}
-                {/*  />*/}
-                {/*</div>*/}
+                <div>
+                  <label htmlFor="url">Ссылка сайта</label>
+                  <input
+                      id="url"
+                      type="text"
+                      placeholder="Вставьте ссылку"
+                      value={url}
+                      onChange={(e) => setUrl(e.target.value)}
+                  />
+                </div>
 
                 <div>
                   <label htmlFor="category">Категория</label>

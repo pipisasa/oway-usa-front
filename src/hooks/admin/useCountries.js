@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const useCountries = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +14,7 @@ const useCountries = () => {
         setError(null);
         try {
             const response = await axios.get(
-                "http://18.222.184.72:8000/api/countries/list/",
+                `${API_URL}/api/countries/list/`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,

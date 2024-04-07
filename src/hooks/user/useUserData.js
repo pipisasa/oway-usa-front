@@ -1,6 +1,8 @@
 import { getCookie } from "@/utils/cookieHelpers";
 import { useEffect, useState } from "react";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const useUserData = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,12 +19,12 @@ const useUserData = () => {
 
       try {
         const response = await fetch(
-          "http://18.222.184.72:8000/api/users/profile/",
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
+            `${API_URL}/api/users/profile/`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
         );
 
         if (!response.ok) {
@@ -59,12 +61,12 @@ const useUserData = () => {
 
     try {
       const response = await fetch(
-        "http://18.222.184.72:8000/api/users/profile/",
-        {
-          method: "PATCH",
-          headers,
-          body: data,
-        }
+          `${API_URL}/api/users/profile/`,
+          {
+            method: "PATCH",
+            headers,
+            body: data,
+          }
       );
 
       if (!response.ok) {
