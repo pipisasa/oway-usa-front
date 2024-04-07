@@ -5,13 +5,14 @@ import ShopsList from "@/components/shared/admin/catalog/ShopsList";
 import s from "@/styles/pages/admin/AdminShops.module.scss";
 
 export default function AdminShopsPage() {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCountry, setSelectedCountry] = useState(null);
   return (
     <div>
-      <CountryTabs />
+      <CountryTabs setSelectedCountry={setSelectedCountry}/>
       <section className={s.shops_block}>
         <ShopsCategory setSelectedCategory={setSelectedCategory} />
-        <ShopsList selectedCategory={selectedCategory}/>
+        <ShopsList selectedCategory={selectedCategory} selectedCountry={selectedCountry}/>
       </section>
     </div>
   );

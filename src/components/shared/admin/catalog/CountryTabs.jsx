@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import s from "@/styles/admin/CountryTabs.module.scss";
 import useCountries from "../../../../hooks/admin/useCountries";
 
-export default function CountryTabs() {
+export default function CountryTabs({ setSelectedCountry }) {
   const [activeTab, setActiveTab] = useState("Все");
   const {countries} = useCountries()
+
+    const handleTabClick = (country) => {
+    setActiveTab(country.name);
+    setSelectedCountry(country); // Установите выбранную страну
+  };
 
   return (
     <div className={s.tabs}>
@@ -18,7 +23,7 @@ export default function CountryTabs() {
             <button
                 key={country.id}
                 className={activeTab === country.name ? s.active : ""}
-                onClick={() => setActiveTab(country.name)}
+                 onClick={() => handleTabClick(country)}
             >
                 <img width={16} height={16} src={country.icon} alt={country.name} />
                 {country.name}
