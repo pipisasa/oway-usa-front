@@ -106,6 +106,17 @@
             margin-top: 20px;
           }
         }
+
+        .select {
+          select {
+            border-radius: 8px;
+            border: 1px solid var(--blue_light, #aed5f3);
+            padding: 12px 20px;
+            background: var(--white, #fff);
+            width: 100%;
+            font-size: 14px;
+          }
+        }
       }
       .calc_inner_infos {
         display: flex;
