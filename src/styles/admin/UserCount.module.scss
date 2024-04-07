@@ -1,0 +1,48 @@
+.chart_section {
+  min-width: 500px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: var(--Colors-Grey-White, #fff);
+
+  .title {
+    color: var(--black, #001526);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    padding-bottom: 16px;
+  }
+
+  .line {
+    height: 1px;
+    width: 100%;
+    border-bottom: 1px solid var(--blue_light_3, #e7efff);
+  }
+
+  .chart_nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+
+    .percentage {
+      span {
+        color: var(--blue, #027ddb);
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 140%;
+      }
+    }
+
+    .date_btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      button {
+        color: var(--main-grey, #5f6c86);
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+}
