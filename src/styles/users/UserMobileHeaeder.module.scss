@@ -1,10 +1,24 @@
 .container {
-  padding: 16px 20px;
+  background: #f7f9fc;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 200vh;
+
+  .pages_container {
+    padding: 16px 20px;
+    margin-top: 75px;
+  }
 
   .header_container {
+    padding: 16px 20px;
     display: flex;
     flex-direction: column;
     gap: 48px;
+    position: fixed;
+    background: #f7f9fc;
+    width: 100%;
+    z-index: 100;
   }
 
   header {
@@ -34,6 +48,11 @@
 
   .nav {
     height: 100vh;
+    position: fixed;
+    background-color: #f7f9fc;
+    top: 80px;
+    width: 93%;
+
     ul {
       display: flex;
       flex-direction: column;

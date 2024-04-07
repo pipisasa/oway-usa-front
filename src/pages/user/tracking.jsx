@@ -41,7 +41,7 @@ export default function TrackingPage() {
 
   return (
     <section>
-      {!detailedTrackingInfo && ( // Условный рендеринг формы
+      {!detailedTrackingInfo && (
         <form className={s.tracking_form} onSubmit={handleTrack}>
           <h3>Введите трек номер для отслеживания доставки</h3>
           <div>
@@ -80,6 +80,12 @@ export default function TrackingPage() {
                       <span>{event.sourceCode}</span>
                       {event.status}
                     </p>
+                    <div className={s.mobile_time}>
+                      <h5>{new Date(event.datetime).toLocaleDateString()}</h5>
+                      <span>
+                        {new Date(event.datetime).toLocaleTimeString()}
+                      </span>
+                    </div>
                   </div>
                 </div>
               )

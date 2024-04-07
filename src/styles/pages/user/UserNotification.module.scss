@@ -65,3 +65,28 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .notifications_page {
+    display: flex;
+    flex-direction: column;
+
+    .notifications_block {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .notifications_page {
+    .notifications_block {
+      .notifications_header {
+        flex-direction: column;
+
+        .check_all_notif {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
