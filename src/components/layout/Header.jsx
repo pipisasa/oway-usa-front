@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import s from "@/styles/components/layout/Header.module.scss";
 import { useRouter } from "next/router";
 import { getCookie } from "@/utils/cookieHelpers";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 
 const links = [
   { href: "/", label: "Главная" },
@@ -18,6 +18,23 @@ const links = [
 export default function Header() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isOpen, setisOpen] = useState(false);
+
+  const handleOpen = () => {
+    setisOpen(!isOpen);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     const token = getCookie("accessToken");
@@ -27,7 +44,7 @@ export default function Header() {
   }, []);
 
   return (
-    <div className={s.header_back}>
+    <div className="">
       <header className={`${s.header} container`}>
         <div>
           <img
@@ -79,11 +96,24 @@ export default function Header() {
           </div>
         )}
         <div className={s.burger_menu}>
-          <button>
-            <RxHamburgerMenu size={25} />
+          <button onClick={handleOpen}>
+            {isOpen ? <RxCross2 size={25} /> : <RxHamburgerMenu size={25} />}
           </button>
         </div>
       </header>
+      {isOpen ? (
+        <div className={s.mobile}>
+          <nav>
+            <ul>
+              {links.map((link) => (
+                <li onClick={handleOpen} key={link.href}>
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      ) : null}
     </div>
   );
 }
