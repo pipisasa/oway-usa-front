@@ -5,16 +5,16 @@ import useWarehousesUser from "@/hooks/user/useWarehousesUser";
 import OnTheWayModal from "../../admin/modals/OnTheWayModal";
 
 export default function OnTheWay() {
-  const {warehouses} = useWarehousesUser()
-    const [isModalVisible, setIsModalVisible] = useState(false);
+  const { warehouses } = useWarehousesUser();
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
 
   const handleOpenModal = (item) => {
     setCurrentRequestData(item);
     setIsModalVisible(true);
   };
-  
-  const is_paid = true
+
+  const is_paid = true;
   return (
     <div className={s.product_table}>
       {isModalVisible && (
@@ -35,10 +35,14 @@ export default function OnTheWay() {
           </tr>
         </thead>
         <tbody>
-         {warehouses?.results?.map((item, index) => (
+          {warehouses?.results?.map((item, index) => (
             <tr key={index}>
               <td>
-                <img width={64} src={`http://18.222.184.72:8000/${item.image}`} alt="product img" />
+                <img
+                  width={64}
+                  src={`http://18.222.184.72:8000/${item.image}`}
+                  alt="product img"
+                />
               </td>
               <td>{item.name}</td>
               <td>{item.price}</td>
@@ -52,9 +56,7 @@ export default function OnTheWay() {
               </td>
               <td>{item.status.name}</td>
               <td>
-                <button
-                  onClick={() => handleOpenModal(item)}
-                >
+                <button onClick={() => handleOpenModal(item)}>
                   <img width={36} src="/assets/icons/icon.svg" alt="more" />
                 </button>
               </td>

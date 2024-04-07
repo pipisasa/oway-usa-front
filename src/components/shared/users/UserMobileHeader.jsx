@@ -96,6 +96,7 @@ export default function UserMobileHeader({ children }) {
                 <li
                   className={isActive(link.href) ? s.active : ""}
                   key={link.href}
+                  onClick={toggleNav}
                 >
                   <img
                     className={isActive(link.href) ? s.active_icon : ""}
@@ -110,7 +111,7 @@ export default function UserMobileHeader({ children }) {
         ) : null}
       </div>
 
-      <main>{children}</main>
+      <main className={s.pages_container}>{children}</main>
     </div>
   );
 }

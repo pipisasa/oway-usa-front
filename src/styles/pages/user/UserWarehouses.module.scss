@@ -69,3 +69,9 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .warehouse_page {
+    flex-direction: column;
+  }
+}

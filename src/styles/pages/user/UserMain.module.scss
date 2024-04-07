@@ -37,3 +37,16 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .user_page {
+    .user_info {
+      div {
+        display: flex;
+        align-items: start;
+        gap: 12px;
+        flex-direction: column !important;
+      }
+    }
+  }
+}
