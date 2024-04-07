@@ -35,7 +35,8 @@ export default function AdminUsersPage() {
           </tr>
         </thead>
         <tbody>
-          {users?.results?.map((user) => (
+          {users?.results?.filter((item) => item.id !== 1)
+          .map((user) => (
             <tr key={user.id}>
               <td>{user.first_name}</td>
               <td>{user.last_name}</td>

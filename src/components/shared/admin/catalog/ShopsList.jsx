@@ -5,7 +5,7 @@ import useShops from "../../../../hooks/admin/useShops";
 import EditShopsModal from "../modals/EditShopsModal";
 
 
-export default function ShopsList({ selectedCategory }) {
+export default function ShopsList({ selectedCategory, selectedCountry }) {
     const {products, isLoading, deleteShops, updateShops} = useShops()
     const [isEditing, setIsEditing] = useState(false);
     const [selectedNotification, setSelectedNotification] = useState(null);
@@ -47,9 +47,11 @@ export default function ShopsList({ selectedCategory }) {
     return (
       <section className={s.cards_list}>
           {products?.results
-              ?.filter((shop) =>
-                  selectedCategory ? shop.category.id === selectedCategory.id : true
-              )
+              ?.filter(
+          (shop) =>
+            (!selectedCategory || shop.category.id === selectedCategory.id) &&
+            (!selectedCountry || shop.country.name === selectedCountry.name) // Фильтрация по стране
+        )
               .map((shop, index) => (
                   <ShopCard key={index} shop={shop} onDelete={handleDelete} onEdit={handleUpdate} />
               ))}

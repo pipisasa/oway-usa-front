@@ -4,6 +4,7 @@ import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import Modal from "@/components/shared/Modal";
 import { Switch } from "@nextui-org/react";
 import useWarehouses from "../../../../hooks/admin/useWarehouses";
+import useCountries from "@/hooks/admin/useCountries";
 
 export default function WarehouseProductsModal() {
     const { addWarehouses } = useWarehouses();
@@ -23,7 +24,7 @@ export default function WarehouseProductsModal() {
     });
 
     const toggleModal = () => setIsOpen(!isOpen);
-
+    const {countries} = useCountries()
     const nextStep = () => {
         setCurrentStep(currentStep + 1);
     };
@@ -82,6 +83,7 @@ export default function WarehouseProductsModal() {
                         handleChange={handleChange}
                         handleImageChange={handleImageChange}
                         nextStep={nextStep}
+                        countries={countries}
                     />
                 );
             case 2:
@@ -118,7 +120,7 @@ export default function WarehouseProductsModal() {
     );
 }
 
-const Step1 = ({ formData, handleChange, handleImageChange, nextStep }) => (
+const Step1 = ({ formData, handleChange, handleImageChange, nextStep, countries }) => (
     <div className={c.step}>
         <div className={c.steps_progress}>
             <img src="/assets/images/step1.svg" alt="step 1" />
@@ -165,7 +167,9 @@ const Step1 = ({ formData, handleChange, handleImageChange, nextStep }) => (
                         onChange={handleChange}
                     >
                         <option value="">Выберите страну</option>
-                        <option value="1">США</option>
+                        {countries?.map((country) => (
+                         <option key={country.id} value={country.id}>{country.name}</option>
+                     ))}
                     </select>
                 </div>
                 <div>
