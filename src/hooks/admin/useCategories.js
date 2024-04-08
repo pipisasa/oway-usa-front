@@ -123,6 +123,7 @@ const useCategories = () => {
         deleteCategories,
         updateCategories,
         error,
+        setCategories,
         isLoading,
     };
 };

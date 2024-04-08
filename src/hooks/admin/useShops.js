@@ -3,19 +3,25 @@ import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const useShops = () => {
+const useShops = (selectedCategory) => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [products, setProducts] = useState([]);
+    const filtercategory = 2
 
-    const fetchShops = async () => {
+
+    useEffect(() => {
+        fetchShops(selectedCategory);
+    }, [selectedCategory]);
+
+    const fetchShops = async (selectedCategory) => {
         const accessToken = getCookie("accessToken");
         setIsLoading(true);
         setError(null);
         try {
             const response = await axios.get(
-                `${API_URL}/api/catalog/sites/list/`,
+                `${API_URL}/api/catalog/sites/list/${selectedCategory ? `?category=${selectedCategory}` : ""}`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -130,6 +136,7 @@ const useShops = () => {
         products,
         addShops,
         deleteShops,
+        fetchShops,
         updateShops,
         error,
         isLoading,

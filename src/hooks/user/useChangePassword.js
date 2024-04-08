@@ -4,28 +4,21 @@ import { getCookie } from "../../utils/cookieHelpers";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const useBillingAdd = () => {
+ const useChangePassword = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const billingAdd = async ({ number, end_date, full_name, cvv }) => {
+    const changePass = async ({ old_password, new_password, confirm_new_password }) => {
         setIsLoading(true);
         setError(null);
         const accessToken = getCookie('accessToken');
-        if (!accessToken) {
-            setError('No access token found');
-            setIsLoading(false);
-            return;
-        }
-
         try {
             const response = await axios.post(
-                `${API_URL}/api/billing/add/`,
+                `${API_URL}/api/users/change_password/`,
                 {
-                    number,
-                    end_date,
-                    full_name,
-                    cvv
+                    old_password,
+                    new_password,
+                    confirm_new_password,
                 },
                 {
                     headers: {
@@ -43,5 +36,6 @@ export const useBillingAdd = () => {
     };
 
 
-    return { billingAdd, isLoading, error };
+    return { changePass, isLoading, error };
 };
+export default useChangePassword

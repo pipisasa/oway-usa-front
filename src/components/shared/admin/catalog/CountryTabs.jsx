@@ -7,9 +7,9 @@ export default function CountryTabs({ setSelectedCountry }) {
   const {countries} = useCountries()
 
     const handleTabClick = (country) => {
-    setActiveTab(country.name);
-    setSelectedCountry(country); // Установите выбранную страну
-  };
+        setActiveTab(country === "Все" ? "" : country.name);
+        setSelectedCountry(country === "Все" ? null : country);
+    };
 
   return (
     <div className={s.tabs}>
