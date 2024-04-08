@@ -64,6 +64,11 @@ const useBillingData = () => {
                     },
                 }
             );
+            console.log("Response:", response.data);
+            setBillingData(prevData => {
+                console.log("Previous Data:", prevData); // Log the previous data
+                return [...prevData, response.data]; // Update the billingData state
+            });
             fetchUserData();
         } catch (error) {
             console.error("Ошибка:", error?.response?.data);

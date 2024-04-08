@@ -2,17 +2,18 @@ import React, { useEffect } from "react";
 import s from "@/styles/pages/auth/Register.module.scss";
 import { useRouter } from "next/router";
 import useActivation from "../../hooks/auth/useActivation";
-import { useRef } from "react";
+import { useMemo } from "react";
 
 function useRefs(length) {
-  const refs = useRef([]);
-  useEffect(() => {
-    refs.current = refs.current
-      .slice(0, length)
-      .map((_, i) => refs.current[i] || React.createRef());
+  const refs = useMemo(() => {
+    const refsArray = [];
+    for (let i = 0; i < length; i++) {
+      refsArray.push(React.createRef());
+    }
+    return refsArray;
   }, [length]);
 
-  return refs.current;
+  return refs;
 }
 
 export default function AccountActivation({ onSubmit }) {
@@ -91,7 +92,7 @@ export default function AccountActivation({ onSubmit }) {
           </form>
         </>
       </section>
-      <img className={s.right_img} src="/assets/images/39.png" alt="" 
+      <img className={s.right_img} src="/assets/images/39.png" alt=""
       data-aos="fade-left"
       data-aos-anchor="#example-anchor"
       data-aos-offset="500"
