@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import s from "@/styles/pages/auth/Register.module.scss";
 import { useRouter } from "next/router";
 import useActivation from "../../hooks/auth/useActivation";

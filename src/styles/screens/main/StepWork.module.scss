@@ -29,7 +29,7 @@
 
     .step_blocks {
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       margin-top: 40px;
 
       .step_block {
@@ -65,7 +65,7 @@
     }
     .step_blocksa {
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       margin-top: 40px;
 
       .step_block {
@@ -101,7 +101,7 @@
     }
     .step_blocks1 {
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       position: relative;
       .step_span {
         color: var(--black, #001526);
@@ -136,7 +136,7 @@
     }
     .step_blocks3 {
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
       position: relative;
       .step_span {
         color: var(--black, #001526);
@@ -170,7 +170,7 @@
     }
     .step_blocks5 {
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       position: relative;
       .step_span {
         color: var(--black, #001526);
