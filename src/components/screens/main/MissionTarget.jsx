@@ -5,7 +5,7 @@ import Button from "../../partials/Button";
 export default function MissionTarget() {
   return (
     <div className={`${s.join} container`}>
-      <div className={s.join_info}>
+      <div className={s.join_info} data-aos="zoom-out-right">
         <p>Наша цель</p>
         <h1>
           В визионерном заявлении мы стремимся стать самой ориентированной на
@@ -23,7 +23,7 @@ export default function MissionTarget() {
         </div>
         <Button button="Закупиться" />
       </div>
-      <div className={s.join_img}>
+      <div className={s.join_img} data-aos="zoom-out-left">
         <img src="assets/images/house.png" alt="" />
       </div>
     </div>

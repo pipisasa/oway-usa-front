@@ -47,7 +47,7 @@ export default function MoreInfo(props) {
             </span>
           </div>
         </div>
-        <div className={s.info_img}>
+        <div className={s.info_img} data-aos="zoom-in-up">
           <img
             src="assets/images/info_box.png"
             width={548}

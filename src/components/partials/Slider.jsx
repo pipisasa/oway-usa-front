@@ -41,6 +41,7 @@ export const Slider = ({ children }) => {
     onTouchStart={handleTouchStart}
     onTouchMove={handleTouchMove}
     onTouchEnd={handleTouchEnd}
+    data-aos="fade-up-right"
     >
       {children[currentIndex]}
       <div className={s.indicators}>

@@ -18,7 +18,7 @@ export default function About() {
           </div>
         </div>
         <Button button="Закупиться" />
-        <div className={s.heroSection_img1}>
+        <div className={s.heroSection_img1} data-aos="zoom-out-left">
           <img
             src="assets/images/teleshkaOrange.png"
             width={537}
