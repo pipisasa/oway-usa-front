@@ -45,7 +45,11 @@ const useWarehouses = () => {
       status,
       image,
       comments,
-      unique_id_user
+      unique_id_user,
+      url,
+      color,
+      count,
+      articul
   ) => {
     const accessToken = getCookie("accessToken");
     const formData = new FormData();
@@ -59,6 +63,10 @@ const useWarehouses = () => {
     formData.append("image", image);
     formData.append("comments", comments);
     formData.append("unique_id_user", unique_id_user);
+    formData.append("url", url);
+    formData.append("color", color);
+    formData.append("count", count);
+    formData.append("articul", articul);
 
     setIsLoading(true);
     setError(null);
@@ -86,66 +94,9 @@ const useWarehouses = () => {
     }
   };
 
-  const deleteWarehouses = async (productId) => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const accessToken = getCookie("accessToken");
-      const response = await axios.delete(
-          `${API_URL}/api/warehouses/delete_notification/${productId}/`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-      );
-
-      setWarehouses((currentProducts) =>
-          currentProducts.filter((product) => product.id !== productId)
-      );
-      fetchWarehouses();
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const updateWarehouses = async (productId, formData) => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const accessToken = getCookie("accessToken");
-      const response = await axios.patch(
-          `${API_URL}/api/warehouses/update_notification/${productId}/`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-      );
-      fetchWarehouses();
-      const updatedProduct = response.data;
-      setWarehouses((currentProducts) =>
-          currentProducts.map((product) =>
-              product.id === productId ? { ...product, ...updatedProduct } : product
-          )
-      );
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return {
     warehouses,
     addWarehouses,
-    deleteWarehouses,
-    updateWarehouses,
     fetchWarehouses,
     error,
     isLoading,

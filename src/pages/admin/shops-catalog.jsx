@@ -11,7 +11,7 @@ export default function AdminShopsPage() {
     <div>
       <CountryTabs setSelectedCountry={setSelectedCountry}/>
       <section className={s.shops_block}>
-        <ShopsCategory setSelectedCategory={setSelectedCategory} />
+        <ShopsCategory selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
         <ShopsList selectedCategory={selectedCategory} selectedCountry={selectedCountry}/>
       </section>
     </div>
