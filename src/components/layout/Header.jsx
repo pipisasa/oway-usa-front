@@ -47,7 +47,7 @@ export default function Header() {
 
   return (
     <div className="">
-      <header className={`${s.header} ${isHomePage ? s.homepage : ''}`}>
+      <header className={`${s.header} ${isHomePage ? s.homepage : ""}`}>
         <div>
           {isHomePage ? (
             <img
@@ -66,19 +66,27 @@ export default function Header() {
           )}
         </div>
         <nav>
-        <ul className={`${isHomePage ? s.whiteBackground : ''}`}>
-          {links.map((link, index) => (
-            <li
-              className={`${router.pathname === link.href ? `${s.active} ${isHomePage && link.label === 'Главная' ? s.whiteText : ''}` : ''}`}
-              key={index}
-            >
-              <Link href={link.href}>{link.label}</Link>
-            </li>
-          ))}
-        </ul>
+          <ul className={`${isHomePage ? s.whiteBackground : ""}`}>
+            {links.map((link, index) => (
+              <li
+                className={`${
+                  router.pathname === link.href
+                    ? `${s.active} ${
+                        isHomePage && link.label === "Главная"
+                          ? s.whiteText
+                          : ""
+                      }`
+                    : ""
+                }`}
+                key={index}
+              >
+                <Link href={link.href}>{link.label}</Link>
+              </li>
+            ))}
+          </ul>
         </nav>
         {isAuthenticated ? (
-          <div className={`${s.auth_btn} ${isHomePage ? s.whiteText : ''}`}>
+          <div className={`${s.auth_btn} ${isHomePage ? s.whiteText : ""}`}>
             <Link href="/user">
               <div>
                 <button className={s.login}>
@@ -89,7 +97,7 @@ export default function Header() {
             </Link>
           </div>
         ) : (
-          <div className={`${s.auth_btn} ${isHomePage ? s.whiteText : ''}`}>
+          <div className={`${s.auth_btn} ${isHomePage ? s.whiteText : ""}`}>
             <Link href="/auth/register">
               <div className={s.auth_btn_reg}>
                 <button className={s.register}>Зарегистрироваться</button>
@@ -105,7 +113,6 @@ export default function Header() {
                 <button className={s.login}>
                   <span>Вход</span>
                   <img src="/assets/icons/rightIcon.svg" alt="" />
-                  
                 </button>
               </div>
             </Link>
@@ -113,15 +120,17 @@ export default function Header() {
         )}
         <div className={s.burger_menu}>
           <button onClick={handleOpen}>
-            {isOpen ? (isHomePage ? (
-              <RxCross2 size={25} color="white" />
-            ) : (
-              <RxCross2 size={25} />
-            )) : (isHomePage ? (
-              <RxHamburgerMenu size={25} color="white"/>
+            {isOpen ? (
+              isHomePage ? (
+                <RxCross2 size={25} color="white" />
+              ) : (
+                <RxCross2 size={25} />
+              )
+            ) : isHomePage ? (
+              <RxHamburgerMenu size={25} color="white" />
             ) : (
               <RxHamburgerMenu size={25} />
-            ))}
+            )}
           </button>
         </div>
       </header>
@@ -134,6 +143,43 @@ export default function Header() {
                   <Link href={link.href}>{link.label}</Link>
                 </li>
               ))}
+              {isAuthenticated ? (
+                <div
+                  className={`${s.auth_btn} ${isHomePage ? s.whiteText : ""}`}
+                >
+                  <Link href="/user">
+                    <div>
+                      <button className={s.login}>
+                        <span>Личный кабинет</span>
+                        <img src="/assets/icons/rightIcon.svg" alt="" />
+                      </button>
+                    </div>
+                  </Link>
+                </div>
+              ) : (
+                <div
+                  className={`${s.auth_btn} ${isHomePage ? s.whiteText : ""}`}
+                >
+                  <Link href="/auth/register">
+                    <div className={s.auth_btn_reg}>
+                      <button className={s.register}>Зарегистрироваться</button>
+                      {isHomePage ? (
+                        <img src="/assets/icons/userWhile.svg" alt="" />
+                      ) : (
+                        <img src="/assets/icons/userBlue.svg" alt="" />
+                      )}
+                    </div>
+                  </Link>
+                  <Link href="/auth/login">
+                    <div>
+                      <button className={s.login}>
+                        <span>Вход</span>
+                        <img src="/assets/icons/rightIcon.svg" alt="" />
+                      </button>
+                    </div>
+                  </Link>
+                </div>
+              )}
             </ul>
           </nav>
         </div>

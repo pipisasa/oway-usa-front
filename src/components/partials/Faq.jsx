@@ -29,7 +29,6 @@ export default function Faq() {
     faqStyle.background = "var(--bue_light_2, #fff)";
   } else if (router.pathname === "/faq") {
     faqStyle.background = "var(--bue_light_2, #f7f9fc)";
-    faqStyle.marginTop = "120px";
   }
 
   return (
