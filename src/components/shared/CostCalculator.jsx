@@ -25,14 +25,19 @@ export default function CostCalculator() {
   };
 
   useEffect(() => {
-    const volumeWeight =
-      (formData.width * formData.length * formData.height) / 6000;
-    const actualWeight = Math.max(volumeWeight, formData.weight);
+    const width = parseFloat(formData.width);
+    const length = parseFloat(formData.length);
+    const height = parseFloat(formData.height);
+    const weight = parseFloat(formData.weight);
+    const volumeWeight = (width * length * height) / 6000;
+
+    const actualWeight = Math.max(volumeWeight, weight);
+
     let rate = 0;
     let time = "";
 
     if (formData.fromCountry === "США" && formData.toCountry === "РФ") {
-      rate = formData.deliveryType === "стандарт" ? 16 : 12; // Предположение для экспресс-доставки
+      rate = formData.deliveryType === "стандарт" ? 16 : 12;
       time = formData.deliveryType === "стандарт" ? "10-15 дней" : "7-9 дней";
     } else if (
       formData.fromCountry === "Турция" &&
@@ -41,7 +46,7 @@ export default function CostCalculator() {
       rate = formData.deliveryType === "стандарт" ? 9.5 : 12;
       time = formData.deliveryType === "стандарт" ? "5-7 дней" : "2-3 дня";
     } else if (formData.fromCountry === "США" && formData.toCountry === "КР") {
-      rate = 12; // Ставка за экспресс-доставку из США в КР
+      rate = 12;
       time = "7-9 дней";
     }
 
