@@ -2,7 +2,14 @@ import React, { useRef } from "react";
 import s from "@/styles/pages/auth/Register.module.scss";
 
 export default function ConfirmRegistrations({ onSubmit }) {
-  const inputRefs = Array.from({ length: 6 }, () => useRef());
+  const createRef = (idx) => {
+    if (!inputRefs.current[idx]) {
+      inputRefs.current[idx] = React.createRef();
+    }
+    return inputRefs.current[idx];
+  };
+
+  const inputRefs = useRef([]);
 
   const handleInputChange = (index, e) => {
     const input = e.target;
@@ -13,21 +20,18 @@ export default function ConfirmRegistrations({ onSubmit }) {
       input.value = value;
     }
 
-    if (value.length > 0) {
-      if (index < inputRefs.length - 1) {
-        inputRefs[index + 1].current.focus();
-      }
+    if (value.length > 0 && index < inputRefs.current.length - 1) {
+      inputRefs.current[index + 1].current.focus();
     }
   };
 
   const handleKeyDown = (index, e) => {
-    if (e.key === "Backspace") {
-      const input = inputRefs[index].current;
-      const value = input.value;
-
-      if (!value && index > 0) {
-        inputRefs[index - 1].current.focus();
-      }
+    if (
+      e.key === "Backspace" &&
+      index > 0 &&
+      !inputRefs.current[index].current.value
+    ) {
+      inputRefs.current[index - 1].current.focus();
     }
   };
 
@@ -42,10 +46,10 @@ export default function ConfirmRegistrations({ onSubmit }) {
       <form className={s.register_form} onSubmit={handleSubmit}>
         <p>Вам на почту пришел 6-ти значный код. Введите его:</p>
         <div className={s.activation_inputs}>
-          {inputRefs.map((inputRef, index) => (
+          {Array.from({ length: 6 }).map((_, index) => (
             <input
               key={index}
-              ref={inputRef}
+              ref={createRef(index)}
               type="text"
               maxLength="1"
               onChange={(e) => handleInputChange(index, e)}

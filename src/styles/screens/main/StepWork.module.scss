@@ -207,14 +207,21 @@
 @media (max-width: 690px) {
   .step {
     .step_container {
+      h2 {
+        font-size: 24px;
+      }
+      .step_blocks {
+        .step_block {
+          padding: 20px;
+        }
+      }
       .step_blocks1,
       .step_blocks2,
-      .step_blocks3, 
+      .step_blocks3,
       .step_blocks4,
       .step_blocks5,
       .step_blocks6 {
         display: none;
-      
       }
       .step_img {
         display: none;
