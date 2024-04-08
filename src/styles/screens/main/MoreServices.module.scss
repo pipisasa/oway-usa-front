@@ -3,6 +3,7 @@
   height: 100%;
   background: var(--bue_light_2, #f7f9fc);
   padding-top: 120px;
+  margin-bottom: 120px;
   padding-bottom: 80px;
   border-radius: 0 0 64px 64px;
 
@@ -94,7 +95,7 @@
         }
 
         .services_inner_down_block {
-          width: 873px;
+          max-width: 873px;
           margin-top: 32px;
           .services_span {
             display: flex;
@@ -129,8 +130,12 @@
     padding-top: 32px;
     border-radius: 0 0 32px 32px;
     padding-bottom: 32px;
+    margin-bottom: 32px;
 
     .service_container {
+      h2 {
+        font-size: 24px;
+      }
       .services_inner {
         .services_inner_top {
           display: flex;
