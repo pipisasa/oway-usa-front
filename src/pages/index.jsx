@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import HeroSection from "../components/screens/main/HeroSection";
 import Shops from "../components/screens/main/Shops";
@@ -10,13 +9,10 @@ import StepWork from "../components/screens/main/StepWork";
 import MoreInfo from "../components/screens/main/MoreInfo";
 import Advantage from "../components/screens/main/ Advantage";
 import MoreServices from "../components/screens/main/MoreServices";
-import Calculator from "../components/shared/Calculator";
 import Join from "../components/screens/main/Join";
 import Faq from "../components/partials/Faq";
 import Contacts from "../components/partials/Contacts";
 import Purchase from "../components/shared/Purchase";
-import CurrentProducts from "../components/screens/main/ProductSlider";
-import ProductSlider from "../components/screens/main/ProductSlider";
 import CostCalculator from "@/components/shared/CostCalculator";
 
 const inter = Inter({ subsets: ["latin"] });

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/screens/main/HeroSection.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
-import Header2 from "@/components/layout/Header2";
-import Header from "@/components/layout/Header";
 
 export default function HeroSection() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

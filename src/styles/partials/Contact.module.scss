@@ -113,10 +113,35 @@
 
 @media (max-width: 748px) {
   .contacts {
-    margin-top: 32px;
-    .contact_inner{
-      .contact_inner_block{
+    margin-top: 0px;
+
+    h1 {
+      font-size: 24px;
+    }
+    .contact_inner {
+      margin-bottom: 32px;
+      .contact_inner_block {
         display: none;
+      }
+
+      .contact_inner_block_infos {
+        gap: 10px;
+
+        .contact_inner_block_info {
+          max-width: 149px;
+          h3 {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .contact_inner_block1 {
+        gap: 16px;
+        padding: 16px;
+        width: 100%;
+        h2 {
+          font-size: 16px;
+        }
       }
     }
   }

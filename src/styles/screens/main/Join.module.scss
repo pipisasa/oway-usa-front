@@ -56,9 +56,22 @@
 
 @media (max-width: 768px) {
   .join {
-    margin-top: 32px;
+    margin-top: 0px;
     .join_img {
       display: none;
+    }
+
+    .join_info {
+      h1 {
+        font-size: 24px;
+        line-height: 140%;
+      }
+
+      div {
+        span {
+          font-size: 14px;
+        }
+      }
     }
   }
 }

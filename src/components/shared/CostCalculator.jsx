@@ -52,9 +52,9 @@ export default function CostCalculator() {
   const calcStyle = {};
   if (router.pathname === "/") {
     calcStyle.background = "var(--bue_light_2, #fff)";
-    calcStyle.marginTop = "120px";
   } else if (router.pathname === "/calculator") {
     calcStyle.background = "var(--bue_light_2, #f7f9fc)";
+    calcStyle.paddingTop = "50px";
   }
 
   return (

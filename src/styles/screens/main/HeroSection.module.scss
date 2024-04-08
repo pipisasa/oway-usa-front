@@ -98,10 +98,17 @@
       .heroSection_info {
         h1 {
           font-size: 32px !important;
-          padding-top: 70px !important;
+          padding-top: 90px !important;
 
           strong {
             font-size: 32px !important;
+          }
+        }
+
+        .heroSection_info_span {
+          div {
+            background: #fff;
+            width: 6px;
           }
         }
       }
