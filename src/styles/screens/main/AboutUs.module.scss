@@ -70,3 +70,18 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .about {
+    .about_info {
+      h1 {
+        font-size: 24px;
+      }
+
+      span {
+        font-size: 12px;
+        line-height: 140%;
+      }
+    }
+  }
+}

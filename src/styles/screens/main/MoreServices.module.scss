@@ -127,11 +127,15 @@
 @media (max-width: 685px) {
   .service {
     padding-top: 32px;
+    border-radius: 0 0 32px 32px;
+    padding-bottom: 32px;
+
     .service_container {
       .services_inner {
         .services_inner_top {
           display: flex;
           flex-direction: column;
+          gap: 0;
 
           .services_span {
             margin-top: 0;
@@ -144,6 +148,7 @@
         .services_inner_down {
           display: flex;
           flex-direction: column;
+          gap: 0;
 
           .services_inner_down_block {
             margin-top: 0;

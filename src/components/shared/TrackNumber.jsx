@@ -1,6 +1,5 @@
 import React from "react";
 import s from "@/styles/shared/main/TrackNumber.module.scss";
-import Button from "../partials/Button";
 
 export default function TrackNumber() {
   return (
