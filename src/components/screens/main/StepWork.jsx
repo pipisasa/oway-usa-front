@@ -62,16 +62,16 @@ export default function StepWork() {
           />
         </div>
         {steps.map((step) => (
-            <div key={step.id} className={s[`step_blocks${step.id}`]}>
-              <span className={s.step_span}>{step.id}</span>
-              <div className={s.step_blocks}>
-                <div className={s.step_block}>
-                  <img src={`assets/icons/${step.icon}`} alt="" />
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </div>
+          <div key={step.id} className={s[`step_blocks${step.id}`]}>
+            <span className={s.step_span}>{step.id}</span>
+            <div className={s.step_blocks}>
+              <div className={s.step_block}>
+                <img src={`assets/icons/${step.icon}`} alt="" />
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
               </div>
             </div>
+          </div>
         ))}
         <Slider>
           {steps.map((step) => (

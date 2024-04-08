@@ -20,8 +20,8 @@ export default function AboutBusiness() {
             <div></div>
             <span>
               <strong>Мы предоставляем</strong> полный спектр логистических
-              услуг. Для вашего удобства доступны варианты доставки "от двери до
-              двери" или до ближайшего ПВЗ, а также возможность забора из нашего
+              услуг. Для вашего удобства доступны варианты доставки от двери до
+              двери или до ближайшего ПВЗ, а также возможность забора из нашего
               пункта выдачи в каждой стране. 
             </span>
           </div>
@@ -37,32 +37,32 @@ export default function AboutBusiness() {
       </div>
       <div className={s.mission_blocks}>
         <div className={s.mission_block1}>
-            <img src="assets/icons/mission_notebook.svg" alt="" />
-            <h3>
-              Привлекательные <br /> цены
-            </h3>
-          </div>
-          <div className={s.mission_block1}>
-            <img src="assets/icons/mission_book.svg" alt="" />
-            <h3>
-              Адекватные
-              <br /> сроки
-            </h3>
-          </div>
-          <div className={s.mission_block1}>
-            <img src="assets/icons/mission_box.svg" alt="" />
-            <h3>
-              Высочайшую <br />
-              надежность
-            </h3>
-          </div>
-          <div className={s.mission_block1}>
-            <img src="assets/icons/mission_box.svg" alt="" />
-            <h3>
-              Высокий уровень
-              <br /> безопасности
-            </h3>
-          </div>
+          <img src="assets/icons/mission_notebook.svg" alt="" />
+          <h3>
+            Привлекательные <br /> цены
+          </h3>
+        </div>
+        <div className={s.mission_block1}>
+          <img src="assets/icons/mission_book.svg" alt="" />
+          <h3>
+            Адекватные
+            <br /> сроки
+          </h3>
+        </div>
+        <div className={s.mission_block1}>
+          <img src="assets/icons/mission_box.svg" alt="" />
+          <h3>
+            Высочайшую <br />
+            надежность
+          </h3>
+        </div>
+        <div className={s.mission_block1}>
+          <img src="assets/icons/mission_box.svg" alt="" />
+          <h3>
+            Высокий уровень
+            <br /> безопасности
+          </h3>
+        </div>
         <Slider>
           <div className={s.mission_block}>
             <img src="assets/icons/mission_notebook.svg" alt="" />

@@ -1,11 +1,23 @@
-import React, { useRef } from "react";
+import React from "react";
 import s from "@/styles/pages/auth/Register.module.scss";
 import { useRouter } from "next/router";
 import useActivation from "../../hooks/auth/useActivation";
+import { useRef } from "react";
+
+function useRefs(length) {
+  const refs = useRef([]);
+  useEffect(() => {
+    refs.current = refs.current
+      .slice(0, length)
+      .map((_, i) => refs.current[i] || React.createRef());
+  }, [length]);
+
+  return refs.current;
+}
 
 export default function AccountActivation({ onSubmit }) {
-  const { activation, error} = useActivation()
-  const inputRefs = Array.from({ length: 6 }, () => useRef());
+  const { activation, error } = useActivation();
+  const inputRefs = useRefs(6);
   const router = useRouter();
 
   const handleInputChange = (index, e) => {
@@ -37,45 +49,45 @@ export default function AccountActivation({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const code = inputRefs.map(inputRef => inputRef.current.value).join("");
+    const code = inputRefs.map((ref) => ref.current.value).join("");
     const email = localStorage.getItem("email");
     activation(email, code);
   };
 
   return (
-      <main className={s.register_page}>
-        <img className={s.left_img} src="/assets/images/28.png" alt="" />
-        <section className={s.section}>
-          <div onClick={() => router.push("/")} className={s.logo}>
-            <img src="/assets/icons/owayUSE.svg" alt="OWAY USA" />
-          </div>
-          <h1>Подтверждение аккаунта</h1>
-          <>
-            <img className={s.steps} src="/assets/images/step3.svg" alt="step1" />
-            <form className={s.register_form} onSubmit={handleSubmit}>
-              <p>Вам на почту пришел 6-ти значный код. Введите его:</p>
-              <div className={s.activation_inputs}>
-                {inputRefs.map((inputRef, index) => (
-                    <input
-                        key={index}
-                        ref={inputRef}
-                        type="text"
-                        maxLength="1"
-                        onChange={(e) => handleInputChange(index, e)}
-                        onKeyDown={(e) => handleKeyDown(index, e)}
-                    />
-                ))}
-              </div>
-              <div className={s.register_btn}>
-                <button type="submit">
-                  Подтвердить аккаунт
-                  <img src="/assets/icons/next-icon.svg" alt="next" />
-                </button>
-              </div>
-            </form>
-          </>
-        </section>
-        <img className={s.right_img} src="/assets/images/39.png" alt="" />
-      </main>
+    <main className={s.register_page}>
+      <img className={s.left_img} src="/assets/images/28.png" alt="" />
+      <section className={s.section}>
+        <div onClick={() => router.push("/")} className={s.logo}>
+          <img src="/assets/icons/owayUSE.svg" alt="OWAY USA" />
+        </div>
+        <h1>Подтверждение аккаунта</h1>
+        <>
+          <img className={s.steps} src="/assets/images/step3.svg" alt="step1" />
+          <form className={s.register_form} onSubmit={handleSubmit}>
+            <p>Вам на почту пришел 6-ти значный код. Введите его:</p>
+            <div className={s.activation_inputs}>
+              {inputRefs.map((inputRef, index) => (
+                <input
+                  key={index}
+                  ref={inputRef}
+                  type="text"
+                  maxLength="1"
+                  onChange={(e) => handleInputChange(index, e)}
+                  onKeyDown={(e) => handleKeyDown(index, e)}
+                />
+              ))}
+            </div>
+            <div className={s.register_btn}>
+              <button type="submit">
+                Подтвердить аккаунт
+                <img src="/assets/icons/next-icon.svg" alt="next" />
+              </button>
+            </div>
+          </form>
+        </>
+      </section>
+      <img className={s.right_img} src="/assets/images/39.png" alt="" />
+    </main>
   );
 }
