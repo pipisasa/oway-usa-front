@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/screens/main/HeroSection.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
-import Header2 from "@/components/layout/Header2";
-import Header from "@/components/layout/Header";
 
 export default function HeroSection() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -17,13 +15,7 @@ export default function HeroSection() {
   return (
     <>
       <div className={s.header_hero}>
-        {/* <div className={s.header_back}>
-          <div className="container">
-            <Header2 />
-          </div>
-        </div> */}
-        {/* <Header /> */}
-        <div className={s.heroSection_page}>
+        <div className={s.heroSection_page} data-aos="fade-up">
           <div className={`${s.heroSection_page_container} container`}>
             <div className={s.heroSection_info}>
               <h1>
@@ -44,7 +36,7 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      <div className={s.heroSection_img}>
+      <div className={s.heroSection_img} data-aos="fade-left">
         <img
           src="/assets/icons/earthAfrica.png"
           width={685}

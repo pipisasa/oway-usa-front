@@ -206,7 +206,11 @@
 
 @media (max-width: 690px) {
   .step {
+    margin-top: 32px;
+    border-radius: 32px 32px 0 0;
+
     .step_container {
+      padding-top: 32px;
       h2 {
         font-size: 24px;
       }

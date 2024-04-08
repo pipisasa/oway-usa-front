@@ -27,7 +27,6 @@ export default function Faq() {
   const faqStyle = {};
   if (router.pathname === "/") {
     faqStyle.background = "var(--bue_light_2, #fff)";
-    faqStyle.marginTop = "120px";
   } else if (router.pathname === "/faq") {
     faqStyle.background = "var(--bue_light_2, #f7f9fc)";
   }
@@ -69,7 +68,7 @@ export default function Faq() {
             </div>
           ))}
         </div>
-        <div className={s.door_img}>
+        <div className={s.door_img} data-aos="zoom-in-up">
           <img src="assets/icons/faq_door.png" alt="" />
         </div>
       </div>

@@ -3,7 +3,7 @@ import s from "@/styles/screens/main/AboutUs.module.scss";
 
 export default function AboutUs() {
   return (
-    <div className={`${s.about} container`}>
+    <div className={`${s.about} container`} data-aos="zoom-out">
       <div className={s.about_info}>
         <span>О компании</span>
         <h1>OWAY USA</h1>

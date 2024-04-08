@@ -52,7 +52,10 @@ export default function Register() {
 
   return (
     <main className={s.register_page}>
-      <img className={s.left_img} src="/assets/images/28.png" alt="" />
+      <img className={s.left_img} src="/assets/images/28.png" alt="" data-aos="fade-right"
+     data-aos-anchor="#example-anchor"
+     data-aos-offset="500"
+     data-aos-duration="500"/>
       <section className={s.section}>
         <div onClick={() => router.push("/")} className={s.logo}>
           <img src="/assets/icons/owayUSE.svg" alt="OWAY USA" />
@@ -64,7 +67,11 @@ export default function Register() {
         )}
         {renderStep()}
       </section>
-      <img className={s.right_img} src="/assets/images/39.png" alt="" />
+      <img className={s.right_img} src="/assets/images/39.png" alt="" data-aos="fade-left"
+     data-aos-anchor="#example-anchor"
+     data-aos-offset="500"
+     data-aos-duration="500"
+     />
     </main>
   );
 }

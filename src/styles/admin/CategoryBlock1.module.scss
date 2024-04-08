@@ -1,0 +1,78 @@
+.category_block {
+  border-radius: 12px;
+  padding: 20px;
+  width: 352px;
+  gap: 16px;
+  background: rgba(247, 249, 252, 1);
+
+  .checkboxes_btn {
+    width: 100%;
+      display: flex;
+      padding: 12px 36px;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      align-self: stretch;
+      border-radius: 12px;
+      border: 1px solid var(--blue, #027DDB);
+      transition: background-color 0.3s;
+      margin-top: 16px;
+      &:hover {
+        background-color: #027DDB;
+        color: #fff;
+      }
+  }
+  h3 {
+    color: var(--black, #001526);
+    font-family: Helvetica;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+
+
+    .checkboxes_block {
+      display: flex;
+      justify-content: space-between;
+
+        div {
+          display: flex;
+          gap: 10px;
+          button {
+            display: flex;
+            padding: 8px 9px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 5px;
+            background: var(--bg_red, #FFE7E7);
+            img {
+              width: 12px;
+              height: 12px;
+            }
+          }
+          .card_button {
+            display: flex;
+            padding: 8px 9px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 5px;
+            background: var(--blue_light_3, #E7EFFF);
+            img {
+              width: 12px;
+              height: 12px;
+            }
+          }
+        }
+    }
+    
+  }
+}

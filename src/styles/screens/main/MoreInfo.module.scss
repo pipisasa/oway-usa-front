@@ -169,9 +169,6 @@
 }
 
 @media (max-width: 1024px) {
-  .more_info {
-    padding-top: 32px;
-  }
   .more_info_culc {
     padding-top: 32px;
 
@@ -190,7 +187,7 @@
     }
   }
   .more_info {
-    padding-top: 32px;
+    padding-top: 0px;
 
     .more_info_container {
       .info_img {

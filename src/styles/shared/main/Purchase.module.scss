@@ -1,6 +1,7 @@
 .purchase {
   margin-top: 120px;
   gap: 20px;
+
   .button {
     display: flex;
     padding: 14px 36px;
@@ -35,6 +36,10 @@
   }
   .purchase_container {
     max-width: 873px;
+
+    .mobile_form {
+      display: none;
+    }
   }
   .purchase_header {
     h1 {
@@ -272,11 +277,39 @@
 
 @media (max-width: 1024px) {
   .purchase {
+    margin-top: 32px;
     input {
       width: 100% !important;
     }
     .purchase_img {
       display: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .purchase {
+    .purchase_container {
+      .mobile_form {
+        display: initial;
+
+        .mobile_form_block {
+          .purchase_inner {
+            .purchase_inner_froms {
+              flex-direction: column;
+            }
+          }
+        }
+      }
+      .form_container {
+        display: none;
+      }
+    }
+    .purchase_header {
+      h1 {
+        font-size: 24px;
+        line-height: 140%; /* 33.6px */
+      }
     }
   }
 }

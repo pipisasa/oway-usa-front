@@ -42,7 +42,7 @@
 
           &.active {
             display: flex;
-            width: 427px;
+            max-width: 427px;
             padding: 24px;
             align-items: center;
             gap: 16px;
@@ -194,6 +194,9 @@
 }
 
 @media (max-width: 748px) {
+  .advantage {
+    padding-top: 32px;
+  }
   .advantage_container {
     .advantage_inner {
       p {
@@ -208,6 +211,10 @@
           padding: 16px !important;
         }
       }
+    }
+
+    .info {
+      padding: 16px !important;
     }
   }
 }

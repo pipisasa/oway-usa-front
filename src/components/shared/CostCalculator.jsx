@@ -52,14 +52,17 @@ export default function CostCalculator() {
   const calcStyle = {};
   if (router.pathname === "/") {
     calcStyle.background = "var(--bue_light_2, #fff)";
-    calcStyle.marginTop = "120px";
   } else if (router.pathname === "/calculator") {
     calcStyle.background = "var(--bue_light_2, #f7f9fc)";
+    calcStyle.paddingTop = "50px";
   }
 
   return (
     <div className={s.calc} style={calcStyle}>
-      <div className={`${s.calc_container} container`}>
+      <div
+        className={`${s.calc_container} container`}
+        data-aos="zoom-out-right"
+      >
         <h1>Калькулятор стоимости</h1>
         <div className={s.calc_inner}>
           <div className={s.calc_inner_forms}>

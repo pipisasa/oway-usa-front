@@ -12,7 +12,7 @@ export default function MoreServices() {
 
         <div className={s.services_inner}>
           <div className={s.services_inner_top}>
-            <div style={{ width: "420px" }}>
+            <div>
               <div className={s.services_span}>
                 <div></div>
                 <span className={s.services_span_each}>
@@ -38,7 +38,7 @@ export default function MoreServices() {
           </div>
 
           <div className={s.services_inner_down}>
-            <div style={{ width: "420px" }}>
+            <div>
               <div className={s.services_span}>
                 <div></div>
                 <span className={s.services_span_each}>

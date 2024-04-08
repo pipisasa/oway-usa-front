@@ -49,7 +49,9 @@ export default function Feedback() {
           </div>
         </div>
       </div>
-      <div className={s.calc_img}>
+      <div className={s.calc_img} data-aos="fade-up"
+     data-aos-anchor-placement="top-center"
+     >
         <img src="assets/images/houseBox.png" width={600} alt="" />
       </div>
     </div>

@@ -21,7 +21,7 @@ export default function Search() {
                         <span>Выбирайте и наслаждайтесь покупками, а мы привезем заказы <br/>в удобные пункты выдачи или к вам домой за 10-17 дней.</span>
                     </div>
                 </div>
-                <div className={s.heroSection_img}>
+                <div className={s.heroSection_img} data-aos="zoom-out-left">
                     <img src="assets/images/teleshka.png" width={536} height={536} alt=""/>
                 </div>
             </div>
