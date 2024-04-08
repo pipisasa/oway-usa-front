@@ -20,7 +20,11 @@ export default function Login() {
 
   return (
     <main className={s.login_page}>
-      <img className={s.left_img} src="/assets/images/40.png" alt="" />
+      <img className={s.left_img} src="/assets/images/40.png" alt="" data-aos="fade-right"
+     data-aos-anchor="#example-anchor"
+     data-aos-offset="500"
+     data-aos-duration="500"
+     />
       <section className={s.login_section}>
         <div onClick={() => router.push("/")} className={s.logo}>
           <img src="/assets/icons/owayUSE.svg" alt="OWAY USA" />
@@ -70,10 +74,10 @@ export default function Login() {
             <span>Или</span>
             <div></div>
           </div>
-          <div className={s.google}>
+          <Link href="/api/auth/google" className={s.google}>
             <img src="/assets/icons/google.svg" alt="google" />
             <p>Google</p>
-          </div>
+          </Link>
           <div className={s.submit_login}>
             <button type="submit">
               Авторизоваться
@@ -86,7 +90,12 @@ export default function Login() {
           </div>
         </form>
       </section>
-      <img className={s.right_img} src="/assets/images/39.png" alt="" />
+      <img className={s.right_img} src="/assets/images/39.png" alt="" 
+      data-aos="fade-left"
+      data-aos-anchor="#example-anchor"
+      data-aos-offset="500"
+      data-aos-duration="500"
+      />
     </main>
   );
 }
