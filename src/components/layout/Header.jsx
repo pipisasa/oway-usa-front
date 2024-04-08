@@ -48,7 +48,7 @@ export default function Header() {
   return (
     <div className="">
       <header className={`${s.header} ${isHomePage ? s.homepage : ""}`}>
-        <div>
+        <div onClick={() => router.push('/')}>
           {isHomePage ? (
             <img
               src="/assets/icons/owayUSEFFF.svg"
