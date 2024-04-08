@@ -1,10 +1,28 @@
-// Ваш файл qwe.module.scss остаётся без изменений
-
 import React, { useState } from 'react';
 import s from "./qwe.module.scss";
 
 export const Slider = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchEndX, setTouchEndX] = useState(0);
+
+  const handleTouchStart = (event) => {
+    setTouchStartX(event.touches[0].clientX);
+  };
+
+  const handleTouchMove = (event) => {
+    setTouchEndX(event.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    const touchDiff = touchEndX - touchStartX;
+    const threshold = 50;
+    if (touchDiff > threshold) {
+      nextSlide();
+    } else if (touchDiff < -threshold) {
+      prevSlide();
+    }
+  };
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex === children.length - 1 ? 0 : prevIndex + 1));
@@ -19,7 +37,11 @@ export const Slider = ({ children }) => {
   };
 
   return (
-    <div className={s.slider}>
+    <div className={s.slider}
+    onTouchStart={handleTouchStart}
+    onTouchMove={handleTouchMove}
+    onTouchEnd={handleTouchEnd}
+    >
       {children[currentIndex]}
       <div className={s.indicators}>
         {children.map((child, index) => (
