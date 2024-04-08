@@ -1,6 +1,7 @@
 import React from "react";
 import s from "@/styles/screens/main/Markets.module.scss";
 import Button from "../../partials/Button";
+import Link from "next/link";
 
 export default function Markets() {
   return (
@@ -18,7 +19,9 @@ export default function Markets() {
               вычислений по выручке и рыночной капитализации.
             </span>
           </div>
-          <Button button="Посетить сайт" />
+          <Link href="https://www.amazon.com/" target="__blank">
+            <Button button="Посетить сайт" />
+          </Link>
         </div>
         <div className={s.heroSection_img} data-aos="zoom-out-left">
           <img src="assets/images/marketsBox.png" alt="" />

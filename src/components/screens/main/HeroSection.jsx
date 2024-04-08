@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/screens/main/HeroSection.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
+import { useRouter } from "next/router";
 
 export default function HeroSection() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
-  useEffect(() => {
+  const handleButtonClick = () => {
     const token = getCookie("accessToken");
     if (token) {
-      setIsAuthenticated(true);
+      router.push("/markets");
+    } else {
+      router.push("/auth/login");
     }
-  }, []);
+  };
 
   return (
     <>
@@ -28,7 +31,7 @@ export default function HeroSection() {
                   <br /> интернет-магазинов прямо к вам домой
                 </span>
               </div>
-              <button className={s.button}>
+              <button onClick={handleButtonClick} className={s.button}>
                 <span>Закупиться</span>
                 <img src="/assets/icons/rightIconwhite.svg" alt="logo" />
               </button>
