@@ -29,7 +29,9 @@ export default function AboutWorld() {
           </span>
         </div>
       </div>
-      <div className={s.join_img}>
+      <div className={s.join_img} data-aos="fade-up"
+     data-aos-anchor-placement="center-center"
+     >
         <img src="assets/images/map.png" alt="OWAY USA MAP" />
       </div>
     </div>
