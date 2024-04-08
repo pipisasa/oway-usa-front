@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import s from "@/styles/users/UserMobileHeaeder.module.scss";
-import { Avatar, Badge, Button } from "@nextui-org/react";
+import { Badge, Button } from "@nextui-org/react";
 import useNotification from "@/hooks/admin/useNotification";
 import { NotificationIcon } from "../admin/NotificationIcon";
 import { useRouter } from "next/router";
@@ -58,7 +58,10 @@ export default function UserMobileHeader({ children }) {
     <div className={s.container}>
       <div className={s.header_container}>
         <header>
-          <img src="/assets/icons/logo.svg" alt="" />
+          <Link href="/">
+            <img src="/assets/icons/logo.svg" alt="" />
+          </Link>
+
           <div>
             <Badge
               content={products?.total_not_checked_notifications}
@@ -106,6 +109,10 @@ export default function UserMobileHeader({ children }) {
                   <Link href={link.href}>{link.label}</Link>
                 </li>
               ))}
+              <button onClick={logout} className={s.logout}>
+                <img src="/assets/icons/logout.svg" alt="logout" />
+                Выйти
+              </button>
             </ul>
           </nav>
         ) : null}

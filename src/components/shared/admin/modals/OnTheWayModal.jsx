@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import s from "@/styles/admin/RequestsModal.module.scss";
 import { RxCross1 } from "react-icons/rx";
-import useRequests from "@/hooks/admin/useRequests";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function OnTheWayModal({ data, onClose }) {
-
   return (
     <div
       className={s.modal_backdrop}
@@ -25,13 +23,10 @@ export default function OnTheWayModal({ data, onClose }) {
             </div>
             <div className={s.input_label}>
               <label htmlFor="">Статус</label>
-              <button style={{width:"140px"}}>{data?.status?.name}</button>
+              <button>{data?.status?.name}</button>
             </div>
           </div>
-          <form
-            className={s.form}
-            encType="multipart/form-data"
-          >
+          <form className={s.form} encType="multipart/form-data">
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
                 <label htmlFor="url">Ссылка на товар</label>
@@ -40,20 +35,15 @@ export default function OnTheWayModal({ data, onClose }) {
 
               <div className={s.input_label}>
                 <label htmlFor="name_of_purchase">Название</label>
-                <input
-                  id="name_of_purchase"
-                  value={data.name || ""}
-                  readOnly
-                />
+                <input id="name_of_purchase" value={data.name || ""} readOnly />
               </div>
 
               <div className={s.input_label}>
                 <label htmlFor="articul">Артикул</label>
                 <input id="articul" value={data.articul || ""} readOnly />
               </div>
-
             </div>
-            
+
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
                 <label htmlFor="count">Кол-во</label>
@@ -65,18 +55,12 @@ export default function OnTheWayModal({ data, onClose }) {
               </div>
               <div className={s.input_label}>
                 <label htmlFor="price">Цена</label>
-                <input
-                  id="price"
-                  name="price"
-                  type="text"
-                  value={data.price}
-                />
+                <input id="price" name="price" type="text" value={data.price} />
               </div>
               <div className={s.input_label}>
                 <label htmlFor="count">Дата покупки</label>
-                <input id="count" value={'23.04.2024'} readOnly />
+                <input id="count" value={"23.04.2024"} readOnly />
               </div>
-
             </div>
 
             <div className={s.input_label}>

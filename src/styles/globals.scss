@@ -71,14 +71,12 @@ body {
   .container {
     padding: 20px 40px;
   }
-  br {
-    display: none;
-  }
 }
 
 @media (max-width: 768px) {
   .container {
     padding: 20px 20px;
+    overflow: hidden !important;
   }
 }
 
