@@ -65,7 +65,7 @@ export default function Login() {
           <div className={s.forgot_pass}>
             <div className={s.remember_me}>
               <input type="checkbox" />
-              <label htmlFor="remember-me">Запомнить пароль</label>
+              <label className={s.label} htmlFor="remember-me">Запомнить пароль</label>
             </div>
             <Link href="/">Забыли пароль?</Link>
           </div>
