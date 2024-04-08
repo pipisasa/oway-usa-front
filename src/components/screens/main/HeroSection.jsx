@@ -17,12 +17,6 @@ export default function HeroSection() {
   return (
     <>
       <div className={s.header_hero}>
-        {/* <div className={s.header_back}>
-          <div className="container">
-            <Header2 />
-          </div>
-        </div> */}
-        {/* <Header /> */}
         <div className={s.heroSection_page}>
           <div className={`${s.heroSection_page_container} container`}>
             <div className={s.heroSection_info}>
