@@ -21,6 +21,10 @@ export default function WarehouseProductsModal() {
         image: "",
         comments: "",
         unique_id_user: "",
+        url: "",
+        color: "",
+        count: "",
+        articul: "",
     });
 
     const toggleModal = () => setIsOpen(!isOpen);
@@ -56,7 +60,11 @@ export default function WarehouseProductsModal() {
             formData.status,
             formData.image,
             formData.comments,
-            formData.unique_id_user
+            formData.unique_id_user,
+            formData.url,
+            formData.color,
+            formData.count,
+            formData.articul,
         );
         setFormData({
             name: "",
@@ -69,6 +77,10 @@ export default function WarehouseProductsModal() {
             image: "",
             comments: "",
             unique_id_user: "",
+            url: "",
+            color: "",
+            count: "",
+            articul: "",
         });
         setCurrentStep(1);
         setIsOpen(false);
@@ -168,9 +180,31 @@ const Step1 = ({ formData, handleChange, handleImageChange, nextStep, countries 
                     >
                         <option value="">Выберите страну</option>
                         {countries?.map((country) => (
-                         <option key={country.id} value={country.id}>{country.name}</option>
-                     ))}
+                            <option key={country.id} value={country.id}>{country.name}</option>
+                        ))}
                     </select>
+                </div>
+                <div>
+                    <label htmlFor="">Количество</label>
+                    <input
+                        type="text"
+                        name="count"
+                        id="count"
+                        placeholder="Впишите вес"
+                        value={formData.count}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="">Цвет</label>
+                    <input
+                        type="text"
+                        name="color"
+                        id="color"
+                        placeholder="Впишите вес"
+                        value={formData.color}
+                        onChange={handleChange}
+                    />
                 </div>
                 <div>
                     <label htmlFor="">Вес</label>
@@ -193,7 +227,6 @@ const Step1 = ({ formData, handleChange, handleImageChange, nextStep, countries 
                         value={formData.track_number}
                         onChange={handleChange}
                     />
-
                 </div>
             </div>
             <div>
@@ -248,6 +281,29 @@ const Step2 = ({ formData, handleChange, nextStep }) => (
                     onChange={handleChange}
                 />
             </div>
+            <div>
+                <label htmlFor="status">Артикул товара</label>
+                <input
+                    type="text"
+                    name="articul"
+                    id="articul"
+                    placeholder="Введите артикул товара"
+                    value={formData.articul}
+                    onChange={handleChange}
+                />
+            </div>
+            <div>
+                <label htmlFor="status">Ссылка</label>
+                <input
+                    type="text"
+                    name="url"
+                    id="url"
+                    placeholder="Введите ссылку"
+                    value={formData.url}
+                    onChange={handleChange}
+                />
+            </div>
+
         </form>
         <button className={c.submit_btn} onClick={nextStep}>
             Продолжить
@@ -255,10 +311,10 @@ const Step2 = ({ formData, handleChange, nextStep }) => (
     </div>
 );
 
-const Step3 = ({ formData, handleChange, handleSubmit }) => (
+const Step3 = ({formData, handleChange, handleSubmit}) => (
     <div className={c.step}>
         <div className={c.steps_progress}>
-            <img src="/assets/images/step3.svg" alt="step 3" />
+            <img src="/assets/images/step3.svg" alt="step 3"/>
         </div>
         <form action="" className={s.step_form}>
             <div>
