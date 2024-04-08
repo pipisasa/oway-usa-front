@@ -69,7 +69,7 @@ export default function Faq() {
             </div>
           ))}
         </div>
-        <div className={s.door_img}>
+        <div className={s.door_img} data-aos="zoom-in-up">
           <img src="assets/icons/faq_door.png" alt="" />
         </div>
       </div>

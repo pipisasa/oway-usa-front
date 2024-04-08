@@ -20,7 +20,9 @@ export default function Services() {
         </div>
         <Button button="Заказать услугу" />
       </div>
-      <div className={s.services_img}>
+      <div className={s.services_img} data-aos="fade-up"
+     data-aos-anchor-placement="top-center"
+     >
         <img
           src="assets/images/container.png"
           width={680}

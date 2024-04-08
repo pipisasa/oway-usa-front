@@ -10,7 +10,7 @@ export default function ProvideServices() {
           Предоставляемые нами <br /> услуги
         </h1>
       </div>
-      <div className={s.services_block}>
+      <div className={s.services_block} data-aos="zoom-out-right">
         <div className={s.services_block_left}>
           <div></div>
           <span>Фото и видео содержимого входящей посылки</span>
@@ -33,7 +33,7 @@ export default function ProvideServices() {
           </div>
         </div>
       </div>
-      <div className={s.services_block}>
+      <div className={s.services_block} data-aos="zoom-out-left">
         <div className={s.services_block_left}>
           <div></div>
           <span>Проверка товара на качество и брак </span>
@@ -58,7 +58,7 @@ export default function ProvideServices() {
           </div>
         </div>
       </div>
-      <div className={s.services_block}>
+      <div className={s.services_block} data-aos="zoom-out-right">
         <div className={s.services_block_left}>
           <div></div>
           <span>Выкуп с интернет-мазинов  которые не доставляют на склады</span>
@@ -76,7 +76,7 @@ export default function ProvideServices() {
           <button>Связаться с менеджером</button>
         </div>
       </div>
-      <div className={s.services_block}>
+      <div className={s.services_block} data-aos="zoom-out-left">
         <div className={s.services_block_left}>
           <div></div>
           <span>Проверка техники на работоспособность</span>

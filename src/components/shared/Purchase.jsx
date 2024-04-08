@@ -46,13 +46,13 @@ export default function Purchase() {
         onSubmit={handleSubmit(onSubmitHandler)}
       >
         <div className={s.purchase_container}>
-          <div className={s.purchase_header}>
+          <div className={s.purchase_header} data-aos="fade-up-right">
             <p>Заявка на выкуп</p>
             <h1>
               Уникальная возможность приобретения товаров по выгодным ценам!
             </h1>
           </div>
-          <div className={s.purchase_inner}>
+          <div className={s.purchase_inner} data-aos="fade-up-left">
             <div className={s.purchase_inner_froms}>
               <div
                 className={`${
@@ -249,7 +249,7 @@ export default function Purchase() {
             </button>
           </div>
         </div>
-        <div className={s.purchase_img}>
+        <div className={s.purchase_img} data-aos="fade-up-right">
           <img src="assets/images/busket.png" width={510} height={510} alt="" />
         </div>
       </form>

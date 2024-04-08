@@ -29,7 +29,7 @@ export default function Join() {
         </div>
         <Button button="Присоединиться" />
       </div>
-      <div className={s.join_img}>
+      <div className={s.join_img} data-aos="zoom-in-up">
         <img src="assets/images/join_image.png" alt="" />
       </div>
     </div>

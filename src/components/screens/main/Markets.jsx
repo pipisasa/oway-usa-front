@@ -20,7 +20,7 @@ export default function Markets() {
           </div>
           <Button button="Посетить сайт" />
         </div>
-        <div className={s.heroSection_img}>
+        <div className={s.heroSection_img} data-aos="zoom-out-left">
           <img src="assets/images/marketsBox.png" alt="" />
         </div>
       </div>

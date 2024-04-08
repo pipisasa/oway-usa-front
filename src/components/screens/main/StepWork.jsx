@@ -53,7 +53,7 @@ export default function StepWork() {
       <div className={`${s.step_container} container`}>
         <span>Этапы работы</span>
         <h2>Всего 6 простых шага</h2>
-        <div className={s.step_img}>
+        <div className={s.step_img} data-aos="zoom-in-up">
           <img
             src="assets/images/step_box.png"
             width={494}
@@ -65,7 +65,7 @@ export default function StepWork() {
           <div key={step.id} className={s[`step_blocks${step.id}`]}>
             <span className={s.step_span}>{step.id}</span>
             <div className={s.step_blocks}>
-              <div className={s.step_block}>
+              <div className={s.step_block} data-aos="fade-down-right">
                 <img src={`assets/icons/${step.icon}`} alt="" />
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
@@ -78,7 +78,7 @@ export default function StepWork() {
             <div key={step.id} className={s[`step_blocksa${step.id}`]}>
               <span className={s.step_span}>{step.id}</span>
               <div className={s.step_blocks}>
-                <div className={s.step_block}>
+                <div className={s.step_block} data-aos="fade-down-right">
                   <img src={`assets/icons/${step.icon}`} alt="" />
                   <h3>{step.title}</h3>
                   <p>{step.description}</p>

@@ -19,7 +19,7 @@ export default function Contacts() {
       <p>Контакты</p>
       <h1>Связаться с нами</h1>
       <div className={s.contact_inner}>
-        <div className={s.contact_inner_block}>
+        <div className={s.contact_inner_block} data-aos="fade-up-right">
           <h2>Главный офис</h2>
           <div className={s.contact_inner_block_infos}>
             <div className={s.contact_inner_block_info}>
@@ -104,7 +104,7 @@ export default function Contacts() {
           </div>
         </div>
 
-        <div className={s.contact_inner_block}>
+        <div className={s.contact_inner_block} data-aos="fade-up-left">
           <h3>Пункт приема онлайн заказов в Delaware</h3>
 
           <div className={s.contact_inner_block_infos}>

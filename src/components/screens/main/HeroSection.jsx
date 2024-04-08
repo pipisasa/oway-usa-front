@@ -15,7 +15,7 @@ export default function HeroSection() {
   return (
     <>
       <div className={s.header_hero}>
-        <div className={s.heroSection_page}>
+        <div className={s.heroSection_page} data-aos="fade-up">
           <div className={`${s.heroSection_page_container} container`}>
             <div className={s.heroSection_info}>
               <h1>
@@ -36,7 +36,7 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      <div className={s.heroSection_img}>
+      <div className={s.heroSection_img} data-aos="fade-left">
         <img
           src="/assets/icons/earthAfrica.png"
           width={685}

@@ -4,7 +4,7 @@ import { Slider } from "@/components/partials/Slider";
 
 export default function Mission() {
   return (
-    <div className={`${s.mission} container`}>
+    <div className={`${s.mission} container`} data-aos="zoom-in-down">
       <span>Наша миссия</span>
       <div className={s.mission_header}>
         <h1>Легкость и доступность совершения покупок</h1>

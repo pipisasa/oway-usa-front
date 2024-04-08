@@ -59,7 +59,7 @@ export default function CostCalculator() {
 
   return (
     <div className={s.calc} style={calcStyle}>
-      <div className={`${s.calc_container} container`}>
+      <div className={`${s.calc_container} container`} data-aos="zoom-out-right">
         <h1>Калькулятор стоимости</h1>
         <div className={s.calc_inner}>
           <div className={s.calc_inner_forms}>
