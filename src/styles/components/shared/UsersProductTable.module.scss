@@ -1,5 +1,6 @@
 .product_table {
   position: relative;
+  overflow-x: scroll;
 
   .pagination {
     display: flex;
@@ -42,6 +43,7 @@
           padding: 24px;
           text-align: left;
           border-bottom: 1px solid #aed5f3;
+          text-wrap: nowrap;
         }
       }
     }
@@ -68,6 +70,10 @@
       }
     }
   }
+}
+
+.product_table::-webkit-scrollbar {
+  display: none; /* Скрывает скроллбары в Webkit-браузерах */
 }
 
 @media (max-width: 850px) {

@@ -27,7 +27,8 @@
 
   .exit {
     position: absolute;
-    right: 32px;
+    right: 16px;
+    top: 16px;
   }
 
   input {
@@ -84,6 +85,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 140px;
 
     img {
       border-radius: 12px;
@@ -103,6 +105,27 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .request_modal {
+    .left_block {
+      flex-direction: row;
+      width: 100%;
+    }
+    .flex_inputs {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .flex_inputs:first-child {
+      flex-direction: column;
+    }
+
+    .request_blocks {
+      flex-direction: column;
     }
   }
 }

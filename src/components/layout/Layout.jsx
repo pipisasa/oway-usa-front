@@ -5,11 +5,13 @@ import { useRouter } from "next/router";
 import AdminLayout from "../shared/admin/AdminLayout";
 import UsersLayout from "../shared/users/UserLayout";
 import UserMobileHeader from "../shared/users/UserMobileHeader";
+import useLogout from "@/hooks/auth/useLogout";
 
 export default function Layout({ children }) {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const path = router.pathname;
+  const logout = useLogout();
 
   useEffect(() => {
     const handleResize = () => {
