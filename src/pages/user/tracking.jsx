@@ -66,7 +66,7 @@ export default function TrackingPage() {
           <div>
             {detailedTrackingInfo.data.trackings[0].events.map(
               (event, index) => (
-                <div className={s.event}>
+                <div key={index} className={s.event}>
                   <div className={s.time}>
                     <h5>{new Date(event.datetime).toLocaleDateString()}</h5>
                     <span>{new Date(event.datetime).toLocaleTimeString()}</span>

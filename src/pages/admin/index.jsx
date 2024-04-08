@@ -1,7 +1,23 @@
+import ImportedKilograms from "@/components/shared/admin/charts/ImportedKilograms";
+import InvoicesIssued from "@/components/shared/admin/charts/InvoicesIsued";
+import UserCount from "@/components/shared/admin/charts/UserCount";
 import React from "react";
+import s from "@/styles/admin/StatPage.module.scss";
+import ImportedProducts from "@/components/shared/admin/charts/ImportedProducts";
 
 export default function AdminMainPage() {
-  return <div>главная</div>;
+  return (
+    <section className={s.stat_page}>
+      <div className={s.first_block}>
+        <UserCount />
+        <ImportedKilograms />
+      </div>
+      <div className={s.second_block}>
+        <ImportedProducts />
+        <InvoicesIssued />
+      </div>
+    </section>
+  );
 }
 
 export async function getServerSideProps(context) {

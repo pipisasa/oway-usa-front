@@ -1,5 +1,6 @@
 import React from "react";
 import s from "@/styles/screens/main/StepWork.module.scss";
+import { Slider } from "@/components/partials/Slider";
 
 const steps = [
   {
@@ -51,7 +52,7 @@ export default function StepWork() {
     <div className={s.step}>
       <div className={`${s.step_container} container`}>
         <span>Этапы работы</span>
-        <h2>Всего 5 простых шага</h2>
+        <h2>Всего 6 простых шага</h2>
         <div className={s.step_img}>
           <img
             src="assets/images/step_box.png"
@@ -72,6 +73,20 @@ export default function StepWork() {
             </div>
           </div>
         ))}
+        <Slider>
+          {steps.map((step) => (
+            <div key={step.id} className={s[`step_blocksa${step.id}`]}>
+              <span className={s.step_span}>{step.id}</span>
+              <div className={s.step_blocks}>
+                <div className={s.step_block}>
+                  <img src={`assets/icons/${step.icon}`} alt="" />
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Slider>
       </div>
     </div>
   );
