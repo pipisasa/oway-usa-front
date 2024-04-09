@@ -8,7 +8,6 @@ const useShops = (selectedCategory) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [products, setProducts] = useState([]);
-  const filtercategory = 2;
 
   useEffect(() => {
     fetchShops(selectedCategory);
@@ -62,6 +61,7 @@ const useShops = (selectedCategory) => {
         }
       );
 
+      window.location.reload();
       await fetchShops();
       setIsSuccess(true);
     } catch (error) {
@@ -120,6 +120,7 @@ const useShops = (selectedCategory) => {
           product.id === productId ? { ...product, ...updatedProduct } : product
         )
       );
+      window.location.reload();
     } catch (error) {
       setError(error.message);
     } finally {

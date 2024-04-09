@@ -43,23 +43,16 @@ export default function ShopsList({ selectedCategory, selectedCountry }) {
   if (isLoading) {
     return <Loading />;
   }
-
   return (
     <section className={s.cards_list}>
-      {products?.results
-        ?.filter(
-          (shop) =>
-            (!selectedCategory || shop.category.id === selectedCategory.id) &&
-            (!selectedCountry || shop.country.name === selectedCountry.name) // Фильтрация по стране
-        )
-        .map((shop, index) => (
-          <ShopCard
-            key={index}
-            shop={shop}
-            onDelete={handleDelete}
-            onEdit={handleUpdate}
-          />
-        ))}
+      {products?.results?.map((shop, index) => (
+        <ShopCard
+          key={index}
+          shop={shop}
+          onDelete={handleDelete}
+          onEdit={handleUpdate}
+        />
+      ))}
       {isEditing && (
         <EditShopsModal
           onUpdate={(formData) => {

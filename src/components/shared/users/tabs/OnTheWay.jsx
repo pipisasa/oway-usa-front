@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import s from "@/styles/components/shared/UsersProductTable.module.scss";
 import { Pagination } from "@nextui-org/react";
 import useWarehousesUser from "@/hooks/user/useWarehousesUser";
 import OnTheWayModal from "../../admin/modals/OnTheWayModal";
 
+const PAGE_SIZE = 5;
+
 export default function OnTheWay() {
-  const { warehouses } = useWarehousesUser();
+  const [currentPage, setCurrentPage] = useState(1);
+  const { warehouses, isLoading, fetchWarehouses } = useWarehousesUser(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
+
+  useEffect(() => {
+
+    fetchWarehouses(currentPage)
+  }, [currentPage]);
 
   const handleOpenModal = (item) => {
     setCurrentRequestData(item);
@@ -68,7 +76,12 @@ export default function OnTheWay() {
         </table>
       </div>
       <div className={s.pagination}>
-        <Pagination variant="bordered" total={10} initialPage={1} />
+        <Pagination
+            variant="bordered"
+            total={Math.ceil(warehouses.count / PAGE_SIZE)}
+            initialPage={currentPage}
+            onChange={(page) => setCurrentPage(page)}
+        />
       </div>
     </>
   );

@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useNotification from "../../../../hooks/admin/useNotification";
+import CustomFileInput from "@/components/partials/SelectPhoto";
 
 export default function NotificationsModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState(null);
+  const [icon1, setIcon1] = useState(null);
 
   const toggleModal = () => setIsOpen(!isOpen);
   const { addNotification } = useNotification();
-
+  const handle = (e) => {
+    console.log(e,43);
+    e.preventDefault();
+    e.stopPropagation();
+      setIcon(e)
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,7 +36,7 @@ export default function NotificationsModal() {
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <h3>Создать уведомление</h3>
-        <form onSubmit={handleSubmit} action="" className={s.notifications_form}>
+        <form  action="" className={s.notifications_form}>
           <div>
             <label htmlFor="">Заголовок</label>
             <input
@@ -50,17 +57,20 @@ export default function NotificationsModal() {
           </div>
           <div>
             <label htmlFor="">Картинка</label>
-            <input
-                type="file"
-                onChange={(e) => setIcon(e.target.files[0])}
-            />
+                 <input
+                    type="file"
+                    onChange={(e) => setIcon(e.target.files[0])}
+               />
+            
+          {/* <CustomFileInput onChange={(e) => handle(e)}/> */}
+            
           </div>
           <p>
             Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512
           </p>
         </form>
         <div className={s.btn_center}>
-          <button type="submit" onClick={handleSubmit} className={s.submit_btn}>
+          <button  onClick={handleSubmit} className={s.submit_btn}>
             Создать уведомление
           </button>
         </div>

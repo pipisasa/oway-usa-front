@@ -19,17 +19,12 @@ export default function ShopsCategory({ setSelectedCategory, selectedCategory })
     };
 
     const handleCategoryChange = (category) => {
-        setSelectedCategory(category);
-        const updatedCategories = categories.map((cat) => {
-            if (cat !== category) {
-                return { ...cat, checked: false };
-            } else {
-                return { ...cat, checked: true };
-            }
-        });
-        setCategories(updatedCategories);
+        if (selectedCategory.includes(category.id)) {
+            setSelectedCategory(selectedCategory.filter((id) => id !== category.id));
+        } else {
+            setSelectedCategory([...selectedCategory, category.id]);
+        }
     };
-
     return (
         <div className={s.category_block}>
             <h3>Категории</h3>
@@ -38,7 +33,7 @@ export default function ShopsCategory({ setSelectedCategory, selectedCategory })
                     <div className={s.checkboxes_block} key={category.id}>
                         <Checkbox
                             size="md"
-                            checked={selectedCategory === category}
+                            checked={selectedCategory.includes(category.id)}
                             onChange={() => handleCategoryChange(category)}
                         >
                             {category.name}
