@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import s from "@/styles/partials/Contact.module.scss";
 import Button from "./Button";
 import { getCookie } from "../../utils/cookieHelpers";
-import { Slider } from "./Slider";
+import { Slide, Slider } from "./Slider";
+// import { Copy } from './';
 
 export default function Contacts() {
   const [state, setState] = useState();
