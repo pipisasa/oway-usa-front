@@ -4,10 +4,15 @@ import useWarehouses from "../../../hooks/admin/useWarehouses";
 import Modal from "../Modal";
 import { RxCross2 } from "react-icons/rx";
 import Loading from "./Loading";
+import { Pagination } from "@nextui-org/react";
 
 export default function WarehousesProductsTable() {
-  const { warehouses, fetchWarehouses, isLoading, error } = useWarehouses();
+  const { warehouses, fetchWarehouses, isLoading, error, count } =
+    useWarehouses();
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     fetchWarehouses();
@@ -19,6 +24,16 @@ export default function WarehousesProductsTable() {
   const handleCloseModal = () => {
     setSelectedWarehouse(null);
   };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  useEffect(() => {
+    fetchWarehouses(currentPage);
+    setTotalPages(Math.ceil(count / 10));
+  }, [currentPage, count]);
+
   if (isLoading) {
     return <Loading />;
   }
@@ -42,7 +57,7 @@ export default function WarehousesProductsTable() {
           </tr>
         </thead>
         <tbody>
-          {warehouses?.results?.map((warehouse) => (
+          {warehouses.map((warehouse) => (
             <tr key={warehouse.id}>
               <td>{warehouse?.name}</td>
               <td>{warehouse?.address}</td>
@@ -62,6 +77,13 @@ export default function WarehousesProductsTable() {
           ))}
         </tbody>
       </table>
+      <div className={s.pagination}>
+        <Pagination
+          current={currentPage}
+          total={totalPages}
+          onChange={handlePageChange}
+        />
+      </div>
       {selectedWarehouse && (
         <div className={s.modal}>
           <Modal isOpen={selectedWarehouse} onClose={handleCloseModal}>

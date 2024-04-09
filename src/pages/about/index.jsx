@@ -5,8 +5,8 @@ import AboutMission from "../../components/screens/main/AboutMission";
 import MissionTarget from "../../components/screens/main/MissionTarget";
 import AboutBusiness from "../../components/screens/main/AboutBusiness";
 import AboutWorld from "../../components/screens/main/AboutWorld";
-import Faq from "../../components/partials/about/Faq";
 import AboutClient from "../../components/screens/main/AboutClient";
+import Faq from "@/components/partials/Faq";
 
 export default function AboutPage() {
   return (
