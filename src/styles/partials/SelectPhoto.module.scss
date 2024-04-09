@@ -1,0 +1,29 @@
+.fileInput {
+  display: none;
+}
+.fileInputbtn {
+    display: flex;
+    padding: 12px 20px;
+    gap: 12px;
+    align-self: stretch;
+    border-radius: 8px;
+    border: 1px solid var(--gray, #A4A4A4);
+    text-align: left;
+
+    .button {
+        display: flex;
+        justify-content: left;
+        color: var(--gray, #A4A4A4);
+        font-family: Helvetica;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    img {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+

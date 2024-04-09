@@ -32,7 +32,6 @@ const useWarehousesUser = (currentPage) => {
 
   return {
     warehouses,
-    addWarehouses,
     fetchWarehouses,
     error,
     isLoading,
