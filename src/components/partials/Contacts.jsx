@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import s from '@/styles/partials/Contact.module.scss';
-import Button from './Button';
-import { getCookie } from '../../utils/cookieHelpers';
-import { Slide, Slider } from './Slider';
-// import { Copy } from './';
+import React, { useEffect, useRef, useState } from "react";
+import s from "@/styles/partials/Contact.module.scss";
+import Button from "./Button";
+import { getCookie } from "../../utils/cookieHelpers";
+import { Slider } from "./Slider";
 
 export default function Contacts() {
   const [state, setState] = useState();
-  const isAuthenticated = !!getCookie('accessToken');
+  const isAuthenticated = !!getCookie("accessToken");
   const slideWidth = 700;
   const sliderRef = useRef(null);
 
@@ -15,7 +14,7 @@ export default function Contacts() {
     if (sliderRef.current) {
       sliderRef.current.scrollBy({
         left: -slideWidth,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -24,7 +23,7 @@ export default function Contacts() {
     if (sliderRef.current) {
       sliderRef.current.scrollBy({
         left: slideWidth,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -36,54 +35,54 @@ export default function Contacts() {
   }, [isAuthenticated]);
   const warehouses = [
     {
-      img: 'assets/icons/footer/usa.svg',
-      title: 'Главный офис',
-      address: '4730d Kimball Ave',
-      state: 'Illinois',
-      phone: '872 710 07 10',
-      city: 'Chicago',
-      zip: '60625',
-      email: 'owayusa1@gmail.com',
+      img: "assets/icons/footer/usa.svg",
+      title: "Главный офис",
+      address: "4730d Kimball Ave",
+      state: "Illinois",
+      phone: "872 710 07 10",
+      city: "Chicago",
+      zip: "60625",
+      email: "owayusa1@gmail.com",
     },
     {
-      img: 'assets/icons/footer/usa.svg',
-      title: 'Пункты приема в Чикаго:',
-      address: '1550 Oak Brook',
-      state: 'Illinois',
-      phone: '872 710 07 10',
-      city: '205',
-      zip: '60625',
-      email: 'owayusa1@gmail.com',
+      img: "assets/icons/footer/usa.svg",
+      title: "Пункты приема в Чикаго:",
+      address: "1550 Oak Brook",
+      state: "Illinois",
+      phone: "872 710 07 10",
+      city: "205",
+      zip: "60625",
+      email: "owayusa1@gmail.com",
     },
     {
-      img: 'assets/icons/footer/usa.svg',
-      title: 'Пункт приема онлайн заказов в Delaware',
-      address: '4730d Kimball Ave',
-      state: 'Turkey',
-      phone: '872 710 07 10',
-      city: 'Chicago',
-      zip: '34130',
-      email: 'owayusa1@gmail.com',
+      img: "assets/icons/footer/usa.svg",
+      title: "Пункт приема онлайн заказов в Delaware",
+      address: "4730d Kimball Ave",
+      state: "Turkey",
+      phone: "872 710 07 10",
+      city: "Chicago",
+      zip: "34130",
+      email: "owayusa1@gmail.com",
     },
     {
-      img: 'assets/icons/footer/turkey.svg',
-      title: 'Адрес склада в Турции',
-      address: 'Nişanca, Hemşire Sk.  ',
-      state: 'Illinois',
-      phone: '872 710 07 10',
-      city: 'Istanbul',
-      zip: '34130',
-      email: 'owayusa1@gmail.com',
+      img: "assets/icons/footer/turkey.svg",
+      title: "Адрес склада в Турции",
+      address: "Nişanca, Hemşire Sk.  ",
+      state: "Illinois",
+      phone: "872 710 07 10",
+      city: "Istanbul",
+      zip: "34130",
+      email: "owayusa1@gmail.com",
     },
   ];
 
   const copyToClipboard = (data) => {
     navigator.clipboard.writeText(data).then(
       () => {
-        alert('Данные скопированы в буфер обмена!');
+        alert("Данные скопированы в буфер обмена!");
       },
       (err) => {
-        console.error('Ошибка при копировании: ', err);
+        console.error("Ошибка при копировании: ", err);
       }
     );
   };
@@ -98,7 +97,8 @@ export default function Contacts() {
       height="32"
       viewBox="0 0 32 32"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <rect width="32" height="32" rx="16" fill="#027DDB" />
       <path
         opacity="0.997"
@@ -137,13 +137,14 @@ export default function Contacts() {
         className={s.contact_inner}
         ref={sliderRef}
         style={{
-          overflowX: 'hidden',
-          whiteSpace: 'nowrap',
-          alignSelf: 'stretch',
-          scrollSnapType: 'x mandatory',
-        }}>
-        {warehouses.map((warehouse) => (
-          <div className={s.contact_inner_block}>
+          overflowX: "hidden",
+          whiteSpace: "nowrap",
+          alignSelf: "stretch",
+          scrollSnapType: "x mandatory",
+        }}
+      >
+        {warehouses.map((warehouse, index) => (
+          <div key={index} className={s.contact_inner_block}>
             <div className={s.contact_inner_block_text}>
               <div className={s.contact_inner_block_text_inner}>
                 <img src={warehouse.img} alt="" />
@@ -195,7 +196,7 @@ export default function Contacts() {
         ))}
         <Slider>
           {warehouses.map((warehouse, index) => (
-            <div className={s.contact_inner_block1}>
+            <div key={index} className={s.contact_inner_block1}>
               <div className={s.contact_inner_block_text}>
                 <div className={s.contact_inner_block_text_inner}>
                   <img src={warehouse.img} alt="" />
@@ -203,7 +204,8 @@ export default function Contacts() {
                 </div>
                 <div
                   onClick={() => handleCopyClick(warehouse)}
-                  className={s.svg}>
+                  className={s.svg}
+                >
                   <Copy />
                 </div>
               </div>
