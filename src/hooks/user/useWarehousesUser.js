@@ -28,6 +28,7 @@ const useWarehousesUser = (currentPage) => {
         } finally {
             setIsLoading(false);
         }
+      }
 
   return {
     warehouses,
@@ -38,4 +39,4 @@ const useWarehousesUser = (currentPage) => {
   };
 };
 
-export default useWarehousesUser;
+export default useWarehousesUser
