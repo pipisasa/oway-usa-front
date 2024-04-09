@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import s from '@/styles/shared/main/CostCalculator.module.scss';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect } from "react";
+import s from "@/styles/shared/main/CostCalculator.module.scss";
+import { useRouter } from "next/router";
 
 export default function CostCalculator() {
   const [formData, setFormData] = useState({
-    fromCountry: '',
-    toCountry: '',
+    fromCountry: "",
+    toCountry: "",
     width: 0,
     length: 0,
     height: 0,
     weight: 0,
-    deliveryType: '',
+    deliveryType: "",
   });
   const router = useRouter();
   const [cost, setCost] = useState(0);
-  const [deliveryTime, setDeliveryTime] = useState('');
+  const [deliveryTime, setDeliveryTime] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,20 +34,20 @@ export default function CostCalculator() {
     const actualWeight = Math.max(volumeWeight, weight);
 
     let rate = 0;
-    let time = '';
+    let time = "";
 
-    if (formData.fromCountry === 'США' && formData.toCountry === 'РФ') {
-      rate = formData.deliveryType === 'стандарт' ? 16 : 12;
-      time = formData.deliveryType === 'стандарт' ? '10-15 дней' : '7-9 дней';
+    if (formData.fromCountry === "США" && formData.toCountry === "РФ") {
+      rate = formData.deliveryType === "стандарт" ? 16 : 12;
+      time = formData.deliveryType === "стандарт" ? "10-15 дней" : "7-9 дней";
     } else if (
-      formData.fromCountry === 'Турция' &&
-      formData.toCountry === 'РФ'
+      formData.fromCountry === "Турция" &&
+      formData.toCountry === "РФ"
     ) {
-      rate = formData.deliveryType === 'стандарт' ? 9.5 : 12;
-      time = formData.deliveryType === 'стандарт' ? '5-7 дней' : '2-3 дня';
-    } else if (formData.fromCountry === 'США' && formData.toCountry === 'КР') {
+      rate = formData.deliveryType === "стандарт" ? 9.5 : 12;
+      time = formData.deliveryType === "стандарт" ? "5-7 дней" : "2-3 дня";
+    } else if (formData.fromCountry === "США" && formData.toCountry === "КР") {
       rate = 12;
-      time = '7-9 дней';
+      time = "7-9 дней";
     }
 
     setCost(rate * actualWeight);
@@ -55,18 +55,19 @@ export default function CostCalculator() {
   }, [formData]);
 
   const calcStyle = {};
-  if (router.pathname === '/') {
-    calcStyle.background = 'var(--bue_light_2, #fff)';
-  } else if (router.pathname === '/calculator') {
-    calcStyle.background = 'var(--bue_light_2, #f7f9fc)';
-    calcStyle.paddingTop = '50px';
+  if (router.pathname === "/") {
+    calcStyle.background = "var(--bue_light_2, #fff)";
+  } else if (router.pathname === "/calculator") {
+    calcStyle.background = "var(--bue_light_2, #f7f9fc)";
+    calcStyle.paddingTop = "50px";
   }
 
   return (
     <div className={s.calc} style={calcStyle}>
       <div
         className={`${s.calc_container} container`}
-        data-aos="zoom-out-right">
+        data-aos="zoom-out-right"
+      >
         <h1>Калькулятор стоимости</h1>
         <div className={s.calc_inner}>
           <div className={s.calc_inner_forms}>
@@ -76,7 +77,8 @@ export default function CostCalculator() {
                 <select
                   name="fromCountry"
                   onChange={handleChange}
-                  defaultValue="">
+                  defaultValue=""
+                >
                   <option value="" disabled>
                     Выберите страну
                   </option>
@@ -89,7 +91,8 @@ export default function CostCalculator() {
                 <select
                   name="toCountry"
                   onChange={handleChange}
-                  defaultValue="">
+                  defaultValue=""
+                >
                   <option value="" disabled>
                     Выберите страну
                   </option>
@@ -100,7 +103,8 @@ export default function CostCalculator() {
             </div>
             <div
               className={s.calc_inner_forms_inputs}
-              style={{ marginTop: '20px' }}>
+              style={{ marginTop: "20px" }}
+            >
               <div>
                 <label>Ширина (см)</label>
                 <input
@@ -138,13 +142,14 @@ export default function CostCalculator() {
                 onChange={handleChange}
               />
             </div>
-            <div className={s.select} style={{ marginTop: '20px' }}>
+            <div className={s.select} style={{ marginTop: "20px" }}>
               <label>Выбор типа доставки</label>
               <select
                 name="deliveryType"
                 onChange={handleChange}
                 defaultValue=""
-                style={{ marginTop: '16px' }}>
+                style={{ marginTop: "16px" }}
+              >
                 <option value="" disabled>
                   Выберите тип доставки
                 </option>
