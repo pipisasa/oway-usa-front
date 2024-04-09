@@ -38,6 +38,17 @@
         font-weight: 700;
       }
 
+      .contact_inner_block_text_inner {
+        display: flex;
+        gap: 20px;
+        text-wrap: nowrap;
+        align-items: center;
+      }
+      .contact_inner_block_text {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
       .contact_inner_block_auth {
         width: 90%;
         height: 82%;

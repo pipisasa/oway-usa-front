@@ -4,6 +4,7 @@ import s from "@/styles/pages/auth/Login.module.scss";
 import Link from "next/link";
 import useLogin from "@/hooks/auth/useLogin";
 import { useRouter } from "next/router";
+import GoogleLoginButton from "@/hooks/auth/GoogleLoginButton";
 
 export default function Login() {
   const { login, error } = useLogin();
@@ -81,8 +82,9 @@ export default function Login() {
             <div></div>
           </div>
           <Link href="/api/auth/google" className={s.google}>
-            <img src="/assets/icons/google.svg" alt="google" />
-            <p>Google</p>
+            {/* <img src="/assets/icons/google.svg" alt="google" />
+            <p>Google</p> */}
+          <GoogleLoginButton className={s.google}/>
           </Link>
           <div className={s.submit_login}>
             <button type="submit">

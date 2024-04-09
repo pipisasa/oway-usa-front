@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import s from "@/styles/partials/Contact.module.scss";
-import Button from "./Button";
-import { getCookie } from "../../utils/cookieHelpers";
-import { Slide, Slider } from "./Slider";
+import React, { useEffect, useState } from 'react';
+import s from '@/styles/partials/Contact.module.scss';
+import Button from './Button';
+import { getCookie } from '../../utils/cookieHelpers';
+import { Slide, Slider } from './Slider';
 
 export default function Contacts() {
   const [state, setState] = useState();
-  const isAuthenticated = !!getCookie("accessToken");
+  const isAuthenticated = !!getCookie('accessToken');
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -20,7 +20,13 @@ export default function Contacts() {
       <h1>Связаться с нами</h1>
       <div className={s.contact_inner}>
         <div className={s.contact_inner_block} data-aos="fade-up-right">
-          <h2>Главный офис</h2>
+          <div className={s.contact_inner_block_text}>
+            <div className={s.contact_inner_block_text_inner}>
+              <img src="assets/icons/footer/usa.svg" alt="" />
+              <h2>Главный офис</h2>
+            </div>
+            <img src="assets/icons/footer/copy.svg" alt="" />
+          </div>
           <div className={s.contact_inner_block_infos}>
             <div className={s.contact_inner_block_info}>
               <img src="assets/icons/contact_address.svg" alt="" />
@@ -151,7 +157,7 @@ export default function Contacts() {
                 <span>
                   Адрес онлайн заказов в Delaware <br /> после регистрации
                 </span>
-                <Button path={"auth/login"} button="Зарегистрироваться" />
+                <Button path={'auth/login'} button="Зарегистрироваться" />
               </div>
             </div>
           ) : null}
@@ -290,7 +296,7 @@ export default function Contacts() {
                   <span>
                     Адрес онлайн заказов в Delaware <br /> после регистрации
                   </span>
-                  <Button path={"auth/login"} button="Зарегистрироваться" />
+                  <Button path={'auth/login'} button="Зарегистрироваться" />
                 </div>
               </div>
             ) : null}
