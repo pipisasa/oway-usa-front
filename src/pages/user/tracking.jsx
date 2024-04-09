@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import s from "@/styles/pages/user/TrackingPage.module.scss";
 import axios from "axios";
+import Loading from "@/components/shared/admin/Loading";
 
 export default function TrackingPage() {
   const [trackingNumber, setTrackingNumber] = useState("");
@@ -25,7 +26,6 @@ export default function TrackingPage() {
       );
 
       setDetailedTrackingInfo(response.data);
-      console.log(response.data);
     } catch (err) {
       console.error("Ошибка при запросе к Ship24 API:", err);
       setError(
@@ -59,7 +59,7 @@ export default function TrackingPage() {
         </form>
       )}
 
-      {loading && <p>Загрузка...</p>}
+      {loading && <Loading />}
       {error && <p>{error}</p>}
       {detailedTrackingInfo && (
         <section className={s.track_results}>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import s from "@/styles/users/ChangePassword.module.scss";
 import useChangePassword from "@/hooks/user/useChangePassword";
+import Loading from "../../admin/Loading";
 
 export default function ChangePassword() {
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -24,6 +25,10 @@ export default function ChangePassword() {
     });
     setShowNewPassword(false);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className={s.change_password_block}>

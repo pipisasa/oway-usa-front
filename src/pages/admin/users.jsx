@@ -4,6 +4,7 @@ import { Pagination } from "@nextui-org/react";
 import Modal from "../../components/shared/Modal";
 import { RxCross2 } from "react-icons/rx";
 import useUsersAdmin from "@/hooks/admin/useUsers";
+import Loading from "@/components/shared/admin/Loading";
 
 const PAGE_SIZE = 7;
 
@@ -19,7 +20,7 @@ export default function AdminUsersPage() {
   }, [currentPage]);
 
   if (isLoading) {
-    return <div>Загрузка...</div>;
+    return <Loading />;
   }
 
   return (
@@ -35,20 +36,24 @@ export default function AdminUsersPage() {
           </tr>
         </thead>
         <tbody>
-          {users?.results?.filter((item) => item.id !== 1)
-          .map((user) => (
-            <tr key={user.id}>
-              <td>{user.first_name}</td>
-              <td>{user.last_name}</td>
-              <td>{user.email}</td>
-              <td>{user.phone_number}</td>
-              <td>
-                <button className={s.btn} onClick={() => setSelectedUser(user)}>
-                  Подробнее
-                </button>
-              </td>
-            </tr>
-          ))}
+          {users?.results
+            ?.filter((item) => item.id !== 1)
+            .map((user) => (
+              <tr key={user.id}>
+                <td>{user.first_name}</td>
+                <td>{user.last_name}</td>
+                <td>{user.email}</td>
+                <td>{user.phone_number}</td>
+                <td>
+                  <button
+                    className={s.btn}
+                    onClick={() => setSelectedUser(user)}
+                  >
+                    Подробнее
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
       {selectedUser && (

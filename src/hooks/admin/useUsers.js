@@ -41,14 +41,14 @@ const useUsersAdmin = (currentPage) => {
   }, []);
 
   const addUsers = async (
-      first_name,
-      last_name,
-      email,
-      phone_number,
-      password,
-      password2,
-      front_image,
-      back_image
+    first_name,
+    last_name,
+    email,
+    phone_number,
+    password,
+    password2,
+    front_image,
+    back_image
   ) => {
     const accessToken = getCookie("accessToken");
     const formData = new FormData();
@@ -73,6 +73,7 @@ const useUsersAdmin = (currentPage) => {
       });
       await fetchUsers();
       setIsSuccess(true);
+      window.location.reload();
     } catch (error) {
       setError(error.message);
       setIsSuccess(false);

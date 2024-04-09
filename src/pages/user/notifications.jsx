@@ -3,10 +3,15 @@ import s from "@/styles/pages/user/UserNotification.module.scss";
 import NotificationsCard from "@/components/shared/users/NotificationsCard";
 import NotificationsSettings from "@/components/shared/users/settings/NotificationsSettings";
 import useNotification from "../../hooks/user/useNotification";
+import Loading from "@/components/shared/admin/Loading";
 
 export default function UserNotificationPage() {
-  const { products, updateCheckAllNotification } = useNotification();
+  const { products, updateCheckAllNotification, isLoading } = useNotification();
   const [showAllNotifications, setShowAllNotifications] = useState(true);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <section className={s.notifications_page}>

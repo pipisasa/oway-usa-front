@@ -3,6 +3,7 @@ import s from "@/styles/pages/admin/AdminRequests.module.scss";
 import { Pagination } from "@nextui-org/react";
 import useRequests from "@/hooks/admin/useRequests";
 import RequestsModal from "@/components/shared/admin/modals/RequestsModal";
+import Loading from "@/components/shared/admin/Loading";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -17,7 +18,7 @@ export default function IncommingRequests() {
     setIsModalVisible(true);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
 
   return (

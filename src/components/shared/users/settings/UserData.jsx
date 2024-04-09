@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import s from "@/styles/users/UserData.module.scss";
 import useUserData from "@/hooks/user/useUserData";
+import Loading from "../../admin/Loading";
 
 export default function UserData() {
   const { userData, loading, error, updateUserData } = useUserData();
@@ -57,6 +58,10 @@ export default function UserData() {
       [name]: value,
     }));
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <form className={s.form} onSubmit={handleSave}>

@@ -37,21 +37,19 @@ const useRequests = (currentPage) => {
   const updateRequest = async (id, updatedData) => {
     const accessToken = getCookie("accessToken");
     try {
-      const response = await fetch(
-          `${API_URL}/api/purchase/update/${id}/`,
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify(updatedData),
-          }
-      );
+      const response = await fetch(`${API_URL}/api/purchase/update/${id}/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(updatedData),
+      });
 
       if (!response.ok) {
         throw new Error(`Failed to update. Status: ${response.status}`);
       }
+      window.location.reload();
     } catch (error) {
       console.error("Update error:", error);
     }

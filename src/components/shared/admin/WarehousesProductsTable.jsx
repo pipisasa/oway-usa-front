@@ -3,6 +3,7 @@ import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import useWarehouses from "../../../hooks/admin/useWarehouses";
 import Modal from "../Modal";
 import { RxCross2 } from "react-icons/rx";
+import Loading from "./Loading";
 
 export default function WarehousesProductsTable() {
   const { warehouses, fetchWarehouses, isLoading, error } = useWarehouses();
@@ -19,7 +20,7 @@ export default function WarehousesProductsTable() {
     setSelectedWarehouse(null);
   };
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {
