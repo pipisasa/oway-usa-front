@@ -68,13 +68,13 @@ export default function Footer() {
 
             <div className={s.social}>
               <Link target="__blank" href="https://www.instagram.com/oway_usa">
-                <img src="/assets/icons/footer/instagram.svg" alt="instagram" />
+                <img src="/assets/icons/instagram4.svg" alt="instagram" />
               </Link>
               <Link target="__blank" href="https://youtube.com/@owayusa">
-                <img src="/assets/icons/footer/youtube.svg" alt="youtube" />
+                <img src="/assets/icons/youtube2.svg" alt="youtube" />
               </Link>
               <Link target="__blank" href="https://www.tiktok.com/@owayusa1">
-                <img src="/assets/icons/footer/tik-tok.svg" alt="tiktok" />
+                <img src="/assets/icons/tiktok.svg" alt="tiktok" />
               </Link>
             </div>
           </div>

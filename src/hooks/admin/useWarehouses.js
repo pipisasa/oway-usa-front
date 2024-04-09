@@ -9,18 +9,24 @@ const useWarehouses = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [warehouses, setWarehouses] = useState([]);
+  const [count, setCount] = useState(0);
 
-  const fetchWarehouses = async () => {
+  const fetchWarehouses = async (page = 1) => {
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${API_URL}/api/warehouses/list/`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      setWarehouses(response.data);
+      const response = await axios.get(
+        `${API_URL}/api/warehouses/list/?cursor=cD0xNA%3D%3D&page=${page}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const data = response.data;
+      setWarehouses(data.results);
+      setCount(data.count);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -98,6 +104,7 @@ const useWarehouses = () => {
     fetchWarehouses,
     error,
     isLoading,
+    count,
   };
 };
 

@@ -1,10 +1,10 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import s from "@/styles/pages/auth/Login.module.scss";
-import Link from "next/link";
-import useLogin from "@/hooks/auth/useLogin";
-import { useRouter } from "next/router";
-import GoogleLoginButton from "@/hooks/auth/GoogleLoginButton";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import s from '@/styles/pages/auth/Login.module.scss';
+import Link from 'next/link';
+import useLogin from '@/hooks/auth/useLogin';
+import { useRouter } from 'next/router';
+import GoogleLoginButton from '@/hooks/auth/GoogleLoginButton';
 
 export default function Login() {
   const { login, error } = useLogin();
@@ -31,19 +31,19 @@ export default function Login() {
         data-aos-duration="500"
       />
       <section className={s.login_section}>
-        <div onClick={() => router.push("/")} className={s.logo}>
+        <div onClick={() => router.push('/')} className={s.logo}>
           <img src="/assets/icons/owayUSE.svg" alt="OWAY USA" />
         </div>
         <h1>Авторизация</h1>
         <form className={s.login_form} onSubmit={handleSubmit(onSubmitHandler)}>
           <div className={s.login_inputs}>
-            <div className={`${errors.email ? s.error : ""}`}>
+            <div className={`${errors.email ? s.error : ''}`}>
               <label htmlFor="email">Электронная почта</label>
               <input
                 type="email"
                 id="email"
                 placeholder="Введите почту"
-                {...register("email", { required: true })}
+                {...register('email', { required: true })}
               />
               {errors.email && (
                 <span className={s.error}>
@@ -51,13 +51,13 @@ export default function Login() {
                 </span>
               )}
             </div>
-            <div className={`${errors.password ? s.error : ""}`}>
+            <div className={`${errors.password ? s.error : ''}`}>
               <label htmlFor="password">Пароль</label>
               <input
                 type="password"
                 id="password"
                 placeholder="Введите пароль"
-                {...register("password", { required: true })}
+                {...register('password', { required: true })}
               />
               {errors.password && (
                 <spanz className={s.error}>
@@ -84,7 +84,7 @@ export default function Login() {
           <Link href="/api/auth/google" className={s.google}>
             {/* <img src="/assets/icons/google.svg" alt="google" />
             <p>Google</p> */}
-          <GoogleLoginButton className={s.google}/>
+            <GoogleLoginButton className={s.google} />
           </Link>
           <div className={s.submit_login}>
             <button type="submit">
@@ -92,7 +92,7 @@ export default function Login() {
               <img src="/assets/icons/next-icon.svg" alt="next" />
             </button>
             <span>
-              Не имеете аккаунта?{" "}
+              Не имеете аккаунта?{' '}
               <Link href="/auth/register">Создать аккаунт.</Link>
             </span>
           </div>
