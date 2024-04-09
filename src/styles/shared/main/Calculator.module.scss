@@ -6,6 +6,12 @@
     border-radius: 8px;
     border: 1px solid var(--gray, #a4a4a4);
     width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('/assets/icons/selecter.svg');
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
   }
 
   button {
