@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import s from "./qwe.module.scss";
+import s from './qwe.module.scss';
 
 export const Slider = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,18 +18,22 @@ export const Slider = ({ children }) => {
     const touchDiff = touchEndX - touchStartX;
     const threshold = 50;
     if (touchDiff > threshold) {
-      nextSlide();
-    } else if (touchDiff < -threshold) {
       prevSlide();
+    } else if (touchDiff < -threshold) {
+      nextSlide();
     }
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === children.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === children.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? children.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? children.length - 1 : prevIndex - 1
+    );
   };
 
   const handleIndicatorClick = (index) => {
@@ -37,12 +41,12 @@ export const Slider = ({ children }) => {
   };
 
   return (
-    <div className={s.slider}
-    onTouchStart={handleTouchStart}
-    onTouchMove={handleTouchMove}
-    onTouchEnd={handleTouchEnd}
-    data-aos="fade-up-right"
-    >
+    <div
+      className={s.slider}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      data-aos="fade-up-right">
       {children[currentIndex]}
       <div className={s.indicators}>
         {children.map((child, index) => (
