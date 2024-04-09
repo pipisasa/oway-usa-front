@@ -4,11 +4,13 @@ import s from "@/styles/components/shared/cards/BankCards.module.scss";
 import useBillingData from "../../../hooks/billing/useBillingData";
 import BankCardsEditModal from "../users/modals/BankCardsEditModal";
 import BankCardsModal from "../users/modals/BankCardsModal";
+import Loading from "./Loading";
 
 export default function BankCardsList() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const { billingData, deleteBilling, fetchUserData } = useBillingData();
+  const { billingData, deleteBilling, fetchUserData, loading } =
+    useBillingData();
 
   useEffect(() => {
     if (!billingData) {
@@ -27,6 +29,10 @@ export default function BankCardsList() {
     setSelectedCard(card);
     setIsEditModalOpen(true);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className={s.cards_list}>

@@ -4,6 +4,7 @@ import OnTheWay from "@/components/shared/users/tabs/OnTheWay";
 import TableTabs from "@/components/shared/users/tabs/TableTabs";
 import Delivered from "@/components/shared/users/tabs/Delivered";
 import useUserData from "@/hooks/user/useUserData";
+import Loading from "@/components/shared/admin/Loading";
 
 export default function UserMainPage() {
   const [activeTab, setActiveTab] = useState("onTheWay");
@@ -17,7 +18,7 @@ export default function UserMainPage() {
     <section className={s.user_page}>
       <div className={s.user_info}>
         {loading ? (
-          <div>Loading...</div>
+          <Loading />
         ) : error ? (
           <div>Error: {error}</div>
         ) : (
@@ -36,7 +37,7 @@ export default function UserMainPage() {
               </p>
               <p>
                 <img src="/assets/icons/locations.svg" alt="address" />
-                {userData?.address}
+                {userData.address ? userData?.address : "Адрес не указан"}
               </p>
             </div>
           </>

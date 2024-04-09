@@ -1,4 +1,5 @@
 import BankCardsList from "@/components/shared/admin/BankCardsList";
+import Loading from "@/components/shared/admin/Loading";
 import React from "react";
 
 export default function BilingPage() {

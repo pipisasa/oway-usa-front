@@ -17,7 +17,6 @@ export default function Delivered() {
   const is_paid = true;
   return (
     <>
-      {" "}
       <div className={s.product_table}>
         {isModalVisible && (
           <OnTheWayModal
