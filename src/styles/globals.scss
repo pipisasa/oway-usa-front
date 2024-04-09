@@ -24,6 +24,7 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 :focus,
 :active {
   outline: none;
@@ -71,14 +72,12 @@ body {
   .container {
     padding: 20px 40px;
   }
-  br {
-    display: none;
-  }
 }
 
 @media (max-width: 768px) {
   .container {
     padding: 20px 20px;
+    overflow: hidden !important;
   }
 }
 

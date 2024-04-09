@@ -18,14 +18,11 @@ const useUserData = () => {
       }
 
       try {
-        const response = await fetch(
-            `${API_URL}/api/users/profile/`,
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
-        );
+        const response = await fetch(`${API_URL}/api/users/profile/`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
@@ -60,14 +57,11 @@ const useUserData = () => {
     }
 
     try {
-      const response = await fetch(
-          `${API_URL}/api/users/profile/`,
-          {
-            method: "PATCH",
-            headers,
-            body: data,
-          }
-      );
+      const response = await fetch(`${API_URL}/api/users/profile/`, {
+        method: "PATCH",
+        headers,
+        body: data,
+      });
 
       if (!response.ok) {
         throw new Error("Failed to update user data");
@@ -75,6 +69,7 @@ const useUserData = () => {
 
       const updatedData = await response.json();
       setUserData(updatedData);
+      window.location.reload();
     } catch (error) {
       setError(error.message);
     }

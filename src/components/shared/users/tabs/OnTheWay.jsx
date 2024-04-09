@@ -24,54 +24,57 @@ export default function OnTheWay() {
 
   const is_paid = true;
   return (
-    <div className={s.product_table}>
-      {isModalVisible && (
-        <OnTheWayModal
-          data={currentRequestData}
-          onClose={() => setIsModalVisible(false)}
-        />
-      )}
-      <table>
-        <thead>
-          <tr>
-            <th>Изображение</th>
-            <th>Название товара</th>
-            <th>Цена</th>
-            <th>Дата покупки товара</th>
-            <th>Статус оплаты</th>
-            <th>Статус посылки</th>
-          </tr>
-        </thead>
-        <tbody>
-          {warehouses?.results?.map((item, index) => (
-            <tr key={index}>
-              <td>
-                <img
-                  width={64}
-                  src={`http://18.222.184.72:8000/${item.image}`}
-                  alt="product img"
-                />
-              </td>
-              <td>{item.name}</td>
-              <td>{item.price}</td>
-              <td>21.04.2024</td>
-              <td>
-                {is_paid === false ? (
-                  <p style={{ color: "red" }}>Не оплачено</p>
-                ) : (
-                  <p style={{ color: "#06DB02" }}>Оплечено</p>
-                )}
-              </td>
-              <td>{item.status.name}</td>
-              <td>
-                <button onClick={() => handleOpenModal(item)}>
-                  <img width={36} src="/assets/icons/icon.svg" alt="more" />
-                </button>
-              </td>
+    <>
+      <div className={s.product_table}>
+        {isModalVisible && (
+          <OnTheWayModal
+            data={currentRequestData}
+            onClose={() => setIsModalVisible(false)}
+          />
+        )}
+        <table>
+          <thead>
+            <tr>
+              <th>Изображение</th>
+              <th>Название товара</th>
+              <th>Цена</th>
+              <th>Дата покупки товара</th>
+              <th>Статус оплаты</th>
+              <th>Статус посылки</th>
+              <th>Подробнее</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {warehouses?.results?.map((item, index) => (
+              <tr key={index}>
+                <td>
+                  <img
+                    width={64}
+                    src={`http://18.222.184.72:8000/${item.image}`}
+                    alt="product img"
+                  />
+                </td>
+                <td>{item.name}</td>
+                <td>{item.price}</td>
+                <td>21.04.2024</td>
+                <td>
+                  {is_paid === false ? (
+                    <p style={{ color: "red" }}>Не оплачено</p>
+                  ) : (
+                    <p style={{ color: "#06DB02" }}>Оплечено</p>
+                  )}
+                </td>
+                <td>{item.status.name}</td>
+                <td>
+                  <button onClick={() => handleOpenModal(item)}>
+                    <img width={36} src="/assets/icons/icon.svg" alt="more" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <div className={s.pagination}>
         <Pagination
             variant="bordered"
@@ -80,6 +83,6 @@ export default function OnTheWay() {
             onChange={(page) => setCurrentPage(page)}
         />
       </div>
-    </div>
+    </>
   );
 }

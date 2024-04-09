@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import s from "@/styles/pages/admin/AdminNotificationsPage.module.scss";
 import useNotification from "../../hooks/admin/useNotification";
 import NotificationsEditModal from "../../components/shared/admin/modals/NotificationsEditModal";
+import Loading from "@/components/shared/admin/Loading";
 
 export default function AdminNotificationPage() {
   const { products, deleteNotification, updateNotification, isLoading } =
@@ -38,46 +39,43 @@ export default function AdminNotificationPage() {
     }
   };
   if (isLoading) {
-    return <div>Загрузка...</div>;
+    return <Loading />;
   }
 
   return (
-
-        <div className={s.noti_page}>
-          {products.map((product, index) => (
-              <div key={index} className={s.notification}>
-                <img src={product.icon} alt="" />
-                <div className={s.text}>
-                  <h3>{product.title}</h3>
-                  <p>{product.description}</p>
-                </div>
-                <div>
-                  <button onClick={() => handleDelete(product.id)}>
-                    <img src="/assets/icons/delete.svg" alt="" />
-                  </button>
-                  <button
-                      className={s.button}
-                      onClick={() => handleUpdate(product.id)}
-                  >
-                    <img src="/assets/icons/edit.svg" alt="" />
-                  </button>
-                </div>
-              </div>
-          ))}
-          {isEditing && (
-              <NotificationsEditModal
-                  onUpdate={(formData) => {
-                    updateNotification(selectedNotification.id, formData);
-                    toggleModal(false);
-                  }}
-                  isOpen={isModalOpen}
-                  onClose={() => toggleModal(false)}
-                  notification={selectedNotification}
-              />
-          )}
+    <div className={s.noti_page}>
+      {products.map((product, index) => (
+        <div key={index} className={s.notification}>
+          <img src={product.icon} alt="" />
+          <div className={s.text}>
+            <h3>{product.title}</h3>
+            <p>{product.description}</p>
+          </div>
+          <div>
+            <button onClick={() => handleDelete(product.id)}>
+              <img src="/assets/icons/delete.svg" alt="" />
+            </button>
+            <button
+              className={s.button}
+              onClick={() => handleUpdate(product.id)}
+            >
+              <img src="/assets/icons/edit.svg" alt="" />
+            </button>
+          </div>
         </div>
-
-
+      ))}
+      {isEditing && (
+        <NotificationsEditModal
+          onUpdate={(formData) => {
+            updateNotification(selectedNotification.id, formData);
+            toggleModal(false);
+          }}
+          isOpen={isModalOpen}
+          onClose={() => toggleModal(false)}
+          notification={selectedNotification}
+        />
+      )}
+    </div>
   );
 }
 

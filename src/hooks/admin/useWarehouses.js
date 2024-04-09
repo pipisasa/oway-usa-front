@@ -15,14 +15,11 @@ const useWarehouses = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.get(
-          `${API_URL}/api/warehouses/list/`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-      );
+      const response = await axios.get(`${API_URL}/api/warehouses/list/`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       setWarehouses(response.data);
     } catch (err) {
       setError(err.message);
@@ -36,20 +33,20 @@ const useWarehouses = () => {
   }, []);
 
   const addWarehouses = async (
-      name,
-      address,
-      weight,
-      track_number,
-      price,
-      country,
-      status,
-      image,
-      comments,
-      unique_id_user,
-      url,
-      color,
-      count,
-      articul
+    name,
+    address,
+    weight,
+    track_number,
+    price,
+    country,
+    status,
+    image,
+    comments,
+    unique_id_user,
+    url,
+    color,
+    count,
+    articul
   ) => {
     const accessToken = getCookie("accessToken");
     const formData = new FormData();
@@ -74,16 +71,17 @@ const useWarehouses = () => {
 
     try {
       const response = await axios.post(
-          `${API_URL}/api/warehouses/create/`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "multipart/form-data",
-            },
-          }
+        `${API_URL}/api/warehouses/create/`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
+      window.location.reload();
       await fetchWarehouses();
       setIsSuccess(true);
     } catch (error) {
