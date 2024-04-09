@@ -4,30 +4,16 @@ import { Checkbox, Modal } from "@nextui-org/react";
 import useCategories from "../../../../hooks/admin/useCategories";
 import ShopsCategoryModal from "../modals/ShopCategoryModal";
 
-export default function ShopsCategory1({ setSelectedCategory }) {
-    const { categories, deleteCategory } = useCategories();
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [editCategory, setEditCategory] = useState(null);
+export default function ShopsCategory1({ setSelectedCategory, selectedCategory }) {
+    const { categories } = useCategories();
 
-    const handleCreateCategoryClick = () => {
-        setShowModal(true);
-        setEditCategory(null);
+    const handleCategoryChange = (category) => {
+        if (selectedCategory.includes(category.id)) {
+            setSelectedCategory(selectedCategory.filter((id) => id !== category.id));
+        } else {
+            setSelectedCategory([...selectedCategory, category.id]);
+        }
     };
-
-    const handleEditCategoryClick = (category) => {
-        setEditCategory(category);
-        setShowModal(true);
-    };
-
-  const handleCheckboxChange = (category) => {
-    if (selectedCategories.includes(category)) {
-        setSelectedCategories(selectedCategories.filter((c) => c !== category));
-    } else {
-        setSelectedCategories([...selectedCategories, category]);
-    }
-    setSelectedCategory(selectedCategories); // Обновление выбранных категорий
-};
 
 
     return (
@@ -38,8 +24,8 @@ export default function ShopsCategory1({ setSelectedCategory }) {
                     <div className={s.checkboxes_block} key={category.id}>
                         <Checkbox
                             size="md"
-                            checked={selectedCategories.includes(category)}
-                            onChange={() => handleCheckboxChange(category)}
+                            checked={selectedCategory.includes(category.id)}
+                            onChange={() => handleCategoryChange(category)}
                         >
                             {category.name}
                         </Checkbox>

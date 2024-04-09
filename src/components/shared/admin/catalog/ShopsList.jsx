@@ -13,6 +13,7 @@ export default function ShopsList({ selectedCategory, selectedCountry }) {
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+
   const handleDelete = async (productId) => {
     try {
       await deleteShops(productId);
@@ -43,34 +44,22 @@ export default function ShopsList({ selectedCategory, selectedCountry }) {
   if (isLoading) {
     return <Loading />;
   }
-
-  return (
-    <section className={s.cards_list}>
-      {products?.results
-        ?.filter(
-          (shop) =>
-            (!selectedCategory || shop.category.id === selectedCategory.id) &&
-            (!selectedCountry || shop.country.name === selectedCountry.name) // Фильтрация по стране
-        )
-        .map((shop, index) => (
-          <ShopCard
-            key={index}
-            shop={shop}
-            onDelete={handleDelete}
-            onEdit={handleUpdate}
-          />
-        ))}
-      {isEditing && (
-        <EditShopsModal
-          onUpdate={(formData) => {
-            updateShops(selectedNotification.id, formData);
-            toggleModal(false);
-          }}
-          isOpen={isModalOpen}
-          onClose={() => toggleModal(false)}
-          shop={selectedNotification}
-        />
-      )}
-    </section>
+    return (
+      <section className={s.cards_list}>
+          {products?.results?.map((shop, index) => (
+                  <ShopCard key={index} shop={shop} onDelete={handleDelete} onEdit={handleUpdate} />
+              ))}
+          {isEditing && (
+              <EditShopsModal
+                  onUpdate={(formData) => {
+                      updateShops(selectedNotification.id, formData);
+                      toggleModal(false);
+                  }}
+                  isOpen={isModalOpen}
+                  onClose={() => toggleModal(false)}
+                  shop={selectedNotification}
+              />
+          )}
+      </section>
   );
 }

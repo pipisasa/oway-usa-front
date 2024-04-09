@@ -7,17 +7,14 @@ import ShopsCategory1 from "@/components/shared/admin/catalog/ShopsCategory1";
 import ShopsList1 from "@/components/shared/admin/catalog/ShopsList1";
 
 export default function AdminShopsSteps1() {
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
   return (
     <div>
-      <CountryTabs setSelectedCountry={setSelectedCountry} />
+      <CountryTabs setSelectedCountry={setSelectedCountry} setSelectedCategory={setSelectedCategory} />
       <section className={s.shops_block}>
-        <ShopsCategory1 setSelectedCategory={setSelectedCategory} />
-        <ShopsList1
-          selectedCategory={selectedCategory}
-          selectedCountry={selectedCountry}
-        />
+        <ShopsCategory1 selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+        <ShopsList1 selectedCategory={selectedCategory} selectedCountry={selectedCountry}/>
       </section>
     </div>
   );

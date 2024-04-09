@@ -3,25 +3,31 @@ import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const useShops = (selectedCategory) => {
+const useShops = (selectedCategory, selectedCountry) => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [products, setProducts] = useState([]);
-    const filtercategory = 2
 
 
     useEffect(() => {
         fetchShops(selectedCategory);
     }, [selectedCategory]);
+    useEffect(() => {
+        fetchShops(selectedCountry);
+    }, [selectedCountry]);
 
-    const fetchShops = async (selectedCategory) => {
+    const fetchShops = async () => {
         const accessToken = getCookie("accessToken");
         setIsLoading(true);
         setError(null);
         try {
+            let categoryQueryParam = "";
+            if (selectedCategory && selectedCategory.length > 0) {
+                categoryQueryParam = `?category=${selectedCategory.join(",")}`;
+            }
             const response = await axios.get(
-                `${API_URL}/api/catalog/sites/list/${selectedCategory ? `?category=${selectedCategory}` : ""}`,
+                `${API_URL}/api/catalog/sites/list/${categoryQueryParam}${selectedCountry ? `${categoryQueryParam ? '&' : '?'}country=${selectedCountry}` : ""}`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -36,6 +42,7 @@ const useShops = (selectedCategory) => {
             setIsLoading(false);
         }
     };
+
 
     useEffect(() => {
         fetchShops();

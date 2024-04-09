@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  width: 352px;
+  width: 100%;
 
   .cards_img {
     min-width: 80px;
@@ -74,4 +74,5 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  width: 66%;
 }
