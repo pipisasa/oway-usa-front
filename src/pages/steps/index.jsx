@@ -1,11 +1,8 @@
 import React from "react";
-
 import Contacts from "../../components/partials/Contacts";
-import CostCalculator from "../../components/shared/CostCalculator";
 import Search from "../../components/screens/main/Search";
-import CountryTabs from "../../components/shared/admin/catalog/CountryTabs";
-
 import AdminShopsSteps1 from "../admin/shops-catalog-steps";
+import SiteList from "@/components/partials/SIteList";
 
 export default function StepsPage() {
   return (
@@ -14,6 +11,7 @@ export default function StepsPage() {
       <div className="container" style={{ marginTop: "120px" }}>
         <AdminShopsSteps1 />
       </div>
+
       <Contacts />
     </div>
   );
