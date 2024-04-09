@@ -3,11 +3,13 @@ import s from "@/styles/components/shared/TableTabs.module.scss";
 import useWarehousesUser from "@/hooks/user/useWarehousesUser";
 
 export default function TableTabs({ onTabClick, activeTab }) {
-  const {warehouses} = useWarehousesUser()
-  console.log(warehouses);
+  const { warehouses } = useWarehousesUser();
 
   const countByStatus = (statusName) => {
-    return warehouses?.results?.filter((item) => item.status.name === statusName)?.length || 0;
+    return (
+      warehouses.results?.filter((item) => item.status.name === statusName)
+        ?.length || 0
+    );
   };
 
   return (
@@ -16,16 +18,9 @@ export default function TableTabs({ onTabClick, activeTab }) {
         className={activeTab === "onTheWay" ? s.active_tabs : s.not_active_tabs}
         onClick={() => onTabClick("onTheWay")}
       >
-        Все заказы ({warehouses?.count})
+        Все заказы ({warehouses.count})
       </button>
-      {/* <button
-        className={
-          activeTab === "readyIssued" ? s.active_tabs : s.not_active_tabs
-        }
-        onClick={() => onTabClick("readyIssued")}
-      >
-        Готов к выдаче (1)
-      </button> */}
+
       <button
         className={
           activeTab === "delivered" ? s.active_tabs : s.not_active_tabs
