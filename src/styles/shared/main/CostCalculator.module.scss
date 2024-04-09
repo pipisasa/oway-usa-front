@@ -113,6 +113,12 @@
             background: var(--white, #fff);
             width: 100%;
             font-size: 14px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('/assets/icons/selecter.svg');
+            background-repeat: no-repeat;
+            background-position: 95% 50%;
           }
         }
       }

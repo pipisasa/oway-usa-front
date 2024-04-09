@@ -39,7 +39,8 @@
       padding: 16px 20px;
       border-radius: 16px;
       border: 1px solid var(--blue_light, #aed5f3);
-
+      transition: all 2s ease-out; 
+      overflow: hidden;
       .answer {
         color: var(--white, var(--Colors-Grey-White, #fff));
         font-size: 14px;
@@ -47,6 +48,7 @@
         padding-top: 16px;
         margin-top: 16px;
         border-top: 1px solid #aed5f3;
+        transition: height 2s ease-out, opacity 3s ease-out;
       }
 
       .close_block {
