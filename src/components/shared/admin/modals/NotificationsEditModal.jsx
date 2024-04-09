@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useNotification from "../../../../hooks/admin/useNotification";
+import SelectOptions from "@/components/partials/SelectOptions";
+
+import DynamicSelect from "@/components/partials/Select";
+import CustomSelect from "@/components/partials/Select";
 
 export default function NotificationsEditModal({ isOpen, onClose, notification }) {
     const [title, setTitle] = useState(notification?.title || "");
@@ -45,12 +49,18 @@ export default function NotificationsEditModal({ isOpen, onClose, notification }
         };
         reader.readAsDataURL(file);
     };
+    const [selectedOption, setSelectedOption] = useState('');
+    const options = ['Option 1', 'Option 2', 'Option 3'];
 
+    const handleChange = (e) => {
+        setSelectedOption(e?.target?.value);
+    }
     return (
         <div className={s.modal}>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <h3>Редактировать уведомление</h3>
                 <form onSubmit={handleSubmit} className={s.notifications_form}>
+
                     <div>
                         <label htmlFor="">Заголовок</label>
                         <input

@@ -4,7 +4,7 @@ import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const useWarehousesUser = () => {
+const useWarehousesUser = (currentPage) => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -16,7 +16,7 @@ const useWarehousesUser = () => {
         setError(null);
         try {
             const response = await axios.get(
-                `${API_URL}/api/warehouses/my/`,
+                `${API_URL}/api/warehouses/my/?page=${currentPage}`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,

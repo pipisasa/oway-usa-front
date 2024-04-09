@@ -6,9 +6,7 @@ import EditShopsModal from "../modals/EditShopsModal";
 
 
 export default function ShopsList({ selectedCategory, selectedCountry }) {
-    console.log(selectedCategory,435)
-    console.log(selectedCountry,345)
-    const {products, isLoading, deleteShops, updateShops} = useShops(selectedCategory?.id)
+    const {products, isLoading, deleteShops, updateShops} = useShops(selectedCategory, selectedCountry?.id)
     const [isEditing, setIsEditing] = useState(false);
     const [selectedNotification, setSelectedNotification] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,13 +46,7 @@ export default function ShopsList({ selectedCategory, selectedCountry }) {
 
     return (
       <section className={s.cards_list}>
-          {products?.results
-              ?.filter(
-          (shop) =>
-            (!selectedCategory || shop.category.id === selectedCategory.id) &&
-            (!selectedCountry || shop.country.name === selectedCountry.name) // Фильтрация по стране
-        )
-              .map((shop, index) => (
+          {products?.results?.map((shop, index) => (
                   <ShopCard key={index} shop={shop} onDelete={handleDelete} onEdit={handleUpdate} />
               ))}
           {isEditing && (
