@@ -11,9 +11,6 @@ export default function AdminWarehousesPage() {
         <input type="text" placeholder="Поиск" />
       </div>
       <WarehousesProductsTable />
-      <div className={s.pagination}>
-        <Pagination variant="bordered" total={10} initialPage={1} />
-      </div>
     </div>
   );
 }

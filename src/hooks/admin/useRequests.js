@@ -40,10 +40,10 @@ const useRequests = (currentPage) => {
       const response = await fetch(`${API_URL}/api/purchase/update/${id}/`, {
         method: "PATCH",
         headers: {
-          "Content-Type": "application/json",
+          // "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(updatedData),
+        body: updatedData,
       });
 
       if (!response.ok) {

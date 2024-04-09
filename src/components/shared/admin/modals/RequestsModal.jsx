@@ -2,11 +2,21 @@ import React, { useState } from "react";
 import s from "@/styles/admin/RequestsModal.module.scss";
 import { RxCross1 } from "react-icons/rx";
 import useRequests from "@/hooks/admin/useRequests";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function RequestsModal({ data, onClose }) {
   const { updateRequest } = useRequests();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [price, setPrice] = useState(data.price || "");
 
@@ -29,6 +39,7 @@ export default function RequestsModal({ data, onClose }) {
   const handlePriceChange = (event) => {
     setPrice(event.target.value);
   };
+
   return (
     <div
       className={s.modal_backdrop}
@@ -97,10 +108,39 @@ export default function RequestsModal({ data, onClose }) {
                 />
               </div>
             </div>
-            <div className={s.input_label}>
-              <label htmlFor="payment_confirmation">Подтверждение оплаты</label>
-              <input id="payment_confirmation" type="file" />
+            <div className={s.flex_inputs}>
+              <div className={s.input_label}>
+                <label htmlFor="payment_confirmation">
+                  Подтверждение оплаты
+                </label>
+                <input id="payment_confirmation" type="file" />
+              </div>
+              {data.payment_confirmation ? (
+                <Button onPress={onOpen}>Посмотреть</Button>
+              ) : null}
             </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalHeader className="flex flex-col gap-1">
+                      Чек подтверждение оплаты
+                    </ModalHeader>
+                    <ModalBody>
+                      <img
+                        src={`${API_URL}${data.payment_confirmation}`}
+                        alt="Чек подтверждение оплаты"
+                      />
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="danger" variant="light" onPress={onClose}>
+                        Закрыть
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
                 <label htmlFor="telegram">Telegram</label>
