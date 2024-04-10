@@ -113,7 +113,11 @@ export default function RequestsModal({ data, onClose }) {
                 <label htmlFor="payment_confirmation">
                   Подтверждение оплаты
                 </label>
-                <input id="payment_confirmation" type="file" />
+                <div className="custom-file-upload">
+                  <input id="payment_confirmation" type="file" />
+                  <img src="/assets/icons/selectimg.svg" alt="select img" />
+                  <span>Выбрать картинку</span>
+                </div>
               </div>
               {data.payment_confirmation ? (
                 <Button onPress={onOpen}>Посмотреть</Button>

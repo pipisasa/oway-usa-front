@@ -5,7 +5,7 @@ import useUsers from "../../../../hooks/admin/useUsers";
 
 export default function AddUsersModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const {addUsers} = useUsers()
+  const { addUsers } = useUsers();
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -33,14 +33,14 @@ export default function AddUsersModal() {
   const handleSubmit = (e) => {
     e.preventDefault();
     addUsers(
-        formData.first_name,
-        formData.last_name,
-        formData.email,
-        formData.phone_number,
-        formData.password,
-        formData.password2,
-        formData.front_image,
-        formData.back_image
+      formData.first_name,
+      formData.last_name,
+      formData.email,
+      formData.phone_number,
+      formData.password,
+      formData.password2,
+      formData.front_image,
+      formData.back_image
     );
     toggleModal();
     setFormData({
@@ -51,9 +51,8 @@ export default function AddUsersModal() {
       password: "",
       password2: "",
       front_image: null,
-      back_image: null
+      back_image: null,
     });
-
   };
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -70,86 +69,94 @@ export default function AddUsersModal() {
             <div>
               <label htmlFor="">Имя</label>
               <input
-                  type="text"
-                  id="first_name"
-                  name="first_name"
-                  placeholder="Введите имя"
-                  value={formData.first_name}
-                  onChange={handleChange}
+                type="text"
+                id="first_name"
+                name="first_name"
+                placeholder="Введите имя"
+                value={formData.first_name}
+                onChange={handleChange}
               />
             </div>
             <div>
               <label htmlFor="">Фамилия</label>
               <input
-                  type="text"
-                  id="last_name"
-                  name="last_name"
-                  placeholder="Введите фамилию"
-                  value={formData.last_name}
-                  onChange={handleChange}
+                type="text"
+                id="last_name"
+                name="last_name"
+                placeholder="Введите фамилию"
+                value={formData.last_name}
+                onChange={handleChange}
               />
             </div>
             <div>
               <label htmlFor="">Почта</label>
               <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Введите почту"
-                  value={formData.email}
-                  onChange={handleChange}
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Введите почту"
+                value={formData.email}
+                onChange={handleChange}
               />
             </div>
             <div>
               <label htmlFor="">Номер телефона</label>
               <input
-                  type="text"
-                  id="phone_number"
-                  name="phone_number"
-                  placeholder="Введите номер телефона"
-                  value={formData.phone_number}
-                  onChange={handleChange}
+                type="text"
+                id="phone_number"
+                name="phone_number"
+                placeholder="Введите номер телефона"
+                value={formData.phone_number}
+                onChange={handleChange}
               />
             </div>
             <div>
               <label htmlFor="">Пароль</label>
               <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Введите пароль"
-                  value={formData.password}
-                  onChange={handleChange}
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Введите пароль"
+                value={formData.password}
+                onChange={handleChange}
               />
             </div>
             <div>
               <label htmlFor="">Пароль повторно</label>
               <input
-                  type="password"
-                  id="password2"
-                  name="password2"
-                  placeholder="Повторите пароль"
-                  value={formData.password2}
-                  onChange={handleChange}
+                type="password"
+                id="password2"
+                name="password2"
+                placeholder="Повторите пароль"
+                value={formData.password2}
+                onChange={handleChange}
               />
             </div>
             <div>
               <label htmlFor="">Лицевая сторона паспорта</label>
-              <input
+              <div className="custom-file-upload">
+                <input
                   type="file"
                   id="front_image"
                   name="front_image"
                   onChange={handleChange}
-              />
+                />
+                <img src="/assets/icons/selectimg.svg" alt="select img" />
+                <span>Выбрать картинку</span>
+              </div>
             </div>
             <div>
               <label htmlFor="">Обратная сторона паспорта</label>
-              <input
+              <div className="custom-file-upload">
+                <input
                   type="file"
                   id="back_image"
                   name="back_image"
                   onChange={handleChange}
-              />
+                />
+                <img src="/assets/icons/selectimg.svg" alt="select img" />
+                <span>Выбрать картинку</span>
+              </div>
             </div>
           </div>
           <div className={s.btn_center}>

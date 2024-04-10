@@ -132,21 +132,29 @@ export default function UserData() {
         </div>
         <div>
           <label>Лицевая сторона паспорта</label>
-          <input
-            type="file"
-            name="front_image"
-            onChange={handleChange}
-            disabled={!isEditing}
-          />
+          <div className="custom-file-upload">
+            <input
+              type="file"
+              name="front_image"
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
+            <img src="/assets/icons/selectimg.svg" alt="select img" />
+            <span>Выбрать картинку</span>
+          </div>
         </div>
         <div>
           <label>Обратная сторона паспорта</label>
-          <input
-            type="file"
-            name="back_image"
-            onChange={handleChange}
-            disabled={!isEditing}
-          />
+          <div className="custom-file-upload">
+            <input
+              type="file"
+              name="back_image"
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
+            <img src="/assets/icons/selectimg.svg" alt="select img" />
+            <span>Выбрать картинку</span>
+          </div>
         </div>
         <div>
           <label>Адрес</label>

@@ -244,12 +244,17 @@ export default function Purchase() {
                 }`}
               >
                 <label>Добавьте скриншот</label>
-                <input
-                  id="purchase_image"
-                  type="file"
-                  onChange={handleChange}
-                  {...register("purchase_image", { required: true })}
-                />
+                <div className="custom-file-upload">
+                  <input
+                    id="purchase_image"
+                    type="file"
+                    onChange={handleChange}
+                    {...register("purchase_image", { required: true })}
+                  />
+                  <img src="/assets/icons/selectimg.svg" alt="select img" />
+                  <span>Выбрать картинку</span>
+                </div>
+
                 {errors?.purchase_image && <p>Выберите фото обязательно!</p>}
                 <p>
                   Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ |
@@ -465,12 +470,17 @@ export default function Purchase() {
                     }`}
                   >
                     <label>Добавьте скриншот</label>
-                    <input
-                      id="purchase_image"
-                      type="file"
-                      onChange={handleChange}
-                      {...register("purchase_image", { required: true })}
-                    />
+                    <div className="custom-file-upload">
+                      <input
+                        id="purchase_image"
+                        type="file"
+                        onChange={handleChange}
+                        {...register("purchase_image", { required: true })}
+                      />
+                      <img src="/assets/icons/selectimg.svg" alt="select img" />
+                      <span>Выбрать картинку</span>
+                    </div>
+
                     {errors?.purchase_image && (
                       <p>Выберите фото обязательно!</p>
                     )}

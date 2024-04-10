@@ -57,7 +57,14 @@ export default function ProductsModal() {
           </div>
           <div>
             <label htmlFor="">Картинка</label>
-            <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+            <div className="custom-file-upload">
+              <input
+                type="file"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+              <img src="/assets/icons/selectimg.svg" alt="select img" />
+              <span>Выбрать картинку</span>
+            </div>
           </div>
           <p>
             Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512
