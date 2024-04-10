@@ -52,7 +52,7 @@ export default function Register() {
 
   return (
     <main className={s.register_page}>
-      <img className={s.left_img} src="/assets/images/28.png" alt="" data-aos="fade-right"
+      <img className={s.left_img} src="/assets/images/autholeftblock.png" alt="" data-aos="fade-right"
      data-aos-anchor="#example-anchor"
      data-aos-offset="500"
      data-aos-duration="500"/>

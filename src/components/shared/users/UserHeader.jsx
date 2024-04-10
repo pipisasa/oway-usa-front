@@ -18,7 +18,7 @@ export default function UsersHeader() {
     { href: "/user", label: "Главная" },
     { href: "/user/biling", label: "Билинг" },
     { href: "/user/notifications", label: "Уведомления" },
-    { href: "/user/warehouses", label: "Адерса складов" },
+    { href: "/user/warehouses", label: "Адреса складов" },
     { href: "/user/tracking", label: "Отслеживание доставки" },
     { href: "/user/settings", label: "Настройки" },
   ];

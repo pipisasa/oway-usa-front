@@ -25,10 +25,6 @@ export default function WarehousesProductsTable() {
     setSelectedWarehouse(null);
   };
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
   useEffect(() => {
     fetchWarehouses(currentPage);
     setTotalPages(Math.ceil(count / 10));
@@ -79,9 +75,10 @@ export default function WarehousesProductsTable() {
       </table>
       <div className={s.pagination}>
         <Pagination
-          current={currentPage}
-          total={totalPages}
-          onChange={handlePageChange}
+          variant="bordered"
+          total={2}
+          initialPage={currentPage}
+          onChange={(page) => setCurrentPage(page)}
         />
       </div>
       {selectedWarehouse && (

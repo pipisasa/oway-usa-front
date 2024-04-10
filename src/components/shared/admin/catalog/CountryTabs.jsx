@@ -10,7 +10,6 @@ export default function CountryTabs({ setSelectedCountry, setSelectedCategory })
         console.log(country,45)
         setActiveTab(country === "Все" ? "Все" : country.name);
         setSelectedCountry(country === "Все" ? "Все" : country);
-        setSelectedCategory([]);
     };
 
   return (
@@ -20,7 +19,6 @@ export default function CountryTabs({ setSelectedCountry, setSelectedCategory })
         onClick={() => {
             setActiveTab("Все");
             setSelectedCountry(null);
-            setSelectedCategory([]);
         }}
 
       >
