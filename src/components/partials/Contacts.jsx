@@ -1,8 +1,14 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import s from "@/styles/partials/Contact.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
 
 export default function Contacts() {
+  const [isAuthorized, setIsAuthorized] = useState(null);
+
+  useEffect(() => {
+    setIsAuthorized(getCookie("accessToken") !== null);
+  }, []);
+
   const warehouses = [
     {
       img: "assets/icons/footer/usa.svg",
@@ -46,8 +52,6 @@ export default function Contacts() {
     },
   ];
 
-  const isAuthorized = getCookie("accessToken") !== null;
-
   const sliderRef = useRef(null);
 
   const copyToClipboard = (text) => {
@@ -68,6 +72,10 @@ export default function Contacts() {
   const scrollRight = () => {
     sliderRef.current.scrollBy({ left: 427, behavior: "smooth" });
   };
+
+  if (isAuthorized === null) {
+    return <div>Загрузка...</div>;
+  }
 
   return (
     <section className={`${s.address_container} container`}>

@@ -134,7 +134,7 @@ export default function AddUsersModal() {
             </div>
             <div>
               <label htmlFor="">Лицевая сторона паспорта</label>
-              <div className="custom-file-upload">
+              <label className="custom-file-upload">
                 <input
                   type="file"
                   id="front_image"
@@ -143,11 +143,11 @@ export default function AddUsersModal() {
                 />
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
-              </div>
+              </label>
             </div>
             <div>
               <label htmlFor="">Обратная сторона паспорта</label>
-              <div className="custom-file-upload">
+              <label className="custom-file-upload">
                 <input
                   type="file"
                   id="back_image"
@@ -156,7 +156,7 @@ export default function AddUsersModal() {
                 />
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
-              </div>
+              </label>
             </div>
           </div>
           <div className={s.btn_center}>

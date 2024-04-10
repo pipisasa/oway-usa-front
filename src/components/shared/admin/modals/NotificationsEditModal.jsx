@@ -90,11 +90,11 @@ export default function NotificationsEditModal({
               {previewImage && (
                 <img width={80} height={80} src={previewImage} alt="Preview" />
               )}
-              <div className="custom-file-upload">
+              <label className="custom-file-upload">
                 <input type="file" onChange={handleImageChange} />
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
-              </div>
+              </label>
               {previewImage && (
                 <button type="button" onClick={handleDeleteImage}>
                   Удалить изображение

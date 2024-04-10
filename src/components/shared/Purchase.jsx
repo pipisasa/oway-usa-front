@@ -244,7 +244,7 @@ export default function Purchase() {
                 }`}
               >
                 <label>Добавьте скриншот</label>
-                <div className="custom-file-upload">
+                <label className="custom-file-upload">
                   <input
                     id="purchase_image"
                     type="file"
@@ -253,7 +253,7 @@ export default function Purchase() {
                   />
                   <img src="/assets/icons/selectimg.svg" alt="select img" />
                   <span>Выбрать картинку</span>
-                </div>
+                </label>
 
                 {errors?.purchase_image && <p>Выберите фото обязательно!</p>}
                 <p>
@@ -470,7 +470,7 @@ export default function Purchase() {
                     }`}
                   >
                     <label>Добавьте скриншот</label>
-                    <div className="custom-file-upload">
+                    <label className="custom-file-upload">
                       <input
                         id="purchase_image"
                         type="file"
@@ -479,7 +479,7 @@ export default function Purchase() {
                       />
                       <img src="/assets/icons/selectimg.svg" alt="select img" />
                       <span>Выбрать картинку</span>
-                    </div>
+                    </label>
 
                     {errors?.purchase_image && (
                       <p>Выберите фото обязательно!</p>

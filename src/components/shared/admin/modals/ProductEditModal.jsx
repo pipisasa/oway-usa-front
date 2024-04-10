@@ -66,7 +66,7 @@ export default function EditProductsModal({ isOpen, toggleModal, product }) {
             </div>
             <div className="">
               <label htmlFor="productImage">Картинка</label>
-              <div class="custom-file-upload">
+              <label class="custom-file-upload">
                 <input
                   id="productImage"
                   type="file"
@@ -74,7 +74,7 @@ export default function EditProductsModal({ isOpen, toggleModal, product }) {
                 />
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
-              </div>
+              </label>
             </div>
             <p>
               Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512
