@@ -1,4 +1,5 @@
 .address_container {
+  margin-top: 120px;
   .container_header {
     display: flex;
     align-items: center;
@@ -126,6 +127,12 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .address_container {
+    margin-top: 32px;
   }
 }
 

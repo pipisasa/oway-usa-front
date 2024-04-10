@@ -60,6 +60,7 @@ export default function CostCalculator() {
   } else if (router.pathname === "/calculator") {
     calcStyle.background = "var(--bue_light_2, #f7f9fc)";
     calcStyle.paddingTop = "50px";
+    calcStyle.paddingBottom = "50px";
   }
 
   return (

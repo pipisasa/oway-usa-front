@@ -111,7 +111,7 @@ export default function EditShopsModal({ isOpen, onClose, shop }) {
             <div className={s.second_input_block}>
               <div>
                 <label htmlFor="logo">Логотип</label>
-                <div className="custom-file-upload">
+                <label className="custom-file-upload">
                   <input
                     id="logo"
                     type="file"
@@ -120,7 +120,7 @@ export default function EditShopsModal({ isOpen, onClose, shop }) {
                   />
                   <img src="/assets/icons/selectimg.svg" alt="select img" />
                   <span>Выбрать картинку</span>
-                </div>
+                </label>
 
                 <p>
                   Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ |

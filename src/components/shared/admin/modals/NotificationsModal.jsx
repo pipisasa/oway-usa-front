@@ -57,11 +57,11 @@ export default function NotificationsModal() {
           </div>
           <div>
             <label htmlFor="">Картинка</label>
-            <div className="custom-file-upload">
+            <label className="custom-file-upload">
               <input type="file" onChange={(e) => setIcon(e.target.files[0])} />
               <img src="/assets/icons/selectimg.svg" alt="select img" />
               <span>Выбрать картинку</span>
-            </div>
+            </label>
 
             {/* <CustomFileInput onChange={(e) => handle(e)}/> */}
           </div>

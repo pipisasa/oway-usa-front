@@ -132,7 +132,7 @@ export default function UserData() {
         </div>
         <div>
           <label>Лицевая сторона паспорта</label>
-          <div className="custom-file-upload">
+          <label className="custom-file-upload">
             <input
               type="file"
               name="front_image"
@@ -141,7 +141,7 @@ export default function UserData() {
             />
             <img src="/assets/icons/selectimg.svg" alt="select img" />
             <span>Выбрать картинку</span>
-          </div>
+          </label>
         </div>
         <div>
           <label>Обратная сторона паспорта</label>

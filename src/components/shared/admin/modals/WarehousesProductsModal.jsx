@@ -186,7 +186,7 @@ const Step1 = ({
         </div>
         <div>
           <label htmlFor="image">Фото товара</label>
-          <div className="custom-file-upload">
+          <label className="custom-file-upload">
             <input
               type="file"
               name="image"
@@ -195,7 +195,7 @@ const Step1 = ({
             />
             <img src="/assets/icons/selectimg.svg" alt="select img" />
             <span>Выбрать картинку</span>
-          </div>
+          </label>
         </div>
         <div>
           <label htmlFor="">Адрес заказа</label>
