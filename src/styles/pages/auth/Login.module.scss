@@ -20,11 +20,10 @@
   }
 
   .left_img {
-    width: 494px;
-    height: 494px;
+    width: 400px;
     flex-shrink: 0;
     position: absolute;
-    left: -150px;
+    left: 0;
   }
 
   h1 {
@@ -157,10 +156,12 @@
 }
 
 .google {
+  width: 100%;
   display: flex;
   gap: 10px;
   align-items: center;
-  background: #f7f7f7;
+  justify-content: center;
+  background: #ffffff;
   max-width: 120px;
   padding: 12px 20px;
   border-radius: 10px;

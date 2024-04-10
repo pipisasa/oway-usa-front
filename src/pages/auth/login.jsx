@@ -23,7 +23,7 @@ export default function Login() {
     <main className={s.login_page}>
       <img
         className={s.left_img}
-        src="/assets/images/40.png"
+        src="/assets/images/autholeftblock.png"
         alt=""
         data-aos="fade-right"
         data-aos-anchor="#example-anchor"
@@ -81,10 +81,10 @@ export default function Login() {
             <span>Или</span>
             <div></div>
           </div>
-          <Link href="/api/auth/google" className={s.google}>
+          <Link href='auth/login/google' className={s.google}>
             {/* <img src="/assets/icons/google.svg" alt="google" />
-            <p>Google</p> */}
-            <GoogleLoginButton className={s.google} />
+              <p>Google</p> */}
+            <GoogleLoginButton  />
           </Link>
           <div className={s.submit_login}>
             <button type="submit">

@@ -4,7 +4,6 @@ import useWarehousesUser from "@/hooks/user/useWarehousesUser";
 
 export default function TableTabs({ onTabClick, activeTab }) {
   const { warehouses } = useWarehousesUser();
-
   const countByStatus = (statusName) => {
     return (
       warehouses.results?.filter((item) => item.status.name === statusName)
@@ -18,7 +17,7 @@ export default function TableTabs({ onTabClick, activeTab }) {
         className={activeTab === "onTheWay" ? s.active_tabs : s.not_active_tabs}
         onClick={() => onTabClick("onTheWay")}
       >
-        Все заказы ({warehouses.count})
+        Все заказы ({warehouses?.results?.length})
       </button>
 
       <button

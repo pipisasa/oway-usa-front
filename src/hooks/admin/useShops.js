@@ -3,33 +3,46 @@ import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const useShops = (selectedCategory) => {
+const useShops = (selectedCategory, selectedCountry) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetchShops(selectedCategory);
-  }, [selectedCategory]);
+ useEffect(() => {
+        fetchShops(selectedCategory);
+    }, [selectedCategory]);
 
-  const fetchShops = async (selectedCategory) => {
+    useEffect(() => {
+        fetchShops(selectedCountry);
+    }, [selectedCountry]);
+
+  const fetchShops = async () => {
     setIsLoading(true);
     setError(null);
-    try {
-      const response = await axios.get(
-        `${API_URL}/api/catalog/sites/list/${
-          selectedCategory ? `?category=${selectedCategory}` : ""
-        }`
-      );
 
-      setProducts(response.data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
+    let categoryQueryParam = selectedCategory?.map(category => `category=${category}`).join('&');
+    let queryParams = '';
+
+    if (selectedCountry) {
+        queryParams = `?${categoryQueryParam}${selectedCategory.length > 0 ? '&' : ''}country=${selectedCountry}`;
+    } else {
+        queryParams = `?${categoryQueryParam}`;
     }
-  };
+
+    try {
+        const response = await axios.get(
+            `${API_URL}/api/catalog/sites/list/${queryParams}`
+        );
+
+        setProducts(response.data);
+    } catch (err) {
+        setError(err.message);
+    } finally {
+        setIsLoading(false);
+    }
+};
+
 
   useEffect(() => {
     fetchShops();

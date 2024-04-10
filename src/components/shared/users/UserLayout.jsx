@@ -28,7 +28,7 @@ export default function UsersLayout({ children }) {
     },
     {
       href: "/user/warehouses",
-      label: "Адерса складов",
+      label: "Адреса складов",
       icons: "/assets/icons/user-icons/склад.svg",
     },
     {

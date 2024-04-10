@@ -39,7 +39,7 @@ export default function UserMobileHeader({ children }) {
     },
     {
       href: "/user/warehouses",
-      label: "Адерса складов",
+      label: "Адреса складов",
       icons: "/assets/icons/user-icons/склад.svg",
     },
     {

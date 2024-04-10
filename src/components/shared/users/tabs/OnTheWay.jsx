@@ -78,7 +78,7 @@ export default function OnTheWay() {
       <div className={s.pagination}>
         <Pagination
             variant="bordered"
-            total={Math.ceil(warehouses.count / PAGE_SIZE)}
+            total={Math.ceil(warehouses?.results?.length / 3)}
             initialPage={currentPage}
             onChange={(page) => setCurrentPage(page)}
         />

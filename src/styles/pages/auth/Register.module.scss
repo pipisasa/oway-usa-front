@@ -13,18 +13,13 @@
     flex-shrink: 0;
     position: absolute;
     right: -140px;
-    top: 50%; /* Устанавливаем начальную точку на середину по вертикали */
-    transform: translateY(-50%); /* Смещаем элемент на 50% его высоты вверх */
   }
 
   .left_img {
-    width: 494px;
-    height: 494px;
+    width: 400px;
     flex-shrink: 0;
     position: absolute;
-    left: -150px;
-    top: 50%; /* Устанавливаем начальную точку на середину по вертикали */
-    transform: translateY(-50%); /* Смещаем элемент на 50% его высоты вверх */
+    left: 0;
   }
 
   h1 {

@@ -17,7 +17,7 @@ const useWarehouses = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `${API_URL}/api/warehouses/list/?cursor=cD0xNA%3D%3D&page=${page}`,
+        `${API_URL}/api/warehouses/list/?pagination_type=page_number&page=${page}&page_size=5`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
