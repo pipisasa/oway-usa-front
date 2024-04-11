@@ -4,7 +4,7 @@
     margin-top: 20px;
   }
 
-  button {
+  .submit_btn {
     border-radius: 12px;
     background: var(--blue, #027ddb);
     padding: 14px 36px;
@@ -14,7 +14,7 @@
     font-weight: 400;
     line-height: 140%;
     margin-top: 20px;
-    width: 350px;
+    width: 100%;
     display: flex;
     justify-content: center;
   }
