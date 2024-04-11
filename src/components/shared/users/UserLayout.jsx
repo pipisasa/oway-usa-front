@@ -18,7 +18,7 @@ export default function UsersLayout({ children }) {
     },
     {
       href: "/user/biling",
-      label: "Билинг",
+      label: "Оплата",
       icons: "/assets/icons/user-icons/biling.svg",
     },
     {

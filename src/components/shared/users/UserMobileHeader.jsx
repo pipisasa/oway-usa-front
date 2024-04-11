@@ -29,7 +29,7 @@ export default function UserMobileHeader({ children }) {
     },
     {
       href: "/user/biling",
-      label: "Билинг",
+      label: "Оплата",
       icons: "/assets/icons/user-icons/biling.svg",
     },
     {

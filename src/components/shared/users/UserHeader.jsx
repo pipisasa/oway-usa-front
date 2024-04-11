@@ -12,11 +12,11 @@ import useNotification from "../../../hooks/user/useNotification";
 export default function UsersHeader() {
   const router = useRouter();
   const { userData, loading, error } = useUserData();
-  const {products} = useNotification()
+  const { products } = useNotification();
 
   const links = [
     { href: "/user", label: "Главная" },
-    { href: "/user/biling", label: "Билинг" },
+    { href: "/user/biling", label: "Оплата" },
     { href: "/user/notifications", label: "Уведомления" },
     { href: "/user/warehouses", label: "Адреса складов" },
     { href: "/user/tracking", label: "Отслеживание доставки" },
@@ -56,7 +56,11 @@ export default function UsersHeader() {
 
       <div className={s.notification}>
         <div>{renderModal()}</div>
-        <Badge content={products?.total_not_checked_notifications} shape="circle" color="danger">
+        <Badge
+          content={products?.total_not_checked_notifications}
+          shape="circle"
+          color="danger"
+        >
           <Button
             radius="full"
             isIconOnly
