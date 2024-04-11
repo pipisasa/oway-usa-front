@@ -15,6 +15,7 @@
     font-weight: 400;
     line-height: 140%;
     transition: background-color 0.3s;
+    width: 100%;
 
     &:hover {
       background-color: #01579b;
@@ -41,7 +42,7 @@
       font-weight: 400;
       line-height: 140%;
       margin-top: 20px;
-      width: 350px;
+      width: 100%;
       display: flex;
       justify-content: center;
 
