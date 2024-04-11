@@ -6,6 +6,27 @@
   position: relative;
   overflow: hidden;
 
+  .password_input {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row !important;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--gray, #a4a4a4);
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+
+    input {
+      padding: 0 !important;
+      border: none !important;
+      width: 100%;
+    }
+  }
+
   .error {
     color: red;
     text-align: center;
@@ -127,8 +148,6 @@
       align-items: center;
       flex-direction: column;
       gap: 10px;
-
-
 
       button {
         border-radius: 12px;

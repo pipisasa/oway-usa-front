@@ -13,7 +13,7 @@ export default function AboutUs() {
             <span>
               {" "}
               <strong>OWAY USA </strong> - сервис по доставке посылок и
-              коммерческих грузов из США и Турции
+              коммерческих грузов из США и Турции.
             </span>
           </div>
           <div className={s.about_info_span}>
@@ -21,7 +21,7 @@ export default function AboutUs() {
             <span>
               Мы имеем выгодные соглашения с авиалиниями, что дает нам
               возможность предоставлять нашим клиентам низкие цены за
-              международную доставку.
+              международные доставки.
             </span>
           </div>
           <div className={s.about_info_span}>

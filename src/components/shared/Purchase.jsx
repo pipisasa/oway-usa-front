@@ -205,14 +205,18 @@ export default function Purchase() {
                   <label>
                     Telegram<span>*</span>
                   </label>
-                  <input
-                    id="telegram"
-                    name="telegram"
-                    type="text"
-                    placeholder="Введите @username"
-                    onChange={handleChange}
-                    {...register("telegram", { required: true })}
-                  />
+                  <div className={s.icon_input}>
+                    <img src="/assets/icons/telegram.svg" alt="telegram" />
+                    <input
+                      id="telegram"
+                      name="telegram"
+                      type="text"
+                      placeholder="Введите @username"
+                      onChange={handleChange}
+                      {...register("telegram", { required: true })}
+                    />
+                  </div>
+
                   {errors?.telegram && (
                     <p>Это поле обязательно к заполнению!</p>
                   )}
@@ -225,14 +229,18 @@ export default function Purchase() {
                   }`}
                 >
                   <label>Номер телефона</label>
-                  <input
-                    id="phone_number"
-                    name="phone_number"
-                    type="text"
-                    placeholder="Введите номер телефона"
-                    onChange={handleChange}
-                    {...register("phone_number", { required: true })}
-                  />
+                  <div className={s.icon_input}>
+                    <img src="/assets/icons/whatsapp.svg" alt="whatsapp" />
+                    <input
+                      id="phone_number"
+                      name="phone_number"
+                      type="text"
+                      placeholder="Введите номер телефона"
+                      onChange={handleChange}
+                      {...register("phone_number", { required: true })}
+                    />
+                  </div>
+
                   {errors?.phone_number && (
                     <p>Это поле обязательно к заполнению!</p>
                   )}
