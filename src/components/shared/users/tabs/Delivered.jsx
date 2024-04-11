@@ -77,7 +77,7 @@ export default function Delivered() {
       <div className={s.pagination}>
         <Pagination 
           variant="bordered"
-              total={Math.ceil(warehouses?.results?.length / 1)}
+              total={Math.ceil(warehouses.results?.filter((item) => item.status.name === "Доставлено")?.length / 5)}
               initialPage={currentPage}
               onChange={(page) => setCurrentPage(page)}
         />

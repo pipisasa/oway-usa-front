@@ -17,7 +17,7 @@ export default function TableTabs({ onTabClick, activeTab }) {
         className={activeTab === "onTheWay" ? s.active_tabs : s.not_active_tabs}
         onClick={() => onTabClick("onTheWay")}
       >
-        Все заказы ({warehouses?.results?.length})
+        Все заказы ({warehouses?.count})
       </button>
 
       <button

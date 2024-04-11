@@ -10,8 +10,10 @@ export default function BankCards({ card, onDelete, onUpdate }) {
   };
   return (
     <div className={s.card_block}>
-      <img src={`/assets/icons/${getCardType(card.number)}.svg`} alt="" />
-      <span>{formatCardNumber(card.number)}</span>
+       <div className={s.card_block_number}>
+          <img src={`/assets/icons/${getCardType(card.number)}.svg`} alt="" />
+          <span>{formatCardNumber(card.number)}</span>
+      </div>
       <div>
         <button onClick={handleEditClick} className={s.card_button}>
           <img src="/assets/icons/edit.svg" alt="" />
@@ -25,13 +27,15 @@ export default function BankCards({ card, onDelete, onUpdate }) {
 }
 
 const formatCardNumber = (value) => {
-  let onlyNums = value.toString().replace(/\D/g, ""); // Преобразовать в строку и удалить все нецифровые символы
-  onlyNums = onlyNums.slice(0, 16); // Ограничить длину до 16 символов
-
-  return onlyNums.replace(/(\d{4})(?=\d)/g, "$1 "); // Разделить номер карты на блоки по 4 цифры
+  let onlyNums = value.toString().replace(/\D/g, ""); 
+  onlyNums = onlyNums.slice(0, 16); 
+  let maskedNumber = onlyNums.substring(0, 4) + " " + onlyNums.substring(4, 6) + "** **** ****"; 
+  return maskedNumber;
 };
+
+
 function getCardType(number) {
-  const cardNumber = number.toString(); // Преобразуем в строку, чтобы использовать метод startsWith
+  const cardNumber = number.toString(); 
   if (cardNumber?.startsWith("4")) {
     return "visa";
   } else if (cardNumber.startsWith("5")) {
