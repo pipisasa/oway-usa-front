@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import s from "@/styles/pages/auth/Login.module.scss";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import GoogleLoginButton from "@/hooks/auth/GoogleLoginButton";
 
 export default function Login() {
   const { login, error } = useLogin();
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -17,6 +18,10 @@ export default function Login() {
 
   const onSubmitHandler = async (data) => {
     await login(data.email, data.password);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -53,12 +58,25 @@ export default function Login() {
             </div>
             <div className={`${errors.password ? s.error : ""}`}>
               <label htmlFor="password">Пароль</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Введите пароль"
-                {...register("password", { required: true })}
-              />
+              <div className={s.password_input}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Введите пароль"
+                  {...register("password", { required: true })}
+                />
+                <button type="button" onClick={togglePasswordVisibility}>
+                  <img
+                    src={
+                      showPassword
+                        ? "/assets/icons/eyes-open.svg"
+                        : "/assets/icons/eyes-close.svg"
+                    }
+                    alt="view password"
+                  />
+                </button>
+              </div>
+
               {errors.password && (
                 <spanz className={s.error}>
                   Это поле обязательно к заполнению!
