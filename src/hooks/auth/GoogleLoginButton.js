@@ -39,7 +39,7 @@ const GoogleLoginButton = () => {
       if (response.status === 200) {
         setCookie('accessToken', data.access);
         if (data?.is_admin) {
-          document.cookie = 'isAdmin=true';
+          document.cookie = 'admin=true';
           router.push('/admin');
         } else {
           router.push('/user');
