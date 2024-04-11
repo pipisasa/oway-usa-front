@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { setCookie } from "@/utils/cookieHelpers";
+import { setCookie, getCookie } from "@/utils/cookieHelpers";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -39,6 +39,14 @@ const useLogin = () => {
       setError("Произошла ошибка при авторизации");
     }
   };
+
+   useEffect(() => {
+    const accessToken = getCookie("accessToken");
+    if (!accessToken) {
+      router.push("/login"); 
+    }
+  }, []);
+
 
   return { login, error };
 };

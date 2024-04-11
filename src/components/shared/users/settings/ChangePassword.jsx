@@ -83,6 +83,9 @@ export default function ChangePassword() {
           </div>
         </form>
       )}
+      <div className={s.change_password_img}>
+           <img width={622} height={621} src="/assets/images/19.png" alt="image" />
+       </div>
     </div>
   );
 }
