@@ -7,16 +7,16 @@ import Loading from "./Loading";
 import { Pagination } from "@nextui-org/react";
 
 export default function WarehousesProductsTable() {
-  const { warehouses, fetchWarehouses, isLoading, error, count } =
-    useWarehouses();
-  const [selectedWarehouse, setSelectedWarehouse] = useState(null);
-
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  const { warehouses, fetchWarehouses, isLoading, error, count } =
+    useWarehouses(currentPage);
+  const [selectedWarehouse, setSelectedWarehouse] = useState(null);
+  console.log(warehouses.total_pages,23);
+ useEffect(() => {
 
-  useEffect(() => {
-    fetchWarehouses();
-  }, []);
+    fetchWarehouses(currentPage)
+  }, [currentPage]);
+
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
   };
@@ -24,11 +24,6 @@ export default function WarehousesProductsTable() {
   const handleCloseModal = () => {
     setSelectedWarehouse(null);
   };
-
-  useEffect(() => {
-    fetchWarehouses(currentPage);
-    setTotalPages(Math.ceil(count / 10));
-  }, [currentPage, count]);
 
   if (isLoading) {
     return <Loading />;
@@ -53,7 +48,7 @@ export default function WarehousesProductsTable() {
           </tr>
         </thead>
         <tbody>
-          {warehouses.map((warehouse) => (
+          {warehouses?.results?.map((warehouse) => (
             <tr key={warehouse.id}>
               <td>{warehouse?.name}</td>
               <td>{warehouse?.address}</td>
@@ -76,7 +71,7 @@ export default function WarehousesProductsTable() {
       <div className={s.pagination}>
         <Pagination
           variant="bordered"
-          total={2}
+          total={warehouses?.total_pages}
           initialPage={currentPage}
           onChange={(page) => setCurrentPage(page)}
         />

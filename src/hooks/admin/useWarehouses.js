@@ -4,20 +4,20 @@ import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const useWarehouses = () => {
+const useWarehouses = (currentPage) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [warehouses, setWarehouses] = useState([]);
   const [count, setCount] = useState(0);
 
-  const fetchWarehouses = async (page = 1) => {
+  const fetchWarehouses = async () => {
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     setError(null);
     try {
       const response = await axios.get(
-        `${API_URL}/api/warehouses/list/?pagination_type=page_number&page=${page}&page_size=5`,
+        `${API_URL}/api/warehouses/list/?pagination_type=page_number&page=${currentPage === undefined ? 1 : currentPage}&page_size=5`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -25,7 +25,7 @@ const useWarehouses = () => {
         }
       );
       const data = response.data;
-      setWarehouses(data.results);
+      setWarehouses(data);
       setCount(data.count);
     } catch (err) {
       setError(err.message);

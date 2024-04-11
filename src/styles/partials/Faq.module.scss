@@ -1,3 +1,8 @@
+// .question.opened .answer {
+//   height: auto;
+//   opacity: 1;
+// }
+
 .faq_container {
   display: flex;
   align-items: center;
@@ -39,8 +44,9 @@
       padding: 16px 20px;
       border-radius: 16px;
       border: 1px solid var(--blue_light, #aed5f3);
-      transition: all 2s ease-out; 
+      transition: all 2s ease-out;
       overflow: hidden;
+
       .answer {
         color: var(--white, var(--Colors-Grey-White, #fff));
         font-size: 14px;
