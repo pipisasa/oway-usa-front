@@ -32,6 +32,7 @@ export default function AdminUsersPage() {
             <th>Фамилия</th>
             <th>Почта</th>
             <th>Номер телефона</th>
+            <th>Уникальный ID</th>
             <th>Данные ID паспорта</th>
           </tr>
         </thead>
@@ -44,6 +45,7 @@ export default function AdminUsersPage() {
                 <td>{user.last_name}</td>
                 <td>{user.email}</td>
                 <td>{user.phone_number}</td>
+                <td>#{user.unique_id}</td>
                 <td>
                   <button
                     className={s.btn}
