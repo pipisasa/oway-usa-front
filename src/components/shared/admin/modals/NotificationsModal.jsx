@@ -14,11 +14,11 @@ export default function NotificationsModal() {
   const toggleModal = () => setIsOpen(!isOpen);
   const { addNotification } = useNotification();
   const handle = (e) => {
-    console.log(e,43);
+    console.log(e, 43);
     e.preventDefault();
     e.stopPropagation();
-      setIcon(e)
-  }
+    setIcon(e);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,41 +36,41 @@ export default function NotificationsModal() {
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <h3>Создать уведомление</h3>
-        <form  action="" className={s.notifications_form}>
+        <form action="" className={s.notifications_form}>
           <div>
             <label htmlFor="">Заголовок</label>
             <input
-                type="text"
-                placeholder="Введите заголовок"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+              type="text"
+              placeholder="Введите заголовок"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div>
             <label htmlFor="">Описание</label>
             <input
-                type="text"
-                placeholder="Добавьте описание"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+              type="text"
+              placeholder="Добавьте описание"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div>
             <label htmlFor="">Картинка</label>
-                 <input
-                    type="file"
-                    onChange={(e) => setIcon(e.target.files[0])}
-               />
-            
-          {/* <CustomFileInput onChange={(e) => handle(e)}/> */}
-            
+            <label className="custom-file-upload">
+              <input type="file" onChange={(e) => setIcon(e.target.files[0])} />
+              <img src="/assets/icons/selectimg.svg" alt="select img" />
+              <span>Выбрать картинку</span>
+            </label>
+
+            {/* <CustomFileInput onChange={(e) => handle(e)}/> */}
           </div>
           <p>
             Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512
           </p>
         </form>
         <div className={s.btn_center}>
-          <button  onClick={handleSubmit} className={s.submit_btn}>
+          <button onClick={handleSubmit} className={s.submit_btn}>
             Создать уведомление
           </button>
         </div>

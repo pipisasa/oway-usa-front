@@ -39,7 +39,11 @@ export default function EditProductsModal({ isOpen, toggleModal, product }) {
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <div className={s.modalContent}>
           <h3>Редактировать товар</h3>
-          <form onSubmit={handleSubmit} encType="multipart/form-data" className={s.notifications_form}>
+          <form
+            onSubmit={handleSubmit}
+            encType="multipart/form-data"
+            className={s.notifications_form}
+          >
             <div>
               <label htmlFor="productTitle">Название товара</label>
               <input
@@ -60,13 +64,17 @@ export default function EditProductsModal({ isOpen, toggleModal, product }) {
                 onChange={(e) => setLink(e.target.value)}
               />
             </div>
-            <div>
+            <div className="">
               <label htmlFor="productImage">Картинка</label>
-              <input
-                id="productImage"
-                type="file"
-                onChange={handleImageChange}
-              />
+              <label class="custom-file-upload">
+                <input
+                  id="productImage"
+                  type="file"
+                  onChange={handleImageChange}
+                />
+                <img src="/assets/icons/selectimg.svg" alt="select img" />
+                <span>Выбрать картинку</span>
+              </label>
             </div>
             <p>
               Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512

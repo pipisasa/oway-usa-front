@@ -6,8 +6,8 @@
 
   .advantage_container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 20px;
 
     .advantage_inner {
       width: 427px;
@@ -90,11 +90,11 @@
 
   .advantage_container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 20px;
 
     .advantage_inner {
-      width: 100%;
+      width: 427px;
 
       p {
         font-size: 16px;

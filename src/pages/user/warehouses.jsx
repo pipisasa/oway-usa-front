@@ -4,6 +4,8 @@ import s from "@/styles/pages/user/UserWarehouses.module.scss";
 export default function UserWarehousesPage() {
   const warehouses = [
     {
+      img: "assets/icons/footer/usa.svg",
+      title: "Главный офис",
       address: "4730d Kimball Ave",
       state: "Illinois",
       phone: "872 710 07 10",
@@ -12,19 +14,33 @@ export default function UserWarehousesPage() {
       email: "owayusa1@gmail.com",
     },
     {
-      address: "1234 Fictional Ave",
-      state: "California",
-      phone: "123 456 7890",
-      city: "Los Angeles",
-      zip: "90001",
+      img: "assets/icons/footer/usa.svg",
+      title: "Пункты приема в Чикаго:",
+      address: "1550 Oak Brook",
+      state: "Illinois",
+      phone: "872 710 07 10",
+      city: "205",
+      zip: "60625",
       email: "owayusa1@gmail.com",
     },
     {
-      address: "5678 Imaginary Rd",
-      state: "New York",
-      phone: "098 765 4321",
-      city: "New York",
-      zip: "10001",
+      img: "assets/icons/footer/usa.svg",
+      title: "Пункт приема онлайн заказов в Delaware",
+      address: "4730d Kimball Ave",
+      state: "Turkey",
+      phone: "872 710 07 10",
+      city: "Chicago",
+      zip: "34130",
+      email: "owayusa1@gmail.com",
+    },
+    {
+      img: "assets/icons/footer/turkey.svg",
+      title: "Адрес склада в Турции",
+      address: "Nişanca, Hemşire Sk.  ",
+      state: "Illinois",
+      phone: "872 710 07 10",
+      city: "Istanbul",
+      zip: "34130",
       email: "owayusa1@gmail.com",
     },
   ];
@@ -49,7 +65,7 @@ export default function UserWarehousesPage() {
     <section className={s.warehouse_page}>
       {warehouses.map((warehouse, index) => (
         <div key={index} className={s.warehouse_card}>
-          <h3>Склад</h3>
+          <h3>{warehouse.title}</h3>
           <div className={s.card}>
             <div className={s.block}>
               <div>
