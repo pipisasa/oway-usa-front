@@ -1,11 +1,11 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import s from "@/styles/components/shared/UsersProductTable.module.scss";
 import { Pagination } from "@nextui-org/react";
 import useWarehousesUser from "@/hooks/user/useWarehousesUser";
 import OnTheWayModal from "../../admin/modals/OnTheWayModal";
 
 export default function Delivered() {
-    const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const { warehouses, fetchWarehouses } = useWarehousesUser(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
@@ -16,7 +16,7 @@ export default function Delivered() {
   };
 
   useEffect(() => {
-    fetchWarehouses(currentPage)
+    fetchWarehouses(currentPage);
   }, [currentPage]);
 
   const is_paid = true;
@@ -60,7 +60,7 @@ export default function Delivered() {
                     {is_paid === false ? (
                       <p style={{ color: "red" }}>Не оплачено</p>
                     ) : (
-                      <p style={{ color: "#06DB02" }}>Оплечено</p>
+                      <p style={{ color: "#06DB02" }}>Оплачено</p>
                     )}
                   </td>
                   <td>{item.status.name}</td>
@@ -75,11 +75,15 @@ export default function Delivered() {
         </table>
       </div>
       <div className={s.pagination}>
-        <Pagination 
+        <Pagination
           variant="bordered"
-              total={Math.ceil(warehouses.results?.filter((item) => item.status.name === "Доставлено")?.length / 5)}
-              initialPage={currentPage}
-              onChange={(page) => setCurrentPage(page)}
+          total={Math.ceil(
+            warehouses.results?.filter(
+              (item) => item.status.name === "Доставлено"
+            )?.length / 5
+          )}
+          initialPage={currentPage}
+          onChange={(page) => setCurrentPage(page)}
         />
       </div>
     </>

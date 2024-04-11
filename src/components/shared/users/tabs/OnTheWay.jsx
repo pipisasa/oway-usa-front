@@ -8,13 +8,13 @@ const PAGE_SIZE = 5;
 
 export default function OnTheWay() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { warehouses, isLoading, fetchWarehouses } = useWarehousesUser(currentPage);
+  const { warehouses, isLoading, fetchWarehouses } =
+    useWarehousesUser(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
 
   useEffect(() => {
-
-    fetchWarehouses(currentPage)
+    fetchWarehouses(currentPage);
   }, [currentPage]);
 
   const handleOpenModal = (item) => {
@@ -61,7 +61,7 @@ export default function OnTheWay() {
                   {is_paid === false ? (
                     <p style={{ color: "red" }}>Не оплачено</p>
                   ) : (
-                    <p style={{ color: "#06DB02" }}>Оплечено</p>
+                    <p style={{ color: "#06DB02" }}>Оплачено</p>
                   )}
                 </td>
                 <td>{item.status.name}</td>
@@ -77,10 +77,10 @@ export default function OnTheWay() {
       </div>
       <div className={s.pagination}>
         <Pagination
-            variant="bordered"
-            total={warehouses?.total_pages}
-            initialPage={currentPage}
-            onChange={(page) => setCurrentPage(page)}
+          variant="bordered"
+          total={warehouses?.total_pages}
+          initialPage={currentPage}
+          onChange={(page) => setCurrentPage(page)}
         />
       </div>
     </>

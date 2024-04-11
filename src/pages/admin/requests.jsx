@@ -66,7 +66,7 @@ export default function IncommingRequests() {
                 {request.is_paid === false ? (
                   <p style={{ color: "red" }}>Не оплачено</p>
                 ) : (
-                  <p style={{ color: "#06DB02" }}>Оплечено</p>
+                  <p style={{ color: "#06DB02" }}>Оплачено</p>
                 )}
               </td>
               <td>

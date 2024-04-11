@@ -29,7 +29,7 @@ export default function AdminLayout({ children }) {
     },
     {
       href: "/admin/products",
-      label: "Товары",
+      label: "Горячие предложения",
       icon: "/assets/icons/admin-icons/товары.svg",
     },
     {

@@ -53,13 +53,13 @@ export default function AdminNotificationPage() {
           </div>
           <div>
             <button onClick={() => handleDelete(product.id)}>
-              <img src="/assets/icons/delete.svg" alt="" />
+              <img src="/assets/icons/delete.svg" alt="delete" />
             </button>
             <button
               className={s.button}
               onClick={() => handleUpdate(product.id)}
             >
-              <img src="/assets/icons/edit.svg" alt="" />
+              <img src="/assets/icons/edit.svg" alt="edit" />
             </button>
           </div>
         </div>

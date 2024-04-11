@@ -228,7 +228,7 @@ export default function Purchase() {
                       : s.purchase_inner_froms_inputs
                   }`}
                 >
-                  <label>Номер телефона</label>
+                  <label>Whats App</label>
                   <div className={s.icon_input}>
                     <img src="/assets/icons/whatsapp.svg" alt="whatsapp" />
                     <input
