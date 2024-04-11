@@ -130,8 +130,8 @@
   background: var(--bue_light_2, #f7f9fc);
 
   main {
-    overflow-y: auto; /* Добавить вертикальный скролл */
-    height: 100vh; /* Задать высоту для возможности скролла */
+    // overflow-y: auto; /* Добавить вертикальный скролл */
+    height: calc(100vh - 84px); /* Задать высоту для возможности скролла */
     padding: 24px;
   }
 }

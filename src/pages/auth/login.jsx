@@ -28,8 +28,9 @@ export default function Login() {
     <main className={s.login_page}>
       <img
         className={s.left_img}
+        height={400}
         src="/assets/images/autholeftblock.png"
-        alt=""
+        alt="cdads"
         data-aos="fade-right"
         data-aos-anchor="#example-anchor"
         data-aos-offset="500"
