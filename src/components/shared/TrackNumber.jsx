@@ -17,7 +17,8 @@ export default function TrackNumber() {
   };
 
   return (
-    <div className={`${s.track} container`}>
+    <div className={`${s.track} container`} data-aos="zoom-out-right"
+    data-aos-duration="600">
       <div className={s.track_info}>
         <div>
           <span>Отслеживание доставки</span>

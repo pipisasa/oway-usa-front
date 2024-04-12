@@ -18,7 +18,9 @@ export default function ShopsCategory1({
   };
 
   return (
-    <div className={s.category_block}>
+    <div className={s.category_block} data-aos="fade-right"
+    data-aos-offset="300"
+    data-aos-easing="ease-in-sine">
       <h3>Категории</h3>
       <div className={s.checkboxes}>
         {categories.map((category) => (

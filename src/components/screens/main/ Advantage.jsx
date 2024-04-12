@@ -91,7 +91,11 @@ export default function Advantage(props) {
 
   return (
     <div className={props?.menu === "menu" ? s.advantage : s.advantage_calc}>
-      <div className={`${s.advantage_container} container`}>
+      <div className={`${s.advantage_container} container`}  
+        data-aos="fade-right"
+        data-aos-offset="300"
+        data-aos-easing="ease-in-sine"
+      >
         <div className={s.advantage_inner}>
           <p>{props.p}</p>
           <h2>{props.h2}</h2>

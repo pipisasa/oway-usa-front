@@ -4,7 +4,11 @@ import Map from "@/components/partials/Map";
 
 export default function AboutWorld() {
   return (
-    <div className={`${s.join} container`}>
+    <div className={`${s.join} container`} 
+      data-aos-offset="300"
+      data-aos-easing="ease-in-sine"
+      data-aos="zoom-in-up"
+    >
       <div className={s.join_info}>
         <p>Мы в СНГ</p>
         <h1>

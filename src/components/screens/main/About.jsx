@@ -4,7 +4,7 @@ import Button from "../../partials/Button";
 
 export default function About() {
   return (
-    <div className={s.heroSection_page}>
+    <div className={s.heroSection_page} data-aos="zoom-out-left">
       <div className={`${s.heroSection_page} container`}>
         <div className={s.heroSection_info}>
           <h1>О компании</h1>
@@ -18,7 +18,7 @@ export default function About() {
           </div>
         </div>
         <Button button="Закупиться" />
-        <div className={s.heroSection_img1} data-aos="zoom-out-left">
+        <div className={s.heroSection_img1} >
           <img
             src="assets/images/teleshkaOrange.png"
             width={537}

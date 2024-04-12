@@ -23,7 +23,10 @@ export default function ProductSlider() {
   };
 
   return (
-    <div className={`${s.current} container`}>
+    <div className={`${s.current} container`} data-aos="fade-right"
+    data-aos-offset="300"
+        data-aos-easing="ease-in-sine"
+    >
       <div className={s.current_header}>
         <div className={s.current_header_title}>
           <p>Интересные товары</p>

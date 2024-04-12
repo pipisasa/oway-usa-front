@@ -71,7 +71,10 @@ export default function Faq() {
 
   return (
     <section style={faqStyle}>
-      <div className={`${s.faq_container} container`}>
+      <div className={`${s.faq_container} container`} data-aos="fade-up-left"
+       data-aos-offset="500"
+       data-aos-easing="ease-in-sine"
+       >
         <div className={s.faq_block}>
           <div className={s.faq_header}>
             <span>FAQ</span>
