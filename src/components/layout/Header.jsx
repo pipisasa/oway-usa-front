@@ -84,6 +84,7 @@ export default function Header() {
               </li>
             ))}
           </ul>
+          
         </nav>
         {isAuthenticated ? (
           <div className={`${s.auth_btn} ${isHomePage ? s.whiteText : ""}`}>
