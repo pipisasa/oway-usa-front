@@ -43,7 +43,7 @@ const useLogin = () => {
    useEffect(() => {
     const accessToken = getCookie("accessToken");
     if (!accessToken) {
-      router.push("/login"); 
+      router.push("/auth/login"); 
     }
   }, []);
 
