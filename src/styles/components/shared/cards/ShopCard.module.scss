@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  width: 352px;
+  width: 100%;
 
   .cards_img {
     min-width: 80px;
@@ -14,7 +14,9 @@
 
     img {
       height: 80px;
-      min-width: 80px;
+      max-width: 80px;
+      object-fit: contain;
+      border-radius: 8px;
     }
   }
   .card_btn {
@@ -29,7 +31,7 @@
       align-items: center;
       gap: 10px;
       border-radius: 5px;
-      background: var(--bg_red, #FFE7E7);
+      background: var(--bg_red, #ffe7e7);
       img {
         width: 12px;
         height: 12px;
@@ -42,7 +44,7 @@
       align-items: center;
       gap: 10px;
       border-radius: 5px;
-      background: var(--blue_light_3, #E7EFFF);
+      background: var(--blue_light_3, #e7efff);
       img {
         width: 12px;
         height: 12px;
@@ -74,4 +76,5 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  width: 100%;
 }

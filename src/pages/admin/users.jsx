@@ -28,7 +28,10 @@ export default function AdminUsersPage() {
 
   return (
     <>
-      <div style={{ display: "flex", gap: "20px" }} className={c.warehouses_page}>
+      <div
+        style={{ display: "flex", gap: "20px" }}
+        className={c.warehouses_page}
+      >
         <div className={c.search}>
           <img src="/assets/icons/search.svg" alt="icon" />
           <input
@@ -64,9 +67,10 @@ export default function AdminUsersPage() {
           <tbody>
             {users?.results
               ?.filter((item) => item.id !== 1)
-              .filter((user) =>
-                user.phone_number.includes(searchPhoneNumber) &&
-                user.unique_id.includes(searchUniqueId)
+              .filter(
+                (user) =>
+                  user.phone_number.includes(searchPhoneNumber) &&
+                  user.unique_id.includes(searchUniqueId)
               )
               .map((user) => (
                 <tr key={user.id}>
@@ -104,11 +108,11 @@ export default function AdminUsersPage() {
                   {selectedUser.front_image && selectedUser.back_image ? (
                     <>
                       <img
-                        src={`http://18.222.184.72:8000/${selectedUser.front_image}`}
+                        src={`https:/api-owayusa.com/${selectedUser.front_image}`}
                         alt=""
                       />
                       <img
-                        src={`http://18.222.184.72:8000/${selectedUser.back_image}`}
+                        src={`https:/api-owayusa.com/${selectedUser.back_image}`}
                         alt=""
                       />
                     </>

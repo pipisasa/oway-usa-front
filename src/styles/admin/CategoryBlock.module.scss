@@ -2,25 +2,25 @@
   border-radius: 12px;
   background: var(--white, #fff);
   padding: 20px;
-  width: 352px;
+  min-width: 352px;
   gap: 16px;
 
   .checkboxes_btn {
     width: 100%;
-      display: flex;
-      padding: 12px 36px;
-      justify-content: center;
-      align-items: center;
-      gap: 14px;
-      align-self: stretch;
-      border-radius: 12px;
-      border: 1px solid var(--blue, #027DDB);
-      transition: background-color 0.3s;
-      margin-top: 16px;
-      &:hover {
-        background-color: #027DDB;
-        color: #fff;
-      }
+    display: flex;
+    padding: 12px 36px;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    align-self: stretch;
+    border-radius: 12px;
+    border: 1px solid var(--blue, #027ddb);
+    transition: background-color 0.3s;
+    margin-top: 16px;
+    &:hover {
+      background-color: #027ddb;
+      color: #fff;
+    }
   }
   h3 {
     color: var(--black, #001526);
@@ -41,37 +41,36 @@
       display: flex;
       justify-content: space-between;
 
-        div {
+      div {
+        display: flex;
+        gap: 10px;
+        button {
           display: flex;
+          padding: 8px 9px;
+          justify-content: center;
+          align-items: center;
           gap: 10px;
-          button {
-            display: flex;
-            padding: 8px 9px;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            border-radius: 5px;
-            background: var(--bg_red, #FFE7E7);
-            img {
-              width: 12px;
-              height: 12px;
-            }
-          }
-          .card_button {
-            display: flex;
-            padding: 8px 9px;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            border-radius: 5px;
-            background: var(--blue_light_3, #E7EFFF);
-            img {
-              width: 12px;
-              height: 12px;
-            }
+          border-radius: 5px;
+          background: var(--bg_red, #ffe7e7);
+          img {
+            width: 12px;
+            height: 12px;
           }
         }
+        .card_button {
+          display: flex;
+          padding: 8px 9px;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          border-radius: 5px;
+          background: var(--blue_light_3, #e7efff);
+          img {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
     }
-    
   }
 }
