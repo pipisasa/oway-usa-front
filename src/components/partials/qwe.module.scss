@@ -1,53 +1,61 @@
-// qwe.module.scss
+.sliderContainer {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
 .slider {
-    display: block;
-    position: relative;
-    width: 100%;
-    max-width: 450px; /* Максимальная ширина слайдера */
-    margin: 0 auto;
-    overflow: hidden;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none; /* Для WebKit-браузеров */
-    }
-  }
-  
-  .slide {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  width: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
     display: none;
   }
-  
-  .slide.active {
-    display: block;
-  }
-  
-  .indicators {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .indicator {
-    width: 20px;
-    height: 7px;
-    background-color: rgba(2, 125, 219, 0.527);
-    border-radius: 5px;
-    margin: 0 5px;
-    cursor: pointer;
-  }
-  
-  .indicator.active {
-    width: 40px;
-    height: 10px;
-    background-color: #027DDB;
-  }
+}
 
-  @media screen and (min-width: 600px) {
-    .slider {
-        display: none;
-    }
+.slide {
+  scroll-snap-align: start;
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide.active {
+  display: block;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px; /* Расстояние между слайдером и индикаторами */
+}
+
+.indicator {
+  width: 20px;
+  height: 7px;
+  background-color: rgba(2, 125, 219, 0.527);
+  border-radius: 5px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.indicator.active {
+  width: 40px;
+  height: 10px;
+  background-color: #027ddb;
+}
+
+@media screen and (min-width: 600px) {
+  .slider {
+    display: none;
   }
+}
