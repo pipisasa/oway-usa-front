@@ -101,6 +101,7 @@ export default function Faq() {
                         : "/assets/icons/plus.svg"
                     }
                     alt={openIndex === index ? "close" : "open"}
+                    className={s.toggle_btn}
                   />
                 </button>
               </div>

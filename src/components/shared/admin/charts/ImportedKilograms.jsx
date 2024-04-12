@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -22,15 +22,21 @@ ChartJS.register(
   Filler
 );
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
 export default function ImportedKilograms() {
   const [activePeriod, setActivePeriod] = useState("today");
-
+  const [percentageChange, setPercentageChange] = useState(0);
   const [chartData, setChartData] = useState({
-    labels: ["28 Мар", "29 Мар", "30 Мар", "31 Мар", "1 Апр", "2 Апр", "3 Апр"], // Начальные метки
+    labels: [],
     datasets: [
       {
         label: "Кг было провезено",
-        data: [3123, 4000, 2500, 3100, 2000, 2200, 3123], // Начальные данные
+        data: [],
         fill: true,
         backgroundColor: "rgba(2, 125, 219, 0.2)",
         borderColor: "rgba(2, 125, 219, 1)",
@@ -41,27 +47,74 @@ export default function ImportedKilograms() {
     ],
   });
 
-  const handlePeriodClick = (period) => {
-    setActivePeriod(period);
-    const updatedData = {
-      today: [4000, 2000, 3000],
-      week: [3000, 3100, 2900, 2800, 3200, 3300, 3400],
-      month: [
-        2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100,
-        3200, 3300, 3400, 3500, 3600, 3700, 3800, 3900, 4000, 4100, 4200, 4300,
-        4400, 4500, 4600, 4700, 4800, 4900,
-      ],
-    };
+  const monthNames = {
+    "01": "янв",
+    "02": "фев",
+    "03": "мар",
+    "04": "апр",
+    "05": "май",
+    "06": "июн",
+    "07": "июл",
+    "08": "авг",
+    "09": "сен",
+    10: "окт",
+    11: "ноя",
+    12: "дек",
+  };
+
+  const formatLabel = (label, period) => {
+    if (period === "today") {
+      return `${label}:00`; // Часы для периода "сегодня"
+    } else {
+      const [year, month, day] = label.split("-");
+      return `${parseInt(day, 10)} ${monthNames[month]}`; // День и сокращённое название месяца
+    }
+  };
+
+  useEffect(() => {
+    fetchData(activePeriod);
+  }, [activePeriod]);
+
+  const fetchData = async (period) => {
+    const accessToken = getCookie("accessToken");
+    const url = `https://api-owayusa.com/api/statics/admin_panel/warehouse-weight/`;
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const data = await response.json();
+    updateChartData(data, period);
+  };
+
+  const updateChartData = (data, period) => {
+    const periodData = data[period];
+    const labels = Object.keys(periodData);
+    const values = Object.values(periodData);
+
+    const currentTotal = values.reduce((a, b) => a + b, 0);
+    const previousTotal = chartData.datasets[0].data.reduce((a, b) => a + b, 0);
+
+    const change =
+      previousTotal > 0
+        ? ((currentTotal - previousTotal) / previousTotal) * 100
+        : 0;
+    setPercentageChange(change.toFixed(2));
+
     setChartData({
       ...chartData,
-      labels: updatedData[period].map((_, index) => `${index + 1}`),
+      labels: labels.map((label) => formatLabel(label, period)),
       datasets: [
         {
           ...chartData.datasets[0],
-          data: updatedData[period],
+          data: values,
         },
       ],
     });
+  };
+
+  const handlePeriodClick = (period) => {
+    setActivePeriod(period);
   };
 
   const options = {
@@ -106,7 +159,7 @@ export default function ImportedKilograms() {
       <div className={s.line}></div>
       <div className={s.chart_nav}>
         <div className={s.percentage}>
-          <span>45%</span>{" "}
+          <span>{percentageChange}%</span>
         </div>
         <div className={s.date_btn}>
           <button

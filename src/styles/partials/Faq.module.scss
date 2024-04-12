@@ -1,14 +1,14 @@
-// .question.opened .answer {
-//   height: auto;
-//   opacity: 1;
-// }
-
 .faq_container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-top: 60px;
   padding-bottom: 60px;
+
+  .toggle_btn {
+    min-width: 28px !important;
+    min-height: 28px !important;
+  }
 
   .door_img {
     max-width: 580px;
@@ -58,7 +58,6 @@
       }
 
       .close_block {
-        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
