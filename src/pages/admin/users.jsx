@@ -108,11 +108,11 @@ export default function AdminUsersPage() {
                   {selectedUser.front_image && selectedUser.back_image ? (
                     <>
                       <img
-                        src={`https:/api-owayusa.com/${selectedUser.front_image}`}
+                        src={`https://api-owayusa.com/${selectedUser.front_image}`}
                         alt=""
                       />
                       <img
-                        src={`https:/api-owayusa.com/${selectedUser.back_image}`}
+                        src={`https://api-owayusa.com/${selectedUser.back_image}`}
                         alt=""
                       />
                     </>

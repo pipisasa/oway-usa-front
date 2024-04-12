@@ -7,7 +7,7 @@ export default function NotificationsCard({ notification }) {
       <div className={s.card_title}>
         <div className={s.ntf_img}>
           <img
-            src={`https:/api-owayusa.com${notification?.notification?.icon}`}
+            src={`https://api-owayusa.com${notification?.notification?.icon}`}
             alt="Иконка уведомления"
           />
         </div>
