@@ -5,18 +5,15 @@ export const Slider = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchEndX, setTouchEndX] = useState(0);
-  const [showIndicators, setShowIndicators] = useState(
-    window.innerWidth <= 768
-  );
+  const [showIndicators, setShowIndicators] = useState(false);
   const sliderRef = useRef(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      setShowIndicators(window.innerWidth <= 768);
-    };
+    const checkWindowSize = () => setShowIndicators(window.innerWidth <= 768);
+    checkWindowSize();
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("resize", checkWindowSize);
+    return () => window.removeEventListener("resize", checkWindowSize);
   }, []);
 
   const handleTouchStart = (event) => {
