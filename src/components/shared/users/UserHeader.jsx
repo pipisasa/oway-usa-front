@@ -76,11 +76,11 @@ export default function UsersHeader() {
           <span>#{loading ? "загрузка..." : userData?.unique_id}</span>
         </div>
 
-        <Avatar
+        {/* <Avatar
           isBordered
           radius="sm"
           src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
-        />
+        /> */}
       </div>
     </header>
   );

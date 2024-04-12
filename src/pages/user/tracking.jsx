@@ -39,16 +39,10 @@ export default function TrackingPage() {
   const lastEvent =
     detailedTrackingInfo?.data?.trackings[0]?.events?.slice(-1)[0];
 
-    
   return (
     <section>
-       <div className={s.heroSection_img}>
-        <img
-          src="/assets/images/22.png"
-          width={757}
-          height={757}
-          alt=""
-        />
+      <div className={s.heroSection_img}>
+        <img src="/assets/images/22.png" width={757} height={757} alt="" />
       </div>
       {!detailedTrackingInfo && (
         <form className={s.tracking_form} onSubmit={handleTrack}>

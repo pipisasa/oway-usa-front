@@ -46,7 +46,7 @@ export default function AdminNotificationPage() {
     <div className={s.noti_page}>
       {products.map((product, index) => (
         <div key={index} className={s.notification}>
-          <img src={product.icon} alt="" />
+          <img src={product.icon} alt="img" />
           <div className={s.text}>
             <h3>{product.title}</h3>
             <p>{product.description}</p>
