@@ -1,19 +1,24 @@
+@keyframes rotateImage {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .heroSection_img {
   position: absolute;
   right: 0;
   top: 130px;
+  animation: rotateImage 200s infinite linear;
 }
 
 .header_hero {
   width: 100%;
-  background: linear-gradient(
-    259deg,
-    #ff5e97 -2.07%,
-    #027ddb 27.75%,
-    #00b4ac 54.31%,
-    #ff7c02 84.67%,
-    #ffd832 106.36%
-  );
+  background-image: url("/assets/gif/animated-bg.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 800px;
   z-index: 32;
   margin-top: -80px;

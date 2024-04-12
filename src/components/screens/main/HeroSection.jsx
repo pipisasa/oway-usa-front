@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import s from "@/styles/screens/main/HeroSection.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
 import { useRouter } from "next/router";
