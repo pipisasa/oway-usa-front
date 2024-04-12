@@ -16,10 +16,10 @@ const ProductsCard = ({ title, link, image, editProduct, deleteProduct }) => {
       </div>
       <div className={s.btns}>
         <button onClick={editProduct} className={s.edit}>
-          <img src="/assets/icons/Edit.svg" alt="Edit" />
+          <img src="/assets/icons/edit.svg" alt="Edit" />
         </button>
         <button onClick={deleteProduct} className={s.delete}>
-          <img src="/assets/icons/Delete.svg" alt="Delete" />
+          <img src="/assets/icons/delete.svg" alt="Delete" />
         </button>
       </div>
     </div>
