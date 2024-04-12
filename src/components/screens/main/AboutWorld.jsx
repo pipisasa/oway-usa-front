@@ -1,5 +1,6 @@
 import React from "react";
 import s from "@/styles/screens/main/AboutWorld.module.scss";
+import Map from "@/components/partials/Map";
 
 export default function AboutWorld() {
   return (
@@ -29,10 +30,13 @@ export default function AboutWorld() {
           </span>
         </div>
       </div>
-      <div className={s.join_img} data-aos="fade-up"
+      {/* <div className={s.join_img} data-aos="fade-up"
      data-aos-anchor-placement="center-center"
      >
-        <img src="assets/images/map.png" alt="OWAY USA MAP" />
+        <img src="assets/icons/map.svg" alt="OWAY USA MAP" />
+      </div> */}
+      <div>
+        <Map/>
       </div>
     </div>
   );
