@@ -14,6 +14,9 @@ export default function Delivered() {
     setCurrentRequestData(item);
     setIsModalVisible(true);
   };
+  const totalDelivere = Math.ceil(warehouses.results?.filter(
+     (item) => item.status.name === "Доставлено"
+  )?.length)
 
   useEffect(() => {
     fetchWarehouses(currentPage);
@@ -77,11 +80,7 @@ export default function Delivered() {
       <div className={s.pagination}>
         <Pagination
           variant="bordered"
-          total={Math.ceil(
-            warehouses.results?.filter(
-              (item) => item.status.name === "Доставлено"
-            )?.length / 5
-          )}
+          total={totalDelivere > 5 ? totalDelivere / 5 : 1}
           initialPage={currentPage}
           onChange={(page) => setCurrentPage(page)}
         />

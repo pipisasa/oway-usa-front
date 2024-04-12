@@ -78,7 +78,7 @@ export default function StepWork() {
             <div key={step.id} className={s[`step_blocksa${step.id}`]}>
               <span className={s.step_span}>{step.id}</span>
               <div className={s.step_blocks}>
-                <div className={s.step_block} data-aos="fade-down-right">
+                <div className={s.step_block}>
                   <img src={`assets/icons/${step.icon}`} alt="" />
                   <h3>{step.title}</h3>
                   <p>{step.description}</p>
