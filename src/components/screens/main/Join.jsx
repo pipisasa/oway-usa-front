@@ -4,7 +4,7 @@ import Button from "../../partials/Button";
 
 export default function Join() {
   return (
-    <div className={`${s.join} container`}>
+    <div className={`${s.join} container`} data-aos="zoom-in-up">
       <div className={s.join_info}>
         <h1>
           Проживаете в США и регулярно передаете посылки своим близким и
@@ -29,7 +29,7 @@ export default function Join() {
         </div>
         <Button button="Присоединиться" />
       </div>
-      <div className={s.join_img} data-aos="zoom-in-up">
+      <div className={s.join_img} >
         <img src="assets/images/join_image.png" alt="" />
       </div>
     </div>

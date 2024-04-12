@@ -13,7 +13,9 @@ export default function CountryTabs({ setSelectedCountry, setSelectedCategory })
     };
 
   return (
-    <div className={s.tabs}>
+    <div className={s.tabs} data-aos="fade-right"
+    data-aos-offset="300"
+    data-aos-easing="ease-in-sine">
       <button
         className={activeTab === "Все" ? s.active : ""}
         onClick={() => {
