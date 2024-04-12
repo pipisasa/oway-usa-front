@@ -3,7 +3,7 @@ import s from "@/styles/screens/main/Search.module.scss";
 
 export default function Search() {
   return (
-    <div className={s.heroSection_page}>
+    <div className={s.heroSection_page}data-aos="zoom-out-left">
       <div className={`${s.heroSection_page} container`}>
         <div className={s.heroSection_info}>
           <h1>Подскажем где Вы можете купить</h1>

@@ -78,7 +78,8 @@ export default function Contacts() {
   }
 
   return (
-    <section className={`${s.address_container} container`}>
+    <section className={`${s.address_container} container`} data-aos="fade-up"
+    data-aos-duration="600" >
       <div className={s.container_header}>
         <div className={s.title}>
           <span>Контакты</span>

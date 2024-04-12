@@ -4,7 +4,11 @@ import s from "@/styles/screens/main/MoreServices.module.scss";
 export default function MoreServices() {
   return (
     <div className={s.service}>
-      <div className={`${s.service_container} container`}>
+      <div className={`${s.service_container} container`}
+        data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="400"
+      >
         <span>Дополнительные услуги</span>
         <h2>
           Наши дополнительные <br /> сервисы

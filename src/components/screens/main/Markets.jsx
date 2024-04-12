@@ -5,7 +5,11 @@ import Link from "next/link";
 
 export default function Markets() {
   return (
-    <div className={s.heroSection_page}>
+    <div className={s.heroSection_page} 
+      data-aos="fade-up" 
+      data-aos-offset="300"
+      data-aos-easing="ease-in-sine"
+    >
       <div className={`${s.heroSection_page} container`}>
         <div className={s.heroSection_info}>
           <h1>

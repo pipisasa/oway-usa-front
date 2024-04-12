@@ -4,7 +4,11 @@ import { Slider } from "@/components/partials/Slider";
 
 export default function AboutClient() {
   return (
-    <div className={`${s.mission} container`}>
+    <div className={`${s.mission} container`}       
+      data-aos="fade-up" 
+      data-aos-offset="300"
+      data-aos-easing="ease-in-sine"
+    >
       <span>Для оптовых клиентов</span>
       <div className={s.mission_header}>
         <h1>

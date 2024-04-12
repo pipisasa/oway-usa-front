@@ -5,7 +5,8 @@ import Button from "../../partials/Button";
 export default function Services() {
   return (
     <div className={s.heroSection_page}>
-      <div className={`${s.heroSection_page_container} container`}>
+      <div className={`${s.heroSection_page_container} container`} data-aos="fade-up"
+     data-aos-anchor-placement="top-center" >
         <div className={s.heroSection_info}>
           <h1>Предоставляемые нами услуги</h1>
           <div className={s.heroSection_info_span}>
