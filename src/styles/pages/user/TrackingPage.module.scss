@@ -177,6 +177,9 @@
 }
 
 @media (max-width: 768px) {
+  .heroSection_img {
+    display: none;
+  }
   .tracking_form {
     padding: 16px;
   }
