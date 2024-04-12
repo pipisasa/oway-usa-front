@@ -1,11 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import s from "./qwe.module.scss";
 
 export const Slider = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchEndX, setTouchEndX] = useState(0);
+  const [showIndicators, setShowIndicators] = useState(
+    window.innerWidth <= 768
+  );
   const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowIndicators(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleTouchStart = (event) => {
     setTouchStartX(event.touches[0].clientX);
@@ -79,17 +91,19 @@ export const Slider = ({ children }) => {
           </div>
         ))}
       </div>
-      <div className={s.indicators}>
-        {children.map((child, index) => (
-          <span
-            key={index}
-            className={`${s.indicator} ${
-              index === currentIndex ? s.active : ""
-            }`}
-            onClick={() => handleIndicatorClick(index)}
-          />
-        ))}
-      </div>
+      {showIndicators && (
+        <div className={s.indicators}>
+          {children.map((child, index) => (
+            <span
+              key={index}
+              className={`${s.indicator} ${
+                index === currentIndex ? s.active : ""
+              }`}
+              onClick={() => handleIndicatorClick(index)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
