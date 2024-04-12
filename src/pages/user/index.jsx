@@ -29,7 +29,9 @@ export default function UserMainPage() {
             <div>
               <p>
                 <img src="/assets/icons/phone-call.svg" alt="phone number" />
-                {userData?.phone_number}
+                {userData.phone_number
+                  ? userData.phone_number
+                  : "Номер телефона не указан"}
               </p>
               <p>
                 <img src="/assets/icons/email.svg" alt="email" />

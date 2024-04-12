@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import s from "@/styles/admin/UserCount.module.scss";
+import { getCookie } from "@/utils/cookieHelpers";
 
 ChartJS.register(
   CategoryScale,
@@ -20,41 +21,89 @@ ChartJS.register(
   Legend
 );
 
+const monthNames = {
+  "01": "янв",
+  "02": "фев",
+  "03": "мар",
+  "04": "апр",
+  "05": "май",
+  "06": "июн",
+  "07": "июл",
+  "08": "авг",
+  "09": "сен",
+  10: "окт",
+  11: "ноя",
+  12: "дек",
+};
+
 export default function UserCount() {
   const [activePeriod, setActivePeriod] = useState("week");
   const [chartData, setChartData] = useState({
-    labels: ["28 Мар", "29 Мар", "30 Мар", "31 Мар", "1 Апр", "2 Апр", "3 Апр"],
+    labels: [],
     datasets: [
       {
-        data: [3123, 2000, 4650, 2240, 3050, 2600, 3000],
+        data: [],
         backgroundColor: "#027DDB",
       },
     ],
   });
+  const [percentageChange, setPercentageChange] = useState(0);
 
-  const handlePeriodClick = (period) => {
-    setActivePeriod(period);
+  useEffect(() => {
+    fetchData(activePeriod);
+  }, [activePeriod]);
 
-    const newData = {
-      today: [3500, 3600, 2400],
-      week: [3000, 2900, 3200, 3100, 2800, 3500, 3700],
-      month: [
-        1000, 1200, 1400, 1300, 1700, 1600, 1500, 1900, 1800, 2000, 2100, 2200,
-        2400, 2300, 2600, 2500, 2900, 2800, 3100, 3000, 3300, 3200, 3400, 3600,
-        3800, 4000, 3900, 3700, 3500, 3400,
-      ],
-    };
+  const fetchData = async (period) => {
+    const accessToken = getCookie("accessToken");
+    const response = await fetch(
+      `https://api-owayusa.com/api/statics/admin_panel/users/`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    const data = await response.json();
+    updateChartData(data, period);
+  };
+
+  const updateChartData = (data, period) => {
+    const periodData = data[period];
+    const labels = Object.keys(periodData);
+    const values = Object.values(periodData);
+
+    const previousTotal = chartData.datasets[0].data.reduce((a, b) => a + b, 0);
+    const currentTotal = values.reduce((a, b) => a + b, 0);
+    const change = previousTotal
+      ? ((currentTotal - previousTotal) / previousTotal) * 100
+      : 0;
+    setPercentageChange(change.toFixed(2));
+
+    let formattedLabels;
+    if (period === "today") {
+      formattedLabels = labels.map((label) => `${label}:00`);
+    } else if (period === "week" || period === "month") {
+      formattedLabels = labels.map((label) => {
+        const [year, month, day] = label.split("-");
+        return `${day} ${monthNames[month]}`;
+      });
+    } else {
+      formattedLabels = labels;
+    }
 
     setChartData({
-      ...chartData,
-      labels: newData[period].map((_, index) => `${index + 1}`),
+      labels: formattedLabels,
       datasets: [
         {
           ...chartData.datasets[0],
-          data: newData[period],
+          data: values,
         },
       ],
     });
+  };
+
+  const handlePeriodClick = (period) => {
+    setActivePeriod(period);
   };
 
   const options = {
@@ -90,7 +139,7 @@ export default function UserCount() {
       <div className={s.line}></div>
       <div className={s.chart_nav}>
         <div className={s.percentage}>
-          <span>45%</span>{" "}
+          <span>{percentageChange}%</span>
         </div>
         <div className={s.date_btn}>
           <button
