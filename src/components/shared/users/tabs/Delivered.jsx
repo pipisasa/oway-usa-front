@@ -14,9 +14,10 @@ export default function Delivered() {
     setCurrentRequestData(item);
     setIsModalVisible(true);
   };
-  const totalDelivere = Math.ceil(warehouses.results?.filter(
-     (item) => item.status.name === "Доставлено"
-  )?.length)
+  const totalDelivere = Math.ceil(
+    warehouses.results?.filter((item) => item.status.name === "Доставлено")
+      ?.length
+  );
 
   useEffect(() => {
     fetchWarehouses(currentPage);
@@ -52,7 +53,7 @@ export default function Delivered() {
                   <td>
                     <img
                       width={64}
-                      src={`https:/api-owayusa.com${item.image}`}
+                      src={`https://api-owayusa.com${item.image}`}
                       alt="product img"
                     />
                   </td>

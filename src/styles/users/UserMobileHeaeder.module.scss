@@ -50,8 +50,12 @@
     height: 100vh;
     position: fixed;
     top: 80px;
-    width: 93%;
-    
+    width: 100%;
+    transform: translateX(-20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     .logout {
       margin-top: 200px;
       display: flex;
@@ -62,16 +66,17 @@
       font-size: 20px;
       line-height: 140%;
       position: absolute;
-      bottom: 0%;
+      bottom: 30%;
       width: 100%;
     }
-    
+
     ul {
-    height: 45vh;
+      height: 100vh;
       background-color: #f7f9fc;
       display: flex;
       flex-direction: column;
       gap: 8px;
+      padding: 0 20px;
 
       li {
         padding: 16px 20px;

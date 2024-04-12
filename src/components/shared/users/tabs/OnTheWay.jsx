@@ -50,7 +50,7 @@ export default function OnTheWay() {
                 <td>
                   <img
                     width={64}
-                    src={`https:/api-owayusa.com${item.image}`}
+                    src={`https://api-owayusa.com${item.image}`}
                     alt="product img"
                   />
                 </td>
