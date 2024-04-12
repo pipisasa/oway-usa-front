@@ -52,7 +52,7 @@ export default function Delivered() {
                   <td>
                     <img
                       width={64}
-                      src={`http://18.222.184.72:8000/${item.image}`}
+                      src={`https:/api-owayusa.com${item.image}`}
                       alt="product img"
                     />
                   </td>
