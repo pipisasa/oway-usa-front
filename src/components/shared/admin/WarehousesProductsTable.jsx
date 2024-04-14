@@ -6,15 +6,27 @@ import { RxCross2 } from "react-icons/rx";
 import Loading from "./Loading";
 import { Pagination } from "@nextui-org/react";
 
-export default function WarehousesProductsTable() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { warehouses, fetchWarehouses, isLoading, error, count } =
-    useWarehouses(currentPage);
+export default function WarehousesProductsTable({
+  warehouses,
+  isLoading,
+  error,
+  current,
+  setCurrent,
+  nameFilter,
+  trackNumberFilter,
+  statusFilter,
+  countryFilter
+}) {
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
-  console.log(warehouses.total_pages, 23);
-  useEffect(() => {
-    fetchWarehouses(currentPage);
-  }, [currentPage]);
+
+  const filteredWarehouses = warehouses?.results?.filter((warehouse) =>
+    warehouse.name.toLowerCase().includes(nameFilter.toLowerCase()) &&
+    warehouse.track_number.toString().includes(trackNumberFilter) &&
+    (statusFilter === "" || warehouse.status.name === statusFilter) &&
+    (countryFilter === "" || warehouse.country.name === countryFilter)
+  );
+  console.log("countryFilter:", countryFilter);
+console.log("filteredWarehouses:", filteredWarehouses);
 
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
@@ -48,25 +60,25 @@ export default function WarehousesProductsTable() {
           </tr>
         </thead>
         <tbody>
-          {warehouses?.results?.map((warehouse) => (
+          {filteredWarehouses?.map((warehouse) => (
             <tr key={warehouse.id}>
               <td style={{ fontWeight: "bold" }}>
-                #{warehouse?.unique_id_user}
+                #{warehouse.unique_id_user}
               </td>
-              <td>{warehouse?.name}</td>
-              <td>{warehouse?.country?.name}</td>
-              <td>{warehouse?.address}</td>
-              <td>{warehouse?.weight}</td>
-              <td>{warehouse?.track_number}</td>
+              <td>{warehouse.name}</td>
+              <td>{warehouse.country.name}</td>
+              <td>{warehouse.address}</td>
+              <td>{warehouse.weight}</td>
+              <td>{warehouse.track_number}</td>
               <td
                 style={{
                   color:
-                    warehouse?.status?.name === "Доставлено"
+                    warehouse.status.name === "Доставлено"
                       ? "#06DB02"
                       : "inherit",
                 }}
               >
-                {warehouse?.status?.name}
+                {warehouse.status.name}
               </td>
               <td>
                 <button
@@ -84,8 +96,8 @@ export default function WarehousesProductsTable() {
         <Pagination
           variant="bordered"
           total={warehouses?.total_pages}
-          initialPage={currentPage}
-          onChange={(page) => setCurrentPage(page)}
+          initialPage={current}
+          onChange={(page) => setCurrent(page)}
         />
       </div>
       {selectedWarehouse && (
@@ -106,3 +118,5 @@ export default function WarehousesProductsTable() {
     </div>
   );
 }
+
+

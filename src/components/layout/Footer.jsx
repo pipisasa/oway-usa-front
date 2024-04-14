@@ -2,6 +2,44 @@ import React from "react";
 import s from "@/styles/components/layout/Footer.module.scss";
 import Link from "next/link";
 export default function Footer() {
+
+ const Mobile = () => {
+  return (
+    <div className={s.footer_inner_block1}>
+      <div className={s.footer_inner_block_two1}>
+        <h3>Основное</h3>
+        <nav>
+          <ul>
+            <li>
+              <Link href="/calculator">Калькулятор</Link>
+            </li>
+            <li>
+              <Link href="/steps">Этапы работы</Link>
+            </li>
+            <li>
+              <Link href="/markets">Магазины</Link>
+            </li>
+            <li>
+              <Link href="/about">О компании</Link>
+            </li>
+            <li>
+              <Link href="/faq">Вопрос/Ответы</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div className={s.footer_inner_block_two1}>
+        <h3>Информация</h3>
+        <p>Общие положение и условия </p>
+        <p>Договоро о международных грузоперевозках</p>
+        <p>Политика конфиденциальности</p>
+        <p>Заявление о возврате средств</p>
+        <p>Реквизиты компании</p>
+      </div>
+    </div>
+  );
+};
+
   return (
     <div className={s.footer}>
       <div className="container">
@@ -62,6 +100,7 @@ export default function Footer() {
               <p>Заявление о возврате средств</p>
               <p>Реквизиты компании</p>
             </div>
+          <Mobile/>
           </div>
           <div className={s.footer_inner_down}>
             <span>2024 OWAY USA. All Rights Reserved</span>

@@ -12,14 +12,23 @@ export default function IncommingRequests() {
   const { data, isLoading, error } = useRequests(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
+  const [nameFilter, setNameFilter] = useState("");
+  const [filter, setFilter] = useState(""); 
 
   const handleOpenModal = (requestData) => {
     setCurrentRequestData(requestData);
     setIsModalVisible(true);
   };
 
+  const filteredRequests = data.results.filter((request) =>
+    request.name_of_purchase?.toLowerCase().includes(nameFilter.toLowerCase()) &&
+    filter === "" ? true : request.is_paid.toString() === filter
+  );
+  console.log(filteredRequests);
+
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
+  console.log();
 
   return (
     <div className={s.requests}>
@@ -32,11 +41,30 @@ export default function IncommingRequests() {
       <div className={s.filters}>
         <div className={s.search}>
           <img src="/assets/icons/search.svg" alt="icon" />
-          <input type="text" placeholder="Поиск по названию" />
+          <input
+            type="text"
+            placeholder="Поиск по названию"
+            value={nameFilter}
+            onChange={(e) => setNameFilter(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                fetchWarehouses(currentPage, {
+                  name: nameFilter,
+                });
+              }
+            }}
+          />
         </div>
-        <select className={s.select} name="" id="">
-          <option value="">Оплачено</option>
-          <option value="">Не оплачено</option>
+        <select
+          className={s.select}
+          name=""
+          id=""
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        >
+          <option value="">Все</option>
+          <option value="false">Не оплачено</option>
+          <option value="true">Оплачено</option>
         </select>
       </div>
       <table>
@@ -52,7 +80,7 @@ export default function IncommingRequests() {
           </tr>
         </thead>
         <tbody>
-          {data.results.map((request) => (
+          {filteredRequests.map((request) => (
             <tr key={request.id}>
               <td className={s.purchase_image}>
                 <img
