@@ -73,10 +73,10 @@ export default function UserData() {
             name="username"
             value={
               isEditing
-                ? formData.username
+                ? formData?.username
                 : loading
                 ? "Loading..."
-                : userData.first_name
+                : userData?.first_name
             }
             onChange={handleChange}
             disabled={!isEditing}
@@ -89,10 +89,10 @@ export default function UserData() {
             name="surname"
             value={
               isEditing
-                ? formData.surname
+                ? formData?.surname
                 : loading
                 ? "Loading..."
-                : userData.last_name
+                : userData?.last_name
             }
             onChange={handleChange}
             disabled={!isEditing}
@@ -105,10 +105,10 @@ export default function UserData() {
             name="phone_number"
             value={
               isEditing
-                ? formData.phone_number
+                ? formData?.phone_number
                 : loading
                 ? "Loading..."
-                : userData.phone_number
+                : userData?.phone_number
             }
             onChange={handleChange}
             disabled={!isEditing}
@@ -121,10 +121,10 @@ export default function UserData() {
             name="email"
             value={
               isEditing
-                ? formData.email
+                ? formData?.email
                 : loading
                 ? "Loading..."
-                : userData.email
+                : userData?.email
             }
             onChange={handleChange}
             disabled={true}
@@ -163,10 +163,10 @@ export default function UserData() {
             name="address"
             value={
               isEditing
-                ? formData.address
+                ? formData?.address
                 : loading
                 ? "Loading..."
-                : userData.address
+                : userData?.address
             }
             onChange={handleChange}
             disabled={!isEditing}
