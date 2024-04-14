@@ -1,0 +1,21 @@
+.select {
+    max-height: 200px; /* Установите желаемую фиксированную высоту списка */
+    overflow-y: auto; /* Добавляем прокрутку по вертикали в случае необходимости */
+    padding: 0; /* Убираем внешний отступ у списка */
+    margin: 0;
+    li {
+        display: flex !important;
+        justify-content: space-between;
+        padding: 12px 20px;
+        align-items: center;
+        gap: 12px;
+        border-radius: 8px;
+        margin: 5px 0 5px 0;
+        border: 1px solid var(--gray, #a4a4a4);
+
+    }
+    span {
+      color: var(--gray, #a4a4a4);
+      font-size: 14px;
+    }
+}

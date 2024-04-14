@@ -36,7 +36,7 @@ export default function UserSettingsPage() {
       </div>
       <div className={s.user_code}>
         <label htmlFor="">Код получателя</label>
-        <span>#{loading ? "Loading..." : userData.unique_id}</span>
+        <span>#{loading ? "Loading..." : userData?.unique_id}</span>
       </div>
     </section>
   );
