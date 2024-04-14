@@ -41,6 +41,11 @@ export default function UsersLayout({ children }) {
       label: "Настройки",
       icons: "/assets/icons/user-icons/настройки.svg",
     },
+    {
+      href: "/user/my-warehouses",
+      label: "Мой склад",
+      icons: "/assets/icons/user-icons/склад.svg",
+    },
   ];
 
   return (

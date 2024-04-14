@@ -21,6 +21,7 @@ export default function UsersHeader() {
     { href: "/user/warehouses", label: "Адреса складов" },
     { href: "/user/tracking", label: "Отслеживание доставки" },
     { href: "/user/settings", label: "Настройки" },
+    { href: "/user/my-warehouses", label: "Мой склад" },
   ];
 
   const getPageHeader = () => {
