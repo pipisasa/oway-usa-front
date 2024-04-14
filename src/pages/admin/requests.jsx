@@ -12,6 +12,7 @@ export default function IncommingRequests() {
   const { data, isLoading, error } = useRequests(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
+  const [nameFilter, setNameFilter] = useState("");
   const [filter, setFilter] = useState(""); 
 
   const handleOpenModal = (requestData) => {
@@ -20,8 +21,10 @@ export default function IncommingRequests() {
   };
 
   const filteredRequests = data.results.filter((request) =>
+    request.name_of_purchase?.toLowerCase().includes(nameFilter.toLowerCase()) &&
     filter === "" ? true : request.is_paid.toString() === filter
   );
+  console.log(filteredRequests);
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
@@ -38,7 +41,19 @@ export default function IncommingRequests() {
       <div className={s.filters}>
         <div className={s.search}>
           <img src="/assets/icons/search.svg" alt="icon" />
-          <input type="text" placeholder="Поиск по названию" />
+          <input
+            type="text"
+            placeholder="Поиск по названию"
+            value={nameFilter}
+            onChange={(e) => setNameFilter(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                fetchWarehouses(currentPage, {
+                  name: nameFilter,
+                });
+              }
+            }}
+          />
         </div>
         <select
           className={s.select}
