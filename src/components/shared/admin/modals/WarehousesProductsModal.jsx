@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import Modal from "@/components/shared/Modal";
@@ -6,6 +6,8 @@ import { Switch } from "@nextui-org/react";
 import useWarehouses from "../../../../hooks/admin/useWarehouses";
 import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
+import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
+import SearchSelect from "@/components/partials/SearchSelect";
 
 export default function WarehouseProductsModal() {
   const { addWarehouses } = useWarehouses();
@@ -356,26 +358,60 @@ const Step2 = ({
   </div>
 );
 
-const Step3 = ({ formData, handleChange, handleSubmit }) => (
-  <div className={c.step}>
-    <div className={c.steps_progress}>
-      <img src="/assets/images/step3.svg" alt="step 3" />
-    </div>
-    <form action="" className={s.step_form}>
-      <div>
-        <label htmlFor="comments">Выбор клиента</label>
-        <input
-          type="text"
-          name="unique_id_user"
-          id="unique_id_user"
-          placeholder="Напишите ID"
-          value={formData.unique_id_user}
-          onChange={handleChange}
-        />
+const Step3 = ({ formData, setFormData, handleChange, handleSubmit }) => {
+  const { warehouses } = useWarehousesFull();
+  const [inputValue, setInputValue] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+ const handleInputChange = (e) => {
+  const value = e.target.value;
+  setInputValue(value);
+
+  let filteredWarehouses = [];
+  if (value.trim() !== "") {
+    filteredWarehouses = warehouses?.results?.filter((warehouse) =>
+      warehouse?.unique_id?.toLowerCase().includes(value.toLowerCase())
+    );
+  }
+  setSuggestions(filteredWarehouses);
+};
+
+useEffect(() => {
+  if (inputValue === "") {
+    setSuggestions([]);
+  }
+}, [inputValue]);
+
+
+  const handleSelectWarehouse = (warehouse) => {
+    handleChange({ target: { name: "unique_id_user", value: warehouse.unique_id } });
+    setInputValue(warehouse.unique_id);
+    setSuggestions([]);
+  };
+
+  return (
+    <div className={c.step}>
+      <div className={c.steps_progress}>
+        <img src="/assets/images/step3.svg" alt="step 3" />
       </div>
-    </form>
-    <button className={c.submit_btn} onClick={handleSubmit}>
-      Отправить
-    </button>
-  </div>
-);
+      <form action="" className={s.step_form}>
+        <div>
+          <label htmlFor="comments">Выбор клиента</label>
+          <input
+            type="text"
+            name="unique_id_user"
+            id="unique_id_user"
+            placeholder="Напишите ID"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+           <SearchSelect suggestions={suggestions} handleSelectWarehouse={handleSelectWarehouse} />
+        </div>
+      </form>
+      <button className={c.submit_btn} onClick={handleSubmit}>
+        Отправить
+      </button>
+    </div>
+  );
+};
+
+

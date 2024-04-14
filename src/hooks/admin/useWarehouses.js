@@ -10,7 +10,7 @@ const useWarehouses = (currentPage) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [warehouses, setWarehouses] = useState([]);
   const [count, setCount] = useState(0);
-
+  
   const fetchWarehouses = async () => {
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
