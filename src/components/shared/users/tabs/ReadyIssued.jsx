@@ -10,7 +10,7 @@ export default function ReadyIssued() {
           <tr>
             <th>Изображение</th>
             <th>Название товара</th>
-            <th>Цена</th>
+            <th>Цена ($)</th>
             <th>Дата покупки товара</th>
           </tr>
         </thead>

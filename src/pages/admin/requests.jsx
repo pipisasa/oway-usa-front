@@ -29,12 +29,22 @@ export default function IncommingRequests() {
           onClose={() => setIsModalVisible(false)}
         />
       )}
+      <div className={s.filters}>
+        <div className={s.search}>
+          <img src="/assets/icons/search.svg" alt="icon" />
+          <input type="text" placeholder="Поиск по названию" />
+        </div>
+        <select className={s.select} name="" id="">
+          <option value="">Оплачено</option>
+          <option value="">Не оплачено</option>
+        </select>
+      </div>
       <table>
         <thead>
           <tr>
             <th>Изображение</th>
             <th>Название товара</th>
-            <th>Цена</th>
+            <th>Цена ($)</th>
             <th>Дата отправки заявки</th>
             <th>Статус запроса</th>
             <th>Статус оплаты</th>

@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 10;
 }
 
 .submit_btn {
@@ -43,6 +43,15 @@
     align-items: center;
     gap: 16px;
     width: 100%;
+
+    .chek_btn {
+      border-radius: 12px;
+      background: var(--blue, #027ddb);
+      padding: 14px 36px;
+      color: var(--white, var(--Colors-Grey-White, #fff));
+      font-size: 14px;
+      margin-top: 26px;
+    }
   }
 
   .input_label {
@@ -51,11 +60,35 @@
     gap: 16px;
     width: 100%;
 
-    button {
+    .change_status {
+      padding: 16px;
+      border: 1px solid #a4a4a4;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      button:first-child {
+        color: red;
+      }
+      button:last-child {
+        color: #06db02;
+      }
+    }
+
+    .button_true {
       color: var(--green, #06db02);
       font-size: 14px;
       border-radius: 8px;
       border: 1px solid #bcf3ae;
+      padding: 12px 16px;
+    }
+
+    .button_false {
+      color: var(--green, red);
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid red;
       padding: 12px 16px;
     }
   }
