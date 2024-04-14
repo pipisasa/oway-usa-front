@@ -210,7 +210,7 @@ const Step1 = ({
           />
         </div>
         <div>
-          <label htmlFor="">Страна получения</label>
+          <label htmlFor="">Страна отправки</label>
           <CustomSelect
             options={countries}
             selectedOption={selectedOption}
@@ -252,7 +252,7 @@ const Step1 = ({
           />
         </div>
         <div>
-          <label htmlFor="">Трек-номер</label>
+          <label htmlFor="">Трак-номер</label>
           <input
             type="text"
             name="track_number"
@@ -330,12 +330,12 @@ const Step2 = ({
         />
       </div>
       <div>
-        <label htmlFor="status">Артикул товара</label>
+        <label htmlFor="status">Трак код товара</label>
         <input
           type="text"
           name="articul"
           id="articul"
-          placeholder="Введите артикул товара"
+          placeholder="Введите трак код товара"
           value={formData.articul}
           onChange={handleChange}
         />

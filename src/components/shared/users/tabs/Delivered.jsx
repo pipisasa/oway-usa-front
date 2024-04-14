@@ -38,7 +38,7 @@ export default function Delivered() {
             <tr>
               <th>Изображение</th>
               <th>Название товара</th>
-              <th>Цена</th>
+              <th>Цена ($)</th>
               <th>Дата покупки товара</th>
               <th>Статус оплаты</th>
               <th>Статус посылки</th>

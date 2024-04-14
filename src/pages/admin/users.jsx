@@ -32,23 +32,25 @@ export default function AdminUsersPage() {
         style={{ display: "flex", gap: "20px" }}
         className={c.warehouses_page}
       >
-        <div className={c.search}>
-          <img src="/assets/icons/search.svg" alt="icon" />
-          <input
-            type="text"
-            placeholder="Поиск по номеру телефона"
-            value={searchPhoneNumber}
-            onChange={(e) => setSearchPhoneNumber(e.target.value)}
-          />
-        </div>
-        <div className={c.search}>
-          <img src="/assets/icons/search.svg" alt="icon" />
-          <input
-            type="text"
-            placeholder="Поиск по уникальному ID"
-            value={searchUniqueId}
-            onChange={(e) => setSearchUniqueId(e.target.value)}
-          />
+        <div className={c.filters}>
+          <div className={c.search}>
+            <img src="/assets/icons/search.svg" alt="icon" />
+            <input
+              type="text"
+              placeholder="Поиск по номеру телефона"
+              value={searchPhoneNumber}
+              onChange={(e) => setSearchPhoneNumber(e.target.value)}
+            />
+          </div>
+          <div className={c.search}>
+            <img src="/assets/icons/search.svg" alt="icon" />
+            <input
+              type="text"
+              placeholder="Поиск по уникальному ID"
+              value={searchUniqueId}
+              onChange={(e) => setSearchUniqueId(e.target.value)}
+            />
+          </div>
         </div>
       </div>
 

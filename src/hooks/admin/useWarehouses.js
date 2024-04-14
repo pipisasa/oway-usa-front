@@ -17,7 +17,9 @@ const useWarehouses = (currentPage) => {
     setError(null);
     try {
       const response = await axios.get(
-        `${API_URL}/api/warehouses/list/?pagination_type=page_number&page=${currentPage === undefined ? 1 : currentPage}&page_size=5`,
+        `${API_URL}/api/warehouses/list/?pagination_type=page_number&page=${
+          currentPage === undefined ? 1 : currentPage
+        }&page_size=7`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

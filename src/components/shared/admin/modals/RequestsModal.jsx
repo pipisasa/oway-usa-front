@@ -17,7 +17,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export default function RequestsModal({ data, onClose }) {
   const { updateRequest } = useRequests();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
   const [price, setPrice] = useState(data.price || "");
 
   const handleSubmit = async (event) => {
@@ -58,7 +57,12 @@ export default function RequestsModal({ data, onClose }) {
             </div>
             <div className={s.input_label}>
               <label htmlFor="">Статус запроса</label>
-              <button>В ожидании</button>
+
+              {data.request_status === false ? (
+                <button className={s.button_false}>В ожидании</button>
+              ) : (
+                <button className={s.button_true}>Обработан</button>
+              )}
             </div>
           </div>
           <form
@@ -80,7 +84,7 @@ export default function RequestsModal({ data, onClose }) {
                 />
               </div>
               <div className={s.input_label}>
-                <label htmlFor="articul">Артикул</label>
+                <label htmlFor="articul">Трак код</label>
                 <input id="articul" value={data.articul || ""} readOnly />
               </div>
             </div>
@@ -98,7 +102,7 @@ export default function RequestsModal({ data, onClose }) {
                 <input id="color" value={data.color || ""} readOnly />
               </div>
               <div className={s.input_label}>
-                <label htmlFor="price">Цена</label>
+                <label htmlFor="price">Цена ($)</label>
                 <input
                   id="price"
                   name="price"
@@ -120,7 +124,9 @@ export default function RequestsModal({ data, onClose }) {
                 </label>
               </div>
               {data.payment_confirmation ? (
-                <Button onPress={onOpen}>Посмотреть</Button>
+                <button className={s.chek_btn} type="button" onClick={onOpen}>
+                  Посмотреть
+                </button>
               ) : null}
             </div>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
