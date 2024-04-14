@@ -79,7 +79,7 @@ export default function AdminUsersPage() {
                   <td>{user.first_name}</td>
                   <td>{user.last_name}</td>
                   <td>{user.email}</td>
-                  <td>{user.phone_number}</td>
+                  <td>{user.phone_number || "Номер телефона не указан"}</td>
                   <td>#{user.unique_id}</td>
                   <td>
                     <button

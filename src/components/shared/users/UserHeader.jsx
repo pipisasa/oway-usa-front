@@ -1,13 +1,14 @@
 import React from "react";
 import s from "@/styles/admin/AdminLayout.module.scss";
 import { useRouter } from "next/router";
-import { Avatar, Badge, Button } from "@nextui-org/react";
+import { Badge, Button } from "@nextui-org/react";
 import { NotificationIcon } from "../admin/NotificationIcon";
 import NotificationsModal from "../admin/modals/NotificationsModal";
 import AddShopsModal from "../admin/modals/AddShopsModal";
 import BankCardsModal from "./modals/BankCardsModal";
 import useUserData from "@/hooks/user/useUserData";
 import useNotification from "../../../hooks/user/useNotification";
+import MyWarehousesModal from "../admin/modals/MyWarehousesModal";
 
 export default function UsersHeader() {
   const router = useRouter();
@@ -45,6 +46,8 @@ export default function UsersHeader() {
       return <NotificationsModal />;
     } else if (router.pathname === "/admin/shops-catalog") {
       return <AddShopsModal />;
+    } else if (router.pathname === "/user/my-warehouses") {
+      return <MyWarehousesModal />;
     }
     return null;
   };
