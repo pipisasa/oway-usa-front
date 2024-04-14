@@ -17,15 +17,18 @@ export default function TrackNumber() {
   };
 
   return (
-    <div className={`${s.track} container`} data-aos="zoom-out-right"
-    data-aos-duration="600">
+    <div
+      className={`${s.track} container`}
+      data-aos="zoom-out-right"
+      data-aos-duration="600"
+    >
       <div className={s.track_info}>
         <div>
           <span>Отслеживание доставки</span>
-          <h1>Отслеживайте свою доставку по введенному трек-номеру</h1>
+          <h1>Отслеживайте свою доставку по введенному трак-номеру</h1>
         </div>
         <div className={s.track_info_input}>
-          <span>Трек-номер</span>
+          <span>Трак-номер</span>
           <input type="text" placeholder="Введите трек номер" />
         </div>
         <button onClick={handleClick} className={s.button}>

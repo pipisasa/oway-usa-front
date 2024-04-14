@@ -11,10 +11,9 @@ export default function WarehousesProductsTable() {
   const { warehouses, fetchWarehouses, isLoading, error, count } =
     useWarehouses(currentPage);
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
-  console.log(warehouses.total_pages,23);
- useEffect(() => {
-
-    fetchWarehouses(currentPage)
+  console.log(warehouses.total_pages, 23);
+  useEffect(() => {
+    fetchWarehouses(currentPage);
   }, [currentPage]);
 
   const handleDetailsClick = (warehouse) => {
@@ -38,11 +37,12 @@ export default function WarehousesProductsTable() {
       <table>
         <thead>
           <tr>
-            <th>Нзвание товара</th>
-            <th>Адрес заказа</th>
-            <th>Страна получения</th>
-            <th>Вес</th>
-            <th>Трек-номер</th>
+            <th>Пользователь</th>
+            <th>Название товара</th>
+            <th>Страна отправки</th>
+            <th>Адрес получения</th>
+            <th>Вес (кг)</th>
+            <th>Трак-номер</th>
             <th>Статус</th>
             <th>Комментарий</th>
           </tr>
@@ -50,12 +50,24 @@ export default function WarehousesProductsTable() {
         <tbody>
           {warehouses?.results?.map((warehouse) => (
             <tr key={warehouse.id}>
+              <td style={{ fontWeight: "bold" }}>
+                #{warehouse?.unique_id_user}
+              </td>
               <td>{warehouse?.name}</td>
-              <td>{warehouse?.address}</td>
               <td>{warehouse?.country?.name}</td>
+              <td>{warehouse?.address}</td>
               <td>{warehouse?.weight}</td>
               <td>{warehouse?.track_number}</td>
-              <td>{warehouse?.status?.name}</td>
+              <td
+                style={{
+                  color:
+                    warehouse?.status?.name === "Доставлено"
+                      ? "#06DB02"
+                      : "inherit",
+                }}
+              >
+                {warehouse?.status?.name}
+              </td>
               <td>
                 <button
                   className={s.btn}

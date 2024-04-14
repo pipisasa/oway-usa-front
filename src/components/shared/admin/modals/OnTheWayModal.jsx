@@ -39,7 +39,7 @@ export default function OnTheWayModal({ data, onClose }) {
               </div>
 
               <div className={s.input_label}>
-                <label htmlFor="articul">Артикул</label>
+                <label htmlFor="articul">Трак код</label>
                 <input id="articul" value={data.articul || ""} readOnly />
               </div>
             </div>
@@ -54,7 +54,7 @@ export default function OnTheWayModal({ data, onClose }) {
                 <input id="color" value={data.color || ""} readOnly />
               </div>
               <div className={s.input_label}>
-                <label htmlFor="price">Цена</label>
+                <label htmlFor="price">Цена ($)</label>
                 <input id="price" name="price" type="text" value={data.price} />
               </div>
               <div className={s.input_label}>

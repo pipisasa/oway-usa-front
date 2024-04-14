@@ -128,12 +128,12 @@ export default function Purchase() {
                     errors?.articul ? s.error : s.purchase_inner_froms_inputs
                   }`}
                 >
-                  <label>Артикул товара</label>
+                  <label>Трак код товара</label>
                   <input
                     id="articul"
                     name="articul"
                     type="text"
-                    placeholder="Введите артикул товара"
+                    placeholder="Введите трак код товара"
                     onChange={handleChange}
                     {...register("articul", { required: true })}
                   />
@@ -354,12 +354,12 @@ export default function Purchase() {
                           : s.purchase_inner_froms_inputs
                       }`}
                     >
-                      <label>Артикул товара</label>
+                      <label>Трак код товара</label>
                       <input
                         id="articul"
                         name="articul"
                         type="text"
-                        placeholder="Введите артикул товара"
+                        placeholder="Введите трак код товара"
                         onChange={handleChange}
                         {...register("articul", { required: true })}
                       />
