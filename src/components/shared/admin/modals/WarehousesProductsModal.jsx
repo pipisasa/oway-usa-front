@@ -39,12 +39,11 @@ export default function WarehouseProductsModal() {
     setSelectedOption(e);
   };
   const countries1 = [
-    { id: 7, name: "Отправлено курьерской службой" },
-    { id: 6, name: "Получен на складе получателя" },
-    { id: 5, name: "Отправлен" },
-    ,
     { id: 4, name: "Получен на складе отправителя" },
+    { id: 5, name: "Отправлен" },
+    { id: 6, name: "Получен на складе получателя" },
     { id: 3, name: "Готов к выдаче" },
+    { id: 7, name: "Отправлено курьерской службой" },
     { id: 8, name: "Доставлено" },
   ];
   const [selectedOption1, setSelectedOption1] = useState("");
