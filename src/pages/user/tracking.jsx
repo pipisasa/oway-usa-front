@@ -73,21 +73,30 @@ export default function TrackingPage() {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent>
-          <ModalHeader>Статус доставки</ModalHeader>
+          <ModalHeader></ModalHeader>
           <ModalBody>
             {status ? (
               <p>
-                Статус доставки:{" "}
-                {status === "delivery" ? "Товар доставлен" : "Товар в пути"}
+                {status === "delivery" ? (
+                  <div className={s.status}>
+                    <img src="/assets/icons/icon_notifications.svg" alt="" />
+                    <p>Товар доставлен</p>
+                  </div>
+                ) : (
+                  <div className={s.status}>
+                    <img src="/assets/icons/впути.svg" alt="" />
+                    <p>Товар в пути</p>
+                  </div>
+                )}
               </p>
             ) : (
               <p>Загрузка данных...</p>
             )}
           </ModalBody>
           <ModalFooter>
-            <Button auto flat color="error" onPress={onClose}>
+            {/* <Button auto flat color="error" onPress={onClose}>
               Закрыть
-            </Button>
+            </Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>
