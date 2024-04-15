@@ -1,37 +1,37 @@
 import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
-import useShops from "../../../../hooks/admin/useShops";
-import useCategories from "@/hooks/admin/useCategories";
+import useWarehouses from "@/hooks/user/useWarehouses";
 import useCountries from "@/hooks/admin/useCountries";
-import CustomSelect from "@/components/partials/Select";
 
 export default function MyWarehousesModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [logo, setLogo] = useState(null);
-  const [description, setDescription] = useState("");
-  const [url, setUrl] = useState("");
-  const { categories } = useCategories();
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const { addWarehouses } = useWarehouses();
   const { countries } = useCountries();
-  const { addShops } = useShops();
-
-  // select-country
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedWarehouse, setSelectedWarehouse] = useState("");
+  const [courierService, setCourierService] = useState("");
 
   const toggleModal = () => setIsOpen(!isOpen);
+
+  const deliveryServices = [
+    { name: "Fedex", id: 1 },
+    { name: "USPS", id: 2 },
+    { name: "UPS", id: 3 },
+    { name: "DHL", id: 4 },
+    { name: "Lasership", id: 5 },
+    { name: "Landmark", id: 6 },
+    { name: "Amazon", id: 7 },
+  ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addShops(
-        name,
-        selectedOption1?.id,
-        selectedOption?.id,
-        logo,
-        description,
-        url
-      );
+      await addWarehouses({
+        courier_service: courierService,
+        tracking_number: trackingNumber,
+        warehouse: selectedWarehouse,
+      });
       toggleModal();
     } catch (error) {
       console.error("Ошибка при добавлении сайта:", error);
@@ -50,29 +50,45 @@ export default function MyWarehousesModal() {
             <div className={s.first_input_block}>
               <div>
                 <label htmlFor="warehouse">Склад</label>
-                <input
+                <select
                   id="warehouse"
-                  type="text"
-                  placeholder="Введите название"
-                />
+                  value={selectedWarehouse}
+                  onChange={(e) => setSelectedWarehouse(e.target.value)}
+                >
+                  <option value="">Выберите страну</option>
+                  {countries.map((country) => (
+                    <option key={country.id} value={country.name}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div>
                 <label htmlFor="tracking_number">Трак-код</label>
                 <input
                   id="tracking_number"
-                  type="number"
+                  type="text"
                   placeholder="Вставьте трак-код"
+                  value={trackingNumber}
+                  onChange={(e) => setTrackingNumber(e.target.value)}
                 />
               </div>
 
               <div>
                 <label htmlFor="courier_service">Курьерская служба</label>
-                <input
+                <select
                   id="courier_service"
-                  type="text"
-                  placeholder="Вставьте трак-код"
-                />
+                  value={courierService}
+                  onChange={(e) => setCourierService(e.target.value)}
+                >
+                  <option value="">Выберите курьерскую службу</option>
+                  {deliveryServices.map((service) => (
+                    <option key={service.id} value={service.name}>
+                      {service.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>

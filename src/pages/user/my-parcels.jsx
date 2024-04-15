@@ -1,7 +1,15 @@
 import React from "react";
 import s from "@/styles/pages/user/MyWarehouse.module.scss";
+import useWarehouses from "@/hooks/user/useWarehouses";
+import Loading from "@/components/shared/admin/Loading";
 
 export default function MyWarehouses() {
+  const { products, isLoading, deleteWarehouses } = useWarehouses();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <section className={s.my}>
       <div className={s.filters}>
@@ -25,19 +33,21 @@ export default function MyWarehouses() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>США</td>
-            <td>234520345798</td>
-            <td>FedEX</td>
-            <td className={s.actions}>
-              <button>
-                <img src="/assets/icons/delete.svg" alt="delete" />
-              </button>
-              <button>
-                <img src="/assets/icons/edit.svg" alt="edit" />
-              </button>
-            </td>
-          </tr>
+          {products?.map((product) => (
+            <tr key={product.id}>
+              <td>{product.warehouse}</td>
+              <td>{product.tracking_number}</td>
+              <td>{product.courier_service}</td>
+              <td className={s.actions}>
+                <button onClick={() => deleteWarehouses(product.id)}>
+                  <img src="/assets/icons/delete.svg" alt="delete" />
+                </button>
+                <button>
+                  <img src="/assets/icons/edit.svg" alt="edit" />
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </section>
