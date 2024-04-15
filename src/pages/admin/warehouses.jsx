@@ -12,7 +12,10 @@ export default function AdminWarehousesPage() {
   const [statusFilter, setStatusFilter] = useState("");
   const [countryFilter, setCountryFilter] = useState("");
 
- 
+  useEffect(() => {
+    fetchWarehouses(currentPage)
+  }, [currentPage]);
+
   return (
     <div className={s.warehouses_page}>
       <div className={s.filters}>
@@ -78,7 +81,6 @@ export default function AdminWarehousesPage() {
         count={count}
         warehouses={warehouses}
         fetchWarehouses={fetchWarehouses}
-
         nameFilter={nameFilter}
         trackNumberFilter={trackNumberFilter}
         statusFilter={statusFilter}
