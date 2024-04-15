@@ -1,37 +1,40 @@
 import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
-import useShops from "../../../../hooks/admin/useShops";
-import useCategories from "@/hooks/admin/useCategories";
+import useWarehouses from "@/hooks/user/useWarehouses";
 import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
 
 export default function MyWarehousesModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [logo, setLogo] = useState(null);
-  const [description, setDescription] = useState("");
-  const [url, setUrl] = useState("");
-  const { categories } = useCategories();
+  const [tracking_number, setTracking_number] = useState("");
+  const { addWarehouses } = useWarehouses();
   const { countries } = useCountries();
-  const { addShops } = useShops();
-
-  // select-country
   const [selectedOption, setSelectedOption] = useState("");
-
+  const [courierOption, setCourierOption] = useState("");
+  console.log(courierOption,tracking_number, selectedOption)
   const toggleModal = () => setIsOpen(!isOpen);
 
+  const deliveryServices = [
+      { name: "Fedex", id: 1 },
+      { name: "USPS", id: 2 },
+      { name: "UPS", id: 3 },
+      { name: "DHL", id: 4 },
+      { name: "Lasership", id: 5 },
+      { name: "Landmark", id: 6 },
+      { name: "Amazon", id: 7 }
+  ];
+
+
   const handleSubmit = async (e) => {
+    console.log("gffgg");
     e.preventDefault();
     try {
-      await addShops(
-        name,
-        selectedOption1?.id,
-        selectedOption?.id,
-        logo,
-        description,
-        url
-      );
+      await addWarehouses({
+        courier_service:courierOption?.name,
+        tracking_number,
+         warehouse:selectedOption?.name
+      });
       toggleModal();
     } catch (error) {
       console.error("Ошибка при добавлении сайта:", error);
@@ -50,10 +53,11 @@ export default function MyWarehousesModal() {
             <div className={s.first_input_block}>
               <div>
                 <label htmlFor="warehouse">Склад</label>
-                <input
-                  id="warehouse"
-                  type="text"
-                  placeholder="Введите название"
+                <CustomSelect
+                  options={countries}
+                  selectedOption={selectedOption}
+                  onChange={(e) => setSelectedOption(e)}
+                  span={"Выберите страну"}
                 />
               </div>
 
@@ -63,15 +67,18 @@ export default function MyWarehousesModal() {
                   id="tracking_number"
                   type="number"
                   placeholder="Вставьте трак-код"
+                  value={tracking_number}
+                  onChange={(e) => setTracking_number(e.target.value)}
                 />
               </div>
 
               <div>
                 <label htmlFor="courier_service">Курьерская служба</label>
-                <input
-                  id="courier_service"
-                  type="text"
-                  placeholder="Вставьте трак-код"
+                 <CustomSelect
+                  options={deliveryServices}
+                  selectedOption={courierOption}
+                  onChange={(e) => setCourierOption(e)}
+                  span={"Курьерская служба"}
                 />
               </div>
             </div>
