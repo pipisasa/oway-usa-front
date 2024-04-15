@@ -47,6 +47,11 @@ export default function AdminLayout({ children }) {
       label: "Каталог сайтов",
       icon: "/assets/icons/admin-icons/сайты.svg",
     },
+    {
+      href: "/admin/user-parcels",
+      label: "Посылки пользователей",
+      icon: "/assets/icons/admin-icons/склад.svg",
+    },
   ];
 
   return (

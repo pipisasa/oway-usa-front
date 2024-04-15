@@ -55,8 +55,8 @@ export default function UserMobileHeader({ children }) {
       icons: "/assets/icons/user-icons/настройки.svg",
     },
     {
-      href: "/user/my-warehouses",
-      label: "Мой склад",
+      href: "/user/my-parcels",
+      label: "Мои посылки",
       icons: "/assets/icons/user-icons/склад.svg",
     },
   ];

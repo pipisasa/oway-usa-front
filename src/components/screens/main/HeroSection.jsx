@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import s from "@/styles/screens/main/HeroSection.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
 import { useRouter } from "next/router";
 
 export default function HeroSection() {
   const router = useRouter();
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/gh/greentfrapp/pocoloco@minigl/minigl.js";
+    script.onload = () => {
+      const gradient = new Gradient();
+      gradient.initGradient("#canvas");
+    };
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const handleButtonClick = () => {
     const token = getCookie("accessToken");
@@ -27,8 +41,8 @@ export default function HeroSection() {
               <div className={s.heroSection_info_span}>
                 <div></div>
                 <span>
-                  Легко, надежно и выгодно доставляем товары из зарубежных{" "}
-                  <br /> интернет-магазинов прямо к вам домой
+                  Легко, надежно и выгодно доставляем товары из зарубежных
+                  интернет-магазинов прямо к вам домой
                 </span>
               </div>
               <button onClick={handleButtonClick} className={s.button}>
@@ -37,6 +51,9 @@ export default function HeroSection() {
               </button>
             </div>
           </div>
+        </div>
+        <div className="background--custom">
+          <canvas id="canvas" />
         </div>
       </div>
       <div className={s.heroSection_img} data-aos="fade-left">
