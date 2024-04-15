@@ -19,7 +19,7 @@ const useWarehouses = () => {
         },
       });
       console.log(response.data,'tret')
-      setProducts(response.data);
+      setProducts(response.data.results);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -31,7 +31,7 @@ const useWarehouses = () => {
     fetchWarehouses();
   }, []);
 
- const addWarehouses = async (courier_service, tracking_number, warehouse) => {
+ const addWarehouses = async (data ) => {
     const accessToken = getCookie("accessToken");
 
     setIsLoading(true);
@@ -40,11 +40,7 @@ const useWarehouses = () => {
     try {
         const response = await axios.post(
             `${API_URL}/api/my_warehouse/add/`,
-            {
-                 courier_service,
-                 tracking_number,
-                warehouse,
-            },
+            data,
             {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -52,9 +48,8 @@ const useWarehouses = () => {
                 },
             }
         );
-
         console.log("dvsfs");
-        //   window.location.reload();
+          window.location.reload();
         await fetchShops();
 
     } catch (error) {

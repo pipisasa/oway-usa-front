@@ -7,12 +7,11 @@ import CustomSelect from "@/components/partials/Select";
 
 export default function MyWarehousesModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [tracking_number, setTracking_number] = useState("");
+  const [tracking_number, setTracking_number] = useState(0);
   const { addWarehouses } = useWarehouses();
   const { countries } = useCountries();
   const [selectedOption, setSelectedOption] = useState("");
   const [courierOption, setCourierOption] = useState("");
-  console.log(courierOption,tracking_number, selectedOption)
   const toggleModal = () => setIsOpen(!isOpen);
 
   const deliveryServices = [
