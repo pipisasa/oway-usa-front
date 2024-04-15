@@ -22,7 +22,7 @@ export default function UsersHeader() {
     { href: "/user/warehouses", label: "Адреса складов" },
     { href: "/user/tracking", label: "Отслеживание доставки" },
     { href: "/user/settings", label: "Настройки" },
-    { href: "/user/my-warehouses", label: "Мой склад" },
+    { href: "/user/my-parcels", label: "Мои посылки" },
   ];
 
   const getPageHeader = () => {
@@ -46,7 +46,7 @@ export default function UsersHeader() {
       return <NotificationsModal />;
     } else if (router.pathname === "/admin/shops-catalog") {
       return <AddShopsModal />;
-    } else if (router.pathname === "/user/my-warehouses") {
+    } else if (router.pathname === "/user/my-parcels") {
       return <MyWarehousesModal />;
     }
     return null;

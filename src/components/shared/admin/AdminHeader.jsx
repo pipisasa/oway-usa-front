@@ -20,6 +20,7 @@ export default function AdminHeader() {
     { href: "/admin/warehouses", label: "Управление складами" },
     { href: "/admin/requests", label: "Входящие запросы" },
     { href: "/admin/shops-catalog", label: "Каталог сайтов" },
+    { href: "/admin/user-parcels", label: "Посылки пользователей" },
   ];
 
   const getPageHeader = () => {
