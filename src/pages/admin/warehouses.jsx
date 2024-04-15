@@ -12,7 +12,10 @@ export default function AdminWarehousesPage() {
   const [statusFilter, setStatusFilter] = useState("");
   const [countryFilter, setCountryFilter] = useState("");
 
- 
+  useEffect(() => {
+    fetchWarehouses(currentPage)
+  }, [currentPage]);
+
   return (
     <div className={s.warehouses_page}>
       <div className={s.filters}>
