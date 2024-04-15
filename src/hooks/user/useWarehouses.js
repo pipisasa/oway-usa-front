@@ -37,7 +37,7 @@ const useWarehouses = () => {
         },
       });
       fetchWarehouses();
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       setError(error.message);
     } finally {
@@ -78,6 +78,8 @@ const useWarehouses = () => {
           product.id === productId ? { ...product, ...response.data } : product
         )
       );
+      fetchWarehouses();
+      window.location.reload();
     } catch (error) {
       setError(error.message);
     } finally {

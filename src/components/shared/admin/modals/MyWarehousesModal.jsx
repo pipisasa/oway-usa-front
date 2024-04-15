@@ -3,14 +3,15 @@ import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
 import useWarehouses from "@/hooks/user/useWarehouses";
 import useCountries from "@/hooks/admin/useCountries";
+import CustomSelect from "@/components/partials/Select";
 
 export default function MyWarehousesModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
   const { addWarehouses } = useWarehouses();
   const { countries } = useCountries();
-  const [selectedWarehouse, setSelectedWarehouse] = useState("");
-  const [courierService, setCourierService] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [courierOption, setCourierOption] = useState("");
 
   const toggleModal = () => setIsOpen(!isOpen);
 
@@ -28,9 +29,9 @@ export default function MyWarehousesModal() {
     e.preventDefault();
     try {
       await addWarehouses({
-        courier_service: courierService,
+        courier_service: courierOption.name,
         tracking_number: trackingNumber,
-        warehouse: selectedWarehouse,
+        warehouse: selectedOption.name,
       });
       toggleModal();
     } catch (error) {
@@ -50,18 +51,12 @@ export default function MyWarehousesModal() {
             <div className={s.first_input_block}>
               <div>
                 <label htmlFor="warehouse">Склад</label>
-                <select
-                  id="warehouse"
-                  value={selectedWarehouse}
-                  onChange={(e) => setSelectedWarehouse(e.target.value)}
-                >
-                  <option value="">Выберите страну</option>
-                  {countries.map((country) => (
-                    <option key={country.id} value={country.name}>
-                      {country.name}
-                    </option>
-                  ))}
-                </select>
+                <CustomSelect
+                    options={countries}
+                    selectedOption={selectedOption}
+                    onChange={(e) => setSelectedOption(e)}
+                    span={"Выберите страну"}
+                />
               </div>
 
               <div>
@@ -77,18 +72,12 @@ export default function MyWarehousesModal() {
 
               <div>
                 <label htmlFor="courier_service">Курьерская служба</label>
-                <select
-                  id="courier_service"
-                  value={courierService}
-                  onChange={(e) => setCourierService(e.target.value)}
-                >
-                  <option value="">Выберите курьерскую службу</option>
-                  {deliveryServices.map((service) => (
-                    <option key={service.id} value={service.name}>
-                      {service.name}
-                    </option>
-                  ))}
-                </select>
+                <CustomSelect
+                    options={deliveryServices}
+                    selectedOption={courierOption}
+                    onChange={(e) => setCourierOption(e)}
+                    span={"Курьерская служба"}
+                />
               </div>
             </div>
           </div>

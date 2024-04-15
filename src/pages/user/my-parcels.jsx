@@ -1,39 +1,78 @@
-import React from "react";
+import React, {useState} from "react";
 import s from "@/styles/pages/user/MyWarehouse.module.scss";
 import useWarehouses from "@/hooks/user/useWarehouses";
 import Loading from "@/components/shared/admin/Loading";
+import MyWarehousesEditModal from "@/components/shared/admin/modals/MyWarehousesEditModal";
 
 export default function MyWarehouses() {
   const { products, isLoading, deleteWarehouses } = useWarehouses();
-
+  const [selectedNotification, setSelectedNotification] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [searchPhoneNumber, setSearchPhoneNumber] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [countryFilter, setCountryFilter] = useState("");
   if (isLoading) {
     return <Loading />;
   }
+  const handleUpdate = async (productId) => {
+    try {
+      setSelectedNotification(
+          products?.find((product) => product.id === productId)
+      );
+      setIsEditing(true);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error("Error updating notification:", error);
+    }
+  };
+
+  const toggleModal = (isOpen) => {
+    setIsModalOpen(isOpen);
+    if (!isOpen) {
+      setIsEditing(false);
+      setSelectedNotification(null);
+    }
+  };
 
   return (
     <section className={s.my}>
       <div className={s.filters}>
         <div className={s.search}>
-          <img src="/assets/icons/search.svg" alt="icon" />
-          <input type="number" placeholder="Поиск по трак номеру" />
+          <img src="/assets/icons/search.svg" alt="icon"/>
+          <input
+              type="text"
+              placeholder="Поиск по трак номеру"
+              value={searchPhoneNumber}
+              onChange={(e) => setSearchPhoneNumber(e.target.value)}
+          />
         </div>
-        <select className={s.select} name="" id="">
-          <option value="">Склад</option>
-          <option value="">США</option>
-          <option value="">Турция</option>
+        <select
+            className={s.select}
+            value={countryFilter}
+            onChange={(e) => setCountryFilter(e.target.value)}
+        >
+          <option value="">Страна отправки</option>
+          <option value="США">США</option>
+          <option value="Турция">Турция</option>
         </select>
       </div>
       <table>
         <thead>
-          <tr>
-            <th>Склад</th>
-            <th>Трак номер</th>
-            <th>Курьерская служба</th>
-            <th>Действие</th>
-          </tr>
+        <tr>
+          <th>Склад</th>
+          <th>Трак номер</th>
+          <th>Курьерская служба</th>
+          <th>Действие</th>
+        </tr>
         </thead>
         <tbody>
-          {products?.map((product) => (
+        {products?.filter(
+            (products) =>
+                products.tracking_number.includes(searchPhoneNumber))
+            .filter((product) =>
+                countryFilter ? product.warehouse === countryFilter : true
+            )
+            .map((product) => (
             <tr key={product.id}>
               <td>{product.warehouse}</td>
               <td>{product.tracking_number}</td>
@@ -42,7 +81,7 @@ export default function MyWarehouses() {
                 <button onClick={() => deleteWarehouses(product.id)}>
                   <img src="/assets/icons/delete.svg" alt="delete" />
                 </button>
-                <button>
+                <button onClick={() => handleUpdate(product.id)}>
                   <img src="/assets/icons/edit.svg" alt="edit" />
                 </button>
               </td>
@@ -50,6 +89,13 @@ export default function MyWarehouses() {
           ))}
         </tbody>
       </table>
+      {isEditing && (
+          <MyWarehousesEditModal
+              isOpen={isModalOpen}
+              onClose={() => toggleModal(false)}
+              warehouse={selectedNotification}
+          />
+      )}
     </section>
   );
 }

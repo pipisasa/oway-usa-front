@@ -78,7 +78,6 @@ export default function AdminWarehousesPage() {
         count={count}
         warehouses={warehouses}
         fetchWarehouses={fetchWarehouses}
-
         nameFilter={nameFilter}
         trackNumberFilter={trackNumberFilter}
         statusFilter={statusFilter}

@@ -25,8 +25,6 @@ export default function WarehousesProductsTable({
     (statusFilter === "" || warehouse.status.name === statusFilter) &&
     (countryFilter === "" || warehouse.country.name === countryFilter)
   );
-  console.log("countryFilter:", countryFilter);
-console.log("filteredWarehouses:", filteredWarehouses);
 
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
