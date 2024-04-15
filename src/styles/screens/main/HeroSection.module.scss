@@ -9,6 +9,7 @@
 
 .heroSection_img {
   position: absolute;
+  z-index: 10;
   right: 0;
   top: 130px;
   animation: rotateImage 200s infinite linear;
@@ -16,9 +17,6 @@
 
 .header_hero {
   width: 100%;
-  background-image: url("/assets/gif/animated-bg.gif");
-  background-repeat: no-repeat;
-  background-size: cover;
   height: 800px;
   z-index: 32;
   margin-top: -80px;
