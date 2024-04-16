@@ -1,4 +1,5 @@
 import { getCookie } from "@/utils/cookieHelpers";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -7,6 +8,7 @@ const useUserData = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -72,6 +74,7 @@ const useUserData = () => {
       window.location.reload();
     } catch (error) {
       setError(error.message);
+      router.push("/auth/login");
     }
   };
 
