@@ -1,5 +1,6 @@
 .my {
   position: relative;
+  overflow-x: scroll;
 
   .filters {
     display: flex;
@@ -41,6 +42,7 @@
     background: var(--white, #fff);
     width: 100%;
     border-collapse: collapse;
+    overflow-x: scroll;
 
     thead {
       tr {
@@ -53,6 +55,7 @@
           padding: 24px;
           text-align: left;
           border-bottom: 1px solid #aed5f3;
+          text-wrap: nowrap;
         }
       }
     }
@@ -86,3 +89,16 @@
     }
   }
 }
+
+.my::-webkit-scrollbar {
+  display: none; /* Скрывает скроллбары в Webkit-браузерах */
+}
+
+// @media (max-width: 768px) {
+//   .my {
+//     table {
+//       max-width: 400px;
+//       overflow-x: scroll;
+//     }
+//   }
+// }
