@@ -13,7 +13,7 @@ export default function Contacts() {
     {
       img: "/assets/icons/footer/usa.svg",
       title: "Главный офис",
-      address: "4730d Kimball Ave",
+      address: "4730DN Kimball Ave",
       state: "Illinois",
       phone: "872 710 07 10",
       city: "Chicago",
@@ -33,7 +33,7 @@ export default function Contacts() {
     {
       img: "/assets/icons/footer/usa.svg",
       title: "Пункт приема онлайн заказов в Delaware",
-      address: "4730d Kimball Ave",
+      address: "4730DN Kimball Ave",
       state: "Turkey",
       phone: "872 710 07 10",
       city: "Chicago",

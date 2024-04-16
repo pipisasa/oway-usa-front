@@ -70,7 +70,7 @@ export default function MyWarehouses() {
         <thead>
           <tr>
             <th>Склад</th>
-            <th>Трак номер</th>
+            <th>Трeк номер</th>
             <th>Курьерская служба</th>
             <th>Действие</th>
           </tr>

@@ -148,10 +148,10 @@ export default function WarehouseProductsModal() {
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
-        Добавить товар
+        Добавить посылку
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
-        <h3>Добавить товар</h3>
+        <h3>Добавить посылку</h3>
         {renderStep()}
       </Modal>
     </div>
@@ -175,18 +175,18 @@ const Step1 = ({
     <form action="" className={s.step_form}>
       <div className={c.first_block}>
         <div>
-          <label htmlFor="name">Название товара</label>
+          <label htmlFor="name">Название посылки</label>
           <input
             type="text"
             name="name"
             id="name"
-            placeholder="Введите название товара"
+            placeholder="Введите название посылки"
             value={formData.name}
             onChange={handleChange}
           />
         </div>
         <div>
-          <label htmlFor="image">Фото товара</label>
+          <label htmlFor="image">Фото посылки</label>
           <label className="custom-file-upload">
             <input
               type="file"
@@ -257,7 +257,7 @@ const Step1 = ({
             type="text"
             name="track_number"
             id="track_number"
-            placeholder="Введите ID товара"
+            placeholder="Введите ID посылки"
             value={formData.track_number}
             onChange={handleChange}
           />
@@ -295,7 +295,7 @@ const Step2 = ({
     </div>
     <form action="" className={c.first_block}>
       <div>
-        <label htmlFor="status">Выберите статус товара</label>
+        <label htmlFor="status">Выберите статус посылки</label>
         {/* <select
                     id="status"
                     name="status"
@@ -330,12 +330,12 @@ const Step2 = ({
         />
       </div>
       <div>
-        <label htmlFor="status">Трек код товара</label>
+        <label htmlFor="status">Трек код посылки</label>
         <input
           type="text"
           name="articul"
           id="articul"
-          placeholder="Введите трек код товара"
+          placeholder="Введите трек код посылки"
           value={formData.articul}
           onChange={handleChange}
         />
