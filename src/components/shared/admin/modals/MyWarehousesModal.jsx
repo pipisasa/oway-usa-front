@@ -4,34 +4,37 @@ import Modal from "../../Modal";
 import useWarehouses from "@/hooks/user/useWarehouses";
 import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
+import Loading from "../Loading";
 
 export default function MyWarehousesModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [trackingNumber, setTrackingNumber] = useState("");
-  const { addWarehouses } = useWarehouses();
+  const [tracking_number, setTracking_number] = useState("");
+  const { addWarehouses, isLoading } = useWarehouses();
   const { countries } = useCountries();
   const [selectedOption, setSelectedOption] = useState("");
   const [courierOption, setCourierOption] = useState("");
-
   const toggleModal = () => setIsOpen(!isOpen);
 
   const deliveryServices = [
-    { name: "Fedex", id: 1 },
-    { name: "USPS", id: 2 },
-    { name: "UPS", id: 3 },
-    { name: "DHL", id: 4 },
-    { name: "Lasership", id: 5 },
-    { name: "Landmark", id: 6 },
-    { name: "Amazon", id: 7 },
+      { name: "Fedex", id: 1 },
+      { name: "USPS", id: 2 },
+      { name: "UPS", id: 3 },
+      { name: "DHL", id: 4 },
+      { name: "Lasership", id: 5 },
+      { name: "Landmark", id: 6 },
+      { name: "Amazon", id: 7 }
   ];
 
+if (isLoading) {
+    return <Loading />;
+  } 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await addWarehouses({
-        courier_service: courierOption.name,
-        tracking_number: trackingNumber,
-        warehouse: selectedOption.name,
+        courier_service:courierOption?.name,
+        tracking_number,
+         warehouse:selectedOption?.name
       });
       toggleModal();
     } catch (error) {

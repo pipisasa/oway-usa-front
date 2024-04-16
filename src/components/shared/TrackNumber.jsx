@@ -33,6 +33,7 @@ export default function TrackNumber() {
         </div>
         <button onClick={handleClick} className={s.button}>
           Проверить
+          <img src="/assets/icons/rightIcon.svg" alt="logo" />
         </button>
       </div>
       <div className={s.track_img} data-aos="zoom-in-down">

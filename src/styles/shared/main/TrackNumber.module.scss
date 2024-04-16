@@ -50,6 +50,9 @@
       }
     }
     .button {
+      display: flex;
+      gap: 10px;
+      align-items: center;
       padding: 14px 36px;
       color: #fff;
       border-radius: 12px;

@@ -41,7 +41,7 @@ export default function HeroSection() {
               <div className={s.heroSection_info_span}>
                 <div></div>
                 <span>
-                  Легко, надежно и выгодно доставляем товары из зарубежных
+                  Легко, надежно и выгодно доставляем товары из зарубежных<br/>
                   интернет-магазинов прямо к вам домой
                 </span>
               </div>
