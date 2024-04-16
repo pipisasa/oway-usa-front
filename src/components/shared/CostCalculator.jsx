@@ -10,7 +10,7 @@ export default function CostCalculator() {
     length: 0,
     height: 0,
     weight: 0,
-    deliveryType: "",
+    deliveryType: "стандарт", // Устанавливаем "стандарт" по умолчанию для всех маршрутов
   });
   const router = useRouter();
   const [cost, setCost] = useState(0);
@@ -30,24 +30,26 @@ export default function CostCalculator() {
     const height = parseFloat(formData.height);
     const weight = parseFloat(formData.weight);
     const volumeWeight = (width * length * height) / 6000;
-
     const actualWeight = Math.max(volumeWeight, weight);
 
     let rate = 0;
     let time = "";
 
-    if (formData.fromCountry === "США" && formData.toCountry === "РФ") {
-      rate = formData.deliveryType === "стандарт" ? 16 : 12;
-      time = formData.deliveryType === "стандарт" ? "10-15 дней" : "7-9 дней";
+    if (formData.fromCountry === "США" && formData.toCountry === "Россия") {
+      rate = 16; // Только стандартная доставка
+      time = "12-17 дней";
+    } else if (
+      formData.fromCountry === "США" &&
+      formData.toCountry === "Кыргызстан"
+    ) {
+      rate = 12; // Только стандартная доставка
+      time = "7-9 дней";
     } else if (
       formData.fromCountry === "Турция" &&
-      formData.toCountry === "РФ"
+      formData.toCountry === "Россия"
     ) {
       rate = formData.deliveryType === "стандарт" ? 9.5 : 12;
       time = formData.deliveryType === "стандарт" ? "5-7 дней" : "2-3 дня";
-    } else if (formData.fromCountry === "США" && formData.toCountry === "КР") {
-      rate = 12;
-      time = "7-9 дней";
     }
 
     setCost(rate * actualWeight);
@@ -97,8 +99,8 @@ export default function CostCalculator() {
                   <option value="" disabled>
                     Выберите страну
                   </option>
-                  <option value="РФ">РФ</option>
-                  <option value="КР">КР</option>
+                  <option value="Россия">Россия</option>
+                  <option value="Кыргызстан">Кыргызстан</option>
                 </select>
               </div>
             </div>
@@ -144,19 +146,20 @@ export default function CostCalculator() {
               />
             </div>
             <div className={s.select} style={{ marginTop: "20px" }}>
-              <label>Выбор типа доставки</label>
-              <select
-                name="deliveryType"
-                onChange={handleChange}
-                defaultValue=""
-                style={{ marginTop: "16px" }}
-              >
-                <option value="" disabled>
-                  Выберите тип доставки
-                </option>
-                <option value="стандарт">Стандарт</option>
-                <option value="экспресс">Экспресс</option>
-              </select>
+              {formData.fromCountry === "Турция" && (
+                <>
+                  <label>Выбор типа доставки</label>
+                  <select
+                    style={{ marginTop: "16px" }}
+                    name="deliveryType"
+                    onChange={handleChange}
+                    value={formData.deliveryType}
+                  >
+                    <option value="стандарт">Стандарт</option>
+                    <option value="экспресс">Экспресс</option>
+                  </select>
+                </>
+              )}
             </div>
             <div className={s.calc_inner_forms_inputss}>
               <div>
@@ -169,21 +172,33 @@ export default function CostCalculator() {
               </div>
             </div>
           </div>
+
           <div className={s.calc_inner_infos}>
             <div className={s.calc_inner_info}>
               <img src="assets/icons/calc_icon.svg" alt="" />
               <div>
                 <h3>
-                  Доставка из США в РФ - <strong>1кг - 16$</strong> стандарт
+                  Доставка из США в Россию - <strong>1кг - 16$</strong> стандарт
                 </h3>
-                <p>Срок доставки 10-15 дней</p>
+                <p>Срок доставки 12-17 дней</p>
               </div>
             </div>
             <div className={s.calc_inner_info}>
               <img src="assets/icons/calc_icon.svg" alt="" />
               <div>
                 <h3>
-                  Доставка из Турции в РФ - <strong>1кг - 9.5$</strong> стандарт
+                  Доставка из США в Кыргызстан - <strong>1кг - 12$</strong>{" "}
+                  стандарт
+                </h3>
+                <p>Срок доставки 7-9 дня</p>
+              </div>
+            </div>
+            <div className={s.calc_inner_info}>
+              <img src="assets/icons/calc_icon.svg" alt="" />
+              <div>
+                <h3>
+                  Доставка из Турции в Россию - <strong>1кг - 9.5$</strong>{" "}
+                  стандарт
                 </h3>
                 <p>Срок доставки 5-7 дней</p>
               </div>
@@ -192,18 +207,10 @@ export default function CostCalculator() {
               <img src="assets/icons/calc_icon.svg" alt="" />
               <div>
                 <h3>
-                  Доставка из Турции в РФ -<strong> 1кг - 12$</strong> экспресс
+                  Доставка из Турции в Россию -<strong> 1кг - 12$</strong>{" "}
+                  экспресс
                 </h3>
                 <p>Срок доставки 2-3 дня</p>
-              </div>
-            </div>
-            <div className={s.calc_inner_info}>
-              <img src="assets/icons/calc_icon.svg" alt="" />
-              <div>
-                <h3>
-                  Доставка из США в КР - <strong>1кг - 12$</strong> экспресс
-                </h3>
-                <p>Срок доставки 7-9 дня</p>
               </div>
             </div>
           </div>
