@@ -39,7 +39,7 @@ export default function OnTheWayModal({ data, onClose }) {
               </div>
 
               <div className={s.input_label}>
-                <label htmlFor="articul">Трак код</label>
+                <label htmlFor="articul">Трек код</label>
                 <input id="articul" value={data.articul || ""} readOnly />
               </div>
             </div>

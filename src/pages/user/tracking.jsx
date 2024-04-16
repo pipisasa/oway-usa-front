@@ -39,7 +39,7 @@ export default function TrackingPage() {
     } catch (err) {
       console.error("Ошибка при запросе к Ship24 API:", err);
       setError(
-        "Произошла ошибка при отслеживании. Пожалуйста, проверьте трак-номер и попробуйте снова."
+        "Произошла ошибка при отслеживании. Пожалуйста, проверьте трек-номер и попробуйте снова."
       );
     } finally {
       setLoading(false);
@@ -53,15 +53,15 @@ export default function TrackingPage() {
       </div>
 
       <form className={s.tracking_form} onSubmit={handleTrack}>
-        <h3>Введите трак номер для отслеживания доставки</h3>
+        <h3>Введите трек номер для отслеживания доставки</h3>
         <div>
-          <label htmlFor="trackingNumber">Трак-номер</label>
+          <label htmlFor="trackingNumber">Трек-номер</label>
           <input
             type="text"
             id="trackingNumber"
             value={trackingNumber}
             onChange={(e) => setTrackingNumber(e.target.value)}
-            placeholder="Введите трак-номер"
+            placeholder="Введите трек-номер"
             required
           />
           <button type="submit">Проверить</button>
@@ -73,21 +73,30 @@ export default function TrackingPage() {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent>
-          <ModalHeader>Статус доставки</ModalHeader>
+          <ModalHeader></ModalHeader>
           <ModalBody>
             {status ? (
               <p>
-                Статус доставки:{" "}
-                {status === "delivery" ? "Товар доставлен" : "Товар в пути"}
+                {status === "delivery" ? (
+                  <div className={s.status}>
+                    <img src="/assets/icons/icon_notifications.svg" alt="" />
+                    <p>Товар доставлен</p>
+                  </div>
+                ) : (
+                  <div className={s.status}>
+                    <img src="/assets/icons/впути.svg" alt="" />
+                    <p>Товар в пути</p>
+                  </div>
+                )}
               </p>
             ) : (
               <p>Загрузка данных...</p>
             )}
           </ModalBody>
           <ModalFooter>
-            <Button auto flat color="error" onPress={onClose}>
+            {/* <Button auto flat color="error" onPress={onClose}>
               Закрыть
-            </Button>
+            </Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>

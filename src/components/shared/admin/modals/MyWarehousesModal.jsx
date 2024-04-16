@@ -63,19 +63,19 @@ if (isLoading) {
               </div>
 
               <div>
-                <label htmlFor="tracking_number">Трак-код</label>
+                <label htmlFor="tracking_number">Трек-код</label>
                 <input
                   id="tracking_number"
-                  type="number"
-                  placeholder="Вставьте трак-код"
-                  value={tracking_number}
-                  onChange={(e) => setTracking_number(e.target.value)}
+                  type="text"
+                  placeholder="Вставьте трек-код"
+                  value={trackingNumber}
+                  onChange={(e) => setTrackingNumber(e.target.value)}
                 />
               </div>
 
               <div>
                 <label htmlFor="courier_service">Курьерская служба</label>
-                 <CustomSelect
+                <CustomSelect
                   options={deliveryServices}
                   selectedOption={courierOption}
                   onChange={(e) => setCourierOption(e)}
