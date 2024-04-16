@@ -63,11 +63,11 @@ if (isLoading) {
               </div>
 
               <div>
-                <label htmlFor="tracking_number">Трек-код</label>
+                <label htmlFor="tracking_number">Трак-код</label>
                 <input
                   id="tracking_number"
                   type="text"
-                  placeholder="Вставьте трек-код"
+                  placeholder="Вставьте трак-код"
                   value={trackingNumber}
                   onChange={(e) => setTrackingNumber(e.target.value)}
                 />

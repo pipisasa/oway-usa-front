@@ -22,6 +22,7 @@ export default function MyWarehouses() {
   if (isLoading) {
     return <Loading />;
   }
+  console.log(total, 89);
 
   const handleUpdate = async (productId) => {
     try {
@@ -69,7 +70,7 @@ export default function MyWarehouses() {
         <thead>
           <tr>
             <th>Склад</th>
-            <th>Трек номер</th>
+            <th>Трак номер</th>
             <th>Курьерская служба</th>
             <th>Действие</th>
           </tr>
