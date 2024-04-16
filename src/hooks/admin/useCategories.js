@@ -63,6 +63,7 @@ const useCategories = () => {
       );
       fetchShops();
       const updatedProduct = response.data;
+      window.location.reload();
       setCategories((currentProducts) =>
         currentProducts.map((product) =>
           product.id === productId ? { ...product, ...updatedProduct } : product
@@ -100,6 +101,7 @@ const useCategories = () => {
 
       await fetchShops();
       setIsSuccess(true);
+      window.location.reload();
     } catch (error) {
       setError(error.message);
       setIsSuccess(false);
