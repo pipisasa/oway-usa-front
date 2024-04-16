@@ -19,7 +19,7 @@ const useWarehouses = (currentPage) => {
       const response = await axios.get(
         `${API_URL}/api/warehouses/list/?pagination_type=page_number&page=${
           currentPage === undefined ? 1 : currentPage
-        }&page_size=7`,
+        }&page_size=6`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

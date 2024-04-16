@@ -60,11 +60,11 @@ export default function MyWarehousesModal() {
               </div>
 
               <div>
-                <label htmlFor="tracking_number">Трак-код</label>
+                <label htmlFor="tracking_number">Трeк-код</label>
                 <input
                   id="tracking_number"
                   type="text"
-                  placeholder="Вставьте трак-код"
+                  placeholder="Вставьте трeк-код"
                   value={trackingNumber}
                   onChange={(e) => setTrackingNumber(e.target.value)}
                 />
