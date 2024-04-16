@@ -108,6 +108,9 @@ body {
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+body {
+  overflow-x: hidden; 
+}
 
 .container {
   max-width: 1320px;
