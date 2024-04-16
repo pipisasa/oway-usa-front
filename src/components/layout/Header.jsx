@@ -9,7 +9,8 @@ import ModalHeader from "../partials/ModalHeader";
 const links = [
   { href: "/", label: "Главная" },
   { href: "/calculator", label: "Калькулятор" },
-  { href: "/steps", label: "Этапы работы" },
+  { href: "/#stepWork", label: "Этапы работы" },
+  { href: "/catalog", label: "Каталог сайтов" },
   { href: "/markets", label: "Магазин" },
   { href: "/about", label: "О компании" },
   { href: "/faq", label: "Вопросы/ответы" },
@@ -21,6 +22,20 @@ export default function Header() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isOpen, setisOpen] = useState(false);
 
+  const handleNavigation = (href) => {
+    const [path, hash] = href.split("#");
+
+    router.push(path, path + (hash ? `#${hash}` : "")).then(() => {
+      if (hash && typeof window !== "undefined") {
+        window.location.hash = hash;
+      }
+    });
+  };
+
+  const handleClick = (e, href) => {
+    e.preventDefault();
+    handleNavigation(href);
+  };
 
   const handleOpen = useCallback(() => {
     setisOpen((current) => !current);
@@ -50,7 +65,7 @@ export default function Header() {
   return (
     <div className="">
       <header className={`${s.header} ${isHomePage ? s.homepage : ""}`}>
-        <div onClick={() => router.push('/')}>
+        <div onClick={() => router.push("/")}>
           {isHomePage ? (
             <img
               src="/assets/icons/owayUSEFFF.svg"
@@ -82,7 +97,12 @@ export default function Header() {
                 }`}
                 key={index}
               >
-                <Link href={link.href}>{link.label}</Link>
+                <Link
+                  href={link.href}
+                  onClick={(e) => handleClick(e, link.href)}
+                >
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -136,20 +156,16 @@ export default function Header() {
           </button>
         </div>
       </header>
-         <div
-          className={`${s.mobile} ${
-            isOpen ? s.visibleFilter : ''
-          }`}
-        >
-          <div className={`${s.filterComponentContainer}`}>
-            <ModalHeader 
-              isAuthenticated={isAuthenticated} 
-              links={links} 
-              isHomePage={isHomePage} 
-              handleOpen={handleOpen}
-            />
-          </div>
+      <div className={`${s.mobile} ${isOpen ? s.visibleFilter : ""}`}>
+        <div className={`${s.filterComponentContainer}`}>
+          <ModalHeader
+            isAuthenticated={isAuthenticated}
+            links={links}
+            isHomePage={isHomePage}
+            handleOpen={handleOpen}
+          />
         </div>
+      </div>
     </div>
   );
 }
