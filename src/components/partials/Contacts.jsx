@@ -92,8 +92,11 @@ export default function Contacts() {
   }
 
   return (
-    <section className={`${s.address_container} container`} data-aos="fade-up"
-    data-aos-duration="600" >
+    <section
+      className={`${s.address_container} container`}
+      data-aos="fade-up"
+      data-aos-duration="600"
+    >
       <div className={s.container_header}>
         <div className={s.title}>
           <span>Контакты</span>
@@ -171,13 +174,13 @@ export default function Contacts() {
                   <span>Number</span>
                   <h5>{data.phone}</h5>
                 </div>
-                {data.text &&   
-                  <div>
-                    <img src={data.logo}  alt="icons" />
+                {data.text && (
+                  <div className={s.unit}>
+                    <img src={data.logo} alt="icons" />
                     <span>{data.text}</span>
                     <h5>{data.unitcode}</h5>
                   </div>
-                }
+                )}
               </div>
               <div className={s.content}>
                 <div>
@@ -190,8 +193,8 @@ export default function Contacts() {
                   <span>Zip code</span>
                   <h5>{data.zip}</h5>
                 </div>
-                 <div>
-                  <img src="/assets/icons/contact_email.svg"  alt="icons" />
+                <div>
+                  <img src="/assets/icons/contact_email.svg" alt="icons" />
                   <span>Email</span>
                   <h5>{data.email}</h5>
                 </div>

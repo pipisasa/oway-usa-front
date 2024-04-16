@@ -19,6 +19,8 @@ export default function Contacts() {
       city: "Chicago",
       zip: "60625",
       email: "owayusa1@gmail.com",
+      words: "Email",
+      logo: "/assets/icons/contact_email.svg",
     },
     {
       img: "/assets/icons/footer/usa.svg",
@@ -28,27 +30,39 @@ export default function Contacts() {
       phone: "872 710 07 10",
       city: "205",
       zip: "60625",
+      unitcode: "205",
+      text: "Unit",
       email: "owayusa1@gmail.com",
+      words: "Email",
+      logo: "/assets/icons/unit.svg",
     },
     {
       img: "/assets/icons/footer/usa.svg",
       title: "Пункт приема онлайн заказов в Delaware",
       address: "4730DN Kimball Ave",
-      state: "Turkey",
-      phone: "872 710 07 10",
+      state: "Dalawere",
+      phone: "+1 872 710 0710 ",
       city: "Chicago",
-      zip: "34130",
+      zip: "19701",
+      unitcode: "PR",
+      text: "Unit",
       email: "owayusa1@gmail.com",
+      words: "Email",
+      logo: "/assets/icons/unit.svg",
     },
     {
       img: "/assets/icons/footer/turkey.svg",
       title: "Адрес склада в Турции",
-      address: "Nişanca, Hemşire Sk.  ",
-      state: "Illinois",
+      address: "Hemşire Sk. 17C,",
+      state: "Fatih",
       phone: "872 710 07 10",
       city: "Istanbul",
       zip: "34130",
+      text: "Unit",
+      unitcode: "17C",
       email: "owayusa1@gmail.com",
+      words: "Email",
+      logo: "/assets/icons/unit.svg",
     },
   ];
 
@@ -104,7 +118,7 @@ export default function Contacts() {
                 <button
                   onClick={() =>
                     copyToClipboard(
-                      `Адрес: ${data.address}, Город: ${data.city}, Штат: ${data.state}, Телефон: ${data.phone}, Email: ${data.email}`
+                      `Address: ${data.address}, City: ${data.city}, State: ${data.state}, Number: ${data.phone}, Email: ${data.email}, Unit: ${data.unitcode}`
                     )
                   }
                 >
@@ -152,6 +166,13 @@ export default function Contacts() {
                   <span>Number</span>
                   <h5>{data.phone}</h5>
                 </div>
+                {data.text && (
+                  <div className={s.unit}>
+                    <img src={data.logo} alt="icons" />
+                    <span>{data.text}</span>
+                    <h5>{data.unitcode}</h5>
+                  </div>
+                )}
               </div>
               <div className={s.content}>
                 <div>
@@ -166,7 +187,7 @@ export default function Contacts() {
                 </div>
                 <div>
                   <img src="/assets/icons/contact_email.svg" alt="icons" />
-                  <span>Mail</span>
+                  <span>Email</span>
                   <h5>{data.email}</h5>
                 </div>
               </div>
