@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
-import useWarehouses from "../../../hooks/admin/useWarehouses";
 import Modal from "../Modal";
 import { RxCross2 } from "react-icons/rx";
 import Loading from "./Loading";
@@ -15,17 +14,16 @@ export default function WarehousesProductsTable({
   nameFilter,
   trackNumberFilter,
   statusFilter,
-  countryFilter
+  countryFilter,
 }) {
-  console.log(current,34)
-  console.log(warehouses)
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
 
-  const filteredWarehouses = warehouses?.results?.filter((warehouse) =>
-    warehouse.name.toLowerCase().includes(nameFilter.toLowerCase()) &&
-    warehouse.track_number.toString().includes(trackNumberFilter) &&
-    (statusFilter === "" || warehouse.status.name === statusFilter) &&
-    (countryFilter === "" || warehouse.country.name === countryFilter)
+  const filteredWarehouses = warehouses?.results?.filter(
+    (warehouse) =>
+      warehouse.name.toLowerCase().includes(nameFilter.toLowerCase()) &&
+      warehouse.track_number.toString().includes(trackNumberFilter) &&
+      (statusFilter === "" || warehouse.status.name === statusFilter) &&
+      (countryFilter === "" || warehouse.country.name === countryFilter)
   );
 
   const handleDetailsClick = (warehouse) => {
@@ -54,7 +52,7 @@ export default function WarehousesProductsTable({
             <th>Страна отправки</th>
             <th>Адрес получения</th>
             <th>Вес (кг)</th>
-            <th>Трак-номер</th>
+            <th>Трек-номер</th>
             <th>Статус</th>
             <th>Комментарий</th>
           </tr>
@@ -118,5 +116,3 @@ export default function WarehousesProductsTable({
     </div>
   );
 }
-
-

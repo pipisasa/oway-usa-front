@@ -25,10 +25,10 @@ export default function TrackNumber() {
       <div className={s.track_info}>
         <div>
           <span>Отслеживание доставки</span>
-          <h1>Отслеживайте свою доставку по введенному трак-номеру</h1>
+          <h1>Отслеживайте свою доставку по введенному трек-номеру</h1>
         </div>
         <div className={s.track_info_input}>
-          <span>Трак-номер</span>
+          <span>Трек-номер</span>
           <input type="text" placeholder="Введите трек номер" />
         </div>
         <button onClick={handleClick} className={s.button}>

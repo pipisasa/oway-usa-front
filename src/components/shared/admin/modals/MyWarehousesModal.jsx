@@ -52,19 +52,19 @@ export default function MyWarehousesModal() {
               <div>
                 <label htmlFor="warehouse">Склад</label>
                 <CustomSelect
-                    options={countries}
-                    selectedOption={selectedOption}
-                    onChange={(e) => setSelectedOption(e)}
-                    span={"Выберите страну"}
+                  options={countries}
+                  selectedOption={selectedOption}
+                  onChange={(e) => setSelectedOption(e)}
+                  span={"Выберите страну"}
                 />
               </div>
 
               <div>
-                <label htmlFor="tracking_number">Трак-код</label>
+                <label htmlFor="tracking_number">Трек-код</label>
                 <input
                   id="tracking_number"
                   type="text"
-                  placeholder="Вставьте трак-код"
+                  placeholder="Вставьте трек-код"
                   value={trackingNumber}
                   onChange={(e) => setTrackingNumber(e.target.value)}
                 />
@@ -73,10 +73,10 @@ export default function MyWarehousesModal() {
               <div>
                 <label htmlFor="courier_service">Курьерская служба</label>
                 <CustomSelect
-                    options={deliveryServices}
-                    selectedOption={courierOption}
-                    onChange={(e) => setCourierOption(e)}
-                    span={"Курьерская служба"}
+                  options={deliveryServices}
+                  selectedOption={courierOption}
+                  onChange={(e) => setCourierOption(e)}
+                  span={"Курьерская служба"}
                 />
               </div>
             </div>
