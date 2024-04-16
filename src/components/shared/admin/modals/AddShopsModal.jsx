@@ -15,6 +15,7 @@ export default function AddShopsModal() {
   const { categories } = useCategories();
   const { countries } = useCountries();
   const { addShops } = useShops();
+  const [logoPreview, setLogoPreview] = useState(""); // Состояние для превью картинки
 
   // select-country
   const [selectedOption, setSelectedOption] = useState("");
@@ -28,6 +29,18 @@ export default function AddShopsModal() {
   };
 
   const toggleModal = () => setIsOpen(!isOpen);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setLogo(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setLogoPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -102,17 +115,23 @@ export default function AddShopsModal() {
             <div className={s.second_input_block}>
               <div>
                 <label htmlFor="logo">Логотип</label>
-                <div className="custom-file-upload">
+                <label className="custom-file-upload">
                   <input
                     id="logo"
                     type="file"
                     placeholder="Вставьте картинку"
-                    onChange={(e) => setLogo(e.target.files[0])}
+                    onChange={handleFileChange}
                   />
                   <img src="/assets/icons/selectimg.svg" alt="select img" />
                   <span>Выбрать картинку</span>
-                </div>
-
+                </label>
+                {logoPreview && (
+                  <img
+                    src={logoPreview}
+                    alt="Preview"
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                )}
                 <p>
                   Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ |
                   512x512

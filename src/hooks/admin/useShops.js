@@ -9,40 +9,43 @@ const useShops = (selectedCategory, selectedCountry) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [products, setProducts] = useState([]);
 
- useEffect(() => {
-        fetchShops(selectedCategory);
-    }, [selectedCategory]);
+  useEffect(() => {
+    fetchShops(selectedCategory);
+  }, [selectedCategory]);
 
-    useEffect(() => {
-        fetchShops(selectedCountry);
-    }, [selectedCountry]);
+  useEffect(() => {
+    fetchShops(selectedCountry);
+  }, [selectedCountry]);
 
   const fetchShops = async () => {
     setIsLoading(true);
     setError(null);
 
-    let categoryQueryParam = selectedCategory?.map(category => `category=${category}`).join('&');
-    let queryParams = '';
+    let categoryQueryParam = selectedCategory
+      ?.map((category) => `category=${category}`)
+      .join("&");
+    let queryParams = "";
 
     if (selectedCountry) {
-        queryParams = `?${categoryQueryParam}${selectedCategory.length > 0 ? '&' : ''}country=${selectedCountry}`;
+      queryParams = `?${categoryQueryParam}${
+        selectedCategory.length > 0 ? "&" : ""
+      }country=${selectedCountry}`;
     } else {
-        queryParams = `?${categoryQueryParam}`;
+      queryParams = `?${categoryQueryParam}`;
     }
 
     try {
-        const response = await axios.get(
-            `${API_URL}/api/catalog/sites/list/${queryParams}`
-        );
+      const response = await axios.get(
+        `${API_URL}/api/catalog/sites/list/${queryParams}`
+      );
 
-        setProducts(response.data);
+      setProducts(response.data);
     } catch (err) {
-        setError(err.message);
+      setError(err.message);
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
-};
-
+  };
 
   useEffect(() => {
     fetchShops();
@@ -100,9 +103,16 @@ const useShops = (selectedCategory, selectedCountry) => {
         }
       );
 
-      setProducts((currentProducts) =>
-        currentProducts.filter((product) => product.id !== productId)
-      );
+      setProducts((currentProducts) => {
+        // Проверяем, что currentProducts действительно является массивом
+        if (Array.isArray(currentProducts)) {
+          return currentProducts.filter((product) => product.id !== productId);
+        } else {
+          // В случае, если это не массив, выводим ошибку или обрабатываем иначе
+          console.error("Expected an array but got:", typeof currentProducts);
+          return []; // или возвращаем currentProducts без изменений
+        }
+      });
       fetchShops();
     } catch (error) {
       setError(error.message);
