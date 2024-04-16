@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
-import useWarehouses from "../../../hooks/admin/useWarehouses";
 import Modal from "../Modal";
 import { RxCross2 } from "react-icons/rx";
 import Loading from "./Loading";
@@ -17,8 +16,6 @@ export default function WarehousesProductsTable({
   statusFilter,
   countryFilter,
 }) {
-  console.log(current, 34);
-  console.log(warehouses);
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
 
   const filteredWarehouses = warehouses?.results?.filter(

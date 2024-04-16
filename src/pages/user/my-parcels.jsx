@@ -22,7 +22,6 @@ export default function MyWarehouses() {
   if (isLoading) {
     return <Loading />;
   }
-  console.log(total, 89);
 
   const handleUpdate = async (productId) => {
     try {
@@ -51,7 +50,7 @@ export default function MyWarehouses() {
           <img src="/assets/icons/search.svg" alt="icon" />
           <input
             type="text"
-            placeholder="Поиск по трек номеру"
+            placeholder="Поиск по трак номеру"
             value={searchPhoneNumber}
             onChange={(e) => setSearchPhoneNumber(e.target.value)}
           />
