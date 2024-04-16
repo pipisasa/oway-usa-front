@@ -1,10 +1,15 @@
 import React from "react";
 import s from "@/styles/pages/user/MyWarehouse.module.scss";
 import useWarehouses from "@/hooks/user/useWarehouses";
+import Loading from "@/components/shared/admin/Loading";
 
 export default function MyWarehouses() {
-  const { products } = useWarehouses()
-  console.log(products);
+  const { products, isLoading, deleteWarehouses } = useWarehouses();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <section className={s.my}>
       <div className={s.filters}>
@@ -34,7 +39,7 @@ export default function MyWarehouses() {
               <td>{product.tracking_number}</td>
               <td>{product.courier_service}</td>
               <td className={s.actions}>
-                <button>
+                <button onClick={() => deleteWarehouses(product.id)}>
                   <img src="/assets/icons/delete.svg" alt="delete" />
                 </button>
                 <button>

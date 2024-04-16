@@ -4,11 +4,12 @@ import Modal from "../../Modal";
 import useWarehouses from "@/hooks/user/useWarehouses";
 import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
+import Loading from "../Loading";
 
 export default function MyWarehousesModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [tracking_number, setTracking_number] = useState(0);
-  const { addWarehouses } = useWarehouses();
+  const [tracking_number, setTracking_number] = useState("");
+  const { addWarehouses, isLoading } = useWarehouses();
   const { countries } = useCountries();
   const [selectedOption, setSelectedOption] = useState("");
   const [courierOption, setCourierOption] = useState("");
@@ -24,9 +25,10 @@ export default function MyWarehousesModal() {
       { name: "Amazon", id: 7 }
   ];
 
-
+if (isLoading) {
+    return <Loading />;
+  } 
   const handleSubmit = async (e) => {
-    console.log("gffgg");
     e.preventDefault();
     try {
       await addWarehouses({
