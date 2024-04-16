@@ -77,7 +77,7 @@ const service = [
   {
     icon: "/assets/icons/adv_box.svg",
     img: "/assets/images/adv_boxes.png",
-    text: "Изминения адреса получателя",
+    text: "Изменение адреса получателя",
     answer: "Мы работаем с понедельника по пятницу с 9:00 до 18:00.",
   },
 ];
@@ -166,7 +166,7 @@ export default function Advantage(props) {
         </div>
         <div className={s.info}>
           {selectedItem === 1 && (
-            <div className={s["info-content"]}>
+            <div className={s["info-content"]} data-aos="fade-down" data-aos-duration="1000">
               {props?.menu === "service" ? (
                 <img
                   src={service[0]?.img}
@@ -190,7 +190,7 @@ export default function Advantage(props) {
             </div>
           )}
           {selectedItem === 2 && (
-            <div className={s["info-content"]}>
+            <div className={s["info-content"]} data-aos="fade-down" data-aos-duration="1000">
               {props?.menu === "service" ? (
                 <img
                   src={service[1]?.img}
@@ -215,7 +215,7 @@ export default function Advantage(props) {
             </div>
           )}
           {selectedItem === 3 && (
-            <div className={s["info-content"]}>
+            <div className={s["info-content"]} data-aos="fade-down" data-aos-duration="1000">
               {props?.menu === "service" ? (
                 <img
                   src={service[2]?.img}
@@ -240,7 +240,7 @@ export default function Advantage(props) {
             </div>
           )}
           {selectedItem === 4 && (
-            <div className={s["info-content"]}>
+            <div className={s["info-content"]} data-aos="fade-down" data-aos-duration="1000">
               <img src={service[2]?.img} width={825} height={327} alt="logo" />
               <p>
                 {props?.menu === "menu" && menu[2]?.answer}
@@ -250,7 +250,7 @@ export default function Advantage(props) {
             </div>
           )}
           {selectedItem === 5 && (
-            <div className={s["info-content"]}>
+            <div className={s["info-content"]} data-aos="fade-down" data-aos-duration="1000">
               <img src={service[2]?.img} width={825} height={327} alt="logo" />
               <p>
                 {props?.menu === "menu" && menu[2]?.answer}

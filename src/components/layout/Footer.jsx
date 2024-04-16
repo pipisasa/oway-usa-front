@@ -66,7 +66,7 @@ export default function Footer() {
                     src="/assets/icons/footer/locations.svg"
                     alt="location"
                   />
-                  <p>4730d Kimball Ave</p>
+                  <p>4730DN Kimball Ave</p>
                 </div>
               </div>
             </div>
