@@ -117,7 +117,7 @@ export default function Contacts() {
                 <button
                   onClick={() =>
                     copyToClipboard(
-                      `Address: ${data.address}, City: ${data.city}, State: ${data.state}, Number: ${data.phone}, Email: ${data.email}`
+                      `Address: ${data.address}, City: ${data.city}, State: ${data.state}, Number: ${data.phone}, ${data.words}: ${data.email}`
                     )
                   }
                 >

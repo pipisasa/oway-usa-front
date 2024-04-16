@@ -1,17 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "@/styles/pages/auth/Register.module.scss";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+
 export default function Step1({ onSubmit, setUserData }) {
   const {
     register,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm();
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+
+  // Валидация имени на английские буквы
+  const validateFirstName = (value) => {
+    if (!/^[A-Za-z]*$/.test(value)) {
+      setFirstNameError("Имя должно содержать только английские буквы");
+    } else {
+      setFirstNameError("");
+    }
+    setValue("first_name", value.replace(/[^A-Za-z]/g, ""));
+  };
+
+  // Валидация фамилии на английские буквы
+  const validateLastName = (value) => {
+    if (!/^[A-Za-z]*$/.test(value)) {
+      setLastNameError("Фамилия должна содержать только английские буквы");
+    } else {
+      setLastNameError("");
+    }
+    setValue("last_name", value.replace(/[^A-Za-z]/g, ""));
+  };
 
   const onSubmitHandler = (data) => {
-    setUserData(data);
-    onSubmit();
+    if (!firstNameError && !lastNameError) {
+      setUserData(data);
+      onSubmit();
+    }
   };
 
   return (
@@ -22,25 +49,27 @@ export default function Step1({ onSubmit, setUserData }) {
         onSubmit={handleSubmit(onSubmitHandler)}
       >
         <div className={s.register_inputs}>
-          <div className={errors.first_name ? s.error : ""}>
+          <div className={firstNameError ? s.error : ""}>
             <label htmlFor="first_name">Имя</label>
             <input
               id="first_name"
               type="text"
               placeholder="Введите Имя"
               {...register("first_name", { required: true })}
+              onChange={(e) => validateFirstName(e.target.value)}
             />
-            {errors.first_name && <div>это поле обязательно к заполнению!</div>}
+            {firstNameError && <div>{firstNameError}</div>}
           </div>
-          <div className={errors.last_name ? s.error : ""}>
+          <div className={lastNameError ? s.error : ""}>
             <label htmlFor="last_name">Фамилия</label>
             <input
               id="last_name"
               type="text"
-              placeholder="Введите Фамилия"
+              placeholder="Введите Фамилию"
               {...register("last_name", { required: true })}
+              onChange={(e) => validateLastName(e.target.value)}
             />
-            {errors.last_name && <div>это поле обязательно к заполнению!</div>}
+            {lastNameError && <div>{lastNameError}</div>}
           </div>
           <div className={errors.phone_number ? s.error : ""}>
             <label htmlFor="phone_number">Номер телефона</label>
