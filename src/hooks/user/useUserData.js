@@ -34,6 +34,7 @@ const useUserData = () => {
         setUserData(data);
       } catch (error) {
         setError(error.message);
+        router.push("/auth/login");
       } finally {
         setLoading(false);
       }
@@ -74,7 +75,6 @@ const useUserData = () => {
       window.location.reload();
     } catch (error) {
       setError(error.message);
-      router.push("/auth/login");
     }
   };
 
