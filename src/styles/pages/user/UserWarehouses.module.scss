@@ -96,12 +96,18 @@
       .card_content {
         display: flex;
         gap: 12px;
+        position: relative;
 
         .content {
           display: flex;
           flex-direction: column;
           gap: 20px;
           width: 183px;
+
+          .unit {
+            position: absolute;
+            right: 0;
+          }
 
           div {
             display: flex;
