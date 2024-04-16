@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import Modal from "@/components/shared/Modal";
@@ -252,7 +252,7 @@ const Step1 = ({
           />
         </div>
         <div>
-          <label htmlFor="">Трак-номер</label>
+          <label htmlFor="">Трек-номер</label>
           <input
             type="text"
             name="track_number"
@@ -330,12 +330,12 @@ const Step2 = ({
         />
       </div>
       <div>
-        <label htmlFor="status">Трак код товара</label>
+        <label htmlFor="status">Трек код товара</label>
         <input
           type="text"
           name="articul"
           id="articul"
-          placeholder="Введите трак код товара"
+          placeholder="Введите трек код товара"
           value={formData.articul}
           onChange={handleChange}
         />
@@ -362,28 +362,29 @@ const Step3 = ({ formData, setFormData, handleChange, handleSubmit }) => {
   const { warehouses } = useWarehousesFull();
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
- const handleInputChange = (e) => {
-  const value = e.target.value;
-  setInputValue(value);
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
 
-  let filteredWarehouses = [];
-  if (value.trim() !== "") {
-    filteredWarehouses = warehouses?.results?.filter((warehouse) =>
-      warehouse?.unique_id?.toLowerCase().includes(value.toLowerCase())
-    );
-  }
-  setSuggestions(filteredWarehouses);
-};
+    let filteredWarehouses = [];
+    if (value.trim() !== "") {
+      filteredWarehouses = warehouses?.results?.filter((warehouse) =>
+        warehouse?.unique_id?.toLowerCase().includes(value.toLowerCase())
+      );
+    }
+    setSuggestions(filteredWarehouses);
+  };
 
-useEffect(() => {
-  if (inputValue === "") {
-    setSuggestions([]);
-  }
-}, [inputValue]);
-
+  useEffect(() => {
+    if (inputValue === "") {
+      setSuggestions([]);
+    }
+  }, [inputValue]);
 
   const handleSelectWarehouse = (warehouse) => {
-    handleChange({ target: { name: "unique_id_user", value: warehouse.unique_id } });
+    handleChange({
+      target: { name: "unique_id_user", value: warehouse.unique_id },
+    });
     setInputValue(warehouse.unique_id);
     setSuggestions([]);
   };
@@ -404,7 +405,10 @@ useEffect(() => {
             value={inputValue}
             onChange={handleInputChange}
           />
-           <SearchSelect suggestions={suggestions} handleSelectWarehouse={handleSelectWarehouse} />
+          <SearchSelect
+            suggestions={suggestions}
+            handleSelectWarehouse={handleSelectWarehouse}
+          />
         </div>
       </form>
       <button className={c.submit_btn} onClick={handleSubmit}>
@@ -413,5 +417,3 @@ useEffect(() => {
     </div>
   );
 };
-
-

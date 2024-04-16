@@ -12,7 +12,10 @@ export default function AdminWarehousesPage() {
   const [statusFilter, setStatusFilter] = useState("");
   const [countryFilter, setCountryFilter] = useState("");
 
- 
+  useEffect(() => {
+    fetchWarehouses(currentPage);
+  }, [currentPage]);
+
   return (
     <div className={s.warehouses_page}>
       <div className={s.filters}>
@@ -24,7 +27,7 @@ export default function AdminWarehousesPage() {
             value={nameFilter}
             onChange={(e) => setNameFilter(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
+              if (e.key === "Enter") {
                 fetchWarehouses(currentPage, {
                   name: nameFilter,
                 });
@@ -36,11 +39,11 @@ export default function AdminWarehousesPage() {
           <img src="/assets/icons/search.svg" alt="icon" />
           <input
             type="number"
-            placeholder="Поиск по трак номеру"
+            placeholder="Поиск по трек номеру"
             value={trackNumberFilter}
             onChange={(e) => setTrackNumberFilter(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
+              if (e.key === "Enter") {
                 fetchWarehouses(currentPage, {
                   trackNumber: trackNumberFilter,
                 });
@@ -54,7 +57,9 @@ export default function AdminWarehousesPage() {
           onChange={(e) => setStatusFilter(e.target.value)}
         >
           <option value="">Статус</option>
-          <option value="Получен на складе получателя">Получен на складе получателя</option>
+          <option value="Получен на складе получателя">
+            Получен на складе получателя
+          </option>
           <option value="Отправлен">Отправлен</option>
           <option value="Доставлено">Доставлено</option>
           <option value="Готов к выдаче">Готов к выдаче</option>
@@ -78,7 +83,6 @@ export default function AdminWarehousesPage() {
         count={count}
         warehouses={warehouses}
         fetchWarehouses={fetchWarehouses}
-
         nameFilter={nameFilter}
         trackNumberFilter={trackNumberFilter}
         statusFilter={statusFilter}

@@ -49,7 +49,7 @@ export default function AdminLayout({ children }) {
     },
     {
       href: "/admin/user-parcels",
-      label: "Посылки пользователей",
+      label: "Ожидаемые посылки",
       icon: "/assets/icons/admin-icons/склад.svg",
     },
   ];

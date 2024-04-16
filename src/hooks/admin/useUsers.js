@@ -22,7 +22,9 @@ const useUsersAdmin = (currentPage) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axiosInstance.get(`list/?page=${currentPage}`, {
+      const response = await axiosInstance.get(`list/?pagination_type=page_number&page=${
+          currentPage === undefined ? 1 : currentPage
+      }&page_size=7`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

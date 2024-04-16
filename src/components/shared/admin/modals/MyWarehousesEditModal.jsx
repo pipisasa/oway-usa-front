@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
 import useWarehouses from "@/hooks/user/useWarehouses";
 import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
 
-export default function MyWarehousesModal() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [trackingNumber, setTrackingNumber] = useState("");
-  const { addWarehouses } = useWarehouses();
+export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
+  const [trackingNumber, setTrackingNumber] = useState(
+    warehouse?.tracking_number || ""
+  );
+  const { updateWarehouses } = useWarehouses();
   const { countries } = useCountries();
-  const [selectedOption, setSelectedOption] = useState("");
-  const [courierOption, setCourierOption] = useState("");
-
-  const toggleModal = () => setIsOpen(!isOpen);
 
   const deliveryServices = [
     { name: "Fedex", id: 1 },
@@ -25,15 +22,30 @@ export default function MyWarehousesModal() {
     { name: "Amazon", id: 7 },
   ];
 
+  const chooseWarehouses = countries.find(
+    (country) => country.name === warehouse?.warehouse
+  );
+  const [selectedOption, setSelectedOption] = useState(chooseWarehouses);
+  useEffect(() => {
+    if (chooseWarehouses) {
+      setSelectedOption(chooseWarehouses);
+    }
+  }, [chooseWarehouses]);
+
+  const chooseCourier = deliveryServices.find(
+    (country) => country.name === warehouse?.courier_service
+  );
+  const [courierOption, setCourierOption] = useState(chooseCourier);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addWarehouses({
+      await updateWarehouses(warehouse?.id, {
         courier_service: courierOption.name,
         tracking_number: trackingNumber,
         warehouse: selectedOption.name,
       });
-      toggleModal();
+      onClose();
     } catch (error) {
       console.error("Ошибка при добавлении сайта:", error);
     }
@@ -41,11 +53,8 @@ export default function MyWarehousesModal() {
 
   return (
     <div className={s.modal}>
-      <button onClick={toggleModal} className={s.add_btn}>
-        Добавить товар
-      </button>
-      <Modal isOpen={isOpen} onClose={toggleModal}>
-        <h3>Добавить сайт</h3>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <h3>Редактировать посылку</h3>
         <form onSubmit={handleSubmit}>
           <div className={s.shops_form}>
             <div className={s.first_input_block}>

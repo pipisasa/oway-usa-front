@@ -15,7 +15,7 @@ export default function UserWarehouses() {
       {/* <div className={s.filters}>
         <div className={s.search}>
           <img src="/assets/icons/search.svg" alt="icon" />
-          <input type="number" placeholder="Поиск по трак номеру" />
+          <input type="number" placeholder="Поиск по трек номеру" />
         </div>
         <select className={s.select}>
           <option value="">Склад</option>
@@ -30,7 +30,7 @@ export default function UserWarehouses() {
             <th>Имя</th>
             <th>Фамилия</th>
             <th>Склад</th>
-            <th>Трак номер</th>
+            <th>Трек номер</th>
             <th>Курьерская служба</th>
             <th>Действие</th>
           </tr>

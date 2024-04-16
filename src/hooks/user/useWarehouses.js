@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
 
-const useWarehouses = () => {
+const useWarehouses = (currentPage) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState([]);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -14,10 +15,14 @@ const useWarehouses = () => {
     setError(null);
     try {
       const accessToken = getCookie("accessToken");
-      const response = await axios.get(`${API_URL}/api/my_warehouse/list/`, {
+      const response = await axios.get(`${API_URL}/api/my_warehouse/list/?pagination_type=page_number&page=${
+          currentPage === undefined ? 1 : currentPage
+      }&page_size=7`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       setProducts(response.data.results);
+      console.log(response.data?.total_pages)
+      setTotal(response.data?.total_pages)
     } catch (error) {
       setError(error.message);
     } finally {
@@ -37,7 +42,7 @@ const useWarehouses = () => {
         },
       });
       fetchWarehouses();
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       setError(error.message);
     } finally {
@@ -78,6 +83,8 @@ const useWarehouses = () => {
           product.id === productId ? { ...product, ...response.data } : product
         )
       );
+      fetchWarehouses();
+      window.location.reload();
     } catch (error) {
       setError(error.message);
     } finally {
@@ -92,8 +99,10 @@ const useWarehouses = () => {
   return {
     products,
     addWarehouses,
+    fetchWarehouses,
     deleteWarehouses,
     updateWarehouses,
+    total,
     isLoading,
     error,
   };

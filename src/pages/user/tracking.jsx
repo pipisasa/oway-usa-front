@@ -39,7 +39,7 @@ export default function TrackingPage() {
     } catch (err) {
       console.error("Ошибка при запросе к Ship24 API:", err);
       setError(
-        "Произошла ошибка при отслеживании. Пожалуйста, проверьте трак-номер и попробуйте снова."
+        "Произошла ошибка при отслеживании. Пожалуйста, проверьте трек-номер и попробуйте снова."
       );
     } finally {
       setLoading(false);
@@ -53,15 +53,15 @@ export default function TrackingPage() {
       </div>
 
       <form className={s.tracking_form} onSubmit={handleTrack}>
-        <h3>Введите трак номер для отслеживания доставки</h3>
+        <h3>Введите трек номер для отслеживания доставки</h3>
         <div>
-          <label htmlFor="trackingNumber">Трак-номер</label>
+          <label htmlFor="trackingNumber">Трек-номер</label>
           <input
             type="text"
             id="trackingNumber"
             value={trackingNumber}
             onChange={(e) => setTrackingNumber(e.target.value)}
-            placeholder="Введите трак-номер"
+            placeholder="Введите трек-номер"
             required
           />
           <button type="submit">Проверить</button>
