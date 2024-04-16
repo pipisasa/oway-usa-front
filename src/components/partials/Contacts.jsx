@@ -30,8 +30,10 @@ export default function Contacts() {
       phone: "872 710 07 10",
       city: "205",
       zip: "60625",
-      email: "205",
-      words: "Unit",
+      unitcode: "205",
+      text: "Unit",
+      email: "owayusa1@gmail.com",
+      words: "Email",
       logo: "/assets/icons/unit.svg",
     },
     {
@@ -42,8 +44,10 @@ export default function Contacts() {
       phone: "+1 872 710 0710 ",
       city: "Chicago",
       zip: "19701",
-      email: "PR",
-      words: "Unit",
+      unitcode: "PR",
+      text: "Unit",
+      email: "owayusa1@gmail.com",
+      words: "Email",
       logo: "/assets/icons/unit.svg",
     },
     {
@@ -54,8 +58,10 @@ export default function Contacts() {
       phone: "872 710 07 10",
       city: "Istanbul",
       zip: "34130",
-      words: "Unit",
-      email: "17C",
+      text: "Unit",
+      unitcode: "17C",
+      email: "owayusa1@gmail.com",
+      words: "Email",
       logo: "/assets/icons/unit.svg",
     },
   ];
@@ -117,7 +123,7 @@ export default function Contacts() {
                 <button
                   onClick={() =>
                     copyToClipboard(
-                      `Address: ${data.address}, City: ${data.city}, State: ${data.state}, Number: ${data.phone}, Email: ${data.email}`
+                      `Address: ${data.address}, City: ${data.city}, State: ${data.state}, Number: ${data.phone}, Email: ${data.email}, Unit: ${data.unitcode}`
                     )
                   }
                 >
@@ -165,6 +171,13 @@ export default function Contacts() {
                   <span>Number</span>
                   <h5>{data.phone}</h5>
                 </div>
+                {data.text &&   
+                  <div>
+                    <img src={data.logo}  alt="icons" />
+                    <span>{data.text}</span>
+                    <h5>{data.unitcode}</h5>
+                  </div>
+                }
               </div>
               <div className={s.content}>
                 <div>
@@ -177,9 +190,9 @@ export default function Contacts() {
                   <span>Zip code</span>
                   <h5>{data.zip}</h5>
                 </div>
-                <div>
-                  <img src={data.logo}  alt="icons" />
-                  <span>{data.words}</span>
+                 <div>
+                  <img src="/assets/icons/contact_email.svg"  alt="icons" />
+                  <span>Email</span>
                   <h5>{data.email}</h5>
                 </div>
               </div>

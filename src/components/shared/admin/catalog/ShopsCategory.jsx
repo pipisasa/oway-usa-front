@@ -8,7 +8,7 @@ export default function ShopsCategory({
   setSelectedCategory,
   selectedCategory,
 }) {
-  const { categories, deleteCategory, setCategories } = useCategories();
+  const { categories, deleteCategories, setCategories } = useCategories();
   const [showModal, setShowModal] = useState(false);
   const [editCategory, setEditCategory] = useState(null);
 
@@ -16,6 +16,7 @@ export default function ShopsCategory({
     setShowModal(true);
     setEditCategory(null);
   };
+
 
   const handleEditCategoryClick = (category) => {
     setEditCategory(category);
@@ -50,7 +51,7 @@ export default function ShopsCategory({
                   onClick={() => handleEditCategoryClick(category)}
                 />
               </button>
-              <button onClick={() => deleteCategory(category.id)}>
+              <button onClick={() => deleteCategories(category.id)}>
                 <img src="/assets/icons/delete.svg" alt="" />
               </button>
             </div>
