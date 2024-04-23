@@ -14,7 +14,7 @@ const ForgotPassword = () => {
 
   const handleConfirmEmail = async (e) => {
     e.preventDefault();
-    await confirmEmail(email);
+    await sendCodeToEmail(email);
     setIsEmailConfirmed(true);
   };
 
