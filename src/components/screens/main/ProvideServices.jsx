@@ -1,7 +1,10 @@
 import React from "react";
 import s from "@/styles/screens/main/ProvideServices.module.scss";
+import { useRouter } from "next/router";
 
 export default function ProvideServices() {
+  const router = useRouter();
+
   return (
     <div className={`${s.service} container`}>
       <div className={s.service_header}>
@@ -25,10 +28,10 @@ export default function ProvideServices() {
           </div>
           <div>
             <img
-              src="assets/images/electronic.png"
+              src="/assets/images/oway-usa-dalle-2.png"
               width={650}
               height={333}
-              alt=""
+              alt="image"
             />
           </div>
         </div>
@@ -50,11 +53,15 @@ export default function ProvideServices() {
           </div>
           <div className={s.services_block_span_div}>
             <div></div>
-            <span>Стоимость услуги  в США - 5$ </span>
+            <span style={{ fontWeight: "bold" }}>
+              Стоимость услуги  в США - 5$ 
+            </span>
           </div>
           <div className={s.services_block_span_div}>
             <div></div>
-            <span>Стоимость услуги в Турции - 2$ </span>
+            <span style={{ fontWeight: "bold" }}>
+              Стоимость услуги в Турции - 2$ 
+            </span>
           </div>
         </div>
       </div>
@@ -73,7 +80,15 @@ export default function ProvideServices() {
               напишите нашему менеджеру
             </span>
           </div>
-          <button>Связаться с менеджером</button>
+          <button
+            onClick={() =>
+              router.push(
+                "https://api.whatsapp.com/send/?phone=18727100710&text&type=phone_number&app_absent=0"
+              )
+            }
+          >
+            Связаться с менеджером
+          </button>
         </div>
       </div>
       <div className={s.services_block} data-aos="zoom-out-left">
@@ -91,10 +106,10 @@ export default function ProvideServices() {
           </div>
           <div>
             <img
-              src="assets/images/electronic.png"
+              src="/assets/images/oway-usa-dalle-1.png"
               width={650}
               height={333}
-              alt=""
+              alt="image"
             />
           </div>
         </div>
