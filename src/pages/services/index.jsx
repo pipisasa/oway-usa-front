@@ -8,12 +8,12 @@ export default function ServicesPage() {
   return (
     <div>
       <Services />
-      <ProvideServices />
       <Advantage
         menu="service"
         h2="Оптимизируйте бюджет с нашими бесплатными услугами"
         p="Бесплатные услуги "
       />
+      <ProvideServices />
       <Contacts />
     </div>
   );
