@@ -3,13 +3,31 @@ import s from "@/styles/pages/admin/AdminUsersPage.module.scss";
 import { RxCross2 } from "react-icons/rx";
 import Modal from "../../Modal";
 
-export default function UserDetailModal({ userData, close }) {
+export default function UserDetailModal({ userData, close, editUser }) {
   const [firstName, setFirstName] = useState(userData.first_name);
   const [lastName, setLastName] = useState(userData.last_name);
   const [email, setEmail] = useState(userData.email);
   const [phoneNumber, setPhoneNumber] = useState(userData.phone_number);
-  const [passportFront, setPassportFront] = useState(userData.passport_front);
-  const [passportBack, setPassportBack] = useState(userData.passport_back);
+  const [passportFront, setPassportFront] = useState(userData.front_image);
+  const [passportBack, setPassportBack] = useState(userData.back_image);
+  // console.log(userData.back_image);
+  // console.log(userData.front_image);
+  console.log(userData);
+  const handleEdit = (e) => {
+    e.preventDefault();
+    const editedUserData = {
+      id: userData.id, 
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      phone_number: phoneNumber,
+      front_image: passportFront,
+      back_image: passportBack
+    };
+    // Вызываем функцию editUser, передавая ей отредактированные данные пользователя
+    editUser(editedUserData);
+  };
+  
 
   return (
     <div className={s.modal}>
@@ -21,7 +39,7 @@ export default function UserDetailModal({ userData, close }) {
             </button>
           </div>
           <h3>Данные пользователя</h3>
-          <form className={s.form} action="">
+          <form className={s.form} action="" onSubmit={handleEdit}>
             <div className={s.inputs}>
               <div>
                 <label>Имя</label>

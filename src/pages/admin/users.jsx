@@ -12,7 +12,7 @@ export default function AdminUsersPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchPhoneNumber, setSearchPhoneNumber] = useState("");
   const [searchUniqueId, setSearchUniqueId] = useState("");
-  const { users, isLoading, fetchUsers } = useUsersAdmin(currentPage);
+  const { users, isLoading, fetchUsers, updateUsers } = useUsersAdmin(currentPage);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isLoadingPage, setIsLoadingPage] = useState(false);
 
@@ -24,8 +24,20 @@ export default function AdminUsersPage() {
   if (isLoading) {
     return <Loading />;
   }
+  console.log();
 
   const deselectUser = () => setSelectedUser(null);
+
+  const handleEditUser = (userData) => {
+    updateUsers(userData.id)
+      .then(() => {
+        updateUsers(currentPage);
+        deselectUser();
+      })
+      .catch((error) => {
+        console.error("Error editing user:", error);
+      });
+  };
 
   return (
     <>
@@ -95,7 +107,7 @@ export default function AdminUsersPage() {
           </tbody>
         </table>
         {selectedUser && (
-          <UserDetailModal userData={selectedUser} close={deselectUser} />
+          <UserDetailModal userData={selectedUser} close={deselectUser} editUser={handleEditUser} />
         )}
         <div className={s.pagination}>
           <Pagination
