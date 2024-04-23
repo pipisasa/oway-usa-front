@@ -36,12 +36,13 @@ export default function HeroSection() {
           <div className={`${s.heroSection_page_container} container`}>
             <div className={s.heroSection_info}>
               <h1>
-                <strong>OWAY USA:</strong> Ваш мост к мировым покупам
+                <strong>OWAY USA:</strong> Ваш мост к мировым покупкам
               </h1>
               <div className={s.heroSection_info_span}>
                 <div></div>
                 <span>
-                  Легко, надежно и выгодно доставляем товары из зарубежных<br/>
+                  Легко, надежно и выгодно доставляем товары из зарубежных
+                  <br />
                   интернет-магазинов прямо к вам домой
                 </span>
               </div>
