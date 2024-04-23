@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminUsersPage.module.scss";
 import c from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import { Pagination } from "@nextui-org/react";
-import Modal from "../../components/shared/Modal";
-import { RxCross2 } from "react-icons/rx";
 import useUsersAdmin from "@/hooks/admin/useUsers";
 import Loading from "@/components/shared/admin/Loading";
+import UserDetailModal from "@/components/shared/users/modals/UserDetailModal";
 
 const PAGE_SIZE = 7;
 
@@ -25,6 +24,8 @@ export default function AdminUsersPage() {
   if (isLoading) {
     return <Loading />;
   }
+
+  const deselectUser = () => setSelectedUser(null);
 
   return (
     <>
@@ -94,37 +95,7 @@ export default function AdminUsersPage() {
           </tbody>
         </table>
         {selectedUser && (
-          <div className={s.modal}>
-            <Modal isOpen={selectedUser} onClose={() => setSelectedUser(null)}>
-              <div className={s.modalContent}>
-                <div className={s.btn_center}>
-                  <button
-                    onClick={() => setSelectedUser(null)}
-                    className={s.close_btn}
-                  >
-                    <RxCross2 size={20} />
-                  </button>
-                </div>
-                <h3>Данные ID паспорта</h3>
-                <div>
-                  {selectedUser.front_image && selectedUser.back_image ? (
-                    <>
-                      <img
-                        src={`https://api-owayusa.com/${selectedUser.front_image}`}
-                        alt=""
-                      />
-                      <img
-                        src={`https://api-owayusa.com/${selectedUser.back_image}`}
-                        alt=""
-                      />
-                    </>
-                  ) : (
-                    <p>Пользователь не загрузил паспортные данные</p>
-                  )}
-                </div>
-              </div>
-            </Modal>
-          </div>
+          <UserDetailModal userData={selectedUser} close={deselectUser} />
         )}
         <div className={s.pagination}>
           <Pagination

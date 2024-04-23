@@ -15,14 +15,16 @@ const useWarehouses = (currentPage) => {
     setError(null);
     try {
       const accessToken = getCookie("accessToken");
-      const response = await axios.get(`${API_URL}/api/my_warehouse/list/?pagination_type=page_number&page=${
+      const response = await axios.get(
+        `${API_URL}/api/my_warehouse/list/?pagination_type=page_number&page=${
           currentPage === undefined ? 1 : currentPage
-      }&page_size=7`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
+        }&page_size=7`,
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
       setProducts(response.data.results);
-      console.log(response.data?.total_pages)
-      setTotal(response.data?.total_pages)
+      setTotal(response.data?.total_pages);
     } catch (error) {
       setError(error.message);
     } finally {
