@@ -93,7 +93,7 @@ export default function Login() {
                 Запомнить пароль
               </label>
             </div>
-            <Link href="/">Забыли пароль?</Link>
+            <Link href="/auth/forgot-password">Забыли пароль?</Link>
           </div>
           <div className={s.ili}>
             <div></div>
