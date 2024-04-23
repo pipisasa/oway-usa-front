@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForgot } from "@/hooks/auth/useforgot";
 import Link from "next/link";
 import s from "@/styles/pages/auth/Register.module.scss";
+import { useRouter } from "next/router";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +12,8 @@ const ForgotPassword = () => {
   const [error, setError] = useState(null);
   const [isEmailConfirmed, setIsEmailConfirmed] = useState(false);
   const { sendCodeToEmail, forgot, confirmEmail, isLoading } = useForgot();
+
+  const router = useRouter();
 
   const handleConfirmEmail = async (e) => {
     e.preventDefault();
@@ -60,8 +63,11 @@ const ForgotPassword = () => {
         <div onClick={() => router.push("/")} className={s.logo}>
           <img src="/assets/icons/owayUSE.svg" alt="OWAY USA" />
         </div>
-        <h1>Подтверждение аккаунта</h1>
-        <form onSubmit={!isEmailConfirmed ? handleConfirmEmail : handleSubmit} className={s.register_form}>
+        <h1>Восстановление аккаунта</h1>
+        <form
+          onSubmit={!isEmailConfirmed ? handleConfirmEmail : handleSubmit}
+          className={s.register_form}
+        >
           <div className={s.register_inputs}>
             {!isEmailConfirmed && (
               <div className={s.email ? s.error : ""}>
@@ -71,6 +77,7 @@ const ForgotPassword = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  placeholder="Введите почту"
                 />
               </div>
             )}
@@ -118,7 +125,7 @@ const ForgotPassword = () => {
                     <button type="button" onClick={togglePassword2Visibility}>
                       <img
                         src={
-                          showPassword2 
+                          showPassword2
                             ? "/assets/icons/eyes-open.svg"
                             : "/assets/icons/eyes-close.svg"
                         }
@@ -132,7 +139,11 @@ const ForgotPassword = () => {
           </div>
           <div className={s.register_btn}>
             <button type="submit" disabled={isLoading}>
-              {isLoading ? "Loading..." : !isEmailConfirmed ? "Confirm Email" : "Reset Password"}
+              {isLoading
+                ? "Loading..."
+                : !isEmailConfirmed
+                ? "Confirm Email"
+                : "Reset Password"}
             </button>
             <span>
               Вы имеете аккаунт? <Link href="/auth/login">Авторизоваться</Link>
