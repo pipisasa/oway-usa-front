@@ -8,6 +8,7 @@ import NotificationsModal from "./modals/NotificationsModal";
 import AddShopsModal from "./modals/AddShopsModal";
 import ProductsModal from "./modals/ProductsModal";
 import WarehouseProductsModal from "./modals/WarehousesProductsModal";
+import Link from "next/link"
 
 export default function AdminHeader() {
   const router = useRouter();
@@ -28,6 +29,7 @@ export default function AdminHeader() {
       return (
         <>
           Здравствуйте, <span>Администратор</span> 👋
+          <Link className={s.lk} href="/user">Личный кабинет</Link>
         </>
       );
     } else {

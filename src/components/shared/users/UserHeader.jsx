@@ -9,15 +9,17 @@ import BankCardsModal from "./modals/BankCardsModal";
 import useUserData from "@/hooks/user/useUserData";
 import useNotification from "../../../hooks/user/useNotification";
 import MyWarehousesModal from "../admin/modals/MyWarehousesModal";
+import Link from "next/link"
 
 export default function UsersHeader() {
   const router = useRouter();
   const { userData, loading, error } = useUserData();
   const { products } = useNotification();
-
+  const isAdmin = userData?.role === 'admin'; 
   const links = [
     { href: "/user", label: "Главная" },
     { href: "/user/biling", label: "Оплата" },
+    { href: "/user/calculator", label: "Калькулятор стоимости" },
     { href: "/user/notifications", label: "Уведомления" },
     { href: "/user/warehouses", label: "Адреса складов" },
     { href: "/user/tracking", label: "Отслеживание доставки" },
@@ -31,6 +33,7 @@ export default function UsersHeader() {
         <>
           Здравствуйте,{" "}
           <span>{loading ? "загрузка..." : userData?.first_name}</span> 👋
+          {isAdmin && <Link href={'/admin'}>admin</Link> }
         </>
       );
     } else {
@@ -79,12 +82,6 @@ export default function UsersHeader() {
         <div className={s.user_code}>
           <span>#{loading ? "загрузка..." : userData?.unique_id}</span>
         </div>
-
-        {/* <Avatar
-          isBordered
-          radius="sm"
-          src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
-        /> */}
       </div>
     </header>
   );
