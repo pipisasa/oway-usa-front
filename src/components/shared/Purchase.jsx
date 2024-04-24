@@ -123,12 +123,12 @@ export default function Purchase() {
                   )}
                 </div>
 
-                <div
+                {/* <div
                   className={`${
                     errors?.articul ? s.error : s.purchase_inner_froms_inputs
                   }`}
                 >
-                  <label>Трек код товара</label>
+                  <label>Трек код товвввара</label>
                   <input
                     id="articul"
                     name="articul"
@@ -138,9 +138,7 @@ export default function Purchase() {
                     {...register("articul", { required: true })}
                   />
                   {errors?.articul && <p>Это поле обязательно к заполнению!</p>}
-                </div>
-              </div>
-              <div className={s.purchase_inner_froms}>
+                </div> */}
                 <div
                   className={`${
                     errors?.count ? s.error : s.purchase_inner_froms_inputs
@@ -159,17 +157,19 @@ export default function Purchase() {
                   />
                   {errors?.count && <p>Это поле обязательно к заполнению!</p>}
                 </div>
+              </div>
+              <div className={s.purchase_inner_froms}>
                 <div
                   className={`${
                     errors?.color ? s.error : s.purchase_inner_froms_inputs
                   }`}
                 >
-                  <label>Цвет</label>
+                  <label>Электронная почта</label>
                   <input
-                    id="color"
-                    name="color"
-                    type="text"
-                    placeholder="Введите цвет"
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Введите электронную почту"
                     onChange={handleChange}
                     {...register("color", { required: true })}
                   />
@@ -478,7 +478,7 @@ export default function Purchase() {
                     }`}
                   >
                     <label>Добавьте скриншот</label>
-                    <label className="custom-file-upload">
+                    <label>
                       <input
                         id="purchase_image"
                         type="file"

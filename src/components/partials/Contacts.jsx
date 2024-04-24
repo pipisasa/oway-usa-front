@@ -18,6 +18,7 @@ export default function Contacts() {
       phone: "872 710 07 10",
       city: "Chicago",
       zip: "60625",
+      qwe: "State",
       email: "owayusa1@gmail.com",
       words: "Email",
       logo: "/assets/icons/contact_email.svg",
@@ -32,6 +33,7 @@ export default function Contacts() {
       zip: "60625",
       unitcode: "205",
       text: "Unit",
+      qwe: "State",
       email: "owayusa1@gmail.com",
       words: "Email",
       logo: "/assets/icons/unit.svg",
@@ -46,6 +48,7 @@ export default function Contacts() {
       zip: "19701",
       unitcode: "PR",
       text: "Unit",
+      qwe: "State",
       email: "owayusa1@gmail.com",
       words: "Email",
       logo: "/assets/icons/unit.svg",
@@ -60,6 +63,7 @@ export default function Contacts() {
       zip: "34130",
       text: "Unit",
       unitcode: "17C",
+      qwe: "Region",
       email: "owayusa1@gmail.com",
       words: "Email",
       logo: "/assets/icons/unit.svg",
@@ -166,7 +170,7 @@ export default function Contacts() {
                     src="/assets/icons/united-states-of-america.svg"
                     alt="icons"
                   />
-                  <span>State</span>
+                  <span>{data.qwe}</span>
                   <h5>{data.state}</h5>
                 </div>
                 <div>

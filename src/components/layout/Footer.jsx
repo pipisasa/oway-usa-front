@@ -75,6 +75,9 @@ export default function Footer() {
               <nav>
                 <ul>
                   <li>
+                    <Link href="/about">О компании</Link>
+                  </li>
+                  <li>
                     <Link href="/calculator">Калькулятор</Link>
                   </li>
                   <li>
@@ -82,9 +85,6 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link href="/markets">Магазины</Link>
-                  </li>
-                  <li>
-                    <Link href="/about">О компании</Link>
                   </li>
                   <li>
                     <Link href="/faq">Вопрос/Ответы</Link>
@@ -114,6 +114,9 @@ export default function Footer() {
               </Link>
               <Link target="__blank" href="https://www.tiktok.com/@owayusa1">
                 <img src="/assets/icons/tiktok.svg" alt="tiktok" />
+              </Link>
+              <Link className={s.telegram} target="__blank" href="https://t.me/owayusa_chat">
+                <img src="/assets/icons/brand_telegram_icon_151521.svg" alt="tiktok" />
               </Link>
             </div>
           </div>
