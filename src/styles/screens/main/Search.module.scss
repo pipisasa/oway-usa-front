@@ -75,7 +75,17 @@
     }
   }
 }
-
+.poisk{
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
+  
+  width: 100%;
+  height: 50px;
+  margin-top: -20px;
+}
 @media (max-width: 1024px) {
   .heroSection_page {
     .heroSection_img {
