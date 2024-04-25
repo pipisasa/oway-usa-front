@@ -62,6 +62,14 @@ export default function ProvideServices() {
             <span style={{ fontWeight: "bold" }}>
               Стоимость услуги в Турции - 2$ 
             </span>
+          </div>{" "}
+          <div>
+            <img
+              src="/assets/images/service-img-2.png"
+              width={650}
+              height={333}
+              alt="image"
+            />
           </div>
         </div>
       </div>
@@ -106,7 +114,7 @@ export default function ProvideServices() {
           </div>
           <div>
             <img
-              src="/assets/images/oway-usa-dalle-1.png"
+              src="/assets/images/service-img-3.png"
               width={650}
               height={333}
               alt="image"
