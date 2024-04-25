@@ -9,12 +9,14 @@ import BankCardsModal from "./modals/BankCardsModal";
 import useUserData from "@/hooks/user/useUserData";
 import useNotification from "../../../hooks/user/useNotification";
 import MyWarehousesModal from "../admin/modals/MyWarehousesModal";
+import Link from "next/link"
 import { getCookie } from "@/utils/cookieHelpers";
 
 export default function UsersHeader() {
   const router = useRouter();
   const { userData, loading, error } = useUserData();
   const { products } = useNotification();
+
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -25,6 +27,7 @@ export default function UsersHeader() {
   const links = [
     { href: "/user", label: "Главная" },
     { href: "/user/biling", label: "Оплата" },
+    { href: "/user/calculator", label: "Калькулятор стоимости" },
     { href: "/user/notifications", label: "Уведомления" },
     { href: "/user/warehouses", label: "Адреса складов" },
     { href: "/user/tracking", label: "Отслеживание доставки" },
@@ -38,6 +41,7 @@ export default function UsersHeader() {
         <>
           Здравствуйте,{" "}
           <span>{loading ? "загрузка..." : userData?.first_name}</span> 👋
+          {isAdmin && <Link href={'/admin'}>admin</Link> }
         </>
       );
     } else {

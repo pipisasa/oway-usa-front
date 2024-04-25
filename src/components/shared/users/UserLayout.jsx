@@ -37,6 +37,11 @@ export default function UsersLayout({ children }) {
       icons: "/assets/icons/user-icons/доставка.svg",
     },
     {
+      href: "/user/calculator",
+      label: "Калькулятор стоимости",
+      icons: "/assets/icons/user-icons/доставка.svg",
+    },
+    {
       href: "/user/settings",
       label: "Настройки",
       icons: "/assets/icons/user-icons/настройки.svg",
