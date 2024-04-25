@@ -8,6 +8,7 @@ import CustomSelect from "@/components/partials/Select";
 export default function MyWarehousesModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
+  const [comments, setComments] = useState("");
   const { addWarehouses } = useWarehouses();
   const { countries } = useCountries();
   const [selectedOption, setSelectedOption] = useState("");
@@ -32,6 +33,7 @@ export default function MyWarehousesModal() {
         courier_service: courierOption.name,
         tracking_number: trackingNumber,
         warehouse: selectedOption.name,
+        comments: comments,
       });
       toggleModal();
     } catch (error) {
@@ -45,7 +47,7 @@ export default function MyWarehousesModal() {
         Добавить товар
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
-        <h3>Добавить сайт</h3>
+        <h3>Добавить товар</h3>
         <form onSubmit={handleSubmit}>
           <div className={s.shops_form}>
             <div className={s.first_input_block}>
@@ -77,6 +79,17 @@ export default function MyWarehousesModal() {
                   selectedOption={courierOption}
                   onChange={(e) => setCourierOption(e)}
                   span={"Курьерская служба"}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="comments">Комментарий</label>
+                <input
+                  id="comments"
+                  type="text"
+                  placeholder="Введите комментарий"
+                  value={comments}
+                  onChange={(e) => setComments(e.target.value)}
                 />
               </div>
             </div>
