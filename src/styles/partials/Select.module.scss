@@ -9,7 +9,7 @@
   padding: 12px 20px;
   gap: 12px;
   border-radius: 8px;
-  border: 1px solid var(--gray, #A4A4A4);
+  border: 1px solid var(--gray, #a4a4a4);
   cursor: pointer;
 
   span {
@@ -48,6 +48,6 @@
 }
 
 .option:hover {
-  background: var(--blue, #027DDB);
+  background: var(--blue, #027ddb);
   color: white;
 }

@@ -71,6 +71,7 @@ export default function MyWarehouses() {
             <th>Склад</th>
             <th>Трeк номер</th>
             <th>Курьерская служба</th>
+            <th>Комментарий</th>
             <th>Действие</th>
           </tr>
         </thead>
@@ -87,6 +88,9 @@ export default function MyWarehouses() {
                 <td>{product.warehouse}</td>
                 <td>{product.tracking_number}</td>
                 <td>{product.courier_service}</td>
+                <td>
+                  <button>Подробнее</button>
+                </td>
                 <td className={s.actions}>
                   <button onClick={() => deleteWarehouses(product.id)}>
                     <img src="/assets/icons/delete.svg" alt="delete" />

@@ -29,8 +29,10 @@ function getCookie(name) {
 }
 
 export default function ImportedKilograms() {
-  const [activePeriod, setActivePeriod] = useState("today");
+  const [activePeriod, setActivePeriod] = useState("month");
   const [percentageChange, setPercentageChange] = useState(0);
+  const [currentCountry, setCurrentCountry] = useState(3);
+
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -64,20 +66,20 @@ export default function ImportedKilograms() {
 
   const formatLabel = (label, period) => {
     if (period === "today") {
-      return `${label}:00`; // Часы для периода "сегодня"
+      return `${label}:00`;
     } else {
       const [year, month, day] = label.split("-");
-      return `${parseInt(day, 10)} ${monthNames[month]}`; // День и сокращённое название месяца
+      return `${parseInt(day, 10)} ${monthNames[month]}`;
     }
   };
 
   useEffect(() => {
-    fetchData(activePeriod);
-  }, [activePeriod]);
+    fetchData(activePeriod, currentCountry);
+  }, [activePeriod, currentCountry]);
 
-  const fetchData = async (period) => {
+  const fetchData = async (period, countryId) => {
     const accessToken = getCookie("accessToken");
-    const url = `https://api-owayusa.com/api/statics/admin_panel/warehouse-weight/`;
+    const url = `https://api-owayusa.com/api/statics/admin_panel/warehouse-weight/?country=${countryId}`;
     const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -85,6 +87,10 @@ export default function ImportedKilograms() {
     });
     const data = await response.json();
     updateChartData(data, period);
+  };
+
+  const handleCountryChange = (countryId) => {
+    setCurrentCountry(countryId);
   };
 
   const updateChartData = (data, period) => {
@@ -155,6 +161,22 @@ export default function ImportedKilograms() {
     <div className={s.chart_container}>
       <div className={s.title}>
         <h2>Кг было провезено</h2>
+        <div className={s.country}>
+          <button
+            className={currentCountry === 3 ? s.active : s.not_active}
+            onClick={() => handleCountryChange(3)}
+          >
+            <img src="/assets/icons/usa.svg" alt="USA" />
+            США
+          </button>
+          <button
+            className={currentCountry === 4 ? s.active : s.not_active}
+            onClick={() => handleCountryChange(4)}
+          >
+            <img src="/assets/icons/turkey.svg" alt="Turkey" />
+            Турция
+          </button>
+        </div>
       </div>
       <div className={s.line}></div>
       <div className={s.chart_nav}>
@@ -163,19 +185,19 @@ export default function ImportedKilograms() {
         </div>
         <div className={s.date_btn}>
           <button
-            className={activePeriod === "today" ? s.active : ""}
+            className={activePeriod === "today" ? s.active : s.not_active}
             onClick={() => handlePeriodClick("today")}
           >
             Сегодня
           </button>
           <button
-            className={activePeriod === "week" ? s.active : ""}
+            className={activePeriod === "week" ? s.active : s.not_active}
             onClick={() => handlePeriodClick("week")}
           >
             Неделя
           </button>
           <button
-            className={activePeriod === "month" ? s.active : ""}
+            className={activePeriod === "month" ? s.active : s.not_active}
             onClick={() => handlePeriodClick("month")}
           >
             Месяц

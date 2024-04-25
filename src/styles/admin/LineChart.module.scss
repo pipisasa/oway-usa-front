@@ -4,12 +4,43 @@
   border-radius: 12px;
   background: var(--Colors-Grey-White, #fff);
 
+  .country {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .active {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #027ddb;
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 16px;
+    }
+
+    .not_active {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #027ddb;
+      color: #000000;
+      border-radius: 8px;
+      padding: 8px 16px;
+    }
+  }
+
   .title {
     color: var(--black, #001526);
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
     padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .line {
@@ -38,7 +69,13 @@
       align-items: center;
       gap: 12px;
 
-      button {
+      .active {
+        color: var(--main-grey, #027ddb);
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      .not_active {
         color: var(--main-grey, #5f6c86);
         font-size: 12px;
         line-height: 16px;
