@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import s from "@/styles/admin/AdminLayout.module.scss";
 import { useRouter } from "next/router";
 import { Badge, Button } from "@nextui-org/react";
@@ -9,11 +9,18 @@ import BankCardsModal from "./modals/BankCardsModal";
 import useUserData from "@/hooks/user/useUserData";
 import useNotification from "../../../hooks/user/useNotification";
 import MyWarehousesModal from "../admin/modals/MyWarehousesModal";
+import { getCookie } from "@/utils/cookieHelpers";
 
 export default function UsersHeader() {
   const router = useRouter();
   const { userData, loading, error } = useUserData();
   const { products } = useNotification();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const adminStatus = getCookie("isAdmin") === "true";
+    setIsAdmin(adminStatus);
+  }, []);
 
   const links = [
     { href: "/user", label: "Главная" },
@@ -60,6 +67,12 @@ export default function UsersHeader() {
 
       <div className={s.notification}>
         <div>{renderModal()}</div>
+        {isAdmin && (
+          <button onClick={() => router.push("/admin")} className={s.btn}>
+            Админ панель
+          </button>
+        )}
+
         <Badge
           content={products?.total_not_checked_notifications}
           shape="circle"
@@ -79,12 +92,6 @@ export default function UsersHeader() {
         <div className={s.user_code}>
           <span>#{loading ? "загрузка..." : userData?.unique_id}</span>
         </div>
-
-        {/* <Avatar
-          isBordered
-          radius="sm"
-          src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
-        /> */}
       </div>
     </header>
   );

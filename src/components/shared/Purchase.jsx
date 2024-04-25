@@ -202,9 +202,7 @@ export default function Purchase() {
                     errors?.telegram ? s.error : s.purchase_inner_froms_inputs
                   }`}
                 >
-                  <label>
-                    Telegram<span>*</span>
-                  </label>
+                  <label>Telegram</label>
                   <div className={s.icon_input}>
                     <img src="/assets/icons/telegram.svg" alt="telegram" />
                     <input
@@ -228,7 +226,7 @@ export default function Purchase() {
                       : s.purchase_inner_froms_inputs
                   }`}
                 >
-                  <label>Whats App</label>
+                  <label>WhatsApp</label>
                   <div className={s.icon_input}>
                     <img src="/assets/icons/whatsapp.svg" alt="whatsapp" />
                     <input
