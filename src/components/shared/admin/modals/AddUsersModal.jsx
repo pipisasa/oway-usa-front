@@ -16,20 +16,32 @@ export default function AddUsersModal() {
     front_image: null,
     back_image: null,
   });
+  const [imagePreviews, setImagePreviews] = useState({
+    front_image: null,
+    back_image: null,
+  });
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, files } = e.target;
     if (name === "front_image" || name === "back_image") {
+      const file = files[0];
       setFormData((prevData) => ({
         ...prevData,
-        [name]: e.target.files[0], // Store the file object
+        [name]: file,
+      }));
+      setImagePreviews((prevPreviews) => ({
+        ...prevPreviews,
+        [name]: file ? URL.createObjectURL(file) : null,
       }));
     } else {
+      const { value } = e.target;
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
       }));
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addUsers(
@@ -50,6 +62,10 @@ export default function AddUsersModal() {
       phone_number: "",
       password: "",
       password2: "",
+      front_image: null,
+      back_image: null,
+    });
+    setImagePreviews({
       front_image: null,
       back_image: null,
     });
@@ -144,6 +160,12 @@ export default function AddUsersModal() {
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
               </label>
+              {imagePreviews.front_image && (
+                <img
+                  src={imagePreviews.front_image}
+                  alt="Front Image Preview"
+                />
+              )}
             </div>
             <div>
               <label htmlFor="">Обратная сторона паспорта</label>
@@ -157,6 +179,9 @@ export default function AddUsersModal() {
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
               </label>
+              {imagePreviews.back_image && (
+                <img src={imagePreviews.back_image} alt="Back Image Preview" />
+              )}
             </div>
           </div>
           <div className={s.btn_center}>

@@ -10,7 +10,7 @@ const useWarehouses = (currentPage) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [warehouses, setWarehouses] = useState([]);
   const [count, setCount] = useState(0);
-  
+
   const fetchWarehouses = async () => {
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
@@ -52,9 +52,10 @@ const useWarehouses = (currentPage) => {
     comments,
     unique_id_user,
     url,
-    color,
-    count,
-    articul
+    date_sent,
+    date_arrived,
+    articul,
+    is_parcels
   ) => {
     const accessToken = getCookie("accessToken");
     const formData = new FormData();
@@ -69,9 +70,10 @@ const useWarehouses = (currentPage) => {
     formData.append("comments", comments);
     formData.append("unique_id_user", unique_id_user);
     formData.append("url", url);
-    formData.append("color", color);
-    formData.append("count", count);
+    formData.append("date_sent", date_sent);
+    formData.append("date_arrived", date_arrived);
     formData.append("articul", articul);
+    formData.append("is_parcels", is_parcels);
 
     setIsLoading(true);
     setError(null);
@@ -89,7 +91,7 @@ const useWarehouses = (currentPage) => {
         }
       );
 
-      window.location.reload();
+      // window.location.reload();
       await fetchWarehouses();
       setIsSuccess(true);
     } catch (error) {

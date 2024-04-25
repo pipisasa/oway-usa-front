@@ -1,28 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
 import s from "@/styles/pages/user/MyWarehouse.module.scss";
 import Loading from "@/components/shared/admin/Loading";
 import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
+import WarehouseProductsModalV2 from "@/components/shared/admin/modals/WarehousesProductModalV2";
 
 export default function UserWarehouses() {
   const { warehouses, loading, error, deleteWarehouse } = useUserWarehouses();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
 
   if (loading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
     <section className={s.my}>
-      {/* <div className={s.filters}>
-        <div className={s.search}>
-          <img src="/assets/icons/search.svg" alt="icon" />
-          <input type="number" placeholder="Поиск по трек номеру" />
-        </div>
-        <select className={s.select}>
-          <option value="">Склад</option>
-          <option value="США">США</option>
-          <option value="Турция">Турция</option>
-        </select>
-      </div> */}
       <table>
         <thead>
           <tr>
@@ -50,11 +49,16 @@ export default function UserWarehouses() {
                 <button onClick={() => deleteWarehouse(warehouse.id)}>
                   <img src="/assets/icons/delete.svg" alt="delete" />
                 </button>
+                <WarehouseProductsModalV2
+                  clientId={warehouse.user.unique_id}
+                  closeModal={closeModal}
+                />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {/* {isModalVisible && <WarehouseProductsModalV2 closeModal={closeModal} />} */}
     </section>
   );
 }
