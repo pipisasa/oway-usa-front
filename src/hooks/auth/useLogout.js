@@ -6,6 +6,7 @@ const useLogout = () => {
 
   const logout = () => {
     deleteCookie("accessToken");
+    deleteCookie("isAdmin");
     router.push("/");
   };
 
