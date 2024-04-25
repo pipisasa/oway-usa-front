@@ -3,22 +3,16 @@ import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useNotification from "../../../../hooks/admin/useNotification";
 import CustomFileInput from "@/components/partials/SelectPhoto";
-
 export default function NotificationsModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState(null);
-  const [icon1, setIcon1] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null); // State to store the selected image
 
   const toggleModal = () => setIsOpen(!isOpen);
   const { addNotification } = useNotification();
-  const handle = (e) => {
-    console.log(e, 43);
-    e.preventDefault();
-    e.stopPropagation();
-    setIcon(e);
-  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,6 +23,13 @@ export default function NotificationsModal() {
       console.error("Error creating notification:", error);
     }
   };
+
+  const handleImageChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setIcon(selectedFile); // Store the file in state
+    setSelectedImage(URL.createObjectURL(selectedFile)); // Set the selected image URL
+  };
+
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
@@ -58,13 +59,17 @@ export default function NotificationsModal() {
           <div>
             <label htmlFor="">Картинка</label>
             <label className="custom-file-upload">
-              <input type="file" onChange={(e) => setIcon(e.target.files[0])} />
+              <input type="file" onChange={handleImageChange} />
               <img src="/assets/icons/selectimg.svg" alt="select img" />
               <span>Выбрать картинку</span>
             </label>
-
-            {/* <CustomFileInput onChange={(e) => handle(e)}/> */}
           </div>
+          {selectedImage && ( // Render the selected image if it exists
+            <div>
+              <label htmlFor="">Выбранная картинка:</label>
+              <img  width={300} height={300}  src={selectedImage} alt="selected img" className={s.selected_image} />
+            </div>
+          )}
           <p>
             Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512
           </p>

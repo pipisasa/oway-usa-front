@@ -51,14 +51,23 @@ export default function UserData() {
     setIsEditing(false);
   };
 
+  const [selectedFrontImage, setSelectedFrontImage] = useState(null);
+const [selectedBackImage, setSelectedBackImage] = useState(null);
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
+  
+    // Проверяем, какое изображение было выбрано
+    if (name === "front_image" && files.length > 0) {
+      setSelectedFrontImage(files[0]);
+    } else if (name === "back_image" && files.length > 0) {
+      setSelectedBackImage(files[0]);
+    }
   };
-
   if (loading) {
     return <Loading />;
   }
@@ -142,6 +151,12 @@ export default function UserData() {
             <img src="/assets/icons/selectimg.svg" alt="select img" />
             <span>Выбрать картинку</span>
           </label>
+          {selectedFrontImage && (
+            <div>
+              <img src={URL.createObjectURL(selectedFrontImage)} alt="Front Image" />
+              <span>Выбрана лицевая сторона паспорта</span>
+            </div>
+          )}
         </div>
         <div>
           <label>Обратная сторона паспорта</label>
@@ -155,6 +170,12 @@ export default function UserData() {
             <img src="/assets/icons/selectimg.svg" alt="select img" />
             <span>Выбрать картинку</span>
           </label>
+          {selectedBackImage && (
+            <div>
+              <img src={URL.createObjectURL(selectedBackImage)} alt="Back Image" />
+              <span>Выбрана обратная сторона паспорта</span>
+            </div>
+          )}
         </div>
         <div>
           <label>Адрес</label>

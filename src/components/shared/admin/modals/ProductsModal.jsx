@@ -10,6 +10,7 @@ export default function ProductsModal() {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -29,6 +30,12 @@ export default function ProductsModal() {
     }
   };
 
+  const handleImageChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage(selectedFile);
+    setSelectedImage(URL.createObjectURL(selectedFile)); 
+  };
+
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
@@ -38,7 +45,7 @@ export default function ProductsModal() {
         <h3>Создать товар</h3>
         <form className={s.notifications_form} onSubmit={handleAddProduct}>
           <div>
-            <label htmlFor="">Назавние товара</label>
+            <label htmlFor="">Название товара</label>
             <input
               type="text"
               placeholder="Введите название товара"
@@ -47,7 +54,7 @@ export default function ProductsModal() {
             />
           </div>
           <div>
-            <label htmlFor="">Ссылку</label>
+            <label htmlFor="">Ссылка</label>
             <input
               type="text"
               placeholder="Вставьте ссылку"
@@ -60,15 +67,19 @@ export default function ProductsModal() {
             <label className="custom-file-upload">
               <input
                 type="file"
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={handleImageChange} 
               />
               <img src="/assets/icons/selectimg.svg" alt="select img" />
               <span>Выбрать картинку</span>
             </label>
           </div>
-          <p>
-            Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512
-          </p>
+          {selectedImage && (
+            <div>
+              <label>Выбранная картинка:</label>
+              <img src={selectedImage} alt="Выбранная картинка" />
+            </div>
+          )}
+          <p>Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512</p>
           <div className={s.btn_center}>
             <button type="submit" className={s.submit_btn}>
               Создать товар

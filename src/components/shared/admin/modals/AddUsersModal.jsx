@@ -5,6 +5,7 @@ import useUsers from "../../../../hooks/admin/useUsers";
 
 export default function AddUsersModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const [imagePreviews, setImagePreviews] = useState()
   const { addUsers } = useUsers();
   const [formData, setFormData] = useState({
     first_name: "",
@@ -21,8 +22,18 @@ export default function AddUsersModal() {
     if (name === "front_image" || name === "back_image") {
       setFormData((prevData) => ({
         ...prevData,
-        [name]: e.target.files[0], // Store the file object
+        [name]: e.target.files[0],
       }));
+
+      // Создание превью для выбранного изображения
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreviews((prevPreviews) => ({
+          ...prevPreviews,
+          [name]: reader.result,
+        }));
+      };
+      reader.readAsDataURL(e.target.files[0]);
     } else {
       setFormData((prevData) => ({
         ...prevData,
@@ -144,6 +155,12 @@ export default function AddUsersModal() {
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
               </label>
+              {imagePreviews &&
+              <img
+              src={imagePreviews?.front_image}
+              alt="select img"
+              />
+            }
             </div>
             <div>
               <label htmlFor="">Обратная сторона паспорта</label>
@@ -157,6 +174,12 @@ export default function AddUsersModal() {
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
               </label>
+              {imagePreviews &&
+                <img
+                src={imagePreviews?.back_image}
+                alt="select img"
+                />
+              }
             </div>
           </div>
           <div className={s.btn_center}>
