@@ -9,7 +9,7 @@ import BankCardsModal from "./modals/BankCardsModal";
 import useUserData from "@/hooks/user/useUserData";
 import useNotification from "../../../hooks/user/useNotification";
 import MyWarehousesModal from "../admin/modals/MyWarehousesModal";
-import Link from "next/link"
+import Link from "next/link";
 import { getCookie } from "@/utils/cookieHelpers";
 
 export default function UsersHeader() {
@@ -41,7 +41,6 @@ export default function UsersHeader() {
         <>
           Здравствуйте,{" "}
           <span>{loading ? "загрузка..." : userData?.first_name}</span> 👋
-          {isAdmin && <Link href={'/admin'}>admin</Link> }
         </>
       );
     } else {

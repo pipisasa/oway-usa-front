@@ -1,14 +1,14 @@
 import React from "react";
 import s from "@/styles/admin/AdminLayout.module.scss";
 import { useRouter } from "next/router";
-import { Avatar, Badge, Button } from "@nextui-org/react";
+import { Badge, Button } from "@nextui-org/react";
 import { NotificationIcon } from "./NotificationIcon";
 import AddUsersModal from "./modals/AddUsersModal";
 import NotificationsModal from "./modals/NotificationsModal";
 import AddShopsModal from "./modals/AddShopsModal";
 import ProductsModal from "./modals/ProductsModal";
 import WarehouseProductsModal from "./modals/WarehousesProductsModal";
-import Link from "next/link"
+import Link from "next/link";
 
 export default function AdminHeader() {
   const router = useRouter();
@@ -29,7 +29,6 @@ export default function AdminHeader() {
       return (
         <>
           Здравствуйте, <span>Администратор</span> 👋
-          <Link className={s.lk} href="/user">Личный кабинет</Link>
         </>
       );
     } else {

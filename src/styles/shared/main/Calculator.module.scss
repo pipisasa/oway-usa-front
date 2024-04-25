@@ -1,6 +1,4 @@
 .calc {
-  margin-top: 120px;
-
   select {
     padding: 12px 20px;
     border-radius: 8px;
@@ -9,7 +7,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-image: url('/assets/icons/selecter.svg');
+    background-image: url("/assets/icons/selecter.svg");
     background-repeat: no-repeat;
     background-position: 95% 50%;
   }
