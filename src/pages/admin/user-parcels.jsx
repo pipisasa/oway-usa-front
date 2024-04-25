@@ -12,17 +12,6 @@ export default function UserWarehouses() {
 
   return (
     <section className={s.my}>
-      {/* <div className={s.filters}>
-        <div className={s.search}>
-          <img src="/assets/icons/search.svg" alt="icon" />
-          <input type="number" placeholder="Поиск по трек номеру" />
-        </div>
-        <select className={s.select}>
-          <option value="">Склад</option>
-          <option value="США">США</option>
-          <option value="Турция">Турция</option>
-        </select>
-      </div> */}
       <table>
         <thead>
           <tr>

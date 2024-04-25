@@ -61,7 +61,7 @@ export default function UsersLayout({ children }) {
             <img src="/assets/icons/owayUSE.svg" alt="Oway USA" />
           </div>
 
-          <nav>
+          <nav> 
             <ul>
               {links.map((link) => (
                 <Link key={link.label} href={link.href}>

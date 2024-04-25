@@ -52,7 +52,6 @@ export default function WarehouseProductsModal() {
   const handleChangeCat = (e) => {
     setSelectedOption1(e);
   };
-  console.log(selectedOption, 11, selectedOption1, 12);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

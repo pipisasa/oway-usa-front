@@ -1,0 +1,65 @@
+.customSelect {
+    position: relative;
+    width: 100%; /* Задайте нужную ширину */
+  }
+  
+  .selectedOption {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid var(--blue_light, #aed5f3);
+    display: flex;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    // border-top: 5px solid #333;
+    transition: transform 0.3s ease;
+  }
+  
+  .options {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    max-height: 150px; /* Задайте максимальную высоту */
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid var(--blue_light, #aed5f3);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+  
+  .options li {
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .options li:hover {
+    background-color: #f5f5f5;
+  }
+  .qwe{
+    display: flex !important;
+    p{
+      text-wrap: nowrap;
+    }
+    // background: #000;
+    // flex-direction: row;
+    justify-content: space-between !important;
+    img{
+        margin-top: -25px;
+        margin-left: calc(100% - 25px);
+
+       
+    }
+    // background: #000;
+  }
