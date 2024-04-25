@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import Modal from "@/components/shared/Modal";
-import { Switch } from "@nextui-org/react";
 import useWarehouses from "../../../../hooks/admin/useWarehouses";
 import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
 import SearchSelect from "@/components/partials/SearchSelect";
 
-export default function WarehouseProductsModal() {
+export default function WarehouseProductsModalV2({ closeModal, clientId }) {
   const { addWarehouses } = useWarehouses();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -23,11 +22,12 @@ export default function WarehouseProductsModal() {
     status: "",
     image: "",
     comments: "",
-    unique_id_user: "",
+    unique_id_user: clientId,
     url: "",
-    color: "",
-    count: "",
+    date_sent: "",
+    date_arrived: "",
     articul: "",
+    is_parcels: true,
   });
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -37,9 +37,7 @@ export default function WarehouseProductsModal() {
   };
 
   const [selectedOption, setSelectedOption] = useState("");
-  const handleChangeCountry = (e) => {
-    setSelectedOption(e);
-  };
+
   const countries1 = [
     { id: 4, name: "Получен на складе отправителя" },
     { id: 5, name: "Отправлен" },
@@ -49,10 +47,6 @@ export default function WarehouseProductsModal() {
     { id: 8, name: "Доставлено" },
   ];
   const [selectedOption1, setSelectedOption1] = useState("");
-  const handleChangeCat = (e) => {
-    setSelectedOption1(e);
-  };
-  console.log(selectedOption, 11, selectedOption1, 12);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -83,9 +77,10 @@ export default function WarehouseProductsModal() {
       formData.comments,
       formData.unique_id_user,
       formData.url,
-      formData.color,
-      formData.count,
-      formData.articul
+      formData.date_sent,
+      formData.date_arrived,
+      formData.articul,
+      true
     );
     setFormData({
       name: "",
@@ -97,11 +92,12 @@ export default function WarehouseProductsModal() {
       status: "",
       image: "",
       comments: "",
-      unique_id_user: "",
+      unique_id_user: clientId,
       url: "",
       date_sent: "",
       date_arrived: "",
       articul: "",
+      is_parcels: true,
     });
     setCurrentStep(1);
     setIsOpen(false);
@@ -138,6 +134,7 @@ export default function WarehouseProductsModal() {
             formData={formData}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            clientId={clientId}
           />
         );
       default:
@@ -148,7 +145,7 @@ export default function WarehouseProductsModal() {
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
-        Добавить посылку
+        В склад
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <h3>Добавить посылку</h3>
@@ -344,10 +341,17 @@ const Step2 = ({
   </div>
 );
 
-const Step3 = ({ formData, setFormData, handleChange, handleSubmit }) => {
+const Step3 = ({
+  formData,
+  setFormData,
+  handleChange,
+  handleSubmit,
+  clientId,
+}) => {
   const { warehouses } = useWarehousesFull();
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
@@ -388,8 +392,9 @@ const Step3 = ({ formData, setFormData, handleChange, handleSubmit }) => {
             name="unique_id_user"
             id="unique_id_user"
             placeholder="Напишите ID"
-            value={inputValue}
+            value={clientId}
             onChange={handleInputChange}
+            disabled
           />
           <SearchSelect
             suggestions={suggestions}
