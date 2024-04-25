@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import s from "@/styles/shared/main/Calculator.module.scss";
 import Button from "../partials/Button";
+import { useRouter } from "next/router";
 
 export default function Calculator() {
   const [countryFrom, setCountryFrom] = useState("");
@@ -9,9 +10,9 @@ export default function Calculator() {
   const [deliveryType, setDeliveryType] = useState("");
   const [cost, setCost] = useState("");
   const [deliveryTime, setDeliveryTime] = useState("");
+  const router = useRouter();
 
   const calculateCostAndTime = () => {
-
     if (
       countryFrom === "USA" &&
       countryTo === "Russian" &&
@@ -46,8 +47,16 @@ export default function Calculator() {
     }
   };
 
+  const containerClass =
+    router.pathname === "/user/calculator" ? "" : "container";
+
+  const marginTopStyle =
+    router.pathname === "/user/calculator"
+      ? { marginTop: "0px" }
+      : { marginTop: "120px" };
+
   return (
-    <div className={`${s.calc} container`}>
+    <div style={marginTopStyle} className={`${s.calc} ${containerClass}`}>
       <h1>Калькулятор стоимости</h1>
       <div className={s.calc_inner}>
         <div className={s.calc_inner_forms}>
@@ -127,11 +136,11 @@ export default function Calculator() {
               <input type="text" value={deliveryTime} readOnly />
             </div>
           </div>
-          <Button button='Рассчитать' onClick={calculateCostAndTime}/>
+          <Button button="Рассчитать" onClick={calculateCostAndTime} />
         </div>
         <div className={s.calc_inner_infos}>
           <div className={s.calc_inner_info}>
-            <img src="assets/icons/calc_icon.svg" alt="" />
+            <img src="/assets/icons/calc_icon.svg" alt="" />
             <div>
               <h3>
                 Доставка из США в РФ - <strong>1кг - 16$</strong> стандарт
@@ -140,7 +149,7 @@ export default function Calculator() {
             </div>
           </div>
           <div className={s.calc_inner_info}>
-            <img src="assets/icons/calc_icon.svg" alt="" />
+            <img src="/assets/icons/calc_icon.svg" alt="" />
             <div>
               <h3>
                 Доставка из Турции в РФ - <strong>1кг - 9.5$</strong> стандарт
@@ -149,7 +158,7 @@ export default function Calculator() {
             </div>
           </div>
           <div className={s.calc_inner_info}>
-            <img src="assets/icons/calc_icon.svg" alt="" />
+            <img src="/assets/icons/calc_icon.svg" alt="" />
             <div>
               <h3>
                 Доставка из Турции в РФ -<strong> 1кг - 12$</strong> экспресс
@@ -158,7 +167,7 @@ export default function Calculator() {
             </div>
           </div>
           <div className={s.calc_inner_info}>
-            <img src="assets/icons/calc_icon.svg" alt="" />
+            <img src="/assets/icons/calc_icon.svg" alt="" />
             <div>
               <h3>
                 Доставка из США в КР - <strong>1кг - 12$</strong> экспресс
