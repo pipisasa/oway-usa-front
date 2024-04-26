@@ -1,3 +1,4 @@
+import { getCookie } from "@/utils/cookieHelpers";
 import { useState } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -7,9 +8,8 @@ const usePurchase = () => {
     full_name: "",
     url: "",
     name_of_purchase: "",
-    articul: "",
     count: "",
-    color: "",
+    email: "",
     description: "",
     telegram: "",
     phone_number: "",
@@ -17,13 +17,13 @@ const usePurchase = () => {
   };
 
   const [purchaseData, setPurchaseData] = useState(initialState);
-  const [isSubmitted, setIsSubmitted] = useState(false); // Для управления сообщением об успешной отправке
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { id, value, files } = e.target;
-    setIsSubmitted(false); // Сбросить сообщение об отправке при изменении формы
-    if (id === "purchase_image") {
-      setPurchaseData({ ...purchaseData, [id]: files });
+    setIsSubmitted(false);
+    if (id === "purchase_image" && files.length) {
+      setPurchaseData({ ...purchaseData, [id]: files[0] });
     } else {
       setPurchaseData({ ...purchaseData, [id]: value });
     }
@@ -32,29 +32,31 @@ const usePurchase = () => {
   const submitPurchase = async (data) => {
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
-      if (key === 'purchase_image') {
-        formData.append(key, data[key]); // Добавляем только первый файл из массива файлов
+      if (key === "purchase_image" && data[key]) {
+        console.log("Добавление файла в FormData:", data[key]);
+        formData.append(key, data[key]);
       } else {
         formData.append(key, data[key]);
       }
     });
 
+    const token = getCookie("accessToken");
+
     try {
-      const response = await fetch(
-          `${API_URL}/api/purchase/add/`,
-          {
-            method: "POST",
-            body: formData,
-          }
-      );
+      const response = await fetch(`${API_URL}/api/purchase/add/`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (!response.ok) throw new Error("Ошибка при отправке данных");
-      setPurchaseData(initialState); // Сброс формы
-      setIsSubmitted(true); // Показать сообщение об успешной отправке
+      setPurchaseData(initialState);
+      setIsSubmitted(true);
     } catch (error) {
-      console.error("Ошибка:", error);
+      console.error("Ошибка при отправке:", error);
     }
   };
-
 
   return { handleChange, submitPurchase, purchaseData, isSubmitted };
 };

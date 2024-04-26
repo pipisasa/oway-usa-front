@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import s from "@/styles/pages/admin/AdminRequests.module.scss";
 import { Pagination } from "@nextui-org/react";
-import useRequests from "@/hooks/admin/useRequests";
-import RequestsModal from "@/components/shared/admin/modals/RequestsModal";
 import Loading from "@/components/shared/admin/Loading";
+import useMyRequests from "@/hooks/user/useMyRequest";
+import UserRequestsModal from "@/components/shared/admin/modals/UserRequestModal";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function IncommingRequests() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading, error } = useRequests(currentPage);
+  const { data, isLoading, error } = useMyRequests(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
   const [nameFilter, setNameFilter] = useState("");
@@ -19,6 +19,8 @@ export default function IncommingRequests() {
     setCurrentRequestData(requestData);
     setIsModalVisible(true);
   };
+
+  console.log(data);
 
   const filteredRequests = data.results.filter((request) =>
     request.name_of_purchase
@@ -31,17 +33,16 @@ export default function IncommingRequests() {
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
-  console.log();
 
   return (
     <div className={s.requests}>
       {isModalVisible && (
-        <RequestsModal
+        <UserRequestsModal
           data={currentRequestData}
           onClose={() => setIsModalVisible(false)}
         />
       )}
-      <div className={s.filters}>
+      {/* <div className={s.filters}>
         <div className={s.search}>
           <img src="/assets/icons/search.svg" alt="icon" />
           <input
@@ -69,7 +70,7 @@ export default function IncommingRequests() {
           <option value="false">Не оплачено</option>
           <option value="true">Оплачено</option>
         </select>
-      </div>
+      </div> */}
       <table>
         <thead>
           <tr>
@@ -97,14 +98,14 @@ export default function IncommingRequests() {
               </td>
               <td>{request.created_at}</td>
               <td>
-                {request.request_status === false ? (
+                {request.payment_confirmation === null ? (
                   <p style={{ color: "red" }}>В ожидании</p>
                 ) : (
                   <p style={{ color: "#06DB02" }}>Обработан</p>
                 )}
               </td>
               <td>
-                {request.is_paid === false ? (
+                {request.payment_confirmation === null ? (
                   <p style={{ color: "red" }}>Не оплачено</p>
                 ) : (
                   <p style={{ color: "#06DB02" }}>Оплачено</p>

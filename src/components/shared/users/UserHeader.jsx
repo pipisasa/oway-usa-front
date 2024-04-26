@@ -33,6 +33,7 @@ export default function UsersHeader() {
     { href: "/user/tracking", label: "Отслеживание доставки" },
     { href: "/user/settings", label: "Настройки" },
     { href: "/user/my-parcels", label: "Мои посылки" },
+    { href: "/user/my-requests", label: "Мои заявки" },
   ];
 
   const getPageHeader = () => {

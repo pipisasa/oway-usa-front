@@ -2,27 +2,15 @@ import React, { useState } from "react";
 import s from "@/styles/admin/RequestsModal.module.scss";
 import { RxCross1 } from "react-icons/rx";
 import useRequests from "@/hooks/admin/useRequests";
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  useDisclosure,
-} from "@nextui-org/react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function RequestsModal({ data, onClose }) {
+export default function UserRequestsModal({ data, onClose }) {
   const { updateRequest } = useRequests();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [price, setPrice] = useState(data.price || "");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("price", price);
 
     if (event.target.payment_confirmation.files[0]) {
       formData.append(
@@ -58,7 +46,7 @@ export default function RequestsModal({ data, onClose }) {
             <div className={s.input_label}>
               <label htmlFor="">Статус запроса</label>
 
-              {data.request_status === false ? (
+              {data.payment_confirmation === null ? (
                 <button className={s.button_false}>В ожидании</button>
               ) : (
                 <button className={s.button_true}>Обработан</button>
@@ -103,50 +91,13 @@ export default function RequestsModal({ data, onClose }) {
                   id="price"
                   name="price"
                   type="text"
-                  value={price}
+                  value={data.price || "---"}
+                  readOnly
                   onChange={handlePriceChange}
                 />
               </div>
             </div>
-            <div className={s.flex_inputs}>
-              <div className={s.input_label}>
-                <label htmlFor="payment_confirmation">
-                  Подтверждение оплаты
-                </label>
-                <label className="custom-file-upload">
-                  <input id="payment_confirmation" type="file" />
-                  <img src="/assets/icons/selectimg.svg" alt="select img" />
-                  <span>Выбрать картинку</span>
-                </label>
-              </div>
-              {data.payment_confirmation ? (
-                <button className={s.chek_btn} type="button" onClick={onOpen}>
-                  Посмотреть
-                </button>
-              ) : null}
-            </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalHeader className="flex flex-col gap-1">
-                      Чек подтверждение оплаты
-                    </ModalHeader>
-                    <ModalBody>
-                      <img
-                        src={`${API_URL}${data.payment_confirmation}`}
-                        alt="Чек подтверждение оплаты"
-                      />
-                    </ModalBody>
-                    <ModalFooter>
-                      <Button color="danger" variant="light" onPress={onClose}>
-                        Закрыть
-                      </Button>
-                    </ModalFooter>
-                  </>
-                )}
-              </ModalContent>
-            </Modal>
+
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
                 <label htmlFor="telegram">Telegram</label>
@@ -167,9 +118,6 @@ export default function RequestsModal({ data, onClose }) {
                 <p>{data.description}</p>
               </div>
             </div>
-            <button type="submit" className={s.submit_btn}>
-              Сохранить
-            </button>
           </form>
         </div>
       </section>

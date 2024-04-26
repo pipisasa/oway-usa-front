@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import UsersHeader from "./UserHeader";
 import useLogout from "@/hooks/auth/useLogout";
 import { FaCalculator } from "react-icons/fa";
+import { BiSolidMessageAltDetail } from "react-icons/bi";
 
 export default function UsersLayout({ children }) {
   const router = useRouter();
@@ -40,7 +41,12 @@ export default function UsersLayout({ children }) {
     {
       href: "/user/calculator",
       label: "Калькулятор",
-      icons: <FaCalculator size={22} />,
+      icons: (
+        <FaCalculator
+          size={22}
+          color={isActive("/user/calculator") ? "#FFFFFF" : "#027ddb"}
+        />
+      ),
     },
     {
       href: "/user/settings",
@@ -52,6 +58,16 @@ export default function UsersLayout({ children }) {
       label: "Мои посылки",
       icons: "/assets/icons/user-icons/склад.svg",
     },
+    {
+      href: "/user/my-requests",
+      label: "Мои заявки",
+      icons: (
+        <BiSolidMessageAltDetail
+          size={22}
+          color={isActive("/user/my-requests") ? "#FFFFFF" : "#027ddb"}
+        />
+      ),
+    },
   ];
 
   return (
@@ -62,7 +78,7 @@ export default function UsersLayout({ children }) {
             <img src="/assets/icons/owayUSE.svg" alt="Oway USA" />
           </div>
 
-          <nav> 
+          <nav>
             <ul>
               {links.map((link) => (
                 <Link key={link.label} href={link.href}>
@@ -74,17 +90,13 @@ export default function UsersLayout({ children }) {
                         className={isActive(link.href) ? s.active_icon : ""}
                       />
                     ) : (
-                      <span>
-                        <FaCalculator
-                          size={22}
-                          color={isActive(link.href) ? "#FFFFFF" : "#027ddb"}
-                        />
-                      </span>
+                      <span>{link.icons}</span>
                     )}
                     {link.label}
                   </li>
                 </Link>
               ))}
+
               <button onClick={logout} className={s.logout}>
                 <img src="/assets/icons/logout.svg" alt="logout" />
                 Выйти
