@@ -1,8 +1,12 @@
 import s from "./Table.module.scss"
+import TheHeader from "./TheHeader"
 
 export default function womanjeans () {
     return(
-        <div className={s.table_container}>
+       <>
+	   <TheHeader/>
+	   <div className={s.table_container}>
+		<h6>Детская обувь 1-6</h6>
 <table>
 	<tbody>
 		<tr>
@@ -98,6 +102,10 @@ export default function womanjeans () {
 		</tr>
 	</tbody>
 </table>
+<h5>
+      Несмотря на то, что американские онлайн-магазины в большинстве случаев отталкиваются от         международного стандарта, размеры разных производителей и даже разных линеек у одного бренда могут сильно отличаться. Чтобы не ошибиться с выбором, советуем смотреть размерные сетки прямо на сайте магазина, а также проверить отзывы по конкретной модели, которую вы        собираетесь купить.
+    </h5>
         </div>
+	   </>
     )
 }

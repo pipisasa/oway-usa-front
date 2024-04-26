@@ -1,4 +1,5 @@
 import s from "./Table.module.scss";
+import TheHeader from "./TheHeader";
 
 export default function MenJeans() {
     // Значения для размера
@@ -20,7 +21,10 @@ export default function MenJeans() {
     const russianSizes = ['42', '44', '44-46', '46-48', '48', '50', '50', '50-52', '52', '52-54', '54', '54-56', '56'];
 
     return (
-        <div className={s.table_container}>
+       <>
+       <TheHeader/>
+       <div className={s.table_container}>
+        <h6>Мужские джинсы</h6>
             <table className={s.table}>
                 <tbody>
                     <tr>
@@ -46,6 +50,10 @@ export default function MenJeans() {
                     </tr>
                 </tbody>
             </table>
+            <h5>
+      Несмотря на то, что американские онлайн-магазины в большинстве случаев отталкиваются от         международного стандарта, размеры разных производителей и даже разных линеек у одного бренда могут сильно отличаться. Чтобы не ошибиться с выбором, советуем смотреть размерные сетки прямо на сайте магазина, а также проверить отзывы по конкретной модели, которую вы        собираетесь купить.
+    </h5>
         </div>
+       </>
     );
 }

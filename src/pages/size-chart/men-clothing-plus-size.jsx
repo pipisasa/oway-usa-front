@@ -1,4 +1,5 @@
 import s from "./Table.module.scss";
+import TheHeader from "./TheHeader";
 
 export default function MenClothingPlusSize() {
     // Значения для международного размера
@@ -11,7 +12,10 @@ export default function MenClothingPlusSize() {
     const waistSizes = ['111.8', '119.4', '121.9', '129.5', '132.1', '139.7', '142.2', '147.3'];
 
     return (
-        <div className={s.table_container}>
+      <>
+      <TheHeader/>
+      <div className={s.table_container}>
+        <h6>Мужская одежда больших размеров</h6>
             <table className={s.table}>
                 <tbody>
                     <tr>
@@ -28,6 +32,10 @@ export default function MenClothingPlusSize() {
                     </tr>
                 </tbody>
             </table>
+            <h5>
+      Несмотря на то, что американские онлайн-магазины в большинстве случаев отталкиваются от         международного стандарта, размеры разных производителей и даже разных линеек у одного бренда могут сильно отличаться. Чтобы не ошибиться с выбором, советуем смотреть размерные сетки прямо на сайте магазина, а также проверить отзывы по конкретной модели, которую вы        собираетесь купить.
+    </h5>
         </div>
+      </>
     );
 }
