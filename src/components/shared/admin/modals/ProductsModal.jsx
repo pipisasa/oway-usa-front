@@ -15,7 +15,6 @@ export default function ProductsModal() {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
-
   const handleAddProduct = async (e) => {
     e.preventDefault();
     if (!title || !link || !image) {
@@ -35,12 +34,10 @@ export default function ProductsModal() {
     }
   };
 
-
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     setImage(selectedFile);
-    setSelectedImage(URL.createObjectURL(selectedFile)); 
-
+    setSelectedImage(URL.createObjectURL(selectedFile));
   };
 
   return (
@@ -52,7 +49,6 @@ export default function ProductsModal() {
         <h3>Создать товар</h3>
         <form className={s.notifications_form} onSubmit={handleAddProduct}>
           <div>
-
             <label htmlFor="">Название товара</label>
 
             <input
@@ -63,7 +59,6 @@ export default function ProductsModal() {
             />
           </div>
           <div>
-
             <label htmlFor="">Ссылка</label>
 
             <input
@@ -76,26 +71,11 @@ export default function ProductsModal() {
           <div>
             <label>Картинка</label>
             <label className="custom-file-upload">
-
-              <input
-                type="file"
-                onChange={handleImageChange} 
-              />
+              <input type="file" onChange={handleImageChange} />
 
               <img src="/assets/icons/selectimg.svg" alt="select img" />
               <span>Выбрать картинку</span>
             </label>
-            {imagePreviewUrl && (
-              <>
-                <button
-                  style={{ textAlign: "left" }}
-                  type="button"
-                  onClick={togglePreview}
-                >
-                  Посмотреть картинку
-                </button>
-              </>
-            )}
           </div>
           {selectedImage && (
             <div>
@@ -103,7 +83,9 @@ export default function ProductsModal() {
               <img src={selectedImage} alt="Выбранная картинка" />
             </div>
           )}
-          <p>Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512</p>
+          <p>
+            Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512
+          </p>
           <div className={s.btn_center}>
             <button type="submit" className={s.submit_btn}>
               Создать товар
@@ -112,11 +94,7 @@ export default function ProductsModal() {
         </form>
       </Modal>
       <Modal isOpen={isPreviewOpen} onClose={togglePreview}>
-        <img
-          src={imagePreviewUrl}
-          alt="Full preview"
-          style={{ width: "100%" }}
-        />
+        <img src={selectedImage} alt="Full preview" style={{ width: "100%" }} />
       </Modal>
     </div>
   );

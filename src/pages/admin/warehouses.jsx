@@ -52,11 +52,10 @@ export default function AdminWarehousesPage() {
             }}
           />
         </div>
-       
-       <div className={s.select}>
-       <CustomSelect
+
+        <div className={s.select}>
+          <CustomSelect
             options={[
-              // " ",
               "Получен на складе получателя",
               "Отправлен",
               "Доставлено",
@@ -65,15 +64,12 @@ export default function AdminWarehousesPage() {
             value={statusFilter || "Выберите статус"}
             onChange={(value) => setStatusFilter(value)}
           />
-       </div>
+        </div>
         <div className={s.select}>
           <CustomSelect
-            options={[
-              "США",
-              "Турция",
-            ]}
+            options={["США", "Турция"]}
             value={countryFilter || "Страна отправки"}
-            onChange={(value) => setCountryFilter(value)}            
+            onChange={(value) => setCountryFilter(value)}
           />
         </div>
       </div>
