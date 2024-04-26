@@ -1,44 +1,45 @@
 import React from "react";
 import s from "@/styles/components/layout/Footer.module.scss";
 import Link from "next/link";
-export default function Footer() {
 
- const Mobile = () => {
-  return (
-    <div className={s.footer_inner_block1}>
-      <div className={s.footer_inner_block_two1}>
-        <h3>Основное</h3>
-        <nav>
-          <ul>
-            <li>
-              <Link href="/calculator">Калькулятор</Link>
-            </li>
-            <li>
-              <Link href="/steps">Этапы работы</Link>
-            </li>
-            <li>
-              <Link href="/markets">Магазины</Link>
-            </li>
-            <li>
-              <Link href="/about">О компании</Link>
-            </li>
-            <li>
-              <Link href="/faq">Вопрос/Ответы</Link>
-            </li>
-          </ul>
-        </nav>
+export default function Footer() {
+  const Mobile = () => {
+    return (
+      <div className={s.footer_inner_block1}>
+        <div className={s.footer_inner_block_two1}>
+          <h3>Основное</h3>
+          <nav>
+            <ul>
+              <li>
+                <Link href="/calculator">Калькулятор</Link>
+              </li>
+              <li>
+                <Link href="/steps">Этапы работы</Link>
+              </li>
+              <li>
+                <Link href="/markets">Магазины</Link>
+              </li>
+              <li>
+                <Link href="/about">О компании</Link>
+              </li>
+              <li>
+                <Link href="/faq">Вопрос/Ответы</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className={s.footer_inner_block_two1}>
+          <h3>Информация</h3>
+          <Link href="/">Общие положение и условия </Link>
+          <Link href="/">Договоро о международных грузоперевозках</Link>
+          <Link href="/">Политика конфиденциальности</Link>
+          <Link href="/">Заявление о возврате средств</Link>
+          <Link href="/">Реквизиты компании</Link>
+          <Link href="/size-chart">Таблица размеров</Link>
+        </div>
       </div>
-      <div className={s.footer_inner_block_two1}>
-        <h3>Информация</h3>
-        <p>Общие положение и условия </p>
-        <p>Договоро о международных грузоперевозках</p>
-        <p>Политика конфиденциальности</p>
-        <p>Заявление о возврате средств</p>
-        <p>Реквизиты компании</p>
-      </div>
-    </div>
-  );
-};
+    );
+  };
 
   return (
     <div className={s.footer}>
@@ -94,13 +95,14 @@ export default function Footer() {
             </div>
             <div className={s.footer_inner_block_two}>
               <h3>Информация</h3>
-              <p>Общие положение и условия </p>
-              <p>Договоро о международных грузоперевозках</p>
-              <p>Политика конфиденциальности</p>
-              <p>Заявление о возврате средств</p>
-              <p>Реквизиты компании</p>
+              <Link href="/">Общие положение и условия </Link>
+              <Link href="/">Договоро о международных грузоперевозках</Link>
+              <Link href="/">Политика конфиденциальности</Link>
+              <Link href="/">Заявление о возврате средств</Link>
+              <Link href="/">Реквизиты компании</Link>
+              <Link href="/size-chart">Таблица размеров</Link>
             </div>
-          <Mobile/>
+            <Mobile />
           </div>
           <div className={s.footer_inner_down}>
             <span>2024 OWAY USA. All Rights Reserved</span>
@@ -115,8 +117,15 @@ export default function Footer() {
               <Link target="__blank" href="https://www.tiktok.com/@owayusa1">
                 <img src="/assets/icons/tiktok.svg" alt="tiktok" />
               </Link>
-              <Link className={s.telegram} target="__blank" href="https://t.me/owayusa_chat">
-                <img src="/assets/icons/brand_telegram_icon_151521.svg" alt="tiktok" />
+              <Link
+                className={s.telegram}
+                target="__blank"
+                href="https://t.me/owayusa_chat"
+              >
+                <img
+                  src="/assets/icons/brand_telegram_icon_151521.svg"
+                  alt="tiktok"
+                />
               </Link>
             </div>
           </div>

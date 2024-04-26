@@ -9,6 +9,7 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
   const [trackingNumber, setTrackingNumber] = useState(
     warehouse?.tracking_number || ""
   );
+  const [comments, setComments] = useState(warehouse?.comments || "");
   const { updateWarehouses } = useWarehouses();
   const { countries } = useCountries();
 
@@ -44,6 +45,7 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
         courier_service: courierOption.name,
         tracking_number: trackingNumber,
         warehouse: selectedOption.name,
+        comments: comments,
       });
       onClose();
     } catch (error) {
@@ -86,6 +88,16 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
                   selectedOption={courierOption}
                   onChange={(e) => setCourierOption(e)}
                   span={"Курьерская служба"}
+                />
+              </div>
+              <div>
+                <label htmlFor="comments">Трeк-код</label>
+                <input
+                  id="comments"
+                  type="text"
+                  placeholder="Вставьте трeк-код"
+                  value={comments}
+                  onChange={(e) => setComments(e.target.value)}
                 />
               </div>
             </div>

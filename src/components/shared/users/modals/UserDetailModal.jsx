@@ -14,17 +14,16 @@ export default function UserDetailModal({ userData, close, editUser }) {
   const handleEdit = (e) => {
     e.preventDefault();
     const editedUserData = {
-      id: userData.id, 
+      id: userData.id,
       first_name: firstName,
       last_name: lastName,
       email: email,
       phone_number: phoneNumber,
       front_image: passportFront,
-      back_image: passportBack
+      back_image: passportBack,
     };
     editUser(editedUserData);
   };
-  
 
   return (
     <div className={s.modal}>

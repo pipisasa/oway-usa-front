@@ -5,7 +5,7 @@ import useUsers from "../../../../hooks/admin/useUsers";
 
 export default function AddUsersModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [imagePreviews, setImagePreviews] = useState()
+  const [imagePreviews, setImagePreviews] = useState();
   const { addUsers } = useUsers();
   const [formData, setFormData] = useState({
     first_name: "",
@@ -14,10 +14,6 @@ export default function AddUsersModal() {
     phone_number: "",
     password: "",
     password2: "",
-    front_image: null,
-    back_image: null,
-  });
-  const [imagePreviews, setImagePreviews] = useState({
     front_image: null,
     back_image: null,
   });
@@ -167,7 +163,6 @@ export default function AddUsersModal() {
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
               </label>
-
             </div>
             <div>
               <label htmlFor="">Обратная сторона паспорта</label>
@@ -182,17 +177,13 @@ export default function AddUsersModal() {
                 <span>Выбрать картинку</span>
               </label>
 
-              {imagePreviews &&
-                <img
-                src={imagePreviews?.back_image}
-                alt="select img"
-                />
-              }
-
-              {imagePreviews.back_image && (
-                <img src={imagePreviews.back_image} alt="Back Image Preview" />
+              {imagePreviews && (
+                <img src={imagePreviews?.back_image} alt="select img" />
               )}
 
+              {imagePreviews && (
+                <img src={imagePreviews?.back_image} alt="Back Image Preview" />
+              )}
             </div>
           </div>
           <div className={s.btn_center}>
