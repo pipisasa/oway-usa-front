@@ -2,33 +2,25 @@ import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useNotification from "../../../../hooks/admin/useNotification";
-import CustomFileInput from "@/components/partials/SelectPhoto";
 
 export default function NotificationsModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState(null);
-  const [icon1, setIcon1] = useState(null);
-
   const toggleModal = () => setIsOpen(!isOpen);
   const { addNotification } = useNotification();
-  const handle = (e) => {
-    console.log(e, 43);
-    e.preventDefault();
-    e.stopPropagation();
-    setIcon(e);
-  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       await addNotification(title, description, icon);
-      toggleModal(); // Close the modal after successful submission
+      toggleModal();
     } catch (error) {
       console.error("Error creating notification:", error);
     }
   };
+
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
@@ -62,8 +54,6 @@ export default function NotificationsModal() {
               <img src="/assets/icons/selectimg.svg" alt="select img" />
               <span>Выбрать картинку</span>
             </label>
-
-            {/* <CustomFileInput onChange={(e) => handle(e)}/> */}
           </div>
           <p>
             Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512

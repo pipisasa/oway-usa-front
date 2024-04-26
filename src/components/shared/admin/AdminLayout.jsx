@@ -52,6 +52,11 @@ export default function AdminLayout({ children }) {
       label: "Ожидаемые посылки",
       icon: "/assets/icons/admin-icons/склад.svg",
     },
+    {
+      href: "/admin/companies",
+      label: "Логотипы компаний",
+      icon: "/assets/icons/admin-icons/склад.svg",
+    },
   ];
 
   return (
