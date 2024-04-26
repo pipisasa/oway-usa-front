@@ -3,17 +3,19 @@ import { useForm } from "react-hook-form";
 import s from "@/styles/shared/main/Purchase.module.scss";
 import usePurchase from "@/hooks/usePurchase";
 import PurchaseModal from "./main/PurchaseModal";
+import ImagePreviewModal from "./ImagePreviewModal";
 
 export default function Purchase() {
   const { handleChange, submitPurchase, isSubmitted } = usePurchase();
   const [isOpen, setIsOpen] = useState(false);
   const [mobileForm, setMobileForm] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const onSubmitHandler = async (data) => {
     await submitPurchase({
       full_name: data.full_name,
@@ -42,6 +44,12 @@ export default function Purchase() {
       setIsOpen(true);
     }
   }, [isSubmitted]);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    setPreviewImage(URL.createObjectURL(file));
+    handleChange(e);
+  };
 
   return (
     <>
@@ -122,23 +130,6 @@ export default function Purchase() {
                     <p>Это поле обязательно к заполнению!</p>
                   )}
                 </div>
-
-                {/* <div
-                  className={`${
-                    errors?.articul ? s.error : s.purchase_inner_froms_inputs
-                  }`}
-                >
-                  <label>Трек код товвввара</label>
-                  <input
-                    id="articul"
-                    name="articul"
-                    type="text"
-                    placeholder="Введите трек код товара"
-                    onChange={handleChange}
-                    {...register("articul", { required: true })}
-                  />
-                  {errors?.articul && <p>Это поле обязательно к заполнению!</p>}
-                </div> */}
                 <div
                   className={`${
                     errors?.count ? s.error : s.purchase_inner_froms_inputs
@@ -251,16 +242,17 @@ export default function Purchase() {
               >
                 <label>Добавьте скриншот</label>
                 <label className="custom-file-upload">
-                  <input
-                    id="purchase_image"
-                    type="file"
-                    onChange={handleChange}
-                    {...register("purchase_image", { required: true })}
-                  />
+                <input
+              id="purchase_image"
+              type="file"
+              onChange={handleFileChange}
+              // {...register("purchase_image", { required: true })}
+            />
                   <img src="/assets/icons/selectimg.svg" alt="select img" />
                   <span>Выбрать картинку</span>
                 </label>
-
+                {previewImage && <ImagePreviewModal previewImage={previewImage} onClose={closeModal} />}
+                
                 {errors?.purchase_image && <p>Выберите фото обязательно!</p>}
                 <p>
                   Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ |

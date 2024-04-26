@@ -23,13 +23,14 @@ const CustomSelect = ({ options, selectedOption, onChange, span }) => {
     };
   }, []);
 
+
   return (
     <div className={styles.custom_select} ref={selectRef}>
       <div
         className={`${styles.selected_option} ${isOpen ? styles.open : ""}`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span>{selectedOption ? selectedOption?.name : span}</span>
+        <span>{selectedOption ? selectedOption?.name  : span}</span>
       </div>
       {isOpen && (
         <div className={styles.options}>

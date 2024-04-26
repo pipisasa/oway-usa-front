@@ -9,11 +9,7 @@ const useLogo = () => {
   const fetchLogos = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("https://api-owayusa.com/api/logos/list/", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await fetch("https://api-owayusa.com/api/logos/list/");
       const data = await response.json();
       if (response.ok) {
         setLogos(data);

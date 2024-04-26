@@ -23,7 +23,7 @@ const usePurchase = () => {
     const { id, value, files } = e.target;
     setIsSubmitted(false); // Сбросить сообщение об отправке при изменении формы
     if (id === "purchase_image") {
-      setPurchaseData({ ...purchaseData, [id]: files[0] });
+      setPurchaseData({ ...purchaseData, [id]: files });
     } else {
       setPurchaseData({ ...purchaseData, [id]: value });
     }
@@ -33,7 +33,7 @@ const usePurchase = () => {
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       if (key === 'purchase_image') {
-        formData.append(key, data[key][0]); // Добавляем только первый файл из массива файлов
+        formData.append(key, data[key]); // Добавляем только первый файл из массива файлов
       } else {
         formData.append(key, data[key]);
       }

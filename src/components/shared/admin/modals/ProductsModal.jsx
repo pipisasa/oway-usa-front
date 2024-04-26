@@ -12,7 +12,9 @@ export default function ProductsModal() {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -33,14 +35,12 @@ export default function ProductsModal() {
     }
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePreviewUrl(reader.result);
-    };
-    reader.readAsDataURL(file);
+
+  const handleImageChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage(selectedFile);
+    setSelectedImage(URL.createObjectURL(selectedFile)); 
+
   };
 
   return (
@@ -52,7 +52,9 @@ export default function ProductsModal() {
         <h3>Создать товар</h3>
         <form className={s.notifications_form} onSubmit={handleAddProduct}>
           <div>
-            <label>Название товара</label>
+
+            <label htmlFor="">Название товара</label>
+
             <input
               type="text"
               placeholder="Введите название товара"
@@ -61,7 +63,9 @@ export default function ProductsModal() {
             />
           </div>
           <div>
-            <label>Ссылку</label>
+
+            <label htmlFor="">Ссылка</label>
+
             <input
               type="text"
               placeholder="Вставьте ссылку"
@@ -72,7 +76,12 @@ export default function ProductsModal() {
           <div>
             <label>Картинка</label>
             <label className="custom-file-upload">
-              <input type="file" onChange={handleFileChange} />
+
+              <input
+                type="file"
+                onChange={handleImageChange} 
+              />
+
               <img src="/assets/icons/selectimg.svg" alt="select img" />
               <span>Выбрать картинку</span>
             </label>
@@ -88,9 +97,13 @@ export default function ProductsModal() {
               </>
             )}
           </div>
-          <p>
-            Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512
-          </p>
+          {selectedImage && (
+            <div>
+              <label>Выбранная картинка:</label>
+              <img src={selectedImage} alt="Выбранная картинка" />
+            </div>
+          )}
+          <p>Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512</p>
           <div className={s.btn_center}>
             <button type="submit" className={s.submit_btn}>
               Создать товар
