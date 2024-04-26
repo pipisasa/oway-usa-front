@@ -10,9 +10,7 @@ export default function UserDetailModal({ userData, close, editUser }) {
   const [phoneNumber, setPhoneNumber] = useState(userData.phone_number);
   const [passportFront, setPassportFront] = useState(userData.front_image);
   const [passportBack, setPassportBack] = useState(userData.back_image);
-  // console.log(userData.back_image);
-  // console.log(userData.front_image);
-  console.log(userData);
+
   const handleEdit = (e) => {
     e.preventDefault();
     const editedUserData = {
@@ -24,7 +22,6 @@ export default function UserDetailModal({ userData, close, editUser }) {
       front_image: passportFront,
       back_image: passportBack
     };
-    // Вызываем функцию editUser, передавая ей отредактированные данные пользователя
     editUser(editedUserData);
   };
   

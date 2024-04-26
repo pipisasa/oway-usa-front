@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import s from "@/styles/shared/main/CostCalculator.module.scss";
 import { useRouter } from "next/router";
+import CustomSelect from "../partials/CustomSelect";
 
 export default function CostCalculator() {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ export default function CostCalculator() {
     length: 0,
     height: 0,
     weight: 0,
-    deliveryType: "стандарт", // Устанавливаем "стандарт" по умолчанию для всех маршрутов
+    deliveryType: "стандарт", 
   });
   const router = useRouter();
   const [cost, setCost] = useState(0);
@@ -36,13 +37,13 @@ export default function CostCalculator() {
     let time = "";
 
     if (formData.fromCountry === "США" && formData.toCountry === "Россия") {
-      rate = 16; // Только стандартная доставка
+      rate = 16; 
       time = "12-17 дней";
     } else if (
       formData.fromCountry === "США" &&
       formData.toCountry === "Кыргызстан"
     ) {
-      rate = 12; // Только стандартная доставка
+      rate = 12; 
       time = "7-9 дней";
     } else if (
       formData.fromCountry === "Турция" &&
@@ -63,45 +64,48 @@ export default function CostCalculator() {
     calcStyle.background = "var(--bue_light_2, #f7f9fc)";
     calcStyle.paddingTop = "50px";
     calcStyle.paddingBottom = "50px";
+
   }
+  const containerClass =
+  router.pathname === "/user/calculator" ? "" : "container";
+
+  const containerClass1 =
+  router.pathname === "/user/calculator" ? "" : "qweqwe";
+
+
+const marginTopStyle =
+  router.pathname === "/user/calculator"
+    ? { marginTop: "0px" }
+    : { marginTop: "120px" };
+
+const showHeader = router.pathname !== "/user/calculator";
 
   return (
-    <div className={s.calc} style={calcStyle}>
+    <div className={s.calc} style={calcStyle ? marginTopStyle : ''}>
       <div
         className={`${s.calc_container} container`}
         data-aos="zoom-out-right"
       >
-        <h1>Калькулятор стоимости</h1>
+        {/* <h1>Калькулятор стоимости</h1> */}
+        {showHeader && <h1>Калькулятор стоимости</h1>}
         <div className={s.calc_inner}>
           <div className={s.calc_inner_forms}>
             <div className={s.calc_inner_forms_inputs}>
               <div className={s.select}>
                 <label>Выбор страны отправки</label>
-                <select
-                  name="fromCountry"
-                  onChange={handleChange}
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Выберите страну
-                  </option>
-                  <option value="США">США</option>
-                  <option value="Турция">Турция</option>
-                </select>
+                  <CustomSelect
+                    options={[ 'США', 'Турция']}
+                    value={formData.fromCountry  || 'Выберите страну'}
+                    onChange={(value) => handleChange({ target: { name: 'fromCountry', value } })}
+                />
               </div>
               <div className={s.select}>
                 <label>Выбор страны получения</label>
-                <select
-                  name="toCountry"
-                  onChange={handleChange}
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Выберите страну
-                  </option>
-                  <option value="Россия">Россия</option>
-                  <option value="Кыргызстан">Кыргызстан</option>
-                </select>
+                <CustomSelect
+                  options={[ 'Россия', 'Кыргызстан']}
+                  value={formData.toCountry  || 'Выберите страну'}
+                  onChange={(value) => handleChange({ target: { name: 'toCountry', value } })}
+                />
               </div>
             </div>
             <div
@@ -175,7 +179,7 @@ export default function CostCalculator() {
 
           <div className={s.calc_inner_infos}>
             <div className={s.calc_inner_info}>
-              <img src="assets/icons/calc_icon.svg" alt="" />
+              <img src="/assets/icons/calc_icon.svg" alt="" />
               <div>
                 <h3>
                   Доставка из США в Россию - <strong>1кг - 16$</strong> стандарт
@@ -184,7 +188,7 @@ export default function CostCalculator() {
               </div>
             </div>
             <div className={s.calc_inner_info}>
-              <img src="assets/icons/calc_icon.svg" alt="" />
+              <img src="/assets/icons/calc_icon.svg" alt="" />
               <div>
                 <h3>
                   Доставка из США в Кыргызстан - <strong>1кг - 12$</strong>{" "}
@@ -194,7 +198,7 @@ export default function CostCalculator() {
               </div>
             </div>
             <div className={s.calc_inner_info}>
-              <img src="assets/icons/calc_icon.svg" alt="" />
+              <img src="/assets/icons/calc_icon.svg" alt="" />
               <div>
                 <h3>
                   Доставка из Турции в Россию - <strong>1кг - 9.5$</strong>{" "}
@@ -204,7 +208,7 @@ export default function CostCalculator() {
               </div>
             </div>
             <div className={s.calc_inner_info}>
-              <img src="assets/icons/calc_icon.svg" alt="" />
+              <img src="/assets/icons/calc_icon.svg" alt="" />
               <div>
                 <h3>
                   Доставка из Турции в Россию -<strong> 1кг - 12$</strong>{" "}
@@ -216,7 +220,7 @@ export default function CostCalculator() {
           </div>
         </div>
         <div className={s.calc_img}>
-          <img src="assets/images/dron.png" width={370} height={370} alt="" />
+          <img src="/assets/images/dron.png" width={370} height={370} alt="" />
         </div>
       </div>
     </div>

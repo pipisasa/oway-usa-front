@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import WarehousesProductsTable from "@/components/shared/admin/WarehousesProductsTable";
 import useWarehouses from "@/hooks/admin/useWarehouses";
+import CustomSelect from "@/components/partials/CustomSelect";
 
 export default function AdminWarehousesPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,28 +52,30 @@ export default function AdminWarehousesPage() {
             }}
           />
         </div>
-        <select
-          className={s.select}
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-        >
-          <option value="">Статус</option>
-          <option value="Получен на складе получателя">
-            Получен на складе получателя
-          </option>
-          <option value="Отправлен">Отправлен</option>
-          <option value="Доставлено">Доставлено</option>
-          <option value="Готов к выдаче">Готов к выдаче</option>
-        </select>
-        <select
-          className={s.select}
-          value={countryFilter}
-          onChange={(e) => setCountryFilter(e.target.value)}
-        >
-          <option value="">Страна отправки</option>
-          <option value="США">США</option>
-          <option value="Турция">Турция</option>
-        </select>
+       
+       <div className={s.select}>
+       <CustomSelect
+            options={[
+              // " ",
+              "Получен на складе получателя",
+              "Отправлен",
+              "Доставлено",
+              "Готов к выдаче",
+            ]}
+            value={statusFilter || "Выберите статус"}
+            onChange={(value) => setStatusFilter(value)}
+          />
+       </div>
+        <div className={s.select}>
+          <CustomSelect
+            options={[
+              "США",
+              "Турция",
+            ]}
+            value={countryFilter || "Страна отправки"}
+            onChange={(value) => setCountryFilter(value)}            
+          />
+        </div>
       </div>
       <WarehousesProductsTable
         currentPage={currentPage}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import s from "@/styles/shared/main/Calculator.module.scss";
 import Button from "../partials/Button";
 import { useRouter } from "next/router";
+import CustomSelect from "../partials/CustomSelect";
 
 export default function Calculator() {
   const [countryFrom, setCountryFrom] = useState("");
@@ -50,14 +51,25 @@ export default function Calculator() {
   const containerClass =
     router.pathname === "/user/calculator" ? "" : "container";
 
+    const containerClass1 =
+    router.pathname === "/user/calculator" ? "" : "qweqwe";
+
+
   const marginTopStyle =
     router.pathname === "/user/calculator"
       ? { marginTop: "0px" }
       : { marginTop: "120px" };
 
+  const showHeader = router.pathname !== "/user/calculator";
+  const calcInnerInfoStyle = router.pathname === "/user/calculator" ? { justifyContent: "initial" } : {};
+
+  
   return (
     <div style={marginTopStyle} className={`${s.calc} ${containerClass}`}>
-      <h1>Калькулятор стоимости доставки</h1>
+
+      {showHeader && <h1>Калькулятор стоимости</h1>}
+
+
       <div className={s.calc_inner}>
         <div className={s.calc_inner_forms}>
           <div className={s.calc_inner_forms_inputs}>
@@ -71,10 +83,15 @@ export default function Calculator() {
               >
                 <option value="">Выберите страну</option>
                 <option value="USA">США</option>
-                <option value="Turkey">Турция</option>
+                <option value="Turkey">Turkey</option>
                 <option value="Russian">Россия</option>
                 <option value="Kyrgzstan">Кыргызстан</option>
               </select>
+                <CustomSelect
+                options={["США", "Турция", "Россия", "Кыргызстан"]}
+                value={countryFrom}
+                onChange={(option) => setCountryFrom(option)}
+              />
             </div>
             <div className={s.country_select}>
               <label htmlFor="">Выбор страны получения</label>
@@ -139,7 +156,7 @@ export default function Calculator() {
           <Button button="Рассчитать" onClick={calculateCostAndTime} />
         </div>
         <div className={s.calc_inner_infos}>
-          <div className={s.calc_inner_info}>
+          <div className={s.calc_inner_info} style={calcInnerInfoStyle}>
             <img src="/assets/icons/calc_icon.svg" alt="" />
             <div>
               <h3>
@@ -148,7 +165,7 @@ export default function Calculator() {
               <p>Срок доставки 10-15 дней</p>
             </div>
           </div>
-          <div className={s.calc_inner_info}>
+          <div className={s.calc_inner_info} style={calcInnerInfoStyle}>
             <img src="/assets/icons/calc_icon.svg" alt="" />
             <div>
               <h3>
@@ -157,7 +174,7 @@ export default function Calculator() {
               <p>Срок доставки 5-7 дней</p>
             </div>
           </div>
-          <div className={s.calc_inner_info}>
+          <div className={s.calc_inner_info} style={calcInnerInfoStyle}>
             <img src="/assets/icons/calc_icon.svg" alt="" />
             <div>
               <h3>
@@ -166,7 +183,7 @@ export default function Calculator() {
               <p>Срок доставки 2-3 дня</p>
             </div>
           </div>
-          <div className={s.calc_inner_info}>
+          <div className={s.calc_inner_info} style={calcInnerInfoStyle}>
             <img src="/assets/icons/calc_icon.svg" alt="" />
             <div>
               <h3>

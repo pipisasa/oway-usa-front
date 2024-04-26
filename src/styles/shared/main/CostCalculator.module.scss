@@ -105,22 +105,22 @@
           }
         }
 
-        .select {
-          select {
-            border-radius: 8px;
-            border: 1px solid var(--blue_light, #aed5f3);
-            padding: 12px 20px;
-            background: var(--white, #fff);
-            width: 100%;
-            font-size: 14px;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url('/assets/icons/selecter.svg');
-            background-repeat: no-repeat;
-            background-position: 95% 50%;
-          }
-        }
+        // .select {
+        //   select {
+        //     border-radius: 8px;
+        //     border: 1px solid var(--blue_light, #aed5f3);
+        //     padding: 12px 20px;
+        //     background: var(--white, #fff);
+        //     width: 100%;
+        //     font-size: 14px;
+        //     -webkit-appearance: none;
+        //     -moz-appearance: none;
+        //     appearance: none;
+        //     background-image: url('/assets/icons/selecter.svg');
+        //     background-repeat: no-repeat;
+        //     background-position: 95% 50%;
+        //   }
+        // }
       }
       .calc_inner_infos {
         display: flex;
