@@ -37,7 +37,7 @@ const monthNames = {
 };
 
 export default function InvoicesIssued() {
-  const [activePeriod, setActivePeriod] = useState("week");
+  const [activePeriod, setActivePeriod] = useState("month");
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -48,15 +48,16 @@ export default function InvoicesIssued() {
     ],
   });
   const [percentageChange, setPercentageChange] = useState(0);
+  const [currentCountry, setCurrentCountry] = useState(3);
 
   useEffect(() => {
-    fetchData(activePeriod);
-  }, [activePeriod]);
+    fetchData(activePeriod, currentCountry);
+  }, [activePeriod, currentCountry]);
 
-  const fetchData = async (period) => {
+  const fetchData = async (period, countryId) => {
     const accessToken = getCookie("accessToken");
     const response = await fetch(
-      `https://api-owayusa.com/api/statics/admin_panel/warehouse-paid/`,
+      `https://api-owayusa.com/api/statics/admin_panel/warehouse-paid/?country=${countryId}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -65,6 +66,10 @@ export default function InvoicesIssued() {
     );
     const data = await response.json();
     updateChartData(data, period);
+  };
+
+  const handleCountryChange = (countryId) => {
+    setCurrentCountry(countryId);
   };
 
   const updateChartData = (data, period) => {
@@ -135,7 +140,24 @@ export default function InvoicesIssued() {
     <div className={s.chart_section}>
       <div className={s.title}>
         <h2>Сумма выписанных счетов</h2>
+        <div className={s.country}>
+          <button
+            className={currentCountry === 3 ? s.active : s.not_active}
+            onClick={() => handleCountryChange(3)}
+          >
+            <img src="/assets/icons/usa.svg" alt="USA" />
+            США
+          </button>
+          <button
+            className={currentCountry === 4 ? s.active : s.not_active}
+            onClick={() => handleCountryChange(4)}
+          >
+            <img src="/assets/icons/turkey.svg" alt="Turkey" />
+            Турция
+          </button>
+        </div>
       </div>
+
       <div className={s.line}></div>
       <div className={s.chart_nav}>
         <div className={s.percentage}>
@@ -143,19 +165,19 @@ export default function InvoicesIssued() {
         </div>
         <div className={s.date_btn}>
           <button
-            className={activePeriod === "today" ? s.active : ""}
+            className={activePeriod === "today" ? s.active : s.not_active}
             onClick={() => handlePeriodClick("today")}
           >
             Сегодня
           </button>
           <button
-            className={activePeriod === "week" ? s.active : ""}
+            className={activePeriod === "week" ? s.active : s.not_active}
             onClick={() => handlePeriodClick("week")}
           >
             Неделя
           </button>
           <button
-            className={activePeriod === "month" ? s.active : ""}
+            className={activePeriod === "month" ? s.active : s.not_active}
             onClick={() => handlePeriodClick("month")}
           >
             Месяц

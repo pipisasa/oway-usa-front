@@ -2,27 +2,31 @@ import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useNotification from "../../../../hooks/admin/useNotification";
+
 import CustomFileInput from "@/components/partials/SelectPhoto";
+
 export default function NotificationsModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState(null);
+
   const [selectedImage, setSelectedImage] = useState(null); // State to store the selected image
 
   const toggleModal = () => setIsOpen(!isOpen);
   const { addNotification } = useNotification();
   
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       await addNotification(title, description, icon);
-      toggleModal(); // Close the modal after successful submission
+      toggleModal();
     } catch (error) {
       console.error("Error creating notification:", error);
     }
   };
+
 
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];

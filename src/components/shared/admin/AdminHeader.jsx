@@ -9,6 +9,7 @@ import AddShopsModal from "./modals/AddShopsModal";
 import ProductsModal from "./modals/ProductsModal";
 import WarehouseProductsModal from "./modals/WarehousesProductsModal";
 import Link from "next/link";
+import CompaniesModal from "./modals/CompaniesModal";
 
 export default function AdminHeader() {
   const router = useRouter();
@@ -22,6 +23,7 @@ export default function AdminHeader() {
     { href: "/admin/requests", label: "Входящие запросы" },
     { href: "/admin/shops-catalog", label: "Каталог сайтов" },
     { href: "/admin/user-parcels", label: "Ожидаемые посылки" },
+    { href: "/admin/companies", label: "Логотипы компаний" },
   ];
 
   const getPageHeader = () => {
@@ -48,6 +50,8 @@ export default function AdminHeader() {
       return <ProductsModal />;
     } else if (router.pathname === "/admin/warehouses") {
       return <WarehouseProductsModal />;
+    } else if (router.pathname === "/admin/companies") {
+      return <CompaniesModal />;
     }
     return null;
   };

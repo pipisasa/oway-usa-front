@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import UsersHeader from "./UserHeader";
 import useLogout from "@/hooks/auth/useLogout";
+import { FaCalculator } from "react-icons/fa";
 
 export default function UsersLayout({ children }) {
   const router = useRouter();
@@ -38,8 +39,8 @@ export default function UsersLayout({ children }) {
     },
     {
       href: "/user/calculator",
-      label: "Калькулятор стоимости",
-      icons: "/assets/icons/user-icons/доставка.svg",
+      label: "Калькулятор",
+      icons: <FaCalculator size={22} />,
     },
     {
       href: "/user/settings",
@@ -66,11 +67,20 @@ export default function UsersLayout({ children }) {
               {links.map((link) => (
                 <Link key={link.label} href={link.href}>
                   <li className={isActive(link.href) ? s.active : ""}>
-                    <img
-                      src={link.icons}
-                      alt="icons"
-                      className={isActive(link.href) ? s.active_icon : ""}
-                    />
+                    {typeof link.icons === "string" ? (
+                      <img
+                        src={link.icons}
+                        alt="icon"
+                        className={isActive(link.href) ? s.active_icon : ""}
+                      />
+                    ) : (
+                      <span>
+                        <FaCalculator
+                          size={22}
+                          color={isActive(link.href) ? "#FFFFFF" : "#027ddb"}
+                        />
+                      </span>
+                    )}
                     {link.label}
                   </li>
                 </Link>

@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useProducts from "@/hooks/admin/useProducts";
 
 export default function ProductsModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
+  const togglePreview = () => setIsPreviewOpen(!isPreviewOpen);
   const { addProduct, error, isSuccess, isLoading } = useProducts();
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
+
   const [selectedImage, setSelectedImage] = useState(null);
+
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -25,15 +29,18 @@ export default function ProductsModal() {
       setTitle("");
       setLink("");
       setImage(null);
+      setImagePreviewUrl("");
     } catch (error) {
       console.error("Ошибка при добавлении продукта: ", error);
     }
   };
 
+
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     setImage(selectedFile);
     setSelectedImage(URL.createObjectURL(selectedFile)); 
+
   };
 
   return (
@@ -45,7 +52,9 @@ export default function ProductsModal() {
         <h3>Создать товар</h3>
         <form className={s.notifications_form} onSubmit={handleAddProduct}>
           <div>
+
             <label htmlFor="">Название товара</label>
+
             <input
               type="text"
               placeholder="Введите название товара"
@@ -54,7 +63,9 @@ export default function ProductsModal() {
             />
           </div>
           <div>
+
             <label htmlFor="">Ссылка</label>
+
             <input
               type="text"
               placeholder="Вставьте ссылку"
@@ -63,15 +74,28 @@ export default function ProductsModal() {
             />
           </div>
           <div>
-            <label htmlFor="">Картинка</label>
+            <label>Картинка</label>
             <label className="custom-file-upload">
+
               <input
                 type="file"
                 onChange={handleImageChange} 
               />
+
               <img src="/assets/icons/selectimg.svg" alt="select img" />
               <span>Выбрать картинку</span>
             </label>
+            {imagePreviewUrl && (
+              <>
+                <button
+                  style={{ textAlign: "left" }}
+                  type="button"
+                  onClick={togglePreview}
+                >
+                  Посмотреть картинку
+                </button>
+              </>
+            )}
           </div>
           {selectedImage && (
             <div>
@@ -86,6 +110,13 @@ export default function ProductsModal() {
             </button>
           </div>
         </form>
+      </Modal>
+      <Modal isOpen={isPreviewOpen} onClose={togglePreview}>
+        <img
+          src={imagePreviewUrl}
+          alt="Full preview"
+          style={{ width: "100%" }}
+        />
       </Modal>
     </div>
   );

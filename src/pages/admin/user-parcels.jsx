@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
 import s from "@/styles/pages/user/MyWarehouse.module.scss";
 import Loading from "@/components/shared/admin/Loading";
 import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
+import WarehouseProductsModalV2 from "@/components/shared/admin/modals/WarehousesProductModalV2";
 
 export default function UserWarehouses() {
   const { warehouses, loading, error, deleteWarehouse } = useUserWarehouses();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
 
   if (loading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
@@ -39,11 +49,16 @@ export default function UserWarehouses() {
                 <button onClick={() => deleteWarehouse(warehouse.id)}>
                   <img src="/assets/icons/delete.svg" alt="delete" />
                 </button>
+                <WarehouseProductsModalV2
+                  clientId={warehouse.user.unique_id}
+                  closeModal={closeModal}
+                />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {/* {isModalVisible && <WarehouseProductsModalV2 closeModal={closeModal} />} */}
     </section>
   );
 }

@@ -37,7 +37,7 @@ const monthNames = {
 };
 
 export default function UserCount() {
-  const [activePeriod, setActivePeriod] = useState("week");
+  const [activePeriod, setActivePeriod] = useState("month");
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [

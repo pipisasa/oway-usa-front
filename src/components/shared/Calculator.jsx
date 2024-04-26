@@ -66,7 +66,10 @@ export default function Calculator() {
   
   return (
     <div style={marginTopStyle} className={`${s.calc} ${containerClass}`}>
+
       {showHeader && <h1>Калькулятор стоимости</h1>}
+
+
       <div className={s.calc_inner}>
         <div className={s.calc_inner_forms}>
           <div className={s.calc_inner_forms_inputs}>

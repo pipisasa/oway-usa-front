@@ -1,0 +1,29 @@
+.logo_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  .logo_card {
+    padding: 24px;
+    background: var(--white, #fff);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .logo_image {
+      max-height: 100px;
+      max-width: 200px;
+    }
+
+    .btns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      img {
+        width: 25px;
+      }
+    }
+  }
+}

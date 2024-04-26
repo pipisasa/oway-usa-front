@@ -26,6 +26,8 @@ export default function WarehousesProductsTable({
       (countryFilter === "" || warehouse.country.name === countryFilter)
   );
 
+  console.log(filteredWarehouses);
+
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
   };
@@ -49,7 +51,6 @@ export default function WarehousesProductsTable({
           <tr>
             <th>Пользователь</th>
             <th>Название товара</th>
-            {/* <th>Страна отправки</th> */}
             <th>Адрес получения</th>
             <th>Вес (кг)</th>
             <th>Трек-номер</th>
@@ -59,12 +60,14 @@ export default function WarehousesProductsTable({
         </thead>
         <tbody>
           {filteredWarehouses?.map((warehouse) => (
-            <tr key={warehouse.id}>
+            <tr
+              className={warehouse.is_parcels === true ? s.parcel_tr : ""}
+              key={warehouse.id}
+            >
               <td style={{ fontWeight: "bold" }}>
                 #{warehouse.unique_id_user}
               </td>
               <td>{warehouse.name}</td>
-              {/* <td>{warehouse.country.name}</td> */}
               <td>{warehouse.address}</td>
               <td>{warehouse.weight}</td>
               <td>{warehouse.track_number}</td>

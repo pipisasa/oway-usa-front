@@ -27,7 +27,7 @@ export default function UsersHeader() {
   const links = [
     { href: "/user", label: "Главная" },
     { href: "/user/biling", label: "Оплата" },
-    { href: "/user/calculator", label: "Калькулятор стоимости" },
+    { href: "/user/calculator", label: "Калькулятор" },
     { href: "/user/notifications", label: "Уведомления" },
     { href: "/user/warehouses", label: "Адреса складов" },
     { href: "/user/tracking", label: "Отслеживание доставки" },
