@@ -25,7 +25,7 @@ const CustomSelect = ({ options, value, onChange }) => {
             style={
               isAdminWarehousesPage
                 ? { marginTop: "0px", marginLeft: "calc(100% - 25px)" }
-                : { marginTop: "-25px", marginLeft: "calc(100% - 25px)"}
+                : { marginTop: "-25px", marginLeft: "calc(100% - 25px)" }
             }
           />
         </div>

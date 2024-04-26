@@ -51,6 +51,7 @@ export default function WarehousesProductsTable({
           <tr>
             <th>Пользователь</th>
             <th>Название товара</th>
+            <th>Дата отправки</th>
             <th>Адрес получения</th>
             <th>Вес (кг)</th>
             <th>Трек-номер</th>
@@ -68,6 +69,7 @@ export default function WarehousesProductsTable({
                 #{warehouse.unique_id_user}
               </td>
               <td>{warehouse.name}</td>
+              <td>{warehouse.date_sent}</td>
               <td>{warehouse.address}</td>
               <td>{warehouse.weight}</td>
               <td>{warehouse.track_number}</td>
