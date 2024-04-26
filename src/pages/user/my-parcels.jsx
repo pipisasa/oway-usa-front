@@ -24,6 +24,7 @@ export default function MyWarehouses() {
   }
 
   const handleUpdate = async (productId) => {
+    s;
     try {
       setSelectedNotification(
         products?.find((product) => product.id === productId)
@@ -89,7 +90,7 @@ export default function MyWarehouses() {
                 <td>{product.tracking_number}</td>
                 <td>{product.courier_service}</td>
                 <td>
-                  <button>Подробнее</button>
+                  <button>{product.comments}</button>
                 </td>
                 <td className={s.actions}>
                   <button onClick={() => deleteWarehouses(product.id)}>
@@ -110,6 +111,7 @@ export default function MyWarehouses() {
           warehouse={selectedNotification}
         />
       )}
+
       <div className={s.pagination}>
         <Pagination
           variant="bordered"

@@ -58,7 +58,6 @@ export default function UserWarehouses() {
           ))}
         </tbody>
       </table>
-      {/* {isModalVisible && <WarehouseProductsModalV2 closeModal={closeModal} />} */}
     </section>
   );
 }
