@@ -1,0 +1,64 @@
+import s from "./Table.module.scss"
+
+export default function womanjeans () {
+    return(
+        <div className={s.table_container}>
+<table>
+	<tbody>
+		<tr>
+			<th>Сантиметры</th>
+			<td>8.3</td>
+			<td>8.9</td>
+			<td>9.2</td>
+			<td>9.5</td>
+			<td>10.2</td>
+			<td>10.5</td>
+			<td>10.8</td>
+			<td>11.4</td>
+			<td>11.7</td>
+			<td>12.1</td>
+		</tr>
+		<tr>
+			<th>США</th>
+			<td>0.5</td>
+			<td>1</td>
+			<td>1.5</td>
+			<td>2</td>
+			<td>2.5</td>
+			<td>3</td>
+			<td>3.5</td>
+			<td>4</td>
+			<td>4.5</td>
+			<td>5</td>
+		</tr>
+		<tr>
+			<th>Великобритания</th>
+			<td>0</td>
+			<td>0.5</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1.5</td>
+			<td>2</td>
+			<td>2.5</td>
+			<td>3</td>
+			<td>3.5</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<th>Европа</th>
+			<td>16</td>
+			<td>16</td>
+			<td>17</td>
+			<td>17</td>
+			<td>18</td>
+			<td>18</td>
+			<td>19</td>
+			<td>19</td>
+			<td>20</td>
+			<td>20</td>
+		</tr>
+	</tbody>
+</table>
+        </div>
+    )
+}
