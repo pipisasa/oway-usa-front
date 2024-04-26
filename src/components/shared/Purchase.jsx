@@ -11,25 +11,12 @@ export default function Purchase() {
   const [mobileForm, setMobileForm] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmitHandler = async (data) => {
-    await submitPurchase({
-      full_name: data.full_name,
-      url: data.url,
-      name_of_purchase: data.name_of_purchase,
-      articul: data.articul,
-      count: data.count,
-      color: data.color,
-      description: data.description,
-      telegram: data.telegram,
-      phone_number: data.phone_number,
-      purchase_image: data.purchase_image,
-    });
-  };
 
   const closeModal = () => {
     setIsOpen(false);
@@ -44,11 +31,22 @@ export default function Purchase() {
       setIsOpen(true);
     }
   }, [isSubmitted]);
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    console.log("Выбранный файл:", file); // Логирование выбранного файла
     setSelectedFile(file);
     setPreviewImage(URL.createObjectURL(file));
     handleChange(e);
+  };
+
+  const onSubmitHandler = async (data) => {
+    console.log("Отправка данных:", data); // Логирование данных формы перед отправкой
+    console.log("Отправка файла:", selectedFile); // Логирование файла перед отправкой
+    await submitPurchase({
+      ...data,
+      purchase_image: selectedFile, // Передаём выбранный файл
+    });
   };
 
   return (
@@ -149,10 +147,11 @@ export default function Purchase() {
                   {errors?.count && <p>Это поле обязательно к заполнению!</p>}
                 </div>
               </div>
+
               <div className={s.purchase_inner_froms}>
                 <div
                   className={`${
-                    errors?.color ? s.error : s.purchase_inner_froms_inputs
+                    errors?.email ? s.error : s.purchase_inner_froms_inputs
                   }`}
                 >
                   <label>Электронная почта</label>
@@ -162,9 +161,9 @@ export default function Purchase() {
                     type="email"
                     placeholder="Введите электронную почту"
                     onChange={handleChange}
-                    {...register("color", { required: true })}
+                    {...register("email", { required: true })}
                   />
-                  {errors?.color && <p>Это поле обязательно к заполнению!</p>}
+                  {errors?.email && <p>Это поле обязательно к заполнению!</p>}
                 </div>
               </div>
               <div
@@ -242,17 +241,22 @@ export default function Purchase() {
               >
                 <label>Добавьте скриншот</label>
                 <label className="custom-file-upload">
-                <input
-              id="purchase_image"
-              type="file"
-              onChange={handleFileChange}
-              // {...register("purchase_image", { required: true })}
-            />
+                  <input
+                    id="purchase_image"
+                    type="file"
+                    onChange={handleFileChange}
+                  />
                   <img src="/assets/icons/selectimg.svg" alt="select img" />
                   <span>Выбрать картинку</span>
                 </label>
-                {previewImage && <ImagePreviewModal previewImage={previewImage} onClose={closeModal} />}
-                
+
+                {previewImage && (
+                  <ImagePreviewModal
+                    previewImage={previewImage}
+                    onClose={closeModal}
+                  />
+                )}
+
                 {errors?.purchase_image && <p>Выберите фото обязательно!</p>}
                 <p>
                   Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ |

@@ -10,25 +10,27 @@ const ImagePreviewModal = ({ previewImage, onClose }) => {
 
   const closeModal = () => {
     setModalIsOpen(false);
-    onClose(); 
+    onClose();
   };
 
   return (
     <>
-      <button onClick={openModal}>Посмотреть картинку</button>
+      <button type="button" onClick={openModal}>
+        Посмотреть картинку
+      </button>
       {modalIsOpen && (
         <div className={styles.image_preview_modal_overlay}>
           <div className={styles.modal_content}>
             {previewImage && (
-            <>
-              <div>
-                <p>Выбранная картинка:</p>
-              <button className={styles.close_button} onClick={closeModal}>
-                Закрыть
-              </button>
-              </div>
+              <>
+                <div>
+                  <p>Выбранная картинка:</p>
+                  <button className={styles.close_button} onClick={closeModal}>
+                    Закрыть
+                  </button>
+                </div>
                 <img src={previewImage} alt="preview" />
-            </>
+              </>
             )}
           </div>
         </div>
