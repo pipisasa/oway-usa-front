@@ -59,7 +59,7 @@ export default function AdminLayout({ children }) {
     },
     {
       href: "/admin/illinois",
-      label: "Иллинойс",
+      label: "Клиенты с Иллинойса",
       icon: "/assets/icons/admin-icons/склад.svg",
     },
   ];
@@ -93,7 +93,6 @@ export default function AdminLayout({ children }) {
             </ul>
           </nav>
         </div>
-
         <div className={s.admin_pages}>
           <AdminHeader />
           <main className={s.admin_page_content}>{children}</main>
