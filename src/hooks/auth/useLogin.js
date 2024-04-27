@@ -10,21 +10,19 @@ const useLogin = () => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch(
-          `${API_URL}/api/users/login/`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-          }
-      );
+      const response = await fetch(`${API_URL}/api/users/login/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       const data = await response.json();
 
       if (response.ok) {
         setCookie("accessToken", data.access);
+        console.log(data.access);
 
         if (data?.is_admin) {
           setCookie("isAdmin", "true");
@@ -40,13 +38,12 @@ const useLogin = () => {
     }
   };
 
-   useEffect(() => {
+  useEffect(() => {
     const accessToken = getCookie("accessToken");
     if (!accessToken) {
-      router.push("/auth/login"); 
+      router.push("/auth/login");
     }
   }, []);
-
 
   return { login, error };
 };

@@ -1,47 +1,82 @@
 .modal {
-    display: block;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    label{
-        color: black;
-    }
-    button{
-        color: black;
-    }
+  display: block;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  label {
+    color: black;
   }
-  
-  .modal_content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fefefe;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  button {
+    color: black;
+  }
+  form {
     display: flex;
-    gap: 20px;
-    color: #000;
+    flex-direction: column;
+    width: 400px;
+    // width: 100%;
+    label {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 16px;
+    }
+    input {
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 119, 255, 0.475);
+      padding: 10px;
+    }
+    button {
+      padding: 14px 36px;
+      color: #fff;
+      border-radius: 12px;
+      background: var(--blue, #027ddb);
+      cursor: pointer;
+      margin-top: 12px;
+    }
   }
-  
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #aaa;
+}
+.qwe {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  p {
+    margin-top: 5px;
   }
-  
-  .close:hover {
-    color: #333;
+  input {
+    margin-top: -5px;
   }
-  
-.aaa{
+}
 
+.modal_content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 20px;
+  color: #000;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #aaa;
+}
+
+.close:hover {
+  color: #333;
+}
+
+.aaa {
 }

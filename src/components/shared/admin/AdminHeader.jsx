@@ -24,6 +24,7 @@ export default function AdminHeader() {
     { href: "/admin/shops-catalog", label: "Каталог сайтов" },
     { href: "/admin/user-parcels", label: "Ожидаемые посылки" },
     { href: "/admin/companies", label: "Логотипы компаний" },
+    { href: "/admin/illinois", label: "Иллинойса" },
   ];
 
   const getPageHeader = () => {
