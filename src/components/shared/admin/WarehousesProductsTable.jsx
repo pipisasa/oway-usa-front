@@ -4,6 +4,8 @@ import Modal from "../Modal";
 import { RxCross2 } from "react-icons/rx";
 import Loading from "./Loading";
 import { Pagination } from "@nextui-org/react";
+import axios from "axios";
+import { getCookie } from "@/utils/cookieHelpers";
 
 export default function WarehousesProductsTable({
   warehouses,
@@ -17,6 +19,49 @@ export default function WarehousesProductsTable({
   countryFilter,
 }) {
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
+  const [formData, setFormData] = useState({
+    address: "",
+    articul: "",
+    comments: "",
+    name: "",
+    image: "",
+    track_number: "",
+    unique_id_user: "",
+    url: "",
+  });
+  const [currentItem, setCurrentItem] = useState(null);
+  const accessToken = getCookie("accessToken");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  console.log(formData);
+
+  const updateData = async () => {
+    if (!selectedWarehouse || !selectedWarehouse.id) {
+      console.error("Selected warehouse or warehouse ID is missing.");
+      return;
+    }
+    try {
+      const response = await axios.put(
+        `https://api-owayusa.com/api/warehouses/update/${selectedWarehouse.id}/`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Обновленные данные:", response.data);
+      handleCloseModal(); // Закрыть модальное окно после обновления
+    } catch (err) {
+      console.error("Ошибка при обновлении данных:", err);
+    }
+  };
 
   const filteredWarehouses = warehouses?.results?.filter(
     (warehouse) =>
@@ -26,10 +71,11 @@ export default function WarehousesProductsTable({
       (countryFilter === "" || warehouse.country.name === countryFilter)
   );
 
-  console.log(filteredWarehouses);
+  console.log(warehouses);
 
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
+    setFormData(warehouse);
   };
 
   const handleCloseModal = () => {
@@ -43,7 +89,6 @@ export default function WarehousesProductsTable({
   if (error) {
     return <div>Error: {error}</div>;
   }
-
   return (
     <div>
       <table>
@@ -105,15 +150,70 @@ export default function WarehousesProductsTable({
       </div>
       {selectedWarehouse && (
         <div className={s.modal}>
-          <Modal isOpen={selectedWarehouse} onClose={handleCloseModal}>
+          <Modal isOpen={!!selectedWarehouse} onClose={handleCloseModal}>
             <div className={s.modalContent}>
               <div className={s.btn_center}>
                 <button onClick={handleCloseModal} className={s.close_btn}>
                   <RxCross2 size={20} />
                 </button>
               </div>
-              <h3>Комментарий</h3>
-              <p>{selectedWarehouse.comments}</p>
+              <h3>Редактирование склада</h3>
+              <input
+                type="text"
+                name="name"
+                placeholder="Название"
+                value={formData.name || ""}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="articul"
+                placeholder="Артикул"
+                value={formData.articul || ""}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="address"
+                placeholder="Адрес"
+                value={formData.address || ""}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="track_number"
+                placeholder="Трек-номер"
+                value={formData.track_number || ""}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="unique_id_user"
+                placeholder="Уникальный ID пользователя"
+                value={formData.unique_id_user || ""}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="url"
+                placeholder="URL"
+                value={formData.url || ""}
+                onChange={handleChange}
+              />
+              <textarea
+                name="comments"
+                placeholder="Комментарии"
+                value={formData.comments || ""}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="image"
+                placeholder="Ссылка на изображение"
+                value={formData.image || ""}
+                onChange={handleChange}
+              />
+              <button onClick={updateData}>Сохранить изменения</button>
             </div>
           </Modal>
         </div>
