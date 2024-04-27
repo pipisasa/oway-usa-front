@@ -57,6 +57,11 @@ export default function AdminLayout({ children }) {
       label: "Логотипы компаний",
       icon: "/assets/icons/admin-icons/склад.svg",
     },
+    {
+      href: "/admin/illinois",
+      label: "Иллинойс",
+      icon: "/assets/icons/admin-icons/склад.svg",
+    },
   ];
 
   return (
