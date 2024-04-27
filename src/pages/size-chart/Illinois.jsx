@@ -13,7 +13,7 @@ const Illinois = () => {
   return (
     <div>
       <button onClick={() => setModalOpen(true)}>
-        Для клиентов за статой Иллинойс
+        Для клиентов за пределом штатой Иллинойс
       </button>
       {modalOpen && (
         <div className={s.modal}>
