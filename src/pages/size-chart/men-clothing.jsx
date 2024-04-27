@@ -65,7 +65,6 @@ export default function MenClothing() {
   return (
     <>
       <TheHeader />
-
       <div className={s.table_container}>
         <h6>Мужская одежда</h6>
         <table className={s.table}>
