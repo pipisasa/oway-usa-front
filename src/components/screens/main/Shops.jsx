@@ -26,7 +26,7 @@ export default function Shops() {
   return (
     <div className={`${s.shops_container} container`} data-aos="fade-up">
       <button onClick={() => handleScroll("left")} className={s.scroll_button}>
-        &lt;
+        <img src="/assets/icons/arrowLeft.svg" alt="" />
       </button>
       <div
         ref={scrollRef}
@@ -48,7 +48,7 @@ export default function Shops() {
         ))}
       </div>
       <button onClick={() => handleScroll("right")} className={s.scroll_button}>
-        &gt;
+        <img src="/assets/icons/arrowRight.svg" alt="" />
       </button>
     </div>
   );
