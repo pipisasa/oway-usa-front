@@ -44,8 +44,8 @@ export default function WarehousesProductsTable({
           <tr>
             <th>Пользователь</th>
             <th>Название посылки</th>
-            <th>Адрес отправки</th>
-            <th>Адрес прибытия</th>
+            <th>Дата отправки</th>
+            <th>Дата прибытия</th>
             <th>Вес (кг)</th>
             <th>Трек-номер</th>
             <th>Статус</th>
@@ -62,8 +62,8 @@ export default function WarehousesProductsTable({
                 #{warehouse.unique_id_user}
               </td>
               <td>{warehouse.name}</td>
-              <td>{warehouse.country.name}</td>
-              <td>{warehouse.address}</td>
+              <td>{warehouse.date_sent}</td>
+              <td>{warehouse.date_arrived}</td>
               <td>{warehouse.weight}</td>
               <td>{warehouse.track_number}</td>
               <td
@@ -76,12 +76,15 @@ export default function WarehousesProductsTable({
               >
                 {warehouse.status?.name}
               </td>
-              <td>
+              <td className="flex items-center ">
                 <button
                   className={s.btn}
                   onClick={() => handleDetailsClick(warehouse)}
                 >
                   Подробнее
+                </button>
+                <button style={{ marginLeft: "10px" }} className={s.btn}>
+                  Удалить
                 </button>
               </td>
             </tr>

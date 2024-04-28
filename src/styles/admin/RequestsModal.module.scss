@@ -19,6 +19,32 @@
   font-size: 16px;
 }
 
+.submit_btns {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .exit_btn {
+    width: 100%;
+    border-radius: 12px;
+    background: var(--blue, #ffffff);
+    border: 1px solid #027ddb;
+    padding: 14px 36px;
+    color: var(--white, var(--Colors-Grey-White, #000000));
+    font-size: 16px;
+  }
+  .submit_btn {
+    width: 100%;
+
+    border-radius: 12px;
+    background: var(--blue, #027ddb);
+    padding: 14px 36px;
+    color: var(--white, var(--Colors-Grey-White, #fff));
+    font-size: 16px;
+  }
+}
+
 .request_modal {
   border-radius: 12px;
   background: var(--Colors-Grey-White, #fff);

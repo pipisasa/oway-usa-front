@@ -91,7 +91,7 @@ const useWarehouses = (currentPage) => {
         }
       );
 
-      // window.location.reload();
+      window.location.reload();
       await fetchWarehouses();
       setIsSuccess(true);
     } catch (error) {

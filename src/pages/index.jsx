@@ -36,9 +36,7 @@ export default function Home() {
       <TrackNumber />
       <Mission />
       <AboutUs />
-      <div id="stepWork">
-        <StepWork />
-      </div>
+      <StepWork />
       <MoreInfo menu="menu" />
       <Advantage
         p="Наши преимущества"
