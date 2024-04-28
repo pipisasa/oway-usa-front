@@ -9,7 +9,7 @@ import ModalHeader from "../partials/ModalHeader";
 const links = [
   { href: "/", label: "Главная" },
   { href: "/calculator", label: "Калькулятор" },
-  { href: "/#stepWork", label: "Этапы работы" },
+  { href: "/steps-work", label: "Этапы работы" },
   { href: "/catalog", label: "Каталог сайтов" },
   { href: "/markets", label: "Магазин" },
   { href: "/about", label: "О компании" },
