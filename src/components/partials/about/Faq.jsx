@@ -45,8 +45,11 @@ export default function Faq() {
           ))}
         </div>
       </div>
-      <div className={s.faq_air} data-aos="fade-up"
-     data-aos-anchor-placement="center-center">
+      <div
+        className={s.faq_air}
+        data-aos="fade-up"
+        data-aos-anchor-placement="center-center"
+      >
         <img src="assets/images/aboutAir.png" width={697} height={697} alt="" />
       </div>
     </div>

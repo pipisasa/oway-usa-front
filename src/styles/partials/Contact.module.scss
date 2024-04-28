@@ -1,5 +1,10 @@
 .address_container {
   margin-top: 120px;
+
+  .wide_card {
+    min-width: 500px;
+  }
+
   .container_header {
     display: flex;
     align-items: center;
@@ -54,6 +59,13 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        .card_header_country {
+          img {
+            width: 25px;
+          }
+        }
+
         div {
           display: flex;
           align-items: center;
@@ -144,6 +156,9 @@
 
 @media (max-width: 474px) {
   .address_container {
+    .wide_card {
+      max-width: 27px !important;
+    }
     .container_header {
       .title {
         h2 {

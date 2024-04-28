@@ -42,7 +42,7 @@ export default function Contacts() {
       img: "assets/icons/footer/usa.svg",
       title: "Пункт приема онлайн заказов в Delaware",
       address: "4730DN Kimball Ave",
-      state: "Dalawere",
+      state: "Delawere",
       phone: "+1 872 710 0710 ",
       city: "Chicago",
       zip: "19701",
@@ -63,6 +63,34 @@ export default function Contacts() {
       zip: "34130",
       text: "Unit",
       unitcode: "17C",
+      qwe: "Region",
+      email: "owayusa1@gmail.com",
+      words: "Email",
+      logo: "/assets/icons/unit.svg",
+    },
+    {
+      img: "assets/icons/footer/1.svg",
+      title: "Пункты приема в Москве:",
+      address: "Перовская 26 корпус 1",
+      state: "Московский регион",
+      phone: "+7 925 644 6608",
+      city: "Москва",
+      zip: "111398",
+      unitcode: "5",
+      text: "Unit",
+      qwe: "Region",
+      email: "owayusamoscow@gmail.com",
+      words: "Email",
+      logo: "/assets/icons/unit.svg",
+    },
+    {
+      img: "assets/icons/footer/2.svg",
+      title: "Пункты приема в Кыргызстане:",
+      address: "ул. Токтогула 211",
+      state: "Чуй",
+      phone: "+996 709 969 621",
+      city: "Бишкек",
+      zip: "",
       qwe: "Region",
       email: "owayusa1@gmail.com",
       words: "Email",
@@ -117,9 +145,14 @@ export default function Contacts() {
       </div>
       <div ref={sliderRef} className={s.address_cards}>
         {warehouses.map((data, index) => (
-          <div key={index} className={s.address_card}>
+          <div
+            key={index}
+            className={`${s.address_card} ${
+              data.title.includes("Пункты приема в Москве:") ? s.wide_card : ""
+            }`}
+          >
             <div className={s.card_header}>
-              <div>
+              <div className={s.card_header_country}>
                 <img src={data.img} alt={data.title} />
                 <h3>{data.title}</h3>
               </div>

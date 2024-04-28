@@ -5,8 +5,11 @@ import Button from "../partials/Button";
 export default function Feedback() {
   return (
     <div className={s.feed}>
-      <div className={`${s.feed_container} container`} data-aos="fade-up"
-     data-aos-anchor-placement="top-center">
+      <div
+        className={`${s.feed_container} container`}
+        data-aos="fade-up"
+        data-aos-anchor-placement="top-center"
+      >
         <div className={s.feed_info}>
           <div className={s.feed_header}>
             <span>Форма обратной связи</span>
@@ -50,10 +53,11 @@ export default function Feedback() {
           </div>
         </div>
       </div>
-      <div className={s.calc_img} 
-      data-aos="fade-up"
-      data-aos-anchor-placement="top-center"
-     >
+      <div
+        className={s.calc_img}
+        data-aos="fade-up"
+        data-aos-anchor-placement="top-center"
+      >
         <img src="assets/images/houseBox.png" width={600} alt="" />
       </div>
     </div>
