@@ -24,10 +24,9 @@ export default function AddUsersModal() {
       const file = files[0];
       setFormData((prevData) => ({
         ...prevData,
-        [name]: e.target.files[0],
+        [name]: file,
       }));
-
-      // Создание превью для выбранного изображения
+  
       const reader = new FileReader();
       reader.onload = () => {
         setImagePreviews((prevPreviews) => ({
@@ -35,7 +34,7 @@ export default function AddUsersModal() {
           [name]: reader.result,
         }));
       };
-      reader.readAsDataURL(e.target.files[0]);
+      reader.readAsDataURL(file);
     } else {
       const { value } = e.target;
       setFormData((prevData) => ({
@@ -44,6 +43,7 @@ export default function AddUsersModal() {
       }));
     }
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -163,6 +163,9 @@ export default function AddUsersModal() {
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
               </label>
+              {imagePreviews && (
+                <img src={imagePreviews.front_image} alt="Front Image Preview" />
+              )}
             </div>
             <div>
               <label htmlFor="">Обратная сторона паспорта</label>
@@ -176,13 +179,8 @@ export default function AddUsersModal() {
                 <img src="/assets/icons/selectimg.svg" alt="select img" />
                 <span>Выбрать картинку</span>
               </label>
-
               {imagePreviews && (
-                <img src={imagePreviews?.back_image} alt="select img" />
-              )}
-
-              {imagePreviews && (
-                <img src={imagePreviews?.back_image} alt="Back Image Preview" />
+                <img src={imagePreviews.back_image} alt="Back Image Preview" />
               )}
             </div>
           </div>

@@ -154,7 +154,7 @@ export default function Purchase() {
                     errors?.email ? s.error : s.purchase_inner_froms_inputs
                   }`}
                 >
-                  <label>Электронная почта</label>
+                  <label>Электронная почта<span>*</span></label>
                   <input
                     id="email"
                     name="email"
@@ -201,7 +201,7 @@ export default function Purchase() {
                       type="text"
                       placeholder="Введите @username"
                       onChange={handleChange}
-                      {...register("telegram", { required: true })}
+                      {...register("telegram", { required: false })}
                     />
                   </div>
 
@@ -225,7 +225,7 @@ export default function Purchase() {
                       type="text"
                       placeholder="Введите номер телефона"
                       onChange={handleChange}
-                      {...register("phone_number", { required: true })}
+                      {...register("phone_number", { required: false })}
                     />
                   </div>
 
@@ -240,7 +240,7 @@ export default function Purchase() {
                 }`}
               >
                 <label>Добавьте скриншот</label>
-                <label className="custom-file-upload">
+                <label className="custom-file-upload" style={{marginTop: "-3px"}}>
                   <input
                     id="purchase_image"
                     type="file"
