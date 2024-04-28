@@ -151,18 +151,18 @@ const showHeader = router.pathname !== "/user/calculator";
             </div>
             <div className={s.select} style={{ marginTop: "20px" }}>
               {formData.fromCountry === "Турция" && (
-                <>
-                  <label>Выбор типа доставки</label>
-                  <select
-                    style={{ marginTop: "16px" }}
-                    name="deliveryType"
-                    onChange={handleChange}
-                    value={formData.deliveryType}
-                  >
-                    <option value="стандарт">Стандарт</option>
-                    <option value="экспресс">Экспресс</option>
-                  </select>
-                </>
+               <div div className={s.select}>
+               <div className={s.calc_inner_forms_inputs}>
+            <div className={s.select}>
+                <label>Выбор типа доставки</label>
+              <CustomSelect
+                options={[ 'стандарт', 'экспресс']}
+                value={formData.deliveryType  || 'Выберите'}
+                onChange={(value) => handleChange({ target: { name: 'deliveryType', value } })}
+              />
+            </div>
+          </div>
+              </div>
               )}
             </div>
             <div className={s.calc_inner_forms_inputss}>

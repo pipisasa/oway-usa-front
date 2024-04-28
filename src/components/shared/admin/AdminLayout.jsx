@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import AdminHeader from "./AdminHeader";
 import useLogout from "@/hooks/auth/useLogout";
+import { AiFillFileImage } from "react-icons/ai";
 
 export default function AdminLayout({ children }) {
   const router = useRouter();
@@ -50,17 +51,19 @@ export default function AdminLayout({ children }) {
     {
       href: "/admin/user-parcels",
       label: "Ожидаемые посылки",
-      icon: "/assets/icons/admin-icons/склад.svg",
+      icon: "/assets/icons/calc_icon.svg",
     },
     {
       href: "/admin/companies",
       label: "Логотипы компаний",
-      icon: "/assets/icons/admin-icons/склад.svg",
+      icon: <AiFillFileImage          
+      size={22}
+      color={isActive("/user/my-requests") ? "#FFF" : "#027ddb"}/>,
     },
     {
       href: "/admin/illinois",
       label: "Клиенты за Иллинойс",
-      icon: "/assets/icons/admin-icons/склад.svg",
+      icon: "/assets/icons/united-states-of-america.svg",
     },
   ];
 
@@ -77,11 +80,15 @@ export default function AdminLayout({ children }) {
               {links.map((link) => (
                 <Link key={link.label} href={link.href}>
                   <li className={isActive(link.href) ? s.active : ""}>
-                    <img
-                      src={link.icon}
-                      alt="icons"
-                      className={isActive(link.href) ? s.active_icon : ""}
-                    />
+                  {typeof link.icon === "string" ? (
+                      <img
+                        src={link.icon}
+                        alt="icon"
+                        className={isActive(link.href) ? s.active_icon : ""}
+                      />
+                    ) : (
+                      <span>{link.icon}</span>
+                    )}
                     {link.label}
                   </li>
                 </Link>
