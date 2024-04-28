@@ -14,6 +14,7 @@ import Faq from "../components/partials/Faq";
 import Contacts from "../components/partials/Contacts";
 import Purchase from "../components/shared/Purchase";
 import CostCalculator from "@/components/shared/CostCalculator";
+import News from "@/components/partials/about/News";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function Home() {
       </Head>
       <HeroSection />
       <Shops />
+      <News />
       <Purchase />
       <TrackNumber />
       <Mission />
