@@ -7,20 +7,21 @@ const calc = [
     img: "/assets/icons/container.png",
     text: "Фактический вес",
     answer:
-      'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
+      "Фактический вес при экспресс доставке товаров — это просто вес посылки, который измеряется на весах.",
   },
   {
     icon: "/assets/icons/adv_date.svg",
     img: "/assets/icons/container.png",
     text: "Объемный вес",
     answer:
-      'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
+      "Объемный вес рассчитывается по формуле: Объемный вес = Длина×Ширина×Высота Делитель Объемный вес = Делитель Длина×Ширина×Высота где размеры берутся в сантиметрах, а делитель зависит от компании перевозчика (часто это число находится в диапазоне от 5000 до 6000).",
   },
   {
     icon: "/assets/icons/adv_box.svg",
     img: "/assets/icons/container.png",
     text: "Гиперобъемный вес",
-    answer: "Ты работаем с понедельника по пятницу с 9:00 до 18:00.",
+    answer:
+      "Формула для расчета гиперобъемного веса может отличаться у разных перевозчиков, но общий принцип таков: Гиперобъемный вес = Длина×Ширина×Высота/Коэффициент гиперобъема Гиперобъемный вес = Коэффициент гиперобъема Длина×Ширина×Высота. Здесь: Длина, Ширина, и Высота измеряются в сантиметрах или инчах в зависимости от страны и компании. Коэффициент гиперобъема — это число, которое может быть значительно меньше, чем стандартный делитель для объемного веса (например, 3000 вместо 5000), что делает гиперобъемный вес значительно выше для очень больших грузов.",
   },
 ];
 
@@ -30,20 +31,21 @@ const menu = [
     img: "/assets/icons/container.png",
     text: "Глобальный выбор товаров",
     answer:
-      'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
+      "Мы гарантируем, что процесс выбора и покупки товаров будет максимально лёгким и понятным даже для начинающих пользователей.",
   },
   {
     icon: "/assets/icons/adv_date.svg",
     img: "/assets/icons/container.png",
     text: "Экономия времени и усилий",
     answer:
-      'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
+      "Наш сайт обеспечивает быстрый и эффективный поиск необходимых товаров, а процесс оформления заказа занимает всего несколько кликов.",
   },
   {
     icon: "/assets/icons/adv_box.svg",
     img: "/assets/icons/container.png",
     text: "Международная доставка с удобством",
-    answer: "Мы работаем с понедельника по пятницу с 9:00 до 18:00.",
+    answer:
+      "Наш сервис обеспечивает удобство международной доставки, делая мир ближе к вам",
   },
 ];
 
@@ -53,32 +55,35 @@ const service = [
     img: "/assets/images/adv_boxes.png",
     text: "Ваш личный адрес для покупок в США и Турции",
     answer:
-      'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
+      "В наших современных и автоматизированных складах в безналогом штате Делавэре и городе Истанбул.",
   },
   {
     icon: "/assets/icons/adv_date.svg",
     img: "/assets/images/adv_boxes.png",
-    text: "Объединение нескольких посылок в одну",
+    text: "Консолидация посылок",
     answer:
-      'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.',
+      "Это более экономичный вариант, так как часто отправка нескольких посылок в одной коробке выходит дешевле, чем отправка каждой посылки по отдельности.",
   },
   {
     icon: "/assets/icons/adv_box.svg",
     img: "/assets/images/adv_boxes.png",
     text: "Устранение избыточной упаковки от посылок",
-    answer: "Мы работаем с понедельника по пятницу с 9:00 до 18:00.",
+    answer:
+      "Это выполняется с целью снижения общего веса посылки, что уменшает вес и стоимости доставки для вас.",
   },
   {
     icon: "/assets/icons/adv_box.svg",
     img: "/assets/images/adv_boxes.png",
     text: "Хранение входящих посылок на 40 дней",
-    answer: "Мы работаем с понедельника по пятницу с 9:00 до 18:00.",
+    answer:
+      "Мы можем хранить ваши посылки до определенного времени и также до прибытие других ваших грузов с целью вместе отправки.",
   },
   {
     icon: "/assets/icons/adv_box.svg",
     img: "/assets/images/adv_boxes.png",
     text: "Изменение адреса получателя",
-    answer: "Мы работаем с понедельника по пятницу с 9:00 до 18:00.",
+    answer:
+      "Изменение адреса доставки и данных получателя возможно до  и после вылета из США. В личном кабинете у вас есть возможность менять и добавлять данные получателя",
   },
 ];
 
@@ -91,7 +96,8 @@ export default function Advantage(props) {
 
   return (
     <div className={props?.menu === "menu" ? s.advantage : s.advantage_calc}>
-      <div className={`${s.advantage_container} container`}  
+      <div
+        className={`${s.advantage_container} container`}
         data-aos="fade-right"
         data-aos-offset="300"
         data-aos-easing="ease-in-sine"
@@ -166,7 +172,11 @@ export default function Advantage(props) {
         </div>
         <div className={s.info}>
           {selectedItem === 1 && (
-            <div className={s["info-content"]} data-aos="fade-down" data-aos-duration="1000">
+            <div
+              className={s["info-content"]}
+              data-aos="fade-down"
+              data-aos-duration="1000"
+            >
               {props?.menu === "service" ? (
                 <img
                   src={service[0]?.img}
@@ -190,7 +200,11 @@ export default function Advantage(props) {
             </div>
           )}
           {selectedItem === 2 && (
-            <div className={s["info-content"]} data-aos="fade-down" data-aos-duration="1000">
+            <div
+              className={s["info-content"]}
+              data-aos="fade-down"
+              data-aos-duration="1000"
+            >
               {props?.menu === "service" ? (
                 <img
                   src={service[1]?.img}
@@ -215,7 +229,11 @@ export default function Advantage(props) {
             </div>
           )}
           {selectedItem === 3 && (
-            <div className={s["info-content"]} data-aos="fade-down" data-aos-duration="1000">
+            <div
+              className={s["info-content"]}
+              data-aos="fade-down"
+              data-aos-duration="1000"
+            >
               {props?.menu === "service" ? (
                 <img
                   src={service[2]?.img}
@@ -240,7 +258,11 @@ export default function Advantage(props) {
             </div>
           )}
           {selectedItem === 4 && (
-            <div className={s["info-content"]} data-aos="fade-down" data-aos-duration="1000">
+            <div
+              className={s["info-content"]}
+              data-aos="fade-down"
+              data-aos-duration="1000"
+            >
               <img src={service[2]?.img} width={825} height={327} alt="logo" />
               <p>
                 {props?.menu === "menu" && menu[2]?.answer}
@@ -250,7 +272,11 @@ export default function Advantage(props) {
             </div>
           )}
           {selectedItem === 5 && (
-            <div className={s["info-content"]} data-aos="fade-down" data-aos-duration="1000">
+            <div
+              className={s["info-content"]}
+              data-aos="fade-down"
+              data-aos-duration="1000"
+            >
               <img src={service[2]?.img} width={825} height={327} alt="logo" />
               <p>
                 {props?.menu === "menu" && menu[2]?.answer}

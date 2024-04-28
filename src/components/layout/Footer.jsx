@@ -102,7 +102,7 @@ export default function Footer() {
               <Link href="/">Заявление о возврате средств</Link>
               <Link href="/">Реквизиты компании</Link>
               <Link href="/size-chart">Таблица размеров</Link>
-              <Illinois/> 
+              <Illinois />
             </div>
             <Mobile />
           </div>
@@ -119,11 +119,7 @@ export default function Footer() {
               <Link target="__blank" href="https://www.tiktok.com/@owayusa1">
                 <img src="/assets/icons/tiktok.svg" alt="tiktok" />
               </Link>
-              <Link
-                className={s.telegram}
-                target="__blank"
-                href="https://t.me/owayusa_chat"
-              >
+              <Link target="__blank" href="https://t.me/owayusa_chat">
                 <img
                   src="/assets/icons/brand_telegram_icon_151521.svg"
                   alt="tiktok"

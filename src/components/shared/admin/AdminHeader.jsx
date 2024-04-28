@@ -8,7 +8,6 @@ import NotificationsModal from "./modals/NotificationsModal";
 import AddShopsModal from "./modals/AddShopsModal";
 import ProductsModal from "./modals/ProductsModal";
 import WarehouseProductsModal from "./modals/WarehousesProductsModal";
-import Link from "next/link";
 import CompaniesModal from "./modals/CompaniesModal";
 
 export default function AdminHeader() {
