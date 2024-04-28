@@ -1,42 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import s from "./modali.module.scss";
 import useIllinois from "@/hooks/admin/useIllinois";
+import { useForm } from "react-hook-form";
 
 const Illinois = () => {
-  const [modalOpen, setModalOpen] = useState(false);
   const { formData, handleSubmit, handleChange } = useIllinois();
+  const {
+    register,
+    
+    formState: { errors },
+  } = useForm();
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
 
   return (
-    <div>
-      <button onClick={() => setModalOpen(true)}>
-        Для клиентов за пределами штата Иллинойс
-      </button>
-      {modalOpen && (
-        <div className={s.modal}>
-          <div className={s.modal_content}>
-            <span className={s.close} onClick={closeModal}>
-              &times;
-            </span>
-            {/* <div className={s.aaa}>
-              <h2>Клиетам за приделами штата Иллинойс</h2>
-              <p>
-                ДЛя клиентов за приделами штата Иллинойс мы можем предоставить
-                почтовую этикету от компании <b> FedEx от 20%-30% дешевле</b>
-              </p>
-              <br />
-              <p>
-                Обратите внимание, что получение вашей послыки на складе Skilk
-                Road shipping с помощью FedEx является договором на дальнейшее
-                использование услуг компании и не подлежит возврату или
-                возмещению{" "}
-              </p>
-            </div> */}
-            <form onSubmit={handleSubmit}>
-              <label>ФИО</label>
+<>
+    <form
+        className={s.purchase} 
+        onSubmit={handleSubmit}
+      >
+        <div className={s.img123} data-aos="fade-up-left">
+          <img src="/assets/icons/142.svg" width={510} height={510} alt="" />
+        </div>
+        <div className={s.purchase_container}>
+          <div className={s.purchase_header} data-aos="fade-up">
+            <h1>
+            Клиентам за пределами штата Иллинойс
+            </h1>
+          </div>
+          <div className={s.form_container}>
+            <div className={s.purchase_inner}>
+              <div className={s.purchase_inner_froms}>
+                <div
+                  className={`${
+                    errors?.full_name ? s.error : s.purchase_inner_froms_inputs
+                  }`}
+                >
+                  <label>ФИО<span>*</span></label>
               <input
                 type="text"
                 name="full_name"
@@ -44,8 +43,23 @@ const Illinois = () => {
                 value={formData?.full_name}
                 onChange={handleChange}
               />
-              <br />
-              <label>Адрес</label>
+                  {errors?.full_name && (
+                    <p>Это поле обязательно к заполнению!</p>
+                  )}
+                </div>
+
+                
+              </div>
+
+              <div className={s.purchase_inner_froms}>
+                <div
+                  className={`${
+                    errors?.name_of_purchase
+                      ? s.error
+                      : s.purchase_inner_froms_inputs
+                  }`}
+                >
+                  <label>Адрес<span>*</span></label>
               <input
                 type="text"
                 name="address"
@@ -53,8 +67,16 @@ const Illinois = () => {
                 value={formData?.address}
                 onChange={handleChange}
               />
-              <br />
-              <label>Номер телефона</label>
+                  {errors?.name_of_purchase && (
+                    <p>Это поле обязательно к заполнению!</p>
+                  )}
+                </div>
+                <div
+                  className={`${
+                    errors?.count ? s.error : s.purchase_inner_froms_inputs
+                  }`}
+                >
+                <label>Номер телефона<span>*</span></label>
               <input
                 type="number"
                 name="phone_number"
@@ -62,17 +84,17 @@ const Illinois = () => {
                 value={formData?.phone_number}
                 onChange={handleChange}
               />
-              <br />
-              <label>Вес груза</label>
-              <input
-                type="number"
-                placeholder="Вес груза..."
-                name="cargo_weight"
-                value={formData?.cargo_weight}
-                onChange={handleChange}
-              />
-              <br />
-              <label>Электронная почта</label>
+                  {errors?.count && <p>Это поле обязательно к заполнению!</p>}
+                </div>
+              </div>
+
+              <div className={s.purchase_inner_froms}>
+                <div
+                  className={`${
+                    errors?.email ? s.error : s.purchase_inner_froms_inputs
+                  }`}
+                >
+                       <label>Электронная почта <span>*</span></label>
               <input
                 type="email"
                 name="email"
@@ -80,17 +102,57 @@ const Illinois = () => {
                 value={formData?.email}
                 onChange={handleChange}
               />
-              <br />
-              <label>Telegram:</label>
+                  {errors?.email && <p>Это поле обязательно к заполнению!</p>}
+                </div>
+                <div
+                  className={`${
+                    errors?.email ? s.error : s.purchase_inner_froms_inputs
+                  }`}
+                >
+                    <label>Вес груза<span>*</span></label>
               <input
+                type="number"
+                placeholder="Вес груза..."
+                name="cargo_weight"
+                value={formData?.cargo_weight}
+                onChange={handleChange}
+              />
+                  {errors?.email && <p>Это поле обязательно к заполнению!</p>}
+                </div>
+              </div>
+              <div className={s.purchase_inner_froms}>
+                <div
+                  className={`${
+                    errors?.telegram ? s.error : s.purchase_inner_froms_inputs
+                  }`}
+                >
+                  <label>Telegram<span>*</span></label>
+                  <div className={s.icon_input}>
+                    <img src="/assets/icons/telegram.svg" alt="telegram" />
+                    <input
                 type="text"
                 placeholder="Введите @username"
                 name="telegram"
                 value={formData?.telegram}
                 onChange={handleChange}
               />
-              <br />
-              <label>Whatsapp:</label>
+                  </div>
+
+                  {errors?.telegram && (
+                    <p>Это поле обязательно к заполнению!</p>
+                  )}
+                </div>
+                <div
+                  className={`${
+                    errors?.phone_number
+                      ? s.error
+                      : s.purchase_inner_froms_inputs
+                  }`}
+                >
+                  <label>WhatsApp<span>*</span></label>
+                  <div className={s.icon_input}>
+                    <img src="/assets/icons/whatsapp.svg" alt="whatsapp" />
+                  
               <input
                 type="text"
                 name="whatsapp"
@@ -98,27 +160,25 @@ const Illinois = () => {
                 value={formData?.whatsapp}
                 onChange={handleChange}
               />
-              <br />
-              <label className={s.qwe}>
-                <p>Положение дел</p>
-                <input
-                  type="checkbox"
-                  name="status"
-                  checked={formData?.status}
-                  onChange={() =>
-                    handleChange({
-                      target: { name: "status", value: !formData?.status },
-                    })
-                  }
-                />
-              </label>
-              <br />
-              <button type="submit">Отправить</button>
-            </form>
+                  </div>
+
+                  {errors?.phone_number && (
+                    <p>Это поле обязательно к заполнению!</p>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div>
+              <button type="submit" className={s.button}>
+                <span>Отправить</span>
+                <img src="/assets/icons/rightIcon.svg" alt="logo" />
+              </button>
+            </div>
           </div>
         </div>
-      )}
-    </div>
+        
+      </form>
+    </>
   );
 };
 
