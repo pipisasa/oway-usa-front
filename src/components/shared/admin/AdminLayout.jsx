@@ -59,7 +59,7 @@ export default function AdminLayout({ children }) {
     },
     {
       href: "/admin/illinois",
-      label: "Клиенты с Иллинойса",
+      label: "Клиенты за Иллинойс",
       icon: "/assets/icons/admin-icons/склад.svg",
     },
   ];

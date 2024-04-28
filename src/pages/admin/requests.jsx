@@ -27,11 +27,9 @@ export default function IncommingRequests() {
       ? true
       : request.is_paid.toString() === filter
   );
-  console.log(filteredRequests);
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
-  console.log();
 
   return (
     <div className={s.requests}>
