@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
-import Modal from "../Modal";
-import { RxCross2 } from "react-icons/rx";
 import Loading from "./Loading";
 import { Pagination } from "@nextui-org/react";
+import WerehousesModal from "./modals/WarehousesModal";
 
 export default function WarehousesProductsTable({
   warehouses,
@@ -30,10 +29,6 @@ export default function WarehousesProductsTable({
     setSelectedWarehouse(warehouse);
   };
 
-  const handleCloseModal = () => {
-    setSelectedWarehouse(null);
-  };
-
   if (isLoading) {
     return <Loading />;
   }
@@ -48,13 +43,13 @@ export default function WarehousesProductsTable({
         <thead>
           <tr>
             <th>Пользователь</th>
-            <th>Название товара</th>
-            <th>Дата отправки</th>
-            <th>Адрес получения</th>
+            <th>Название посылки</th>
+            <th>Адрес отправки</th>
+            <th>Адрес прибытия</th>
             <th>Вес (кг)</th>
             <th>Трек-номер</th>
             <th>Статус</th>
-            <th>Комментарий</th>
+            <th>Действие</th>
           </tr>
         </thead>
         <tbody>
@@ -67,7 +62,7 @@ export default function WarehousesProductsTable({
                 #{warehouse.unique_id_user}
               </td>
               <td>{warehouse.name}</td>
-              <td>{warehouse.date_sent}</td>
+              <td>{warehouse.country.name}</td>
               <td>{warehouse.address}</td>
               <td>{warehouse.weight}</td>
               <td>{warehouse.track_number}</td>
@@ -101,20 +96,12 @@ export default function WarehousesProductsTable({
           onChange={(page) => setCurrent(page)}
         />
       </div>
+
       {selectedWarehouse && (
-        <div className={s.modal}>
-          <Modal isOpen={selectedWarehouse} onClose={handleCloseModal}>
-            <div className={s.modalContent}>
-              <div className={s.btn_center}>
-                <button onClick={handleCloseModal} className={s.close_btn}>
-                  <RxCross2 size={20} />
-                </button>
-              </div>
-              <h3>Комментарий</h3>
-              <p>{selectedWarehouse.comments}</p>
-            </div>
-          </Modal>
-        </div>
+        <WerehousesModal
+          warehouse={selectedWarehouse}
+          onClose={() => setSelectedWarehouse(null)}
+        />
       )}
     </div>
   );
