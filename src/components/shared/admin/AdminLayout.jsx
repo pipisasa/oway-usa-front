@@ -56,9 +56,7 @@ export default function AdminLayout({ children }) {
     {
       href: "/admin/companies",
       label: "Логотипы компаний",
-      icon: <AiFillFileImage          
-      size={22}
-      color={isActive("/user/my-requests") ? "#FFF" : "#027ddb"}/>,
+      icon: "/assets/icons/city.svg",
     },
     {
       href: "/admin/illinois",
