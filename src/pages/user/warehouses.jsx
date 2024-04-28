@@ -6,7 +6,7 @@ export default function Contacts() {
   const [isAuthorized, setIsAuthorized] = useState(null);
 
   useEffect(() => {
-    setIsAuthorized(getCookie("accessToken") !== null);
+    setIsAuthorized(getCookie("/accessToken") !== null);
   }, []);
 
   const warehouses = [
@@ -18,6 +18,7 @@ export default function Contacts() {
       phone: "872 710 07 10",
       city: "Chicago",
       zip: "60625",
+      qwe: "State",
       email: "owayusa1@gmail.com",
       words: "Email",
       logo: "/assets/icons/contact_email.svg",
@@ -32,6 +33,7 @@ export default function Contacts() {
       zip: "60625",
       unitcode: "205",
       text: "Unit",
+      qwe: "State",
       email: "owayusa1@gmail.com",
       words: "Email",
       logo: "/assets/icons/unit.svg",
@@ -40,12 +42,13 @@ export default function Contacts() {
       img: "/assets/icons/footer/usa.svg",
       title: "Пункт приема онлайн заказов в Delaware",
       address: "4730DN Kimball Ave",
-      state: "Dalawere",
+      state: "Delawere",
       phone: "+1 872 710 0710 ",
       city: "Chicago",
       zip: "19701",
       unitcode: "PR",
       text: "Unit",
+      qwe: "State",
       email: "owayusa1@gmail.com",
       words: "Email",
       logo: "/assets/icons/unit.svg",
@@ -60,6 +63,35 @@ export default function Contacts() {
       zip: "34130",
       text: "Unit",
       unitcode: "17C",
+      qwe: "Region",
+      email: "owayusa1@gmail.com",
+      words: "Email",
+      logo: "/assets/icons/unit.svg",
+    },
+    {
+      img: "/assets/icons/footer/1.svg",
+      title: "Пункты приема в Москве:",
+      address: "Перовская 26 корпус 1",
+      state: "Московский регион",
+      phone: "+7 925 644 6608",
+      city: "Москва",
+      zip: "111398",
+      unitcode: "5",
+      text: "Unit",
+      qwe: "Region",
+      email: "owayusamoscow@gmail.com",
+      words: "Email",
+      logo: "/assets/icons/unit.svg",
+    },
+    {
+      img: "/assets/icons/footer/2.svg",
+      title: "Пункты приема в Кыргызстане:",
+      address: "ул. Токтогула 211",
+      state: "Чуй",
+      phone: "+996 709 969 621",
+      city: "Бишкек",
+      zip: "",
+      qwe: "Region",
       email: "owayusa1@gmail.com",
       words: "Email",
       logo: "/assets/icons/unit.svg",

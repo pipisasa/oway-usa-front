@@ -50,6 +50,10 @@
       scroll-snap-align: start;
       position: relative;
 
+      img {
+        width: 24px;
+      }
+
       .card_header {
         display: flex;
         align-items: center;
