@@ -102,7 +102,7 @@ export default function Footer() {
               <Link href="/">Заявление о возврате средств</Link>
               <Link href="/">Реквизиты компании</Link>
               <Link href="/size-chart">Таблица размеров</Link>
-              <Illinois />
+              {/* <Illinois /> */}
             </div>
             <Mobile />
           </div>
