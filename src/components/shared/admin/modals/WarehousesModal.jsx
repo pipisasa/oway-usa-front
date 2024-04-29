@@ -1,11 +1,40 @@
 import React, { useState } from "react";
+import axios from "axios";
 import s from "@/styles/admin/RequestsModal.module.scss";
 import { RxCross1 } from "react-icons/rx";
+import { getCookie } from "@/utils/cookieHelpers";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function WerehousesModal({ onClose, warehouse }) {
+export default function WarehousesModal({ onClose, warehouse }) {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isEditing, setIsEditing] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [currentStatus, setCurrentStatus] = useState(warehouse.status.id);
+  const [originalStatus, setOriginalStatus] = useState(warehouse.status.id);
+  const [showStatusOptions, setShowStatusOptions] = useState(false);
+  const [countries, setCountries] = useState([
+    { id: 3, name: "США" },
+    { id: 4, name: "Турция" },
+  ]);
+
+  const [previewImageUrl, setPreviewImageUrl] = useState(
+    API_URL + warehouse.image
+  );
+
+  const handleStatusClick = (statusId) => {
+    setCurrentStatus(statusId);
+    setShowStatusOptions(false);
+  };
 
   const [editData, setEditData] = useState({
     url: warehouse.url,
@@ -16,10 +45,20 @@ export default function WerehousesModal({ onClose, warehouse }) {
     weight: warehouse.weight,
     date_sent: warehouse.date_sent,
     date_arrived: warehouse.date_arrived,
-    country: warehouse.country.name,
+    country: warehouse.country.id,
     address: warehouse.address,
     comments: warehouse.comments,
+    status: currentStatus,
   });
+
+  const statuses = [
+    { id: 8, name: "Доставлено" },
+    { id: 7, name: "Отправлено курьерской службой" },
+    { id: 6, name: "Получен на складе получателя" },
+    { id: 5, name: "Отправлен" },
+    { id: 4, name: "Получен на складе отправителя" },
+    { id: 3, name: "Готов к выдаче" },
+  ];
 
   const handleInputChange = (e) => {
     setEditData({ ...editData, [e.target.id]: e.target.value });
@@ -40,14 +79,50 @@ export default function WerehousesModal({ onClose, warehouse }) {
       weight: warehouse.weight,
       date_sent: warehouse.date_sent,
       date_arrived: warehouse.date_arrived,
-      country: warehouse.country.name,
+      country: warehouse.country.id,
       address: warehouse.address,
       comments: warehouse.comments,
+      status: currentStatus,
     });
   };
 
-  const handleSave = () => {
-    setIsEditing(false);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+    const imageUrl = URL.createObjectURL(file);
+    setPreviewImageUrl(imageUrl);
+  };
+
+  const handleSave = async () => {
+    const formData = new FormData();
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+    Object.keys(editData).forEach((key) => {
+      if (key === "status" && currentStatus !== originalStatus) {
+        formData.append(key, currentStatus);
+      } else {
+        formData.append(key, editData[key]);
+      }
+    });
+
+    const accessToken = getCookie("accessToken");
+    try {
+      await axios.patch(
+        `${API_URL}/api/warehouses/update/${warehouse.id}/`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      onClose();
+      window.location.reload();
+    } catch (error) {
+      console.error("Ошибка при обновлении данных:", error);
+    }
   };
 
   return (
@@ -64,17 +139,38 @@ export default function WerehousesModal({ onClose, warehouse }) {
           <div className={s.left_block}>
             <div className={s.input_label}>
               <label>Фотография</label>
-              <img src={API_URL + warehouse.image} alt="img" />
+              <img onClick={onOpen} src={previewImageUrl} alt="Preview img" />
+              <input
+                id="fileInput"
+                className="hidden"
+                type="file"
+                onChange={handleImageChange}
+              />
+              <label htmlFor="fileInput" className={s.change_img}>
+                Изменить фотографию
+              </label>
             </div>
             <div className={s.input_label}>
               <label htmlFor="">Статус посылки</label>
 
-              {warehouse.status.name === "Доставлено" ? (
-                <button className={s.button_true}>Доставлено</button>
-              ) : (
-                <button className={s.button_false}>
-                  {warehouse.status.name}
-                </button>
+              <button
+                onClick={() => setShowStatusOptions(!showStatusOptions)}
+                className={s.button_default}
+              >
+                {statuses.find((status) => status.id === currentStatus)?.name ||
+                  warehouse.status.name}
+              </button>
+              {showStatusOptions && (
+                <div className={s.select_status}>
+                  {statuses.map((status) => (
+                    <button
+                      key={status.id}
+                      onClick={() => handleStatusClick(status.id)}
+                    >
+                      {status.name}
+                    </button>
+                  ))}
+                </div>
               )}
             </div>
           </div>
@@ -159,13 +255,20 @@ export default function WerehousesModal({ onClose, warehouse }) {
             </div>
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
-                <label htmlFor="country">Адрес отправки</label>
-                <input
+                <label htmlFor="country">Страна отправки</label>
+                <select
                   id="country"
-                  value={editData.country.name || "Не указан"}
+                  name="country"
+                  value={editData.country}
                   onChange={handleInputChange}
-                  readOnly={!isEditing}
-                />
+                  disabled={!isEditing}
+                >
+                  {countries.map((country) => (
+                    <option key={country.id} value={country.id}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className={s.input_label}>
                 <label htmlFor="address">Адрес прибытия</label>
@@ -214,6 +317,23 @@ export default function WerehousesModal({ onClose, warehouse }) {
             )}
           </form>
         </div>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1"></ModalHeader>
+                <ModalBody>
+                  <img src={previewImageUrl} alt="картинка" />
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Закрыть
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
       </section>
     </div>
   );

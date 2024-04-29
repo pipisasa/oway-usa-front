@@ -6,7 +6,7 @@ export default function Contacts() {
   const [isAuthorized, setIsAuthorized] = useState(null);
 
   useEffect(() => {
-    setIsAuthorized(getCookie("/accessToken") !== null);
+    setIsAuthorized(getCookie("accessToken") !== null);
   }, []);
 
   const warehouses = [
@@ -124,7 +124,7 @@ export default function Contacts() {
   }
 
   return (
-    <section className={`${s.address_container} container`}>
+    <section className={`${s.address_container} `}>
       <div className={s.container_header}>
         <div className={s.slider_btns}>
           <button onClick={scrollLeft}>

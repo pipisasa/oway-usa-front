@@ -15,14 +15,13 @@ export default function AddShopsModal() {
   const { categories } = useCategories();
   const { countries } = useCountries();
   const { addShops } = useShops();
-  const [logoPreview, setLogoPreview] = useState(""); // Состояние для превью картинки
+  const [logoPreview, setLogoPreview] = useState("");
 
-  // select-country
   const [selectedOption, setSelectedOption] = useState("");
   const handleChangeCountry = (e) => {
     setSelectedOption(e);
   };
-  // select-category
+
   const [selectedOption1, setSelectedOption1] = useState("");
   const handleChangeCat = (e) => {
     setSelectedOption1(e);

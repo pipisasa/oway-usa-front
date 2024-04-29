@@ -3,11 +3,18 @@ import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import WarehousesProductsTable from "@/components/shared/admin/WarehousesProductsTable";
 import useWarehouses from "@/hooks/admin/useWarehouses";
 import CustomSelect from "@/components/partials/CustomSelect";
+import AksesSelect from "@/components/shared/AksesSelect";
 
 export default function AdminWarehousesPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { warehouses, fetchWarehouses, isLoading, error, count } =
-    useWarehouses(currentPage);
+  const {
+    warehouses,
+    fetchWarehouses,
+    deleteWarehouse,
+    isLoading,
+    error,
+    count,
+  } = useWarehouses(currentPage);
   const [nameFilter, setNameFilter] = useState("");
   const [trackNumberFilter, setTrackNumberFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
@@ -82,6 +89,7 @@ export default function AdminWarehousesPage() {
         count={count}
         warehouses={warehouses}
         fetchWarehouses={fetchWarehouses}
+        deleteWarehouse={deleteWarehouse}
         nameFilter={nameFilter}
         trackNumberFilter={trackNumberFilter}
         statusFilter={statusFilter}
