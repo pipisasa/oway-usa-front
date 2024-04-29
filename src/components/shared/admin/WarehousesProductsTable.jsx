@@ -6,6 +6,7 @@ import WerehousesModal from "./modals/WarehousesModal";
 
 export default function WarehousesProductsTable({
   warehouses,
+  deleteWarehouse,
   isLoading,
   error,
   current,
@@ -76,14 +77,18 @@ export default function WarehousesProductsTable({
               >
                 {warehouse.status?.name}
               </td>
-              <td className="flex items-center ">
+              <td className="flex items-center">
                 <button
                   className={s.btn}
                   onClick={() => handleDetailsClick(warehouse)}
                 >
                   Подробнее
                 </button>
-                <button style={{ marginLeft: "10px" }} className={s.btn}>
+                <button
+                  style={{ marginLeft: "10px" }}
+                  className={s.btn}
+                  onClick={() => deleteWarehouse(warehouse.id)}
+                >
                   Удалить
                 </button>
               </td>
