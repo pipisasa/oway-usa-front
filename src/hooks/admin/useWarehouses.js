@@ -73,7 +73,7 @@ const useWarehouses = (currentPage) => {
     formData.append("date_sent", date_sent);
     formData.append("date_arrived", date_arrived);
     formData.append("articul", articul);
-    formData.append("is_parcels", is_parcels);
+    formData.append("is_parcels", !!is_parcels);
 
     setIsLoading(true);
     setError(null);
@@ -111,7 +111,7 @@ const useWarehouses = (currentPage) => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      fetchWarehouses(); // Обновляем данные после удаления
+      fetchWarehouses();
       setIsSuccess(true);
     } catch (err) {
       setError(err.message);

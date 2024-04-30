@@ -51,6 +51,7 @@ export default function UserWarehouses() {
                 </button>
                 <WarehouseProductsModalV2
                   clientId={warehouse.user.unique_id}
+                  warehouseId={warehouse.id}
                   closeModal={closeModal}
                 />
               </td>
