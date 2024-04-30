@@ -4,6 +4,7 @@ import { RxCross2 } from "react-icons/rx";
 import Modal from "../../Modal";
 
 export default function UserDetailModal({ userData, close, editUser }) {
+  const [imagePreviews, setImagePreviews] = useState({});
   const [firstName, setFirstName] = useState(userData.first_name);
   const [lastName, setLastName] = useState(userData.last_name);
   const [email, setEmail] = useState(userData.email);
@@ -23,6 +24,20 @@ export default function UserDetailModal({ userData, close, editUser }) {
       back_image: passportBack,
     };
     editUser(editedUserData);
+  };
+
+  const handleImageChange = (event, type) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreviews({
+        ...imagePreviews,
+        [type]: reader.result,
+      });
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -70,20 +85,38 @@ export default function UserDetailModal({ userData, close, editUser }) {
                 />
               </div>
               <div>
-                <label>Лицевая сторона паспорта</label>
+                <label htmlFor="">Лицевая сторона паспорта</label>
+                <label className="custom-file-upload">
+                
                 <input
-                  type="text"
-                  value={passportFront}
-                  onChange={(e) => setPassportFront(e.target.value)}
-                />
+                  type="file"
+                  id="front_image"
+                  name="front_image"
+                  onChange={(e) => handleImageChange(e, "front_image")}
+                  />
+                   <img src="/assets/icons/selectimg.svg" alt="select img" />
+                 <span>Выбрать картинку</span>
+                  </label>
+                {imagePreviews.front_image && (
+                  <img src={imagePreviews.front_image} alt="Front Image Preview" />
+                )}
               </div>
               <div>
-                <label>Обратная сторона паспорта</label>
+                <label htmlFor="">Обратная сторона паспорта</label>
+                <label className="custom-file-upload">
+
                 <input
-                  type="text"
-                  value={passportBack}
-                  onChange={(e) => setPassportBack(e.target.value)}
-                />
+                  type="file"
+                  id="back_image"
+                  name="back_image"
+                  onChange={(e) => handleImageChange(e, "back_image")}
+                  />
+                 <img src="/assets/icons/selectimg.svg" alt="select img" />
+                 <span>Выбрать картинку</span>
+                  </label>
+                {imagePreviews.back_image && (
+                  <img src={imagePreviews.back_image} alt="Back Image Preview" />
+                )}
               </div>
             </div>
             <div>

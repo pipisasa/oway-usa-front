@@ -203,6 +203,14 @@ const Step1 = ({
             <span>Выбрать картинку</span>
           </label>
         </div>
+        {formData.image && (
+        <div></div>
+        )}
+        {formData.image && (
+          <div className={c.image_preview}>
+            <img src={URL.createObjectURL(formData.image)} alt="preview" />
+          </div>
+        )}
         <div>
           <label htmlFor="">Адрес заказа</label>
           <input
