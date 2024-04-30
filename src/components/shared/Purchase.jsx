@@ -34,18 +34,16 @@ export default function Purchase() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    console.log("Выбранный файл:", file); // Логирование выбранного файла
+    console.log("Выбранный файл:", file);
     setSelectedFile(file);
     setPreviewImage(URL.createObjectURL(file));
     handleChange(e);
   };
 
   const onSubmitHandler = async (data) => {
-    console.log("Отправка данных:", data); // Логирование данных формы перед отправкой
-    console.log("Отправка файла:", selectedFile); // Логирование файла перед отправкой
     await submitPurchase({
       ...data,
-      purchase_image: selectedFile, // Передаём выбранный файл
+      purchase_image: selectedFile,
     });
   };
 
@@ -154,7 +152,9 @@ export default function Purchase() {
                     errors?.email ? s.error : s.purchase_inner_froms_inputs
                   }`}
                 >
-                  <label>Электронная почта<span>*</span></label>
+                  <label>
+                    Электронная почта<span>*</span>
+                  </label>
                   <input
                     id="email"
                     name="email"
@@ -240,7 +240,10 @@ export default function Purchase() {
                 }`}
               >
                 <label>Добавьте скриншот</label>
-                <label className="custom-file-upload" style={{marginTop: "-3px"}}>
+                <label
+                  className="custom-file-upload"
+                  style={{ marginTop: "-3px" }}
+                >
                   <input
                     id="purchase_image"
                     type="file"
