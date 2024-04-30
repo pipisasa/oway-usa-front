@@ -8,8 +8,12 @@ import CustomSelect from "@/components/partials/Select";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
 import SearchSelect from "@/components/partials/SearchSelect";
 
-export default function WarehouseProductsModalV2({ closeModal, clientId }) {
-  const { addWarehouses } = useWarehouses();
+export default function WarehouseProductsModalV2({
+  closeModal,
+  clientId,
+  warehouseId,
+}) {
+  const { addWarehouses, deleteWarehouse } = useWarehouses();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -64,6 +68,8 @@ export default function WarehouseProductsModalV2({ closeModal, clientId }) {
     }));
   };
 
+  console.log(warehouseId, "sadfsdfsfasdf");
+
   const handleSubmit = async () => {
     await addWarehouses(
       formData.name,
@@ -101,6 +107,8 @@ export default function WarehouseProductsModalV2({ closeModal, clientId }) {
     });
     setCurrentStep(1);
     setIsOpen(false);
+    deleteWarehouse(warehouseId);
+    window.location.reload();
   };
 
   const renderStep = () => {
