@@ -50,6 +50,7 @@ export default function Illinois() {
       );
       console.log("Обновленные данные:", response.data);
       setModalOpen(false); // Закрыть модальное окно после обновления
+      window.location.reload()
     } catch (err) {
       console.error("Ошибка при обновлении данных:", err);
     }
