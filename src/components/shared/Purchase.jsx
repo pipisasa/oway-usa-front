@@ -33,8 +33,20 @@ export default function Purchase() {
   }, [isSubmitted]);
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    let file = e.target.files[0];
     console.log("Выбранный файл:", file);
+
+    const maxFilenameLength = 100;
+    let filename = file.name;
+    if (filename.length > maxFilenameLength) {
+      const fileExtension = filename.slice(filename.lastIndexOf("."));
+      filename =
+        filename.substring(0, maxFilenameLength - fileExtension.length) +
+        fileExtension;
+      file = new File([file], filename, { type: file.type });
+      console.log("Имя файла было сокращено:", file.name);
+    }
+
     setSelectedFile(file);
     setPreviewImage(URL.createObjectURL(file));
     handleChange(e);
@@ -178,7 +190,7 @@ export default function Purchase() {
                   id="description"
                   name="description"
                   type="text"
-                  placeholder="Введите комментарий"
+                  placeholder="Введите комментарий, укажите размер, цвет и т.д."
                   onChange={handleChange}
                   {...register("description", { required: true })}
                 />
