@@ -134,16 +134,23 @@ export default function TheHeader() {
 
   return (
     <div className={s.header}>
-      <h1>{currentPageTitle}</h1>
+      {currentPageTitle && <h1>{currentPageTitle}</h1>
+      }
+       {!currentPageTitle && <h1>Таблица размеров</h1>
+      }
       <div className={s.table}>
         {categories.map((category, index) => (
           <div key={index} className={s.table_text}>
+            <div className={s.border}>
             <h2>{category.title}</h2>
+            </div>
+            <div className={s.border}>
             {category.links.map((link, linkIndex) => (
               <Link key={linkIndex} href={link.href} passHref>
                 <p>{link.text}</p>
               </Link>
             ))}
+            </div>
           </div>
         ))}
       </div>
