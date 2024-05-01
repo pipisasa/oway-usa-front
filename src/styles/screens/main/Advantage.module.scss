@@ -114,6 +114,10 @@
         flex-direction: column;
         margin-top: 32px;
 
+        .menu-item:last-child {
+          display: none;
+        }
+
         .menu-item {
           display: flex;
           padding: 24px;
