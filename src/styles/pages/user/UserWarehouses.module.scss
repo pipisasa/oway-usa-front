@@ -36,7 +36,11 @@
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
-      display: none; /* Для WebKit-браузеров */
+      display: none;
+    }
+
+    .address_card:nth-child(5) {
+      min-width: 500px !important;
     }
 
     .address_card {
@@ -160,6 +164,10 @@
     }
     .address_cards {
       width: 100%;
+
+      .address_card:nth-child(5) {
+        min-width: 420px !important;
+      }
 
       .address_card {
         padding: 20px;
