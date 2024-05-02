@@ -9,8 +9,8 @@ export default function Purchase() {
   const { handleChange, submitPurchase, isSubmitted } = usePurchase();
   const [isOpen, setIsOpen] = useState(false);
   const [mobileForm, setMobileForm] = useState(false);
-  const [previewImage, setPreviewImage] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewImages, setPreviewImages] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const {
     register,
@@ -33,18 +33,24 @@ export default function Purchase() {
   }, [isSubmitted]);
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    console.log("Выбранный файл:", file);
-    setSelectedFile(file);
-    setPreviewImage(URL.createObjectURL(file));
+    const files = e.target.files;
+    const selectedFilesArray = Array.from(files).slice(0, 2); 
+    setSelectedFiles(selectedFilesArray);
+    const previewImagesArray = selectedFilesArray.map((file) =>
+      URL.createObjectURL(file)
+    );
+    setPreviewImages(previewImagesArray);
     handleChange(e);
   };
 
   const onSubmitHandler = async (data) => {
-    await submitPurchase({
-      ...data,
-      purchase_image: selectedFile,
+    const formData = new FormData();
+    selectedFiles.forEach((file, index) => {
+      formData.append(`purchase_image${index + 1}`, file);
     });
+    formData.append("other_data", JSON.stringify(data));
+
+    await submitPurchase(formData);
   };
 
   return (
@@ -248,17 +254,20 @@ export default function Purchase() {
                     id="purchase_image"
                     type="file"
                     onChange={handleFileChange}
+                    multiple
                   />
                   <img src="/assets/icons/selectimg.svg" alt="select img" />
                   <span>Выбрать картинку</span>
                 </label>
 
-                {previewImage && (
+                {previewImages?.map((previewImage, index) => (
+                  
                   <ImagePreviewModal
+                    key={index}
                     previewImage={previewImage}
                     onClose={closeModal}
                   />
-                )}
+                ))}
 
                 {errors?.purchase_image && <p>Выберите фото обязательно!</p>}
                 <p>

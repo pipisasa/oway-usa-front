@@ -72,14 +72,14 @@ const service = [
       "Это выполняется с целью снижения общего веса посылки, что уменшает вес и стоимости доставки для вас.",
   },
   {
-    icon: "/assets/icons/adv_box.svg",
+    icon: "/assets/icons/footer/Warehouse.svg",
     img: "/assets/images/adv_boxes.png",
     text: "Хранение входящих посылок на 40 дней",
     answer:
       "Мы можем хранить ваши посылки до определенного времени и также до прибытие других ваших грузов с целью вместе отправки.",
   },
   {
-    icon: "/assets/icons/adv_box.svg",
+    icon: "/assets/icons/footer/Deliveryaddress.svg",
     img: "/assets/images/adv_boxes.png",
     text: "Изменение адреса получателя",
     answer:

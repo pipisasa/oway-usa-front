@@ -17,6 +17,7 @@ export default function WarehousesProductsTable({
   countryFilter,
 }) {
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
+  const [confirmDeleteWarehouse, setConfirmDeleteWarehouse] = useState(null);
 
   const filteredWarehouses = warehouses?.results?.filter(
     (warehouse) =>
@@ -28,6 +29,15 @@ export default function WarehousesProductsTable({
 
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
+  };
+
+  const handleDeleteConfirmation = (warehouse) => {
+    setConfirmDeleteWarehouse(warehouse);
+  };
+
+  const handleDelete = (warehouseId) => {
+    deleteWarehouse(warehouseId);
+    setConfirmDeleteWarehouse(null);
   };
 
   if (isLoading) {
@@ -87,7 +97,7 @@ export default function WarehousesProductsTable({
                 <button
                   style={{ marginLeft: "10px" }}
                   className={s.btn}
-                  onClick={() => deleteWarehouse(warehouse.id)}
+                  onClick={() => handleDeleteConfirmation(warehouse)}
                 >
                   Удалить
                 </button>
@@ -110,6 +120,18 @@ export default function WarehousesProductsTable({
           warehouse={selectedWarehouse}
           onClose={() => setSelectedWarehouse(null)}
         />
+      )}
+
+      {confirmDeleteWarehouse && (
+        <div className={s.confirmDeleteModal}>
+          <p>Вы уверены, что хотите удалить этот товар?</p>
+          <div>
+            <button onClick={() => handleDelete(confirmDeleteWarehouse.id)}>
+              Да
+            </button>
+            <button onClick={() => setConfirmDeleteWarehouse(null)}>Отмена</button>
+          </div>
+        </div>
       )}
     </div>
   );

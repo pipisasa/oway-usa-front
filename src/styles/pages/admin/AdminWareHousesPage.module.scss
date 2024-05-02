@@ -103,11 +103,13 @@
     border-radius: 12px;
     background: var(--white, #fff);
     width: 100%;
+    gap: 10px;
     border-collapse: collapse;
 
     .btn {
       border-radius: 12px;
       border: 1px solid var(--blue, #027ddb);
+      background-color: #fff;
       padding: 10px 36px;
       color: var(--black, #001526);
       font-size: 14px;
@@ -203,6 +205,38 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+}
+.confirmDeleteModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirmDeleteModal p {
+  margin-bottom: 20px;
+}
+
+.confirmDeleteModal button {
+  background-color: #369ef4;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.confirmDeleteModal button:hover {
+  background-color: #2f7bd3;
+}
+
+.confirmDeleteModal button + button {
+  margin-left: 10px;
 }
 
 .qwemodalHeader {
