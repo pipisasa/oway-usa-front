@@ -35,7 +35,7 @@ export default function AdminLayout({ children }) {
     },
     {
       href: "/admin/warehouses",
-      label: "Управление складами",
+      label: "Склад",
       icon: "/assets/icons/admin-icons/склад.svg",
     },
     {
@@ -78,7 +78,7 @@ export default function AdminLayout({ children }) {
               {links.map((link) => (
                 <Link key={link.label} href={link.href}>
                   <li className={isActive(link.href) ? s.active : ""}>
-                  {typeof link.icon === "string" ? (
+                    {typeof link.icon === "string" ? (
                       <img
                         src={link.icon}
                         alt="icon"

@@ -20,8 +20,6 @@ export default function IncommingRequests() {
     setIsModalVisible(true);
   };
 
-  console.log(data);
-
   const filteredRequests = data.results.filter((request) =>
     request.name_of_purchase
       ?.toLowerCase()
@@ -111,13 +109,19 @@ export default function IncommingRequests() {
                   <p style={{ color: "#06DB02" }}>Оплачено</p>
                 )}
               </td>
-              <td>
+              <td className="flex items-center">
                 <button
                   className={s.btn}
                   onClick={() => handleOpenModal(request)}
                 >
                   <img src="/assets/icons/icon.svg" alt="more" />
                 </button>
+                {/* <button
+                  onClick={() => handleDeleteRequest(request.id)}
+                  className={s.delete}
+                >
+                  <img src="/assets/icons/delete.svg" alt="" />
+                </button> */}
               </td>
             </tr>
           ))}

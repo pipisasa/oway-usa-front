@@ -91,11 +91,11 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
                 />
               </div>
               <div>
-                <label htmlFor="comments">Трeк-код</label>
+                <label htmlFor="comments">Комментарий</label>
                 <input
                   id="comments"
                   type="text"
-                  placeholder="Вставьте трeк-код"
+                  placeholder="Комментарий"
                   value={comments}
                   onChange={(e) => setComments(e.target.value)}
                 />
