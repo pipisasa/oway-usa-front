@@ -24,7 +24,7 @@ const CustomSelect = ({ options, value, onChange }) => {
             alt="qwe"
             style={
               isAdminWarehousesPage
-                ? { marginTop: "0px", marginLeft: "calc(100% - 25px)" }
+                ? { display: "none" }
                 : { marginTop: "-25px", marginLeft: "calc(100% - 25px)" }
             }
           />

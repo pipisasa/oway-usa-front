@@ -50,7 +50,7 @@ export default function Illinois() {
       );
       console.log("Обновленные данные:", response.data);
       setModalOpen(false); // Закрыть модальное окно после обновления
-      window.location.reload()
+      window.location.reload();
     } catch (err) {
       console.error("Ошибка при обновлении данных:", err);
     }
@@ -142,9 +142,9 @@ export default function Illinois() {
         <table>
           <thead>
             <tr>
-              <th>ID</th>
               <th>ФИО</th>
               <th>Адрес</th>
+              <th>Telegram</th>
               <th>Номер телефона</th>
               <th>Вес груза</th>
               <th>Действия</th>
@@ -153,9 +153,9 @@ export default function Illinois() {
           <tbody>
             {data.map((item) => (
               <tr key={item.id}>
-                <td>{item.id}</td>
                 <td>{item.full_name}</td>
                 <td>{item.address}</td>
+                <td>{item.telegram}</td>
                 <td>{item.phone_number}</td>
                 <td>{item.cargo_weight}</td>
                 <td>

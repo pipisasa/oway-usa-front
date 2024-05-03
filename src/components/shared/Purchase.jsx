@@ -9,8 +9,11 @@ export default function Purchase() {
   const { handleChange, submitPurchase, isSubmitted } = usePurchase();
   const [isOpen, setIsOpen] = useState(false);
   const [mobileForm, setMobileForm] = useState(false);
-  const [previewImages, setPreviewImages] = useState(null);
-  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [previewImage1, setPreviewImage1] = useState(null);
+  const [previewImage2, setPreviewImage2] = useState(null);
+  const [selectedFile1, setSelectedFile1] = useState(null);
+  const [selectedFile2, setSelectedFile2] = useState(null);
 
   const {
     register,
@@ -32,41 +35,24 @@ export default function Purchase() {
     }
   }, [isSubmitted]);
 
-  const handleFileChange = (e) => {
-    const files = e.target.files;
-    const selectedFilesArray = Array.from(files).slice(0, 2); 
-    setSelectedFiles(selectedFilesArray);
-    const previewImagesArray = selectedFilesArray.map((file) =>
-      URL.createObjectURL(file)
-    );
-    setPreviewImages(previewImagesArray);
-    let file = e.target.files[0];
-    console.log("Выбранный файл:", file);
+  const handleFileChange1 = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile1(file);
+    setPreviewImage1(URL?.createObjectURL(file));
+  };
 
-    const maxFilenameLength = 100;
-    let filename = file.name;
-    if (filename.length > maxFilenameLength) {
-      const fileExtension = filename.slice(filename.lastIndexOf("."));
-      filename =
-        filename.substring(0, maxFilenameLength - fileExtension.length) +
-        fileExtension;
-      file = new File([file], filename, { type: file.type });
-      console.log("Имя файла было сокращено:", file.name);
-    }
-
-    setSelectedFiles(file);
-    setPreviewImages(URL.createObjectURL(file));
-    handleChange(e);
+  const handleFileChange2 = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile2(file);
+    setPreviewImage2(URL?.createObjectURL(file));
   };
 
   const onSubmitHandler = async (data) => {
-    const formData = new FormData();
-    selectedFiles.forEach((file, index) => {
-      formData.append(`purchase_image${index + 1}`, file);
+    await submitPurchase({
+      ...data,
+      purchase_image: selectedFile1,
+      purchase_image_2: selectedFile2,
     });
-    formData.append("other_data", JSON.stringify(data));
-
-    await submitPurchase(formData);
   };
 
   return (
@@ -200,7 +186,7 @@ export default function Purchase() {
                   id="description"
                   name="description"
                   type="text"
-                  placeholder="Введите комментарий, укажите размер, цвет и т.д."
+                  placeholder="Введите комментарий"
                   onChange={handleChange}
                   {...register("description", { required: true })}
                 />
@@ -231,6 +217,7 @@ export default function Purchase() {
                     <p>Это поле обязательно к заполнению!</p>
                   )}
                 </div>
+
                 <div
                   className={`${
                     errors?.phone_number
@@ -261,37 +248,54 @@ export default function Purchase() {
                   errors?.purchase_image ? s.errorr : s.purchase_inner_from
                 }`}
               >
-                <label>Добавьте скриншот</label>
+                <label>Добавьте первый скриншот</label>
                 <label
                   className="custom-file-upload"
                   style={{ marginTop: "-3px" }}
                 >
-                  <input
-                    id="purchase_image"
-                    type="file"
-                    onChange={handleFileChange}
-                    multiple
-                  />
+                  <input type="file" onChange={handleFileChange1} />
                   <img src="/assets/icons/selectimg.svg" alt="select img" />
                   <span>Выбрать картинку</span>
                 </label>
 
-                {previewImages?.map((previewImage, index) => (
-                  
+                {errors?.purchase_image && <p>Выберите фото обязательно!</p>}
+                {previewImage1 && (
                   <ImagePreviewModal
-                    key={index}
-                    previewImage={previewImage}
+                    previewImage={previewImage1}
                     onClose={closeModal}
                   />
-                ))}
-
-                {errors?.purchase_image && <p>Выберите фото обязательно!</p>}
-                <p>
-                  Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ |
-                  512x512
-                </p>
+                )}
               </div>
+
+              {selectedFile1 && (
+                <div
+                  className={`${
+                    errors?.purchase_image ? s.errorr : s.purchase_inner_from
+                  }`}
+                >
+                  <>
+                    <label>Добавьте второй скриншот</label>
+                    <label
+                      className="custom-file-upload"
+                      style={{ marginTop: "-3px" }}
+                    >
+                      <input type="file" onChange={handleFileChange2} />
+                      <img src="/assets/icons/selectimg.svg" alt="select img" />
+                      <span>Выбрать картинку</span>
+                    </label>
+                    {previewImage2 && (
+                      <ImagePreviewModal
+                        previewImage={previewImage2}
+                        onClose={closeModal}
+                      />
+                    )}
+                  </>
+                </div>
+              )}
             </div>
+            <p style={{ marginTop: "10px" }}>
+              Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512
+            </p>
             <div>
               <button type="submit" className={s.button}>
                 <span>Далее</span>

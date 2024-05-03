@@ -42,7 +42,7 @@ export default function Contacts() {
       img: "assets/icons/footer/usa.svg",
       title: "Пункт приема онлайн заказов в Delaware",
       address: "4730DN Kimball Ave",
-      state: "Delawere",
+      state: "Delaware",
       phone: "+1 872 710 0710 ",
       city: "Bear",
       zip: "19701",

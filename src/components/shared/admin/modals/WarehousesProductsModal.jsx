@@ -8,9 +8,11 @@ import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
 import SearchSelect from "@/components/partials/SearchSelect";
+import ImagePreviewModal from "../../ImagePreviewModal";
 
 export default function WarehouseProductsModal() {
   const { addWarehouses } = useWarehouses();
+  const [previewImage, setPreviewImage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -55,12 +57,31 @@ export default function WarehouseProductsModal() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    if (name === "url") {
+      if (value && !value.startsWith("https://")) {
+        return;
+      }
+    }
+    if (name === "date_sent" || name === "date_arrived") {
+      let newValue = value
+        .replace(/[^\d.]/g, "")
+        .replace(/^(\d{2})(\d)/, "$1.$2")
+        .replace(/^(\d{2}\.\d{2})(\d)/, "$1.$2");
 
+      if (newValue.length > 10) {
+        newValue = newValue.substring(0, 10);
+      }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: newValue,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData((prevData) => ({
@@ -105,6 +126,9 @@ export default function WarehouseProductsModal() {
     setCurrentStep(1);
     setIsOpen(false);
   };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const renderStep = () => {
     switch (currentStep) {
@@ -115,6 +139,7 @@ export default function WarehouseProductsModal() {
             handleChange={handleChange}
             handleImageChange={handleImageChange}
             nextStep={nextStep}
+            closeModal={closeModal}
             countries={countries}
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}
@@ -164,6 +189,7 @@ const Step1 = ({
   nextStep,
   countries,
   selectedOption,
+  closeModal,
   handleChangeCountry,
   setSelectedOption,
 }) => (
@@ -197,15 +223,14 @@ const Step1 = ({
             <span>Выбрать картинку</span>
           </label>
         </div>
+        {formData.image && <div></div>}
         {formData.image && (
-        <div></div>
+          <ImagePreviewModal
+            previewImage={URL.createObjectURL(formData.image)}
+            onClose={closeModal}
+          />
         )}
-        {formData.image && (
-          <div className={c.image_preview}>
-            <img src={URL.createObjectURL(formData.image)} alt="preview" />
-          </div>
-        )}
-        
+
         <div>
           <label htmlFor="">Адрес заказа</label>
           <input
@@ -251,7 +276,7 @@ const Step1 = ({
         <div>
           <label htmlFor="">Вес</label>
           <input
-            type="text"
+            type="number"
             name="weight"
             id="weight"
             placeholder="Впишите вес"
@@ -262,7 +287,7 @@ const Step1 = ({
         <div>
           <label htmlFor="">Трек-номер</label>
           <input
-            type="text"
+            type="number"
             name="track_number"
             id="track_number"
             placeholder="Введите ID посылки"
@@ -315,7 +340,7 @@ const Step2 = ({
       <div>
         <label htmlFor="status">Стоимость к оплате</label>
         <input
-          type="text"
+          type="number"
           name="price"
           id="price"
           placeholder="Введите сумму"
@@ -326,7 +351,7 @@ const Step2 = ({
       <div>
         <label htmlFor="status">Трек код посылки</label>
         <input
-          type="text"
+          type="number"
           name="articul"
           id="articul"
           placeholder="Введите трек код посылки"

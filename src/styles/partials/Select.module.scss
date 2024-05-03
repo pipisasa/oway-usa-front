@@ -6,34 +6,33 @@
 .selected_option {
   display: flex;
   justify-content: space-between;
-  padding: 12px 20px;
+  padding: 9px 20px;
   gap: 12px;
   border-radius: 8px;
-  border: 1px solid var(--gray, #a4a4a4);
+  border: 1px solid var(--blue, #a4a4a4);
   cursor: pointer;
-
   span {
     margin: 2px;
+    border-bottom: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
+  z-index: 1000;
 }
-
-//.selected_option.open {
-//  border-bottom-left-radius: 0;
-//  border-bottom-right-radius: 0;
-//  gap: 1px;
-//}
 
 .options {
   position: absolute;
-  top: 120%;
+  top: 100%;
   left: 0;
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid var(--blue, #a4a4a4);
   border-radius: 8px;
   background-color: #fff;
   display: none;
   z-index: 999;
-  gap: 0;
+  transform: translateY(5px);
+  gap: 0 !important;
 }
 
 .custom_select.open .options {
@@ -41,13 +40,12 @@
 }
 
 .option {
-  padding: 12px 20px;
+  padding: 10px 20px;
+  gap: 0 !important;
   cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s;
-}
-
-.option:hover {
-  background: var(--blue, #027ddb);
-  color: white;
+  &:hover {
+    background-color: var(--blue, #027ddb);
+    border-radius: 4px;
+    color: white;
+  }
 }
