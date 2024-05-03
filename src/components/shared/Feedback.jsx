@@ -23,7 +23,7 @@ export default function Feedback() {
               </div>
               <div>
                 <label htmlFor="">Почта</label>
-                <input type="text" placeholder={"http:"} />
+                <input type="text" placeholder="example@email.com" />
               </div>
             </div>
             <div className={s.feed_input_blocks}>
