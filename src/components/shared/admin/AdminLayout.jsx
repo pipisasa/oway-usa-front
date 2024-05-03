@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import AdminHeader from "./AdminHeader";
 import useLogout from "@/hooks/auth/useLogout";
-import { AiFillFileImage } from "react-icons/ai";
 
 export default function AdminLayout({ children }) {
   const router = useRouter();
