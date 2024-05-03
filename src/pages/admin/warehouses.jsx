@@ -60,7 +60,7 @@ export default function AdminWarehousesPage() {
           />
         </div>
 
-        <div className={s.select}>
+        <div className={s.castomselect}>
           <CustomSelect
             options={[
               "Получен на складе получателя",
@@ -72,7 +72,7 @@ export default function AdminWarehousesPage() {
             onChange={(value) => setStatusFilter(value)}
           />
         </div>
-        <div className={s.select}>
+        <div className={s.castomselect}>
           <CustomSelect
             options={["США", "Турция"]}
             value={countryFilter || "Страна отправки"}

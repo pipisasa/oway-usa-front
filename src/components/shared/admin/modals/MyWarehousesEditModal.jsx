@@ -74,7 +74,7 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
                 <label htmlFor="tracking_number">Трeк-код</label>
                 <input
                   id="tracking_number"
-                  type="text"
+                  type="number"
                   placeholder="Вставьте трeк-код"
                   value={trackingNumber}
                   onChange={(e) => setTrackingNumber(e.target.value)}
