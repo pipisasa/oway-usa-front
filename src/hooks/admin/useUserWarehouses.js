@@ -33,7 +33,7 @@ const useUserWarehouses = () => {
 
   const deleteWarehouse = async (id) => {
     const newWarehouses = warehouses.filter((warehouse) => warehouse.id !== id);
-    setWarehouses(newWarehouses); // Optimistically update UI
+    setWarehouses(newWarehouses); 
 
     try {
       const accessToken = getCookie("accessToken");
@@ -43,7 +43,7 @@ const useUserWarehouses = () => {
       );
     } catch (err) {
       setError(err);
-      setWarehouses(warehouses); // Revert if error
+      setWarehouses(warehouses); 
     }
   };
 

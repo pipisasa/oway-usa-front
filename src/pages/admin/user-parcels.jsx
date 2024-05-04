@@ -52,6 +52,7 @@ export default function UserWarehouses() {
                 <WarehouseProductsModalV2
                   clientId={warehouse.user.unique_id}
                   warehouseId={warehouse.id}
+                  deleteWarehouse={deleteWarehouse}
                   closeModal={closeModal}
                 />
               </td>

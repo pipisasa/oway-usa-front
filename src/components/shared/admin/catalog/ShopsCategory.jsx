@@ -11,12 +11,13 @@ export default function ShopsCategory({
   const { categories, deleteCategories, setCategories } = useCategories();
   const [showModal, setShowModal] = useState(false);
   const [editCategory, setEditCategory] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletingCategoryId, setDeletingCategoryId] = useState(null);
 
   const handleCreateCategoryClick = () => {
     setShowModal(true);
     setEditCategory(null);
   };
-
 
   const handleEditCategoryClick = (category) => {
     setEditCategory(category);
@@ -30,6 +31,21 @@ export default function ShopsCategory({
       setSelectedCategory([...selectedCategory, category.id]);
     }
   };
+
+  const handleDeleteCategoryClick = (categoryId) => {
+    setShowDeleteModal(true);
+    setDeletingCategoryId(categoryId);
+  };
+
+  const handleDeleteConfirmation = () => {
+    deleteCategories(deletingCategoryId);
+    setShowDeleteModal(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+  };
+
   return (
     <div className={s.category_block}>
       <h3>Категории</h3>
@@ -51,7 +67,7 @@ export default function ShopsCategory({
                   onClick={() => handleEditCategoryClick(category)}
                 />
               </button>
-              <button onClick={() => deleteCategories(category.id)}>
+              <button onClick={() => handleDeleteCategoryClick(category.id)}>
                 <img src="/assets/icons/delete.svg" alt="" />
               </button>
             </div>
@@ -67,6 +83,17 @@ export default function ShopsCategory({
           onClose={() => setShowModal(false)}
           editCategory={editCategory}
         />
+      )}
+      {showDeleteModal && (
+        <div className={s.modal}>
+          <div className={s.modal_content}>
+            <p>Вы уверены, что хотите удалить эту категорию?</p>
+            <div>
+              <button onClick={handleDeleteConfirmation}>Да</button>
+              <button onClick={handleDeleteCancel}>Нет</button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
