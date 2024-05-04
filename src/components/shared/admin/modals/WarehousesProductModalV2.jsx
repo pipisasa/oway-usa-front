@@ -7,15 +7,17 @@ import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
 import SearchSelect from "@/components/partials/SearchSelect";
+import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
 import ImagePreviewModal from "../../ImagePreviewModal";
 
 export default function WarehouseProductsModalV2({
   closeModal,
   clientId,
   warehouseId,
+  deleteWarehouse,
 }) {
-  const { addWarehouses, deleteWarehouse } = useWarehouses();
-  const [previewImage, setPreviewImage] = useState(null);
+  const { addWarehouses } = useWarehouses();
+  // const { deleteWarehouse } = useUserWarehouses();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -56,17 +58,17 @@ export default function WarehouseProductsModalV2({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "url") {
-      if (value && !value.startsWith("https://")) {
-        return;
-      }
+  
+    if (name === "url" && value && !value.startsWith("https://")) {
+      return;
     }
+  
     if (name === "date_sent" || name === "date_arrived") {
       let newValue = value
         .replace(/[^\d.]/g, "")
         .replace(/^(\d{2})(\d)/, "$1.$2")
         .replace(/^(\d{2}\.\d{2})(\d)/, "$1.$2");
-
+  
       if (newValue.length > 10) {
         newValue = newValue.substring(0, 10);
       }
@@ -74,12 +76,13 @@ export default function WarehouseProductsModalV2({
         ...prevData,
         [name]: newValue,
       }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
+      return;
     }
+  
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleImageChange = (e) => {
@@ -91,29 +94,51 @@ export default function WarehouseProductsModalV2({
   };
 
   const handleSubmit = async () => {
-    await addWarehouses();
-    setFormData({
-      name: "",
-      address: "",
-      weight: "",
-      track_number: "",
-      price: "",
-      country: "",
-      status: "",
-      image: "",
-      comments: "",
-      unique_id_user: clientId,
-      url: "",
-      date_sent: "",
-      date_arrived: "",
-      articul: "",
-      is_parcels: true,
-    });
-    setCurrentStep(1);
-    setIsOpen(false);
-    deleteWarehouse(warehouseId);
-    // window.location.reload();
+    try {
+      await addWarehouses(
+        formData.name,
+        formData.address,
+        formData.weight,
+        formData.track_number,
+        formData.price,
+        selectedOption?.id,
+        selectedOption1?.id,
+        formData.image,
+        formData.comments,
+        formData.unique_id_user,
+        formData.url,
+        formData.date_sent,
+        formData.date_arrived,
+        formData.articul,
+        true
+      );
+      await deleteWarehouse(warehouseId);
+      setFormData({
+        name: "",
+        address: "",
+        weight: "",
+        track_number: "",
+        price: "",
+        country: "",
+        status: "",
+        image: "",
+        comments: "",
+        unique_id_user: clientId,
+        url: "",
+        date_sent: "",
+        date_arrived: "",
+        articul: "",
+        is_parcels: true,
+      });
+      setCurrentStep(1);
+      setIsOpen(false);
+      // window.location.reload();
+    } catch (error) {
+      console.error("Ошибка при отправке данных формы или при удалении склада:", error);
+    }
   };
+  
+
   const renderStep = () => {
     switch (currentStep) {
       case 1:
@@ -172,8 +197,8 @@ const Step1 = ({
   handleChange,
   handleImageChange,
   nextStep,
-  countries,
   closeModal,
+  countries,
   selectedOption,
   handleChangeCountry,
   setSelectedOption,
@@ -361,75 +386,9 @@ const Step2 = ({
   </div>
 );
 
-// const Step3 = ({
-//   formData,
-//   setFormData,
-//   handleChange,
-//   handleSubmit,
-//   clientId,
-// }) => {
-//   const { warehouses } = useWarehousesFull();
-//   const [inputValue, setInputValue] = useState("");
-//   const [suggestions, setSuggestions] = useState([]);
-
-//   const handleInputChange = (e) => {
-//     const value = e.target.value;
-//     setInputValue(value);
-
-//     let filteredWarehouses = [];
-//     if (value.trim() !== "") {
-//       filteredWarehouses = warehouses?.results?.filter((warehouse) =>
-//         warehouse?.unique_id?.toLowerCase().includes(value.toLowerCase())
-//       );
-//     }
-//     setSuggestions(filteredWarehouses);
-//   };
-
-//   useEffect(() => {
-//     if (inputValue === "") {
-//       setSuggestions([]);
-//     }
-//   }, [inputValue]);
-
-//   const handleSelectWarehouse = (warehouse) => {
-//     handleChange({
-//       target: { name: "unique_id_user", value: warehouse.unique_id },
-//     });
-//     setInputValue(warehouse.unique_id);
-//     setSuggestions([]);
-//   };
-
-//   return (
-//     <div className={c.step}>
-//       <div className={c.steps_progress}>
-//         <img src="/assets/images/step3.svg" alt="step 3" />
-//       </div>
-//       <form action="" className={s.step_form}>
-//         <div>
-//           <label htmlFor="comments">Выбор клиента</label>
-//           <input
-//             type="text"
-//             name="unique_id_user"
-//             id="unique_id_user"
-//             placeholder="Напишите ID"
-//             value={clientId}
-//             onChange={handleInputChange}
-//             disabled
-//           />
-//           <SearchSelect
-//             suggestions={suggestions}
-//             handleSelectWarehouse={handleSelectWarehouse}
-//           />
-//         </div>
-//       </form>
-//       <button className={c.submit_btn} onClick={handleSubmit}>
-//         Отправить
-//       </button>
-//     </div>
-//   );
-// };
 const Step3 = ({
   formData,
+  setFormData,
   handleChange,
   handleSubmit,
   clientId,
@@ -450,7 +409,7 @@ const Step3 = ({
     }
     setSuggestions(filteredWarehouses);
   };
-
+  
   useEffect(() => {
     if (inputValue === "") {
       setSuggestions([]);
