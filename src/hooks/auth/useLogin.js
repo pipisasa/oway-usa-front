@@ -22,7 +22,6 @@ const useLogin = () => {
 
       if (response.ok) {
         setCookie("accessToken", data.access);
-        console.log(data.access);
 
         if (data?.is_admin) {
           setCookie("isAdmin", "true");
