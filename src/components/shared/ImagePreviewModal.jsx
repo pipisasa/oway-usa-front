@@ -23,7 +23,7 @@ const ImagePreviewModal = ({ previewImage, onClose }) => {
           <div className={styles.modal_content}>
             {previewImage && (
               <>
-                <div>
+                <div className={styles.qwe}>
                   <p>Выбранная картинка:</p>
                   <button className={styles.close_button} onClick={closeModal}>
                     Закрыть
