@@ -27,14 +27,10 @@ export default function TrackingPage() {
 
     try {
       const response = await axios.get(
-        `https://api.ship24.com/public/v1/trackers/search/${trackingNumber}/results`,
-        {
-          headers: {
-            Authorization: `Bearer apik_9JrnxnPPxnuGRuhEoJXz86zSFpMkU9`,
-          },
-        }
+        `https://api-owayusa.com/api/warehouses/get/${trackingNumber}/`
       );
-      setStatus(response.data.data.trackings[0].shipment.statusCategory);
+      setStatus(response.data);
+      console.log(response.data);
       onOpen();
     } catch (err) {
       console.error("Ошибка при запросе к Ship24 API:", err);
@@ -75,28 +71,29 @@ export default function TrackingPage() {
         <ModalContent>
           <ModalHeader></ModalHeader>
           <ModalBody>
-            {status ? (
+            {loading ? (
+              <p>Загрузка данных...</p>
+            ) : (
               <p>
-                {status === "delivery" ? (
-                  <div className={s.status}>
-                    <img src="/assets/icons/icon_notifications.svg" alt="" />
-                    <p>Товар доставлен</p>
-                  </div>
+                {status ? (
+                  status === "delivery" ? (
+                    <div className={s.status}>
+                      <img src="/assets/icons/icon_notifications.svg" alt="" />
+                      <p>Товар доставлен</p>
+                    </div>
+                  ) : (
+                    <div className={s.status}>
+                      <img src="/assets/icons/впути.svg" alt="" />
+                      <p>{status.status.name}</p>
+                    </div>
+                  )
                 ) : (
-                  <div className={s.status}>
-                    <img src="/assets/icons/впути.svg" alt="" />
-                    <p>Товар в пути</p>
-                  </div>
+                  <p>Загрузка данных...</p>
                 )}
               </p>
-            ) : (
-              <p>Загрузка данных...</p>
             )}
           </ModalBody>
           <ModalFooter>
-            {/* <Button auto flat color="error" onPress={onClose}>
-              Закрыть
-            </Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>

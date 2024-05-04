@@ -12,6 +12,7 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import AdminCustomSelect from "@/components/partials/AdminCustomSelect";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -256,19 +257,12 @@ export default function WarehousesModal({ onClose, warehouse }) {
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
                 <label htmlFor="country">Страна отправки</label>
-                <select
-                  id="country"
-                  name="country"
-                  value={editData.country}
-                  onChange={handleInputChange}
-                  disabled={!isEditing}
-                >
-                  {countries.map((country) => (
-                    <option key={country.id} value={country.id}>
-                      {country.name}
-                    </option>
-                  ))}
-                </select>
+                <AdminCustomSelect
+                  options={countries.map(country => country.name)} 
+                  value={editData.country} 
+                  onChange={(value) => handleInputChange({ target: { id: "country", value } })}
+                  readOnly={!isEditing}
+                />
               </div>
               <div className={s.input_label}>
                 <label htmlFor="address">Адрес прибытия</label>

@@ -24,12 +24,11 @@ const CustomSelect = ({ options, value, onChange }) => {
             alt="qwe"
             style={
               isAdminWarehousesPage
-                ? { display: "none" }
+                ? { marginTop: "0" }
                 : { marginTop: "-25px", marginLeft: "calc(100% - 25px)" }
             }
           />
         </div>
-        <div className={`${s.arrow} ${isOpen ? s.open : ""}`}></div>
       </div>
       {isOpen && (
         <ul className={s.options}>
