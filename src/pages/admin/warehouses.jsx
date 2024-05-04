@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import WarehousesProductsTable from "@/components/shared/admin/WarehousesProductsTable";
 import useWarehouses from "@/hooks/admin/useWarehouses";
-import CustomSelect from "@/components/partials/CustomSelect";
-import AksesSelect from "@/components/shared/AksesSelect";
+import AdminCustomSelect from "@/components/partials/AdminCustomSelect";
 
 export default function AdminWarehousesPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -60,8 +59,7 @@ export default function AdminWarehousesPage() {
           />
         </div>
 
-        <div className={s.castomselect}>
-          <CustomSelect
+          <AdminCustomSelect
             options={[
               "Получен на складе получателя",
               "Отправлен",
@@ -71,14 +69,11 @@ export default function AdminWarehousesPage() {
             value={statusFilter || "Выберите статус"}
             onChange={(value) => setStatusFilter(value)}
           />
-        </div>
-        <div className={s.castomselect}>
-          <CustomSelect
+          <AdminCustomSelect
             options={["США", "Турция"]}
             value={countryFilter || "Страна отправки"}
             onChange={(value) => setCountryFilter(value)}
           />
-        </div>
       </div>
       <WarehousesProductsTable
         currentPage={currentPage}

@@ -1,5 +1,5 @@
 .image_preview_modal_overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -11,13 +11,13 @@
 
   .modal_content {
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.204);
-    max-width: 700px;
-    max-height: 700px;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
 
     img {
+      max-width: 700px;
+      max-height: 700px;
       width: 100%;
     }
 
