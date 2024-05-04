@@ -7,15 +7,15 @@ import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
 import SearchSelect from "@/components/partials/SearchSelect";
-import ImagePreviewModal from "../../ImagePreviewModal";
+import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
 
 export default function WarehouseProductsModalV2({
   closeModal,
   clientId,
   warehouseId,
 }) {
-  const { addWarehouses, deleteWarehouse } = useWarehouses();
-  const [previewImage, setPreviewImage] = useState(null);
+  const { addWarehouses } = useWarehouses();
+  const { deleteWarehouse } = useUserWarehouses();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -56,30 +56,10 @@ export default function WarehouseProductsModalV2({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "url") {
-      if (value && !value.startsWith("https://")) {
-        return;
-      }
-    }
-    if (name === "date_sent" || name === "date_arrived") {
-      let newValue = value
-        .replace(/[^\d.]/g, "")
-        .replace(/^(\d{2})(\d)/, "$1.$2")
-        .replace(/^(\d{2}\.\d{2})(\d)/, "$1.$2");
-
-      if (newValue.length > 10) {
-        newValue = newValue.substring(0, 10);
-      }
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: newValue,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleImageChange = (e) => {
@@ -91,7 +71,23 @@ export default function WarehouseProductsModalV2({
   };
 
   const handleSubmit = async () => {
-    await addWarehouses();
+    await addWarehouses(
+      formData.name,
+      formData.address,
+      formData.weight,
+      formData.track_number,
+      formData.price,
+      selectedOption?.id,
+      selectedOption1?.id,
+      formData.image,
+      formData.comments,
+      formData.unique_id_user,
+      formData.url,
+      formData.date_sent,
+      formData.date_arrived,
+      formData.articul,
+      true
+    );
     setFormData({
       name: "",
       address: "",
@@ -111,9 +107,10 @@ export default function WarehouseProductsModalV2({
     });
     setCurrentStep(1);
     setIsOpen(false);
-    deleteWarehouse(warehouseId);
-    // window.location.reload();
+    await deleteWarehouse(warehouseId);
+    window.location.reload();
   };
+
   const renderStep = () => {
     switch (currentStep) {
       case 1:
@@ -123,7 +120,6 @@ export default function WarehouseProductsModalV2({
             handleChange={handleChange}
             handleImageChange={handleImageChange}
             nextStep={nextStep}
-            closeModal={closeModal}
             countries={countries}
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}
@@ -173,7 +169,6 @@ const Step1 = ({
   handleImageChange,
   nextStep,
   countries,
-  closeModal,
   selectedOption,
   handleChangeCountry,
   setSelectedOption,
@@ -210,10 +205,9 @@ const Step1 = ({
         </div>
         {formData.image && <div></div>}
         {formData.image && (
-          <ImagePreviewModal
-            previewImage={URL.createObjectURL(formData.image)}
-            onClose={closeModal}
-          />
+          <div className={c.image_preview}>
+            <img src={URL.createObjectURL(formData.image)} alt="preview" />
+          </div>
         )}
         <div>
           <label htmlFor="">Адрес заказа</label>
@@ -260,7 +254,7 @@ const Step1 = ({
         <div>
           <label htmlFor="">Вес</label>
           <input
-            type="number"
+            type="text"
             name="weight"
             id="weight"
             placeholder="Впишите вес"
@@ -271,7 +265,7 @@ const Step1 = ({
         <div>
           <label htmlFor="">Трек-номер</label>
           <input
-            type="number"
+            type="text"
             name="track_number"
             id="track_number"
             placeholder="Введите ID посылки"
@@ -324,7 +318,7 @@ const Step2 = ({
       <div>
         <label htmlFor="status">Стоимость к оплате</label>
         <input
-          type="number"
+          type="text"
           name="price"
           id="price"
           placeholder="Введите сумму"
@@ -335,7 +329,7 @@ const Step2 = ({
       <div>
         <label htmlFor="status">Трек код посылки</label>
         <input
-          type="number"
+          type="text"
           name="articul"
           id="articul"
           placeholder="Введите трек код посылки"
@@ -361,75 +355,9 @@ const Step2 = ({
   </div>
 );
 
-// const Step3 = ({
-//   formData,
-//   setFormData,
-//   handleChange,
-//   handleSubmit,
-//   clientId,
-// }) => {
-//   const { warehouses } = useWarehousesFull();
-//   const [inputValue, setInputValue] = useState("");
-//   const [suggestions, setSuggestions] = useState([]);
-
-//   const handleInputChange = (e) => {
-//     const value = e.target.value;
-//     setInputValue(value);
-
-//     let filteredWarehouses = [];
-//     if (value.trim() !== "") {
-//       filteredWarehouses = warehouses?.results?.filter((warehouse) =>
-//         warehouse?.unique_id?.toLowerCase().includes(value.toLowerCase())
-//       );
-//     }
-//     setSuggestions(filteredWarehouses);
-//   };
-
-//   useEffect(() => {
-//     if (inputValue === "") {
-//       setSuggestions([]);
-//     }
-//   }, [inputValue]);
-
-//   const handleSelectWarehouse = (warehouse) => {
-//     handleChange({
-//       target: { name: "unique_id_user", value: warehouse.unique_id },
-//     });
-//     setInputValue(warehouse.unique_id);
-//     setSuggestions([]);
-//   };
-
-//   return (
-//     <div className={c.step}>
-//       <div className={c.steps_progress}>
-//         <img src="/assets/images/step3.svg" alt="step 3" />
-//       </div>
-//       <form action="" className={s.step_form}>
-//         <div>
-//           <label htmlFor="comments">Выбор клиента</label>
-//           <input
-//             type="text"
-//             name="unique_id_user"
-//             id="unique_id_user"
-//             placeholder="Напишите ID"
-//             value={clientId}
-//             onChange={handleInputChange}
-//             disabled
-//           />
-//           <SearchSelect
-//             suggestions={suggestions}
-//             handleSelectWarehouse={handleSelectWarehouse}
-//           />
-//         </div>
-//       </form>
-//       <button className={c.submit_btn} onClick={handleSubmit}>
-//         Отправить
-//       </button>
-//     </div>
-//   );
-// };
 const Step3 = ({
   formData,
+  setFormData,
   handleChange,
   handleSubmit,
   clientId,
