@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "@/styles/components/shared/cards/ShopCard.module.scss";
 import Link from "next/link";
 
 export default function ShopCard({ shop, onEdit, onDelete }) {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const handleEditClick = (id) => {
     onEdit(id);
   };
+
   const handleDelete = (id) => {
-    onDelete(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteConfirmed = () => {
+    onDelete(shop?.id);
+    setShowDeleteModal(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
   };
 
   return (
@@ -28,10 +40,21 @@ export default function ShopCard({ shop, onEdit, onDelete }) {
         >
           <img src="/assets/icons/edit.svg" alt="" />
         </button>
-        <button onClick={() => handleDelete(shop?.id)}>
+        <button onClick={handleDelete}>
           <img src="/assets/icons/delete.svg" alt="" />
         </button>
       </div>
+      {showDeleteModal && (
+        <div className={s.modal}>
+          <div className={s.modal_content}>
+            <p>Вы уверены, что хотите удалить этот сайт?</p>
+            <div>
+              <button onClick={handleDeleteConfirmed}>Yes</button>
+              <button onClick={handleDeleteCancel}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
