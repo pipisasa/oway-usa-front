@@ -8,14 +8,20 @@ export default function CompaniesAdminPage() {
   const { logos, fetchLogos, deleteLogo, isLoading } = useLogo();
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editingLogo, setEditingLogo] = useState(null);
+  const [deleteLogoId, setDeleteLogoId] = useState(null);
 
   useEffect(() => {
     fetchLogos();
   }, []);
 
   const handleDeleteLogo = async (id) => {
-    if (confirm("Вы уверены, что хотите удалить этот логотип?")) {
-      await deleteLogo(id);
+    setDeleteLogoId(id); 
+  };
+
+  const confirmDelete = async () => {
+    if (deleteLogoId) {
+      await deleteLogo(deleteLogoId);
+      setDeleteLogoId(null); 
     }
   };
 
@@ -48,7 +54,17 @@ export default function CompaniesAdminPage() {
           </div>
         </div>
       ))}
-
+      {deleteLogoId && (
+        <div className={s.modal}>
+          <div className={s.modal_content}>
+            <p>Вы уверены, что хотите удалить этот логотип?</p>
+            <div>
+              <button onClick={confirmDelete}>Да</button>
+              <button onClick={() => setDeleteLogoId(null)}>Нет</button>
+            </div>
+          </div>
+        </div>
+      )}
       {isEditOpen && (
         <CompaniesEditModal
           isOpen={isEditOpen}

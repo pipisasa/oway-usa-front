@@ -44,6 +44,7 @@ const useUserWarehouses = () => {
     } catch (err) {
       setError(err);
       setWarehouses(warehouses);
+
     }
   };
 
