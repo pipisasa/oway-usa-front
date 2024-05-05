@@ -47,7 +47,7 @@ export default function WarehousesProductsTable({
   if (error) {
     return <div>Error: {error}</div>;
   }
-console.log(warehouses);
+  console.log(warehouses);
   return (
     <div>
       <table>
@@ -123,15 +123,20 @@ console.log(warehouses);
       )}
 
       {confirmDeleteWarehouse && (
-        <div className={s.confirmDeleteModal}>
-          <p>Вы уверены, что хотите удалить этот товар?</p>
-          <div>
-            <button onClick={() => handleDelete(confirmDeleteWarehouse.id)}>
-              Да
-            </button>
-            <button onClick={() => setConfirmDeleteWarehouse(null)}>Отмена</button>
+        <>
+          <div className={s.modalBackdrop}></div>
+          <div className={s.confirmDeleteModal}>
+            <p>Вы уверены, что хотите удалить этот товар?</p>
+            <div>
+              <button onClick={() => handleDelete(confirmDeleteWarehouse.id)}>
+                Да
+              </button>
+              <button onClick={() => setConfirmDeleteWarehouse(null)}>
+                Отмена
+              </button>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

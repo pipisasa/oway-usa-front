@@ -18,6 +18,7 @@ export default function Purchase() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -53,6 +54,7 @@ export default function Purchase() {
       purchase_image: selectedFile1,
       purchase_image_2: selectedFile2,
     });
+    reset();
   };
 
   return (
