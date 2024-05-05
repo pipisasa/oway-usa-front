@@ -13,7 +13,6 @@
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.204);
     background-color: #fff;
     padding: 20px;
-    width: 90%;
     border-radius: 8px;
 
     img {
@@ -25,7 +24,7 @@
     div {
       display: flex;
       justify-content: space-between;
-      // margin-bottom: 20px;
+      margin-bottom: 20px;
     }
 
     .close_button {
