@@ -126,6 +126,24 @@ export default function WarehousesModal({ onClose, warehouse }) {
     }
   };
 
+  const formatDateInput = (value) => {
+    let numbers = value.replace(/[^\d]/g, "");
+
+    if (numbers.length >= 2) {
+      numbers = numbers.substring(0, 2) + "." + numbers.substring(2);
+    }
+    if (numbers.length >= 5) {
+      numbers = numbers.substring(0, 5) + "." + numbers.substring(5);
+    }
+
+    return numbers.substring(0, 10);
+  };
+
+  const handleDateChange = (e) => {
+    const { id, value } = e.target;
+    setEditData({ ...editData, [id]: formatDateInput(value) });
+  };
+
   return (
     <div
       className={s.modal_backdrop}
@@ -238,18 +256,22 @@ export default function WarehousesModal({ onClose, warehouse }) {
               <div className={s.input_label}>
                 <label htmlFor="date_sent">Дата отправки</label>
                 <input
+                  type="text"
                   id="date_sent"
-                  value={editData.date_sent || "Не указан"}
-                  onChange={handleInputChange}
+                  placeholder="dd.mm.yyyy"
+                  value={editData.date_sent || ""}
+                  onChange={handleDateChange}
                   readOnly={!isEditing}
                 />
               </div>
               <div className={s.input_label}>
                 <label htmlFor="date_arrived">Дата прибытия</label>
                 <input
+                  type="text"
                   id="date_arrived"
-                  value={editData.date_arrived || "Не указан"}
-                  onChange={handleInputChange}
+                  placeholder="dd.mm.yyyy"
+                  value={editData.date_arrived || ""}
+                  onChange={handleDateChange}
                   readOnly={!isEditing}
                 />
               </div>
@@ -258,9 +280,11 @@ export default function WarehousesModal({ onClose, warehouse }) {
               <div className={s.input_label}>
                 <label htmlFor="country">Страна отправки</label>
                 <AdminCustomSelect
-                  options={countries.map(country => country.name)} 
-                  value={editData.country} 
-                  onChange={(value) => handleInputChange({ target: { id: "country", value } })}
+                  options={countries.map((country) => country.name)}
+                  value={editData.country}
+                  onChange={(value) =>
+                    handleInputChange({ target: { id: "country", value } })
+                  }
                   readOnly={!isEditing}
                 />
               </div>

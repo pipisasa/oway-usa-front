@@ -14,10 +14,9 @@ export default function WarehouseProductsModalV2({
   closeModal,
   clientId,
   warehouseId,
-  deleteWarehouse,
 }) {
   const { addWarehouses } = useWarehouses();
-  // const { deleteWarehouse } = useUserWarehouses();
+  const { deleteWarehouse } = useUserWarehouses();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -58,17 +57,17 @@ export default function WarehouseProductsModalV2({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     if (name === "url" && value && !value.startsWith("https://")) {
       return;
     }
-  
+
     if (name === "date_sent" || name === "date_arrived") {
       let newValue = value
         .replace(/[^\d.]/g, "")
         .replace(/^(\d{2})(\d)/, "$1.$2")
         .replace(/^(\d{2}\.\d{2})(\d)/, "$1.$2");
-  
+
       if (newValue.length > 10) {
         newValue = newValue.substring(0, 10);
       }
@@ -78,7 +77,7 @@ export default function WarehouseProductsModalV2({
       }));
       return;
     }
-  
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -95,6 +94,7 @@ export default function WarehouseProductsModalV2({
 
   const handleSubmit = async () => {
     try {
+      await deleteWarehouse(warehouseId);
       await addWarehouses(
         formData.name,
         formData.address,
@@ -112,7 +112,6 @@ export default function WarehouseProductsModalV2({
         formData.articul,
         true
       );
-      await deleteWarehouse(warehouseId);
       setFormData({
         name: "",
         address: "",
@@ -134,10 +133,12 @@ export default function WarehouseProductsModalV2({
       setIsOpen(false);
       // window.location.reload();
     } catch (error) {
-      console.error("Ошибка при отправке данных формы или при удалении склада:", error);
+      console.error(
+        "Ошибка при отправке данных формы или при удалении склада:",
+        error
+      );
     }
   };
-  
 
   const renderStep = () => {
     switch (currentStep) {
@@ -409,7 +410,7 @@ const Step3 = ({
     }
     setSuggestions(filteredWarehouses);
   };
-  
+
   useEffect(() => {
     if (inputValue === "") {
       setSuggestions([]);

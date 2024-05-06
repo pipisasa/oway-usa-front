@@ -9,10 +9,6 @@ export default function UserWarehouses() {
   const { warehouses, loading, error, deleteWarehouse } = useUserWarehouses();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
   const closeModal = () => {
     setIsModalVisible(false);
   };
@@ -52,7 +48,6 @@ export default function UserWarehouses() {
                 <WarehouseProductsModalV2
                   clientId={warehouse.user.unique_id}
                   warehouseId={warehouse.id}
-                  deleteWarehouse={deleteWarehouse}
                   closeModal={closeModal}
                 />
               </td>

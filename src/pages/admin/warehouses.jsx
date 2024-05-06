@@ -59,21 +59,21 @@ export default function AdminWarehousesPage() {
           />
         </div>
 
-          <AdminCustomSelect
-            options={[
-              "Получен на складе получателя",
-              "Отправлен",
-              "Доставлено",
-              "Готов к выдаче",
-            ]}
-            value={statusFilter || "Выберите статус"}
-            onChange={(value) => setStatusFilter(value)}
-          />
-          <AdminCustomSelect
-            options={["США", "Турция"]}
-            value={countryFilter || "Страна отправки"}
-            onChange={(value) => setCountryFilter(value)}
-          />
+        <AdminCustomSelect
+          options={[
+            "Получен на складе получателя",
+            "Отправлен",
+            "Доставлено",
+            "Готов к выдаче",
+          ]}
+          value={statusFilter || "Выберите статус"}
+          onChange={(value) => setStatusFilter(value)}
+        />
+        <AdminCustomSelect
+          options={["США", "Турция"]}
+          value={countryFilter || "Страна отправки"}
+          onChange={(value) => setCountryFilter(value)}
+        />
       </div>
       <WarehousesProductsTable
         currentPage={currentPage}
