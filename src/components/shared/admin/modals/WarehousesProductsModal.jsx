@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import Modal from "@/components/shared/Modal";
-import { Switch } from "@nextui-org/react";
 import useWarehouses from "../../../../hooks/admin/useWarehouses";
 import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
@@ -12,7 +11,6 @@ import ImagePreviewModal from "../../ImagePreviewModal";
 
 export default function WarehouseProductsModal() {
   const { addWarehouses } = useWarehouses();
-  const [previewImage, setPreviewImage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -27,8 +25,8 @@ export default function WarehouseProductsModal() {
     comments: "",
     unique_id_user: "",
     url: "",
-    color: "",
-    count: "",
+    date_sent: "",
+    date_arrived: "",
     articul: "",
   });
 
@@ -39,9 +37,7 @@ export default function WarehouseProductsModal() {
   };
 
   const [selectedOption, setSelectedOption] = useState("");
-  const handleChangeCountry = (e) => {
-    setSelectedOption(e);
-  };
+
   const countries1 = [
     { id: 4, name: "Получен на складе отправителя" },
     { id: 5, name: "Отправлен" },
@@ -51,9 +47,6 @@ export default function WarehouseProductsModal() {
     { id: 8, name: "Доставлено" },
   ];
   const [selectedOption1, setSelectedOption1] = useState("");
-  const handleChangeCat = (e) => {
-    setSelectedOption1(e);
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -103,8 +96,8 @@ export default function WarehouseProductsModal() {
       formData.comments,
       formData.unique_id_user,
       formData.url,
-      formData.color,
-      formData.count,
+      formData.date_sent,
+      formData.date_arrived,
       formData.articul
     );
     setFormData({
@@ -190,7 +183,6 @@ const Step1 = ({
   countries,
   selectedOption,
   closeModal,
-  handleChangeCountry,
   setSelectedOption,
 }) => (
   <div className={c.step}>

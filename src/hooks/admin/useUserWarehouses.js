@@ -32,19 +32,17 @@ const useUserWarehouses = () => {
   };
 
   const deleteWarehouse = async (id) => {
-    const newWarehouses = warehouses.filter((warehouse) => warehouse.id !== id);
-    setWarehouses(newWarehouses);
-
     try {
       const accessToken = getCookie("accessToken");
       await axios.delete(
         `https://api-owayusa.com/api/my_warehouse/delete/${id}/`,
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );
+      setWarehouses((currentWarehouses) =>
+        currentWarehouses.filter((warehouse) => warehouse.id !== id)
+      );
     } catch (err) {
       setError(err);
-      setWarehouses(warehouses);
-
     }
   };
 
