@@ -16,7 +16,10 @@ export default function ProvideServices() {
       <div className={s.services_block} data-aos="zoom-out-right">
         <div className={s.services_block_left}>
           <div></div>
-          <span>Фото и видео содержимого входящей посылки</span>
+          <span>
+            Фото и видео содержимого входящей посылки
+            <p>120$</p>
+          </span>
         </div>
         <div className={s.services_block_span}>
           <div className={s.services_block_span_div}>
@@ -39,7 +42,9 @@ export default function ProvideServices() {
       <div className={s.services_block} data-aos="zoom-out-left">
         <div className={s.services_block_left}>
           <div></div>
-          <span>Проверка товара на качество и брак </span>
+          <span>
+            Проверка товара на качество и брак  <p>120$</p>
+          </span>
         </div>
         <div className={s.services_block_span}>
           <div className={s.services_block_span_div}>
@@ -62,7 +67,7 @@ export default function ProvideServices() {
             <span style={{ fontWeight: "bold" }}>
               Стоимость услуги в Турции - 2$ 
             </span>
-          </div>{" "}
+          </div>
           <div>
             <img
               src="/assets/images/service-img-2.png"
@@ -76,7 +81,10 @@ export default function ProvideServices() {
       <div className={s.services_block} data-aos="zoom-out-right">
         <div className={s.services_block_left}>
           <div></div>
-          <span>Выкуп с интернет-мазинов  которые не доставляют на склады</span>
+          <span>
+            Выкуп с интернет-мазинов  которые не доставляют на склады{" "}
+            <p>120$</p>
+          </span>
         </div>
         <div className={s.services_block_span}>
           <div className={s.services_block_span_div}>
@@ -102,7 +110,9 @@ export default function ProvideServices() {
       <div className={s.services_block} data-aos="zoom-out-left">
         <div className={s.services_block_left}>
           <div></div>
-          <span>Проверка техники на работоспособность</span>
+          <span>
+            Проверка техники на работоспособность <p>120$</p>
+          </span>
         </div>
         <div className={s.services_block_span}>
           <div className={s.services_block_span_div}>

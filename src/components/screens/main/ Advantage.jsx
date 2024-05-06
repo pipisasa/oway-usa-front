@@ -73,7 +73,7 @@ const service = [
   },
   {
     icon: "/assets/icons/footer/Deliveryaddress.svg",
-    img: "/assets/images/adv_boxes.png",
+    img: "/assets/images/address_change.png",
     text: "Изменение адреса получателя",
     answer:
       "Изменение адреса доставки и данных получателя возможно до и после вылета из США. В личном кабинете у вас есть возможность менять и добавлять данные получателя",
