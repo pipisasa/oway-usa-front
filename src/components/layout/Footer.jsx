@@ -36,7 +36,9 @@ export default function Footer() {
           <Link href="/">Политика конфиденциальности</Link>
           <Link href="/">Заявление о возврате средств</Link>
           <Link href="/">Реквизиты компании</Link>
-          <Link href="/size-chart">Таблица размеров</Link>
+          <span className={s.underline}>
+            <Link href="/size-chart">Таблица размеров</Link>
+          </span>
         </div>
       </div>
     );
@@ -101,8 +103,9 @@ export default function Footer() {
               <Link href="/">Политика конфиденциальности</Link>
               <Link href="/">Заявление о возврате средств</Link>
               <Link href="/">Реквизиты компании</Link>
-              <Link href="/size-chart">Таблица размеров</Link>
-              {/* <Illinois /> */}
+              <span className={s.underline}>
+                <Link href="/size-chart">Таблица размеров</Link>
+              </span>
             </div>
             <Mobile />
           </div>

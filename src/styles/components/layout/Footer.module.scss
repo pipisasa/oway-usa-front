@@ -4,6 +4,12 @@
   background: var(--black, #001526);
   color: white;
 
+  .underline {
+    a {
+      text-decoration: underline !important;
+    }
+  }
+
   .footer_container {
     display: inline-flex;
     padding: 48px 0 48px 0;
@@ -68,6 +74,7 @@
           font-weight: 700;
           line-height: 140%;
         }
+
         nav {
           ul {
             display: flex;
@@ -85,6 +92,7 @@
     }
   }
 }
+
 .telegram {
   background-color: aliceblue;
   padding: 3px;
