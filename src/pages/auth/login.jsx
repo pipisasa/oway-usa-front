@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import GoogleLoginButton from "@/hooks/auth/GoogleLoginButton";
 
 export default function Login() {
-  const { login, error } = useLogin();
+  const { login, error, isLoading } = useLogin();
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -67,7 +67,7 @@ export default function Login() {
                   {...register("password", { required: true })}
                 />
                 <button type="button" onClick={togglePasswordVisibility}>
-                  <img
+                  <img  
                     src={
                       showPassword
                         ? "/assets/icons/eyes-open.svg"
@@ -105,7 +105,7 @@ export default function Login() {
           </div>
           <div className={s.submit_login}>
             <button type="submit">
-              Авторизоваться
+            {isLoading ? "Загрузка..." : "Авторизоваться"}
               <img src="/assets/icons/next-icon.svg" alt="next" />
             </button>
             <span>

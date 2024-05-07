@@ -61,7 +61,6 @@ const [selectedBackImage, setSelectedBackImage] = useState(null);
       [name]: value,
     }));
   
-    // Проверяем, какое изображение было выбрано
     if (name === "front_image" && files.length > 0) {
       setSelectedFrontImage(files[0]);
     } else if (name === "back_image" && files.length > 0) {
@@ -200,7 +199,7 @@ const [selectedBackImage, setSelectedBackImage] = useState(null);
             Отмена
           </button>
           <button type="submit" className={s.save}>
-            Сохранить
+            {loading ? "Загрузка..." : "Сохранить"}
           </button>
         </div>
       ) : (

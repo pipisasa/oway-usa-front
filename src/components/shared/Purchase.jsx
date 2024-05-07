@@ -6,7 +6,7 @@ import PurchaseModal from "./main/PurchaseModal";
 import ImagePreviewModal from "./ImagePreviewModal";
 
 export default function Purchase() {
-  const { handleChange, submitPurchase, isSubmitted } = usePurchase();
+  const { handleChange, submitPurchase, isSubmitted, isLoading } = usePurchase();
   const [isOpen, setIsOpen] = useState(false);
   const [mobileForm, setMobileForm] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
@@ -300,7 +300,10 @@ export default function Purchase() {
             </p>
             <div>
               <button type="submit" className={s.button}>
-                <span>Далее</span>
+                <span>
+
+                {isLoading ? "Загрузка..." : "Далее"}
+                </span>
                 <img src="/assets/icons/rightIcon.svg" alt="logo" />
               </button>
             </div>

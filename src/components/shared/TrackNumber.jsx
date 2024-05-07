@@ -72,7 +72,7 @@ export default function TrackNumber() {
           />
         </div>
         <button type="sumbit" className={s.button}>
-          Проверить
+          {loading ? "Загрузка..." : "Проверить"}
           <img src="/assets/icons/rightIcon.svg" alt="logo" />
         </button>
       </form>

@@ -4,7 +4,7 @@ import useIllinois from "@/hooks/admin/useIllinois";
 import { useForm } from "react-hook-form";
 
 const Illinois = () => {
-  const { formData, handleSubmit, handleChange } = useIllinois();
+  const { formData, handleSubmit, handleChange, isLoading } = useIllinois();
   const {
     register,
     
@@ -170,7 +170,7 @@ const Illinois = () => {
             </div>
             <div>
               <button type="submit" className={s.button}>
-                <span>Отправить</span>
+                <span> {isLoading ? "Загрузка..." : "Отправить"}</span>
                 <img src="/assets/icons/rightIcon.svg" alt="logo" />
               </button>
             </div>

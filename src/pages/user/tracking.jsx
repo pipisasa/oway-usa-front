@@ -62,7 +62,7 @@ export default function TrackingPage() {
             placeholder="Введите трек-номер"
             required
           />
-          <button type="submit">Проверить</button>
+          <button type="submit">{loading ? "Загрузка..." : "Проверить"}</button>
         </div>
       </form>
 
