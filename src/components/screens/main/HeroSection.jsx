@@ -54,7 +54,10 @@ export default function HeroSection() {
           </div>
         </div>
         <div className="background--custom">
-          <canvas id="canvas" />
+          <canvas
+            id="canvas"
+            // style={{ width: "calc(100% - 100px)" }}
+          />
         </div>
       </div>
       <div className={s.heroSection_img} data-aos="fade-left">

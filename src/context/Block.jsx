@@ -7,20 +7,16 @@ const AlwaysOpenModal = () => {
     <div className={s.modal}>
       <div className={s.modalContent}>
         <h1>Доброго времени суток</h1>
-        <p>
-          {" "}
-          <div className={s.linni}> </div>Сайт временно заблокирован из-за
-          неоплаты разработчикам
-        </p>
-        <p>
-          <div className={s.linni}> </div>
-        </p>
-        <p>
-          <div className={s.linni}> </div>Для уточнения деталей свяжитесь с нами
-          через{" "}
-        </p>
+        <div className={s.df}>
+          <h4 className={s.linni}> </h4>
+          <p>Сайт временно заблокирован из-за неоплаты разработчикам</p>
+        </div>
+        <div className={s.df}>
+          <h4 className={s.linni}> </h4>
+          <p>Для уточнения деталей свяжитесь с нами через </p>
+        </div>
         <Link className={s.telegram} href="https://t.me/xdev_studio">
-          <div className={s.linni}> </div>
+          <h4 className={s.linni}> </h4>
           <img src="/assets/icons/telegram.svg" alt="" />
           Telegram
         </Link>
