@@ -25,7 +25,7 @@
 }
 
 .background--custom {
-  width: 100vw;
+  width: calc(100vw - 0px);
   height: 100vh;
   position: absolute;
   overflow: hidden;

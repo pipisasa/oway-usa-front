@@ -37,17 +37,14 @@ export default function Layout({ children }) {
 
   if (isHomePage) {
     return (
-      <main>
+      <main className="ebat">
         <Header />
-        <main>
-          <AlwaysOpenModal />
-          {children}
-        </main>
+        <AlwaysOpenModal />
+        <main className="">{children}</main>
         <Footer />
       </main>
     );
   }
 
-  // Since all non-home pages redirect to the home page, there is no need to render other layouts
   return null;
 }
