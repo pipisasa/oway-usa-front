@@ -37,6 +37,8 @@ export default function TrackingPage() {
       setError(
         "Произошла ошибка при отслеживании. Пожалуйста, проверьте трек-номер и попробуйте снова."
       );
+      setStatus("not-found"); // Устанавливаем статус, чтобы показать, что товар не найден
+      onOpen();
     } finally {
       setLoading(false);
     }
@@ -76,15 +78,15 @@ export default function TrackingPage() {
             ) : (
               <p>
                 {status ? (
-                  status === "delivery" ? (
-                    <div className={s.status}>
-                      <img src="/assets/icons/icon_notifications.svg" alt="" />
-                      <p>Товар доставлен</p>
-                    </div>
-                  ) : (
+                  status.status.name ? (
                     <div className={s.status}>
                       <img src="/assets/icons/впути.svg" alt="" />
                       <p>{status.status.name}</p>
+                    </div>
+                  ) : (
+                    <div className={s.status}>
+                      <img src="/assets/icons/icon_notifications.svg" alt="" />
+                      <p>Трек-код товара не найден</p>
                     </div>
                   )
                 ) : (

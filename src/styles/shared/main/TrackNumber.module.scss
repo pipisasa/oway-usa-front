@@ -40,7 +40,7 @@
       }
 
       input {
-        max-width: 400px;
+        min-width: 400px;
         padding: 12px 20px;
         border-radius: 8px;
         border: 1px solid var(--gray, #a4a4a4);
@@ -74,7 +74,7 @@
 
       .track_info_input {
         input {
-          width: 360px;
+          min-width: 300px;
         }
       }
 
