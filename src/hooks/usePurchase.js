@@ -18,6 +18,7 @@ const usePurchase = () => {
 
   const [purchaseData, setPurchaseData] = useState(initialState);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); 
 
   const handleChange = (e) => {
     const { id, value, files } = e.target;
@@ -30,6 +31,8 @@ const usePurchase = () => {
   };
 
   const submitPurchase = async (data) => {
+    setIsLoading(true); 
+
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       if (key === "purchase_image" && data[key]) {
@@ -55,10 +58,12 @@ const usePurchase = () => {
       setIsSubmitted(true);
     } catch (error) {
       console.error("Ошибка при отправке:", error);
+    } finally {
+      setIsLoading(false); 
     }
   };
 
-  return { handleChange, submitPurchase, purchaseData, isSubmitted };
+  return { handleChange, submitPurchase, purchaseData, isSubmitted, isLoading }; // Возвращаем isLoading из хука
 };
 
 export default usePurchase;

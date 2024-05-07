@@ -14,9 +14,12 @@ function useIllinois() {
     whatsapp: "",
     status: true,
   });
+  const [isLoading, setIsLoading] = useState(false); // Добавляем состояние isLoading для отслеживания загрузки
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true); // Устанавливаем isLoading в true перед отправкой запроса
+
     try {
       const response = await axios.post(
         "https://api-owayusa.com/api/otside_of_illinois/add/",
@@ -25,6 +28,8 @@ function useIllinois() {
       console.log("Response:", response.data);
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsLoading(false); // Вне зависимости от результата запроса, устанавливаем isLoading в false
     }
   };
 
@@ -33,15 +38,10 @@ function useIllinois() {
     setFormData({ ...formData, [name]: value });
   };
 
-  // return (
-  //   <Illinois
-  //     formData={formData}
-  //     handleSubmit={handleSubmit}
-  //     handleChange={handleChange}
-  //   />
-  // );
+
   return {
     formData,
+    isLoading,
     handleChange,
     handleSubmit,
   };
