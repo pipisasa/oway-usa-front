@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: space-between;
   }
-  z-index: 1000;
+  // z-index: 900;
 }
 
 .options {
@@ -30,7 +30,7 @@
   border-radius: 8px;
   background-color: #fff;
   display: none;
-  z-index: 999;
+  z-index: 9999;
   transform: translateY(5px);
   gap: 0 !important;
 }
@@ -40,6 +40,7 @@
 }
 
 .option {
+  background: #fff;
   padding: 10px 20px;
   gap: 0 !important;
   cursor: pointer;
