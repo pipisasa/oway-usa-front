@@ -83,7 +83,7 @@ export default function ProvideServices() {
           <div></div>
           <span>
             Выкуп с интернет-мазинов  которые не доставляют на склады{" "}
-            <p>120$</p>
+            <p>10% от стоимости</p>
           </span>
         </div>
         <div className={s.services_block_span}>
@@ -111,7 +111,7 @@ export default function ProvideServices() {
         <div className={s.services_block_left}>
           <div></div>
           <span>
-            Проверка техники на работоспособность <p>120$</p>
+            Проверка техники на работоспособность <p>5$</p>
           </span>
         </div>
         <div className={s.services_block_span}>
