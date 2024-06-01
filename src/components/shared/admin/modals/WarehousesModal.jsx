@@ -289,7 +289,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
                 />
               </div>
               <div className={s.input_label}>
-                <label htmlFor="address">Адрес прибытия</label>
+                <label htmlFor="address">Страна прибытия</label>
                 <input
                   id="address"
                   value={editData.address || "Не указан"}

@@ -18,7 +18,7 @@ export default function ProvideServices() {
           <div></div>
           <span>
             Фото и видео содержимого входящей посылки
-            <p>120$</p>
+            {/* <p>120$</p> */}
           </span>
         </div>
         <div className={s.services_block_span}>
@@ -43,7 +43,8 @@ export default function ProvideServices() {
         <div className={s.services_block_left}>
           <div></div>
           <span>
-            Проверка товара на качество и брак  <p>120$</p>
+            Проверка товара на качество и брак 
+            {/* <p>120$</p> */}
           </span>
         </div>
         <div className={s.services_block_span}>
