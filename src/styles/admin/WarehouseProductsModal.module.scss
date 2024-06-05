@@ -1,7 +1,33 @@
 .step {
-  .steps_progress img {
-    margin: 0 auto;
-    margin-top: 20px;
+  .steps_progress {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 0;
+
+    button {
+      color: var(--black, #001526);
+      font-size: 14px;
+      line-height: 140%;
+      border-radius: 100px;
+      border: 1px solid var(--blue, #027ddb);
+      padding: 10px;
+      width: 48px;
+      height: 48px;
+    }
+
+    .active_step {
+      background-color: #027ddb;
+      color: #fff;
+    }
+
+    .line {
+      width: 64px;
+      height: 1px;
+      background: #027ddb;
+    }
   }
 
   .submit_btn {
