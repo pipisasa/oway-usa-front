@@ -24,10 +24,8 @@ export default function WarehouseProductsModal() {
     image: "",
     comments: "",
     unique_id_user: "",
-    url: "",
     date_sent: "",
     date_arrived: "",
-    articul: "",
   });
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -55,11 +53,6 @@ export default function WarehouseProductsModal() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "url") {
-      if (value && !value.startsWith("https://")) {
-        return;
-      }
-    }
     if (name === "date_sent" || name === "date_arrived") {
       let newValue = value
         .replace(/[^\d.]/g, "")
@@ -101,10 +94,8 @@ export default function WarehouseProductsModal() {
       formData.image,
       formData.comments,
       formData.unique_id_user,
-      formData.url,
       formData.date_sent,
-      formData.date_arrived,
-      formData.articul
+      formData.date_arrived
     );
     setFormData({
       name: "",
@@ -117,10 +108,8 @@ export default function WarehouseProductsModal() {
       image: "",
       comments: "",
       unique_id_user: "",
-      url: "",
       date_sent: "",
       date_arrived: "",
-      articul: "",
     });
     setCurrentStep(1);
     setIsOpen(false);
@@ -404,28 +393,6 @@ const Step2 = ({
           id="price"
           placeholder="Введите сумму"
           value={formData.price}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="status">Трек код посылки</label>
-        <input
-          type="number"
-          name="articul"
-          id="articul"
-          placeholder="Введите трек код посылки"
-          value={formData.articul}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="status">Ссылка</label>
-        <input
-          type="text"
-          name="url"
-          id="url"
-          placeholder="Введите ссылку"
-          value={formData.url}
           onChange={handleChange}
         />
       </div>

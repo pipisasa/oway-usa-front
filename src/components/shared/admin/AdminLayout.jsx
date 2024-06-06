@@ -29,7 +29,7 @@ export default function AdminLayout({ children }) {
     },
     {
       href: "/admin/warehouses",
-      label: "Склад",
+      label: "Склады",
       icon: "/assets/icons/admin-icons/склад.svg",
     },
     {

@@ -51,10 +51,8 @@ const useWarehouses = (currentPage) => {
     image,
     comments,
     unique_id_user,
-    url,
     date_sent,
     date_arrived,
-    articul,
     is_parcels
   ) => {
     const accessToken = getCookie("accessToken");
@@ -69,10 +67,8 @@ const useWarehouses = (currentPage) => {
     formData.append("image", image);
     formData.append("comments", comments);
     formData.append("unique_id_user", unique_id_user);
-    formData.append("url", url);
     formData.append("date_sent", date_sent);
     formData.append("date_arrived", date_arrived);
-    formData.append("articul", articul);
     formData.append("is_parcels", !!is_parcels);
 
     setIsLoading(true);
