@@ -17,7 +17,7 @@ const useWarehouses = (currentPage) => {
     setError(null);
     try {
       const response = await axios.get(
-        `${API_URL}/api/warehouses/list/?pagination_type=page_number&page=${
+        `${API_URL}/api/warehouses/product/list/?pagination_type=page_number&page=${
           currentPage === undefined ? 1 : currentPage
         }&page_size=6`,
         {
@@ -102,7 +102,7 @@ const useWarehouses = (currentPage) => {
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     try {
-      await axios.delete(`${API_URL}/api/warehouses/delete/${id}/`, {
+      await axios.delete(`${API_URL}/api/warehouses/products/delete/${id}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

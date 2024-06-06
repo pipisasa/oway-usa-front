@@ -12,6 +12,8 @@ import CompaniesModal from "./modals/CompaniesModal";
 
 export default function AdminHeader() {
   const router = useRouter();
+  const { asPath } = router;
+  const pathSegments = asPath.split("/");
 
   const links = [
     { href: "/admin", label: "Главная" },
@@ -40,6 +42,12 @@ export default function AdminHeader() {
           Здравствуйте, <span>Администратор</span> 👋
         </>
       );
+    } else if (
+      router.pathname.startsWith("/admin/warehouses/") &&
+      pathSegments.length >= 3
+    ) {
+      const warehouseName = decodeURIComponent(pathSegments[3]);
+      return `Склад - ${warehouseName}`;
     } else {
       const currentPage = links.find((link) => router.pathname === link.href);
       return currentPage ? currentPage.label : "Название страницы не найдено";
@@ -55,7 +63,7 @@ export default function AdminHeader() {
       return <AddShopsModal />;
     } else if (router.pathname === "/admin/products") {
       return <ProductsModal />;
-    } else if (router.pathname === "/admin/warehouses") {
+    } else if (router.pathname.includes("/admin/warehouses/")) {
       return <WarehouseProductsModal />;
     } else if (router.pathname === "/admin/companies") {
       return <CompaniesModal />;

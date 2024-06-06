@@ -38,15 +38,12 @@ export default function WarehousesModal({ onClose, warehouse }) {
   };
 
   const [editData, setEditData] = useState({
-    url: warehouse.url,
     name: warehouse.name,
-    articul: warehouse.articul,
     unique_id_user: warehouse.unique_id_user,
     price: warehouse.price,
     weight: warehouse.weight,
     date_sent: warehouse.date_sent,
     date_arrived: warehouse.date_arrived,
-    country: warehouse.country.id,
     address: warehouse.address,
     comments: warehouse.comments,
     status: currentStatus,
@@ -55,9 +52,9 @@ export default function WarehousesModal({ onClose, warehouse }) {
   const statuses = [
     { id: 8, name: "Доставлено" },
     { id: 7, name: "Отправлено курьерской службой" },
-    { id: 6, name: "Получен на складе получателя" },
+    { id: 6, name: "Получен на складе" },
     { id: 5, name: "Отправлен" },
-    { id: 4, name: "Получен на складе отправителя" },
+    { id: 4, name: "Получен в ПВЗ" },
     { id: 3, name: "Готов к выдаче" },
   ];
 
@@ -72,9 +69,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
   const handleCancel = () => {
     setIsEditing(false);
     setEditData({
-      url: warehouse.url,
       name: warehouse.name,
-      articul: warehouse.articul,
       unique_id_user: warehouse.unique_id_user,
       price: warehouse.price,
       weight: warehouse.weight,
@@ -110,7 +105,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
     const accessToken = getCookie("accessToken");
     try {
       await axios.patch(
-        `${API_URL}/api/warehouses/update/${warehouse.id}/`,
+        `${API_URL}/api/warehouses/products/update/${warehouse.id}/`,
         formData,
         {
           headers: {
@@ -196,28 +191,10 @@ export default function WarehousesModal({ onClose, warehouse }) {
           <form className={s.form} encType="multipart/form-data">
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
-                <label htmlFor="url">Ссылка на посылку</label>
-                <input
-                  id="url"
-                  value={editData.url}
-                  onChange={handleInputChange}
-                  readOnly={!isEditing}
-                />
-              </div>
-              <div className={s.input_label}>
                 <label htmlFor="name">Название</label>
                 <input
                   id="name"
                   value={editData.name}
-                  onChange={handleInputChange}
-                  readOnly={!isEditing}
-                />
-              </div>
-              <div className={s.input_label}>
-                <label htmlFor="articul">Трек-код </label>
-                <input
-                  id="articul"
-                  value={editData.articul}
                   onChange={handleInputChange}
                   readOnly={!isEditing}
                 />

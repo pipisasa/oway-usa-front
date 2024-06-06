@@ -2,9 +2,11 @@ import React from "react";
 import s from "@/styles/components/shared/cards/WarehousesCard.module.scss";
 import EditWarehouses from "../admin/modals/EditWarehouses";
 import { useWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
+import { useRouter } from "next/router";
 
 export default function WarehousesCard({ warehouse }) {
   const { deleteWarehouse } = useWarehouses();
+  const router = useRouter();
 
   const handleDelete = async () => {
     const confirmed = window.confirm(
@@ -31,7 +33,12 @@ export default function WarehousesCard({ warehouse }) {
           </button>
         </div>
       </div>
-      <button className={s.view}>Посмотреть</button>
+      <button
+        className={s.view}
+        onClick={() => router.push(`/admin/warehouses/${warehouse.name}`)}
+      >
+        Посмотреть
+      </button>
     </div>
   );
 }

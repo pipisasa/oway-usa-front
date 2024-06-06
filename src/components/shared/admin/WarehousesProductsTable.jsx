@@ -12,7 +12,6 @@ export default function WarehousesProductsTable({
   current,
   setCurrent,
   nameFilter,
-  trackNumberFilter,
   statusFilter,
   countryFilter,
 }) {
@@ -22,7 +21,6 @@ export default function WarehousesProductsTable({
   const filteredWarehouses = warehouses?.results?.filter(
     (warehouse) =>
       warehouse.name.toLowerCase().includes(nameFilter.toLowerCase()) &&
-      warehouse.track_number.toString().includes(trackNumberFilter) &&
       (statusFilter === "" || warehouse.status.name === statusFilter) &&
       (countryFilter === "" || warehouse.country.name === countryFilter)
   );
@@ -47,16 +45,14 @@ export default function WarehousesProductsTable({
   if (error) {
     return <div>Error: {error}</div>;
   }
-  console.log(warehouses);
   return (
     <div>
       <table>
         <thead>
           <tr>
-            <th>Пользователь</th>
             <th>Название посылки</th>
-            <th>Дата отправки</th>
-            <th>Дата прибытия</th>
+            <th>Адрес получения</th>
+            <th>Страна получения</th>
             <th>Вес (кг)</th>
             <th>Трек-номер</th>
             <th>Статус</th>
@@ -69,12 +65,9 @@ export default function WarehousesProductsTable({
               className={warehouse.is_parcels === true ? s.parcel_tr : ""}
               key={warehouse.id}
             >
-              <td style={{ fontWeight: "bold" }}>
-                #{warehouse.unique_id_user}
-              </td>
               <td>{warehouse.name}</td>
-              <td>{warehouse.date_sent}</td>
-              <td>{warehouse.date_arrived}</td>
+              <td>{warehouse.country_of_origin}</td>
+              <td>{warehouse.country_of_destination}</td>
               <td>{warehouse.weight}</td>
               <td>{warehouse.track_number}</td>
               <td
