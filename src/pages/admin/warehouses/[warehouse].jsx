@@ -3,6 +3,8 @@ import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import WarehousesProductsTable from "@/components/shared/admin/WarehousesProductsTable";
 import useWarehouses from "@/hooks/admin/useWarehouses";
 import AdminCustomSelect from "@/components/partials/AdminCustomSelect";
+import SearchSelect from "@/components/partials/SearchSelect";
+import CustomSelect from "@/components/partials/select/SearchSelectCustom";
 
 export default function AdminWarehousesPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,54 +28,7 @@ export default function AdminWarehousesPage() {
   return (
     <div className={s.warehouses_page}>
       <div className={s.filters}>
-        <div className={s.search}>
-          <img src="/assets/icons/search.svg" alt="icon" />
-          <input
-            type="text"
-            placeholder="Поиск по названию"
-            value={nameFilter}
-            onChange={(e) => setNameFilter(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                fetchWarehouses(currentPage, {
-                  name: nameFilter,
-                });
-              }
-            }}
-          />
-        </div>
-        <div className={s.search}>
-          <img src="/assets/icons/search.svg" alt="icon" />
-          <input
-            type="number"
-            placeholder="Поиск по трек номеру"
-            value={trackNumberFilter}
-            onChange={(e) => setTrackNumberFilter(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                fetchWarehouses(currentPage, {
-                  trackNumber: trackNumberFilter,
-                });
-              }
-            }}
-          />
-        </div>
-
-        <AdminCustomSelect
-          options={[
-            "Получен на складе получателя",
-            "Отправлен",
-            "Доставлено",
-            "Готов к выдаче",
-          ]}
-          value={statusFilter || "Выберите статус"}
-          onChange={(value) => setStatusFilter(value)}
-        />
-        <AdminCustomSelect
-          options={["США", "Турция"]}
-          value={countryFilter || "Страна отправки"}
-          onChange={(value) => setCountryFilter(value)}
-        />
+        <CustomSelect />
       </div>
       <WarehousesProductsTable
         currentPage={currentPage}

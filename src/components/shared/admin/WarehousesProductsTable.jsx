@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import Loading from "./Loading";
 import { Pagination } from "@nextui-org/react";
-import WerehousesModal from "./modals/WarehousesModal";
+import WarehousesModal from "./modals/WarehousesModal";
 
 export default function WarehousesProductsTable({
   warehouses,
@@ -17,6 +17,7 @@ export default function WarehousesProductsTable({
 }) {
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
   const [confirmDeleteWarehouse, setConfirmDeleteWarehouse] = useState(null);
+  const [selectedWarehouses, setSelectedWarehouses] = useState([]);
 
   const filteredWarehouses = warehouses?.results?.filter(
     (warehouse) =>
@@ -38,6 +39,20 @@ export default function WarehousesProductsTable({
     setConfirmDeleteWarehouse(null);
   };
 
+  const toggleWarehouseSelection = (id) => {
+    setSelectedWarehouses((prev) =>
+      prev.includes(id) ? prev.filter((wid) => wid !== id) : [...prev, id]
+    );
+  };
+
+  const toggleSelectAllWarehouses = () => {
+    if (selectedWarehouses.length === filteredWarehouses.length) {
+      setSelectedWarehouses([]);
+    } else {
+      setSelectedWarehouses(filteredWarehouses.map((wh) => wh.id));
+    }
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -45,11 +60,21 @@ export default function WarehousesProductsTable({
   if (error) {
     return <div>Error: {error}</div>;
   }
+
   return (
     <div>
       <table>
         <thead>
           <tr>
+            <th>
+              <input
+                type="checkbox"
+                onChange={toggleSelectAllWarehouses}
+                checked={
+                  selectedWarehouses.length === filteredWarehouses?.length
+                }
+              />
+            </th>
             <th>Название посылки</th>
             <th>Адрес получения</th>
             <th>Страна получения</th>
@@ -65,6 +90,13 @@ export default function WarehousesProductsTable({
               className={warehouse.is_parcels === true ? s.parcel_tr : ""}
               key={warehouse.id}
             >
+              <td>
+                <input
+                  type="checkbox"
+                  checked={selectedWarehouses.includes(warehouse.id)}
+                  onChange={() => toggleWarehouseSelection(warehouse.id)}
+                />
+              </td>
               <td>{warehouse.name}</td>
               <td>{warehouse.country_of_origin}</td>
               <td>{warehouse.country_of_destination}</td>
@@ -109,7 +141,7 @@ export default function WarehousesProductsTable({
       </div>
 
       {selectedWarehouse && (
-        <WerehousesModal
+        <WarehousesModal
           warehouse={selectedWarehouse}
           onClose={() => setSelectedWarehouse(null)}
         />
