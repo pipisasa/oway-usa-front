@@ -27,6 +27,10 @@ export default function AdminHeader() {
       href: "/admin/illinois",
       label: "Запросы клиентов за пределами штата Иллинойс",
     },
+    {
+      href: "/admin/bulletin-board",
+      label: "Доска объявлений",
+    },
   ];
 
   const getPageHeader = () => {

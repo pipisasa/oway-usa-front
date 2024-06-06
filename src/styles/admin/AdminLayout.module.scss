@@ -104,10 +104,15 @@
       gap: 20px;
 
       .btn {
-        background: var(--blue, #027ddb);
-        color: #fff;
-        padding: 14px 26px;
         border-radius: 12px;
+        background: var(--blue, #027ddb);
+        padding: 12px 36px;
+        margin-right: 12px;
+        color: var(--white, #fff);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
       }
 
       .user_code {

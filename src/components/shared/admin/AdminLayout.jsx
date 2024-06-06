@@ -52,6 +52,11 @@ export default function AdminLayout({ children }) {
       label: "Клиенты за Иллинойс",
       icon: "/assets/icons/united-states-of-america.svg",
     },
+    {
+      href: "/admin/bulletin-board",
+      label: "Доска объявлений",
+      icon: "/assets/icons/admin-icons/bulletin_board.svg",
+    },
   ];
 
   return (
