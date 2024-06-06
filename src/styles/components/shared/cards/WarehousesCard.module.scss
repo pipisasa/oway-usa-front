@@ -1,0 +1,44 @@
+.card {
+  border-radius: 12px;
+  background: var(--Colors-Grey-White, #fff);
+  padding: 24px;
+
+  .card_info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .btns {
+      display: flex;
+      gap: 12px;
+
+      .edit {
+        border-radius: 5px;
+        background: var(--blue_light_3, #e7efff);
+        padding: 9px 10px;
+      }
+      .delete {
+        border-radius: 5px;
+        background: var(--blue_light_3, #ffe7e7);
+        padding: 9px 10px;
+      }
+    }
+  }
+
+  .view {
+    border-radius: 12px;
+    background: var(--blue, #027ddb);
+    padding: 14px 36px;
+    margin-top: 20px;
+    width: 100%;
+    color: var(--white, var(--Colors-Grey-White, #fff));
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+  }
+}

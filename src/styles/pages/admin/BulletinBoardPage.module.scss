@@ -4,22 +4,6 @@
   grid-auto-rows: min-content;
   gap: 20px;
 
-  .add_board {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 16px;
-    background: var(--Colors-Grey-White, #fff);
-    height: 100%;
-    width: 100%;
-
-    .edit {
-      border-radius: 5px;
-      background: var(--blue_light_3, #e7efff);
-      padding: 9px 10px;
-    }
-  }
-
   .hex_colors {
     display: grid !important;
     grid-template-columns: repeat(9, 1fr);
@@ -31,5 +15,21 @@
       border-radius: 100%;
       border: 0.1px solid #919191;
     }
+  }
+}
+
+.add_board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  background: var(--Colors-Grey-White, #fff);
+  height: 100%;
+  width: 100%;
+
+  .edit {
+    border-radius: 5px;
+    background: var(--blue_light_3, #e7efff);
+    padding: 9px 10px;
   }
 }

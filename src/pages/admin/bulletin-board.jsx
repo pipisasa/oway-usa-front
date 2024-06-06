@@ -5,7 +5,7 @@ import AddBulletinBoard from "@/components/shared/admin/modals/AddBulletinBoard"
 
 export default function BulletinBoardPage() {
   return (
-    <main className={s.boards_page}>
+    <section className={s.boards_page}>
       <AddBulletinBoard />
       <BulletinBoardCard />
       <BulletinBoardCard />
@@ -15,6 +15,6 @@ export default function BulletinBoardPage() {
       <BulletinBoardCard />
       <BulletinBoardCard />
       <BulletinBoardCard />
-    </main>
+    </section>
   );
 }
