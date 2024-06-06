@@ -4,8 +4,14 @@ import c from "@/styles/pages/admin/BulletinBoardPage.module.scss";
 import Modal from "../../Modal";
 import { useWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 
-const InputField = memo(
-  ({ label, type = "text", placeholder, name, value }) => (
+const InputField = memo(function InputField({
+  label,
+  type = "text",
+  placeholder,
+  name,
+  value,
+}) {
+  return (
     <div>
       <label>{label}</label>
       <input
@@ -15,8 +21,8 @@ const InputField = memo(
         defaultValue={value}
       />
     </div>
-  )
-);
+  );
+});
 
 export default function EditWarehouses({ warehouse }) {
   const [isOpen, setIsOpen] = useState(false);

@@ -5,12 +5,19 @@ import Modal from "../../Modal";
 import { useWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import Loading from "../Loading";
 
-const InputField = memo(({ label, type = "text", placeholder, name }) => (
-  <div>
-    <label>{label}</label>
-    <input type={type} placeholder={placeholder} name={name} />
-  </div>
-));
+const InputField = memo(function InputField({
+  label,
+  type = "text",
+  placeholder,
+  name,
+}) {
+  return (
+    <div>
+      <label>{label}</label>
+      <input type={type} name={name} placeholder={placeholder} />
+    </div>
+  );
+});
 
 export default function AddWarehouses() {
   const { createWarehouse, loading, error } = useWarehouses();
