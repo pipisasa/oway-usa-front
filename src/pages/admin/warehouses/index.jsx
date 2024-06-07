@@ -6,7 +6,8 @@ import { useWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import Loading from "@/components/shared/admin/Loading";
 
 export default function WarehousesPage() {
-  const { warehouses, fetchWarehouses, loading, error } = useWarehouses();
+  const { warehouses, fetchWarehouses, deleteWarehouse, loading, error } =
+    useWarehouses();
 
   useEffect(() => {
     fetchWarehouses();
@@ -21,7 +22,11 @@ export default function WarehousesPage() {
         <p>Ошибка: {error}</p>
       ) : (
         warehouses.map((warehouse) => (
-          <WarehousesCard key={warehouse.id} warehouse={warehouse} />
+          <WarehousesCard
+            key={warehouse.id}
+            deleteWarehouse={deleteWarehouse}
+            warehouse={warehouse}
+          />
         ))
       )}
     </section>
