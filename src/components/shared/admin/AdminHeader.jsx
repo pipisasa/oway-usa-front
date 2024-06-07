@@ -59,13 +59,13 @@ export default function AdminHeader() {
       return <AddUsersModal />;
     } else if (router.pathname === "/admin/notifications") {
       return <NotificationsModal />;
-    } else if (router.pathname === "/admin/shops-catalog") {
+    } else if (router.pathname === "/admin/catalog/shops-catalog") {
       return <AddShopsModal />;
-    } else if (router.pathname === "/admin/products") {
+    } else if (router.pathname === "/admin/catalog/products") {
       return <ProductsModal />;
     } else if (router.pathname.includes("/admin/warehouses/")) {
       return <WarehouseProductsModal />;
-    } else if (router.pathname === "/admin/companies") {
+    } else if (router.pathname === "/admin/catalog/companies") {
       return <CompaniesModal />;
     }
     return null;
