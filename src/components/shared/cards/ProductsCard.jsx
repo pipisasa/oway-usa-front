@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import s from "@/styles/components/shared/cards/ProdustCard.module.scss";
 import Link from "next/link";
+import ImageModal from "../admin/modals/ImageModal";
 
 const ProductsCard = ({ title, link, image, editProduct, deleteProduct }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   const handleDeleteConfirmation = () => {
     setShowDeleteModal(true);
@@ -18,11 +20,24 @@ const ProductsCard = ({ title, link, image, editProduct, deleteProduct }) => {
     setShowDeleteModal(false);
   };
 
+  const handleImageClick = () => {
+    setIsImageModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsImageModalOpen(false);
+  };
+
   return (
     <div className={s.card_block}>
       <div className={s.data}>
         <div className={s.card_img}>
-          <img src={image} alt="" />
+          <img
+            src={image}
+            alt=""
+            onClick={handleImageClick}
+            style={{ cursor: "pointer" }}
+          />
         </div>
         <div className={s.card_text}>
           <h2>{title}</h2>
@@ -49,6 +64,7 @@ const ProductsCard = ({ title, link, image, editProduct, deleteProduct }) => {
           </div>
         </div>
       )}
+      {isImageModalOpen && <ImageModal src={image} onClose={closeModal} />}
     </div>
   );
 };

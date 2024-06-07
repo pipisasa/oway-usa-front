@@ -11,6 +11,7 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import ImageModal from "@/components/shared/admin/modals/ImageModal";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -18,6 +19,8 @@ export default function RequestsModal({ data, onClose }) {
   const { updateRequest } = useRequests();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [price, setPrice] = useState(data.price || "");
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [imageSrc, setImageSrc] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,6 +42,15 @@ export default function RequestsModal({ data, onClose }) {
     setPrice(event.target.value);
   };
 
+  const handleImageClick = (src) => {
+    setImageSrc(src);
+    setIsImageModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsImageModalOpen(false);
+  };
+
   return (
     <div
       className={s.modal_backdrop}
@@ -53,7 +65,14 @@ export default function RequestsModal({ data, onClose }) {
           <div className={s.left_block}>
             <div className={s.input_label}>
               <label>Фотография</label>
-              <img src={`${API_URL}${data.purchase_image}`} alt="" />
+              <img
+                src={`${API_URL}${data.purchase_image}`}
+                alt=""
+                onClick={() =>
+                  handleImageClick(`${API_URL}${data.purchase_image}`)
+                }
+                style={{ cursor: "pointer" }}
+              />
             </div>
             <div className={s.input_label}>
               <label htmlFor="">Статус запроса</label>
@@ -173,6 +192,7 @@ export default function RequestsModal({ data, onClose }) {
           </form>
         </div>
       </section>
+      {isImageModalOpen && <ImageModal src={imageSrc} onClose={closeModal} />}
     </div>
   );
 }

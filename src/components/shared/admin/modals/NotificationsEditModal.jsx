@@ -3,9 +3,9 @@ import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useNotification from "../../../../hooks/admin/useNotification";
 import SelectOptions from "@/components/partials/SelectOptions";
-
 import DynamicSelect from "@/components/partials/Select";
 import CustomSelect from "@/components/partials/Select";
+import ImageModal from "./ImageModal";
 
 export default function NotificationsEditModal({
   isOpen,
@@ -18,6 +18,7 @@ export default function NotificationsEditModal({
   );
   const [icon, setIcon] = useState(null);
   const [previewImage, setPreviewImage] = useState(notification?.icon || null);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   const { updateNotification } = useNotification();
 
@@ -55,12 +56,22 @@ export default function NotificationsEditModal({
     };
     reader.readAsDataURL(file);
   };
+
+  const handleImageClick = () => {
+    setIsImageModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsImageModalOpen(false);
+  };
+
   const [selectedOption, setSelectedOption] = useState("");
   const options = ["Option 1", "Option 2", "Option 3"];
 
   const handleChange = (e) => {
     setSelectedOption(e?.target?.value);
   };
+
   return (
     <div className={s.modal}>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -88,7 +99,14 @@ export default function NotificationsEditModal({
             <label htmlFor="">Картинка</label>
             <div className={s.image_container}>
               {previewImage && (
-                <img width={80} height={80} src={previewImage} alt="Preview" />
+                <img
+                  width={80}
+                  height={80}
+                  src={previewImage}
+                  alt="Preview"
+                  onClick={handleImageClick}
+                  style={{ cursor: "pointer" }}
+                />
               )}
               <label className="custom-file-upload">
                 <input type="file" onChange={handleImageChange} />
@@ -116,6 +134,9 @@ export default function NotificationsEditModal({
           </div>
         </form>
       </Modal>
+      {isImageModalOpen && (
+        <ImageModal src={previewImage} onClose={closeModal} />
+      )}
     </div>
   );
 }

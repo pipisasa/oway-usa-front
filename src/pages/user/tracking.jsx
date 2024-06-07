@@ -37,7 +37,7 @@ export default function TrackingPage() {
       setError(
         "Произошла ошибка при отслеживании. Пожалуйста, проверьте трек-номер и попробуйте снова."
       );
-      setStatus("not-found"); // Устанавливаем статус, чтобы показать, что товар не найден
+      setStatus("not-found");
       onOpen();
     } finally {
       setLoading(false);
@@ -67,7 +67,7 @@ export default function TrackingPage() {
       </form>
 
       {loading && <Loading />}
-      {error && <p>{error}</p>}
+      {/* {error && <p>{error}</p>} */}
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent>
@@ -78,7 +78,7 @@ export default function TrackingPage() {
             ) : (
               <p>
                 {status ? (
-                  status.status.name ? (
+                  status.status?.name ? (
                     <div className={s.status}>
                       <img src="/assets/icons/впути.svg" alt="" />
                       <p>{status.status.name}</p>
@@ -95,8 +95,7 @@ export default function TrackingPage() {
               </p>
             )}
           </ModalBody>
-          <ModalFooter>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </section>
