@@ -4,6 +4,7 @@ import { Pagination } from "@nextui-org/react";
 import useRequests from "@/hooks/admin/useRequests";
 import RequestsModal from "@/components/shared/admin/modals/RequestsModal";
 import Loading from "@/components/shared/admin/Loading";
+import ImageModal from "@/components/shared/admin/modals/ImageModal";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -14,10 +15,21 @@ export default function IncommingRequests() {
   const [currentRequestData, setCurrentRequestData] = useState(null);
   const [nameFilter, setNameFilter] = useState("");
   const [filter, setFilter] = useState("");
-
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [imageSrc, setImageSrc] = useState("");
+  console.log(data);
   const handleOpenModal = (requestData) => {
     setCurrentRequestData(requestData);
     setIsModalVisible(true);
+  };
+
+  const handleImageClick = (src) => {
+    setImageSrc(src);
+    setIsImageModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsImageModalOpen(false);
   };
 
   const filteredRequests = data.results.filter((request) =>
@@ -39,6 +51,7 @@ export default function IncommingRequests() {
           onClose={() => setIsModalVisible(false)}
         />
       )}
+      {isImageModalOpen && <ImageModal src={imageSrc} onClose={closeModal} />}
       <div className={s.filters}>
         <div className={s.search}>
           <img src="/assets/icons/search.svg" alt="icon" />
@@ -87,6 +100,10 @@ export default function IncommingRequests() {
                 <img
                   src={`${API_URL}${request.purchase_image}`}
                   alt="Product"
+                  onClick={() =>
+                    handleImageClick(`${API_URL}${request.purchase_image}`)
+                  }
+                  style={{ cursor: "pointer" }}
                 />
               </td>
               <td>{request.name_of_purchase}</td>
