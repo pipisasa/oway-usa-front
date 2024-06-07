@@ -77,7 +77,7 @@ const useWarehouses = (currentPage) => {
 
     try {
       const response = await axios.post(
-        `${API_URL}/api/warehouses/create/`,
+        `${API_URL}/api/warehouses/product/create/`,
         formData,
         {
           headers: {
@@ -87,7 +87,7 @@ const useWarehouses = (currentPage) => {
         }
       );
 
-      window.location.reload();
+      // window.location.reload();
       await fetchWarehouses();
       setIsSuccess(true);
     } catch (error) {
