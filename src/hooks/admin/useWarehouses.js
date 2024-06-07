@@ -87,7 +87,6 @@ const useWarehouses = (currentPage) => {
         }
       );
 
-      // window.location.reload();
       await fetchWarehouses();
       setIsSuccess(true);
     } catch (error) {
@@ -102,7 +101,7 @@ const useWarehouses = (currentPage) => {
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     try {
-      await axios.delete(`${API_URL}/api/warehouses/products/delete/${id}/`, {
+      await axios.delete(`${API_URL}/api/warehouses/product/delete/${id}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
