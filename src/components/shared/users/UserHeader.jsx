@@ -11,6 +11,7 @@ import useNotification from "../../../hooks/user/useNotification";
 import MyWarehousesModal from "../admin/modals/MyWarehousesModal";
 import Link from "next/link";
 import { getCookie } from "@/utils/cookieHelpers";
+import MyRequestsModal from "./modals/MyRequestsModal";
 
 export default function UsersHeader() {
   const router = useRouter();
@@ -59,6 +60,8 @@ export default function UsersHeader() {
       return <AddShopsModal />;
     } else if (router.pathname === "/user/my-parcels") {
       return <MyWarehousesModal />;
+    } else if (router.pathname === "/user/my-requests") {
+      return <MyRequestsModal />;
     }
     return null;
   };
