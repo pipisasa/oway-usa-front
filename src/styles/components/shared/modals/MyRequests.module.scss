@@ -1,0 +1,310 @@
+.purchase {
+  .icon_input {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--gray, #a4a4a4);
+    padding: 12px 20px;
+    width: 100%;
+
+    input {
+      border: none !important;
+      padding: 0 !important;
+    }
+  }
+
+  .button {
+    display: flex;
+    padding: 14px 36px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 12px;
+    background: var(--blue, #027ddb);
+    cursor: pointer;
+    margin-top: 24px;
+    font-size: 16px;
+    gap: 20px;
+    width: 100%;
+    transition: background-color 0.3s;
+
+    span {
+      font-family: Helvetica;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%;
+      color: white;
+    }
+
+    &:hover {
+      background-color: #01579b;
+    }
+  }
+  .purchase_img {
+    position: absolute;
+    right: -60px;
+    top: -60px;
+    img {
+      transform: rotate(7.912deg);
+    }
+  }
+  .purchase_container {
+    max-width: 873px;
+
+    .mobile_form {
+      display: none;
+    }
+  }
+
+  .purchase_inner {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    .purchase_inner_froms {
+      .error {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+
+        input {
+          border-radius: 8px;
+          border: 1px solid var(--gray, #ff0000);
+          padding: 12px 20px;
+          width: 100%;
+        }
+
+        label {
+          color: var(--black, #ff0000);
+          font-family: Helvetica;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 140%;
+          //   margin-top: 20px;
+          span {
+            color: red;
+          }
+        }
+        p {
+          color: red;
+        }
+        .purchase_inner_froms_label {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 8px;
+          label {
+            color: var(--black, #ff0000);
+            font-family: Helvetica;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+          }
+          img {
+            margin-top: 20px;
+          }
+        }
+      }
+
+      .purchase_inner_froms_inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+
+        input {
+          border-radius: 8px;
+          border: 1px solid var(--gray, #a4a4a4);
+          padding: 12px 20px;
+          width: 100%;
+        }
+
+        label {
+          color: var(--black, #001526);
+          font-family: Helvetica;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 140%;
+          span {
+            color: red;
+          }
+        }
+        .purchase_inner_froms_label {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 8px;
+          label {
+            color: var(--black, #001526);
+            font-family: Helvetica;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+          }
+          img {
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+    .errorr {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      input {
+        border-radius: 8px;
+        border: 1px solid var(--gray, #ff0000);
+        padding: 12px 20px;
+        width: 100%;
+      }
+
+      label {
+        color: var(--black, #ff0000);
+        font-family: Helvetica;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        // margin-top: 20px;
+        span {
+          color: red;
+        }
+      }
+      p {
+        color: red;
+      }
+    }
+    .purchase_inner_from {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+
+      input {
+        border-radius: 8px;
+        border: 1px solid var(--gray, #a4a4a4);
+        padding: 12px 20px;
+        width: 100%;
+      }
+
+      label {
+        color: var(--black, #001526);
+        font-family: Helvetica;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        margin-top: 20px;
+
+        span {
+          color: red;
+        }
+      }
+    }
+    .error {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      input {
+        border-radius: 8px;
+        border: 1px solid var(--gray, #ff0000);
+        padding: 12px 20px 64px 20px;
+        width: 100%;
+      }
+      p {
+        color: red;
+      }
+
+      label {
+        color: var(--black, #ff0000);
+        font-family: Helvetica;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        // margin-top: 20px;
+
+        span {
+          color: red;
+        }
+      }
+    }
+  }
+}
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+}
+
+.modalContent {
+  h2 {
+    color: var(--black, #001526);
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 700px;
+  position: relative;
+}
+
+.closeModalButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.openModalButton {
+  border-radius: 12px;
+  background: var(--blue, #027ddb);
+  padding: 12px 36px;
+  margin-right: 12px;
+  color: var(--white, #fff);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+}
+@media screen and (max-width: 900px) {
+  .purchase {
+    .purchase_container {
+      .form_container {
+        .purchase_inner {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+    }
+  }
+  .modalContent {
+    padding: 12px;
+    width: 70%;
+    max-height: 750px;
+    overflow: scroll;
+    border-radius: 12px;
+  }
+}
