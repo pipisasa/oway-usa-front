@@ -31,11 +31,29 @@ export default function Step1({
   nextStep,
   currentStep,
   countries,
-  selectedOption,
-  closeModal,
-  setSelectedOption,
   setCurrentStep,
 }) {
+  const [selectedOption1, setSelectedOption1] = useState("");
+  const [selectedOption2, setSelectedOption2] = useState("");
+
+  const handleSelectChange1 = (e) => {
+    const newSelectedId = e.target.value;
+    setSelectedOption1(newSelectedId);
+    handleChange({
+      target: { name: "country_of_origin", value: newSelectedId },
+    });
+  };
+
+  const handleSelectChange2 = (e) => {
+    const newSelectedId = e.target.value;
+    setSelectedOption2(newSelectedId);
+    handleChange({
+      target: { name: "country_of_destination", value: newSelectedId },
+    });
+  };
+
+  console.log(countries);
+
   return (
     <div className={c.step}>
       <div className={c.steps_progress}>
@@ -87,33 +105,43 @@ export default function Step1({
               <span>Выбрать картинку</span>
             </label>
           </div>
-          {/* <InputField
-            id="address"
-            label="Адрес заказа"
-            value={formData.address}
-            onChange={handleChange}
-            placeholder="Введите адрес"
-          /> */}
-          {/* <div className={c.flex}>
-            <div>
-              <label htmlFor="country">Страна отправки</label>
-              <CustomSelect
-                options={countries}
-                selectedOption={selectedOption}
-                onChange={setSelectedOption}
-                span="Выберите страну"
-              />
+
+          <div className={c.flex}>
+            <div className={c.input}>
+              <label htmlFor="status">Страна отправки</label>
+              <select
+                id="country_of_origin"
+                name="country_of_origin"
+                value={selectedOption1}
+                onChange={handleSelectChange1}
+                className={c.select}
+              >
+                <option value="">Выберите страну</option>
+                {countries.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.name}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div>
-              <label htmlFor="country">Страна отправки</label>
-              <CustomSelect
-                options={countries}
-                selectedOption={selectedOption}
-                onChange={setSelectedOption}
-                span="Выберите страну"
-              />
+            <div className={c.input}>
+              <label htmlFor="status">Страна прибытия</label>
+              <select
+                id="country_of_destination"
+                name="country_of_destination"
+                value={selectedOption2}
+                onChange={handleSelectChange2}
+                className={c.select}
+              >
+                <option value="">Выберите страну</option>
+                {countries.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.name}
+                  </option>
+                ))}
+              </select>
             </div>
-          </div> */}
+          </div>
 
           <div className={c.flex}>
             <InputField
