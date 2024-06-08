@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminUsersPage.module.scss";
-import c from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
+
 import { Pagination } from "@nextui-org/react";
 import useUsersAdmin from "@/hooks/admin/useUsers";
 import Loading from "@/components/shared/admin/Loading";
@@ -27,7 +27,7 @@ export default function AdminUsersPage() {
   }
 
   const deselectUser = () => setSelectedUser(null);
-  console.log(users);
+
   const handleEditUser = (userData) => {
     updateUsers(userData.id)
       .then(() => {

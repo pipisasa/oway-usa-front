@@ -27,7 +27,7 @@ export default function TrackingPage() {
 
     try {
       const response = await axios.get(
-        `https://api-owayusa.com/api/warehouses/get/${trackingNumber}/`
+        `https://api-owayusa.com/api/warehouses/product/get/${trackingNumber}/`
       );
       setStatus(response.data);
       console.log(response.data);

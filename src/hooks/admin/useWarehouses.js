@@ -4,22 +4,32 @@ import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const useWarehouses = (currentPage) => {
+const useWarehouses = (currentPage, initialFilters = {}) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [warehouses, setWarehouses] = useState([]);
   const [count, setCount] = useState(0);
+  const [filters, setFilters] = useState(initialFilters);
 
-  const fetchWarehouses = async () => {
+  const fetchWarehouses = async (newFilters = {}) => {
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     setError(null);
+
+    // Merge new filters with existing ones
+    const mergedFilters = { ...filters, ...newFilters };
+
+    // Convert filters to query string
+    const queryString = Object.keys(mergedFilters)
+      .map((key) => `${key}=${encodeURIComponent(mergedFilters[key])}`)
+      .join("&");
+
     try {
       const response = await axios.get(
         `${API_URL}/api/warehouses/product/list/?pagination_type=page_number&page=${
           currentPage === undefined ? 1 : currentPage
-        }&page_size=6`,
+        }&page_size=6&${queryString}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -38,7 +48,7 @@ const useWarehouses = (currentPage) => {
 
   useEffect(() => {
     fetchWarehouses();
-  }, []);
+  }, [currentPage, filters]);
 
   const addWarehouses = async (
     name,
@@ -125,6 +135,7 @@ const useWarehouses = (currentPage) => {
     addWarehouses,
     deleteWarehouse,
     fetchWarehouses,
+    setFilters,
     error,
     isLoading,
     count,
