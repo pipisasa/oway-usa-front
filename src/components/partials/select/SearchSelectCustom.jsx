@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import s from "@/styles/components/partials/select/SearchSelectCustom.module.scss";
 import useLocalStorage from "./useLocalStorage";
 import { options, inputComponents } from "./inputComponents";
+import { useWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
+import { useRouter } from "next/router";
 
 const storageKeys = {
   textInput: "textInput",
@@ -21,10 +23,13 @@ const CustomSelect = ({
   onCountryFilterChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { warehouses, fetchWarehouses, deleteWarehouse, loading, error } =
+    useWarehouses();
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [displayText, setDisplayText] = useState("Поиск");
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeButton, setActiveButton] = useState(0);
+  const [currentWarehouseIndex, setCurrentWarehouseIndex] = useState(0);
 
   const [textInput, setTextInput] = useLocalStorage(storageKeys.textInput, "");
   const [numberInput, setNumberInput] = useLocalStorage(
@@ -50,6 +55,11 @@ const CustomSelect = ({
     ""
   );
   const dropdownRef = useRef(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetchWarehouses();
+  }, []);
 
   const inputs = {
     textInput,
@@ -137,12 +147,6 @@ const CustomSelect = ({
   };
 
   const performSearch = () => {
-    console.log("Performing search with the following filters:");
-    console.log("Name Filter:", nameInput);
-    console.log("Track Number Filter:", numberInput);
-    console.log("Status Filter:", statusInput);
-    console.log("Country Filter:", countryInput);
-
     onNameFilterChange(nameInput);
     onTrackNumberFilterChange(numberInput);
     onStatusFilterChange(statusInput);
@@ -156,7 +160,7 @@ const CustomSelect = ({
           {option}
         </div>
       ))}
-      <div className={s.borber}></div>
+      <div className={s.border}></div>
     </div>
   );
 
@@ -202,6 +206,30 @@ const CustomSelect = ({
     setActiveButton(buttonIndex);
   };
 
+  const handleNext = () => {
+    if (currentWarehouseIndex < warehouses.length - 1) {
+      const newIndex = currentWarehouseIndex + 1;
+      setCurrentWarehouseIndex(newIndex);
+      navigateToWarehouse(newIndex);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentWarehouseIndex > 0) {
+      const newIndex = currentWarehouseIndex - 1;
+      setCurrentWarehouseIndex(newIndex);
+      navigateToWarehouse(newIndex);
+    }
+  };
+
+  const navigateToWarehouse = (index) => {
+    const warehouse = warehouses[index];
+    if (warehouse) {
+      const path = `/admin/warehouses/${encodeURIComponent(warehouse.name)}`;
+      router.push(path);
+    }
+  };
+
   return (
     <div className={s.main}>
       <div className={s.selectContainer} ref={dropdownRef}>
@@ -235,20 +263,18 @@ const CustomSelect = ({
                 {renderComponentOptions()}
                 {inputComponents(handleSearch, inputs).map(
                   ({ component, displayText }, index) => (
-                    <>
-                      <div
-                        key={index}
-                        className={`${s.option} ${
-                          index === activeIndex ? s.active : ""
-                        }`}
-                        onClick={() => {
-                          setSelectedComponent(component);
-                          setActiveIndex(index);
-                        }}
-                      >
-                        {displayText}
-                      </div>
-                    </>
+                    <div
+                      key={index}
+                      className={`${s.option} ${
+                        index === activeIndex ? s.active : ""
+                      }`}
+                      onClick={() => {
+                        setSelectedComponent(component);
+                        setActiveIndex(index);
+                      }}
+                    >
+                      {displayText}
+                    </div>
                   )
                 )}
                 <div className={s.buttonContainer}>
@@ -265,8 +291,8 @@ const CustomSelect = ({
         </div>
       </div>
       <div className={s.onebutton}>
-        <button>Предыдущий склад</button>
-        <button>Следующий склад</button>
+        <button onClick={handlePrevious}>Предыдущий склад</button>
+        <button onClick={handleNext}>Следующий склад</button>
       </div>
       <div className={s.twobutton}>
         <button
