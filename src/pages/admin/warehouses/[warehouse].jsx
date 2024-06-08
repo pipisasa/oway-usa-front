@@ -15,20 +15,53 @@ export default function AdminWarehousesPage() {
     isLoading,
     error,
     count,
+    setFilters,
   } = useWarehouses(currentPage);
+
   const [nameFilter, setNameFilter] = useState("");
   const [trackNumberFilter, setTrackNumberFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [countryFilter, setCountryFilter] = useState("");
 
   useEffect(() => {
-    fetchWarehouses(currentPage);
-  }, [currentPage]);
+    fetchWarehouses({
+      currentPage,
+      name: nameFilter,
+      track_number: trackNumberFilter,
+      status: statusFilter,
+      country: countryFilter,
+    });
+  }, [currentPage, nameFilter, trackNumberFilter, statusFilter, countryFilter]);
+
+  const handleNameFilterChange = (value) => {
+    setNameFilter(value);
+    setFilters({ name: value });
+  };
+
+  const handleTrackNumberFilterChange = (value) => {
+    setTrackNumberFilter(value);
+    setFilters({ track_number: value });
+  };
+
+  const handleStatusFilterChange = (value) => {
+    setStatusFilter(value);
+    setFilters({ status: value });
+  };
+
+  const handleCountryFilterChange = (value) => {
+    setCountryFilter(value);
+    setFilters({ country: value });
+  };
 
   return (
     <div className={s.warehouses_page}>
       <div className={s.filters}>
-        <CustomSelect />
+        <CustomSelect
+          onNameFilterChange={handleNameFilterChange}
+          onTrackNumberFilterChange={handleTrackNumberFilterChange}
+          onStatusFilterChange={handleStatusFilterChange}
+          onCountryFilterChange={handleCountryFilterChange}
+        />
       </div>
       <WarehousesProductsTable
         currentPage={currentPage}

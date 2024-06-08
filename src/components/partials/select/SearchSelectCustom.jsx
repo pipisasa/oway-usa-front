@@ -14,7 +14,12 @@ const storageKeys = {
   weightInput: "weightInput",
 };
 
-const CustomSelect = () => {
+const CustomSelect = ({
+  onNameFilterChange,
+  onTrackNumberFilterChange,
+  onStatusFilterChange,
+  onCountryFilterChange,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [displayText, setDisplayText] = useState("Поиск");
@@ -99,14 +104,49 @@ const CustomSelect = () => {
     setSelectedComponent(null);
     setDisplayText("Поиск");
     e.stopPropagation();
+    console.log("Resetting all filters");
+    onNameFilterChange("");
+    onTrackNumberFilterChange("");
+    onStatusFilterChange("");
+    onCountryFilterChange("");
   };
 
   const handleSearch = (searchText, type) => {
     const setter = inputs[`set${type.charAt(0).toUpperCase() + type.slice(1)}`];
     if (setter) {
       setter(searchText);
+      console.log(`${type} updated:`, searchText);
       setDisplayText(`по: ${searchText}`);
     }
+    switch (type) {
+      case "nameInput":
+        onNameFilterChange(searchText);
+        break;
+      case "trackNumberInput":
+        onTrackNumberFilterChange(searchText);
+        break;
+      case "statusInput":
+        onStatusFilterChange(searchText);
+        break;
+      case "countryInput":
+        onCountryFilterChange(searchText);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const performSearch = () => {
+    console.log("Performing search with the following filters:");
+    console.log("Name Filter:", nameInput);
+    console.log("Track Number Filter:", numberInput);
+    console.log("Status Filter:", statusInput);
+    console.log("Country Filter:", countryInput);
+
+    onNameFilterChange(nameInput);
+    onTrackNumberFilterChange(numberInput);
+    onStatusFilterChange(statusInput);
+    onCountryFilterChange(countryInput);
   };
 
   const renderOptions = (optionsToRender, type) => (
@@ -164,14 +204,26 @@ const CustomSelect = () => {
 
   return (
     <div className={s.main}>
-      <div
-        className={s.selectContainer}
-        onClick={toggleDropdown}
-        ref={dropdownRef}
-      >
-        <div>
+      <div className={s.selectContainer} ref={dropdownRef}>
+        <div onClick={toggleDropdown}>
           <div className={s.selectedOption}>
-            {selectedComponent ? selectedComponent : displayText}
+            {selectedComponent ? (
+              selectedComponent
+            ) : (
+              <>
+                <div className={s.Search}>
+                  <p>Поиск</p>
+                  <img
+                    src="/assets/icons/search.svg"
+                    alt="search"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      performSearch();
+                    }}
+                  />
+                </div>
+              </>
+            )}
           </div>
 
           {isOpen && (

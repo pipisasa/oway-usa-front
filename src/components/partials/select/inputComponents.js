@@ -6,7 +6,12 @@ import ChoiceInputSelect from "./all/ChoiceInputSelect";
 const options = {
   status: ["в складе", "готов к выдаче", "в пути"],
   country: ["Россия", "Америка", "Кыргызстан"],
-  default: ["Option 1", "Option 2", "Option 3"],
+  default: [
+    "Получен на складе отправителя",
+    "Отправлен",
+    "Получен на складе получателя",
+    "Отправлено курьерской службой",
+  ],
 };
 
 const inputComponents = (handleSearch, inputs) => [
@@ -83,7 +88,7 @@ const inputComponents = (handleSearch, inputs) => [
         onChoiceSelect={(choice) => handleSearch(choice, "selectedChoice")}
       />
     ),
-    displayText: `по: ${inputs.selectedChoice || "Choice Input"}`,
+    displayText: `по: ${inputs.selectedChoice || "Выберите страну"}`,
   },
 ];
 
