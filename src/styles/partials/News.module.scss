@@ -27,5 +27,15 @@
     gap: 20px;
     margin-top: 40px;
     overflow-x: scroll;
+    scroll-snap-type: x mandatory; // добавлен scroll snap
+
+    & > * {
+      scroll-snap-align: start; // каждый элемент будет привязываться к началу контейнера
+      flex: 0 0 auto; // каждый элемент будет занимать необходимую ширину
+    }
+
+    &::-webkit-scrollbar {
+      display: none; // скрытие стандартной полосы прокрутки
+    }
   }
 }
