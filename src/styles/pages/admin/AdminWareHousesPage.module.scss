@@ -111,6 +111,14 @@
     width: 100%;
     gap: 10px;
     border-collapse: collapse;
+    position: relative;
+
+    .actions_btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 20px;
+    }
 
     .btn {
       border-radius: 12px;
