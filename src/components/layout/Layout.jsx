@@ -19,18 +19,10 @@ export default function Layout({ children }) {
       const currentWidth = window.innerWidth;
       setIsMobile(currentWidth <= 888);
       setIsMobileAdmin(currentWidth <= 1024);
-      console.log(
-        "Window width:",
-        currentWidth,
-        "isMobile:",
-        isMobile,
-        "isMobileAdmin:",
-        isMobileAdmin
-      );
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Вызовите handleResize сразу, чтобы установить начальные состояния
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);

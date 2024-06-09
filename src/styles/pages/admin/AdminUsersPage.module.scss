@@ -76,6 +76,7 @@
         font-weight: 700;
         line-height: normal;
       }
+
       .btn_center {
         display: flex;
         justify-content: center;
@@ -188,6 +189,22 @@
 
 @media (max-width: 768px) {
   .users_page {
+    .modal {
+      .modalContent {
+        h3 {
+          font-size: 20px;
+          text-align: center;
+        }
+
+        .form {
+          min-width: 320px;
+
+          .inputs {
+            grid-template-columns: repeat(1, 1fr);
+          }
+        }
+      }
+    }
     table {
       thead {
         display: none;

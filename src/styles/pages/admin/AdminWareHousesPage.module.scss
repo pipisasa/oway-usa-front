@@ -1,5 +1,6 @@
 .warehouses_page {
   position: relative;
+  overflow-x: scroll;
 
   .filters {
     display: flex;
@@ -296,5 +297,39 @@
   background-color: #ccc;
   &:hover {
     background-color: darken(#ccc, 10%);
+  }
+}
+
+@media (max-width: 1024px) {
+  .warehouses_page {
+    overflow-x: hidden;
+    table {
+      thead {
+        display: none;
+      }
+
+      tbody {
+        tr {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto auto auto auto auto;
+          margin-bottom: 10px;
+          border-radius: 8px;
+          padding: 16px;
+          gap: 10px;
+          margin-bottom: 0;
+
+          td {
+            padding: 0px;
+            font-size: 16px;
+          }
+
+          td:nth-child(1) {
+            grid-column: 1 / 2;
+            grid-row: 1;
+          }
+        }
+      }
+    }
   }
 }

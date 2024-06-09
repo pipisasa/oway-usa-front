@@ -282,5 +282,9 @@
         padding: 20px;
       }
     }
+
+    .grid3 {
+      grid-template-columns: repeat(1, 1fr) !important;
+    }
   }
 }
