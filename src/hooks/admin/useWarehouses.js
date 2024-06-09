@@ -17,10 +17,8 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     setIsLoading(true);
     setError(null);
 
-    // Merge new filters with existing ones
     const mergedFilters = { ...filters, ...newFilters };
 
-    // Convert filters to query string
     const queryString = Object.keys(mergedFilters)
       .map((key) => `${key}=${encodeURIComponent(mergedFilters[key])}`)
       .join("&");
@@ -82,8 +80,11 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     formData.append("date_sent", date_sent);
     formData.append("date_arrived", date_arrived);
     formData.append("is_parcels", !!is_parcels);
-    formData.append("country_of_origin", country_of_origin);
-    formData.append("country_of_destination", country_of_destination);
+    formData.append("country_of_origin", parseInt(country_of_origin, 10));
+    formData.append(
+      "country_of_destination",
+      parseInt(country_of_destination, 10)
+    );
 
     setIsLoading(true);
     setError(null);

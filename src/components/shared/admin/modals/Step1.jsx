@@ -32,23 +32,27 @@ export default function Step1({
   countries,
   setCurrentStep,
 }) {
-  const [selectedOption1, setSelectedOption1] = useState("");
-  const [selectedOption2, setSelectedOption2] = useState("");
+  const [selectedOption1, setSelectedOption1] = useState(null);
+  const [selectedOption2, setSelectedOption2] = useState(null);
 
   const handleSelectChange1 = (e) => {
-    const newSelectedId = e.target.value;
-    setSelectedOption1(newSelectedId);
-    handleChange({
-      target: { name: "country_of_origin", value: newSelectedId },
-    });
+    const newSelectedId = parseInt(e.target.value, 10);
+    if (!isNaN(newSelectedId)) {
+      setSelectedOption1(newSelectedId);
+      handleChange({
+        target: { name: "country_of_origin", value: newSelectedId },
+      });
+    }
   };
 
   const handleSelectChange2 = (e) => {
-    const newSelectedId = e.target.value;
-    setSelectedOption2(newSelectedId);
-    handleChange({
-      target: { name: "country_of_destination", value: newSelectedId },
-    });
+    const newSelectedId1 = parseInt(e.target.value, 10);
+    if (newSelectedId1) {
+      setSelectedOption2(newSelectedId1);
+      handleChange({
+        target: { name: "country_of_destination", value: newSelectedId1 },
+      });
+    }
   };
 
   return (
@@ -105,11 +109,11 @@ export default function Step1({
 
           <div className={c.flex}>
             <div className={c.input}>
-              <label htmlFor="status">Страна отправки</label>
+              <label htmlFor="country_of_origin">Страна отправки</label>
               <select
                 id="country_of_origin"
                 name="country_of_origin"
-                value={selectedOption1}
+                value={selectedOption1 || ""}
                 onChange={handleSelectChange1}
                 className={c.select}
               >
@@ -122,11 +126,11 @@ export default function Step1({
               </select>
             </div>
             <div className={c.input}>
-              <label htmlFor="status">Страна прибытия</label>
+              <label htmlFor="country_of_destination">Страна прибытия</label>
               <select
                 id="country_of_destination"
                 name="country_of_destination"
-                value={selectedOption2}
+                value={selectedOption2 || ""}
                 onChange={handleSelectChange2}
                 className={c.select}
               >
@@ -165,24 +169,24 @@ export default function Step1({
               label="Длина"
               type="number"
               placeholder="Впишите длину"
-              //   value={formData.length}
-              //   onChange={handleChange}
+              value={formData.length}
+              onChange={handleChange}
             />
             <InputField
               id="width"
               label="Ширина"
               type="number"
               placeholder="Впишите ширину"
-              //   value={formData.width}
-              //   onChange={handleChange}
+              value={formData.width}
+              onChange={handleChange}
             />
             <InputField
               id="height"
               label="Высота"
               type="number"
               placeholder="Впишите высоту"
-              //   value={formData.height}
-              //   onChange={handleChange}
+              value={formData.height}
+              onChange={handleChange}
             />
           </div>
 

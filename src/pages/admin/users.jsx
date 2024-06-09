@@ -50,6 +50,7 @@ export default function AdminUsersPage() {
               <th>Почта</th>
               <th>Номер телефона</th>
               <th>Уникальный ID</th>
+              {/* <th>Дата</th> */}
               <th>Данные ID паспорта</th>
             </tr>
           </thead>
@@ -68,7 +69,7 @@ export default function AdminUsersPage() {
                   <td>{user.email}</td>
                   <td>{user.phone_number || "Номер телефона не указан"}</td>
                   <td>#{user.unique_id}</td>
-                  <td>{user.created_at}</td>
+                  {/* <td>{user.created_at}</td> */}
                   <td>
                     <button
                       className={s.btn}

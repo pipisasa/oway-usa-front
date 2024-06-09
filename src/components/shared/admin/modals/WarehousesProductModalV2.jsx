@@ -2,13 +2,31 @@ import React, { useState, useEffect } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import Modal from "@/components/shared/Modal";
-import useWarehouses from "../../../../hooks/admin/useWarehouses";
+import useWarehouses from "@/hooks/admin/useWarehouses";
 import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
 import SearchSelect from "@/components/partials/SearchSelect";
 import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
 import ImagePreviewModal from "../../ImagePreviewModal";
+
+const initialFormData = (clientId) => ({
+  name: "",
+  address: "",
+  weight: "",
+  track_number: "",
+  price: "",
+  country: "",
+  status: "",
+  image: "",
+  comments: "",
+  unique_id_user: clientId,
+  url: "",
+  date_sent: "",
+  date_arrived: "",
+  articul: "",
+  is_parcels: true,
+});
 
 export default function WarehouseProductsModalV2({
   closeModal,
@@ -17,48 +35,14 @@ export default function WarehouseProductsModalV2({
 }) {
   const { addWarehouses } = useWarehouses();
   const { deleteWarehouse } = useUserWarehouses();
+  const { countries } = useCountries();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
-    name: "",
-    address: "",
-    weight: "",
-    track_number: "",
-    price: "",
-    country: "",
-    status: "",
-    image: "",
-    comments: "",
-    unique_id_user: clientId,
-    url: "",
-    date_sent: "",
-    date_arrived: "",
-    articul: "",
-    is_parcels: true,
-  });
+  const [formData, setFormData] = useState(initialFormData(clientId));
+  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption1, setSelectedOption1] = useState("");
 
   const toggleModal = () => setIsOpen(!isOpen);
-  const { countries } = useCountries();
-
-  const nextStep = () => {
-    setCurrentStep(currentStep + 1);
-  };
-
-  const previousStep = () => {
-    setCurrentStep(currentStep - 1);
-  };
-
-  const [selectedOption, setSelectedOption] = useState("");
-
-  const countries1 = [
-    { id: 8, name: "Доставлено" },
-    { id: 7, name: "Отправлено курьерской службой" },
-    { id: 6, name: "Получен на складе" },
-    { id: 5, name: "Отправлен" },
-    { id: 4, name: "Получен в ПВЗ" },
-    { id: 3, name: "Готов к выдаче" },
-  ];
-  const [selectedOption1, setSelectedOption1] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -100,40 +84,12 @@ export default function WarehouseProductsModalV2({
   const handleSubmit = async () => {
     try {
       await deleteWarehouse(warehouseId);
-      await addWarehouses(
-        formData.name,
-        formData.address,
-        formData.weight,
-        formData.track_number,
-        formData.price,
-        selectedOption?.id,
-        selectedOption1?.id,
-        formData.image,
-        formData.comments,
-        formData.unique_id_user,
-        formData.url,
-        formData.date_sent,
-        formData.date_arrived,
-        formData.articul,
-        true
-      );
-      setFormData({
-        name: "",
-        address: "",
-        weight: "",
-        track_number: "",
-        price: "",
-        country: "",
-        status: "",
-        image: "",
-        comments: "",
-        unique_id_user: clientId,
-        url: "",
-        date_sent: "",
-        date_arrived: "",
-        articul: "",
-        is_parcels: true,
+      await addWarehouses({
+        ...formData,
+        country: selectedOption?.id,
+        status: selectedOption1?.id,
       });
+      setFormData(initialFormData(clientId));
       setCurrentStep(1);
       setIsOpen(false);
       window.location.reload();
@@ -145,53 +101,177 @@ export default function WarehouseProductsModalV2({
     }
   };
 
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <Step1
-            formData={formData}
-            handleChange={handleChange}
-            handleImageChange={handleImageChange}
-            nextStep={nextStep}
-            previousStep={previousStep}
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            closeModal={closeModal}
-            countries={countries}
+  const Step1 = () => (
+    <div className={c.step}>
+      <StepProgress currentStep={currentStep} setCurrentStep={setCurrentStep} />
+      <form className={s.step_form}>
+        <div className={c.first_block}>
+          <InputField
+            label="Название посылки"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Введите название посылки"
+          />
+          <ImageUpload
+            label="Фото посылки"
+            name="image"
+            onChange={handleImageChange}
+            imagePreview={formData.image && URL.createObjectURL(formData.image)}
+          />
+          <InputField
+            label="Адрес заказа"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            placeholder="Введите адрес"
+          />
+          <CustomSelect
+            span="Страна отправки"
+            options={countries}
             selectedOption={selectedOption}
-            setSelectedOption={setSelectedOption}
+            onChange={setSelectedOption}
+            placeholder="Выберите страну"
           />
-        );
-      case 2:
-        return (
-          <Step2
-            formData={formData}
-            handleChange={handleChange}
-            nextStep={nextStep}
-            previousStep={previousStep}
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            countries={countries1}
-            selectedOption={selectedOption1}
-            setSelectedOption={setSelectedOption1}
+          <div className={c.flex}>
+            <DateInputField
+              label="Дата отправки"
+              name="date_sent"
+              value={formData.date_sent}
+              onChange={handleChange}
+            />
+            <DateInputField
+              label="Дата прибытия"
+              name="date_arrived"
+              value={formData.date_arrived}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={c.flex}>
+            <InputField
+              label="Вес"
+              name="weight"
+              value={formData.weight}
+              onChange={handleChange}
+              placeholder="Впишите вес"
+            />
+            <InputField
+              label="Трек-номер"
+              name="track_number"
+              value={formData.track_number}
+              onChange={handleChange}
+              placeholder="Введите ID посылки"
+            />
+          </div>
+        </div>
+        <InputField
+          label="Комментарий"
+          name="comments"
+          value={formData.comments}
+          onChange={handleChange}
+          placeholder="Пришитие комментарий"
+        />
+      </form>
+      <button className={c.submit_btn} onClick={() => setCurrentStep(2)}>
+        Продолжить
+      </button>
+    </div>
+  );
+
+  const Step2 = () => (
+    <div className={c.step}>
+      <StepProgress currentStep={currentStep} setCurrentStep={setCurrentStep} />
+      <form className={c.first_block}>
+        <CustomSelect
+          span="Выберите статус посылки"
+          options={countries}
+          selectedOption={selectedOption1}
+          onChange={setSelectedOption1}
+          placeholder="Выберите статус"
+        />
+        <div className={c.flex}>
+          <InputField
+            label="Стоимость к оплате"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            placeholder="Введите сумму"
           />
-        );
-      case 3:
-        return (
-          <Step3
-            formData={formData}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            clientId={clientId}
-            previousStep={previousStep}
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
+          <InputField
+            label="Трек код посылки"
+            name="articul"
+            value={formData.articul}
+            onChange={handleChange}
+            placeholder="Введите трек код посылки"
           />
+        </div>
+        <InputField
+          label="Ссылка"
+          name="url"
+          value={formData.url}
+          onChange={handleChange}
+          placeholder="Введите ссылку"
+        />
+      </form>
+      <button className={c.submit_btn} onClick={() => setCurrentStep(3)}>
+        Продолжить
+      </button>
+    </div>
+  );
+
+  const Step3 = () => {
+    const { warehouses } = useWarehousesFull();
+    const [inputValue, setInputValue] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+
+    const handleInputChange = (e) => {
+      const value = e.target.value;
+      setInputValue(value);
+
+      if (value.trim() !== "") {
+        const filteredWarehouses = warehouses?.results?.filter((warehouse) =>
+          warehouse?.unique_id?.toLowerCase().includes(value.toLowerCase())
         );
-      default:
-        return <Step1 />;
-    }
+        setSuggestions(filteredWarehouses);
+      } else {
+        setSuggestions([]);
+      }
+    };
+
+    const handleSelectWarehouse = (warehouse) => {
+      setFormData((prevData) => ({
+        ...prevData,
+        unique_id_user: warehouse.unique_id,
+      }));
+      setInputValue(warehouse.unique_id);
+      setSuggestions([]);
+    };
+
+    return (
+      <div className={c.step}>
+        <StepProgress
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        />
+        <form className={s.step_form}>
+          <InputField
+            label="Выбор клиента"
+            name="unique_id_user"
+            value={inputValue}
+            onChange={handleInputChange}
+            placeholder="Напишите ID"
+            disabled
+          />
+          <SearchSelect
+            suggestions={suggestions}
+            handleSelectWarehouse={handleSelectWarehouse}
+          />
+        </form>
+        <button className={c.submit_btn} onClick={handleSubmit}>
+          Отправить
+        </button>
+      </div>
+    );
   };
 
   return (
@@ -201,348 +281,83 @@ export default function WarehouseProductsModalV2({
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <h3>Добавить посылку</h3>
-        {renderStep()}
+        {currentStep === 1 && <Step1 />}
+        {currentStep === 2 && <Step2 />}
+        {currentStep === 3 && <Step3 />}
       </Modal>
     </div>
   );
 }
 
-const Step1 = ({
-  formData,
-  handleChange,
-  handleImageChange,
-  nextStep,
-  currentStep,
-  setCurrentStep,
-  closeModal,
-  countries,
-  selectedOption,
-  handleChangeCountry,
-  setSelectedOption,
-}) => (
-  <div className={c.step}>
-    <div className={c.steps_progress}>
-      <div className={c.line}></div>
-      <button
-        type="button"
-        className={currentStep >= 1 ? `${c.active_step}` : ""}
-        onClick={() => setCurrentStep(1)}
-      >
-        1
-      </button>
-      <div className={c.line}></div>
-      <button
-        type="button"
-        className={currentStep >= 2 ? `${c.active_step}` : ""}
-        onClick={() => setCurrentStep(2)}
-      >
-        2
-      </button>
-      <div className={c.line}></div>
-      <button
-        type="button"
-        className={currentStep >= 3 ? `${c.active_step}` : ""}
-        onClick={() => setCurrentStep(3)}
-      >
-        3
-      </button>
-      <div className={c.line}></div>
-    </div>
-    <form action="" className={s.step_form}>
-      <div className={c.first_block}>
-        <div>
-          <label htmlFor="name">Название посылки</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Введите название посылки"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="image">Фото посылки</label>
-          <label className="custom-file-upload">
-            <input
-              type="file"
-              name="image"
-              id="image"
-              onChange={handleImageChange}
-            />
-            <img src="/assets/icons/selectimg.svg" alt="select img" />
-            <span>Выбрать картинку</span>
-          </label>
-        </div>
-        {formData.image && <div></div>}
-        {formData.image && (
-          <ImagePreviewModal
-            previewImage={URL.createObjectURL(formData.image)}
-            onClose={closeModal}
-          />
-        )}
-        <div>
-          <label htmlFor="">Адрес заказа</label>
-          <input
-            type="text"
-            name="address"
-            id="address"
-            placeholder="Введите адрес"
-            value={formData.address}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="">Страна отправки</label>
-          <CustomSelect
-            options={countries}
-            selectedOption={selectedOption}
-            onChange={(e) => setSelectedOption(e)}
-            span={"Выберите страну"}
-          />
-        </div>
-        <div>
-          <label htmlFor="">Дата отправки</label>
-          <input
-            type="text"
-            name="date_sent"
-            id="date_sent"
-            placeholder="dd.mm.yyyy"
-            value={formData.date_sent}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="">Дата прибытия</label>
-          <input
-            type="text"
-            name="date_arrived"
-            id="date_arrived"
-            placeholder="dd.mm.yyyy"
-            value={formData.date_arrived}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="">Вес</label>
-          <input
-            type="number"
-            name="weight"
-            id="weight"
-            placeholder="Впишите вес"
-            value={formData.weight}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="">Трек-номер</label>
-          <input
-            type="number"
-            name="track_number"
-            id="track_number"
-            placeholder="Введите ID посылки"
-            value={formData.track_number}
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-      <div>
-        <label htmlFor="">Комментарий</label>
-        <input
-          type="text"
-          name="comments"
-          id="comments"
-          placeholder="Пришитие комментарий"
-          value={formData.comments}
-          onChange={handleChange}
-        />
-      </div>
-    </form>
-    <button className={c.submit_btn} onClick={nextStep}>
-      Продолжить
-    </button>
+const StepProgress = ({ currentStep, setCurrentStep }) => (
+  <div className={c.steps_progress}>
+    <div className={c.line}></div>
+    {[1, 2, 3].map((step) => (
+      <React.Fragment key={step}>
+        <button
+          type="button"
+          className={currentStep >= step ? `${c.active_step}` : ""}
+          onClick={() => setCurrentStep(step)}
+        >
+          {step}
+        </button>
+        <div className={c.line}></div>
+      </React.Fragment>
+    ))}
   </div>
 );
 
-const Step2 = ({
-  formData,
-  handleChange,
-  nextStep,
-  currentStep,
-  setCurrentStep,
-  countries,
-  selectedOption,
-  setSelectedOption,
+const InputField = ({
+  label,
+  name,
+  value,
+  onChange,
+  placeholder,
+  disabled = false,
 }) => (
-  <div className={c.step}>
-    <div className={c.steps_progress}>
-      <div className={c.line}></div>
-      <button
-        type="button"
-        className={currentStep >= 1 ? `${c.active_step}` : ""}
-        onClick={() => setCurrentStep(1)}
-      >
-        1
-      </button>
-      <div className={c.line}></div>
-      <button
-        type="button"
-        className={currentStep >= 2 ? `${c.active_step}` : ""}
-        onClick={() => setCurrentStep(2)}
-      >
-        2
-      </button>
-      <div className={c.line}></div>
-      <button
-        type="button"
-        className={currentStep >= 3 ? `${c.active_step}` : ""}
-        onClick={() => setCurrentStep(3)}
-      >
-        3
-      </button>
-      <div className={c.line}></div>
-    </div>
-    <form action="" className={c.first_block}>
-      <div>
-        <label htmlFor="status">Выберите статус посылки</label>
-
-        <CustomSelect
-          options={countries}
-          selectedOption={selectedOption}
-          onChange={(e) => setSelectedOption(e)}
-          span={"Выберите статус"}
-        />
-      </div>
-      <div>
-        <label htmlFor="status">Стоимость к оплате</label>
-        <input
-          type="number"
-          name="price"
-          id="price"
-          placeholder="Введите сумму"
-          value={formData.price}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="status">Трек код посылки</label>
-        <input
-          type="number"
-          name="articul"
-          id="articul"
-          placeholder="Введите трек код посылки"
-          value={formData.articul}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="status">Ссылка</label>
-        <input
-          type="text"
-          name="url"
-          id="url"
-          placeholder="Введите ссылку"
-          value={formData.url}
-          onChange={handleChange}
-        />
-      </div>
-    </form>
-    <button className={c.submit_btn} onClick={nextStep}>
-      Продолжить
-    </button>
+  <div className={c.input}>
+    <label htmlFor={name}>{label}</label>
+    <input
+      type={
+        name === "price" ||
+        name === "articul" ||
+        name === "weight" ||
+        name === "track_number"
+          ? "number"
+          : "text"
+      }
+      name={name}
+      id={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      disabled={disabled}
+    />
   </div>
 );
 
-const Step3 = ({
-  formData,
-  setFormData,
-  currentStep,
-  setCurrentStep,
-  handleChange,
-  handleSubmit,
-  clientId,
-}) => {
-  const { warehouses } = useWarehousesFull();
-  const [inputValue, setInputValue] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+const DateInputField = ({ label, name, value, onChange }) => (
+  <div className={c.input}>
+    <label htmlFor={name}>{label}</label>
+    <input
+      type="text"
+      name={name}
+      id={name}
+      placeholder="dd.mm.yyyy"
+      value={value}
+      onChange={onChange}
+    />
+  </div>
+);
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
-
-    let filteredWarehouses = [];
-    if (value.trim() !== "") {
-      filteredWarehouses = warehouses?.results?.filter((warehouse) =>
-        warehouse?.unique_id?.toLowerCase().includes(value.toLowerCase())
-      );
-    }
-    setSuggestions(filteredWarehouses);
-  };
-
-  useEffect(() => {
-    if (inputValue === "") {
-      setSuggestions([]);
-    }
-  }, [inputValue]);
-
-  const handleSelectWarehouse = (warehouse) => {
-    handleChange({
-      target: { name: "unique_id_user", value: warehouse.unique_id },
-    });
-    setInputValue(warehouse.unique_id);
-    setSuggestions([]);
-  };
-
-  return (
-    <div className={c.step}>
-      <div className={c.steps_progress}>
-        <div className={c.line}></div>
-        <button
-          type="button"
-          className={currentStep >= 1 ? `${c.active_step}` : ""}
-          onClick={() => setCurrentStep(1)}
-        >
-          1
-        </button>
-        <div className={c.line}></div>
-        <button
-          type="button"
-          className={currentStep >= 2 ? `${c.active_step}` : ""}
-          onClick={() => setCurrentStep(2)}
-        >
-          2
-        </button>
-        <div className={c.line}></div>
-        <button
-          type="button"
-          className={currentStep >= 3 ? `${c.active_step}` : ""}
-          onClick={() => setCurrentStep(3)}
-        >
-          3
-        </button>
-        <div className={c.line}></div>
-      </div>
-      <form action="" className={s.step_form}>
-        <div>
-          <label htmlFor="comments">Выбор клиента</label>
-          <input
-            type="text"
-            name="unique_id_user"
-            id="unique_id_user"
-            placeholder="Напишите ID"
-            value={clientId}
-            onChange={handleInputChange}
-            disabled
-          />
-          <SearchSelect
-            suggestions={suggestions}
-            handleSelectWarehouse={handleSelectWarehouse}
-          />
-        </div>
-      </form>
-      <button className={c.submit_btn} onClick={handleSubmit}>
-        Отправить
-      </button>
-    </div>
-  );
-};
+const ImageUpload = ({ label, name, onChange, imagePreview }) => (
+  <div>
+    <label htmlFor={name}>{label}</label>
+    <label className="custom-file-upload">
+      <input type="file" name={name} id={name} onChange={onChange} />
+      <img src="/assets/icons/selectimg.svg" alt="select img" />
+      <span>Выбрать картинку</span>
+    </label>
+    {imagePreview && <ImagePreviewModal previewImage={imagePreview} />}
+  </div>
+);
