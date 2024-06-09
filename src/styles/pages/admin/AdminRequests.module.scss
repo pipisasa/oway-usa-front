@@ -93,3 +93,42 @@
     }
   }
 }
+.delete {
+  border-radius: 5px;
+  background: var(--blue_light_3, #ffe7e7);
+  padding: 9px 10px;
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+.deleteModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.deleteModal {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.modalButtons button {
+  padding: 10px 20px;
+  cursor: pointer;
+}

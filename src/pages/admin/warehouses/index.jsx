@@ -8,7 +8,7 @@ import Loading from "@/components/shared/admin/Loading";
 export default function WarehousesPage() {
   const { warehouses, fetchWarehouses, deleteWarehouse, loading, error } =
     useWarehouses();
-
+  console.log(warehouses);
   useEffect(() => {
     fetchWarehouses();
   }, []);
