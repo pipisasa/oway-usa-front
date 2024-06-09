@@ -16,7 +16,7 @@ export default function AdminUsersPage() {
     useUsersAdmin(currentPage);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isLoadingPage, setIsLoadingPage] = useState(false);
-
+  console.log(users);
   useEffect(() => {
     setIsLoadingPage(true);
     fetchUsers(currentPage).then(() => setIsLoadingPage(false));
@@ -68,6 +68,7 @@ export default function AdminUsersPage() {
                   <td>{user.email}</td>
                   <td>{user.phone_number || "Номер телефона не указан"}</td>
                   <td>#{user.unique_id}</td>
+                  <td>{user.created_at}</td>
                   <td>
                     <button
                       className={s.btn}

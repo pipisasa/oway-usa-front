@@ -10,14 +10,16 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function IncommingRequests() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading, error } = useRequests(currentPage);
+  const { data, isLoading, error, deleteRequest } = useRequests(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
   const [nameFilter, setNameFilter] = useState("");
   const [filter, setFilter] = useState("");
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
-  console.log(data);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [requestIdToDelete, setRequestIdToDelete] = useState(null);
+
   const handleOpenModal = (requestData) => {
     setCurrentRequestData(requestData);
     setIsModalVisible(true);
@@ -30,6 +32,23 @@ export default function IncommingRequests() {
 
   const closeModal = () => {
     setIsImageModalOpen(false);
+  };
+
+  const openDeleteModal = (id) => {
+    setRequestIdToDelete(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setRequestIdToDelete(null);
+  };
+
+  const confirmDelete = () => {
+    if (requestIdToDelete) {
+      deleteRequest(requestIdToDelete);
+    }
+    closeDeleteModal();
   };
 
   const filteredRequests = data.results.filter((request) =>
@@ -60,13 +79,6 @@ export default function IncommingRequests() {
             placeholder="Поиск по названию"
             value={nameFilter}
             onChange={(e) => setNameFilter(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                fetchWarehouses(currentPage, {
-                  name: nameFilter,
-                });
-              }
-            }}
           />
         </div>
         <select
@@ -125,12 +137,18 @@ export default function IncommingRequests() {
                   <p style={{ color: "#06DB02" }}>Оплачено</p>
                 )}
               </td>
-              <td>
+              <td className="flex">
                 <button
                   className={s.btn}
                   onClick={() => handleOpenModal(request)}
                 >
                   <img src="/assets/icons/icon.svg" alt="more" />
+                </button>
+                <button
+                  className={s.delete}
+                  onClick={() => openDeleteModal(request.id)}
+                >
+                  <img src="/assets/icons/delete.svg" alt="Delete" />
                 </button>
               </td>
             </tr>
@@ -145,6 +163,17 @@ export default function IncommingRequests() {
           onChange={(page) => setCurrentPage(page)}
         />
       </div>
+      {isDeleteModalOpen && (
+        <div className={s.deleteModalOverlay}>
+          <div className={s.deleteModal}>
+            <h2>Вы уверены, что хотите удалить эту запись?</h2>
+            <div className={s.modalButtons}>
+              <button onClick={confirmDelete}>Да</button>
+              <button onClick={closeDeleteModal}>Нет</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
