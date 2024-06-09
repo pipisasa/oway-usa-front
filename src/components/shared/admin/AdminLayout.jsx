@@ -8,7 +8,6 @@ import useLogout from "@/hooks/auth/useLogout";
 export default function AdminLayout({ children }) {
   const router = useRouter();
   const logout = useLogout();
-
   const isActive = (path) => router.pathname === path;
 
   const links = [

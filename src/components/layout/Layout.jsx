@@ -5,33 +5,40 @@ import { useRouter } from "next/router";
 import AdminLayout from "../shared/admin/AdminLayout";
 import UsersLayout from "../shared/users/UserLayout";
 import UserMobileHeader from "../shared/users/UserMobileHeader";
-import useLogout from "@/hooks/auth/useLogout";
+import AdminMobileHeader from "../shared/admin/AdminMobileHeader";
 
 export default function Layout({ children }) {
-  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const path = router.pathname;
-  const logout = useLogout();
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileAdmin, setIsMobileAdmin] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 888);
+      const currentWidth = window.innerWidth;
+      setIsMobile(currentWidth <= 888);
+      setIsMobileAdmin(currentWidth <= 1024);
     };
 
+    window.addEventListener("resize", handleResize);
     handleResize();
 
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const isAdminPage = path.startsWith("/admin");
   const isUserPage = path.startsWith("/user");
   const isAuthPage = path.startsWith("/auth");
-  const isHomePage = path === "/";
 
   if (isAdminPage) {
-    return <AdminLayout>{children}</AdminLayout>;
+    return isMobileAdmin ? (
+      <AdminMobileHeader>{children}</AdminMobileHeader>
+    ) : (
+      <AdminLayout>{children}</AdminLayout>
+    );
   }
 
   if (isUserPage) {
@@ -47,9 +54,9 @@ export default function Layout({ children }) {
   }
 
   return (
-    <main className="ebat">
+    <main>
       <Header />
-      <main className="">{children}</main>
+      {children}
       <Footer />
     </main>
   );

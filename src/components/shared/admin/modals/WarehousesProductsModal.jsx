@@ -24,8 +24,8 @@ export default function WarehouseProductsModal() {
     unique_id_user: "",
     date_sent: "",
     date_arrived: "",
-    length: "",
-    width: "",
+    country_of_origin: "",
+    country_of_destination: "",
   });
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -49,6 +49,7 @@ export default function WarehouseProductsModal() {
     { id: 4, name: "Получен в ПВЗ" },
     { id: 3, name: "Готов к выдаче" },
   ];
+
   const [selectedOption1, setSelectedOption1] = useState("");
 
   const handleChange = (e) => {
@@ -95,7 +96,9 @@ export default function WarehouseProductsModal() {
       formData.comments,
       formData.unique_id_user,
       formData.date_sent,
-      formData.date_arrived
+      formData.date_arrived,
+      formData.country_of_origin,
+      formData.country_of_destination
     );
     setFormData({
       name: "",
@@ -110,6 +113,8 @@ export default function WarehouseProductsModal() {
       unique_id_user: "",
       date_sent: "",
       date_arrived: "",
+      country_of_origin: "",
+      country_of_destination: "",
     });
     setCurrentStep(1);
     setIsOpen(false);
@@ -133,8 +138,6 @@ export default function WarehouseProductsModal() {
             setCurrentStep={setCurrentStep}
             closeModal={closeModal}
             countries={countries}
-            selectedOption={selectedOption}
-            setSelectedOption={setSelectedOption}
           />
         );
       case 2:

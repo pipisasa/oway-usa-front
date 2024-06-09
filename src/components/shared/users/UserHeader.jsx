@@ -9,7 +9,6 @@ import BankCardsModal from "./modals/BankCardsModal";
 import useUserData from "@/hooks/user/useUserData";
 import useNotification from "../../../hooks/user/useNotification";
 import MyWarehousesModal from "../admin/modals/MyWarehousesModal";
-import Link from "next/link";
 import { getCookie } from "@/utils/cookieHelpers";
 import MyRequestsModal from "./modals/MyRequestsModal";
 
@@ -17,7 +16,6 @@ export default function UsersHeader() {
   const router = useRouter();
   const { userData, loading, error } = useUserData();
   const { products } = useNotification();
-
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {

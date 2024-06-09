@@ -26,11 +26,13 @@
         gap: 10px;
         border-radius: 5px;
         background: var(--bg_red, #ffe7e7);
+
         img {
           width: 12px;
           height: 12px;
         }
       }
+
       .button {
         display: flex;
         padding: 8px 9px;
@@ -45,6 +47,7 @@
         }
       }
     }
+
     img {
       width: 48px;
       height: 48px;
@@ -66,6 +69,23 @@
         color: var(--black, #001526);
         font-size: 14px;
         line-height: 140%;
+      }
+    }
+  }
+}
+
+@media (max-width: 1350px) {
+  .noti_page {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .noti_page {
+    .notification {
+      padding: 16px;
+      .text {
+        max-width: 100%;
       }
     }
   }

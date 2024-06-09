@@ -4,59 +4,65 @@ import { Badge, Button } from "@nextui-org/react";
 import useNotification from "@/hooks/admin/useNotification";
 import { NotificationIcon } from "../admin/NotificationIcon";
 import { useRouter } from "next/router";
-import useUserData from "@/hooks/user/useUserData";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
 import useLogout from "@/hooks/auth/useLogout";
 import ModalUserMobil from "@/components/partials/ModalUserMobil";
 
-export default function UserMobileHeader({ children }) {
+export default function AdminMobileHeader({ children }) {
   const { products } = useNotification();
   const router = useRouter();
-  const { userData, loading, error } = useUserData();
   const logout = useLogout();
   const isActive = (path) => router.pathname === path;
   const [isNavOpen, setIsNavOpen] = useState(false);
-
-  if (error) return <div className={s.header}>Error: {error}</div>;
 
   const toggleNav = () => setIsNavOpen(!isNavOpen);
 
   const links = [
     {
-      href: "/user",
+      href: "/admin",
       label: "Главная",
-      icons: "/assets/icons/user-icons/главная.svg",
+      icon: "/assets/icons/admin-icons/главная.svg",
     },
     {
-      href: "/user/biling",
-      label: "Оплата",
-      icons: "/assets/icons/user-icons/biling.svg",
+      href: "/admin/users",
+      label: "Пользователи",
+      icon: "/assets/icons/admin-icons/пользователи.svg",
     },
     {
-      href: "/user/notifications",
+      href: "/admin/notifications",
       label: "Уведомления",
-      icons: "/assets/icons/user-icons/уведомления.svg",
+      icon: "/assets/icons/admin-icons/уведомления.svg",
     },
     {
-      href: "/user/warehouses",
-      label: "Адреса складов",
-      icons: "/assets/icons/user-icons/склад.svg",
+      href: "/admin/warehouses",
+      label: "Склады",
+      icon: "/assets/icons/admin-icons/склад.svg",
     },
     {
-      href: "/user/tracking",
-      label: "Отслеживание доставки",
-      icons: "/assets/icons/user-icons/доставка.svg",
+      href: "/admin/requests",
+      label: "Входящие запросы",
+      icon: "/assets/icons/admin-icons/requests.svg",
     },
     {
-      href: "/user/settings",
-      label: "Настройки",
-      icons: "/assets/icons/user-icons/настройки.svg",
+      href: "/admin/catalog/shops-catalog",
+      label: "Каталог",
+      icon: "/assets/icons/admin-icons/сайты.svg",
     },
     {
-      href: "/user/my-parcels",
-      label: "Мои посылки",
-      icons: "/assets/icons/user-icons/склад.svg",
+      href: "/admin/user-parcels",
+      label: "Ожидаемые посылки",
+      icon: "/assets/icons/calc_icon.svg",
+    },
+    {
+      href: "/admin/illinois",
+      label: "Клиенты за Иллинойс",
+      icon: "/assets/icons/united-states-of-america.svg",
+    },
+    {
+      href: "/admin/bulletin-board",
+      label: "Доска объявлений",
+      icon: "/assets/icons/admin-icons/bulletin_board.svg",
     },
   ];
 
@@ -84,9 +90,7 @@ export default function UserMobileHeader({ children }) {
                 <NotificationIcon size={24} />
               </Button>
             </Badge>
-            <div className={s.user_code}>
-              <span>#{loading ? "загрузка..." : userData?.unique_id}</span>
-            </div>
+
             <div>
               <button onClick={toggleNav}>
                 {isNavOpen ? (
