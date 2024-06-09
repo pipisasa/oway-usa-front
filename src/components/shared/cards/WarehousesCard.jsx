@@ -36,7 +36,7 @@ export default function WarehousesCard({ warehouse, deleteWarehouse }) {
       {modalIsOpen && (
         <div className={s.modalOverlay}>
           <div className={s.modal}>
-            <h2>Вы уверены, что хотите удалить склад "{warehouse.name}"?</h2>
+            <h2>Вы уверены, что хотите удалить склад {warehouse.name}?</h2>
             <div className={s.modal_buttons}>
               <button onClick={handleDelete}>Да</button>
               <button onClick={() => setModalIsOpen(false)}>Отмена</button>

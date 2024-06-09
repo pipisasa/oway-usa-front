@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 
@@ -54,10 +54,6 @@ export default function Step1({
       });
     }
   };
-
-  useEffect(() => {
-    console.log("Updated selectedOption2:", selectedOption2);
-  }, [selectedOption2]);
 
   return (
     <div className={c.step}>
