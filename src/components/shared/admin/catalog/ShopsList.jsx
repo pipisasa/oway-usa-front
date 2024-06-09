@@ -6,7 +6,10 @@ import EditShopsModal from "../modals/EditShopsModal";
 import Loading from "../Loading";
 
 export default function ShopsList({ selectedCategory, selectedCountry }) {
-   const {products, isLoading, deleteShops, updateShops} = useShops(selectedCategory, selectedCountry?.id)
+  const { products, isLoading, deleteShops, updateShops } = useShops(
+    selectedCategory,
+    selectedCountry?.id
+  );
   const [isEditing, setIsEditing] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

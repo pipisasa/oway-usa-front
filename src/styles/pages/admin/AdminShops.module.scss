@@ -6,6 +6,10 @@
   margin-top: 16px;
 }
 
+.pages_tabs {
+  overflow-x: scroll;
+}
+
 @media (max-width: 1028px) {
   .shops_block {
     flex-direction: column;

@@ -46,7 +46,7 @@ export default function AddBulletinBoard() {
   return (
     <div className={s.modal}>
       <div className={c.add_board}>
-        <button onClick={toggleModal}>
+        <button style={{ padding: "24px" }} onClick={toggleModal}>
           <img src="/assets/icons/add_board.svg" alt="" />
         </button>
       </div>
