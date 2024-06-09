@@ -3,11 +3,17 @@ import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/pages/admin/BulletinBoardPage.module.scss";
 import Modal from "../../Modal";
 import { BsCheck } from "react-icons/bs";
+import useBulletinBoard from "@/hooks/admin/useBulletinBoard";
 
-export default function EditBulletinBoard() {
+export default function EditBulletinBoard({ bulletin }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [text, setText] = useState(bulletin.text);
+  const [category, setCategory] = useState(bulletin.category);
+  const [city, setCity] = useState(bulletin.city);
+  const [selectedColor, setSelectedColor] = useState(bulletin.color);
+
+  const { updateBulletinBoard, loading, error } = useBulletinBoard();
 
   const colors = [
     { color: "gray", hex: "#808080" },
@@ -43,6 +49,20 @@ export default function EditBulletinBoard() {
     setSelectedColor(color.hex);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await updateBulletinBoard(
+      bulletin.id,
+      text,
+      category,
+      selectedColor,
+      city
+    );
+    if (result) {
+      toggleModal();
+    }
+  };
+
   return (
     <div className={s.modal}>
       <div className={c.add_board}>
@@ -51,13 +71,18 @@ export default function EditBulletinBoard() {
         </button>
       </div>
       <Modal isOpen={isOpen} onClose={toggleModal}>
-        <h3>Редактировать </h3>
-        <form>
+        <h3>Редактировать</h3>
+        <form onSubmit={handleSubmit}>
           <div className={s.shops_form}>
             <div className={s.second_input_block}>
               <div>
                 <label htmlFor="">Название объявления</label>
-                <input type="text" placeholder="Введите название" />
+                <input
+                  type="text"
+                  placeholder="Введите название"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                />
               </div>
               <div className={c.colors}>
                 <label htmlFor="">Цвет</label>
@@ -80,16 +105,31 @@ export default function EditBulletinBoard() {
                 </div>
               </div>
               <div>
-                <label htmlFor="">Дата создания</label>
-                <input type="text" placeholder="Выберите дату" />
+                <label htmlFor="">Категория</label>
+                <input
+                  type="text"
+                  placeholder="Введите категорию"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="">Город</label>
+                <input
+                  type="text"
+                  placeholder="Введите город"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
               </div>
             </div>
           </div>
           <div className={s.btn_center}>
-            <button type="submit" className={s.submit_btn}>
-              Редактировать
+            <button type="submit" className={s.submit_btn} disabled={loading}>
+              {loading ? "Редактирование..." : "Редактировать"}
             </button>
           </div>
+          {error && <p className={s.error_msg}>{error}</p>}
         </form>
       </Modal>
     </div>

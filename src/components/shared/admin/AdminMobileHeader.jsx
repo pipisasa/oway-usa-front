@@ -22,47 +22,47 @@ export default function AdminMobileHeader({ children }) {
     {
       href: "/admin",
       label: "Главная",
-      icon: "/assets/icons/admin-icons/главная.svg",
+      icons: "/assets/icons/admin-icons/главная.svg",
     },
     {
       href: "/admin/users",
       label: "Пользователи",
-      icon: "/assets/icons/admin-icons/пользователи.svg",
+      icons: "/assets/icons/admin-icons/пользователи.svg",
     },
     {
       href: "/admin/notifications",
       label: "Уведомления",
-      icon: "/assets/icons/admin-icons/уведомления.svg",
+      icons: "/assets/icons/admin-icons/уведомления.svg",
     },
     {
       href: "/admin/warehouses",
       label: "Склады",
-      icon: "/assets/icons/admin-icons/склад.svg",
+      icons: "/assets/icons/admin-icons/склад.svg",
     },
     {
       href: "/admin/requests",
       label: "Входящие запросы",
-      icon: "/assets/icons/admin-icons/requests.svg",
+      icons: "/assets/icons/admin-icons/requests.svg",
     },
     {
       href: "/admin/catalog/shops-catalog",
       label: "Каталог",
-      icon: "/assets/icons/admin-icons/сайты.svg",
+      icons: "/assets/icons/admin-icons/сайты.svg",
     },
     {
       href: "/admin/user-parcels",
       label: "Ожидаемые посылки",
-      icon: "/assets/icons/calc_icon.svg",
+      icons: "/assets/icons/calc_icon.svg",
     },
     {
       href: "/admin/illinois",
       label: "Клиенты за Иллинойс",
-      icon: "/assets/icons/united-states-of-america.svg",
+      icons: "/assets/icons/united-states-of-america.svg",
     },
     {
       href: "/admin/bulletin-board",
       label: "Доска объявлений",
-      icon: "/assets/icons/admin-icons/bulletin_board.svg",
+      icons: "/assets/icons/admin-icons/bulletin_board.svg",
     },
   ];
 
