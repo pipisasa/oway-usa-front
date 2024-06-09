@@ -114,3 +114,9 @@
 .modal_content button:last-child {
   margin-right: 0;
 }
+
+@media (max-width: 786px) {
+  .category_block {
+    min-width: 100%;
+  }
+}

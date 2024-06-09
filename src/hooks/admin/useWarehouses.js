@@ -63,7 +63,9 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     unique_id_user,
     date_sent,
     date_arrived,
-    is_parcels
+    is_parcels,
+    country_of_origin,
+    country_of_destination
   ) => {
     const accessToken = getCookie("accessToken");
     const formData = new FormData();
@@ -80,6 +82,8 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     formData.append("date_sent", date_sent);
     formData.append("date_arrived", date_arrived);
     formData.append("is_parcels", !!is_parcels);
+    formData.append("country_of_origin", country_of_origin);
+    formData.append("country_of_destination", country_of_destination);
 
     setIsLoading(true);
     setError(null);

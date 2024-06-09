@@ -11,7 +11,10 @@ export default function AdminShopsPage() {
 
   return (
     <div>
-      <PagesTabs />
+      <div className={s.pages_tabs}>
+        <PagesTabs />
+      </div>
+
       <CountryTabs
         setSelectedCountry={setSelectedCountry}
         setSelectedCategory={setSelectedCategory}

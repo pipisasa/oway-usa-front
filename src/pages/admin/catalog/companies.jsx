@@ -42,7 +42,9 @@ export default function CompaniesAdminPage() {
 
   return (
     <>
-      <PagesTabs />
+      <div className={s.pages_tabs}>
+        <PagesTabs />
+      </div>
       <section className={s.logo_container}>
         {logos.map((logo) => (
           <div key={logo.id} className={s.logo_card}>

@@ -4,12 +4,10 @@ import Loading from "./Loading";
 import { Pagination } from "@nextui-org/react";
 import WarehousesModal from "./modals/WarehousesModal";
 
-// Функция для установки значения в LocalStorage без кавычек
 const setItemWithoutQuotes = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-// Функция для получения значения из LocalStorage без кавычек
 const getItemWithoutQuotes = (key) => {
   const value = localStorage.getItem(key);
   return value ? JSON.parse(value) : "";
@@ -171,8 +169,8 @@ export default function WarehousesProductsTable({
                 />
               </td>
               <td>{warehouse.name}</td>
-              <td>{warehouse.country_of_origin}</td>
-              <td>{warehouse.country_of_destination}</td>
+              <td>warehouse.country_of_origin</td>
+              <td>warehouse.country_of_destination</td>
               <td>{warehouse.weight}</td>
               <td>{warehouse.track_number}</td>
               <td

@@ -32,6 +32,15 @@ export default function NewsCards() {
           NASA отменила запуск Boeing Starliner из-за технических неисправностей
         </p>
       </div>
+      <div className={s.card}>
+        <div className={s.header}>
+          <h5>Категория</h5>
+          <span>03.22.2023</span>
+        </div>
+        <p>
+          NASA отменила запуск Boeing Starliner из-за технических неисправностей
+        </p>
+      </div>
     </section>
   );
 }

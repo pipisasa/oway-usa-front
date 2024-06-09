@@ -87,35 +87,39 @@ export default function UserDetailModal({ userData, close, editUser }) {
               <div>
                 <label htmlFor="">Лицевая сторона паспорта</label>
                 <label className="custom-file-upload">
-                
-                <input
-                  type="file"
-                  id="front_image"
-                  name="front_image"
-                  onChange={(e) => handleImageChange(e, "front_image")}
+                  <input
+                    type="file"
+                    id="front_image"
+                    name="front_image"
+                    onChange={(e) => handleImageChange(e, "front_image")}
                   />
-                   <img src="/assets/icons/selectimg.svg" alt="select img" />
-                 <span>Выбрать картинку</span>
-                  </label>
+                  <img src="/assets/icons/selectimg.svg" alt="select img" />
+                  <span>Выбрать картинку</span>
+                </label>
                 {imagePreviews.front_image && (
-                  <img src={imagePreviews.front_image} alt="Front Image Preview" />
+                  <img
+                    src={imagePreviews.front_image}
+                    alt="Front Image Preview"
+                  />
                 )}
               </div>
               <div>
                 <label htmlFor="">Обратная сторона паспорта</label>
                 <label className="custom-file-upload">
-
-                <input
-                  type="file"
-                  id="back_image"
-                  name="back_image"
-                  onChange={(e) => handleImageChange(e, "back_image")}
+                  <input
+                    type="file"
+                    id="back_image"
+                    name="back_image"
+                    onChange={(e) => handleImageChange(e, "back_image")}
                   />
-                 <img src="/assets/icons/selectimg.svg" alt="select img" />
-                 <span>Выбрать картинку</span>
-                  </label>
+                  <img src="/assets/icons/selectimg.svg" alt="select img" />
+                  <span>Выбрать картинку</span>
+                </label>
                 {imagePreviews.back_image && (
-                  <img src={imagePreviews.back_image} alt="Back Image Preview" />
+                  <img
+                    src={imagePreviews.back_image}
+                    alt="Back Image Preview"
+                  />
                 )}
               </div>
             </div>

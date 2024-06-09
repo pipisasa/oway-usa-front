@@ -119,3 +119,10 @@
 .modal_content button:last-child {
   margin-right: 0;
 }
+
+@media (max-width: 768px) {
+  .cards_list {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const useCountries = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
