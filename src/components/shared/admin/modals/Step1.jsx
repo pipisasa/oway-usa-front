@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
-import CustomSelect from "@/components/partials/Select";
 
 const InputField = ({
   id,
@@ -51,8 +50,6 @@ export default function Step1({
       target: { name: "country_of_destination", value: newSelectedId },
     });
   };
-
-  console.log(countries);
 
   return (
     <div className={c.step}>
