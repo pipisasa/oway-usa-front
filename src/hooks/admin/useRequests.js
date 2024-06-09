@@ -55,7 +55,26 @@ const useRequests = (currentPage) => {
     }
   };
 
-  return { data, isLoading, error, updateRequest };
+  const deleteRequest = async (id) => {
+    const accessToken = getCookie("accessToken");
+    try {
+      const response = await fetch(`${API_URL}/api/purchase/delete/${id}/`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to delete. Status: ${response.status}`);
+      }
+      window.location.reload();
+    } catch (error) {
+      console.error("Delete error:", error);
+    }
+  };
+
+  return { data, isLoading, error, updateRequest, deleteRequest };
 };
 
 export default useRequests;
