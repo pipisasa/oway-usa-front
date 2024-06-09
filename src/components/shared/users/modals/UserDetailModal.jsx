@@ -85,6 +85,12 @@ export default function UserDetailModal({ userData, close, editUser }) {
                 />
               </div>
               <div>
+                <label>Дата регистрации</label>
+                <p>{userData.created_at}</p>
+              </div>
+
+              <div></div>
+              <div>
                 <label htmlFor="">Лицевая сторона паспорта</label>
                 <label className="custom-file-upload">
                   <input

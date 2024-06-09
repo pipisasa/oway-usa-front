@@ -54,25 +54,34 @@ export default function WarehouseProductsModal() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let parsedValue = value;
+
+    if (
+      name === "country_of_origin" ||
+      name === "country_of_destination" ||
+      name === "weight" ||
+      name === "track_number" ||
+      name === "price"
+    ) {
+      parsedValue = parseInt(value, 10);
+      if (isNaN(parsedValue)) parsedValue = "";
+    }
+
     if (name === "date_sent" || name === "date_arrived") {
-      let newValue = value
+      parsedValue = value
         .replace(/[^\d.]/g, "")
         .replace(/^(\d{2})(\d)/, "$1.$2")
         .replace(/^(\d{2}\.\d{2})(\d)/, "$1.$2");
 
-      if (newValue.length > 10) {
-        newValue = newValue.substring(0, 10);
+      if (parsedValue.length > 10) {
+        parsedValue = parsedValue.substring(0, 10);
       }
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: newValue,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
     }
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: parsedValue,
+    }));
   };
 
   const handleImageChange = (e) => {
@@ -84,6 +93,7 @@ export default function WarehouseProductsModal() {
   };
 
   const handleSubmit = async () => {
+    console.log("Submitting form data:", formData);
     await addWarehouses(
       formData.name,
       formData.address,

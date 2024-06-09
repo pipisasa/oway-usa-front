@@ -24,6 +24,8 @@ export default function WarehousesProductsTable({
   statusFilter,
   countryFilter,
 }) {
+  console.log(warehouses);
+
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
   const [confirmDeleteWarehouse, setConfirmDeleteWarehouse] = useState(null);
   const [selectedWarehouses, setSelectedWarehouses] = useState([]);
@@ -96,7 +98,6 @@ export default function WarehousesProductsTable({
           .includes(localStorageFilters.dateInput));
     return isMatching;
   });
-
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
   };
@@ -169,8 +170,8 @@ export default function WarehousesProductsTable({
                 />
               </td>
               <td>{warehouse.name}</td>
-              <td>warehouse.country_of_origin</td>
-              <td>warehouse.country_of_destination</td>
+              <td>{warehouse.country_of_origin?.name}</td>
+              <td>{warehouse.country_of_destination?.name}</td>
               <td>{warehouse.weight}</td>
               <td>{warehouse.track_number}</td>
               <td
