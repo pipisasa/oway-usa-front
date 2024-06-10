@@ -147,13 +147,18 @@ export default function WarehousesProductsTable({
               />
             </th>
             <th>Название посылки</th>
-            <th>Адрес получения</th>
-            <th>Страна получения</th>
+            <th>Страна отправки</th>
+            <th>Страна прибытия</th>
             <th>Вес (кг)</th>
             <th>Трек-номер</th>
             <th>Статус</th>
             <th>Действие</th>
           </tr>
+          <div className={s.actions_btn}>
+            <button className={s.all_delete}>
+              <img src="/assets/icons/admin-icons/Delete.svg" alt="" />
+            </button>
+          </div>
         </thead>
         <tbody>
           {filteredWarehouses?.map((warehouse) => (
