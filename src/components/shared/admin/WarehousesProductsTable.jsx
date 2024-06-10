@@ -24,7 +24,6 @@ export default function WarehousesProductsTable({
   statusFilter,
   countryFilter,
 }) {
-  console.log(warehouses);
 
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
   const [confirmDeleteWarehouse, setConfirmDeleteWarehouse] = useState(null);

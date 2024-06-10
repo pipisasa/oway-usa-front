@@ -61,11 +61,11 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     unique_id_user,
     date_sent,
     date_arrived,
-    is_parcels,
     country_of_origin,
     country_of_destination
   ) => {
     const accessToken = getCookie("accessToken");
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("address", address);
@@ -79,16 +79,17 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     formData.append("unique_id_user", unique_id_user);
     formData.append("date_sent", date_sent);
     formData.append("date_arrived", date_arrived);
-    formData.append("is_parcels", !!is_parcels);
-    formData.append("country_of_origin", parseInt(country_of_origin, 10));
+    formData.append("country_of_origin", country_of_origin.toString());
     formData.append(
       "country_of_destination",
-      parseInt(country_of_destination, 10)
+      country_of_destination.toString()
     );
 
     setIsLoading(true);
     setError(null);
     setIsSuccess(false);
+
+    // kdhjfsjhgfjkghjsdkf
 
     try {
       const response = await axios.post(
@@ -104,9 +105,11 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
 
       await fetchWarehouses();
       setIsSuccess(true);
+      return response.data;
     } catch (error) {
       setError(error.message);
       setIsSuccess(false);
+      throw error;
     } finally {
       setIsLoading(false);
     }
