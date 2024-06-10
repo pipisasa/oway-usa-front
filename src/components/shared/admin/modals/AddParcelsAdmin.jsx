@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
-import useWarehouses from "@/hooks/user/useWarehouses";
-import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
+import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
+import useWarehouses from "@/hooks/user/useWarehouses";
 
 export default function AddParcelsAdmin() {
   const [isOpen, setIsOpen] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comments, setComments] = useState("");
   const { addWarehouses } = useWarehouses();
-  const { countries } = useCountries();
+  const { warehouses, fetchWarehouses, deleteWarehouse, loading, error } =
+    useMainWarehouses();
+  useEffect(() => {
+    fetchWarehouses();
+  }, []);
   const [selectedOption, setSelectedOption] = useState("");
   const [courierOption, setCourierOption] = useState("");
 
@@ -54,7 +58,7 @@ export default function AddParcelsAdmin() {
               <div>
                 <label htmlFor="warehouse">Склад</label>
                 <CustomSelect
-                  options={countries}
+                  options={warehouses}
                   selectedOption={selectedOption}
                   onChange={(e) => setSelectedOption(e)}
                   span={"Выберите страну"}
