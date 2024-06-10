@@ -15,7 +15,6 @@ const getItemWithoutQuotes = (key) => {
 
 export default function WarehousesProductsTable({
   warehouses,
-  deleteWarehouse,
   deleteMultipleWarehouses,
   isLoading,
   error,
@@ -106,11 +105,6 @@ export default function WarehousesProductsTable({
     setConfirmDeleteWarehouse(warehouse);
   };
 
-  // const handleDelete = (warehouseId) => {
-  //   deleteWarehouse(warehouseId);
-  //   setConfirmDeleteWarehouse(null);
-  // };
-
   const handleMultipleDelete = () => {
     console.log("Deleting selected warehouses with ids:", selectedWarehouses);
     deleteMultipleWarehouses(selectedWarehouses);
@@ -128,14 +122,6 @@ export default function WarehousesProductsTable({
       setSelectedWarehouses([]);
     } else {
       setSelectedWarehouses(filteredWarehouses.map((wh) => wh.id));
-    }
-  };
-
-  const handleMassDelete = () => {
-    if (selectedWarehouses.length > 0) {
-      deleteWarehouse(selectedWarehouses); // Измените функцию deleteWarehouse, чтобы она могла обрабатывать массив ID
-    } else {
-      alert("Выберите хотя бы один склад для удаления.");
     }
   };
 
@@ -205,19 +191,19 @@ export default function WarehousesProductsTable({
               >
                 {warehouse.status?.name}
               </td>
-              <td className="flex items-center">
+              <td className={s.btns}>
                 <button
-                  className={s.btn}
+                  className={s.edit}
                   onClick={() => handleDetailsClick(warehouse)}
                 >
                   Подробнее
                 </button>
                 <button
                   style={{ marginLeft: "10px" }}
-                  className={s.btn}
+                  className={s.delete}
                   onClick={() => handleDeleteConfirmation(warehouse)}
                 >
-                  Удалить
+                  <img src="/assets/icons/delete.svg" alt="" />
                 </button>
               </td>
             </tr>
