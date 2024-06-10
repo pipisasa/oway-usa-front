@@ -132,3 +132,32 @@
   padding: 10px 20px;
   cursor: pointer;
 }
+
+@media (max-width: 1024px) {
+  .requests {
+    table {
+      thead {
+        display: none;
+      }
+    }
+
+    tbody {
+      tr {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Устанавливаем две колонки: первая шире второй */
+        grid-template-rows: repeat(3, auto); /* Определяем три ряда */
+        gap: 10px; /* Пространство между элементами сетки */
+        margin-bottom: 10px; /* Отступ снизу для каждой строки */
+        border-radius: 8px; /* Скругление углов */
+        padding: 16px; /* Отступы внутри каждой строки */
+        align-items: center; /* Выравнивание содержимого по центру */
+      }
+
+      td {
+        font-size: 16px;
+        padding: 5px !important;
+        text-wrap: nowrap;
+      }
+    }
+  }
+}

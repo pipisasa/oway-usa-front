@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import s from "@/styles/components/shared/cards/WarehousesCard.module.scss";
 import EditWarehouses from "../admin/modals/EditWarehouses";
-import { useWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import { useRouter } from "next/router";
 
 export default function WarehousesCard({ warehouse, deleteWarehouse }) {

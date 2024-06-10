@@ -46,6 +46,26 @@
           width: 100%;
         }
 
+        .editing {
+          width: 100%;
+
+          .edit {
+            display: flex;
+            padding: 14px 36px;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            border-radius: 12px;
+            background: #fff;
+            cursor: pointer;
+            margin-top: 32px;
+            background: var(--blue, #ffffff);
+            color: #000000;
+            width: 100%;
+            border: 1px solid #027ddb;
+          }
+        }
+
         .inputs {
           display: grid;
           grid-template-columns: repeat(2, 1fr);

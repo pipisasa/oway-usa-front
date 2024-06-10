@@ -131,6 +131,14 @@ export default function WarehousesProductsTable({
     }
   };
 
+  const handleMassDelete = () => {
+    if (selectedWarehouses.length > 0) {
+      deleteWarehouse(selectedWarehouses); // Измените функцию deleteWarehouse, чтобы она могла обрабатывать массив ID
+    } else {
+      alert("Выберите хотя бы один склад для удаления.");
+    }
+  };
+
   if (isLoading) {
     return <Loading />;
   }

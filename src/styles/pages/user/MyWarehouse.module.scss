@@ -85,6 +85,12 @@
           align-items: center;
           gap: 20px;
 
+          .delete {
+            border-radius: 5px;
+            background: var(--blue_light_3, #ffe7e7);
+            padding: 9px 10px;
+          }
+
           img {
             min-width: 20px;
           }
@@ -99,5 +105,38 @@
 }
 
 .my::-webkit-scrollbar {
-  display: none; /* Скрывает скроллбары в Webkit-браузерах */
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .my {
+    table {
+      thead {
+        display: none;
+      }
+
+      tbody {
+        tr {
+          display: grid;
+          grid-template-columns: 3fr 2fr; /* Три части для имени/фамилии, две части для страны и службы доставки */
+          grid-template-rows: auto auto; /* Два ряда: один для данных, второй для кнопки */
+          gap: 10px;
+          margin-bottom: 10px;
+          border-radius: 8px;
+          padding: 16px;
+          align-items: center;
+        }
+
+        td {
+          font-size: 16px;
+          padding: 5px !important;
+        }
+
+        .full-width {
+          /* Стиль для кнопки, чтобы она занимала весь ряд */
+          grid-column: 1 / -1; /* Растягивание кнопки на всю ширину ряда */
+        }
+      }
+    }
+  }
 }

@@ -139,6 +139,7 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
   };
 
   const deleteMultipleWarehouses = async (ids) => {
+
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     setError(null);

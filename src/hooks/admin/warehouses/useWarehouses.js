@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
 
-export const useWarehouses = () => {
+export const useMainWarehouses = () => {
   const [warehouses, setWarehouses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

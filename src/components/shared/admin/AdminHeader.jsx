@@ -9,6 +9,7 @@ import AddShopsModal from "./modals/AddShopsModal";
 import ProductsModal from "./modals/ProductsModal";
 import WarehouseProductsModal from "./modals/WarehousesProductsModal";
 import CompaniesModal from "./modals/CompaniesModal";
+import AddParcelsAdmin from "./modals/AddParcelsAdmin";
 
 export default function AdminHeader() {
   const router = useRouter();
@@ -67,6 +68,8 @@ export default function AdminHeader() {
       return <WarehouseProductsModal />;
     } else if (router.pathname === "/admin/catalog/companies") {
       return <CompaniesModal />;
+    } else if (router.pathname.includes("/admin/user-parcels")) {
+      return <AddParcelsAdmin />;
     }
     return null;
   };

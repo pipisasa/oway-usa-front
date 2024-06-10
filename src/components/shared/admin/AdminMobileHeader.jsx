@@ -8,6 +8,13 @@ import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
 import useLogout from "@/hooks/auth/useLogout";
 import ModalUserMobil from "@/components/partials/ModalUserMobil";
+import NotificationsModal from "./modals/NotificationsModal";
+import AddShopsModal from "./modals/AddShopsModal";
+import WarehouseProductsModal from "./modals/WarehousesProductsModal";
+import CompaniesModal from "./modals/CompaniesModal";
+import AddParcelsAdmin from "./modals/AddParcelsAdmin";
+import AddUsersModal from "./modals/AddUsersModal";
+import ProductsModal from "./modals/ProductsModal";
 
 export default function AdminMobileHeader({ children }) {
   const { products } = useNotification();
@@ -52,7 +59,7 @@ export default function AdminMobileHeader({ children }) {
     {
       href: "/admin/user-parcels",
       label: "Ожидаемые посылки",
-      icons: "/assets/icons/calc_icon.svg",
+      icons: "/assets/icons/admin-icons/поссылки.svg",
     },
     {
       href: "/admin/illinois",
@@ -66,14 +73,35 @@ export default function AdminMobileHeader({ children }) {
     },
   ];
 
+  const renderModal = () => {
+    if (router.pathname === "/admin/users") {
+      return <AddUsersModal />;
+    } else if (router.pathname === "/admin/notifications") {
+      return <NotificationsModal />;
+    } else if (router.pathname === "/admin/catalog/shops-catalog") {
+      return <AddShopsModal />;
+    } else if (router.pathname === "/admin/catalog/products") {
+      return <ProductsModal />;
+    } else if (router.pathname.includes("/admin/warehouses/")) {
+      return <WarehouseProductsModal />;
+    } else if (router.pathname === "/admin/catalog/companies") {
+      return <CompaniesModal />;
+    } else if (router.pathname.includes("/admin/user-parcels")) {
+      return <AddParcelsAdmin />;
+    }
+    return null;
+  };
+
   return (
     <div className={s.container}>
       <div className={s.header_container}>
         <header>
           <Link href="/">
-            <img src="/assets/icons/logo.svg" alt="" />
+            <img className={s.logo} src="/assets/icons/logo.svg" alt="" />
           </Link>
-
+          <button onClick={() => router.push("/user")} className={s.btn}>
+            Личный кабинет
+          </button>
           <div>
             <Badge
               content={products?.total_not_checked_notifications}
@@ -115,6 +143,8 @@ export default function AdminMobileHeader({ children }) {
       </div>
 
       <main className={s.pages_container}>{children}</main>
+
+      <div className={s.modals}>{renderModal()}</div>
     </div>
   );
 }

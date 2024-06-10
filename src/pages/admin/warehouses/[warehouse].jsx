@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import WarehousesProductsTable from "@/components/shared/admin/WarehousesProductsTable";
 import useWarehouses from "@/hooks/admin/useWarehouses";
-import AdminCustomSelect from "@/components/partials/AdminCustomSelect";
-import SearchSelect from "@/components/partials/SearchSelect";
 import CustomSelect from "@/components/partials/select/SearchSelectCustom";
 
 export default function AdminWarehousesPage() {

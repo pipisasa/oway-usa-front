@@ -61,15 +61,15 @@ export default function Illinois() {
                 <td className={s.update_delete}>
                   <button
                     onClick={() => handleUpdateClick(item)}
-                    className={s.btn}
+                    className={s.edit}
                   >
-                    Обновить
+                    <img src="/assets/icons/edit.svg" alt="" />
                   </button>
                   <button
                     onClick={() => handleDeleteClick(item)}
-                    className={s.btn}
+                    className={s.delete}
                   >
-                    Удалить
+                    <img src="/assets/icons/delete.svg" alt="Delete" />
                   </button>
                 </td>
               </tr>
