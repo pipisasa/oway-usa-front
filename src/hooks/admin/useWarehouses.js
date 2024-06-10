@@ -89,6 +89,8 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     setError(null);
     setIsSuccess(false);
 
+    // kdhjfsjhgfjkghjsdkf
+
     try {
       const response = await axios.post(
         `${API_URL}/api/warehouses/product/create/`,
