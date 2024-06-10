@@ -14,6 +14,7 @@ export default function AdminWarehousesPage() {
     error,
     count,
     setFilters,
+    deleteMultipleWarehouses,
   } = useWarehouses(currentPage);
 
   const [nameFilter, setNameFilter] = useState("");
@@ -65,6 +66,7 @@ export default function AdminWarehousesPage() {
         currentPage={currentPage}
         setCurrent={setCurrentPage}
         current={currentPage}
+        deleteMultipleWarehouses={deleteMultipleWarehouses}
         isLoading={isLoading}
         error={error}
         count={count}

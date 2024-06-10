@@ -21,11 +21,7 @@ export default function WarehousesPage() {
         <p>Ошибка: {error}</p>
       ) : (
         warehouses.map((warehouse) => (
-          <WarehousesCard
-            key={warehouse.id}
-            deleteWarehouse={deleteWarehouse}
-            warehouse={warehouse}
-          />
+          <WarehousesCard key={warehouse.id} warehouse={warehouse} />
         ))
       )}
     </section>
