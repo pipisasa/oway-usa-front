@@ -209,6 +209,7 @@ const CustomSelect = ({
   const handleNext = () => {
     if (currentWarehouseIndex < warehouses.length - 1) {
       const newIndex = currentWarehouseIndex + 1;
+      console.log(currentWarehouseIndex);
       setCurrentWarehouseIndex(newIndex);
       navigateToWarehouse(newIndex);
     }
@@ -221,7 +222,6 @@ const CustomSelect = ({
       navigateToWarehouse(newIndex);
     }
   };
-
   const navigateToWarehouse = (index) => {
     const warehouse = warehouses[index];
     if (warehouse) {
@@ -291,8 +291,16 @@ const CustomSelect = ({
         </div>
       </div>
       <div className={s.onebutton}>
-        <button onClick={handlePrevious}>Предыдущий склад</button>
-        <button onClick={handleNext}>Следующий склад</button>
+        <button onClick={handlePrevious}>
+          {currentWarehouseIndex > 0
+            ? warehouses[currentWarehouseIndex - 1]?.name
+            : "Нет предыдущего"}
+        </button>
+        <button onClick={handleNext}>
+          {currentWarehouseIndex < warehouses.length - 1
+            ? warehouses[currentWarehouseIndex + 1]?.name
+            : "Нет следующего"}
+        </button>
       </div>
       <div className={s.twobutton}>
         <button
