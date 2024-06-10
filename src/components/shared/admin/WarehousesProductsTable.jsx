@@ -16,6 +16,7 @@ const getItemWithoutQuotes = (key) => {
 export default function WarehousesProductsTable({
   warehouses,
   deleteWarehouse,
+  deleteMultipleWarehouses,
   isLoading,
   error,
   current,
@@ -96,6 +97,7 @@ export default function WarehousesProductsTable({
           .includes(localStorageFilters.dateInput));
     return isMatching;
   });
+
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
   };
@@ -104,9 +106,15 @@ export default function WarehousesProductsTable({
     setConfirmDeleteWarehouse(warehouse);
   };
 
-  const handleDelete = (warehouseId) => {
-    deleteWarehouse(warehouseId);
-    setConfirmDeleteWarehouse(null);
+  // const handleDelete = (warehouseId) => {
+  //   deleteWarehouse(warehouseId);
+  //   setConfirmDeleteWarehouse(null);
+  // };
+
+  const handleMultipleDelete = () => {
+    console.log("Deleting selected warehouses with ids:", selectedWarehouses);
+    deleteMultipleWarehouses(selectedWarehouses);
+    setSelectedWarehouses([]);
   };
 
   const toggleWarehouseSelection = (id) => {
@@ -161,11 +169,13 @@ export default function WarehousesProductsTable({
             <th>Статус</th>
             <th>Действие</th>
           </tr>
-          {/* <div className={s.actions_btn}>
-            <button className={s.all_delete} onClick={handleMassDelete}>
-              <img src="/assets/icons/admin-icons/Delete.svg" alt="Удалить" />
-            </button>
-          </div> */}
+          <tr>
+            <th className={s.actions_btn}>
+              <button className={s.all_delete} onClick={handleMultipleDelete}>
+                <img src="/assets/icons/admin-icons/Delete.svg" alt="" />
+              </button>
+            </th>
+          </tr>
         </thead>
         <tbody>
           {filteredWarehouses?.map((warehouse) => (

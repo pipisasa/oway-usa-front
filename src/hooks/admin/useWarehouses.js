@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { getCookie } from "@/utils/cookieHelpers";
 import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const warehouseSity = [
+  { id: 7, name: "Турция" },
+  { id: 8, name: "Москва" },
+  { id: 9, name: "Кыргызстан" },
+  { id: 14, name: "Чикаго" },
+];
 
 const useWarehouses = (currentPage, initialFilters = {}) => {
   const [error, setError] = useState(null);
@@ -11,13 +19,30 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
   const [warehouses, setWarehouses] = useState([]);
   const [count, setCount] = useState(0);
   const [filters, setFilters] = useState(initialFilters);
+  const router = useRouter();
 
   const fetchWarehouses = async (newFilters = {}) => {
     const accessToken = getCookie("accessToken");
+
+    const pathParts = router.asPath.split("/");
+    const countryName = decodeURIComponent(pathParts[pathParts.length - 1]);
+    console.log("Country Name from Path:", countryName);
+
     setIsLoading(true);
     setError(null);
 
-    const mergedFilters = { ...filters, ...newFilters };
+    const warehouseCity = warehouseSity.find(
+      (city) => city.name === countryName
+    );
+    const warehouseCityId = warehouseCity ? warehouseCity.id : null;
+    console.log("Warehouse City:", warehouseCity);
+    console.log("Warehouse City ID:", warehouseCityId);
+
+    const mergedFilters = {
+      ...filters,
+      ...newFilters,
+      warehouse: warehouseCityId,
+    };
 
     const queryString = Object.keys(mergedFilters)
       .map((key) => `${key}=${encodeURIComponent(mergedFilters[key])}`)
@@ -46,7 +71,7 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
 
   useEffect(() => {
     fetchWarehouses();
-  }, [currentPage, filters]);
+  }, [currentPage, filters, router.asPath]);
 
   const addWarehouses = async (
     name,
@@ -89,8 +114,6 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     setError(null);
     setIsSuccess(false);
 
-    // kdhjfsjhgfjkghjsdkf
-
     try {
       const response = await axios.post(
         `${API_URL}/api/warehouses/product/create/`,
@@ -115,33 +138,37 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     }
   };
 
-  const deleteWarehouse = async (ids) => {
+  const deleteMultipleWarehouses = async (ids) => {
+
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
+    setError(null);
+
     try {
-      await axios.delete(
-        `${API_URL}/api/warehouses/product/delete/`,
-        { id: ids },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      fetchWarehouses();
+      await axios.delete(`${API_URL}/api/warehouses/product/delete/`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        data: { ids: Array.isArray(ids) ? ids : [ids] },
+      });
+
+      await fetchWarehouses();
       setIsSuccess(true);
     } catch (err) {
-      setError(err.message);
-      setIsSuccess(false);
+      if (err.response && err.response.status === 401) {
+      } else {
+        setError(err.message);
+        setIsSuccess(false);
+      }
     } finally {
       setIsLoading(false);
     }
   };
 
   return {
+    deleteMultipleWarehouses,
     warehouses,
     addWarehouses,
-    deleteWarehouse,
     fetchWarehouses,
     setFilters,
     error,
