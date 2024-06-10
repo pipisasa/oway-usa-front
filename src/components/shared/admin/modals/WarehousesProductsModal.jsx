@@ -24,8 +24,8 @@ export default function WarehouseProductsModal() {
     unique_id_user: "",
     date_sent: "",
     date_arrived: "",
-    country_of_origin: "",
-    country_of_destination: "",
+    country_of_origin: 0,
+    country_of_destination: 0,
   });
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -94,40 +94,48 @@ export default function WarehouseProductsModal() {
 
   const handleSubmit = async () => {
     console.log("Submitting form data:", formData);
-    await addWarehouses(
-      formData.name,
-      formData.address,
-      formData.weight,
-      formData.track_number,
-      formData.price,
-      selectedOption?.id,
-      formData.status,
-      formData.image,
-      formData.comments,
-      formData.unique_id_user,
-      formData.date_sent,
-      formData.date_arrived,
-      formData.country_of_origin,
-      formData.country_of_destination
-    );
-    setFormData({
-      name: "",
-      address: "",
-      weight: "",
-      track_number: "",
-      price: "",
-      country: "",
-      status: "",
-      image: "",
-      comments: "",
-      unique_id_user: "",
-      date_sent: "",
-      date_arrived: "",
-      country_of_origin: "",
-      country_of_destination: "",
-    });
-    setCurrentStep(1);
-    setIsOpen(false);
+    console.log("Selected option:", selectedOption);
+    try {
+      await addWarehouses(
+        formData.name,
+        formData.address,
+        formData.weight,
+        formData.track_number,
+        formData.price,
+        selectedOption?.id,
+        formData.status,
+        formData.image,
+        formData.comments,
+        formData.unique_id_user,
+        formData.date_sent,
+        formData.date_arrived,
+        // formData.country_of_origin,
+        // formData.country_of_destination
+        Number(formData.country_of_origin), // Преобразование в число
+        Number(formData.country_of_destination)
+      );
+      console.log("Form data successfully submitted");
+      setFormData({
+        name: "",
+        address: "",
+        weight: "",
+        track_number: "",
+        price: "",
+        country: "",
+        status: "",
+        image: "",
+        comments: "",
+        unique_id_user: "",
+        date_sent: "",
+        date_arrived: "",
+        country_of_origin: 0,
+        country_of_destination: 0,
+      });
+      setCurrentStep(1);
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Error submitting form data:", error);
+    }
   };
 
   const closeModal = () => {
