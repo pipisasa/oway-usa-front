@@ -9,7 +9,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function IncommingRequests() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading, error } = useMyRequests(currentPage);
+  const { data, isLoading, error, deleteRequest, isDeleting, deleteError } =
+    useMyRequests(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
   const [nameFilter, setNameFilter] = useState("");
@@ -27,7 +28,6 @@ export default function IncommingRequests() {
       ? true
       : request.is_paid.toString() === filter
   );
-  console.log(filteredRequests);
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
@@ -40,35 +40,6 @@ export default function IncommingRequests() {
           onClose={() => setIsModalVisible(false)}
         />
       )}
-      {/* <div className={s.filters}>
-        <div className={s.search}>
-          <img src="/assets/icons/search.svg" alt="icon" />
-          <input
-            type="text"
-            placeholder="Поиск по названию"
-            value={nameFilter}
-            onChange={(e) => setNameFilter(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                fetchWarehouses(currentPage, {
-                  name: nameFilter,
-                });
-              }
-            }}
-          />
-        </div>
-        <select
-          className={s.select}
-          name=""
-          id=""
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="">Все</option>
-          <option value="false">Не оплачено</option>
-          <option value="true">Оплачено</option>
-        </select>
-      </div> */}
       <table>
         <thead>
           <tr>
@@ -116,12 +87,13 @@ export default function IncommingRequests() {
                 >
                   <img src="/assets/icons/icon.svg" alt="more" />
                 </button>
-                {/* <button
-                  onClick={() => handleDeleteRequest(request.id)}
+                <button
+                  onClick={() => deleteRequest(request.id)}
                   className={s.delete}
+                  disabled={isDeleting}
                 >
-                  <img src="/assets/icons/delete.svg" alt="" />
-                </button> */}
+                  <img src="/assets/icons/delete.svg" alt="delete" />
+                </button>
               </td>
             </tr>
           ))}
@@ -135,6 +107,7 @@ export default function IncommingRequests() {
           onChange={(page) => setCurrentPage(page)}
         />
       </div>
+      {deleteError && <div>Error: {deleteError.message}</div>}
     </div>
   );
 }

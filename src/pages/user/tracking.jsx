@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import s from "@/styles/pages/user/TrackingPage.module.scss";
 import axios from "axios";
 import Loading from "@/components/shared/admin/Loading";
@@ -8,9 +8,9 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
   useDisclosure,
 } from "@nextui-org/react";
+import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 
 export default function TrackingPage() {
   const [trackingNumber, setTrackingNumber] = useState("");
@@ -18,6 +18,19 @@ export default function TrackingPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { warehouses, fetchWarehouses } = useMainWarehouses();
+  const [warehouseName, setWarehouseName] = useState("");
+
+  useEffect(() => {
+    fetchWarehouses();
+  }, [fetchWarehouses]);
+
+  useEffect(() => {
+    if (status && warehouses.length > 0) {
+      const warehouse = warehouses.find((wh) => wh.id === status.warehouse);
+      setWarehouseName(warehouse ? warehouse.name : "Неизвестный склад");
+    }
+  }, [status, warehouses]);
 
   const handleTrack = async (e) => {
     e.preventDefault();
@@ -67,7 +80,6 @@ export default function TrackingPage() {
       </form>
 
       {loading && <Loading />}
-      {/* {error && <p>{error}</p>} */}
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent>
@@ -82,6 +94,7 @@ export default function TrackingPage() {
                     <div className={s.status}>
                       <img src="/assets/icons/впути.svg" alt="" />
                       <p>{status.status.name}</p>
+                      <span>Склад: {warehouseName}</span>
                     </div>
                   ) : (
                     <div className={s.status}>
