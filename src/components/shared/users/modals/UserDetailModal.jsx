@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import s from "@/styles/pages/admin/AdminUsersPage.module.scss";
 import { RxCross2 } from "react-icons/rx";
 import Modal from "../../Modal";
+import { getCookie } from "@/utils/cookieHelpers";
 
-export default function UserDetailModal({ userData, close, editUser }) {
+export default function UserDetailModal({ userData, close }) {
   const [imagePreviews, setImagePreviews] = useState({});
   const [firstName, setFirstName] = useState(userData.first_name);
   const [lastName, setLastName] = useState(userData.last_name);
@@ -11,35 +12,71 @@ export default function UserDetailModal({ userData, close, editUser }) {
   const [phoneNumber, setPhoneNumber] = useState(userData.phone_number);
   const [passportFront, setPassportFront] = useState(userData.front_image);
   const [passportBack, setPassportBack] = useState(userData.back_image);
-
-  const handleEdit = (e) => {
-    e.preventDefault();
-    const editedUserData = {
-      id: userData.id,
-      first_name: firstName,
-      last_name: lastName,
-      email: email,
-      phone_number: phoneNumber,
-      front_image: passportFront,
-      back_image: passportBack,
-    };
-    editUser(editedUserData);
-  };
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleImageChange = (event, type) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePreviews({
-        ...imagePreviews,
-        [type]: reader.result,
-      });
-    };
     if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreviews((prev) => ({
+          ...prev,
+          [type]: reader.result,
+        }));
+      };
       reader.readAsDataURL(file);
+      setImagePreviews((prev) => ({
+        ...prev,
+        [type]: file,
+      }));
     }
   };
 
+  const editUser = async (e) => {
+    e.preventDefault();
+    const accessToken = getCookie("accessToken");
+    const formData = new FormData();
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("email", email);
+    formData.append("phone_number", phoneNumber);
+
+    if (imagePreviews.front_image instanceof File) {
+      formData.append("front_image", imagePreviews.front_image);
+    }
+    if (imagePreviews.back_image instanceof File) {
+      formData.append("back_image", imagePreviews.back_image);
+    }
+
+    const response = await fetch(
+      `https://api-owayusa.com/api/users/profile/${userData.id}/`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: formData,
+      }
+    );
+
+    if (response.ok) {
+      const updatedUser = await response.json();
+      console.log("Updated successfully", updatedUser);
+      setIsEditing(false);
+    } else {
+      console.error("Failed to update", await response.text());
+    }
+  };
+
+  const handleCancel = () => {
+    setFirstName(userData.first_name);
+    setLastName(userData.last_name);
+    setEmail(userData.email);
+    setPhoneNumber(userData.phone_number);
+    setPassportFront(userData.front_image);
+    setPassportBack(userData.back_image);
+    setIsEditing(false);
+  };
   return (
     <div className={s.modal}>
       <Modal isOpen={userData}>
@@ -50,7 +87,7 @@ export default function UserDetailModal({ userData, close, editUser }) {
             </button>
           </div>
           <h3>Данные пользователя</h3>
-          <form className={s.form} action="" onSubmit={handleEdit}>
+          <form className={s.form} action="" onSubmit={editUser}>
             <div className={s.inputs}>
               <div>
                 <label>Имя</label>
@@ -58,6 +95,7 @@ export default function UserDetailModal({ userData, close, editUser }) {
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                  disabled={!isEditing}
                 />
               </div>
               <div>
@@ -66,6 +104,7 @@ export default function UserDetailModal({ userData, close, editUser }) {
                   type="text"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  disabled={!isEditing}
                 />
               </div>
               <div>
@@ -74,6 +113,7 @@ export default function UserDetailModal({ userData, close, editUser }) {
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  disabled={!isEditing}
                 />
               </div>
               <div>
@@ -82,14 +122,10 @@ export default function UserDetailModal({ userData, close, editUser }) {
                   type="text"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
+                  disabled={!isEditing}
                 />
               </div>
-              <div>
-                <label>Дата регистрации</label>
-                <p>{userData.created_at}</p>
-              </div>
 
-              <div></div>
               <div>
                 <label htmlFor="">Лицевая сторона паспорта</label>
                 <label className="custom-file-upload">
@@ -98,6 +134,7 @@ export default function UserDetailModal({ userData, close, editUser }) {
                     id="front_image"
                     name="front_image"
                     onChange={(e) => handleImageChange(e, "front_image")}
+                    disabled={!isEditing}
                   />
                   <img src="/assets/icons/selectimg.svg" alt="select img" />
                   <span>Выбрать картинку</span>
@@ -117,6 +154,7 @@ export default function UserDetailModal({ userData, close, editUser }) {
                     id="back_image"
                     name="back_image"
                     onChange={(e) => handleImageChange(e, "back_image")}
+                    disabled={!isEditing}
                   />
                   <img src="/assets/icons/selectimg.svg" alt="select img" />
                   <span>Выбрать картинку</span>
@@ -130,7 +168,18 @@ export default function UserDetailModal({ userData, close, editUser }) {
               </div>
             </div>
             <div>
-              <button>Редактировать</button>
+              {isEditing ? (
+                <div className={s.editing}>
+                  <button className={s.edit} onClick={handleCancel}>
+                    Отмена
+                  </button>
+                  <button type="submit">Сохранить</button>
+                </div>
+              ) : (
+                <button onClick={() => setIsEditing(true)}>
+                  Редактировать
+                </button>
+              )}
             </div>
           </form>
         </div>
