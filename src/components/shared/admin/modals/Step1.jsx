@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 
@@ -32,32 +32,29 @@ export default function Step1({
   countries,
   setCurrentStep,
 }) {
-  const [selectedOption1, setSelectedOption1] = useState(null);
-  const [selectedOption2, setSelectedOption2] = useState(null);
-
+  const country_of_origin = [
+    { id: 3, name: "сша" },
+    { id: 4, name: "Турция" },
+  ];
+  const country_of_destination = [
+    { id: 3, name: "сша" },
+    { id: 4, name: "Турция" },
+  ];
   const handleSelectChange1 = (e) => {
-    const newSelectedId = parseInt(e.target.value, 10);
-    if (!isNaN(newSelectedId)) {
-      setSelectedOption1(newSelectedId);
-      handleChange({
-        target: { name: "country_of_origin", value: newSelectedId },
-      });
-    }
+    const newSelectedId = e.target.value;
+    handleChange({
+      target: { name: "country_of_origin", value: newSelectedId },
+    });
   };
 
   const handleSelectChange2 = (e) => {
-    const newSelectedId1 = parseInt(e.target.value, 10);
-    if (newSelectedId1) {
-      setSelectedOption2(newSelectedId1);
-      handleChange({
-        target: { name: "country_of_destination", value: newSelectedId1 },
-      });
-    }
+    const newSelectedId2 = e.target.value;
+    console.log(newSelectedId2);
+    // handleChange
+    handleChange({
+      target: { name: "country_of_destination", value: newSelectedId2 },
+    });
   };
-
-  useEffect(() => {
-    console.log("Updated selectedOption2:", selectedOption2);
-  }, [selectedOption2]);
 
   return (
     <div className={c.step}>
@@ -117,12 +114,12 @@ export default function Step1({
               <select
                 id="country_of_origin"
                 name="country_of_origin"
-                value={selectedOption1 || ""}
+                value={formData.country_of_origin || ""}
                 onChange={handleSelectChange1}
                 className={c.select}
               >
                 <option value="">Выберите страну</option>
-                {countries.map((option) => (
+                {country_of_origin.map((option) => (
                   <option key={option.id} value={option.id}>
                     {option.name}
                   </option>
@@ -134,12 +131,12 @@ export default function Step1({
               <select
                 id="country_of_destination"
                 name="country_of_destination"
-                value={selectedOption2 || ""}
+                value={formData?.country_of_destination}
                 onChange={handleSelectChange2}
                 className={c.select}
               >
                 <option value="">Выберите страну</option>
-                {countries.map((option) => (
+                {country_of_destination.map((option) => (
                   <option key={option.id} value={option.id}>
                     {option.name}
                   </option>

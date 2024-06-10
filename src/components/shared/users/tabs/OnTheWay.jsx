@@ -21,7 +21,6 @@ export default function OnTheWay() {
     setCurrentRequestData(item);
     setIsModalVisible(true);
   };
-  console.log(warehouses);
 
   const is_paid = true;
   return (
