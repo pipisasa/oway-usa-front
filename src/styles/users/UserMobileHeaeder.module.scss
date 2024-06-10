@@ -5,6 +5,14 @@
   gap: 20px;
   height: 200vh;
 
+  .modals {
+    position: fixed;
+    bottom: 10px;
+    margin: 20px;
+    width: 95%;
+    z-index: 100;
+  }
+
   .pages_container {
     padding: 16px 20px;
     margin-top: 75px;
@@ -14,19 +22,35 @@
     padding: 16px 20px;
     display: flex;
     flex-direction: column;
-    gap: 48px;
     position: fixed;
     background: #f7f9fc;
     width: 100%;
     z-index: 100;
+
+    .logo {
+      min-width: 92px;
+      height: 48px;
+    }
+
+    .btn {
+      border-radius: 12px;
+      background: var(--blue, #027ddb);
+      padding: 10px;
+      color: var(--white, #fff);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%;
+      text-wrap: nowrap;
+    }
   }
 
   header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 48px;
 
+    gap: 10px;
     div {
       display: flex;
       align-items: center;
@@ -99,6 +123,7 @@
     }
   }
 }
+
 .filterComponentContainer {
   background: #fff;
   z-index: 88;

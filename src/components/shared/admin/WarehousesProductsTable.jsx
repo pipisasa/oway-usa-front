@@ -24,7 +24,6 @@ export default function WarehousesProductsTable({
   statusFilter,
   countryFilter,
 }) {
-
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
   const [confirmDeleteWarehouse, setConfirmDeleteWarehouse] = useState(null);
   const [selectedWarehouses, setSelectedWarehouses] = useState([]);
@@ -124,6 +123,14 @@ export default function WarehousesProductsTable({
     }
   };
 
+  const handleMassDelete = () => {
+    if (selectedWarehouses.length > 0) {
+      deleteWarehouse(selectedWarehouses); // Измените функцию deleteWarehouse, чтобы она могла обрабатывать массив ID
+    } else {
+      alert("Выберите хотя бы один склад для удаления.");
+    }
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -154,11 +161,11 @@ export default function WarehousesProductsTable({
             <th>Статус</th>
             <th>Действие</th>
           </tr>
-          <div className={s.actions_btn}>
-            <button className={s.all_delete}>
-              <img src="/assets/icons/admin-icons/Delete.svg" alt="" />
+          {/* <div className={s.actions_btn}>
+            <button className={s.all_delete} onClick={handleMassDelete}>
+              <img src="/assets/icons/admin-icons/Delete.svg" alt="Удалить" />
             </button>
-          </div>
+          </div> */}
         </thead>
         <tbody>
           {filteredWarehouses?.map((warehouse) => (

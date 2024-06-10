@@ -195,6 +195,8 @@
 
 @media (max-width: 768px) {
   .request_modal {
+    max-height: 830px;
+    overflow-y: scroll;
     .left_block {
       flex-direction: row;
       width: 100%;
@@ -210,6 +212,7 @@
 
     .request_blocks {
       flex-direction: column;
+      overflow-y: scroll;
     }
   }
 }

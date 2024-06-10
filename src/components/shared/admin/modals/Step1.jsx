@@ -29,7 +29,6 @@ export default function Step1({
   handleImageChange,
   nextStep,
   currentStep,
-  countries,
   setCurrentStep,
 }) {
   const country_of_origin = [
