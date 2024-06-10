@@ -2,7 +2,7 @@ import React, { memo, useCallback, useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/pages/admin/BulletinBoardPage.module.scss";
 import Modal from "../../Modal";
-import { useWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
+import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import Loading from "../Loading";
 
 const InputField = memo(function InputField({
@@ -20,7 +20,7 @@ const InputField = memo(function InputField({
 });
 
 export default function AddWarehouses() {
-  const { createWarehouse, loading, error } = useWarehouses();
+  const { createWarehouse, loading, error } = useMainWarehouses();
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
 
