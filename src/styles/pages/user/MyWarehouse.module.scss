@@ -85,6 +85,12 @@
           align-items: center;
           gap: 20px;
 
+          .delete {
+            border-radius: 5px;
+            background: var(--blue_light_3, #ffe7e7);
+            padding: 9px 10px;
+          }
+
           img {
             min-width: 20px;
           }

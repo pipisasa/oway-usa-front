@@ -29,14 +29,18 @@ export default function Step1({
   handleImageChange,
   nextStep,
   currentStep,
-  countries,
   setCurrentStep,
 }) {
-  const [selectedOption1, setSelectedOption1] = useState(null);
-  const [selectedOption2, setSelectedOption2] = useState(null);
+  const [countries, setCountries] = useState([
+    { id: 3, name: "США" },
+    { id: 4, name: "Турция" },
+  ]);
+  const [selectedOption1, setSelectedOption1] = useState("");
+  const [selectedOption2, setSelectedOption2] = useState("");
 
   const handleSelectChange1 = (e) => {
     const newSelectedId = parseInt(e.target.value, 10);
+    console.log(e.target.value);
     if (!isNaN(newSelectedId)) {
       setSelectedOption1(newSelectedId);
       handleChange({
@@ -46,13 +50,15 @@ export default function Step1({
   };
 
   const handleSelectChange2 = (e) => {
+    console.log("Selected value before parseInt:", e.target.value);
     const newSelectedId1 = parseInt(e.target.value, 10);
-    if (newSelectedId1) {
-      setSelectedOption2(newSelectedId1);
-      handleChange({
-        target: { name: "country_of_destination", value: newSelectedId1 },
-      });
-    }
+    console.log("Parsed integer:", newSelectedId1);
+
+    setSelectedOption2(newSelectedId1); // Установка выбранного значения независимо от его валидности
+
+    handleChange({
+      target: { name: "country_of_destination", value: newSelectedId1 },
+    });
   };
 
   return (

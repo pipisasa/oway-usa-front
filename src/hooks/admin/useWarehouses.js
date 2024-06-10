@@ -112,15 +112,19 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     }
   };
 
-  const deleteWarehouse = async (id) => {
+  const deleteWarehouse = async (ids) => {
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     try {
-      await axios.delete(`${API_URL}/api/warehouses/product/delete/${id}/`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      await axios.delete(
+        `${API_URL}/api/warehouses/product/delete/`,
+        { id: ids },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       fetchWarehouses();
       setIsSuccess(true);
     } catch (err) {

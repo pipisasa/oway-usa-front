@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-
 import s from "@/styles/pages/user/MyWarehouse.module.scss";
-
 import Loading from "@/components/shared/admin/Loading";
 import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
 import WarehouseProductsModalV2 from "@/components/shared/admin/modals/WarehousesProductModalV2";
@@ -43,7 +41,10 @@ export default function UserWarehouses() {
               <td>{warehouse.tracking_number}</td>
               <td>{warehouse.courier_service}</td>
               <td className={s.actions}>
-                <button onClick={() => deleteWarehouse(warehouse.id)}>
+                <button
+                  className={s.delete}
+                  onClick={() => deleteWarehouse(warehouse.id)}
+                >
                   <img src="/assets/icons/delete.svg" alt="delete" />
                 </button>
                 <WarehouseProductsModalV2
