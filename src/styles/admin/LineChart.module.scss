@@ -83,3 +83,9 @@
     }
   }
 }
+
+@media (max-width: 550px) {
+  .chart_container {
+    min-width: 100%;
+  }
+}

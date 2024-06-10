@@ -44,7 +44,7 @@ export default function AdminLayout({ children }) {
     {
       href: "/admin/user-parcels",
       label: "Ожидаемые посылки",
-      icon: "/assets/icons/calc_icon.svg",
+      icon: "/assets/icons/admin-icons/поссылки.svg",
     },
     {
       href: "/admin/illinois",

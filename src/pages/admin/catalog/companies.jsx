@@ -50,10 +50,13 @@ export default function CompaniesAdminPage() {
           <div key={logo.id} className={s.logo_card}>
             <img src={logo.logo} alt="Логотип" className={s.logo_image} />
             <div className={s.btns}>
-              <button onClick={() => handleDeleteLogo(logo.id)}>
+              <button
+                className={s.delete}
+                onClick={() => handleDeleteLogo(logo.id)}
+              >
                 <img src="/assets/icons/delete.svg" alt="delete" />
               </button>
-              <button onClick={() => openEditModal(logo)}>
+              <button className={s.edit} onClick={() => openEditModal(logo)}>
                 <img src="/assets/icons/edit.svg" alt="edit" />
               </button>
             </div>

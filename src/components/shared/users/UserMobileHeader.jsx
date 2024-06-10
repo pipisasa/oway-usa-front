@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "@/styles/users/UserMobileHeaeder.module.scss";
 import { Badge, Button } from "@nextui-org/react";
 import useNotification from "@/hooks/admin/useNotification";
@@ -9,6 +9,7 @@ import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
 import useLogout from "@/hooks/auth/useLogout";
 import ModalUserMobil from "@/components/partials/ModalUserMobil";
+import { getCookie } from "@/utils/cookieHelpers";
 
 export default function UserMobileHeader({ children }) {
   const { products } = useNotification();
@@ -17,6 +18,12 @@ export default function UserMobileHeader({ children }) {
   const logout = useLogout();
   const isActive = (path) => router.pathname === path;
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const adminStatus = getCookie("isAdmin") === "true";
+    setIsAdmin(adminStatus);
+  }, []);
 
   if (error) return <div className={s.header}>Error: {error}</div>;
 
@@ -65,8 +72,13 @@ export default function UserMobileHeader({ children }) {
       <div className={s.header_container}>
         <header>
           <Link href="/">
-            <img src="/assets/icons/logo.svg" alt="" />
+            <img className={s.logo} src="/assets/icons/logo.svg" alt="" />
           </Link>
+          {isAdmin && (
+            <button onClick={() => router.push("/admin")} className={s.btn}>
+              Админ панель
+            </button>
+          )}
 
           <div>
             <Badge

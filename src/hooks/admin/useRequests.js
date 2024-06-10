@@ -16,7 +16,6 @@ const useRequests = (currentPage) => {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-          л,
         });
 
         if (!response.ok) {

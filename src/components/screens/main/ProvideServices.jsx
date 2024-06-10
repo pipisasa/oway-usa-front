@@ -18,7 +18,7 @@ export default function ProvideServices() {
           <div></div>
           <span>
             Фото и видео содержимого входящей посылки
-            {/* <p>120$</p> */}
+            <p>3$</p>
           </span>
         </div>
         <div className={s.services_block_span}>
@@ -59,13 +59,13 @@ export default function ProvideServices() {
           </div>
           <div className={s.services_block_span_div}>
             <div></div>
-            <span style={{ fontWeight: "bold" }}>
+            <span style={{ fontWeight: "bold", color: "#ff7c00" }}>
               Стоимость услуги  в США - 5$ 
             </span>
           </div>
           <div className={s.services_block_span_div}>
             <div></div>
-            <span style={{ fontWeight: "bold" }}>
+            <span style={{ fontWeight: "bold", color: "#ff7c00" }}>
               Стоимость услуги в Турции - 2$ 
             </span>
           </div>
