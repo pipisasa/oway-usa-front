@@ -1,6 +1,7 @@
 .warehouses_page {
   position: relative;
   overflow-x: scroll;
+  height: 100%;
 
   .filters {
     display: flex;
@@ -120,17 +121,30 @@
       padding: 20px;
     }
 
-    .btn {
-      border-radius: 12px;
-      border: 1px solid var(--blue, #027ddb);
-      background-color: #fff;
-      padding: 10px 36px;
-      color: var(--black, #001526);
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 140%;
-      transition: 0.3s;
+    .btns {
+      display: flex;
+      align-items: center;
+      img {
+        min-width: 20px;
+        height: 20px;
+      }
+      .edit {
+        border-radius: 12px;
+        border: 1px solid var(--blue, #027ddb);
+        background-color: #fff;
+        padding: 10px 36px;
+        color: var(--black, #001526);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        transition: 0.3s;
+      }
+      .delete {
+        border-radius: 5px;
+        background: var(--blue_light_3, #ffe7e7);
+        padding: 9px 10px;
+      }
     }
 
     .btn:hover {
