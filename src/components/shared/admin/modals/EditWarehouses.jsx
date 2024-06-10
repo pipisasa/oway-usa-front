@@ -2,7 +2,7 @@ import React, { memo, useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/pages/admin/BulletinBoardPage.module.scss";
 import Modal from "../../Modal";
-import { useWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
+import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 
 const InputField = memo(function InputField({
   label,
@@ -27,7 +27,7 @@ const InputField = memo(function InputField({
 export default function EditWarehouses({ warehouse }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
-  const { updateWarehouse, loading, error } = useWarehouses();
+  const { updateWarehouse, loading, error } = useMainWarehouses();
 
   const handleSubmit = async (event) => {
     event.preventDefault();

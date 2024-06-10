@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import s from "@/styles/components/partials/select/SearchSelectCustom.module.scss";
 import useLocalStorage from "./useLocalStorage";
 import { options, inputComponents } from "./inputComponents";
-import { useWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
+import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import { useRouter } from "next/router";
 
 const storageKeys = {
@@ -24,7 +24,7 @@ const CustomSelect = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { warehouses, fetchWarehouses, deleteWarehouse, loading, error } =
-    useWarehouses();
+    useMainWarehouses();
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [displayText, setDisplayText] = useState("Поиск");
   const [activeIndex, setActiveIndex] = useState(null);
