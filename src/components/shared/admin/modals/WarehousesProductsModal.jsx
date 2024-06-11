@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useWarehouses from "../../../../hooks/admin/useWarehouses";
@@ -6,6 +7,13 @@ import useCountries from "@/hooks/admin/useCountries";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
+
+const warehouseSity = [
+  { id: 7, name: "Турция" },
+  { id: 8, name: "Москва" },
+  { id: 9, name: "Кыргызстан" },
+  { id: 14, name: "Чикаго" },
+];
 
 export default function WarehouseProductsModal() {
   const { addWarehouses } = useWarehouses();
@@ -24,10 +32,12 @@ export default function WarehouseProductsModal() {
     unique_id_user: "",
     date_sent: "",
     date_arrived: "",
+    // warehouse: 0,
     country_of_origin: 0,
     country_of_destination: 0,
   });
 
+  const router = useRouter();
   const toggleModal = () => setIsOpen(!isOpen);
   const { countries } = useCountries();
 
@@ -91,10 +101,16 @@ export default function WarehouseProductsModal() {
       image: file,
     }));
   };
+  const pathParts = router.asPath.split("/");
+  const countryName = decodeURIComponent(pathParts[pathParts.length - 1]);
+
+  const warehouseCity = warehouseSity.find((city) => city.name === countryName);
+  const warehouse = warehouseCity ? warehouseCity.id : null;
 
   const handleSubmit = async () => {
     console.log("Submitting form data:", formData);
     console.log("Selected option:", selectedOption);
+
     try {
       await addWarehouses(
         formData.name,
@@ -102,16 +118,14 @@ export default function WarehouseProductsModal() {
         formData.weight,
         formData.track_number,
         formData.price,
-        selectedOption?.id,
+        // Number(formData.warehouse),
         formData.status,
         formData.image,
         formData.comments,
         formData.unique_id_user,
         formData.date_sent,
         formData.date_arrived,
-        // formData.country_of_origin,
-        // formData.country_of_destination
-        Number(formData.country_of_origin), // Преобразование в число
+        Number(formData.country_of_origin), // Convert to number
         Number(formData.country_of_destination)
       );
       console.log("Form data successfully submitted");
@@ -128,6 +142,7 @@ export default function WarehouseProductsModal() {
         unique_id_user: "",
         date_sent: "",
         date_arrived: "",
+        // warehouse: 0,
         country_of_origin: 0,
         country_of_destination: 0,
       });

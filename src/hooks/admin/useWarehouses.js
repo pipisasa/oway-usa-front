@@ -35,8 +35,6 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
       (city) => city.name === countryName
     );
     const warehouseCityId = warehouseCity ? warehouseCity.id : null;
-    console.log("Warehouse City:", warehouseCity);
-    console.log("Warehouse City ID:", warehouseCityId);
 
     const mergedFilters = {
       ...filters,
@@ -88,11 +86,12 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     date_arrived,
     country_of_origin,
     country_of_destination
+    // warehouse
   ) => {
     const accessToken = getCookie("accessToken");
-
     const formData = new FormData();
     formData.append("name", name);
+    // formData.append("warehouse", warehouse.toString());
     formData.append("address", address);
     formData.append("weight", weight);
     formData.append("track_number", track_number);
@@ -139,7 +138,6 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
   };
 
   const deleteMultipleWarehouses = async (ids) => {
-
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     setError(null);
