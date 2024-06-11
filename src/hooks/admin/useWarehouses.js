@@ -26,7 +26,6 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
 
     const pathParts = router.asPath.split("/");
     const countryName = decodeURIComponent(pathParts[pathParts.length - 1]);
-    console.log("Country Name from Path:", countryName);
 
     setIsLoading(true);
     setError(null);
@@ -35,8 +34,6 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
       (city) => city.name === countryName
     );
     const warehouseCityId = warehouseCity ? warehouseCity.id : null;
-    console.log("Warehouse City:", warehouseCity);
-    console.log("Warehouse City ID:", warehouseCityId);
 
     const mergedFilters = {
       ...filters,
@@ -139,7 +136,6 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
   };
 
   const deleteMultipleWarehouses = async (ids) => {
-
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     setError(null);
