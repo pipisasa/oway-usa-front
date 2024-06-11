@@ -93,8 +93,6 @@ export default function WarehouseProductsModal() {
   };
 
   const handleSubmit = async () => {
-    console.log("Submitting form data:", formData);
-    console.log("Selected option:", selectedOption);
     try {
       await addWarehouses(
         formData.name,
@@ -109,12 +107,9 @@ export default function WarehouseProductsModal() {
         formData.unique_id_user,
         formData.date_sent,
         formData.date_arrived,
-        // formData.country_of_origin,
-        // formData.country_of_destination
-        Number(formData.country_of_origin), // Преобразование в число
+        Number(formData.country_of_origin),
         Number(formData.country_of_destination)
       );
-      console.log("Form data successfully submitted");
       setFormData({
         name: "",
         address: "",
