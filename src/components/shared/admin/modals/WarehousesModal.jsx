@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import s from "@/styles/admin/RequestsModal.module.scss";
+import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import { RxCross1 } from "react-icons/rx";
 import { getCookie } from "@/utils/cookieHelpers";
 import {
@@ -44,11 +45,14 @@ export default function WarehousesModal({ onClose, warehouse }) {
     weight: warehouse.weight,
     height: warehouse.height,
     length: warehouse.length,
+    width: warehouse.width,
     date_sent: warehouse.date_sent,
     date_arrived: warehouse.date_arrived,
     address: warehouse.address,
     comments: warehouse.comments,
     status: currentStatus,
+    country_of_origin: warehouse.country_of_origin,
+    country_of_destination: warehouse.country_of_destination,
   });
 
   const statuses = [
@@ -64,6 +68,10 @@ export default function WarehousesModal({ onClose, warehouse }) {
     setEditData({ ...editData, [e.target.id]: e.target.value });
   };
 
+  const handleSelectChange = (e) => {
+    setEditData({ ...editData, [e.target.id]: e.target.value });
+  };
+
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -75,11 +83,13 @@ export default function WarehousesModal({ onClose, warehouse }) {
       unique_id_user: warehouse.unique_id_user,
       price: warehouse.price,
       weight: warehouse.weight,
+      width: warehouse.width,
       height: warehouse.height,
       length: warehouse.length,
       date_sent: warehouse.date_sent,
       date_arrived: warehouse.date_arrived,
-      country: warehouse.country.id,
+      country_of_origin: warehouse.country_of_origin,
+      country_of_destination: warehouse.country_of_destination,
       address: warehouse.address,
       comments: warehouse.comments,
       status: currentStatus,
@@ -109,7 +119,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
     const accessToken = getCookie("accessToken");
     try {
       await axios.patch(
-        `${API_URL}/api/warehouses/products/update/${warehouse.id}/`,
+        `${API_URL}/api/warehouses/product/update/${warehouse.id}/`,
         formData,
         {
           headers: {
@@ -243,10 +253,10 @@ export default function WarehousesModal({ onClose, warehouse }) {
             </div>
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
-                <label htmlFor="weight">Ширина</label>
+                <label htmlFor="width">Ширина</label>
                 <input
-                  id="weight"
-                  value={editData.weight || ""}
+                  id="width"
+                  value={editData.width || ""}
                   onChange={handleInputChange}
                   readOnly={!isEditing}
                 />
@@ -296,24 +306,40 @@ export default function WarehousesModal({ onClose, warehouse }) {
             </div>
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
-                <label htmlFor="country">Страна отправки</label>
-                <AdminCustomSelect
-                  options={countries.map((country) => country.name)}
-                  value={editData.country}
-                  onChange={(value) =>
-                    handleInputChange({ target: { id: "country", value } })
-                  }
-                  readOnly={!isEditing}
-                />
+                <label htmlFor="country_of_origin">Страна отправки</label>
+                <select
+                  id="country_of_origin"
+                  name="country_of_origin"
+                  value={editData.country_of_origin || ""}
+                  onChange={handleSelectChange}
+                  className={c.select}
+                  disabled={!isEditing}
+                >
+                  <option value="">Выберите страну</option>
+                  {countries.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className={s.input_label}>
-                <label htmlFor="address">Страна прибытия</label>
-                <input
-                  id="address"
-                  value={editData.address || "Не указан"}
-                  onChange={handleInputChange}
-                  readOnly={!isEditing}
-                />
+                <label htmlFor="country_of_destination">Страна прибытия</label>
+                <select
+                  id="country_of_destination"
+                  name="country_of_destination"
+                  value={editData.country_of_destination || ""}
+                  onChange={handleSelectChange}
+                  className={c.select}
+                  disabled={!isEditing}
+                >
+                  <option value="">Выберите страну</option>
+                  {countries.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className={s.input_label}>
