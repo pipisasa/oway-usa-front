@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useWarehouses from "../../../../hooks/admin/useWarehouses";
@@ -7,6 +6,7 @@ import useCountries from "@/hooks/admin/useCountries";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
+import { useRouter } from "next/router";
 
 const warehouseSity = [
   { id: 7, name: "Турция" },
@@ -17,12 +17,16 @@ const warehouseSity = [
 
 export default function WarehouseProductsModal() {
   const { addWarehouses } = useWarehouses();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
     address: "",
     weight: "",
+    width: "",
+    height: "",
+    length: "",
     track_number: "",
     price: "",
     country: "",
@@ -32,12 +36,10 @@ export default function WarehouseProductsModal() {
     unique_id_user: "",
     date_sent: "",
     date_arrived: "",
-    // warehouse: 0,
     country_of_origin: 0,
     country_of_destination: 0,
   });
 
-  const router = useRouter();
   const toggleModal = () => setIsOpen(!isOpen);
   const { countries } = useCountries();
 
@@ -101,6 +103,7 @@ export default function WarehouseProductsModal() {
       image: file,
     }));
   };
+
   const pathParts = router.asPath.split("/");
   const countryName = decodeURIComponent(pathParts[pathParts.length - 1]);
 
@@ -108,31 +111,34 @@ export default function WarehouseProductsModal() {
   const warehouse = warehouseCity ? warehouseCity.id : null;
 
   const handleSubmit = async () => {
-    console.log("Submitting form data:", formData);
-    console.log("Selected option:", selectedOption);
-
     try {
       await addWarehouses(
         formData.name,
         formData.address,
         formData.weight,
+        formData.length,
+        formData.width,
+        formData.height,
         formData.track_number,
         formData.price,
-        // Number(formData.warehouse),
+        selectedOption?.id,
         formData.status,
         formData.image,
         formData.comments,
         formData.unique_id_user,
         formData.date_sent,
         formData.date_arrived,
-        Number(formData.country_of_origin), // Convert to number
-        Number(formData.country_of_destination)
+        Number(formData.country_of_origin),
+        Number(formData.country_of_destination),
+        warehouse
       );
-      console.log("Form data successfully submitted");
       setFormData({
         name: "",
         address: "",
         weight: "",
+        width: "",
+        height: "",
+        length: "",
         track_number: "",
         price: "",
         country: "",
@@ -140,9 +146,9 @@ export default function WarehouseProductsModal() {
         image: "",
         comments: "",
         unique_id_user: "",
+        warehouse: "",
         date_sent: "",
         date_arrived: "",
-        // warehouse: 0,
         country_of_origin: 0,
         country_of_destination: 0,
       });
