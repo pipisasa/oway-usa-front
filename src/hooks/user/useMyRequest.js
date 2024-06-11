@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const useMyRequests = (currentPage) => {
   const [data, setData] = useState({ results: [], count: 0 });
   const [isLoading, setIsLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState(null);
+  const [deleteError, setDeleteError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +37,32 @@ const useMyRequests = (currentPage) => {
     fetchData();
   }, [currentPage]);
 
-  return { data, isLoading, error };
+  const deleteRequest = async (id) => {
+    setIsDeleting(true);
+    const accessToken = getCookie("accessToken");
+    try {
+      const response = await fetch(`${API_URL}/api/purchase/delete/${id}/`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Failed to delete the request");
+      }
+
+      const updatedData = data.results.filter((request) => request.id !== id);
+      setData({ ...data, results: updatedData });
+    } catch (error) {
+      setDeleteError(error);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  return { data, isLoading, error, deleteError, deleteRequest, isDeleting };
 };
 
 export default useMyRequests;

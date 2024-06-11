@@ -42,6 +42,8 @@ export default function WarehousesModal({ onClose, warehouse }) {
     unique_id_user: warehouse.unique_id_user,
     price: warehouse.price,
     weight: warehouse.weight,
+    height: warehouse.height,
+    length: warehouse.length,
     date_sent: warehouse.date_sent,
     date_arrived: warehouse.date_arrived,
     address: warehouse.address,
@@ -73,6 +75,8 @@ export default function WarehousesModal({ onClose, warehouse }) {
       unique_id_user: warehouse.unique_id_user,
       price: warehouse.price,
       weight: warehouse.weight,
+      height: warehouse.height,
+      length: warehouse.length,
       date_sent: warehouse.date_sent,
       date_arrived: warehouse.date_arrived,
       country: warehouse.country.id,
@@ -152,7 +156,18 @@ export default function WarehousesModal({ onClose, warehouse }) {
         <div className={s.request_blocks}>
           <div className={s.left_block}>
             <div className={s.input_label}>
-              <label>Фотография</label>
+              <div className={s.edited}>
+                <label>Фотография</label>
+                <label htmlFor="fileInput" className={s.change_img}>
+                  <img
+                    className={s.edit_img}
+                    src="/assets/icons/edit.svg"
+                    alt="edit"
+                    style={{ border: "none", width: "20px" }}
+                  />
+                </label>
+              </div>
+
               <img onClick={onOpen} src={previewImageUrl} alt="Preview img" />
               <input
                 id="fileInput"
@@ -160,9 +175,6 @@ export default function WarehousesModal({ onClose, warehouse }) {
                 type="file"
                 onChange={handleImageChange}
               />
-              <label htmlFor="fileInput" className={s.change_img}>
-                Изменить фотографию
-              </label>
             </div>
             <div className={s.input_label}>
               <label htmlFor="">Статус посылки</label>
@@ -224,6 +236,35 @@ export default function WarehousesModal({ onClose, warehouse }) {
                 <input
                   id="weight"
                   value={editData.weight || ""}
+                  onChange={handleInputChange}
+                  readOnly={!isEditing}
+                />
+              </div>
+            </div>
+            <div className={s.flex_inputs}>
+              <div className={s.input_label}>
+                <label htmlFor="weight">Ширина</label>
+                <input
+                  id="weight"
+                  value={editData.weight || ""}
+                  onChange={handleInputChange}
+                  readOnly={!isEditing}
+                />
+              </div>
+              <div className={s.input_label}>
+                <label htmlFor="height">Длина</label>
+                <input
+                  id="height"
+                  value={editData.height || ""}
+                  onChange={handleInputChange}
+                  readOnly={!isEditing}
+                />
+              </div>
+              <div className={s.input_label}>
+                <label htmlFor="length">Высота</label>
+                <input
+                  id="length"
+                  value={editData.length || ""}
                   onChange={handleInputChange}
                   readOnly={!isEditing}
                 />

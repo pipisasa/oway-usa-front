@@ -26,7 +26,6 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
 
     const pathParts = router.asPath.split("/");
     const countryName = decodeURIComponent(pathParts[pathParts.length - 1]);
-    console.log("Country Name from Path:", countryName);
 
     setIsLoading(true);
     setError(null);
