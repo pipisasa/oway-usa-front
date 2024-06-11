@@ -3,8 +3,6 @@ import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useWarehouses from "@/hooks/admin/useWarehouses";
-import useCountries from "@/hooks/admin/useCountries";
-import CustomSelect from "@/components/partials/Select";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
 import SearchSelect from "@/components/partials/SearchSelect";
 import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
@@ -16,26 +14,23 @@ const initialFormData = (clientId) => ({
   weight: "",
   track_number: "",
   price: "",
-  country: "",
   status: "",
   image: "",
   comments: "",
   unique_id_user: clientId,
-  url: "",
   date_sent: "",
   date_arrived: "",
-  articul: "",
   is_parcels: true,
+  country_of_origin: "",
+  country_of_destination: "",
+  lenght: "",
+  height: "",
+  width: "",
 });
 
-export default function WarehouseProductsModalV2({
-  closeModal,
-  clientId,
-  warehouseId,
-}) {
+export default function WarehouseProductsModalV2({ clientId, warehouseId }) {
   const { addWarehouses } = useWarehouses();
   const { deleteWarehouse } = useUserWarehouses();
-  const { countries } = useCountries();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(initialFormData(clientId));
@@ -46,10 +41,6 @@ export default function WarehouseProductsModalV2({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === "url" && value && !value.startsWith("https://")) {
-      return;
-    }
 
     if (name === "date_sent" || name === "date_arrived") {
       let newValue = value
@@ -83,12 +74,19 @@ export default function WarehouseProductsModalV2({
 
   const handleSubmit = async () => {
     try {
-      await deleteWarehouse(warehouseId);
+      console.log("Selected Option:", selectedOption);
+      console.log("Selected Option1:", selectedOption1);
+      console.log("Form Data:", formData);
+
+      if (!selectedOption || !selectedOption1) {
+        throw new Error("Country or Status is not defined");
+      }
+
       await addWarehouses({
         ...formData,
-        country: selectedOption?.id,
-        status: selectedOption1?.id,
+        status: selectedOption1,
       });
+
       setFormData(initialFormData(clientId));
       setCurrentStep(1);
       setIsOpen(false);
@@ -99,6 +97,47 @@ export default function WarehouseProductsModalV2({
         error
       );
     }
+  };
+
+  const country_of_origin = [
+    { id: 3, name: "сша" },
+    { id: 4, name: "Турция" },
+  ];
+  const country_of_destination = [
+    { id: 3, name: "сша" },
+    { id: 4, name: "Турция" },
+  ];
+  const handleSelectChange1 = (e) => {
+    const newSelectedId = e.target.value;
+    setSelectedOption(newSelectedId);
+    handleChange({
+      target: { name: "country_of_origin", value: newSelectedId },
+    });
+  };
+
+  const handleSelectChange2 = (e) => {
+    const newSelectedId2 = e.target.value;
+    setSelectedOption1(newSelectedId2);
+    handleChange({
+      target: { name: "country_of_destination", value: newSelectedId2 },
+    });
+  };
+
+  const status = [
+    { id: 8, name: "Доставлено" },
+    { id: 7, name: "Отправлено курьерской службой" },
+    { id: 6, name: "Получен на складе" },
+    { id: 5, name: "Отправлен" },
+    { id: 4, name: "Получен в ПВЗ" },
+    { id: 3, name: "Готов к выдаче" },
+  ];
+
+  const handleSelectChange = (e) => {
+    const newSelectedId = e.target.value;
+    setSelectedOption(newSelectedId);
+    handleChange({
+      target: { name: "status", value: newSelectedId },
+    });
   };
 
   const Step1 = () => (
@@ -119,34 +158,43 @@ export default function WarehouseProductsModalV2({
             onChange={handleImageChange}
             imagePreview={formData.image && URL.createObjectURL(formData.image)}
           />
-          <InputField
-            label="Адрес заказа"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            placeholder="Введите адрес"
-          />
-          <CustomSelect
-            span="Страна отправки"
-            options={countries}
-            selectedOption={selectedOption}
-            onChange={setSelectedOption}
-            placeholder="Выберите страну"
-          />
           <div className={c.flex}>
-            <DateInputField
-              label="Дата отправки"
-              name="date_sent"
-              value={formData.date_sent}
-              onChange={handleChange}
-            />
-            <DateInputField
-              label="Дата прибытия"
-              name="date_arrived"
-              value={formData.date_arrived}
-              onChange={handleChange}
-            />
+            <div className={c.input}>
+              <label htmlFor="country_of_origin">Страна отправки</label>
+              <select
+                id="country_of_origin"
+                name="country_of_origin"
+                value={formData.country_of_origin || ""}
+                onChange={handleSelectChange1}
+                className={c.select}
+              >
+                <option value="">Выберите страну</option>
+                {country_of_origin.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className={c.input}>
+              <label htmlFor="country_of_destination">Страна прибытия</label>
+              <select
+                id="country_of_destination"
+                name="country_of_destination"
+                value={formData?.country_of_destination}
+                onChange={handleSelectChange2}
+                className={c.select}
+              >
+                <option value="">Выберите страну</option>
+                {country_of_destination.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
+
           <div className={c.flex}>
             <InputField
               label="Вес"
@@ -161,6 +209,29 @@ export default function WarehouseProductsModalV2({
               value={formData.track_number}
               onChange={handleChange}
               placeholder="Введите ID посылки"
+            />
+          </div>
+          <div className={c.flex}>
+            <InputField
+              label="Высота"
+              name="lenght"
+              value={formData.lenght}
+              onChange={handleChange}
+              placeholder="Впишите высоту"
+            />
+            <InputField
+              label="Длина"
+              name="height"
+              value={formData.height}
+              onChange={handleChange}
+              placeholder="Впишите длину"
+            />
+            <InputField
+              label="Ширина"
+              name="width"
+              value={formData.width}
+              onChange={handleChange}
+              placeholder="Впишите ширина"
             />
           </div>
         </div>
@@ -182,13 +253,23 @@ export default function WarehouseProductsModalV2({
     <div className={c.step}>
       <StepProgress currentStep={currentStep} setCurrentStep={setCurrentStep} />
       <form className={c.first_block}>
-        <CustomSelect
-          span="Выберите статус посылки"
-          options={countries}
-          selectedOption={selectedOption1}
-          onChange={setSelectedOption1}
-          placeholder="Выберите статус"
-        />
+        <div className={c.input}>
+          <label htmlFor="status">Выберите статус посылки</label>
+          <select
+            id="status"
+            name="status"
+            value={selectedOption1}
+            onChange={handleSelectChange}
+            className={c.select}
+          >
+            <option value="">Выберите статус</option>
+            {status.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className={c.flex}>
           <InputField
             label="Стоимость к оплате"
@@ -205,13 +286,20 @@ export default function WarehouseProductsModalV2({
             placeholder="Введите трек код посылки"
           />
         </div>
-        <InputField
-          label="Ссылка"
-          name="url"
-          value={formData.url}
-          onChange={handleChange}
-          placeholder="Введите ссылку"
-        />
+        <div className={c.flex}>
+          <DateInputField
+            label="Дата отправки"
+            name="date_sent"
+            value={formData.date_sent}
+            onChange={handleChange}
+          />
+          <DateInputField
+            label="Дата прибытия"
+            name="date_arrived"
+            value={formData.date_arrived}
+            onChange={handleChange}
+          />
+        </div>
       </form>
       <button className={c.submit_btn} onClick={() => setCurrentStep(3)}>
         Продолжить
@@ -260,7 +348,6 @@ export default function WarehouseProductsModalV2({
             value={inputValue}
             onChange={handleInputChange}
             placeholder="Напишите ID"
-            disabled
           />
           <SearchSelect
             suggestions={suggestions}
