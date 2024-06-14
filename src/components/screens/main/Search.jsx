@@ -14,7 +14,6 @@ export default function Search() {
   const handleSearchInputChange = event => {
     setSearchQuery(event.target.value);
   };
-  console.log(sites);
   return (
     <div className={s.heroSection_page} data-aos="zoom-out-left">
       <div className={`${s.heroSection_page} container`}>

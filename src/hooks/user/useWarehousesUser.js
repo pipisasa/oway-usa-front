@@ -25,7 +25,6 @@ const useWarehousesUser = (currentPage) => {
         }
       );
       setWarehouses(response.data);
-      console.log(response.data);
     } catch (err) {
       setError(err.message);
     } finally {

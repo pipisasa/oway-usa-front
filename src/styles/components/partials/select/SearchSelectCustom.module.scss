@@ -94,6 +94,16 @@
     font-size: 14px;
     line-height: 20px;
     font-weight: 400;
+    gap: 10px;
+    .oneImage {
+      transform: rotate(180deg);
+      img {
+      }
+    }
+    img {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 
@@ -118,5 +128,12 @@
   .activeButton {
     background: #027ddb;
     color: #fff;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
   }
 }

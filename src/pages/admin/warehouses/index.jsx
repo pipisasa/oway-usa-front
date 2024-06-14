@@ -11,6 +11,7 @@ export default function WarehousesPage() {
   useEffect(() => {
     fetchWarehouses();
   }, []);
+  console.log(warehouses);
 
   return (
     <section className={s.warehouses_container}>

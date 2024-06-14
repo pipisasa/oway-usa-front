@@ -1,6 +1,7 @@
 .modal {
-  h3 {
-    font-size: 30px;
+  h4 {
+    font-size: 40px;
+    font-weight: 600;
     text-align: center;
   }
 
@@ -269,8 +270,9 @@
 
 @media (max-width: 768px) {
   .modal {
-    h3 {
-      font-size: 24px;
+    h4 {
+      font-size: 20px;
+      font-weight: 500;
     }
     .add_btn {
       min-width: 100%;
@@ -280,6 +282,11 @@
       .modal_content {
         width: 90%;
         padding: 20px;
+        .forms {
+          grid-template-columns: repeat(1, 1fr);
+          overflow-y: auto;
+          max-height: 600px;
+        }
       }
     }
 

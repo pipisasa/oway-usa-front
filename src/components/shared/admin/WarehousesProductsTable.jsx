@@ -4,15 +4,6 @@ import Loading from "./Loading";
 import { Pagination } from "@nextui-org/react";
 import WarehousesModal from "./modals/WarehousesModal";
 
-const setItemWithoutQuotes = (key, value) => {
-  localStorage.setItem(key, JSON.stringify(value));
-};
-
-const getItemWithoutQuotes = (key) => {
-  const value = localStorage.getItem(key);
-  return value ? JSON.parse(value) : "";
-};
-
 export default function WarehousesProductsTable({
   warehouses,
   deleteMultipleWarehouses,
@@ -20,82 +11,11 @@ export default function WarehousesProductsTable({
   error,
   current,
   setCurrent,
-  nameFilter,
-  statusFilter,
-  countryFilter,
 }) {
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
   const [confirmDeleteWarehouse, setConfirmDeleteWarehouse] = useState(null);
   const [selectedWarehouses, setSelectedWarehouses] = useState([]);
-  const [localStorageFilters, setLocalStorageFilters] = useState({
-    dateInput: "",
-    numberInput: "",
-    weightInput: "",
-    textInput: "",
-    selectedChoice: "",
-    nameInput: "",
-    countryInput: "",
-    statusInput: "",
-  });
-
-  useEffect(() => {
-    const filters = {
-      dateInput: getItemWithoutQuotes("dateInput"),
-      numberInput: getItemWithoutQuotes("numberInput"),
-      weightInput: getItemWithoutQuotes("weightInput"),
-      textInput: getItemWithoutQuotes("textInput"),
-      selectedChoice: getItemWithoutQuotes("selectedChoice"),
-      nameInput: getItemWithoutQuotes("nameInput"),
-      countryInput: getItemWithoutQuotes("countryInput"),
-      statusInput: getItemWithoutQuotes("statusInput"),
-    };
-    setLocalStorageFilters(filters);
-  }, []);
-
-  useEffect(() => {
-    const filters = {
-      dateInput: getItemWithoutQuotes("dateInput"),
-      numberInput: getItemWithoutQuotes("numberInput"),
-      weightInput: getItemWithoutQuotes("weightInput"),
-      textInput: getItemWithoutQuotes("textInput"),
-      selectedChoice: getItemWithoutQuotes("selectedChoice"),
-      nameInput: getItemWithoutQuotes("nameInput"),
-      countryInput: getItemWithoutQuotes("countryInput"),
-      statusInput: getItemWithoutQuotes("statusInput"),
-    };
-    setLocalStorageFilters(filters);
-  }, [warehouses]);
-
-  const filteredWarehouses = warehouses?.results?.filter((warehouse) => {
-    const isMatching =
-      (nameFilter === "" ||
-        warehouse.name.toLowerCase().includes(nameFilter.toLowerCase())) &&
-      (statusFilter === "" || warehouse.status.name === statusFilter) &&
-      (countryFilter === "" || warehouse.country.name === countryFilter) &&
-      (localStorageFilters.nameInput === "" ||
-        warehouse.name
-          .toLowerCase()
-          .includes(localStorageFilters.nameInput.toLowerCase())) &&
-      (localStorageFilters.statusInput === "" ||
-        warehouse.status.name === localStorageFilters.statusInput) &&
-      (localStorageFilters.countryInput === "" ||
-        warehouse.country.name === localStorageFilters.countryInput) &&
-      (localStorageFilters.textInput === "" ||
-        warehouse.name
-          .toLowerCase()
-          .includes(localStorageFilters.textInput.toLowerCase())) &&
-      (localStorageFilters.weightInput === "" ||
-        warehouse.weight
-          .toString()
-          .includes(localStorageFilters.weightInput)) &&
-      (localStorageFilters.numberInput === "" ||
-        warehouse.track_number.includes(localStorageFilters.numberInput)) &&
-      (localStorageFilters.dateInput === "" ||
-        new Date(warehouse.date)
-          .toLocaleDateString()
-          .includes(localStorageFilters.dateInput));
-    return isMatching;
-  });
+  const [selectAll, setSelectAll] = useState(false);
 
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
@@ -106,7 +26,6 @@ export default function WarehousesProductsTable({
   };
 
   const handleMultipleDelete = () => {
-    console.log("Deleting selected warehouses with ids:", selectedWarehouses);
     deleteMultipleWarehouses(selectedWarehouses);
     setSelectedWarehouses([]);
   };
@@ -117,13 +36,17 @@ export default function WarehousesProductsTable({
     );
   };
 
-  const toggleSelectAllWarehouses = () => {
-    if (selectedWarehouses.length === filteredWarehouses.length) {
+  const handleSelectAllChange = () => {
+    if (selectAll) {
       setSelectedWarehouses([]);
     } else {
-      setSelectedWarehouses(filteredWarehouses.map((wh) => wh.id));
+      setSelectedWarehouses(
+        warehouses.results.map((warehouse) => warehouse.id)
+      );
     }
+    setSelectAll(!selectAll);
   };
+
 
   if (isLoading) {
     return <Loading />;
@@ -141,10 +64,8 @@ export default function WarehousesProductsTable({
             <th>
               <input
                 type="checkbox"
-                onChange={toggleSelectAllWarehouses}
-                checked={
-                  selectedWarehouses.length === filteredWarehouses?.length
-                }
+                checked={selectAll}
+                onChange={handleSelectAllChange}
               />
             </th>
             <th>Название посылки</th>
@@ -164,7 +85,7 @@ export default function WarehousesProductsTable({
           </tr>
         </thead>
         <tbody>
-          {filteredWarehouses?.map((warehouse) => (
+          {warehouses.results?.map((warehouse) => (
             <tr
               className={warehouse.is_parcels === true ? s.parcel_tr : ""}
               key={warehouse.id}

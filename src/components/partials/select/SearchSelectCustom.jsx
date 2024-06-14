@@ -6,78 +6,72 @@ import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import { useRouter } from "next/router";
 
 const storageKeys = {
-  textInput: "textInput",
-  numberInput: "numberInput",
-  selectedChoice: "selectedChoice",
   nameInput: "nameInput",
+  trackNumberInput: "trackNumberInput",
   statusInput: "statusInput",
-  countryInput: "countryInput",
-  dateInput: "dateInput",
+  countryOfOriginInput: "countryOfOriginInput",
+  countryOfDestinationInput: "countryOfDestinationInput",
   weightInput: "weightInput",
+  priceInput: "priceInput",
+  dateSentInput: "dateSentInput",
 };
 
-const CustomSelect = ({
-  onNameFilterChange,
-  onTrackNumberFilterChange,
-  onStatusFilterChange,
-  onCountryFilterChange,
-}) => {
+const CustomSelect = ({ onFilterChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { warehouses, fetchWarehouses, deleteWarehouse, loading, error } =
-    useMainWarehouses();
+  const { fetchWarehouses, warehouses } = useMainWarehouses();
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [displayText, setDisplayText] = useState("Поиск");
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeButton, setActiveButton] = useState(0);
   const [currentWarehouseIndex, setCurrentWarehouseIndex] = useState(0);
+  const router = useRouter();
 
-  const [textInput, setTextInput] = useLocalStorage(storageKeys.textInput, "");
-  const [numberInput, setNumberInput] = useLocalStorage(
-    storageKeys.numberInput,
-    ""
-  );
-  const [selectedChoice, setSelectedChoice] = useLocalStorage(
-    storageKeys.selectedChoice,
-    ""
-  );
   const [nameInput, setNameInput] = useLocalStorage(storageKeys.nameInput, "");
+  const [trackNumberInput, setTrackNumberInput] = useLocalStorage(
+    storageKeys.trackNumberInput,
+    ""
+  );
   const [statusInput, setStatusInput] = useLocalStorage(
     storageKeys.statusInput,
     ""
   );
-  const [countryInput, setCountryInput] = useLocalStorage(
-    storageKeys.countryInput,
+  const [countryOfOriginInput, setCountryOfOriginInput] = useLocalStorage(
+    storageKeys.countryOfOriginInput,
     ""
   );
-  const [dateInput, setDateInput] = useLocalStorage(storageKeys.dateInput, "");
+  const [countryOfDestinationInput, setCountryOfDestinationInput] =
+    useLocalStorage(storageKeys.countryOfDestinationInput, "");
   const [weightInput, setWeightInput] = useLocalStorage(
     storageKeys.weightInput,
     ""
   );
+  const [priceInput, setPriceInput] = useLocalStorage(
+    storageKeys.priceInput,
+    ""
+  );
+  const [dateSentInput, setDateSentInput] = useLocalStorage(
+    storageKeys.dateSentInput,
+    ""
+  );
   const dropdownRef = useRef(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    fetchWarehouses();
-  }, []);
 
   const inputs = {
-    textInput,
-    numberInput,
-    selectedChoice,
     nameInput,
+    trackNumberInput,
     statusInput,
-    countryInput,
-    dateInput,
+    countryOfOriginInput,
+    countryOfDestinationInput,
     weightInput,
-    setTextInput,
-    setNumberInput,
-    setSelectedChoice,
+    priceInput,
+    dateSentInput,
     setNameInput,
+    setTrackNumberInput,
     setStatusInput,
-    setCountryInput,
-    setDateInput,
+    setCountryOfOriginInput,
+    setCountryOfDestinationInput,
     setWeightInput,
+    setPriceInput,
+    setDateSentInput,
   };
 
   const toggleDropdown = (e) => {
@@ -102,62 +96,82 @@ const CustomSelect = ({
   };
 
   const resetAllData = (e) => {
-    setTextInput("");
-    setNumberInput("");
-    setSelectedChoice("");
     setNameInput("");
+    setTrackNumberInput("");
     setStatusInput("");
-    setCountryInput("");
-    setDateInput("");
+    setCountryOfOriginInput("");
+    setCountryOfDestinationInput("");
     setWeightInput("");
+    setPriceInput("");
+    setDateSentInput("");
     setActiveIndex(null);
     setSelectedComponent(null);
     setDisplayText("Поиск");
     e.stopPropagation();
-    console.log("Resetting all filters");
-    onNameFilterChange("");
-    onTrackNumberFilterChange("");
-    onStatusFilterChange("");
-    onCountryFilterChange("");
+    onFilterChange("name", "");
+    onFilterChange("track_number", "");
+    onFilterChange("status", "");
+    onFilterChange("country_of_origin", "");
+    onFilterChange("country_of_destination", "");
+    onFilterChange("weight", "");
+    onFilterChange("price", "");
+    onFilterChange("dateSentInput", "");
   };
 
   const handleSearch = (searchText, type) => {
     const setter = inputs[`set${type.charAt(0).toUpperCase() + type.slice(1)}`];
     if (setter) {
       setter(searchText);
-      console.log(`${type} updated:`, searchText);
       setDisplayText(`по: ${searchText}`);
     }
     switch (type) {
       case "nameInput":
-        onNameFilterChange(searchText);
+        onFilterChange("name", searchText);
         break;
       case "trackNumberInput":
-        onTrackNumberFilterChange(searchText);
+        onFilterChange("track_number", searchText);
         break;
       case "statusInput":
-        onStatusFilterChange(searchText);
+        onFilterChange("status", searchText);
         break;
-      case "countryInput":
-        onCountryFilterChange(searchText);
+      case "countryOfOriginInput":
+        onFilterChange("country_of_origin", searchText);
+        break;
+
+      case "countryOfDestinationInput":
+        onFilterChange("country_of_destination", searchText);
+        break;
+      case "weightInput":
+        onFilterChange("weight", searchText);
+        break;
+      case "priceInput":
+        onFilterChange("price", searchText);
+        break;
+      case "dateSentInput":
+        onFilterChange("date_sent", searchText);
         break;
       default:
         break;
     }
   };
-
   const performSearch = () => {
-    onNameFilterChange(nameInput);
-    onTrackNumberFilterChange(numberInput);
-    onStatusFilterChange(statusInput);
-    onCountryFilterChange(countryInput);
+    onFilterChange("name", nameInput);
+    onFilterChange("track_number", trackNumberInput);
+    onFilterChange("status", statusInput);
+    onFilterChange("country_of_origin", countryOfOriginInput);
+    onFilterChange("country_of_destination", countryOfDestinationInput);
+    onFilterChange("weight", weightInput);
+    onFilterChange("price", priceInput);
+    onFilterChange("date_sent", dateSentInput);
   };
-
+  useEffect(() => {
+    fetchWarehouses(performSearch);
+  }, []);
   const renderOptions = (optionsToRender, type) => (
     <div className={s.block}>
-      {optionsToRender.map((option, index) => (
-        <div key={index} onClick={() => handleSearch(option, type)}>
-          {option}
+      {optionsToRender?.map((option) => (
+        <div key={option.id} onClick={() => handleSearch(option.id, type)}>
+          {option.name}
         </div>
       ))}
       <div className={s.border}></div>
@@ -168,12 +182,16 @@ const CustomSelect = ({
     if (!selectedComponent) return null;
 
     const { title } = selectedComponent.props;
-
     switch (title) {
       case "Выберите статус":
         return renderOptions(options.status, "statusInput");
-      case "Выберите страну принятия":
-        return renderOptions(options.country, "countryInput");
+      case "Выберите страну отправления":
+        return renderOptions(options.country_of_origin, "countryOfOriginInput");
+      case "Выберите страну назначения":
+        return renderOptions(
+          options.country_of_origin,
+          "countryOfDestinationInput"
+        );
       case "Выберите страну":
         return renderOptions(options.default, "selectedChoice");
       default:
@@ -205,11 +223,17 @@ const CustomSelect = ({
   const handleButtonClick = (buttonIndex) => {
     setActiveButton(buttonIndex);
   };
+  const navigateToWarehouse = (index) => {
+    const warehouse = warehouses[index];
+    if (warehouse) {
+      const path = `/admin/warehouses/${encodeURIComponent(warehouse.name)}`;
+      router.push(path);
+    }
+  };
 
   const handleNext = () => {
     if (currentWarehouseIndex < warehouses.length - 1) {
       const newIndex = currentWarehouseIndex + 1;
-      console.log(currentWarehouseIndex);
       setCurrentWarehouseIndex(newIndex);
       navigateToWarehouse(newIndex);
     }
@@ -220,13 +244,6 @@ const CustomSelect = ({
       const newIndex = currentWarehouseIndex - 1;
       setCurrentWarehouseIndex(newIndex);
       navigateToWarehouse(newIndex);
-    }
-  };
-  const navigateToWarehouse = (index) => {
-    const warehouse = warehouses[index];
-    if (warehouse) {
-      const path = `/admin/warehouses/${encodeURIComponent(warehouse.name)}`;
-      router.push(path);
     }
   };
 
@@ -277,29 +294,26 @@ const CustomSelect = ({
                     </div>
                   )
                 )}
-                <div className={s.buttonContainer}>
-                  <button className={s.closeButton} onClick={closeDropdown}>
-                    Закрыть
-                  </button>
-                  <button className={s.resetButton} onClick={resetAllData}>
-                    Сбросить
-                  </button>
-                </div>
               </div>
             </>
           )}
         </div>
       </div>
       <div className={s.onebutton}>
-        <button onClick={handlePrevious}>
+        <button onClick={handlePrevious} disabled={currentWarehouseIndex <= 0}>
+          <img src="/assets/icons/icon.svg" className={s.oneImage} alt="" />
           {currentWarehouseIndex > 0
-            ? warehouses[currentWarehouseIndex - 1]?.name
+            ? `${warehouses[currentWarehouseIndex - 1].name}`
             : "Нет предыдущего"}
         </button>
-        <button onClick={handleNext}>
+        <button
+          onClick={handleNext}
+          disabled={currentWarehouseIndex >= warehouses.length - 1}
+        >
           {currentWarehouseIndex < warehouses.length - 1
-            ? warehouses[currentWarehouseIndex + 1]?.name
+            ? `${warehouses[currentWarehouseIndex + 1].name}`
             : "Нет следующего"}
+          <img src="/assets/icons/icon.svg" alt="" />
         </button>
       </div>
       <div className={s.twobutton}>

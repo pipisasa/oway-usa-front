@@ -9,6 +9,7 @@ const CustomSelect = ({ options, selectedOption, onChange, span }) => {
     setIsOpen(false);
     onChange(option);
   };
+  console.log(options);
 
   const handleClickOutside = (event) => {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
