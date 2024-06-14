@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import s from "@/styles/users/UserData.module.scss";
 import useUserData from "@/hooks/user/useUserData";
 import Loading from "../../admin/Loading";
+import ImageModal from "../../admin/modals/ImageModal";
 
 export default function UserData() {
   const { userData, loading, error, updateUserData } = useUserData();
@@ -52,7 +53,9 @@ export default function UserData() {
   };
 
   const [selectedFrontImage, setSelectedFrontImage] = useState(null);
-const [selectedBackImage, setSelectedBackImage] = useState(null);
+  const [selectedBackImage, setSelectedBackImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFrontModalOpen, setIsFrontModalOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -60,7 +63,7 @@ const [selectedBackImage, setSelectedBackImage] = useState(null);
       ...prevFormData,
       [name]: value,
     }));
-  
+
     if (name === "front_image" && files.length > 0) {
       setSelectedFrontImage(files[0]);
     } else if (name === "back_image" && files.length > 0) {
@@ -70,6 +73,10 @@ const [selectedBackImage, setSelectedBackImage] = useState(null);
   if (loading) {
     return <Loading />;
   }
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  const openFrontModal = () => setIsFrontModalOpen(true);
+  const closeFrontModal = () => setIsFrontModalOpen(false);
 
   return (
     <form className={s.form} onSubmit={handleSave}>
@@ -151,10 +158,15 @@ const [selectedBackImage, setSelectedBackImage] = useState(null);
             <span>Выбрать картинку</span>
           </label>
           {selectedFrontImage && (
-            <div>
-              <img src={URL.createObjectURL(selectedFrontImage)} alt="Front Image" />
-              <span>Выбрана лицевая сторона паспорта</span>
-            </div>
+            <>
+              <p onClick={openFrontModal}>Просмотр выбранной картинки</p>
+              {isFrontModalOpen && (
+                <ImageModal
+                  src={URL.createObjectURL(selectedFrontImage)}
+                  onClose={closeFrontModal}
+                />
+              )}
+            </>
           )}
         </div>
         <div>
@@ -170,10 +182,15 @@ const [selectedBackImage, setSelectedBackImage] = useState(null);
             <span>Выбрать картинку</span>
           </label>
           {selectedBackImage && (
-            <div>
-              <img src={URL.createObjectURL(selectedBackImage)} alt="Back Image" />
-              <span>Выбрана обратная сторона паспорта</span>
-            </div>
+            <>
+              <p onClick={openModal}>Просмотр выбранной картинки</p>
+              {isModalOpen && (
+                <ImageModal
+                  src={URL.createObjectURL(selectedBackImage)}
+                  onClose={closeModal}
+                />
+              )}
+            </>
           )}
         </div>
         <div>

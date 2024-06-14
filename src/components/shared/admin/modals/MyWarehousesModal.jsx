@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
 import useWarehouses from "@/hooks/user/useWarehouses";
-import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
 
 export default function MyWarehousesModal() {
@@ -10,11 +9,16 @@ export default function MyWarehousesModal() {
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comments, setComments] = useState("");
   const { addWarehouses } = useWarehouses();
-  const { countries } = useCountries();
   const [selectedOption, setSelectedOption] = useState("");
   const [courierOption, setCourierOption] = useState("");
 
   const toggleModal = () => setIsOpen(!isOpen);
+  const warehouses = [
+    { id: 7, name: "Турция" },
+    { id: 8, name: "Москва" },
+    { id: 9, name: "Кыргызстан" },
+    { id: 14, name: "Чикаго" },
+  ];
 
   const deliveryServices = [
     { name: "Fedex", id: 1 },
@@ -54,7 +58,7 @@ export default function MyWarehousesModal() {
               <div>
                 <label htmlFor="warehouse">Склад</label>
                 <CustomSelect
-                  options={countries}
+                  options={warehouses}
                   selectedOption={selectedOption}
                   onChange={(e) => setSelectedOption(e)}
                   span={"Выберите страну"}

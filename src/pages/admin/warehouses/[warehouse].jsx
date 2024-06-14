@@ -17,50 +17,29 @@ export default function AdminWarehousesPage() {
     deleteMultipleWarehouses,
   } = useWarehouses(currentPage);
 
-  const [nameFilter, setNameFilter] = useState("");
-  const [trackNumberFilter, setTrackNumberFilter] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
-  const [countryFilter, setCountryFilter] = useState("");
-
+  const [filters, setFiltersState] = useState({
+    name: "",
+    track_number: "",
+    status: "",
+    country_of_origin: "",
+    country_of_destination: "",
+    weight: "",
+    price: "",
+    date_sent: "",
+  });
   useEffect(() => {
-    fetchWarehouses({
-      currentPage,
-      name: nameFilter,
-      track_number: trackNumberFilter,
-      status: statusFilter,
-      country: countryFilter,
-    });
-  }, [currentPage, nameFilter, trackNumberFilter, statusFilter, countryFilter]);
+    fetchWarehouses({ currentPage, ...filters });
+  }, [currentPage, filters]);
 
-  const handleNameFilterChange = (value) => {
-    setNameFilter(value);
-    setFilters({ name: value });
-  };
-
-  const handleTrackNumberFilterChange = (value) => {
-    setTrackNumberFilter(value);
-    setFilters({ track_number: value });
-  };
-
-  const handleStatusFilterChange = (value) => {
-    setStatusFilter(value);
-    setFilters({ status: value });
-  };
-
-  const handleCountryFilterChange = (value) => {
-    setCountryFilter(value);
-    setFilters({ country: value });
+  const handleFilterChange = (key, value) => {
+    setFiltersState((prevFilters) => ({ ...prevFilters, [key]: value }));
+    setFilters({ [key]: value });
   };
 
   return (
     <div className={s.warehouses_page}>
       <div className={s.filters}>
-        <CustomSelect
-          onNameFilterChange={handleNameFilterChange}
-          onTrackNumberFilterChange={handleTrackNumberFilterChange}
-          onStatusFilterChange={handleStatusFilterChange}
-          onCountryFilterChange={handleCountryFilterChange}
-        />
+        <CustomSelect onFilterChange={handleFilterChange} />
       </div>
       <WarehousesProductsTable
         currentPage={currentPage}
@@ -73,10 +52,7 @@ export default function AdminWarehousesPage() {
         warehouses={warehouses}
         fetchWarehouses={fetchWarehouses}
         deleteWarehouse={deleteWarehouse}
-        nameFilter={nameFilter}
-        trackNumberFilter={trackNumberFilter}
-        statusFilter={statusFilter}
-        countryFilter={countryFilter}
+        filters={filters}
       />
     </div>
   );

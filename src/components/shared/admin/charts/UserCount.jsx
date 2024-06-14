@@ -69,7 +69,7 @@ export default function UserCount() {
 
   const updateChartData = (data, period) => {
     const periodData = data[period];
-    const labels = Object.keys(periodData);
+    const labels = Object?.keys(periodData);
     const values = Object.values(periodData);
 
     const previousTotal = chartData.datasets[0].data.reduce((a, b) => a + b, 0);

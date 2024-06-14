@@ -12,6 +12,7 @@ export default function UserWarehouses() {
     setIsModalVisible(false);
   };
 
+  console.log(warehouses);
   if (loading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -50,6 +51,7 @@ export default function UserWarehouses() {
                 <WarehouseProductsModalV2
                   clientId={warehouse.user.unique_id}
                   warehouseId={warehouse.id}
+                  warehouse={warehouse.warehouse}
                   closeModal={closeModal}
                 />
               </td>

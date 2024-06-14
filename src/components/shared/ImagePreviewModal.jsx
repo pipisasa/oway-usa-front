@@ -10,7 +10,7 @@ const ImagePreviewModal = ({ previewImage, onClose }) => {
 
   const closeModal = () => {
     setModalIsOpen(false);
-    onClose();
+    // onClose();
   };
 
   return (

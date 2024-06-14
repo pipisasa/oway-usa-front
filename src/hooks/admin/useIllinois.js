@@ -25,7 +25,6 @@ function useIllinois() {
         "https://api-owayusa.com/api/otside_of_illinois/add/",
         formData
       );
-      console.log("Response:", response.data);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -37,7 +36,6 @@ function useIllinois() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-
 
   return {
     formData,

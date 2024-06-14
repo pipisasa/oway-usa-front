@@ -10,25 +10,37 @@ const axiosInstance = axios.create({
   },
 });
 
-const useUsersAdmin = (currentPage) => {
+const useUsersAdmin = (currentPage, initialFilters) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [users, setUsers] = useState({ results: [], count: 0 });
   const [totalCount, setTotalCount] = useState(0);
+  const [filters, setFilters] = useState(initialFilters);
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (newFilters = {}) => {
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     setError(null);
+    const mergedFilters = {
+      ...filters,
+      ...newFilters,
+    };
+    const queryString = Object.entries(mergedFilters)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+      .join("&");
+
     try {
-      const response = await axiosInstance.get(`list/?pagination_type=page_number&page=${
+      const response = await axiosInstance.get(
+        `list/?pagination_type=page_number&page=${
           currentPage === undefined ? 1 : currentPage
-      }&page_size=7`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+        }&page_size=7&${queryString}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       setUsers(response.data);
       setTotalCount(response.data.count);
     } catch (err) {
@@ -119,7 +131,7 @@ const useUsersAdmin = (currentPage) => {
       setIsLoading(false);
     }
   };
-  
+
   return {
     users,
     totalCount,
@@ -127,6 +139,7 @@ const useUsersAdmin = (currentPage) => {
     deleteUsers,
     updateUsers,
     error,
+    setFilters,
     isLoading,
     fetchUsers,
   };

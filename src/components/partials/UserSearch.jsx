@@ -20,7 +20,6 @@ function UserSearch() {
     if (response.ok) {
       const data = await response.json();
       setUsers(data.results);
-      console.log(data.results);
     } else {
       alert("Failed to fetch users");
     }

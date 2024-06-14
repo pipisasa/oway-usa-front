@@ -95,7 +95,7 @@ export default function ImportedKilograms() {
 
   const updateChartData = (data, period) => {
     const periodData = data[period];
-    const labels = Object.keys(periodData);
+    const labels = Object?.keys(periodData);
     const values = Object.values(periodData);
 
     const currentTotal = values.reduce((a, b) => a + b, 0);

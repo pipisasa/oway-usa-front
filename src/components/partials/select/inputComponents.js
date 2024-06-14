@@ -4,13 +4,17 @@ import NumberInputSelect from "./all/NumberInputSelect";
 import ChoiceInputSelect from "./all/ChoiceInputSelect";
 
 const options = {
-  status: ["в складе", "готов к выдаче", "в пути"],
-  country: ["Россия", "Америка", "Кыргызстан"],
-  default: [
-    "Получен на складе отправителя",
-    "Отправлен",
-    "Получен на складе получателя",
-    "Отправлено курьерской службой",
+  status: [
+    { id: 8, name: "Доставлено," },
+    { id: 7, name: "Отправлено курьерской службой," },
+    { id: 6, name: "Получен на складе," },
+    { id: 5, name: "Отправлен," },
+    { id: 4, name: "Получен в ПВЗ," },
+    { id: 3, name: "Готов к выдаче," },
+  ],
+  country_of_origin: [
+    { id: 3, name: "США" },
+    { id: 4, name: "Турция" },
   ],
 };
 
@@ -19,28 +23,28 @@ const inputComponents = (handleSearch, inputs) => [
     component: (
       <TextInputSelect
         placeholder="Впишите трек-номер"
-        onSearch={(input) => handleSearch(input, "textInput")}
+        onSearch={(input) => handleSearch(input, "trackNumberInput")}
       />
     ),
-    displayText: `по: ${inputs.textInput || "трек-номеру"}`,
+    displayText: `по: ${inputs.trackNumberInput || "трек-номеру"}`,
   },
   {
     component: (
       <NumberInputSelect
         placeholder="по: цена"
-        onSearch={(input) => handleSearch(input, "numberInput")}
+        onSearch={(input) => handleSearch(input, "priceInput")}
       />
     ),
-    displayText: `по: ${inputs.numberInput || "цена"}`,
+    displayText: `по: ${inputs.priceInput || "цена"}`,
   },
   {
     component: (
       <NumberInputSelect
         placeholder="по: дата"
-        onSearch={(input) => handleSearch(input, "dateInput")}
+        onSearch={(input) => handleSearch(input, "dateSentInput")}
       />
     ),
-    displayText: `по: ${inputs.dateInput || "дате"}`,
+    displayText: `по: ${inputs.dateSentInput || "дате"}`,
   },
   {
     component: (
@@ -65,31 +69,37 @@ const inputComponents = (handleSearch, inputs) => [
       <ChoiceInputSelect
         title="Выберите статус"
         options={options.status}
-        onChoiceSelect={(choice) => handleSearch(choice, "statusInput")}
+        onChoiceSelect={(choice) => handleSearch(choice.id, "statusInput")}
       />
     ),
-    displayText: `по: ${inputs.statusInput || "статусу"}`,
+    displayText: `по: ${inputs.statusInput.name || "статусу"}`,
+  },
+
+  {
+    component: (
+      <ChoiceInputSelect
+        title="Выберите страну отправления"
+        options={options.country_of_origin}
+        onChoiceSelect={(choice) =>
+          handleSearch(choice.id, "countryOfOriginInput")
+        }
+      />
+    ),
+    displayText: `по: ${inputs.countryOfOriginInput.name || "стране принятия"}`,
   },
   {
     component: (
       <ChoiceInputSelect
-        title="Выберите страну принятия"
-        options={options.country}
-        onChoiceSelect={(choice) => handleSearch(choice, "countryInput")}
+        title="Выберите страну назначения"
+        options={options.country_of_origin}
+        onChoiceSelect={(choice) =>
+          handleSearch(choice.id, "countryOfDestinationInput")
+        }
       />
     ),
-    displayText: `по: ${inputs.countryInput || "стране принятия"}`,
-  },
-  {
-    component: (
-      <ChoiceInputSelect
-        title="Выберите страну"
-        options={options.default}
-        onChoiceSelect={(choice) => handleSearch(choice, "selectedChoice")}
-      />
-    ),
-    displayText: `по: ${inputs.selectedChoice || "Выберите страну"}`,
+    displayText: `по: ${
+      inputs.countryOfDestinationInput.name || "Выберите страну"
+    }`,
   },
 ];
-
 export { options, inputComponents };
