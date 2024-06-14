@@ -4,22 +4,23 @@ import c from "@/styles/pages/admin/BulletinBoardPage.module.scss";
 import Modal from "../../Modal";
 import { BsCheck } from "react-icons/bs";
 import useBulletinBoard from "@/hooks/admin/useBulletinBoard";
+import useBulletinBoardCategory from "@/hooks/admin/useBulletinBoardCategory";
 
 export default function AddBulletinBoard() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
   const [selectedColor, setSelectedColor] = useState(null);
   const [text, setText] = useState("");
-  const [category, setCategory] = useState("");
+  const [itemCategory, setItemCategory] = useState("");
   const [city, setCity] = useState("");
-
+  const { bulletins1 } = useBulletinBoardCategory();
   const { createBulletinBoard, loading, error } = useBulletinBoard();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await createBulletinBoard(
       text,
-      category,
+      itemCategory,
       selectedColor,
       city
     );
@@ -51,12 +52,19 @@ export default function AddBulletinBoard() {
               </div>
               <div>
                 <label htmlFor="">Категория</label>
-                <input
-                  type="text"
-                  placeholder="Введите категорию"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                />
+                <select
+                  value={itemCategory}
+                  onChange={(e) => setItemCategory(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Выберите категорию
+                  </option>
+                  {bulletins1.map((bulletin) => (
+                    <option key={bulletin.id} value={bulletin.id}>
+                      {bulletin.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label htmlFor="">Город</label>

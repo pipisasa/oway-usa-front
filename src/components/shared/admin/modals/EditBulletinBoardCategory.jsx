@@ -5,15 +5,13 @@ import Modal from "../../Modal";
 import { BsCheck } from "react-icons/bs";
 import useBulletinBoardCategory from "@/hooks/admin/useBulletinBoardCategory";
 
-export default function AddBulletinCategoryBoard() {
+export default function EditBulletinBoardCategory({ bulletin }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
-  const [selectedColor, setSelectedColor] = useState("");
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [city, setCity] = useState("");
+  const [name, setName] = useState(bulletin.name);
+  const [selectedColor, setSelectedColor] = useState(bulletin.color);
 
-  const { createBulletinBoard, loading, error } = useBulletinBoardCategory();
+  const { updateBulletinBoard, loading, error } = useBulletinBoardCategory();
 
   const colors = [
     { color: "gray", hex: "#808080" },
@@ -47,32 +45,31 @@ export default function AddBulletinCategoryBoard() {
 
   const selectColor = (color) => {
     setSelectedColor(color.hex);
-    setCategory(color.hex);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await createBulletinBoard(name, selectedColor);
+    console.log("Submitting:", name, selectedColor); // Debug log
+    const result = await updateBulletinBoard(bulletin.id, name, selectedColor);
     if (result) {
       toggleModal();
     }
   };
 
   useEffect(() => {
-    if (category) {
-      setSelectedColor(category);
-    }
-  }, [category]);
+    setName(bulletin.name);
+    setSelectedColor(bulletin.color);
+  }, [bulletin]);
 
   return (
     <div className={s.modal}>
       <div className={c.add_board}>
-        <button style={{ padding: "24px" }} onClick={toggleModal}>
-          <img src="/assets/icons/add_board.svg" alt="" />
+        <button onClick={toggleModal} className={c.edit}>
+          <img src="/assets/icons/edit.svg" alt="" />
         </button>
       </div>
       <Modal isOpen={isOpen} onClose={toggleModal}>
-        <h3>Добавить категорию</h3>
+        <h3>Редактировать</h3>
         <form onSubmit={handleSubmit}>
           <div className={s.shops_form}>
             <div className={s.second_input_block}>
@@ -84,21 +81,6 @@ export default function AddBulletinCategoryBoard() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-              </div>
-              <div className={c.category_color}>
-                <div>
-                  <label htmlFor="">Цвет</label>
-                  <input
-                    type="text"
-                    placeholder="#FD23FR"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  />
-                </div>
-                <div
-                  className={c.color_box}
-                  style={{ backgroundColor: selectedColor }}
-                ></div>
               </div>
               <div className={c.colors}>
                 <label htmlFor="">Цвет</label>
@@ -124,7 +106,7 @@ export default function AddBulletinCategoryBoard() {
           </div>
           <div className={s.btn_center}>
             <button type="submit" className={s.submit_btn} disabled={loading}>
-              {loading ? "Добавление..." : "Добавить"}
+              {loading ? "Редактирование..." : "Редактировать"}
             </button>
           </div>
           {error && <p className={s.error_msg}>{error}</p>}

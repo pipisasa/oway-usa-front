@@ -3,12 +3,12 @@ import TextInputSelect from "../select/all/TextInputSelect";
 import ChoiceInputSelect from "../select/all/ChoiceInputSelect";
 const options = {
   status: [
-    { id: 8, name: "В ожидании" },
-    { id: 7, name: "Обработан" },
+    { id: false, name: "В ожидании" },
+    { id: true, name: "Обработан" },
   ],
-  country_of_origin: [
-    { id: 3, name: "США" },
-    { id: 4, name: "Турция" },
+  is_paid: [
+    { id: false, name: "Не оплачено" },
+    { id: true, name: "Оплачено" },
   ],
 };
 
@@ -53,12 +53,12 @@ const inputComponents = (handleSearch, inputs) => [
   {
     component: (
       <ChoiceInputSelect
-        title="Выберите статус"
-        options={options.status}
-        onChoiceSelect={(choice) => handleSearch(choice.id, "statusInput")}
+        title="Выберите статус оплаты"
+        options={options.is_paid}
+        onChoiceSelect={(choice) => handleSearch(choice.id, "is_paid")}
       />
     ),
-    displayText: `по: ${inputs.statusInput || "статусу"}`,
+    displayText: `по: ${inputs.is_paid || "статус оплаты"}`,
   },
 ];
 export { inputComponents, options };

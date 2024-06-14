@@ -29,30 +29,12 @@ export default function OnTheWayModal({ data, onClose }) {
           <form className={s.form} encType="multipart/form-data">
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
-                <label htmlFor="url">Ссылка на товар</label>
-                <input id="url" value={data.url || ""} readOnly />
-              </div>
-
-              <div className={s.input_label}>
                 <label htmlFor="name_of_purchase">Название</label>
                 <input id="name_of_purchase" value={data.name || ""} readOnly />
-              </div>
-
-              <div className={s.input_label}>
-                <label htmlFor="articul">Трек код</label>
-                <input id="articul" value={data.articul || ""} readOnly />
               </div>
             </div>
 
             <div className={s.flex_inputs}>
-              <div className={s.input_label}>
-                <label htmlFor="count">Кол-во</label>
-                <input id="count" value={data.count || ""} readOnly />
-              </div>
-              <div className={s.input_label}>
-                <label htmlFor="color">Цвет</label>
-                <input id="color" value={data.color || ""} readOnly />
-              </div>
               <div className={s.input_label}>
                 <label htmlFor="price">Цена ($)</label>
                 <input id="price" name="price" type="text" value={data.price} />

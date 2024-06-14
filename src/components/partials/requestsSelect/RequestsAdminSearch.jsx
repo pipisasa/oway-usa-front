@@ -8,7 +8,7 @@ import useRequests from "@/hooks/admin/useRequests";
 
 const storageKeys = {
   name_of_purchase: "name_of_purchase",
-  unique_id: "unique_id",
+  is_paid: "is_paid",
   created_at: "created_at",
   email: "email",
   price: "price",
@@ -27,7 +27,7 @@ const RequestsAdminSearch = ({ onFilterChange }) => {
     storageKeys.name_of_purchase,
     ""
   );
-  const [unique_id, setunique_id] = useLocalStorage(storageKeys.unique_id, "");
+  const [is_paid, setis_paid] = useLocalStorage(storageKeys.is_paid, "");
   const [created_at, setcreated_at] = useLocalStorage(
     storageKeys.created_at,
     ""
@@ -42,7 +42,7 @@ const RequestsAdminSearch = ({ onFilterChange }) => {
 
   const inputs = {
     name_of_purchase,
-    unique_id,
+    is_paid,
     created_at,
     email,
     price,
@@ -51,7 +51,7 @@ const RequestsAdminSearch = ({ onFilterChange }) => {
     setcreated_at,
     setStatusInput,
     setemail,
-    setunique_id,
+    setis_paid,
     setname_of_purchase,
   };
 
@@ -86,11 +86,12 @@ const RequestsAdminSearch = ({ onFilterChange }) => {
         break;
       case "request_status":
         onFilterChange("request_status", searchText);
+        break;
       case "price":
         onFilterChange("price", searchText);
         break;
-      case "unique_id":
-        onFilterChange("unique_id", searchText);
+      case "is_paid":
+        onFilterChange("is_paid", searchText);
         break;
       case "phone_number":
         onFilterChange("phone_number", searchText);
@@ -107,7 +108,7 @@ const RequestsAdminSearch = ({ onFilterChange }) => {
     onFilterChange("email", email);
     onFilterChange("price", price);
     onFilterChange("request_status", request_status);
-    onFilterChange("unique_id", unique_id);
+    onFilterChange("is_paid", is_paid);
   };
   useEffect(() => {
     fetchData(performSearch);
@@ -139,15 +140,8 @@ const RequestsAdminSearch = ({ onFilterChange }) => {
     switch (title) {
       case "Выберите статус":
         return renderOptions(options.status, "request_status");
-      case "Выберите страну отправления":
-        return renderOptions(options.country_of_origin, "countryOfOriginInput");
-      case "Выберите страну назначения":
-        return renderOptions(
-          options.country_of_origin,
-          "countryOfDestinationInput"
-        );
-      case "Выберите страну":
-        return renderOptions(options.default, "selectedChoice");
+      case "Выберите статус оплаты":
+        return renderOptions(options.is_paid, "is_paid");
       default:
         return null;
     }

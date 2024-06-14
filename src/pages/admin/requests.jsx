@@ -24,8 +24,8 @@ export default function IncommingRequests() {
     created_at: "",
     email: "",
     price: "",
-    unique_id: "",
-    request_status: 0,
+    is_paid: "",
+    request_status: "",
   });
   console.log(data, 12121212);
   useEffect(() => {

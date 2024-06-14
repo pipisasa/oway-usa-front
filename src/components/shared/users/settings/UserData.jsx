@@ -77,6 +77,7 @@ export default function UserData() {
   const closeModal = () => setIsModalOpen(false);
   const openFrontModal = () => setIsFrontModalOpen(true);
   const closeFrontModal = () => setIsFrontModalOpen(false);
+  console.log(userData);
 
   return (
     <form className={s.form} onSubmit={handleSave}>
