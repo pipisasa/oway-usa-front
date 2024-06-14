@@ -122,3 +122,14 @@
     }
   }
 }
+@media screen and (max-width: 900px) {
+  .step {
+    overflow-y: auto;
+    max-height: 500px;
+    .first_block {
+      .flex {
+        flex-direction: column;
+      }
+    }
+  }
+}

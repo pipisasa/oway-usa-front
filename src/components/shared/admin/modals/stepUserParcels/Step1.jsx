@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
+import ImageModal from "../ImageModal";
 
 const InputField = ({
   id,
@@ -31,12 +32,14 @@ export default function Step1({
   currentStep,
   setCurrentStep,
 }) {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const country_of_origin = [
-    { id: 3, name: "сша" },
+    { id: 3, name: "CША" },
     { id: 4, name: "Турция" },
   ];
   const country_of_destination = [
-    { id: 3, name: "сша" },
+    { id: 3, name: "CША" },
     { id: 4, name: "Турция" },
   ];
   const handleSelectChange1 = (e) => {
@@ -45,10 +48,22 @@ export default function Step1({
       target: { name: "country_of_origin", value: newSelectedId },
     });
   };
+  const handleImageSelect = (e) => {
+    handleImageChange(e);
+    const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
+    setSelectedImage(imageUrl);
+  };
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const handleSelectChange2 = (e) => {
     const newSelectedId2 = e.target.value;
-    // handleChange
     handleChange({
       target: { name: "country_of_destination", value: newSelectedId2 },
     });
@@ -99,11 +114,16 @@ export default function Step1({
                 type="file"
                 name="image"
                 id="image"
-                onChange={handleImageChange}
+                onChange={handleImageSelect}
               />
               <img src="/assets/icons/selectimg.svg" alt="select img" />
               <span>Выбрать картинку</span>
             </label>
+            {selectedImage && (
+              <button type="button" onClick={openModal}>
+                Посмотреть картинку
+              </button>
+            )}
           </div>
 
           <div className={c.flex}>
@@ -201,6 +221,7 @@ export default function Step1({
       <button className={c.submit_btn} onClick={nextStep}>
         Продолжить
       </button>
+      {showModal && <ImageModal src={selectedImage} onClose={closeModal} />}
     </div>
   );
 }
