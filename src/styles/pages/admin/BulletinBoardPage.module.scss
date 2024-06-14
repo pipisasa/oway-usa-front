@@ -116,6 +116,10 @@
 }
 
 @media (max-width: 900px) {
+  .filtr {
+    flex-direction: column;
+    gap: 20px;
+  }
   .boards_page {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -124,5 +128,15 @@
 @media (max-width: 600px) {
   .boards_page {
     grid-template-columns: repeat(1, 1fr);
+    .hex_colors {
+      grid-template-columns: repeat(10, 1fr);
+    }
+  }
+}
+@media (max-width: 400px) {
+  .boards_page {
+    .hex_colors {
+      grid-template-columns: repeat(7, 1fr);
+    }
   }
 }

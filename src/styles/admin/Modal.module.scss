@@ -282,6 +282,11 @@
       .modal_content {
         width: 90%;
         padding: 20px;
+        h3 {
+          font-size: 20px;
+          font-weight: 600;
+          text-align: center;
+        }
         .forms {
           grid-template-columns: repeat(1, 1fr);
           overflow-y: auto;
