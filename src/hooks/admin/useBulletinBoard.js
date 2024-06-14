@@ -24,6 +24,7 @@ const useBulletinBoard = () => {
       );
 
       setLoading(false);
+      window.location.reload();
       return response.data;
     } catch (err) {
       setLoading(false);
