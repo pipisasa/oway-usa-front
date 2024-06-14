@@ -43,7 +43,6 @@ export default function TrackingPage() {
         `https://api-owayusa.com/api/warehouses/product/get/${trackingNumber}/`
       );
       setStatus(response.data);
-      console.log(response.data);
       onOpen();
     } catch (err) {
       console.error("Ошибка при запросе к Ship24 API:", err);

@@ -1,10 +1,12 @@
 .users_page {
   position: relative;
+  margin-top: 20px;
 
   .pagination {
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
+    z-index: 1;
   }
 
   .modal {
@@ -207,10 +209,11 @@
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .users_page {
     .modal {
       .modalContent {
+        padding: 20px;
         h3 {
           font-size: 20px;
           text-align: center;
@@ -218,6 +221,8 @@
 
         .form {
           min-width: 320px;
+          overflow-y: scroll;
+          height: 630px;
 
           .inputs {
             grid-template-columns: repeat(1, 1fr);

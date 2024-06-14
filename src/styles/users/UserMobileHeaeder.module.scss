@@ -4,17 +4,19 @@
   flex-direction: column;
   gap: 20px;
   height: 200vh;
+  z-index: 1000;
 
   .modals {
     position: fixed;
     bottom: 10px;
-    margin: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
     width: 95%;
-    z-index: 100;
+    z-index: 10;
   }
 
   .pages_container {
-    padding: 16px 20px;
+    padding: 16px 20px 20% 20px;
     margin-top: 75px;
   }
 
@@ -92,6 +94,19 @@
       bottom: 30%;
       width: 100%;
     }
+    .logoutadmin {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--red, #ff1414);
+      font-size: 20px;
+      line-height: 140%;
+      // position: absolute;
+      bottom: 30%;
+      width: 100%;
+    }
 
     ul {
       height: 100vh;
@@ -143,4 +158,9 @@
   .filterComponentContainer {
     transform: translateX(0);
   }
+}
+
+.mobilHeader {
+  overflow: scroll;
+  max-height: 100%;
 }

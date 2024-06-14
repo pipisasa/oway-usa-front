@@ -31,7 +31,6 @@ export default function UserDetailModal({ userData, close }) {
       }));
     }
   };
-
   const editUser = async (e) => {
     e.preventDefault();
     const accessToken = getCookie("accessToken");
@@ -61,7 +60,6 @@ export default function UserDetailModal({ userData, close }) {
 
     if (response.ok) {
       const updatedUser = await response.json();
-      console.log("Updated successfully", updatedUser);
       setIsEditing(false);
     } else {
       console.error("Failed to update", await response.text());

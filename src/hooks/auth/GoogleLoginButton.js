@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { GoogleLogin } from '@react-oauth/google';
-import { setCookie } from '@/utils/cookieHelpers';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
+import { setCookie } from "@/utils/cookieHelpers";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -13,15 +13,12 @@ const GoogleLoginButton = () => {
   const router = useRouter();
 
   const handleSuccess = async (credentialResponse) => {
-    console.log(credentialResponse);
     const receivedToken = credentialResponse.credential;
     setToken(receivedToken);
     await sendTokenToBackend(receivedToken);
   };
 
-  const handleError = () => {
-    console.log('Login Failed');
-  };
+  const handleError = () => {};
 
   const sendTokenToBackend = async (token) => {
     try {
@@ -30,25 +27,25 @@ const GoogleLoginButton = () => {
         { token },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
       const data = response.data;
 
       if (response.status === 200) {
-        setCookie('accessToken', data.access);
+        setCookie("accessToken", data.access);
         if (data?.is_admin) {
-          document.cookie = 'admin=true';
-          router.push('/admin');
+          document.cookie = "admin=true";
+          router.push("/admin");
         } else {
-          router.push('/user');
+          router.push("/user");
         }
       } else {
-        setError(data.detail || 'Произошла ошибка при авторизации');
+        setError(data.detail || "Произошла ошибка при авторизации");
       }
     } catch (error) {
-      setError('Произошла ошибка при авторизации');
+      setError("Произошла ошибка при авторизации");
     }
   };
 

@@ -15,7 +15,6 @@ export const useForgot = () => {
         `https://api-owayusa.com/api/users/forgot_pass_send_activation_code/`,
         { email }
       );
-      console.log("Код отправлен на почту:", response?.data);
     } catch (error) {
       console.error("Ошибка отправки кода на почту:", error?.response?.data);
       setError(error?.response?.data);
@@ -24,7 +23,6 @@ export const useForgot = () => {
 
   const confirmEmail = async (email) => {
     try {
-      console.log("Email подтверждён:", email);
     } catch (error) {
       console.error("Ошибка подтверждения email:", error);
       setError(error);
@@ -46,7 +44,6 @@ export const useForgot = () => {
         }
       );
 
-      console.log("Успешная смена пароля:", response?.data);
       router.push("/");
     } catch (error) {
       console.error("Ошибка смены пароля:", error?.response?.data);

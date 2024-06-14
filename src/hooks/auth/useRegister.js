@@ -10,30 +10,26 @@ export const useRegister = () => {
   const router = useRouter();
 
   const register = async ({
-                            first_name,
-                            last_name,
-                            email,
-                            phone_number,
-                            password,
-                            password2,
-                          }) => {
+    first_name,
+    last_name,
+    email,
+    phone_number,
+    password,
+    password2,
+  }) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await axios.post(
-          `${API_URL}/api/users/register/`,
-          {
-            first_name,
-            last_name,
-            email,
-            phone_number,
-            password,
-            password2,
-          }
-      );
+      const response = await axios.post(`${API_URL}/api/users/register/`, {
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        password,
+        password2,
+      });
 
-      console.log("Успешная регистрация:", response?.data);
       router.push("/auth/account-activation");
     } catch (error) {
       console.error("Ошибка регистрации:", error?.response?.data);

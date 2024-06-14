@@ -19,6 +19,7 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
   const [warehouses, setWarehouses] = useState([]);
   const [count, setCount] = useState(0);
   const [filters, setFilters] = useState(initialFilters);
+
   const router = useRouter();
 
   const fetchWarehouses = async (newFilters = {}) => {
@@ -39,17 +40,17 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
       ...filters,
       ...newFilters,
       warehouse: warehouseCityId,
+      page: currentPage,
+      page_size: 6,
     };
 
-    const queryString = Object.keys(mergedFilters)
-      .map((key) => `${key}=${encodeURIComponent(mergedFilters[key])}`)
+    const queryString = Object.entries(mergedFilters)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
       .join("&");
 
     try {
       const response = await axios.get(
-        `${API_URL}/api/warehouses/product/list/?pagination_type=page_number&page=${
-          currentPage === undefined ? 1 : currentPage
-        }&page_size=6&${queryString}`,
+        `${API_URL}/api/warehouses/product/list/?${queryString}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -107,11 +108,8 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     formData.append("unique_id_user", unique_id_user);
     formData.append("date_sent", date_sent);
     formData.append("date_arrived", date_arrived);
-    formData.append("country_of_origin", country_of_origin.toString());
-    formData.append(
-      "country_of_destination",
-      country_of_destination.toString()
-    );
+    formData.append("country_of_origin", country_of_origin);
+    formData.append("country_of_destination", country_of_destination);
 
     setIsLoading(true);
     setError(null);
@@ -148,17 +146,20 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     setError(null);
 
     try {
-      await axios.delete(`${API_URL}/api/warehouses/product/delete/`, {
+      const data = {
+        ids,
+      };
+
+      await axios.put(`${API_URL}/api/warehouses/product/delete/`, data, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        data: { ids: Array.isArray(ids) ? ids : [ids] },
       });
-
       await fetchWarehouses();
       setIsSuccess(true);
     } catch (err) {
       if (err.response && err.response.status === 401) {
+        setError("Unauthorized. Please log in again.");
       } else {
         setError(err.message);
         setIsSuccess(false);

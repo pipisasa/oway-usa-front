@@ -24,6 +24,10 @@
   border: 1px solid var(--gray, #a4a4a4);
 }
 
+.scrollbar-hide {
+  z-index: 1;
+}
+
 .background--custom {
   width: calc(100vw - 0px);
   height: 100vh;

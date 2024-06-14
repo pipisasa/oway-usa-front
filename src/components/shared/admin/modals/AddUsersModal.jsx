@@ -26,7 +26,7 @@ export default function AddUsersModal() {
         ...prevData,
         [name]: file,
       }));
-  
+
       const reader = new FileReader();
       reader.onload = () => {
         setImagePreviews((prevPreviews) => ({
@@ -43,7 +43,6 @@ export default function AddUsersModal() {
       }));
     }
   };
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -82,7 +81,7 @@ export default function AddUsersModal() {
         Добавить пользователя
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
-        <h3>Добавить пользователя</h3>
+        <h4>Добавить пользователя</h4>
         <form onSubmit={handleSubmit}>
           <div className={s.forms}>
             <div>
@@ -164,7 +163,10 @@ export default function AddUsersModal() {
                 <span>Выбрать картинку</span>
               </label>
               {imagePreviews && (
-                <img src={imagePreviews.front_image} alt="Front Image Preview" />
+                <img
+                  src={imagePreviews.front_image}
+                  alt="Front Image Preview"
+                />
               )}
             </div>
             <div>
