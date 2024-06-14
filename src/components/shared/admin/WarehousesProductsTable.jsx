@@ -16,6 +16,8 @@ export default function WarehousesProductsTable({
   const [confirmDeleteWarehouse, setConfirmDeleteWarehouse] = useState(null);
   const [selectedWarehouses, setSelectedWarehouses] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const [showMultipleDeleteConfirm, setShowMultipleDeleteConfirm] =
+    useState(false);
 
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
@@ -23,6 +25,14 @@ export default function WarehousesProductsTable({
 
   const handleDeleteConfirmation = (warehouse) => {
     setConfirmDeleteWarehouse(warehouse);
+  };
+
+  const handleSingleDelete = (id) => {
+    deleteMultipleWarehouses([id]);
+    setConfirmDeleteWarehouse(null);
+  };
+  const handleMultipleDeleteClick = () => {
+    setShowMultipleDeleteConfirm(true);
   };
 
   const handleMultipleDelete = () => {
@@ -46,7 +56,6 @@ export default function WarehousesProductsTable({
     }
     setSelectAll(!selectAll);
   };
-
 
   if (isLoading) {
     return <Loading />;
@@ -78,7 +87,10 @@ export default function WarehousesProductsTable({
           </tr>
           <tr>
             <th className={s.actions_btn}>
-              <button className={s.all_delete} onClick={handleMultipleDelete}>
+              <button
+                className={s.all_delete}
+                onClick={handleMultipleDeleteClick}
+              >
                 <img src="/assets/icons/admin-icons/Delete.svg" alt="" />
               </button>
             </th>
@@ -139,21 +151,42 @@ export default function WarehousesProductsTable({
           onChange={(page) => setCurrent(page)}
         />
       </div>
-
       {selectedWarehouse && (
         <WarehousesModal
           warehouse={selectedWarehouse}
           onClose={() => setSelectedWarehouse(null)}
         />
       )}
-
+      {showMultipleDeleteConfirm && (
+        <>
+          <div className={s.modalBackdrop}></div>
+          <div className={s.confirmDeleteModal}>
+            <p>Вы уверены, что хотите удалить все выбранные товары?</p>
+            <div>
+              <button
+                onClick={() => {
+                  handleMultipleDelete();
+                  setShowMultipleDeleteConfirm(false);
+                }}
+              >
+                Да
+              </button>
+              <button onClick={() => setShowMultipleDeleteConfirm(false)}>
+                Отмена
+              </button>
+            </div>
+          </div>
+        </>
+      )}
       {confirmDeleteWarehouse && (
         <>
           <div className={s.modalBackdrop}></div>
           <div className={s.confirmDeleteModal}>
             <p>Вы уверены, что хотите удалить этот товар?</p>
             <div>
-              <button onClick={() => handleDelete(confirmDeleteWarehouse.id)}>
+              <button
+                onClick={() => handleSingleDelete(confirmDeleteWarehouse.id)}
+              >
                 Да
               </button>
               <button onClick={() => setConfirmDeleteWarehouse(null)}>
