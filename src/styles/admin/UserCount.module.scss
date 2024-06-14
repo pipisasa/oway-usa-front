@@ -38,7 +38,6 @@
     font-weight: 700;
     line-height: 20px;
     padding-bottom: 16px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -88,5 +87,21 @@
 @media (max-width: 550px) {
   .chart_section {
     min-width: 100%;
+
+    .title {
+      font-size: 16px;
+    }
+
+    .country {
+      .active {
+        padding: 8px;
+        min-width: 90px;
+      }
+
+      .not_active {
+        padding: 8px;
+        min-width: 90px;
+      }
+    }
   }
 }
