@@ -74,6 +74,9 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     name,
     address,
     weight,
+    length,
+    width,
+    height,
     track_number,
     price,
     country,
@@ -84,17 +87,20 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     date_sent,
     date_arrived,
     country_of_origin,
-    country_of_destination
+    country_of_destination,
+    warehouse
   ) => {
     const accessToken = getCookie("accessToken");
-
     const formData = new FormData();
     formData.append("name", name);
+    formData.append("width", width);
+    formData.append("height", height);
+    formData.append("length", length);
     formData.append("address", address);
     formData.append("weight", weight);
     formData.append("track_number", track_number);
     formData.append("price", price);
-    formData.append("country", country);
+    formData.append("warehouse", warehouse);
     formData.append("status", status);
     formData.append("image", image);
     formData.append("comments", comments);
@@ -125,6 +131,7 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
 
       await fetchWarehouses();
       setIsSuccess(true);
+      window.location.reload();
       return response.data;
     } catch (error) {
       setError(error.message);

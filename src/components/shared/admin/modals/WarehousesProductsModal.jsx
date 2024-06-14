@@ -6,15 +6,27 @@ import useCountries from "@/hooks/admin/useCountries";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
+import { useRouter } from "next/router";
+
+const warehouseSity = [
+  { id: 7, name: "Турция" },
+  { id: 8, name: "Москва" },
+  { id: 9, name: "Кыргызстан" },
+  { id: 14, name: "Чикаго" },
+];
 
 export default function WarehouseProductsModal() {
   const { addWarehouses } = useWarehouses();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
     address: "",
     weight: "",
+    width: "",
+    height: "",
+    length: "",
     track_number: "",
     price: "",
     country: "",
@@ -92,12 +104,21 @@ export default function WarehouseProductsModal() {
     }));
   };
 
+  const pathParts = router.asPath.split("/");
+  const countryName = decodeURIComponent(pathParts[pathParts.length - 1]);
+
+  const warehouseCity = warehouseSity.find((city) => city.name === countryName);
+  const warehouse = warehouseCity ? warehouseCity.id : null;
+
   const handleSubmit = async () => {
     try {
       await addWarehouses(
         formData.name,
         formData.address,
         formData.weight,
+        formData.length,
+        formData.width,
+        formData.height,
         formData.track_number,
         formData.price,
         selectedOption?.id,
@@ -108,12 +129,16 @@ export default function WarehouseProductsModal() {
         formData.date_sent,
         formData.date_arrived,
         Number(formData.country_of_origin),
-        Number(formData.country_of_destination)
+        Number(formData.country_of_destination),
+        warehouse
       );
       setFormData({
         name: "",
         address: "",
         weight: "",
+        width: "",
+        height: "",
+        length: "",
         track_number: "",
         price: "",
         country: "",
@@ -121,6 +146,7 @@ export default function WarehouseProductsModal() {
         image: "",
         comments: "",
         unique_id_user: "",
+        warehouse: "",
         date_sent: "",
         date_arrived: "",
         country_of_origin: 0,
