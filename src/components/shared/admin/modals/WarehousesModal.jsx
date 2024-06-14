@@ -51,8 +51,8 @@ export default function WarehousesModal({ onClose, warehouse }) {
     address: warehouse.address,
     comments: warehouse.comments,
     status: currentStatus,
-    country_of_origin: warehouse.country_of_origin,
-    country_of_destination: warehouse.country_of_destination,
+    country_of_origin: warehouse.country_of_origin.id,
+    country_of_destination: warehouse.country_of_destination.id,
   });
 
   const statuses = [
@@ -88,8 +88,8 @@ export default function WarehousesModal({ onClose, warehouse }) {
       length: warehouse.length,
       date_sent: warehouse.date_sent,
       date_arrived: warehouse.date_arrived,
-      country_of_origin: warehouse.country_of_origin,
-      country_of_destination: warehouse.country_of_destination,
+      country_of_origin: warehouse.country_of_origin.id,
+      country_of_destination: warehouse.country_of_destination.id,
       address: warehouse.address,
       comments: warehouse.comments,
       status: currentStatus,
@@ -153,6 +153,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
     setEditData({ ...editData, [id]: formatDateInput(value) });
   };
 
+  console.log(editData.country_of_origin.name);
   return (
     <div
       className={s.modal_backdrop}

@@ -1,25 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminRequests.module.scss";
 import { Pagination } from "@nextui-org/react";
 import useRequests from "@/hooks/admin/useRequests";
 import RequestsModal from "@/components/shared/admin/modals/RequestsModal";
 import Loading from "@/components/shared/admin/Loading";
 import ImageModal from "@/components/shared/admin/modals/ImageModal";
+import RequestsAdminSearch from "@/components/partials/requestsSelect/RequestsAdminSearch";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function IncommingRequests() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading, error, deleteRequest } = useRequests(currentPage);
+  const { data, isLoading, error, deleteRequest, setFilters, fetchData } =
+    useRequests(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
-  const [nameFilter, setNameFilter] = useState("");
-  const [filter, setFilter] = useState("");
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [requestIdToDelete, setRequestIdToDelete] = useState(null);
-
+  const [filters, setFiltersState] = useState({
+    name_of_purchase: "",
+    created_at: "",
+    email: "",
+    price: "",
+    unique_id: "",
+    request_status: 0,
+  });
+  console.log(data, 12121212);
+  useEffect(() => {
+    fetchData({ currentPage, ...filters });
+  }, [currentPage, filters]);
   const handleOpenModal = (requestData) => {
     setCurrentRequestData(requestData);
     setIsModalVisible(true);
@@ -50,14 +61,10 @@ export default function IncommingRequests() {
     }
     closeDeleteModal();
   };
-
-  const filteredRequests = data.results.filter((request) =>
-    request.name_of_purchase
-      ?.toLowerCase()
-      .includes(nameFilter.toLowerCase()) && filter === ""
-      ? true
-      : request.is_paid.toString() === filter
-  );
+  const handleFilterChange = (key, value) => {
+    setFiltersState((prevFilters) => ({ ...prevFilters, [key]: value }));
+    setFilters({ [key]: value });
+  };
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
@@ -72,26 +79,7 @@ export default function IncommingRequests() {
       )}
       {isImageModalOpen && <ImageModal src={imageSrc} onClose={closeModal} />}
       <div className={s.filters}>
-        <div className={s.search}>
-          <img src="/assets/icons/search.svg" alt="icon" />
-          <input
-            type="text"
-            placeholder="Поиск по названию"
-            value={nameFilter}
-            onChange={(e) => setNameFilter(e.target.value)}
-          />
-        </div>
-        <select
-          className={s.select}
-          name=""
-          id=""
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="">Все</option>
-          <option value="false">Не оплачено</option>
-          <option value="true">Оплачено</option>
-        </select>
+        <RequestsAdminSearch onFilterChange={handleFilterChange} />
       </div>
       <table>
         <thead>
@@ -106,7 +94,7 @@ export default function IncommingRequests() {
           </tr>
         </thead>
         <tbody>
-          {filteredRequests.map((request) => (
+          {data.results.map((request) => (
             <tr key={request.id}>
               <td className={s.purchase_image}>
                 <img

@@ -2,37 +2,41 @@ import { useState, useEffect } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const useRequests = (currentPage) => {
+const useRequests = (currentPage, initialFilters) => {
   const [data, setData] = useState({ results: [], count: 0 });
   const [isLoading, setIsLoading] = useState(true);
+  const [filters, setFilters] = useState(initialFilters);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const accessToken = getCookie("accessToken");
-      const url = `${API_URL}/api/purchase/list/?page=${currentPage}`;
-      try {
-        const response = await fetch(url, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
+  const fetchData = async (newFilters = {}) => {
+    const accessToken = getCookie("accessToken");
+    const mergedFilters = {
+      ...filters,
+      ...newFilters,
     };
+    const queryParams = Object.entries(mergedFilters)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+      .join("&");
+    const url = `${API_URL}/api/purchase/list/?page=${currentPage}&${queryParams}`;
+    try {
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
-    fetchData();
-  }, [currentPage]);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const updateRequest = async (id, updatedData) => {
     const accessToken = getCookie("accessToken");
@@ -73,7 +77,15 @@ const useRequests = (currentPage) => {
     }
   };
 
-  return { data, isLoading, error, updateRequest, deleteRequest };
+  return {
+    data,
+    isLoading,
+    error,
+    updateRequest,
+    deleteRequest,
+    setFilters,
+    fetchData,
+  };
 };
 
 export default useRequests;
