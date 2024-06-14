@@ -27,7 +27,7 @@ export default function IncommingRequests() {
     is_paid: "",
     request_status: "",
   });
-  console.log(data, 12121212);
+
   useEffect(() => {
     fetchData({ currentPage, ...filters });
   }, [currentPage, filters]);

@@ -54,7 +54,7 @@ export default function Layout({ children }) {
   }
 
   return (
-    <main>
+    <main className="ebat">
       <Header />
       {children}
       <Footer />
