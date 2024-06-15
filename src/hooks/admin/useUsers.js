@@ -96,19 +96,30 @@ const useUsersAdmin = (currentPage, initialFilters) => {
     }
   };
 
-  const deleteUsers = async (userId) => {
+  const deleteUsers = async (ids) => {
+    const accessToken = getCookie("accessToken");
     setIsLoading(true);
     setError(null);
+
     try {
-      const accessToken = getCookie("accessToken");
-      await axiosInstance.delete(`delete/${userId}/`, {
+      // const data = {
+      //   ids,
+      // };
+
+      await axios.put(`https://api-owayusa.com/api/users/delete/`, ids, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
       await fetchUsers();
-    } catch (error) {
-      setError(error.message);
+      setIsSuccess(true);
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        setError("Unauthorized. Please log in again.");
+      } else {
+        setError(err.message);
+        setIsSuccess(false);
+      }
     } finally {
       setIsLoading(false);
     }
