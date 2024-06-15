@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/pages/admin/AdminUsersPage.module.scss";
-import { Pagination, user } from "@nextui-org/react";
+import { Pagination } from "@nextui-org/react";
 import useUsersAdmin from "@/hooks/admin/useUsers";
 import Loading from "@/components/shared/admin/Loading";
 import UserDetailModal from "@/components/shared/users/modals/UserDetailModal";
@@ -10,10 +10,13 @@ const PAGE_SIZE = 7;
 
 export default function AdminUsersPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { users, isLoading, fetchUsers, updateUsers, setFilters } =
+  const { users, isLoading, fetchUsers, updateUsers, deleteUsers, setFilters } =
     useUsersAdmin(currentPage);
+  const [selectAll, setSelectAll] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [isLoadingPage, setIsLoadingPage] = useState(false);
+  const [selectedUserIds, setSelectedUserIds] = useState([]);
+  const [showMultipleDeleteConfirm, setShowMultipleDeleteConfirm] =
+    useState(false);
   const [filters, setFiltersState] = useState({
     first_name: "",
     last_name: "",
@@ -21,9 +24,8 @@ export default function AdminUsersPage() {
     phone_number: "",
     unique_id: "",
   });
+
   useEffect(() => {
-    // setIsLoadingPage(true);
-    // fetchUsers(currentPage).then(() => setIsLoadingPage(false));
     fetchUsers({ currentPage, ...filters });
   }, [currentPage, filters]);
 
@@ -36,7 +38,7 @@ export default function AdminUsersPage() {
   const handleEditUser = (userData) => {
     updateUsers(userData.id)
       .then(() => {
-        updateUsers(currentPage);
+        fetchUsers(currentPage);
         deselectUser();
       })
       .catch((error) => {
@@ -48,6 +50,39 @@ export default function AdminUsersPage() {
     setFiltersState((prevFilters) => ({ ...prevFilters, [key]: value }));
     setFilters({ [key]: value });
   };
+
+  const handleUserSelection = (id) => {
+    setSelectedUserIds((prev) =>
+      prev.includes(id) ? prev.filter((wid) => wid !== id) : [...prev, id]
+    );
+  };
+
+  const handleSelectAll = () => {
+    if (selectAll) {
+      setSelectedUserIds([]);
+    } else {
+      setSelectedUserIds(users.results.map((user) => user.id));
+    }
+    setSelectAll(!selectAll);
+  };
+
+  const handleDeleteSelectedUsers = () => {
+    setShowMultipleDeleteConfirm(true);
+  };
+
+  const confirmDeleteSelectedUsers = () => {
+    deleteUsers({ ids: selectedUserIds })
+      .then(() => {
+        fetchUsers(currentPage);
+        setSelectedUserIds([]);
+        setSelectAll(false);
+        setShowMultipleDeleteConfirm(false);
+      })
+      .catch((error) => {
+        console.error("Error deleting users:", error);
+      });
+  };
+
   return (
     <section>
       <div className={s.filter}>
@@ -57,19 +92,41 @@ export default function AdminUsersPage() {
         <table>
           <thead>
             <tr>
-              <th>Имя</th>
+              <th className={s.gap}>
+                <input
+                  type="checkbox"
+                  onChange={handleSelectAll}
+                  checked={selectAll}
+                />
+                Имя
+              </th>
               <th>Фамилия</th>
               <th>Почта</th>
               <th>Номер телефона</th>
               <th>Уникальный ID</th>
               <th>Дата регистрации</th>
-              <th>Действия</th>
+              <th className={s.gap}>
+                Действия{" "}
+                <button
+                  className={s.all_delete}
+                  onClick={handleDeleteSelectedUsers}
+                >
+                  <img src="/assets/icons/admin-icons/Delete.svg" alt="" />
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody>
             {users.results.map((user) => (
               <tr key={user.id}>
-                <td>{user.first_name}</td>
+                <td className={s.gap}>
+                  <input
+                    type="checkbox"
+                    checked={selectedUserIds.includes(user.id)}
+                    onChange={() => handleUserSelection(user.id)}
+                  />
+                  {user.first_name}
+                </td>
                 <td>{user.last_name}</td>
                 <td>{user.email}</td>
                 <td>{user.phone_number || "Номер телефона не указан"}</td>
@@ -103,6 +160,15 @@ export default function AdminUsersPage() {
           />
         </div>
       </div>
+      {showMultipleDeleteConfirm && (
+        <div className={s.confirm_delete_modal}>
+          <p>Вы уверены, что хотите удалить выбранных пользователей?</p>
+          <button onClick={confirmDeleteSelectedUsers}>Да</button>
+          <button onClick={() => setShowMultipleDeleteConfirm(false)}>
+            Нет
+          </button>
+        </div>
+      )}
     </section>
   );
 }
