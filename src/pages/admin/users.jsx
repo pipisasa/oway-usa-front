@@ -92,12 +92,12 @@ export default function AdminUsersPage() {
         <table>
           <thead>
             <tr>
-              <th className={s.gap}>
-                <input
+              <th>
+                {/* <input
                   type="checkbox"
                   onChange={handleSelectAll}
                   checked={selectAll}
-                />
+                /> */}
                 Имя
               </th>
               <th>Фамилия</th>
@@ -105,26 +105,26 @@ export default function AdminUsersPage() {
               <th>Номер телефона</th>
               <th>Уникальный ID</th>
               <th>Дата регистрации</th>
-              <th className={s.gap}>
+              <th>
                 Действия{" "}
-                <button
+                {/* <button
                   className={s.all_delete}
                   onClick={handleDeleteSelectedUsers}
                 >
                   <img src="/assets/icons/admin-icons/Delete.svg" alt="" />
-                </button>
+                </button> */}
               </th>
             </tr>
           </thead>
           <tbody>
             {users.results.map((user) => (
               <tr key={user.id}>
-                <td className={s.gap}>
-                  <input
+                <td>
+                  {/* <input
                     type="checkbox"
                     checked={selectedUserIds.includes(user.id)}
                     onChange={() => handleUserSelection(user.id)}
-                  />
+                  /> */}
                   {user.first_name}
                 </td>
                 <td>{user.last_name}</td>

@@ -102,10 +102,6 @@ const useUsersAdmin = (currentPage, initialFilters) => {
     setError(null);
 
     try {
-      // const data = {
-      //   ids,
-      // };
-
       await axios.put(`https://api-owayusa.com/api/users/delete/`, ids, {
         headers: {
           Authorization: `Bearer ${accessToken}`,

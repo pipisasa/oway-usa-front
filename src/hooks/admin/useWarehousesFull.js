@@ -10,13 +10,13 @@ const useWarehousesFull = () => {
   const [warehouses, setWarehouses] = useState([]);
   const [count, setCount] = useState(0);
 
-  const fetchWarehouses = async () => {
+  const fetchWarehouses = async (query = "") => {
     const accessToken = getCookie("accessToken");
     setIsLoading(true);
     setError(null);
     try {
       const response = await axios.get(
-        `${API_URL}/api/add_user_for_admin/list/`,
+        `${API_URL}/api/add_user_for_admin/list/?unique_id=${query}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -37,12 +37,12 @@ const useWarehousesFull = () => {
     fetchWarehouses();
   }, []);
 
-
   return {
     warehouses,
     error,
     isLoading,
     count,
+    fetchWarehouses,
   };
 };
 
