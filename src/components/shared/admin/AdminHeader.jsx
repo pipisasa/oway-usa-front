@@ -23,7 +23,7 @@ export default function AdminHeader() {
     { href: "/admin/catalog/products", label: "Товары" },
     { href: "/admin/warehouses", label: "Управление складами" },
     { href: "/admin/requests", label: "Входящие запросы" },
-    { href: "/admin/catalog/shops-catalog", label: "Каталог сайтов" },
+    { href: "/admin/catalog", label: "Каталог сайтов" },
     { href: "/admin/user-parcels", label: "Ожидаемые посылки" },
     { href: "/admin/catalog/companies", label: "Логотипы компаний" },
     {
@@ -64,7 +64,7 @@ export default function AdminHeader() {
       return <AddUsersModal />;
     } else if (router.pathname === "/admin/notifications") {
       return <NotificationsModal />;
-    } else if (router.pathname === "/admin/catalog/shops-catalog") {
+    } else if (router.pathname === "/admin/catalog") {
       return <AddShopsModal />;
     } else if (router.pathname === "/admin/catalog/products") {
       return <ProductsModal />;
