@@ -195,6 +195,9 @@
     }
   }
 }
+.imageModalContent {
+  z-index: 30;
+}
 .gap {
   display: flex;
   gap: 10px;
@@ -204,6 +207,49 @@
     border-radius: 6px;
   }
 }
+.confirm_delete_modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 4;
+  text-align: center;
+}
+
+.confirm_delete_modal p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+}
+.confirm_delete_modal button {
+  background-color: #0070f3;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 10px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.confirm_delete_modal button:hover {
+  background-color: #005bb5;
+}
+
+.confirm_delete_modal button:first-child {
+  background-color: #d9534f;
+}
+
+.confirm_delete_modal button:first-child:hover {
+  background-color: #c9302c;
+}
+
 @media (max-width: 1350px) {
   .users_page {
     overflow-x: scroll;

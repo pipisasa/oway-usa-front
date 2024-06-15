@@ -13,6 +13,7 @@ export default function UserDetailModal({ userData, close }) {
   const [passportFront, setPassportFront] = useState(userData.front_image);
   const [passportBack, setPassportBack] = useState(userData.back_image);
   const [isEditing, setIsEditing] = useState(false);
+  const [viewImage, setViewImage] = useState(null);
 
   const handleImageChange = (event, type) => {
     const file = event.target.files[0];
@@ -31,6 +32,7 @@ export default function UserDetailModal({ userData, close }) {
       }));
     }
   };
+
   const editUser = async (e) => {
     e.preventDefault();
     const accessToken = getCookie("accessToken");
@@ -75,6 +77,15 @@ export default function UserDetailModal({ userData, close }) {
     setPassportBack(userData.back_image);
     setIsEditing(false);
   };
+
+  const handleViewImage = (image) => {
+    setViewImage(image);
+  };
+
+  const closeModal = () => {
+    setViewImage(null);
+  };
+
   return (
     <div className={s.modal}>
       <Modal isOpen={userData}>
@@ -85,7 +96,7 @@ export default function UserDetailModal({ userData, close }) {
             </button>
           </div>
           <h3>Данные пользователя</h3>
-          <form className={s.form} action="" onSubmit={editUser}>
+          <form className={s.form} onSubmit={editUser}>
             <div className={s.inputs}>
               <div>
                 <label>Имя</label>
@@ -138,10 +149,24 @@ export default function UserDetailModal({ userData, close }) {
                   <span>Выбрать картинку</span>
                 </label>
                 {imagePreviews.front_image && (
-                  <img
-                    src={imagePreviews.front_image}
-                    alt="Front Image Preview"
-                  />
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => handleViewImage(imagePreviews.front_image)}
+                    >
+                      Посмотреть картинку
+                    </button>
+                  </>
+                )}
+                {userData.front_image && !imagePreviews.front_image && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => handleViewImage(userData.front_image)}
+                    >
+                      Посмотреть картинку
+                    </button>
+                  </>
                 )}
               </div>
               <div>
@@ -158,10 +183,24 @@ export default function UserDetailModal({ userData, close }) {
                   <span>Выбрать картинку</span>
                 </label>
                 {imagePreviews.back_image && (
-                  <img
-                    src={imagePreviews.back_image}
-                    alt="Back Image Preview"
-                  />
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => handleViewImage(imagePreviews.back_image)}
+                    >
+                      Посмотреть картинку
+                    </button>
+                  </>
+                )}
+                {userData.back_image && !imagePreviews.back_image && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => handleViewImage(userData.back_image)}
+                    >
+                      Посмотреть картинку
+                    </button>
+                  </>
                 )}
               </div>
             </div>
@@ -182,6 +221,17 @@ export default function UserDetailModal({ userData, close }) {
           </form>
         </div>
       </Modal>
+      {viewImage && (
+        <Modal isOpen={true} onClose={closeModal}>
+          <div className={s.imageModalContent}>
+            <img
+              src={`https://api-owayusa.com${viewImage}`}
+              alt="Image Preview"
+            />
+            <button onClick={closeModal}>Закрыть</button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

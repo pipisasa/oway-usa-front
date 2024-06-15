@@ -267,6 +267,12 @@
     }
   }
 }
+.search_container {
+  display: flex;
+  img {
+    margin-left: -40px;
+  }
+}
 
 @media (max-width: 768px) {
   .modal {

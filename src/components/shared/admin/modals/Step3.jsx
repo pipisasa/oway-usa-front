@@ -10,27 +10,27 @@ export default function Step3({
   currentStep,
   setCurrentStep,
 }) {
-  const { warehouses } = useWarehousesFull();
+  const { warehouses, fetchWarehouses } = useWarehousesFull();
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
 
-    let filteredWarehouses = [];
-    if (value.trim() !== "") {
-      filteredWarehouses = warehouses?.results?.filter((warehouse) =>
-        warehouse?.unique_id?.toLowerCase().includes(value.toLowerCase())
-      );
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSearchClick = () => {
+    if (inputValue.trim() !== "") {
+      fetchWarehouses(inputValue);
     }
-    setSuggestions(filteredWarehouses);
   };
 
   useEffect(() => {
     if (inputValue === "") {
       setSuggestions([]);
+    } else {
+      setSuggestions(warehouses?.results || []);
     }
-  }, [inputValue]);
+  }, [warehouses]);
 
   const handleSelectWarehouse = (warehouse) => {
     handleChange({
@@ -72,14 +72,21 @@ export default function Step3({
       <form action="" className={s.step_form}>
         <div className={c.input}>
           <label htmlFor="comments">Выбор клиента</label>
-          <input
-            type="text"
-            name="unique_id_user"
-            id="unique_id_user"
-            placeholder="Напишите ID"
-            value={inputValue}
-            onChange={handleInputChange}
-          />
+          <div className={s.search_container}>
+            <input
+              type="text"
+              name="unique_id_user"
+              id="unique_id_user"
+              placeholder="Напишите ID"
+              value={inputValue}
+              onChange={handleInputChange}
+            />
+            <img
+              src="/assets/icons/search.svg"
+              alt=""
+              onClick={handleSearchClick}
+            />
+          </div>
           <SearchSelect
             suggestions={suggestions}
             handleSelectWarehouse={handleSelectWarehouse}

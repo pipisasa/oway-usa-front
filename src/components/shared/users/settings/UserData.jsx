@@ -70,14 +70,15 @@ export default function UserData() {
       setSelectedBackImage(files[0]);
     }
   };
+
   if (loading) {
     return <Loading />;
   }
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const openFrontModal = () => setIsFrontModalOpen(true);
   const closeFrontModal = () => setIsFrontModalOpen(false);
-  console.log(userData);
 
   return (
     <form className={s.form} onSubmit={handleSave}>
@@ -96,6 +97,7 @@ export default function UserData() {
             }
             onChange={handleChange}
             disabled={!isEditing}
+            className={isEditing ? s.blackInput : ""}
           />
         </div>
         <div>
@@ -112,6 +114,7 @@ export default function UserData() {
             }
             onChange={handleChange}
             disabled={!isEditing}
+            className={isEditing ? s.blackInput : ""}
           />
         </div>
         <div>
@@ -128,6 +131,7 @@ export default function UserData() {
             }
             onChange={handleChange}
             disabled={!isEditing}
+            className={isEditing ? s.blackInput : ""}
           />
         </div>
         <div>
@@ -144,6 +148,7 @@ export default function UserData() {
             }
             onChange={handleChange}
             disabled={true}
+            className={isEditing ? s.blackInput : ""}
           />
         </div>
         <div>
@@ -208,6 +213,7 @@ export default function UserData() {
             }
             onChange={handleChange}
             disabled={!isEditing}
+            className={isEditing ? s.blackInput : ""}
           />
         </div>
       </div>
