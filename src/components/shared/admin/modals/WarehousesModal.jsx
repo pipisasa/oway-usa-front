@@ -27,6 +27,8 @@ export default function WarehousesModal({ onClose, warehouse }) {
   const [countries, setCountries] = useState([
     { id: 3, name: "США" },
     { id: 4, name: "Турция" },
+    { id: 5, name: "Кыргызстан" },
+    { id: 6, name: "Россия" },
   ]);
 
   const [previewImageUrl, setPreviewImageUrl] = useState(
@@ -313,7 +315,6 @@ export default function WarehousesModal({ onClose, warehouse }) {
                   name="country_of_origin"
                   value={editData.country_of_origin || ""}
                   onChange={handleSelectChange}
-                  className={c.select}
                   disabled={!isEditing}
                 >
                   <option value="">Выберите страну</option>
@@ -331,7 +332,6 @@ export default function WarehousesModal({ onClose, warehouse }) {
                   name="country_of_destination"
                   value={editData.country_of_destination || ""}
                   onChange={handleSelectChange}
-                  className={c.select}
                   disabled={!isEditing}
                 >
                   <option value="">Выберите страну</option>
