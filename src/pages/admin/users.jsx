@@ -160,7 +160,7 @@ export default function AdminUsersPage() {
           />
         </div>
       </div>
-      {showMultipleDeleteConfirm && (
+      {/* {showMultipleDeleteConfirm && (
         <div className={s.confirm_delete_modal}>
           <p>Вы уверены, что хотите удалить выбранных пользователей?</p>
           <button onClick={confirmDeleteSelectedUsers}>Да</button>
@@ -168,7 +168,7 @@ export default function AdminUsersPage() {
             Нет
           </button>
         </div>
-      )}
+      )} */}
     </section>
   );
 }

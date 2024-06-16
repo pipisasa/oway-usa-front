@@ -281,7 +281,11 @@ export default function Step1({
       <button className={c.submit_btn} onClick={nextStep}>
         Продолжить
       </button>
-      {showModal && <ImageModal src={selectedImage} onClose={closeModal} />}
+      {showModal && (
+        <div className="absolute">
+          <ImageModal src={selectedImage} onClose={closeModal} />
+        </div>
+      )}
     </div>
   );
 }
