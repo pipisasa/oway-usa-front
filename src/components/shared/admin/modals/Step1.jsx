@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import ImageModal from "./ImageModal";
@@ -26,6 +26,7 @@ const InputField = ({
 
 export default function Step1({
   formData,
+  setFormData,
   handleChange,
   handleImageChange,
   nextStep,
@@ -34,14 +35,19 @@ export default function Step1({
 }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [costs, setCosts] = useState({ standard: 0, express: 0 });
 
   const country_of_origin = [
-    { id: 3, name: "США" },
-    { id: 4, name: "Турция" },
+    { id: "3", name: "США" },
+    { id: "4", name: "Турция" },
+    { id: "5", name: "Кыргызстан" },
+    { id: "6", name: "Россия" },
   ];
   const country_of_destination = [
-    { id: 3, name: "США" },
-    { id: 4, name: "Турция" },
+    { id: "3", name: "США" },
+    { id: "4", name: "Турция" },
+    { id: "5", name: "Кыргызстан" },
+    { id: "6", name: "Россия" },
   ];
 
   const handleSelectChange1 = (e) => {
@@ -72,6 +78,56 @@ export default function Step1({
   const closeModal = () => {
     setShowModal(false);
   };
+
+  useEffect(() => {
+    const width = parseFloat(formData.width);
+    const length = parseFloat(formData.length);
+    const height = parseFloat(formData.height);
+    const weight = parseFloat(formData.weight);
+
+    if (isNaN(width) || isNaN(length) || isNaN(height) || isNaN(weight)) {
+      console.log("Invalid dimensions or weight");
+      return;
+    }
+
+    const volumeWeight = (width * length * height) / 6000;
+    const actualWeight = Math.max(volumeWeight, weight);
+
+    let standardRate = 0;
+
+    if (
+      String(formData.country_of_origin) === "3" &&
+      String(formData.country_of_destination) === "5"
+    ) {
+      standardRate = 12;
+    } else if (
+      String(formData.country_of_origin) === "4" &&
+      String(formData.country_of_destination) === "6"
+    ) {
+      standardRate = 9.5;
+    } else if (
+      String(formData.country_of_origin) === "3" &&
+      String(formData.country_of_destination) === "6"
+    ) {
+      standardRate = 16;
+    }
+
+    const standardCost = standardRate * actualWeight;
+
+    console.log(`Standard cost: $${standardCost.toFixed(2)}`);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      price: standardCost.toFixed(2), // сохраняем стандартную стоимость как price
+    }));
+  }, [
+    formData.width,
+    formData.length,
+    formData.height,
+    formData.weight,
+    formData.country_of_origin,
+    formData.country_of_destination,
+  ]);
 
   return (
     <div className={c.step}>
@@ -153,7 +209,7 @@ export default function Step1({
               <select
                 id="country_of_destination"
                 name="country_of_destination"
-                value={formData?.country_of_destination}
+                value={formData.country_of_destination || ""}
                 onChange={handleSelectChange2}
                 className={c.select}
               >
@@ -179,7 +235,7 @@ export default function Step1({
             <InputField
               id="track_number"
               label="Трек-номер"
-              type="number"
+              type="text"
               value={formData.track_number}
               onChange={handleChange}
               placeholder="Введите ID посылки"

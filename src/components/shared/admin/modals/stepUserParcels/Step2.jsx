@@ -99,7 +99,7 @@ export default function Step2({
             onChange={handleSelectChange1}
             className={c.select}
           >
-            <option value="">Выберите статус</option>
+            <option value="">Выберите склад</option>
             {warehouses.map((warehouse) => (
               <option key={warehouse.id} value={warehouse.id}>
                 {warehouse.name}
@@ -108,14 +108,14 @@ export default function Step2({
           </select>
         </div>
         <div className={c.input}>
-          <label htmlFor="price">Стоимость к оплате</label>
+          <label htmlFor="price">Стоимость к оплате ( $ )</label>
           <input
             type="number"
             name="price"
             id="price"
-            placeholder="Введите сумму"
+            placeholder="Стандартная стоимость"
             value={formData.price}
-            onChange={handleChange}
+            readOnly
           />
         </div>
 

@@ -38,6 +38,8 @@ export default function WarehouseProductsModal() {
     date_arrived: "",
     country_of_origin: 0,
     country_of_destination: 0,
+    standardCost: 0,
+    expressCost: 0,
   });
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -169,6 +171,7 @@ export default function WarehouseProductsModal() {
         return (
           <Step1
             formData={formData}
+            setFormData={setFormData}
             handleChange={handleChange}
             handleImageChange={handleImageChange}
             nextStep={nextStep}
