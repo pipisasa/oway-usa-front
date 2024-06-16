@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import s from "@/styles/components/partials/select/SearchSelectCustom.module.scss";
 import useLocalStorage from "./useLocalStorage";
 import { options, inputComponents } from "./inputComponents";
@@ -74,7 +74,7 @@ const CustomSelect = ({ onFilterChange }) => {
     setDateSentInput,
   };
 
-  const toggleDropdown = (e) => {
+  const toggleDropdown = useCallback((e) => {
     setIsOpen((prev) => {
       const newState = !prev;
       if (!newState) {
@@ -85,76 +85,83 @@ const CustomSelect = ({ onFilterChange }) => {
       return newState;
     });
     e.stopPropagation();
-  };
+  }, []);
 
-  const closeDropdown = (e) => {
+  const closeDropdown = useCallback((e) => {
     setIsOpen(false);
     setSelectedComponent(null);
     setActiveIndex(null);
     setDisplayText("Поиск");
     e.stopPropagation();
-  };
+  }, []);
 
-  const resetAllData = (e) => {
-    setNameInput("");
-    setTrackNumberInput("");
-    setStatusInput("");
-    setCountryOfOriginInput("");
-    setCountryOfDestinationInput("");
-    setWeightInput("");
-    setPriceInput("");
-    setDateSentInput("");
-    setActiveIndex(null);
-    setSelectedComponent(null);
-    setDisplayText("Поиск");
-    e.stopPropagation();
-    onFilterChange("name", "");
-    onFilterChange("track_number", "");
-    onFilterChange("status", "");
-    onFilterChange("country_of_origin", "");
-    onFilterChange("country_of_destination", "");
-    onFilterChange("weight", "");
-    onFilterChange("price", "");
-    onFilterChange("dateSentInput", "");
-  };
+  const resetAllData = useCallback(
+    (e) => {
+      setNameInput("");
+      setTrackNumberInput("");
+      setStatusInput("");
+      setCountryOfOriginInput("");
+      setCountryOfDestinationInput("");
+      setWeightInput("");
+      setPriceInput("");
+      setDateSentInput("");
+      setActiveIndex(null);
+      setSelectedComponent(null);
+      setDisplayText("Поиск");
+      e.stopPropagation();
+      onFilterChange("name", "");
+      onFilterChange("track_number", "");
+      onFilterChange("status", "");
+      onFilterChange("country_of_origin", "");
+      onFilterChange("country_of_destination", "");
+      onFilterChange("weight", "");
+      onFilterChange("price", "");
+      onFilterChange("dateSentInput", "");
+    },
+    [onFilterChange]
+  );
 
-  const handleSearch = (searchText, type) => {
-    const setter = inputs[`set${type.charAt(0).toUpperCase() + type.slice(1)}`];
-    if (setter) {
-      setter(searchText);
-      setDisplayText(`по: ${searchText}`);
-    }
-    switch (type) {
-      case "nameInput":
-        onFilterChange("name", searchText);
-        break;
-      case "trackNumberInput":
-        onFilterChange("track_number", searchText);
-        break;
-      case "statusInput":
-        onFilterChange("status", searchText);
-        break;
-      case "countryOfOriginInput":
-        onFilterChange("country_of_origin", searchText);
-        break;
+  const handleSearch = useCallback(
+    (searchText, type) => {
+      const setter =
+        inputs[`set${type.charAt(0).toUpperCase() + type.slice(1)}`];
+      if (setter) {
+        setter(searchText);
+        setDisplayText(`по: ${searchText}`);
+      }
+      switch (type) {
+        case "nameInput":
+          onFilterChange("name", searchText);
+          break;
+        case "trackNumberInput":
+          onFilterChange("track_number", searchText);
+          break;
+        case "statusInput":
+          onFilterChange("status", searchText);
+          break;
+        case "countryOfOriginInput":
+          onFilterChange("country_of_origin", searchText);
+          break;
+        case "countryOfDestinationInput":
+          onFilterChange("country_of_destination", searchText);
+          break;
+        case "weightInput":
+          onFilterChange("weight", searchText);
+          break;
+        case "priceInput":
+          onFilterChange("price", searchText);
+          break;
+        case "dateSentInput":
+          onFilterChange("date_sent", searchText);
+          break;
+        default:
+          break;
+      }
+    },
+    [inputs, onFilterChange]
+  );
 
-      case "countryOfDestinationInput":
-        onFilterChange("country_of_destination", searchText);
-        break;
-      case "weightInput":
-        onFilterChange("weight", searchText);
-        break;
-      case "priceInput":
-        onFilterChange("price", searchText);
-        break;
-      case "dateSentInput":
-        onFilterChange("date_sent", searchText);
-        break;
-      default:
-        break;
-    }
-  };
-  const performSearch = () => {
+  const performSearch = useCallback(() => {
     onFilterChange("name", nameInput);
     onFilterChange("track_number", trackNumberInput);
     onFilterChange("status", statusInput);
@@ -163,22 +170,37 @@ const CustomSelect = ({ onFilterChange }) => {
     onFilterChange("weight", weightInput);
     onFilterChange("price", priceInput);
     onFilterChange("date_sent", dateSentInput);
-  };
+  }, [
+    nameInput,
+    trackNumberInput,
+    statusInput,
+    countryOfOriginInput,
+    countryOfDestinationInput,
+    weightInput,
+    priceInput,
+    dateSentInput,
+    onFilterChange,
+  ]);
+
   useEffect(() => {
     fetchWarehouses(performSearch);
-  }, []);
-  const renderOptions = (optionsToRender, type) => (
-    <div className={s.block}>
-      {optionsToRender?.map((option) => (
-        <div key={option.id} onClick={() => handleSearch(option.id, type)}>
-          {option.name}
-        </div>
-      ))}
-      <div className={s.border}></div>
-    </div>
+  }, [fetchWarehouses, performSearch]);
+
+  const renderOptions = useCallback(
+    (optionsToRender, type) => (
+      <div className={s.block}>
+        {optionsToRender?.map((option) => (
+          <div key={option.id} onClick={() => handleSearch(option.id, type)}>
+            {option.name}
+          </div>
+        ))}
+        <div className={s.border}></div>
+      </div>
+    ),
+    [handleSearch]
   );
 
-  const renderComponentOptions = () => {
+  const renderComponentOptions = useCallback(() => {
     if (!selectedComponent) return null;
 
     const { title } = selectedComponent.props;
@@ -197,16 +219,16 @@ const CustomSelect = ({ onFilterChange }) => {
       default:
         return null;
     }
-  };
+  }, [selectedComponent, renderOptions]);
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = useCallback((event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsOpen(false);
       setSelectedComponent(null);
       setActiveIndex(null);
       setDisplayText("Поиск");
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -218,34 +240,35 @@ const CustomSelect = ({ onFilterChange }) => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [isOpen]);
+  }, [isOpen, handleClickOutside]);
 
-  const handleButtonClick = (buttonIndex) => {
+  const handleButtonClick = useCallback((buttonIndex) => {
     setActiveButton(buttonIndex);
-  };
-  const navigateToWarehouse = (index) => {
-    const warehouse = warehouses[index];
-    if (warehouse) {
-      const path = `/admin/warehouses/${encodeURIComponent(warehouse.name)}`;
-      router.push(path);
-    }
-  };
+  }, []);
 
-  const handleNext = () => {
-    if (currentWarehouseIndex < warehouses.length - 1) {
-      const newIndex = currentWarehouseIndex + 1;
-      setCurrentWarehouseIndex(newIndex);
-      navigateToWarehouse(newIndex);
-    }
-  };
+  const navigateToWarehouse = useCallback(
+    (index) => {
+      const warehouse = warehouses[index];
+      if (warehouse) {
+        const path = `/admin/warehouses/${encodeURIComponent(warehouse.name)}`;
+        router.push(path);
+      }
+    },
+    [warehouses, router]
+  );
 
-  const handlePrevious = () => {
-    if (currentWarehouseIndex > 0) {
-      const newIndex = currentWarehouseIndex - 1;
-      setCurrentWarehouseIndex(newIndex);
-      navigateToWarehouse(newIndex);
-    }
-  };
+  const handleNext = useCallback(() => {
+    const newIndex = (currentWarehouseIndex + 1) % warehouses.length;
+    setCurrentWarehouseIndex(newIndex);
+    navigateToWarehouse(newIndex);
+  }, [currentWarehouseIndex, warehouses.length, navigateToWarehouse]);
+
+  const handlePrevious = useCallback(() => {
+    const newIndex =
+      (currentWarehouseIndex - 1 + warehouses.length) % warehouses.length;
+    setCurrentWarehouseIndex(newIndex);
+    navigateToWarehouse(newIndex);
+  }, [currentWarehouseIndex, warehouses.length, navigateToWarehouse]);
 
   return (
     <div className={s.main}>
@@ -300,19 +323,17 @@ const CustomSelect = ({ onFilterChange }) => {
         </div>
       </div>
       <div className={s.onebutton}>
-        <button onClick={handlePrevious} disabled={currentWarehouseIndex <= 0}>
+        <button onClick={handlePrevious}>
           <img src="/assets/icons/icon.svg" className={s.oneImage} alt="" />
-          {currentWarehouseIndex > 0
-            ? `${warehouses[currentWarehouseIndex - 1].name}`
-            : "Нет предыдущего"}
+          {
+            warehouses[
+              (currentWarehouseIndex - 1 + warehouses.length) %
+                warehouses.length
+            ]?.name
+          }
         </button>
-        <button
-          onClick={handleNext}
-          disabled={currentWarehouseIndex >= warehouses.length - 1}
-        >
-          {currentWarehouseIndex < warehouses.length - 1
-            ? `${warehouses[currentWarehouseIndex + 1].name}`
-            : "Нет следующего"}
+        <button onClick={handleNext}>
+          {warehouses[(currentWarehouseIndex + 1) % warehouses.length]?.name}
           <img src="/assets/icons/icon.svg" alt="" />
         </button>
       </div>

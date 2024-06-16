@@ -13,8 +13,8 @@ export default function PagesTabs() {
   return (
     <div className={s.tabs}>
       <button
-        className={pathname === "/admin/catalog/shops-catalog" ? s.active : ""}
-        onClick={() => handleTabClick("/admin/catalog/shops-catalog")}
+        className={pathname === "/admin/catalog" ? s.active : ""}
+        onClick={() => handleTabClick("/admin/catalog")}
       >
         Каталог сайтов
       </button>

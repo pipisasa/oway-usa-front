@@ -52,7 +52,7 @@ export default function AdminMobileHeader({ children }) {
       icons: "/assets/icons/admin-icons/requests.svg",
     },
     {
-      href: "/admin/catalog/shops-catalog",
+      href: "/admin/catalog",
       label: "Каталог",
       icons: "/assets/icons/admin-icons/сайты.svg",
     },
@@ -78,7 +78,7 @@ export default function AdminMobileHeader({ children }) {
       return <AddUsersModal />;
     } else if (router.pathname === "/admin/notifications") {
       return <NotificationsModal />;
-    } else if (router.pathname === "/admin/catalog/shops-catalog") {
+    } else if (router.pathname === "/admin/catalog") {
       return <AddShopsModal />;
     } else if (router.pathname === "/admin/catalog/products") {
       return <ProductsModal />;
