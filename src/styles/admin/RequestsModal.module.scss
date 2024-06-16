@@ -92,6 +92,13 @@
       justify-content: space-between;
     }
 
+    select {
+      border-radius: 8px;
+      border: 1px solid var(--gray, #a4a4a4);
+      padding: 12px 20px;
+      width: 100%;
+    }
+
     .change_img {
       border: none !important;
       padding: 0;

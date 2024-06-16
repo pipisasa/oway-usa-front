@@ -15,6 +15,8 @@ const options = {
   country_of_origin: [
     { id: 3, name: "США" },
     { id: 4, name: "Турция" },
+    { id: 5, name: "Кыргызстан" },
+    { id: 6, name: "Россия" },
   ],
 };
 

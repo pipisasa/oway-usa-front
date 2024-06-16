@@ -65,11 +65,6 @@ export default function CostCalculator() {
     calcStyle.paddingTop = "50px";
     calcStyle.paddingBottom = "50px";
   }
-  const containerClass =
-    router.pathname === "/user/calculator" ? "" : "container";
-
-  const containerClass1 =
-    router.pathname === "/user/calculator" ? "" : "qweqwe";
 
   const marginTopStyle =
     router.pathname === "/user/calculator"
@@ -84,7 +79,6 @@ export default function CostCalculator() {
         className={`${s.calc_container} container`}
         data-aos="zoom-out-right"
       >
-        {/* <h1>Калькулятор стоимости</h1> */}
         {showHeader && <h1>Калькулятор стоимости</h1>}
         <div className={s.calc_inner}>
           <div className={s.calc_inner_forms}>

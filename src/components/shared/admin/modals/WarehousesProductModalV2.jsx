@@ -166,6 +166,7 @@ export default function WarehouseProductsModalV2({
         return (
           <Step1
             formData={formData}
+            setFormData={setFormData}
             handleChange={handleChange}
             handleImageChange={handleImageChange}
             nextStep={nextStep}
