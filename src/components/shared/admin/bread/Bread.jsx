@@ -12,6 +12,18 @@ const pathLabelMap = {
     label: "Управление складами",
     href: "/admin/warehouses",
   },
+  catalog: {
+    label: "Каталог сайтов",
+    href: "/catalog",
+  },
+  companies: {
+    label: "Логотипы компаний",
+    href: "/companies",
+  },
+  products: {
+    label: "Товары",
+    href: "/products",
+  },
 };
 
 const warehouses = [

@@ -4,6 +4,7 @@ import ShopsCategory from "@/components/shared/admin/catalog/ShopsCategory";
 import ShopsList from "@/components/shared/admin/catalog/ShopsList";
 import s from "@/styles/pages/admin/AdminShops.module.scss";
 import PagesTabs from "@/components/shared/admin/catalog/PagesTabs";
+import Breadcrumbs from "@/components/shared/admin/bread/Bread";
 
 export default function AdminShopsPage() {
   const [selectedCategory, setSelectedCategory] = useState([]);
@@ -12,9 +13,9 @@ export default function AdminShopsPage() {
   return (
     <div>
       <div className={s.pages_tabs}>
+        <Breadcrumbs />
         <PagesTabs />
       </div>
-
       <CountryTabs
         setSelectedCountry={setSelectedCountry}
         setSelectedCategory={setSelectedCategory}
