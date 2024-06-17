@@ -11,7 +11,6 @@ export default function WarehousesPage() {
   useEffect(() => {
     fetchWarehouses();
   }, []);
-  console.log(warehouses);
 
   return (
     <section className={s.warehouses_container}>
@@ -22,7 +21,11 @@ export default function WarehousesPage() {
         <p>Ошибка: {error}</p>
       ) : (
         warehouses.map((warehouse) => (
-          <WarehousesCard key={warehouse.id} warehouse={warehouse} />
+          <WarehousesCard
+            key={warehouse.id}
+            deleteWarehouse={deleteWarehouse}
+            warehouse={warehouse}
+          />
         ))
       )}
     </section>

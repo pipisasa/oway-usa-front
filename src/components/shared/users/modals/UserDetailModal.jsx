@@ -10,6 +10,8 @@ export default function UserDetailModal({ userData, close }) {
   const [lastName, setLastName] = useState(userData.last_name);
   const [email, setEmail] = useState(userData.email);
   const [phoneNumber, setPhoneNumber] = useState(userData.phone_number);
+  const [created_at, setcreated_at] = useState(userData.created_at);
+  const [address, setaddress] = useState(userData.address);
   const [passportFront, setPassportFront] = useState(userData.front_image);
   const [passportBack, setPassportBack] = useState(userData.back_image);
   const [isEditing, setIsEditing] = useState(false);
@@ -38,6 +40,8 @@ export default function UserDetailModal({ userData, close }) {
       formData.append("last_name", lastName);
       formData.append("email", email);
       formData.append("phone_number", phoneNumber);
+      formData.append("created_at", created_at);
+      formData.append("address", address);
       formData.append(type, file);
 
       const response = await fetch(
@@ -65,6 +69,8 @@ export default function UserDetailModal({ userData, close }) {
     formData.append("last_name", lastName);
     formData.append("email", email);
     formData.append("phone_number", phoneNumber);
+    formData.append("created_at", created_at);
+    formData.append("address", address);
 
     if (imagePreviews.front_image instanceof File) {
       formData.append("front_image", imagePreviews.front_image);
@@ -96,6 +102,8 @@ export default function UserDetailModal({ userData, close }) {
     setLastName(userData.last_name);
     setEmail(userData.email);
     setPhoneNumber(userData.phone_number);
+    setcreated_at(userData.created_at);
+    setaddress(userData.address);
     setPassportFront(userData.front_image);
     setPassportBack(userData.back_image);
     setIsEditing(false);
@@ -159,6 +167,25 @@ export default function UserDetailModal({ userData, close }) {
                   disabled={!isEditing}
                 />
               </div>
+              <div>
+                <label>Дата регистрации</label>
+                <input
+                  type="text"
+                  value={created_at}
+                  onChange={(e) => setcreated_at(e.target.value)}
+                  disabled={!isEditing}
+                />
+              </div>
+              <div>
+                <label>Адрес</label>
+                <input
+                  type="text"
+                  value={address}
+                  placeholder="Адрес не указон"
+                  onChange={(e) => setaddress(e.target.value)}
+                  disabled={!isEditing}
+                />
+              </div>
 
               <div>
                 {!userData.front_image && (
@@ -199,7 +226,7 @@ export default function UserDetailModal({ userData, close }) {
                       onClick={() =>
                         handleViewImage(userData.front_image, "front_image")
                       }
-                      disabled={!isEditing}
+                      // disabled={!isEditing}
                     >
                       Посмотреть картинку
                     </button>
@@ -242,7 +269,7 @@ export default function UserDetailModal({ userData, close }) {
                       onClick={() =>
                         handleViewImage(userData.back_image, "back_image")
                       }
-                      disabled={!isEditing}
+                      // disabled={!isEditing}
                     >
                       Посмотреть картинку
                     </button>

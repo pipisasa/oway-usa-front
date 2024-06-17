@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import ImageModal from "../ImageModal";
+import useCountries from "@/hooks/admin/useCountries";
 
 const InputField = ({
   id,
@@ -36,18 +37,19 @@ export default function Step1({
   const [selectedImage, setSelectedImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [costs, setCosts] = useState({ standard: 0, express: 0 });
+  const { countries } = useCountries();
 
   const country_of_origin = [
-    { id: "3", name: "США" },
-    { id: "4", name: "Турция" },
-    { id: "5", name: "Кыргызстан" },
-    { id: "6", name: "Россия" },
+    { id: 3, name: "США" },
+    { id: 4, name: "Турция" },
+    { id: 8, name: "Кыргызстан" },
+    { id: 9, name: "Россия" },
   ];
   const country_of_destination = [
-    { id: "3", name: "США" },
-    { id: "4", name: "Турция" },
-    { id: "5", name: "Кыргызстан" },
-    { id: "6", name: "Россия" },
+    { id: 3, name: "США" },
+    { id: 4, name: "Турция" },
+    { id: 8, name: "Кыргызстан" },
+    { id: 9, name: "Россия" },
   ];
 
   const handleSelectChange1 = (e) => {
@@ -85,40 +87,40 @@ export default function Step1({
     const height = parseFloat(formData.height);
     const weight = parseFloat(formData.weight);
 
-    if (isNaN(width) || isNaN(length) || isNaN(height) || isNaN(weight)) {
-      console.log("Invalid dimensions or weight");
+    if (isNaN(weight)) {
+      console.log("Invalid weight");
       return;
     }
-
-    const volumeWeight = (width * length * height) / 6000;
+    const volumeWeight =
+      width > 0 && length > 0 && height > 0
+        ? (width * length * height) / 6000
+        : 0;
     const actualWeight = Math.max(volumeWeight, weight);
 
     let standardRate = 0;
-
     if (
       String(formData.country_of_origin) === "3" &&
-      String(formData.country_of_destination) === "5"
+      String(formData.country_of_destination) === "8"
     ) {
       standardRate = 12;
     } else if (
       String(formData.country_of_origin) === "4" &&
-      String(formData.country_of_destination) === "6"
+      String(formData.country_of_destination) === "9"
     ) {
       standardRate = 9.5;
     } else if (
       String(formData.country_of_origin) === "3" &&
-      String(formData.country_of_destination) === "6"
+      String(formData.country_of_destination) === "9"
     ) {
       standardRate = 16;
     }
 
     const standardCost = standardRate * actualWeight;
-
     console.log(`Standard cost: $${standardCost.toFixed(2)}`);
 
     setFormData((prevData) => ({
       ...prevData,
-      price: standardCost.toFixed(2), // сохраняем стандартную стоимость как price
+      price: standardCost.toFixed(2),
     }));
   }, [
     formData.width,

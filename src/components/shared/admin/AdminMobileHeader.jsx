@@ -48,7 +48,7 @@ export default function AdminMobileHeader({ children }) {
     },
     {
       href: "/admin/requests",
-      label: "Входящие запросы",
+      label: "Запрос на выкуп",
       icons: "/assets/icons/admin-icons/requests.svg",
     },
     {

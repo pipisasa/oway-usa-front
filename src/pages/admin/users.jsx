@@ -82,7 +82,7 @@ export default function AdminUsersPage() {
         console.error("Error deleting users:", error);
       });
   };
-
+  console.log(users);
   return (
     <section>
       <div className={s.filter}>
