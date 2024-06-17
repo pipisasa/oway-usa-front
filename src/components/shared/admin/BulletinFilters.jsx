@@ -24,7 +24,7 @@ export default function BulletinFilters({ onSearchChange }) {
           onChange={(e) => onSearchChange(e.target.value)}
         />
       </div>
-      <div className={s.oldest_newest}>
+      {/* <div className={s.oldest_newest}>
         <button
           className={activeFilter === "newest" ? s.active : s.not_active}
           onClick={() => setActiveFilter("newest")}
@@ -37,7 +37,7 @@ export default function BulletinFilters({ onSearchChange }) {
         >
           Старые
         </button>
-      </div>
+      </div> */}
       <div className={s.adv_category}>
         <button
           className={activeCategory === "bulletin" ? s.active : s.not_active}

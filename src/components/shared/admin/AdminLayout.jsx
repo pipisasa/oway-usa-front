@@ -39,7 +39,7 @@ export default function AdminLayout({ children }) {
     },
     {
       href: "/admin/requests",
-      label: "Входящие запросы",
+      label: "Запрос на выкуп",
       icon: "/assets/icons/admin-icons/requests.svg",
     },
     {

@@ -27,8 +27,8 @@ export default function WarehousesModal({ onClose, warehouse }) {
   const [countries, setCountries] = useState([
     { id: 3, name: "США" },
     { id: 4, name: "Турция" },
-    { id: 5, name: "Кыргызстан" },
-    { id: 6, name: "Россия" },
+    { id: 8, name: "Кыргызстан" },
+    { id: 9, name: "Россия" },
   ]);
 
   const [previewImageUrl, setPreviewImageUrl] = useState(
@@ -58,12 +58,12 @@ export default function WarehousesModal({ onClose, warehouse }) {
   });
 
   const statuses = [
-    { id: 8, name: "Доставлено" },
-    { id: 7, name: "Отправлено курьерской службой" },
-    { id: 6, name: "Получен на складе" },
-    { id: 5, name: "Отправлен" },
-    { id: 4, name: "Получен в ПВЗ" },
-    { id: 3, name: "Готов к выдаче" },
+    { id: 8, name: "Доставлено," },
+    { id: 3, name: "Готов к выдаче," },
+    { id: 6, name: "Получен на складе," },
+    { id: 4, name: "Получен в ПВЗ," },
+    { id: 7, name: "Отправлено курьерской службой," },
+    { id: 5, name: "Отправлен," },
   ];
 
   const handleInputChange = (e) => {
@@ -309,7 +309,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
             </div>
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
-                <label htmlFor="country_of_origin">Страна отправки</label>
+                <label htmlFor="country_of_origin">Склады отправки</label>
                 <select
                   id="country_of_origin"
                   name="country_of_origin"
@@ -326,7 +326,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
                 </select>
               </div>
               <div className={s.input_label}>
-                <label htmlFor="country_of_destination">Страна прибытия</label>
+                <label htmlFor="country_of_destination">Склады прибытия</label>
                 <select
                   id="country_of_destination"
                   name="country_of_destination"

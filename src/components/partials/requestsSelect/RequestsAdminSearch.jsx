@@ -214,7 +214,7 @@ const RequestsAdminSearch = ({ onFilterChange }) => {
           )}
         </div>
       </div>
-      <div className={s.twobutton}>
+      {/* <div className={s.twobutton}>
         <button
           className={activeButton === 0 ? s.activeButton : ""}
           onClick={() => handleButtonClick(0)}
@@ -227,7 +227,7 @@ const RequestsAdminSearch = ({ onFilterChange }) => {
         >
           Старые
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

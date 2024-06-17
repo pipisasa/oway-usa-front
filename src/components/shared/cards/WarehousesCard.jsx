@@ -5,14 +5,25 @@ import { useRouter } from "next/router";
 
 export default function WarehousesCard({ warehouse, deleteWarehouse }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
   const router = useRouter();
 
   const handleDelete = async () => {
     const success = await deleteWarehouse(warehouse.id);
     if (success) {
+      setConfirmModalIsOpen(false);
       setModalIsOpen(false);
     } else {
     }
+  };
+
+  const openConfirmModal = () => {
+    setConfirmModalIsOpen(true);
+  };
+
+  const closeAllModals = () => {
+    setConfirmModalIsOpen(false);
+    setModalIsOpen(false);
   };
 
   return (
@@ -37,8 +48,21 @@ export default function WarehousesCard({ warehouse, deleteWarehouse }) {
           <div className={s.modal}>
             <h2>Вы уверены, что хотите удалить склад {warehouse.name}?</h2>
             <div className={s.modal_buttons}>
-              <button onClick={handleDelete}>Да</button>
+              <button onClick={openConfirmModal}>Да</button>
               <button onClick={() => setModalIsOpen(false)}>Отмена</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {confirmModalIsOpen && (
+        <div className={s.modalOverlay}>
+          <div className={s.modal}>
+            <h2>
+              Вы точно-точно уверены, что хотите удалить склад {warehouse.name}?
+            </h2>
+            <div className={s.modal_buttons}>
+              <button onClick={handleDelete}>Да, точно</button>
+              <button onClick={closeAllModals}>Отмена</button>
             </div>
           </div>
         </div>

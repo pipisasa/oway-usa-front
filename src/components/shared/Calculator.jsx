@@ -51,9 +51,8 @@ export default function Calculator() {
   const containerClass =
     router.pathname === "/user/calculator" ? "" : "container";
 
-    const containerClass1 =
+  const containerClass1 =
     router.pathname === "/user/calculator" ? "" : "qweqwe";
-
 
   const marginTopStyle =
     router.pathname === "/user/calculator"
@@ -61,14 +60,12 @@ export default function Calculator() {
       : { marginTop: "120px" };
 
   const showHeader = router.pathname !== "/user/calculator";
-  const calcInnerInfoStyle = router.pathname === "/user/calculator" ? { justifyContent: "initial" } : {};
+  const calcInnerInfoStyle =
+    router.pathname === "/user/calculator" ? { justifyContent: "initial" } : {};
 
-  
   return (
     <div style={marginTopStyle} className={`${s.calc} ${containerClass}`}>
-
       {showHeader && <h1>Калькулятор стоимости</h1>}
-
 
       <div className={s.calc_inner}>
         <div className={s.calc_inner_forms}>
@@ -87,7 +84,7 @@ export default function Calculator() {
                 <option value="Russian">Россия</option>
                 <option value="Kyrgzstan">Кыргызстан</option>
               </select>
-                <CustomSelect
+              <CustomSelect
                 options={["США", "Турция", "Россия", "Кыргызстан"]}
                 value={countryFrom}
                 onChange={(option) => setCountryFrom(option)}

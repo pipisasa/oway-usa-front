@@ -22,7 +22,7 @@ export default function AdminHeader() {
     { href: "/admin/notifications", label: "Уведомления" },
     { href: "/admin/catalog/products", label: "Товары" },
     { href: "/admin/warehouses", label: "Управление складами" },
-    { href: "/admin/requests", label: "Входящие запросы" },
+    { href: "/admin/requests", label: "Запрос на выкуп" },
     { href: "/admin/catalog", label: "Каталог сайтов" },
     { href: "/admin/user-parcels", label: "Ожидаемые посылки" },
     { href: "/admin/catalog/companies", label: "Логотипы компаний" },

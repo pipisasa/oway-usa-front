@@ -337,7 +337,7 @@ const CustomSelect = ({ onFilterChange }) => {
           <img src="/assets/icons/icon.svg" alt="" />
         </button>
       </div>
-      <div className={s.twobutton}>
+      {/* <div className={s.twobutton}>
         <button
           className={activeButton === 0 ? s.activeButton : ""}
           onClick={() => handleButtonClick(0)}
@@ -350,7 +350,7 @@ const CustomSelect = ({ onFilterChange }) => {
         >
           Старые
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
