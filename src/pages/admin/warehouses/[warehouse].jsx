@@ -3,6 +3,7 @@ import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import WarehousesProductsTable from "@/components/shared/admin/WarehousesProductsTable";
 import useWarehouses from "@/hooks/admin/useWarehouses";
 import CustomSelect from "@/components/partials/select/SearchSelectCustom";
+import Breadcrumbs from "@/components/shared/admin/bread/Bread";
 
 export default function AdminWarehousesPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,6 +39,7 @@ export default function AdminWarehousesPage() {
 
   return (
     <div className={s.warehouses_page}>
+      <Breadcrumbs />
       <div className={s.filters}>
         <CustomSelect onFilterChange={handleFilterChange} />
       </div>

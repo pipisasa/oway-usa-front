@@ -4,10 +4,12 @@ import UserCount from "@/components/shared/admin/charts/UserCount";
 import React from "react";
 import s from "@/styles/admin/StatPage.module.scss";
 import ImportedProducts from "@/components/shared/admin/charts/ImportedProducts";
+import Breadcrumbs from "@/components/shared/admin/bread/Bread";
 
 export default function AdminMainPage() {
   return (
     <section className={s.stat_page}>
+      <Breadcrumbs />
       <div className={s.first_block}>
         <UserCount />
         <ImportedKilograms />
