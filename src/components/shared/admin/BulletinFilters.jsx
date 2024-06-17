@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import s from "@/styles/pages/admin/BulletinBoardPage.module.scss";
 import { useRouter } from "next/router";
 
-export default function BulletinFilters() {
+export default function BulletinFilters({ onSearchChange }) {
   const router = useRouter();
   const [activeFilter, setActiveFilter] = useState("newest");
   const [activeCategory, setActiveCategory] = useState("");
@@ -18,7 +18,11 @@ export default function BulletinFilters() {
   return (
     <div className={s.filtr}>
       <div className={s.search}>
-        <input type="text" placeholder="Поиск" />
+        <input
+          type="text"
+          placeholder="Поиск по названию"
+          onChange={(e) => onSearchChange(e.target.value)}
+        />
       </div>
       <div className={s.oldest_newest}>
         <button

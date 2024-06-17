@@ -4,6 +4,7 @@ import useLogo from "@/hooks/admin/useLogo";
 import Loading from "@/components/shared/admin/Loading";
 import CompaniesEditModal from "@/components/shared/admin/modals/CompaniesEditModal";
 import PagesTabs from "@/components/shared/admin/catalog/PagesTabs";
+import Breadcrumbs from "@/components/shared/admin/bread/Bread";
 
 export default function CompaniesAdminPage() {
   const { logos, fetchLogos, deleteLogo, isLoading } = useLogo();
@@ -43,6 +44,7 @@ export default function CompaniesAdminPage() {
   return (
     <>
       <div className={s.pages_tabs}>
+        <Breadcrumbs />
         <PagesTabs />
       </div>
       <section className={s.logo_container}>
