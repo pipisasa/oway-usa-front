@@ -8,6 +8,7 @@ export default function CountryTabs({
 }) {
   const [activeTab, setActiveTab] = useState("Все");
   const { countries } = useCountries();
+  const excludedIds = [8, 9];
 
   const handleTabClick = (country) => {
     setActiveTab(country === "Все" ? "Все" : country.name);
@@ -30,16 +31,18 @@ export default function CountryTabs({
       >
         Все
       </button>
-      {countries.map((country) => (
-        <button
-          key={country.id}
-          className={activeTab === country.name ? s.active : ""}
-          onClick={() => handleTabClick(country)}
-        >
-          <img width={16} height={16} src={country.icon} alt={country.name} />
-          {country.name}
-        </button>
-      ))}
+      {countries
+        .filter((country) => !excludedIds.includes(country.id))
+        .map((country) => (
+          <button
+            key={country.id}
+            className={activeTab === country.name ? s.active : ""}
+            onClick={() => handleTabClick(country)}
+          >
+            <img width={16} height={16} src={country.icon} alt={country.name} />
+            {country.name}
+          </button>
+        ))}
     </div>
   );
 }
