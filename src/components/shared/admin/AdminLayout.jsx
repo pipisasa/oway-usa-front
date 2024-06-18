@@ -74,18 +74,20 @@ export default function AdminLayout({ children }) {
         <nav>
           <ul>
             {links.map((link) => (
-              <li
-                key={link.label}
-                className={isActive(link.href) ? s.active : ""}
-              >
-                <Link
-                  href={link.href}
-                  className={isActive(link.href) ? s.active_icon : ""}
+              <Link href={link.href}>
+                <li
+                  key={link.label}
+                  className={isActive(link.href) ? s.active : ""}
                 >
-                  <img src={link.icon} alt={link.label} />
-                  {link.label}
-                </Link>
-              </li>
+                  <Link
+                    href={link.href}
+                    className={isActive(link.href) ? s.active_icon : ""}
+                  >
+                    <img src={link.icon} alt={link.label} />
+                    {link.label}
+                  </Link>
+                </li>
+              </Link>
             ))}
             <li>
               <button onClick={logout} className={s.logout}>
