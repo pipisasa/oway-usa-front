@@ -79,13 +79,14 @@ export default function AdminLayout({ children }) {
                   key={link.label}
                   className={isActive(link.href) ? s.active : ""}
                 >
-                  <Link
-                    href={link.href}
+                  <img
+                    src={link.icon}
+                    alt={link.label}
                     className={isActive(link.href) ? s.active_icon : ""}
-                  >
-                    <img src={link.icon} alt={link.label} />
+                  />
+                  <span className={isActive(link.href) ? s.active_icon : ""}>
                     {link.label}
-                  </Link>
+                  </span>
                 </li>
               </Link>
             ))}

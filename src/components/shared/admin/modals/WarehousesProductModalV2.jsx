@@ -13,6 +13,8 @@ export default function WarehouseProductsModalV2({
   clientId,
   warehouseId,
   warehouse,
+  comments,
+  tracking_number,
 }) {
   const { addWarehouses } = useWarehouses();
   const { deleteWarehouse } = useUserWarehouses();
@@ -26,13 +28,13 @@ export default function WarehouseProductsModalV2({
     width: "",
     height: "",
     length: "",
-    track_number: "",
+    track_number: tracking_number || "",
     price: "",
     warehouse: 0,
     country: "",
     status: "",
     image: "",
-    comments: "",
+    comments: comments || "",
     unique_id_user: clientId,
     date_sent: "",
     date_arrived: "",
@@ -135,13 +137,13 @@ export default function WarehouseProductsModalV2({
         width: "",
         height: "",
         length: "",
-        track_number: "",
+        track_number: tracking_number || "",
         price: "",
         warehouse: 0,
         country: "",
         status: "",
         image: "",
-        comments: "",
+        comments: comments || "",
         unique_id_user: clientId,
         date_sent: "",
         date_arrived: "",
@@ -165,6 +167,8 @@ export default function WarehouseProductsModalV2({
       case 1:
         return (
           <Step1
+            comments12={comments}
+            tracking_number12={tracking_number}
             formData={formData}
             setFormData={setFormData}
             handleChange={handleChange}

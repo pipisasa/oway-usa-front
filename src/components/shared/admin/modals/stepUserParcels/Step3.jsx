@@ -26,7 +26,6 @@ export default function Step3({
     }
     setSuggestions(filteredWarehouses);
   };
-  console.log(clientId);
   useEffect(() => {
     if (inputValue === "") {
       setSuggestions([]);

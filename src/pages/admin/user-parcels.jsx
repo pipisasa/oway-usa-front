@@ -52,6 +52,8 @@ export default function UserWarehouses() {
                   clientId={warehouse.user.unique_id}
                   warehouseId={warehouse.id}
                   warehouse={warehouse.warehouse}
+                  comments={warehouse.comments}
+                  tracking_number={warehouse.tracking_number}
                   closeModal={closeModal}
                 />
               </td>
