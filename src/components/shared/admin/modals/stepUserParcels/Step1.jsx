@@ -33,6 +33,8 @@ export default function Step1({
   nextStep,
   currentStep,
   setCurrentStep,
+  comments12,
+  tracking_number12,
 }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -238,7 +240,7 @@ export default function Step1({
               id="track_number"
               label="Трек-номер"
               type="text"
-              value={formData.track_number}
+              value={formData.track_number || tracking_number12}
               onChange={handleChange}
               placeholder="Введите ID посылки"
             />
@@ -274,7 +276,7 @@ export default function Step1({
           <InputField
             id="comments"
             label="Комментарий"
-            value={formData.comments}
+            value={formData.comments || comments12}
             onChange={handleChange}
             placeholder="Пришитие комментарий"
           />
