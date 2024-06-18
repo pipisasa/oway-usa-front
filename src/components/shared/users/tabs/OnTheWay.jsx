@@ -22,7 +22,7 @@ export default function OnTheWay() {
     setIsModalVisible(true);
   };
 
-  const is_paid = true;
+  const is_paid = false;
   return (
     <>
       <div className={s.product_table}>
