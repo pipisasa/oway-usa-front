@@ -13,12 +13,12 @@ export default function Step2({
   setSelectedOption2,
 }) {
   const status = [
-    { id: 8, name: "Доставлено," },
-    { id: 3, name: "Готов к выдаче," },
     { id: 6, name: "Получен на складе," },
-    { id: 4, name: "Получен в ПВЗ," },
-    { id: 7, name: "Отправлено курьерской службой," },
     { id: 5, name: "Отправлен," },
+    { id: 4, name: "Получен в ПВЗ," },
+    { id: 3, name: "Готов к выдаче," },
+    { id: 7, name: "Отправлено курьерской службой," },
+    { id: 8, name: "Доставлено," },
   ];
   const warehouses = [
     { id: 7, name: "Турция" },

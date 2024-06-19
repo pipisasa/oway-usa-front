@@ -71,3 +71,32 @@
 .modal_buttons button {
   padding: 10px 20px;
 }
+
+.card1 {
+  border-radius: 12px;
+  background: var(--Colors-Grey-White, #027ddb);
+  color: #fff;
+  padding: 24px;
+
+  .card_info1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+  .view1 {
+    border-radius: 12px;
+    background: var(--blue, #fff);
+    padding: 14px 36px;
+    margin-top: 20px;
+    width: 100%;
+    color: var(--white, var(--Colors-Grey-White, #027ddb));
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+  }
+}
