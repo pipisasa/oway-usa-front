@@ -74,11 +74,8 @@ export default function AdminLayout({ children }) {
         <nav>
           <ul>
             {links.map((link) => (
-              <Link href={link.href}>
-                <li
-                  key={link.label}
-                  className={isActive(link.href) ? s.active : ""}
-                >
+              <Link href={link.href} key={link.label}>
+                <li className={isActive(link.href) ? s.active : ""}>
                   <img
                     src={link.icon}
                     alt={link.label}
