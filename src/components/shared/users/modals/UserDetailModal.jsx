@@ -181,7 +181,7 @@ export default function UserDetailModal({ userData, close }) {
                 <input
                   type="text"
                   value={address}
-                  placeholder="Адрес не указон"
+                  placeholder="Адрес не указан"
                   onChange={(e) => setaddress(e.target.value)}
                   disabled={!isEditing}
                 />

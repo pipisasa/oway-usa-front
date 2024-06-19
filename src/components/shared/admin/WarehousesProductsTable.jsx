@@ -10,6 +10,7 @@ export default function WarehousesProductsTable({
   isLoading,
   error,
   current,
+  currentPage,
   setCurrent,
 }) {
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
@@ -18,6 +19,7 @@ export default function WarehousesProductsTable({
   const [selectAll, setSelectAll] = useState(false);
   const [showMultipleDeleteConfirm, setShowMultipleDeleteConfirm] =
     useState(false);
+  console.log(warehouses);
 
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
@@ -146,8 +148,8 @@ export default function WarehousesProductsTable({
       <div className={s.pagination}>
         <Pagination
           variant="bordered"
-          total={warehouses?.total_pages}
-          initialPage={current}
+          total={Math.ceil(warehouses.count / 6)}
+          initialPage={currentPage}
           onChange={(page) => setCurrent(page)}
         />
       </div>

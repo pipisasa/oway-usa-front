@@ -33,7 +33,8 @@ export default function NumberInputSelect({ placeholder, onSearch }) {
         onKeyDown={handleKeyDown}
       />
       <img
-        src="/assets/icons/search.svg"
+        className={s.borderimg}
+        src="/assets/icons/searchfff.svg"
         alt="search"
         onClick={handleSearchClick}
       />

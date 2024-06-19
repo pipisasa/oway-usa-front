@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import s from "@/styles/components/partials/select/SearchSelectCustom.module.scss";
-import useLocalStorage from "./useLocalStorage";
-import { options, inputComponents } from "./inputComponents";
+import useLocalStorage from "../useLocalStorage";
+import { options, inputComponents } from "../inputComponents";
 import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import { useRouter } from "next/router";
 
@@ -16,14 +16,12 @@ const storageKeys = {
   dateSentInput: "dateSentInput",
 };
 
-const CustomSelect = ({ onFilterChange }) => {
+const WarehousesAllSelect = ({ onFilterChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { fetchWarehouses, warehouses } = useMainWarehouses();
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [displayText, setDisplayText] = useState("Поиск");
   const [activeIndex, setActiveIndex] = useState(null);
-  const [activeButton, setActiveButton] = useState(0);
-  const [currentWarehouseIndex, setCurrentWarehouseIndex] = useState(0);
   const router = useRouter();
 
   const [nameInput, setNameInput] = useLocalStorage(storageKeys.nameInput, "");
@@ -86,40 +84,6 @@ const CustomSelect = ({ onFilterChange }) => {
     });
     e.stopPropagation();
   }, []);
-
-  const closeDropdown = useCallback((e) => {
-    setIsOpen(false);
-    setSelectedComponent(null);
-    setActiveIndex(null);
-    setDisplayText("Поиск");
-    e.stopPropagation();
-  }, []);
-
-  const resetAllData = useCallback(
-    (e) => {
-      setNameInput("");
-      setTrackNumberInput("");
-      setStatusInput("");
-      setCountryOfOriginInput("");
-      setCountryOfDestinationInput("");
-      setWeightInput("");
-      setPriceInput("");
-      setDateSentInput("");
-      setActiveIndex(null);
-      setSelectedComponent(null);
-      setDisplayText("Поиск");
-      e.stopPropagation();
-      onFilterChange("name", "");
-      onFilterChange("track_number", "");
-      onFilterChange("status", "");
-      onFilterChange("country_of_origin", "");
-      onFilterChange("country_of_destination", "");
-      onFilterChange("weight", "");
-      onFilterChange("price", "");
-      onFilterChange("dateSentInput", "");
-    },
-    [onFilterChange]
-  );
 
   const handleSearch = useCallback(
     (searchText, type) => {
@@ -242,10 +206,6 @@ const CustomSelect = ({ onFilterChange }) => {
     };
   }, [isOpen, handleClickOutside]);
 
-  const handleButtonClick = useCallback((buttonIndex) => {
-    setActiveButton(buttonIndex);
-  }, []);
-
   const navigateToWarehouse = useCallback(
     (index) => {
       const warehouse = warehouses[index];
@@ -256,19 +216,6 @@ const CustomSelect = ({ onFilterChange }) => {
     },
     [warehouses, router]
   );
-
-  const handleNext = useCallback(() => {
-    const newIndex = (currentWarehouseIndex + 1) % warehouses.length;
-    setCurrentWarehouseIndex(newIndex);
-    navigateToWarehouse(newIndex);
-  }, [currentWarehouseIndex, warehouses.length, navigateToWarehouse]);
-
-  const handlePrevious = useCallback(() => {
-    const newIndex =
-      (currentWarehouseIndex - 1 + warehouses.length) % warehouses.length;
-    setCurrentWarehouseIndex(newIndex);
-    navigateToWarehouse(newIndex);
-  }, [currentWarehouseIndex, warehouses.length, navigateToWarehouse]);
 
   return (
     <div className={s.main}>
@@ -323,37 +270,8 @@ const CustomSelect = ({ onFilterChange }) => {
           )}
         </div>
       </div>
-      <div className={s.onebutton}>
-        <button onClick={handlePrevious}>
-          <img src="/assets/icons/icon.svg" className={s.oneImage} alt="" />
-          {
-            warehouses[
-              (currentWarehouseIndex - 1 + warehouses.length) %
-                warehouses.length
-            ]?.name
-          }
-        </button>
-        <button onClick={handleNext}>
-          {warehouses[(currentWarehouseIndex + 1) % warehouses.length]?.name}
-          <img src="/assets/icons/icon.svg" alt="" />
-        </button>
-      </div>
-      {/* <div className={s.twobutton}>
-        <button
-          className={activeButton === 0 ? s.activeButton : ""}
-          onClick={() => handleButtonClick(0)}
-        >
-          Новые
-        </button>
-        <button
-          className={activeButton === 1 ? s.activeButton : ""}
-          onClick={() => handleButtonClick(1)}
-        >
-          Старые
-        </button>
-      </div> */}
     </div>
   );
 };
 
-export default CustomSelect;
+export default WarehousesAllSelect;

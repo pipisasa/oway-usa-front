@@ -119,6 +119,7 @@
       top: 0;
       right: 0;
       padding: 20px;
+      border-bottom: 0px;
     }
 
     .btns {
@@ -155,14 +156,14 @@
     thead {
       tr {
         th {
-          color: var(--black, #001526);
+          color: var(--black, #000);
           font-size: 14px;
           font-style: normal;
-          font-weight: 400;
+          font-weight: 500;
           line-height: 140%;
           padding: 24px;
           text-align: left;
-          border-bottom: 1px solid #027ddb33;
+          border-bottom: 1px solid rgba(2, 125, 219, 0.2);
           text-wrap: nowrap;
 
           input {
@@ -178,13 +179,13 @@
         background: #ebf6ff;
       }
       tr {
-        border-bottom: 1px solid #027ddb33;
+        border-bottom: 1px solid rgba(2, 125, 219, 0.2);
 
         td {
-          color: var(--black, #001526);
+          color: var(--black, #000);
           font-size: 14px;
           font-style: normal;
-          font-weight: 400;
+          font-weight: 500;
           line-height: 140%;
           padding: 24px;
 
