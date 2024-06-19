@@ -18,11 +18,11 @@ export default function WarehousesPage() {
     <section className={s.warehouses_container}>
       <AddWarehouses />
       <div>
-        <div className={c.card}>
-          <div className={c.card_info}>
-            <h2>Все склады</h2>
+        <div className={c.card1}>
+          <div className={c.card_info1}>
+            <h2>Все посылки</h2>
           </div>
-          <button className={c.view}>
+          <button className={c.view1}>
             <Link href="/admin/warehouses/warehousesall">Посмотреть</Link>
           </button>
         </div>

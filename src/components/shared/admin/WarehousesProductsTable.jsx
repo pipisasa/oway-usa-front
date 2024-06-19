@@ -3,6 +3,7 @@ import s from "@/styles/pages/admin/AdminWareHousesPage.module.scss";
 import Loading from "./Loading";
 import { Pagination } from "@nextui-org/react";
 import WarehousesModal from "./modals/WarehousesModal";
+import { useRouter } from "next/router";
 
 export default function WarehousesProductsTable({
   warehouses,
@@ -19,7 +20,14 @@ export default function WarehousesProductsTable({
   const [selectAll, setSelectAll] = useState(false);
   const [showMultipleDeleteConfirm, setShowMultipleDeleteConfirm] =
     useState(false);
-  console.log(warehouses);
+  const router = useRouter();
+
+  const predefinedWarehouses = [{ id: 14, name: "Чикаго" }];
+
+  const getWarehouseNameById = (id) => {
+    const warehouse = predefinedWarehouses.find((wh) => wh.id === id);
+    return warehouse ? warehouse.name : "Неизвестный склад";
+  };
 
   const handleDetailsClick = (warehouse) => {
     setSelectedWarehouse(warehouse);
@@ -33,6 +41,7 @@ export default function WarehousesProductsTable({
     deleteMultipleWarehouses([id]);
     setConfirmDeleteWarehouse(null);
   };
+
   const handleMultipleDeleteClick = () => {
     setShowMultipleDeleteConfirm(true);
   };
@@ -82,7 +91,11 @@ export default function WarehousesProductsTable({
             <th>Название посылки</th>
             <th>Страна отправки</th>
             <th>Страна прибытия</th>
-            <th>Вес (кг)</th>
+            <th>
+              {router.pathname === "/admin/warehouses/warehousesall"
+                ? "Склад"
+                : "Вес (кг)"}
+            </th>
             <th>Трек-номер</th>
             <th>Статус</th>
             <th>Действие</th>
@@ -114,7 +127,11 @@ export default function WarehousesProductsTable({
               <td>{warehouse.name}</td>
               <td>{warehouse.country_of_origin?.name}</td>
               <td>{warehouse.country_of_destination?.name}</td>
-              <td>{warehouse.weight}</td>
+              <td>
+                {router.pathname === "/admin/warehouses/warehousesall"
+                  ? getWarehouseNameById(warehouse.warehouse)
+                  : warehouse.weight}
+              </td>
               <td>{warehouse.track_number}</td>
               <td
                 style={{
