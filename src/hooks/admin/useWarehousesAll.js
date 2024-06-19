@@ -5,14 +5,7 @@ import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const warehouseSity = [
-  { id: 7, name: "Турция" },
-  { id: 8, name: "Москва" },
-  { id: 9, name: "Кыргызстан" },
-  { id: 14, name: "Чикаго" },
-];
-
-const useWarehouses = (currentPage, initialFilters = {}) => {
+const useWarehousesAll = (currentPage, initialFilters = {}) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -31,15 +24,10 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
     setIsLoading(true);
     setError(null);
 
-    const warehouseCity = warehouseSity.find(
-      (city) => city.name === countryName
-    );
-    const warehouseCityId = warehouseCity ? warehouseCity.id : null;
-
     const mergedFilters = {
       ...filters,
       ...newFilters,
-      warehouse: warehouseCityId,
+      page: currentPage,
       page_size: 5,
     };
 
@@ -182,4 +170,4 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
   };
 };
 
-export default useWarehouses;
+export default useWarehousesAll;

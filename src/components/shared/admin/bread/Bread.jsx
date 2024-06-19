@@ -24,6 +24,10 @@ const pathLabelMap = {
     label: "Товары",
     href: "/products",
   },
+  warehousesall: {
+    label: "Все посылки",
+    href: "/warehousesall",
+  },
 };
 
 const warehouses = [

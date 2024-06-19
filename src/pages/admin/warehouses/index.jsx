@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import WarehousesCard from "@/components/shared/cards/WarehousesCard";
 import s from "@/styles/pages/admin/Warehouses.module.scss";
+import c from "@/styles/components/shared/cards/WarehousesCard.module.scss";
 import AddWarehouses from "@/components/shared/admin/modals/AddWarehouses";
 import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import Loading from "@/components/shared/admin/Loading";
+import Link from "next/link";
 
 export default function WarehousesPage() {
   const { warehouses, fetchWarehouses, deleteWarehouse, loading, error } =
@@ -15,6 +17,16 @@ export default function WarehousesPage() {
   return (
     <section className={s.warehouses_container}>
       <AddWarehouses />
+      <div>
+        <div className={c.card}>
+          <div className={c.card_info}>
+            <h2>Все склады</h2>
+          </div>
+          <button className={c.view}>
+            <Link href="/admin/warehouses/warehousesall">Посмотреть</Link>
+          </button>
+        </div>
+      </div>
       {loading ? (
         <Loading />
       ) : error ? (

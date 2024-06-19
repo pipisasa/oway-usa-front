@@ -89,7 +89,7 @@ const UserAdminSearch = ({ onFilterChange }) => {
     }
   };
   const performSearch = () => {
-    onFilterChange("first_name", nameInput);
+    onFilterChange("first_name", first_name);
     onFilterChange("last_name", last_name);
     onFilterChange("email", email);
     onFilterChange("phone_number", phone_number);
@@ -136,7 +136,8 @@ const UserAdminSearch = ({ onFilterChange }) => {
                 <div className={s.Search}>
                   <p>Поиск</p>
                   <img
-                    src="/assets/icons/search.svg"
+                    className={s.image_border}
+                    src="/assets/icons/searchfff.svg"
                     alt="search"
                     onClick={(e) => {
                       e.stopPropagation();

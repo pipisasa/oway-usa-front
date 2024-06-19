@@ -31,6 +31,10 @@ export default function AdminHeader() {
       label: "Запросы клиентов за пределами штата Иллинойс",
     },
     {
+      href: "/admin/warehouses/warehousesall",
+      label: "Все посылки",
+    },
+    {
       href: "/admin/bulletin-board",
       label: "Доска объявлений",
     },
@@ -49,6 +53,7 @@ export default function AdminHeader() {
       );
     } else if (
       router.pathname.startsWith("/admin/warehouses/") &&
+      // router.pathname.startsWith("/admin/warehouses/warehousesall") &&
       pathSegments.length >= 3
     ) {
       const warehouseName = decodeURIComponent(pathSegments[3]);
