@@ -59,7 +59,7 @@ export default function EditBulletinBoard({ bulletin }) {
                   onChange={(e) => setText(e.target.value)}
                 />
               </div>
-              <div>
+              <div className={c.selectcontainer}>
                 <label htmlFor="">Категория</label>
                 <select
                   value={itemCategory}

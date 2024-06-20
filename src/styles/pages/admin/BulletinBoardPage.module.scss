@@ -64,6 +64,36 @@
   }
 }
 
+.selectcontainer {
+  margin-bottom: 1rem;
+}
+
+.selectcontainer label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.selectcontainer select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #a4a4a4;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 1rem;
+  outline: none;
+  appearance: none;
+  transition: border-color 0.3s;
+}
+
+.selectcontainer select:focus {
+  // border-color: #007bff;
+}
+
+.selectcontainer option {
+  padding: 0.5rem;
+}
+
 .boards_page {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
