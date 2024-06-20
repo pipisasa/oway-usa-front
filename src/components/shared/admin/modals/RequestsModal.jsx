@@ -21,6 +21,7 @@ export default function RequestsModal({ data, onClose }) {
   const [price, setPrice] = useState(data.price || "");
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
+  const [selectedImageSrc, setSelectedImageSrc] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,6 +52,17 @@ export default function RequestsModal({ data, onClose }) {
     setIsImageModalOpen(false);
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImageSrc(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div
       className={s.modal_backdrop}
@@ -77,10 +89,10 @@ export default function RequestsModal({ data, onClose }) {
             <div className={s.input_label}>
               <label htmlFor="">Статус запроса</label>
 
-              {data.request_status === false ? (
-                <button className={s.button_false}>В ожидании</button>
-              ) : (
+              {data.payment_confirmation ? (
                 <button className={s.button_true}>Обработан</button>
+              ) : (
+                <button className={s.button_false}>В ожидании</button>
               )}
             </div>
           </div>
@@ -133,7 +145,11 @@ export default function RequestsModal({ data, onClose }) {
                   Подтверждение оплаты
                 </label>
                 <label className="custom-file-upload">
-                  <input id="payment_confirmation" type="file" />
+                  <input
+                    id="payment_confirmation"
+                    type="file"
+                    onChange={handleFileChange}
+                  />
                   <img src="/assets/icons/selectimg.svg" alt="select img" />
                   <span>Выбрать картинку</span>
                 </label>
@@ -144,6 +160,17 @@ export default function RequestsModal({ data, onClose }) {
                 </button>
               ) : null}
             </div>
+            {selectedImageSrc && (
+              <div className={s.input_label}>
+                <button
+                  className={s.view_selected_image_btn}
+                  type="button"
+                  onClick={() => setIsImageModalOpen(true)}
+                >
+                  Посмотреть выбранную картинку
+                </button>
+              </div>
+            )}
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
               <ModalContent>
                 {(onClose) => (
@@ -192,7 +219,9 @@ export default function RequestsModal({ data, onClose }) {
           </form>
         </div>
       </section>
-      {isImageModalOpen && <ImageModal src={imageSrc} onClose={closeModal} />}
+      {isImageModalOpen && (
+        <ImageModal src={selectedImageSrc} onClose={closeModal} />
+      )}
     </div>
   );
 }

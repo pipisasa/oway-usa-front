@@ -8,7 +8,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 1000 !important;
+  img {
+    z-index: 1000 !important;
+  }
 }
 
 .image_modal {
