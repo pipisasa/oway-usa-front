@@ -13,8 +13,9 @@ export default function AddBulletinBoard() {
   const [text, setText] = useState("");
   const [itemCategory, setItemCategory] = useState("");
   const [city, setCity] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const { bulletins1 } = useBulletinBoardCategory();
-  const { createBulletinBoard, loading, error } = useBulletinBoard();
+  const { createBulletinBoard, loading, error, bulletins } = useBulletinBoard();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +29,24 @@ export default function AddBulletinBoard() {
       toggleModal();
     }
   };
+
+  const handleCityChange = (e) => {
+    setCity(e.target.value);
+    setShowSuggestions(true);
+  };
+
+  const handleCitySelect = (suggestion) => {
+    setCity(suggestion);
+    setShowSuggestions(false);
+  };
+
+  const filteredCities = bulletins
+    .map((bulletin) => bulletin.city)
+    .filter(
+      (c, index, self) =>
+        c.toLowerCase().startsWith(city.toLowerCase()) &&
+        self.indexOf(c) === index
+    );
 
   return (
     <div className={s.modal}>
@@ -66,14 +85,26 @@ export default function AddBulletinBoard() {
                   ))}
                 </select>
               </div>
-              <div>
+              <div className={s.position_relative}>
                 <label htmlFor="">Город</label>
                 <input
                   type="text"
                   placeholder="Введите город"
                   value={city}
-                  onChange={(e) => setCity(e.target.value)}
+                  onChange={handleCityChange}
                 />
+                {city && showSuggestions && filteredCities.length > 0 && (
+                  <ul className={c.suggestions}>
+                    {filteredCities.map((suggestion, index) => (
+                      <li
+                        key={index}
+                        onClick={() => handleCitySelect(suggestion)}
+                      >
+                        {suggestion}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>

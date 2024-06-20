@@ -115,6 +115,34 @@
   }
 }
 
+.suggestions {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  list-style: none;
+  margin-top: 80px;
+  padding: 0;
+  position: absolute;
+  background: #fff;
+  width: 50%;
+  z-index: 100;
+  max-height: 150px;
+  overflow-y: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background: #f0f0f0;
+}
+
+.position_relative {
+  position: relative;
+}
+
 @media (max-width: 900px) {
   .filtr {
     flex-direction: column;
