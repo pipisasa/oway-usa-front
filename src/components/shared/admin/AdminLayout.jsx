@@ -87,12 +87,12 @@ export default function AdminLayout({ children }) {
                 </li>
               </Link>
             ))}
-            <li>
-              <button onClick={logout} className={s.logout}>
-                <img src="/assets/icons/logout.svg" alt="logout" />
-                Выйти
-              </button>
-            </li>
+            {/* <li> */}
+            <button onClick={logout} className={s.logout}>
+              <img src="/assets/icons/logout.svg" alt="logout" />
+              Выйти
+            </button>
+            {/* </li> */}
           </ul>
         </nav>
       </div>

@@ -27,7 +27,7 @@ export default function IncommingRequests() {
     is_paid: "",
     request_status: "",
   });
-
+  console.log(data);
   useEffect(() => {
     fetchData({ currentPage, ...filters });
   }, [currentPage, filters]);
@@ -112,17 +112,17 @@ export default function IncommingRequests() {
               </td>
               <td>{request.created_at}</td>
               <td>
-                {request.request_status === false ? (
-                  <p style={{ color: "red" }}>В ожидании</p>
-                ) : (
+                {request.payment_confirmation ? (
                   <p style={{ color: "#06DB02" }}>Обработан</p>
+                ) : (
+                  <p style={{ color: "red" }}>В ожидании</p>
                 )}
               </td>
               <td>
-                {request.is_paid === false ? (
-                  <p style={{ color: "red" }}>Не оплачено</p>
-                ) : (
+                {request.payment_confirmation ? (
                   <p style={{ color: "#06DB02" }}>Оплачено</p>
+                ) : (
+                  <p style={{ color: "red" }}>Не оплачено</p>
                 )}
               </td>
               <td className="flex">

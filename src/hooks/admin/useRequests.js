@@ -40,6 +40,7 @@ const useRequests = (currentPage, initialFilters) => {
 
   const updateRequest = async (id, updatedData) => {
     const accessToken = getCookie("accessToken");
+    console.log(updatedData);
     try {
       const response = await fetch(`${API_URL}/api/purchase/update/${id}/`, {
         method: "PATCH",
