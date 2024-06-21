@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "@/styles/admin/BulletinBoardCard.module.scss";
 import EditBulletinBoard from "./modals/EditBulletinBoard";
 import useBulletinBoardCategory from "@/hooks/admin/useBulletinBoardCategory";
@@ -7,9 +7,19 @@ import useBulletinBoard from "@/hooks/admin/useBulletinBoard";
 export default function BulletinBoardCards({ bulletin }) {
   const { deleteBulletinBoard, loading } = useBulletinBoard();
   const { bulletins1 } = useBulletinBoardCategory();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDelete = async () => {
+    setIsModalOpen(false);
     await deleteBulletinBoard(bulletin.id);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const matchingBulletin = bulletins1.find(
@@ -35,7 +45,7 @@ export default function BulletinBoardCards({ bulletin }) {
                 <EditBulletinBoard bulletin={bulletin} />
                 <button
                   className={s.delete}
-                  onClick={handleDelete}
+                  onClick={openModal}
                   disabled={loading}
                 >
                   <img src="/assets/icons/delete.svg" alt="Удалить" />
@@ -47,6 +57,18 @@ export default function BulletinBoardCards({ bulletin }) {
             <span>{bulletin.text}</span>
           </div>
           <span>{bulletin.publication_date}</span>
+        </div>
+      )}
+      {isModalOpen && (
+        <div className={s.modal_overlay}>
+          <div className={s.modal}>
+            <h2>Подтверждение</h2>
+            <p>Вы точно хотите удалить?</p>
+            <div className={s.buttons}>
+              <button onClick={closeModal}>Отмена</button>
+              <button onClick={handleDelete}>Удалить</button>
+            </div>
+          </div>
         </div>
       )}
     </>

@@ -52,6 +52,7 @@ const usePurchase = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      window.location.reload();
       if (!response.ok) throw new Error("Ошибка при отправке данных");
       setPurchaseData(initialState);
       setIsSubmitted(true);
@@ -62,7 +63,7 @@ const usePurchase = () => {
     }
   };
 
-  return { handleChange, submitPurchase, purchaseData, isSubmitted, isLoading }; // Возвращаем isLoading из хука
+  return { handleChange, submitPurchase, purchaseData, isSubmitted, isLoading };
 };
 
 export default usePurchase;

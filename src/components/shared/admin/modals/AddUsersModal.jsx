@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
 import useUsers from "../../../../hooks/admin/useUsers";
+import Arrow from "../../ui/Arrow";
 
 export default function AddUsersModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,7 +79,7 @@ export default function AddUsersModal() {
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
-        Добавить пользователя
+        Добавить пользователя <Arrow />
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <h4>Добавить пользователя</h4>
