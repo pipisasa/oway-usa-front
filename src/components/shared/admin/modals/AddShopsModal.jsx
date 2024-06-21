@@ -5,6 +5,7 @@ import useShops from "../../../../hooks/admin/useShops";
 import useCategories from "@/hooks/admin/useCategories";
 import useCountries from "@/hooks/admin/useCountries";
 import CustomSelect from "@/components/partials/Select";
+import Arrow from "../../ui/Arrow";
 
 export default function AddShopsModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +62,7 @@ export default function AddShopsModal() {
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
-        Добавить сайт
+        Добавить сайт <Arrow />
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <h3>Добавить сайт</h3>

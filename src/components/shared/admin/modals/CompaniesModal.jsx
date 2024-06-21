@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
 import useLogo from "@/hooks/admin/useLogo";
+import Arrow from "../../ui/Arrow";
 
 export default function CompaniesModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,7 @@ export default function CompaniesModal() {
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
-        Добавить логотип
+        Добавить логотип <Arrow />
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <h3>Добавить логотип</h3>

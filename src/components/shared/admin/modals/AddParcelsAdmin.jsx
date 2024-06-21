@@ -4,6 +4,7 @@ import Modal from "../../Modal";
 import CustomSelect from "@/components/partials/Select";
 import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import useWarehouses from "@/hooks/user/useWarehouses";
+import Arrow from "../../ui/Arrow";
 
 export default function AddParcelsAdmin() {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +49,7 @@ export default function AddParcelsAdmin() {
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
-        Добавить товар
+        Добавить товар <Arrow />
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <h3>Добавить товар</h3>

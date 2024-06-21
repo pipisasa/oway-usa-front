@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import s from "@/styles/components/shared/cards/WarehousesCard.module.scss";
 import EditWarehouses from "../admin/modals/EditWarehouses";
 import { useRouter } from "next/router";
+import Arrow from "../ui/Arrow";
 
 export default function WarehousesCard({ warehouse, deleteWarehouse }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -41,7 +42,7 @@ export default function WarehousesCard({ warehouse, deleteWarehouse }) {
         className={s.view}
         onClick={() => router.push(`/admin/warehouses/${warehouse.name}`)}
       >
-        Посмотреть
+        Посмотреть <Arrow />
       </button>
       {modalIsOpen && (
         <div className={s.modalOverlay}>

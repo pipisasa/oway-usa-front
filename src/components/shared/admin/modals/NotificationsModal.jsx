@@ -4,6 +4,7 @@ import Modal from "@/components/shared/Modal";
 import useNotification from "../../../../hooks/admin/useNotification";
 
 import CustomFileInput from "@/components/partials/SelectPhoto";
+import Arrow from "../../ui/Arrow";
 
 export default function NotificationsModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,11 +12,10 @@ export default function NotificationsModal() {
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState(null);
 
-  const [selectedImage, setSelectedImage] = useState(null); // State to store the selected image
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const toggleModal = () => setIsOpen(!isOpen);
   const { addNotification } = useNotification();
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,17 +27,17 @@ export default function NotificationsModal() {
     }
   };
 
-
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
-    setIcon(selectedFile); // Store the file in state
-    setSelectedImage(URL.createObjectURL(selectedFile)); // Set the selected image URL
+    setIcon(selectedFile);
+    setSelectedImage(URL.createObjectURL(selectedFile));
   };
 
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
         Создать уведомление
+        <Arrow />
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <h3>Создать уведомление</h3>
@@ -71,7 +71,13 @@ export default function NotificationsModal() {
           {selectedImage && ( // Render the selected image if it exists
             <div>
               <label htmlFor="">Выбранная картинка:</label>
-              <img  width={300} height={300}  src={selectedImage} alt="selected img" className={s.selected_image} />
+              <img
+                width={300}
+                height={300}
+                src={selectedImage}
+                alt="selected img"
+                className={s.selected_image}
+              />
             </div>
           )}
           <p>

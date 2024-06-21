@@ -7,6 +7,7 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
 import { useRouter } from "next/router";
+import Arrow from "../../ui/Arrow";
 
 const warehouseSity = [
   { id: 7, name: "Турция" },
@@ -214,7 +215,7 @@ export default function WarehouseProductsModal() {
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
-        Добавить посылку
+        Добавить посылку <Arrow />
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
         <h3>Добавить посылку</h3>
