@@ -11,15 +11,15 @@ const inputComponents = (handleSearch, inputs) => [
     ),
     displayText: `по: ${inputs.first_name || "имени"}`,
   },
-  // {
-  //   component: (
-  //     <TextInputSelect
-  //       placeholder="Введите фамилию"
-  //       onSearch={(input) => handleSearch(input, "last_name")}
-  //     />
-  //   ),
-  //   displayText: `по: ${inputs.last_name || "фамилие"}`,
-  // },
+  {
+    component: (
+      <TextInputSelect
+        placeholder="Трек номер	"
+        onSearch={(input) => handleSearch(input, "last_name")}
+      />
+    ),
+    displayText: `по: ${inputs.last_name || "Трек номер	"}`,
+  },
   // {
   //   component: (
   //     <TextInputSelect

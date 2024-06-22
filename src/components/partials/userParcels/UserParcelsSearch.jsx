@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import s from "@/styles/components/partials/select/SearchSelectCustom.module.scss";
 import useLocalStorage from "../select/useLocalStorage";
-import { inputComponents } from "../userSelect/inputComponents";
+import { inputComponents } from "./inputComponents";
 import { useRouter } from "next/router";
 import useUsersAdmin from "@/hooks/admin/useUsers";
 import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
@@ -129,7 +129,7 @@ const UserParcelsSearch = ({ onFilterChange }) => {
   return (
     <div className={s.main}>
       <div className={s.selectContainer} ref={dropdownRef}>
-        <div className={s.selectedOption}>
+        <div className={s.selectedOption1}>
           <div onClick={toggleDropdown}>
             {selectedComponent ? (
               selectedComponent
