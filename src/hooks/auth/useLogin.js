@@ -6,11 +6,11 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const useLogin = () => {
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // Добавляем состояние isLoading для отслеживания загрузки
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const login = async (email, password) => {
-    setIsLoading(true); // Устанавливаем isLoading в true перед отправкой запроса
+    setIsLoading(true);
 
     try {
       const response = await fetch(`${API_URL}/api/users/login/`, {
@@ -38,7 +38,7 @@ const useLogin = () => {
     } catch (error) {
       setError("Произошла ошибка при авторизации");
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
 
@@ -49,7 +49,7 @@ const useLogin = () => {
     }
   }, []);
 
-  return { login, error, isLoading }; 
+  return { login, error, isLoading };
 };
 
 export default useLogin;
