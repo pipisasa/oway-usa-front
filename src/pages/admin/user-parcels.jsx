@@ -3,7 +3,7 @@ import s from "@/styles/pages/user/MyWarehouse.module.scss";
 import Loading from "@/components/shared/admin/Loading";
 import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
 import WarehouseProductsModalV2 from "@/components/shared/admin/modals/WarehousesProductModalV2";
-import UserParcelsSearch from "@/components/partials/userParcels/userParcelsSearch";
+import UserParcelsSearch from "@/components/partials/userParcels/UserParcelsSearch";
 
 export default function UserWarehouses() {
   const { warehouses, loading, error, deleteWarehouse } = useUserWarehouses();
