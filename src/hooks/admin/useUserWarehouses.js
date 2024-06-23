@@ -2,16 +2,17 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
 
-const useUserWarehouses = () => {
+const useUserWarehouses = (initialFilters = {}) => {
   const [warehouses, setWarehouses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [filters, setFilters] = useState(initialFilters);
 
   useEffect(() => {
-    fetchWarehouses();
-  }, []);
+    fetchWarehouses(filters);
+  }, [filters]);
 
-  const fetchWarehouses = async () => {
+  const fetchWarehouses = async (filters) => {
     setLoading(true);
     try {
       const accessToken = getCookie("accessToken");
@@ -21,6 +22,7 @@ const useUserWarehouses = () => {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
+          params: filters,
         }
       );
       setWarehouses(response.data.results);
@@ -46,7 +48,7 @@ const useUserWarehouses = () => {
     }
   };
 
-  return { warehouses, loading, error, deleteWarehouse };
+  return { warehouses, loading, error, setFilters, deleteWarehouse };
 };
 
 export default useUserWarehouses;

@@ -33,6 +33,9 @@ export default function AddWarehouses() {
         zip_code: event.target.zip_code.value,
         phone_number: event.target.phone_number.value,
         mail: event.target.mail.value,
+        unit: event.target.unit.value,
+        city: event.target.city.value,
+        country: event.target.country.value,
       };
 
       await createWarehouse(formData);
@@ -84,6 +87,21 @@ export default function AddWarehouses() {
                   label="Почта"
                   placeholder="Введите почту"
                   name="mail"
+                />
+                <InputField
+                  label="Unit"
+                  placeholder="Введите unit"
+                  name="unit"
+                />
+                <InputField
+                  label="Город"
+                  placeholder="Введите город"
+                  name="city"
+                />
+                <InputField
+                  label="Страна"
+                  placeholder="Введите страну"
+                  name="country"
                 />
               </div>
             </div>

@@ -53,6 +53,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
     address: warehouse.address,
     comments: warehouse.comments,
     status: currentStatus,
+    track_number: warehouse.track_number,
     country_of_origin: warehouse.country_of_origin.id,
     country_of_destination: warehouse.country_of_destination.id,
   });
@@ -94,6 +95,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
       country_of_destination: warehouse.country_of_destination.id,
       address: warehouse.address,
       comments: warehouse.comments,
+      track_number: warehouse.track_number,
       status: currentStatus,
     });
   };
@@ -249,6 +251,17 @@ export default function WarehousesModal({ onClose, warehouse }) {
                 <input
                   id="weight"
                   value={editData.weight || ""}
+                  onChange={handleInputChange}
+                  readOnly={!isEditing}
+                />
+              </div>
+            </div>
+            <div className={s.flex_inputs}>
+              <div className={s.input_label}>
+                <label htmlFor="track_number">Трек номер</label>
+                <input
+                  id="track_number"
+                  value={editData.track_number || ""}
                   onChange={handleInputChange}
                   readOnly={!isEditing}
                 />

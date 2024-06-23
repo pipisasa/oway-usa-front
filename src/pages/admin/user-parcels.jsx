@@ -6,21 +6,24 @@ import WarehouseProductsModalV2 from "@/components/shared/admin/modals/Warehouse
 import UserParcelsSearch from "@/components/partials/userParcels/UserParcelsSearch";
 
 export default function UserWarehouses() {
-  const { warehouses, loading, error, deleteWarehouse } = useUserWarehouses();
+  const { warehouses, loading, error, setFilters, deleteWarehouse } =
+    useUserWarehouses();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const closeModal = () => {
     setIsModalVisible(false);
   };
 
-  console.log(warehouses);
+  const handleFilterChange = (key, value) => {
+    setFilters((prevFilters) => ({ ...prevFilters, [key]: value }));
+  };
+
   if (loading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
-
   return (
     <section>
       <div className={s.filter}>
-        <UserParcelsSearch />
+        <UserParcelsSearch onFilterChange={handleFilterChange} />
       </div>
       <div className={s.my}>
         <table>

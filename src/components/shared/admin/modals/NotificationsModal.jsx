@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "@/components/shared/Modal";
+
 import useNotification from "../../../../hooks/admin/useNotification";
 
 import CustomFileInput from "@/components/partials/SelectPhoto";
 import Arrow from "../../ui/Arrow";
+import ImageModal from "./ImageModal";
 
 export default function NotificationsModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,8 +15,11 @@ export default function NotificationsModal() {
   const [icon, setIcon] = useState(null);
 
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   const toggleModal = () => setIsOpen(!isOpen);
+  const toggleImageModal = () => setIsImageModalOpen(!isImageModalOpen);
+
   const { addNotification } = useNotification();
 
   const handleSubmit = async (e) => {
@@ -31,6 +36,12 @@ export default function NotificationsModal() {
     const selectedFile = e.target.files[0];
     setIcon(selectedFile);
     setSelectedImage(URL.createObjectURL(selectedFile));
+  };
+
+  const handleDeleteImage = () => {
+    setIcon(null);
+    setSelectedImage(null);
+    setIsImageModalOpen(false);
   };
 
   return (
@@ -68,17 +79,14 @@ export default function NotificationsModal() {
               <span>Выбрать картинку</span>
             </label>
           </div>
-          {selectedImage && ( // Render the selected image if it exists
-            <div>
-              <label htmlFor="">Выбранная картинка:</label>
-              <img
-                width={300}
-                height={300}
-                src={selectedImage}
-                alt="selected img"
-                className={s.selected_image}
-              />
-            </div>
+          {selectedImage && (
+            <button
+              type="button"
+              onClick={toggleImageModal}
+              className={s.view_btn}
+            >
+              Посмотреть на картинку
+            </button>
           )}
           <p>
             Формат PNG, JPEG, JPG | Максимальный размер файла 5 МБ | 512x512
@@ -90,6 +98,13 @@ export default function NotificationsModal() {
           </button>
         </div>
       </Modal>
+      {isImageModalOpen && selectedImage && (
+        <ImageModal
+          src={selectedImage}
+          onClose={toggleImageModal}
+          onDelete={handleDeleteImage}
+        />
+      )}
     </div>
   );
 }

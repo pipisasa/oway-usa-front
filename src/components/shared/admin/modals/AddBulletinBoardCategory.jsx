@@ -16,24 +16,20 @@ export default function AddBulletinCategoryBoard() {
   const { createBulletinBoard, loading, error } = useBulletinBoardCategory();
 
   const colors = [
-    { color: "gray", hex: "#808080" },
-    { color: "blue", hex: "#414BB2" },
-    { color: "gold", hex: "#ECC819" },
-    { color: "black", hex: "#1A1A1A" },
-    { color: "brown", hex: "#57480E" },
-    { color: "turquoise", hex: "#10A689" },
-    { color: "red", hex: "#F14725" },
-    { color: "pink", hex: "#F2439B" },
-    { color: "purple", hex: "#652CB3" },
-    { color: "sky", hex: "#6AD9E6" },
-    { color: "yellow", hex: "#FEF445" },
-    { color: "white", hex: "#ffffff" },
-    { color: "light-gray", hex: "#F2F2F2" },
-    { color: "olive-green", hex: "#708238" },
-    { color: "coral", hex: "#FF7F50" },
-    { color: "teal", hex: "#008080" },
-    { color: "maroon", hex: "#800000" },
-    { color: "navy", hex: "#000080" },
+    { color: "orange", hex: "#FF7C02" },
+    { color: "blue", hex: "#4169E1" },
+    { color: "gold", hex: "#FFD832" },
+    { color: "black", hex: "#FF5E97" },
+    { color: "brown", hex: "#00B4AC" },
+    { color: "turquoise", hex: "#FF3A3A" },
+    { color: "red", hex: "#652CB3" },
+    { color: "pink", hex: "#1400FF" },
+    { color: "purple", hex: "#21E8FF" },
+    { color: "sky", hex: "#40FA12" },
+    { color: "yellow", hex: "#1AFFAD" },
+    { color: "white", hex: "#E16C00" },
+    { color: "light-gray", hex: "#07BE45" },
+    { color: "olive-green", hex: "#FFFFFF" },
   ];
 
   const isDark = (hex) => {

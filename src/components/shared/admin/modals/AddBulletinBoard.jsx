@@ -61,7 +61,7 @@ export default function AddBulletinBoard() {
           <div className={s.shops_form}>
             <div className={s.second_input_block}>
               <div>
-                <label htmlFor="">Название объявления</label>
+                <label htmlFor="">Cодержание объявления</label>
                 <input
                   type="text"
                   placeholder="Введите название"
