@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import { Pagination } from "@nextui-org/react";
 import WarehousesModal from "./modals/WarehousesModal";
 import { useRouter } from "next/router";
+import EditModal from "./modals/EditModal";
 
 export default function WarehousesProductsTable({
   warehouses,
@@ -20,6 +21,7 @@ export default function WarehousesProductsTable({
   const [selectAll, setSelectAll] = useState(false);
   const [showMultipleDeleteConfirm, setShowMultipleDeleteConfirm] =
     useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const router = useRouter();
 
   const predefinedWarehouses = [{ id: 14, name: "Чикаго" }];
@@ -68,6 +70,10 @@ export default function WarehousesProductsTable({
     setSelectAll(!selectAll);
   };
 
+  const handleEditClick = () => {
+    setShowEditModal(true);
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -107,6 +113,9 @@ export default function WarehousesProductsTable({
                 onClick={handleMultipleDeleteClick}
               >
                 <img src="/assets/icons/admin-icons/Delete.svg" alt="" />
+              </button>
+              <button className={s.all_delete} onClick={handleEditClick}>
+                <img src="/assets/icons/Edit123.svg" alt="" />
               </button>
             </th>
           </tr>
@@ -213,6 +222,15 @@ export default function WarehousesProductsTable({
               </button>
             </div>
           </div>
+        </>
+      )}
+      {showEditModal && (
+        <>
+          <div className={s.modalBackdrop}></div>
+          <EditModal
+            onClose={() => setShowEditModal(false)}
+            selectedWarehouses={selectedWarehouses}
+          />
         </>
       )}
     </div>

@@ -7,11 +7,19 @@
 
   .search {
     width: 100%;
+    display: flex;
+    gap: 20px;
     input {
       padding: 9px 20px;
-      min-width: 100%;
+      min-width: 85%;
       border-radius: 6px;
       background: var(--Colors-Grey-White, #fff);
+    }
+    button {
+      padding: 12px 24px;
+      border-radius: 8px;
+      background: #027ddb;
+      color: #fff;
     }
   }
 
@@ -177,6 +185,9 @@
   .filtr {
     flex-direction: column;
     gap: 20px;
+    .search {
+      flex-direction: column;
+    }
   }
   .boards_page {
     grid-template-columns: repeat(2, 1fr);

@@ -35,7 +35,6 @@ export default function Step1({
 }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [costs, setCosts] = useState({ standard: 0, express: 0 });
 
   const country_of_origin = [
     { id: 3, name: "США" },
@@ -76,6 +75,15 @@ export default function Step1({
   };
 
   const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleDeleteImage = () => {
+    setSelectedImage(null);
+    setFormData((prevData) => ({
+      ...prevData,
+      image: null,
+    }));
     setShowModal(false);
   };
 
@@ -281,9 +289,14 @@ export default function Step1({
       <button className={c.submit_btn} onClick={nextStep}>
         Продолжить
       </button>
+
       {showModal && (
         <div className="absolute">
-          <ImageModal src={selectedImage} onClose={closeModal} />
+          <ImageModal
+            src={selectedImage}
+            onClose={closeModal}
+            onDelete={handleDeleteImage}
+          />
         </div>
       )}
     </div>

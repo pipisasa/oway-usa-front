@@ -68,6 +68,14 @@ export default function Step1({
     });
   };
 
+  const handleDeleteImage = () => {
+    setSelectedImage(null);
+    setFormData((prevData) => ({
+      ...prevData,
+      image: null,
+    }));
+    setShowModal(false);
+  };
   const handleImageSelect = (e) => {
     handleImageChange(e);
     const file = e.target.files[0];
@@ -285,7 +293,13 @@ export default function Step1({
       <button className={c.submit_btn} onClick={nextStep}>
         Продолжить
       </button>
-      {showModal && <ImageModal src={selectedImage} onClose={closeModal} />}
+      {showModal && (
+        <ImageModal
+          onDelete={handleDeleteImage}
+          src={selectedImage}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 }

@@ -9,9 +9,7 @@ import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
 const storageKeys = {
   first_name: "first_name",
   unique_id: "unique_id",
-  last_name: "last_name",
-  email: "email",
-  phone_number: "phone_number",
+  tracking_number: "tracking_number",
 };
 
 const UserParcelsSearch = ({ onFilterChange }) => {
@@ -29,7 +27,10 @@ const UserParcelsSearch = ({ onFilterChange }) => {
     ""
   );
   const [unique_id, setunique_id] = useLocalStorage(storageKeys.unique_id, "");
-  const [last_name, setlast_name] = useLocalStorage(storageKeys.last_name, "");
+  const [tracking_number, settracking_number] = useLocalStorage(
+    storageKeys.tracking_number,
+    ""
+  );
   const [phone_number, setphone_number] = useLocalStorage(
     storageKeys.phone_number,
     ""
@@ -40,11 +41,11 @@ const UserParcelsSearch = ({ onFilterChange }) => {
   const inputs = {
     first_name,
     unique_id,
-    last_name,
+    tracking_number,
     email,
     phone_number,
     setphone_number,
-    setlast_name,
+    settracking_number,
     setemail,
     setunique_id,
     setfirst_name,
@@ -73,30 +74,24 @@ const UserParcelsSearch = ({ onFilterChange }) => {
       case "first_name":
         onFilterChange("first_name", searchText);
         break;
-      case "last_name":
-        onFilterChange("last_name", searchText);
-        break;
-      case "email":
-        onFilterChange("email", searchText);
-        break;
-      case "phone_number":
-        onFilterChange("phone_number", searchText);
+      case "tracking_number":
+        onFilterChange("tracking_number", searchText);
         break;
       case "unique_id":
-        onFilterChange("unique_id", searchText);
+        onFilterChange("user.unique_id", searchText);
         break;
       default:
         console.log(`No filter matched for type: ${type}`);
         break;
     }
   };
+
   const performSearch = () => {
     onFilterChange("first_name", first_name);
-    onFilterChange("last_name", last_name);
-    onFilterChange("email", email);
-    onFilterChange("phone_number", phone_number);
-    onFilterChange("unique_id", unique_id);
+    onFilterChange("tracking_number", tracking_number);
+    onFilterChange("user.unique_id", unique_id);
   };
+
   useEffect(() => {
     fetchUsers(performSearch);
   }, []);

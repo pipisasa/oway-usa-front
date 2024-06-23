@@ -15,29 +15,11 @@ const inputComponents = (handleSearch, inputs) => [
     component: (
       <TextInputSelect
         placeholder="Трек номер	"
-        onSearch={(input) => handleSearch(input, "last_name")}
+        onSearch={(input) => handleSearch(input, "tracking_number")}
       />
     ),
-    displayText: `по: ${inputs.last_name || "Трек номер	"}`,
+    displayText: `по: ${inputs.tracking_number || "Трек номер	"}`,
   },
-  // {
-  //   component: (
-  //     <TextInputSelect
-  //       placeholder="Введите почту"
-  //       onSearch={(input) => handleSearch(input, "email")}
-  //     />
-  //   ),
-  //   displayText: `по: ${inputs.email || "почта"}`,
-  // },
-  // {
-  //   component: (
-  //     <TextInputSelect
-  //       placeholder="Введите номер телефона"
-  //       onSearch={(input) => handleSearch(input, "phone_number")}
-  //     />
-  //   ),
-  //   displayText: `по: ${inputs.phone_number || "номер телефона"}`,
-  // },
   {
     component: (
       <TextInputSelect

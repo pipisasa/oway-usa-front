@@ -32,13 +32,18 @@ const useBulletinBoard = () => {
     }
   };
 
-  const getBulletinBoards = async () => {
+  const getBulletinBoards = async (searchText = "") => {
     setLoading(true);
     setError(null);
 
     try {
       const response = await axios.get(
-        "https://api-owayusa.com/api/items/list/"
+        "https://api-owayusa.com/api/items/list/",
+        {
+          params: {
+            text: searchText,
+          },
+        }
       );
       setBulletins(response.data.results);
       setLoading(false);

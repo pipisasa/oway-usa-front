@@ -52,7 +52,6 @@ const usePurchase = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      window.location.reload();
       if (!response.ok) throw new Error("Ошибка при отправке данных");
       setPurchaseData(initialState);
       setIsSubmitted(true);
