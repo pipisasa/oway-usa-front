@@ -5,7 +5,6 @@ import { Pagination } from "@nextui-org/react";
 import WarehousesModal from "./modals/WarehousesModal";
 import { useRouter } from "next/router";
 import EditModal from "./modals/EditModal";
-import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 
 export default function WarehousesProductsTable({
   warehouses1,
