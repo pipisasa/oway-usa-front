@@ -62,6 +62,11 @@ export default function AdminLayout({ children }) {
       label: "Доска объявлений",
       icon: "/assets/icons/admin-icons/bulletin_board.svg",
     },
+    {
+      href: "/admin/contact",
+      label: "Адреса складов",
+      icon: "/assets/icons/user-icons/доставка.svg",
+    },
   ];
 
   return (
