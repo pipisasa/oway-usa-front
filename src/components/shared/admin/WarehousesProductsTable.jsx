@@ -5,9 +5,10 @@ import { Pagination } from "@nextui-org/react";
 import WarehousesModal from "./modals/WarehousesModal";
 import { useRouter } from "next/router";
 import EditModal from "./modals/EditModal";
+import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 
 export default function WarehousesProductsTable({
-  warehouses,
+  warehouses1,
   deleteMultipleWarehouses,
   isLoading,
   error,
@@ -23,7 +24,6 @@ export default function WarehousesProductsTable({
     useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const router = useRouter();
-
   const predefinedWarehouses = [{ id: 14, name: "Чикаго" }];
 
   const getWarehouseNameById = (id) => {
@@ -64,7 +64,7 @@ export default function WarehousesProductsTable({
       setSelectedWarehouses([]);
     } else {
       setSelectedWarehouses(
-        warehouses.results.map((warehouse) => warehouse.id)
+        warehouses1.results.map((warehouse) => warehouse.id)
       );
     }
     setSelectAll(!selectAll);
@@ -121,7 +121,7 @@ export default function WarehousesProductsTable({
           </tr>
         </thead>
         <tbody>
-          {warehouses.results?.map((warehouse) => (
+          {warehouses1.results?.map((warehouse) => (
             <tr
               className={warehouse.is_parcels === true ? s.parcel_tr : ""}
               key={warehouse.id}
@@ -174,7 +174,7 @@ export default function WarehousesProductsTable({
       <div className={s.pagination}>
         <Pagination
           variant="bordered"
-          total={Math.ceil(warehouses.count / 6)}
+          total={Math.ceil(warehouses1.count / 6)}
           initialPage={currentPage}
           onChange={(page) => setCurrent(page)}
         />
