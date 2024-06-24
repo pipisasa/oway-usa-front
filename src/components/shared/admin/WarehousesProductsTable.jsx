@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import EditModal from "./modals/EditModal";
 
 export default function WarehousesProductsTable({
-  warehouses1,
+  warehouses,
   deleteMultipleWarehouses,
   isLoading,
   error,
@@ -63,7 +63,7 @@ export default function WarehousesProductsTable({
       setSelectedWarehouses([]);
     } else {
       setSelectedWarehouses(
-        warehouses1.results.map((warehouse) => warehouse.id)
+        warehouses.results.map((warehouse) => warehouse.id)
       );
     }
     setSelectAll(!selectAll);
@@ -120,7 +120,7 @@ export default function WarehousesProductsTable({
           </tr>
         </thead>
         <tbody>
-          {warehouses1.results?.map((warehouse) => (
+          {warehouses.results?.map((warehouse) => (
             <tr
               className={warehouse.is_parcels === true ? s.parcel_tr : ""}
               key={warehouse.id}
@@ -173,7 +173,7 @@ export default function WarehousesProductsTable({
       <div className={s.pagination}>
         <Pagination
           variant="bordered"
-          total={Math.ceil(warehouses1.count / 6)}
+          total={Math.ceil(warehouses.count / 6)}
           initialPage={currentPage}
           onChange={(page) => setCurrent(page)}
         />
