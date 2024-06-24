@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import s from "@/styles/pages/user/UserWarehouses.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
+import useContacts from "@/hooks/useContacts";
 
 export default function Contacts() {
   const [isAuthorized, setIsAuthorized] = useState(null);
+  const { contacts, loading, error, deleteContact } = useContacts();
 
   useEffect(() => {
     setIsAuthorized(getCookie("accessToken") !== null);
@@ -216,6 +218,70 @@ export default function Contacts() {
                   <img src="/assets/icons/contact_zip-code.svg" alt="icons" />
                   <span>Zip code</span>
                   <h5>{data.zip}</h5>
+                </div>
+                <div>
+                  <img src="/assets/icons/contact_email.svg" alt="icons" />
+                  <span>Email</span>
+                  <h5>{data.email}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+        {contacts.results?.map((data, index) => (
+          <div key={index} className={s.address_card}>
+            <div className={s.card_header}>
+              <div>
+                <img
+                  src={`https://api-owayusa.com/${data.image}`}
+                  alt={data.title}
+                />
+                <h3>Пункты приема в {data.name}:</h3>
+              </div>
+              {/* <button
+                onClick={() => deleteContact(data.id)}
+                className={s.delete_button}
+              >
+                <img src="/assets/icons/delete.svg" alt="delete" />
+              </button> */}
+            </div>
+
+            <div className={s.card_content}>
+              <div className={s.content}>
+                <div>
+                  <img src="/assets/icons/contact_address.svg" alt="icons" />
+                  <span>Address</span>
+                  <h5>{data.address}</h5>
+                </div>
+                <div>
+                  <img
+                    src="/assets/icons/united-states-of-america.svg"
+                    alt="icons"
+                  />
+                  <span>State</span>
+                  <h5>{data.state}</h5>
+                </div>
+                <div>
+                  <img src="/assets/icons/contact_call.svg" alt="icons" />
+                  <span>Number</span>
+                  <h5>{data.number}</h5>
+                </div>
+                <div className={s.unit}>
+                  <img src="/assets/icons/unit.svg" alt="icons" />
+                  <span>Unit</span>
+                  <h5>{data.unit}</h5>
+                </div>
+              </div>
+              <div className={s.content}>
+                <div>
+                  <img src="/assets/icons/city.svg" alt="icons" />
+                  <span>City</span>
+                  <h5>{data.city}</h5>
+                </div>
+                <div>
+                  <img src="/assets/icons/contact_zip-code.svg" alt="icons" />
+                  <span>Zip code</span>
+                  <h5>{data.zip_code}</h5>
                 </div>
                 <div>
                   <img src="/assets/icons/contact_email.svg" alt="icons" />

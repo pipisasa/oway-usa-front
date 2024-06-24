@@ -42,6 +42,7 @@ export default function AdminHeader() {
       href: "/admin/board-category",
       label: "Доска объявлений - Категории",
     },
+    { href: "/admin/contact", label: "Адреса складов" },
   ];
 
   const getPageHeader = () => {

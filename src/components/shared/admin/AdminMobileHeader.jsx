@@ -71,6 +71,11 @@ export default function AdminMobileHeader({ children }) {
       label: "Доска объявлений",
       icons: "/assets/icons/admin-icons/bulletin_board.svg",
     },
+    {
+      href: "/admin/contact",
+      label: "Адреса складов",
+      icons: "/assets/icons/user-icons/склад.svg",
+    },
   ];
 
   const renderModal = () => {
