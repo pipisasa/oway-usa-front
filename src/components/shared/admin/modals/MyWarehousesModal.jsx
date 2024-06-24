@@ -14,9 +14,9 @@ export default function MyWarehousesModal() {
 
   const toggleModal = () => setIsOpen(!isOpen);
   const warehouses = [
-    { id: 7, name: "Турция" },
-    { id: 8, name: "Москва" },
-    { id: 9, name: "Кыргызстан" },
+    { id: 24, name: "Турция" },
+    { id: 23, name: "Москва" },
+    { id: 22, name: "Кыргызстан" },
     { id: 14, name: "Чикаго" },
   ];
 
