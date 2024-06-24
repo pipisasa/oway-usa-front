@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 @import url("/public/Helvetica/COPYRIGHT.txt");
+
 @font-face {
   font-family: "Helvetica";
-  src: url("/public/Helvetica.woff2") format("woff2"),
-    url("/public/Helvetica.woff") format("woff");
+  src: url("/public/Helvetica/Helvetica.woff2") format("woff2"),
+    url("/public/Helvetica/Helvetica.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -119,6 +120,7 @@ body {
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  font-family: "Helvetica", sans-serif;
 }
 
 body {

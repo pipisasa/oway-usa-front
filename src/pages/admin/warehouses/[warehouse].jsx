@@ -51,7 +51,7 @@ export default function AdminWarehousesPage() {
         isLoading={isLoading}
         error={error}
         count={count}
-        warehouses={warehouses}
+        warehouses1={warehouses}
         fetchWarehouses={fetchWarehouses}
         deleteWarehouse={deleteWarehouse}
         filters={filters}
