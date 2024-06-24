@@ -39,8 +39,8 @@ export default function ContactsAdmin() {
 
   const openModal = (contact) => {
     setCurrentContact(contact);
-    setUpdatedData(contact); // Set the current contact as the initial updated data
-    setUpdatedImage(null); // Reset the updated image
+    setUpdatedData(contact);
+    setUpdatedImage(null);
     setModalIsOpen(true);
   };
 
@@ -64,16 +64,14 @@ export default function ContactsAdmin() {
   };
 
   const handleUpdate = async () => {
-    if (updatedImage) {
-      const formData = new FormData();
-      formData.append("image", updatedImage);
-      for (const key in updatedData) {
-        formData.append(key, updatedData[key]);
-      }
-      await updateContact(currentContact.id, formData);
-    } else {
-      await updateContact(currentContact.id, updatedData);
+    const formData = new FormData();
+    for (const key in updatedData) {
+      formData.append(key, updatedData[key]);
     }
+    if (updatedImage) {
+      formData.append("image", updatedImage);
+    }
+    await updateContact(currentContact.id, formData);
     closeModal();
   };
 
@@ -171,8 +169,8 @@ export default function ContactsAdmin() {
           <div className={s.modal}>
             <h2>Update Contact</h2>
             {currentContact && (
-              <form>
-                <label>
+              <form className={s.gridEdit}>
+                <div>
                   Address:
                   <input
                     type="text"
@@ -180,8 +178,8 @@ export default function ContactsAdmin() {
                     value={updatedData.address || ""}
                     onChange={handleInputChange}
                   />
-                </label>
-                <label>
+                </div>
+                <div>
                   State:
                   <input
                     type="text"
@@ -189,8 +187,8 @@ export default function ContactsAdmin() {
                     value={updatedData.state || ""}
                     onChange={handleInputChange}
                   />
-                </label>
-                <label>
+                </div>
+                <div>
                   Number:
                   <input
                     type="text"
@@ -198,8 +196,8 @@ export default function ContactsAdmin() {
                     value={updatedData.number || ""}
                     onChange={handleInputChange}
                   />
-                </label>
-                <label>
+                </div>
+                <div>
                   Unit:
                   <input
                     type="text"
@@ -207,8 +205,8 @@ export default function ContactsAdmin() {
                     value={updatedData.unit || ""}
                     onChange={handleInputChange}
                   />
-                </label>
-                <label>
+                </div>
+                <div>
                   City:
                   <input
                     type="text"
@@ -216,8 +214,8 @@ export default function ContactsAdmin() {
                     value={updatedData.city || ""}
                     onChange={handleInputChange}
                   />
-                </label>
-                <label>
+                </div>
+                <div>
                   Zip code:
                   <input
                     type="text"
@@ -225,8 +223,8 @@ export default function ContactsAdmin() {
                     value={updatedData.zip_code || ""}
                     onChange={handleInputChange}
                   />
-                </label>
-                <label>
+                </div>
+                <div>
                   Email:
                   <input
                     type="text"
@@ -234,20 +232,28 @@ export default function ContactsAdmin() {
                     value={updatedData.email || ""}
                     onChange={handleInputChange}
                   />
-                </label>
-                <label>
+                </div>
+                <div>
                   Image:
                   <input
                     type="file"
                     name="image"
                     onChange={handleImageChange}
                   />
-                </label>
-                <button type="button" onClick={handleUpdate}>
-                  Update
+                </div>
+                <button
+                  className={s.button1}
+                  type="button"
+                  onClick={handleUpdate}
+                >
+                  Сохранить
                 </button>
-                <button type="button" onClick={closeModal}>
-                  Cancel
+                <button
+                  type="button"
+                  className={s.button1}
+                  onClick={closeModal}
+                >
+                  Отмена
                 </button>
               </form>
             )}
