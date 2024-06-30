@@ -1,9 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import s from "@/styles/pages/user/MyWarehouse.module.scss";
 import Loading from "@/components/shared/admin/Loading";
 import useUserWarehouses from "@/hooks/admin/useUserWarehouses";
 import WarehouseProductsModalV2 from "@/components/shared/admin/modals/WarehousesProductModalV2";
 import UserParcelsSearch from "@/components/partials/userParcels/UserParcelsSearch";
+
+const deliveryServices = [
+  { name: "Fedex", id: 1 },
+  { name: "USPS", id: 2 },
+  { name: "UPS", id: 3 },
+  { name: "DHL", id: 4 },
+  { name: "Lasership", id: 5 },
+  { name: "Landmark", id: 6 },
+  { name: "Amazon", id: 7 },
+];
+
+const getCourierServiceName = (id) => {
+  const service = deliveryServices.find(
+    (service) => service.id === parseInt(id, 10)
+  );
+  return service ? service.name : "Unknown";
+};
 
 export default function UserWarehouses() {
   const { warehouses, loading, error, setFilters, deleteWarehouse } =
@@ -18,8 +35,15 @@ export default function UserWarehouses() {
     setFilters((prevFilters) => ({ ...prevFilters, [key]: value }));
   };
 
+  useEffect(() => {
+    if (warehouses) {
+      console.log("Warehouses data:", warehouses);
+    }
+  }, [warehouses]);
+
   if (loading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
+  console.log(warehouses);
   return (
     <section>
       <div className={s.filter}>
@@ -48,7 +72,7 @@ export default function UserWarehouses() {
                 <td>{warehouse.user.last_name}</td>
                 <td>{warehouse.warehouse}</td>
                 <td>{warehouse.tracking_number}</td>
-                <td>{warehouse.courier_service}</td>
+                <td>{getCourierServiceName(warehouse.courier_service)}</td>
                 <td className={s.actions}>
                   <button
                     className={s.delete}
@@ -58,6 +82,8 @@ export default function UserWarehouses() {
                   </button>
                   <WarehouseProductsModalV2
                     clientId={warehouse.user.unique_id}
+                    country_of_origin1={warehouse.country_of_origin}
+                    country_of_destination1={warehouse.country_of_destination}
                     warehouseId={warehouse.id}
                     warehouse={warehouse.warehouse}
                     comments={warehouse.comments}

@@ -23,7 +23,9 @@ export default function WarehousesProductsTable({
     useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const router = useRouter();
-  const predefinedWarehouses = [{ id: 14, name: "Чикаго" }];
+  const predefinedWarehouses = [
+    { id: 14, name: "Чикаго", id: 24, name: "Турция" },
+  ];
 
   const getWarehouseNameById = (id) => {
     const warehouse = predefinedWarehouses.find((wh) => wh.id === id);
