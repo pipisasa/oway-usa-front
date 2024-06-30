@@ -9,10 +9,13 @@ export default function MyWarehousesModal() {
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comments, setComments] = useState("");
   const { addWarehouses } = useWarehouses();
-  const [selectedOption, setSelectedOption] = useState("");
-  const [courierOption, setCourierOption] = useState("");
+  const [selectedWarehouse, setSelectedWarehouse] = useState("");
+  const [selectedDestination, setSelectedDestination] = useState("");
+  const [selectedOrigin, setSelectedOrigin] = useState("");
+  const [selectedCourier, setSelectedCourier] = useState("");
 
   const toggleModal = () => setIsOpen(!isOpen);
+
   const warehouses = [
     { id: 24, name: "Турция" },
     { id: 23, name: "Москва" },
@@ -20,6 +23,12 @@ export default function MyWarehousesModal() {
     { id: 14, name: "Чикаго" },
   ];
 
+  const warehouses1 = [
+    { id: 3, name: "США" },
+    { id: 4, name: "Турция" },
+    { id: 8, name: "Кыргызстан" },
+    { id: 9, name: "Россия" },
+  ];
   const deliveryServices = [
     { name: "Fedex", id: 1 },
     { name: "USPS", id: 2 },
@@ -34,9 +43,11 @@ export default function MyWarehousesModal() {
     e.preventDefault();
     try {
       await addWarehouses({
-        courier_service: courierOption.name,
+        courier_service: selectedCourier.id,
         tracking_number: trackingNumber,
-        warehouse: selectedOption.name,
+        warehouse: selectedWarehouse.id,
+        country_of_origin: selectedOrigin.id,
+        country_of_destination: selectedDestination.id,
         comments: comments,
       });
       toggleModal();
@@ -59,12 +70,29 @@ export default function MyWarehousesModal() {
                 <label htmlFor="warehouse">Склад</label>
                 <CustomSelect
                   options={warehouses}
-                  selectedOption={selectedOption}
-                  onChange={(e) => setSelectedOption(e)}
-                  span={"Выберите страну"}
+                  selectedOption={selectedWarehouse}
+                  onChange={(e) => setSelectedWarehouse(e)}
+                  span={"Выберите склад"}
                 />
               </div>
-
+              <div>
+                <label htmlFor="origin">Страна отправления</label>
+                <CustomSelect
+                  options={warehouses1}
+                  selectedOption={selectedOrigin}
+                  onChange={(e) => setSelectedOrigin(e)}
+                  span={"Выберите страну отправления"}
+                />
+              </div>
+              <div>
+                <label htmlFor="destination">Страна назначения</label>
+                <CustomSelect
+                  options={warehouses1}
+                  selectedOption={selectedDestination}
+                  onChange={(e) => setSelectedDestination(e)}
+                  span={"Выберите страну назначения"}
+                />
+              </div>
               <div>
                 <label htmlFor="tracking_number">Трeк-код</label>
                 <input
@@ -75,17 +103,15 @@ export default function MyWarehousesModal() {
                   onChange={(e) => setTrackingNumber(e.target.value)}
                 />
               </div>
-
               <div>
                 <label htmlFor="courier_service">Курьерская служба</label>
                 <CustomSelect
                   options={deliveryServices}
-                  selectedOption={courierOption}
-                  onChange={(e) => setCourierOption(e)}
+                  selectedOption={selectedCourier}
+                  onChange={(e) => setSelectedCourier(e)}
                   span={"Курьерская служба"}
                 />
               </div>
-
               <div>
                 <label htmlFor="comments">Комментарий</label>
                 <input

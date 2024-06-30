@@ -3,7 +3,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <link rel="icon" href="/assets/images/logotitle.jpeg" />
+      <link rel="icon" href="/assets/images/title/owayusa.svg" />
       <body>
         <Main />
         <NextScript />

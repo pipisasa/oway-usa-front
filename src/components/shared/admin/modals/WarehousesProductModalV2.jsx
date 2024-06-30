@@ -15,6 +15,8 @@ export default function WarehouseProductsModalV2({
   warehouse,
   comments,
   tracking_number,
+  country_of_origin1,
+  country_of_destination1,
 }) {
   const { addWarehouses } = useWarehouses();
   const { deleteWarehouse } = useUserWarehouses();
@@ -148,8 +150,8 @@ export default function WarehouseProductsModalV2({
         date_sent: "",
         date_arrived: "",
         warehouse: "",
-        country_of_origin: 0,
-        country_of_destination: 0,
+        country_of_origin: country_of_origin1 || 0,
+        country_of_destination: country_of_destination1 || 0,
       });
       setCurrentStep(1);
       setIsOpen(false);
@@ -170,6 +172,8 @@ export default function WarehouseProductsModalV2({
             comments12={comments}
             tracking_number12={tracking_number}
             formData={formData}
+            country_of_origin1={country_of_origin1}
+            country_of_destination1={country_of_destination1}
             setFormData={setFormData}
             handleChange={handleChange}
             handleImageChange={handleImageChange}

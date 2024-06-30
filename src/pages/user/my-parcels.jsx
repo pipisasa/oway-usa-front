@@ -5,6 +5,23 @@ import Loading from "@/components/shared/admin/Loading";
 import MyWarehousesEditModal from "@/components/shared/admin/modals/MyWarehousesEditModal";
 import { Pagination } from "@nextui-org/react";
 
+const deliveryServices = [
+  { name: "Fedex", id: 1 },
+  { name: "USPS", id: 2 },
+  { name: "UPS", id: 3 },
+  { name: "DHL", id: 4 },
+  { name: "Lasership", id: 5 },
+  { name: "Landmark", id: 6 },
+  { name: "Amazon", id: 7 },
+];
+
+const getCourierServiceName = (id) => {
+  const service = deliveryServices.find(
+    (service) => service.id === parseInt(id, 10)
+  );
+  return service ? service.name : "Unknown";
+};
+
 export default function MyWarehouses() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedNotification, setSelectedNotification] = useState(null);
@@ -24,7 +41,6 @@ export default function MyWarehouses() {
   }
 
   const handleUpdate = async (productId) => {
-    s;
     try {
       setSelectedNotification(
         products?.find((product) => product.id === productId)
@@ -78,8 +94,8 @@ export default function MyWarehouses() {
         </thead>
         <tbody>
           {products
-            ?.filter((products) =>
-              products.tracking_number.includes(searchPhoneNumber)
+            ?.filter((product) =>
+              product.tracking_number.includes(searchPhoneNumber)
             )
             .filter((product) =>
               countryFilter ? product.warehouse === countryFilter : true
@@ -88,7 +104,7 @@ export default function MyWarehouses() {
               <tr key={product.id}>
                 <td>{product.warehouse}</td>
                 <td>{product.tracking_number}</td>
-                <td>{product.courier_service}</td>
+                <td>{getCourierServiceName(product.courier_service)}</td>
                 <td>
                   <button>{product.comments}</button>
                 </td>

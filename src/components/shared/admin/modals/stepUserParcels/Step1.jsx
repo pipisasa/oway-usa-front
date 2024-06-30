@@ -35,6 +35,8 @@ export default function Step1({
   setCurrentStep,
   comments12,
   tracking_number12,
+  country_of_origin1,
+  country_of_destination1,
 }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -109,18 +111,18 @@ export default function Step1({
 
     let standardRate = 0;
     if (
-      String(formData.country_of_origin) === "3" &&
-      String(formData.country_of_destination) === "8"
+      String(formData.country_of_origin || country_of_origin1) === "3" &&
+      String(formData.country_of_destination || country_of_destination1) === "8"
     ) {
       standardRate = 12;
     } else if (
-      String(formData.country_of_origin) === "4" &&
-      String(formData.country_of_destination) === "9"
+      String(formData.country_of_origin || country_of_origin1) === "4" &&
+      String(formData.country_of_destination || country_of_destination1) === "9"
     ) {
       standardRate = 9.5;
     } else if (
-      String(formData.country_of_origin) === "3" &&
-      String(formData.country_of_destination) === "9"
+      String(formData.country_of_origin || country_of_origin1) === "3" &&
+      String(formData.country_of_destination || country_of_destination1) === "9"
     ) {
       standardRate = 16;
     }
@@ -204,7 +206,7 @@ export default function Step1({
               <select
                 id="country_of_origin"
                 name="country_of_origin"
-                value={formData.country_of_origin || ""}
+                value={formData.country_of_origin || country_of_origin1}
                 onChange={handleSelectChange1}
                 className={c.select}
               >
@@ -221,7 +223,9 @@ export default function Step1({
               <select
                 id="country_of_destination"
                 name="country_of_destination"
-                value={formData.country_of_destination || ""}
+                value={
+                  formData.country_of_destination || country_of_destination1
+                }
                 onChange={handleSelectChange2}
                 className={c.select}
               >
