@@ -10,7 +10,12 @@
   align-items: center;
   z-index: 50;
 }
-
+.green {
+  color: #06db02;
+}
+.red {
+  color: red;
+}
 .submit_btn {
   border-radius: 12px;
   background: var(--blue, #027ddb);
@@ -18,7 +23,24 @@
   color: var(--white, var(--Colors-Grey-White, #fff));
   font-size: 16px;
 }
-
+.addressBlock {
+  padding: 24px;
+  border-radius: 16px;
+  div {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+    }
+  }
+}
 .submit_btns {
   width: 100%;
   display: flex;

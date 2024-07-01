@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import s from "@/styles/admin/RequestsModal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
@@ -13,31 +13,64 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
-import AdminCustomSelect from "@/components/partials/AdminCustomSelect";
+import { useAddresses } from "@/hooks/useAddresses";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function WarehousesModal({ onClose, warehouse }) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isImageModalOpen,
+    onOpen: onImageModalOpen,
+    onOpenChange: onImageModalOpenChange,
+  } = useDisclosure();
+  const {
+    isOpen: isAddressModalOpen,
+    onOpen: onAddressModalOpen,
+    onOpenChange: onAddressModalOpenChange,
+  } = useDisclosure();
+  const { selectedAddress, fetchAddressById: fetchAddress } = useAddresses();
   const [isEditing, setIsEditing] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [currentStatus, setCurrentStatus] = useState(warehouse.status.id);
   const [originalStatus, setOriginalStatus] = useState(warehouse.status.id);
   const [showStatusOptions, setShowStatusOptions] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState(warehouse.status_many);
+  const [showPaymentStatusOptions, setShowPaymentStatusOptions] =
+    useState(false);
   const [countries, setCountries] = useState([
     { id: 3, name: "США" },
     { id: 4, name: "Турция" },
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ]);
-
   const [previewImageUrl, setPreviewImageUrl] = useState(
     API_URL + warehouse.image
   );
+  const [addressLoaded, setAddressLoaded] = useState(false);
+
+  const fetchAddressById = useCallback(
+    async (id) => {
+      await fetchAddress(id);
+      setAddressLoaded(true);
+    },
+    [fetchAddress]
+  );
+
+  useEffect(() => {
+    if (warehouse.address && !addressLoaded) {
+      fetchAddressById(warehouse.address);
+    }
+  }, [warehouse.address, addressLoaded, fetchAddressById]);
 
   const handleStatusClick = (statusId) => {
     setCurrentStatus(statusId);
     setShowStatusOptions(false);
+  };
+
+  const handlePaymentStatusClick = (status) => {
+    setPaymentStatus(status);
+    setShowPaymentStatusOptions(false);
+    setEditData((prevData) => ({ ...prevData, status_many: status }));
   };
 
   const [editData, setEditData] = useState({
@@ -56,15 +89,16 @@ export default function WarehousesModal({ onClose, warehouse }) {
     track_number: warehouse.track_number,
     country_of_origin: warehouse.country_of_origin.id,
     country_of_destination: warehouse.country_of_destination.id,
+    status_many: paymentStatus,
   });
 
   const statuses = [
-    { id: 6, name: "Получен на складе," },
-    { id: 5, name: "Отправлен," },
-    { id: 4, name: "Получен в ПВЗ," },
-    { id: 3, name: "Готов к выдаче," },
-    { id: 7, name: "Отправлено курьерской службой," },
-    { id: 8, name: "Доставлено," },
+    { id: 6, name: "Получен на складе" },
+    { id: 5, name: "Отправлен" },
+    { id: 4, name: "Получен в ПВЗ" },
+    { id: 3, name: "Готов к выдаче" },
+    { id: 7, name: "Отправлено курьерской службой" },
+    { id: 8, name: "Доставлено" },
   ];
 
   const handleInputChange = (e) => {
@@ -97,6 +131,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
       comments: warehouse.comments,
       track_number: warehouse.track_number,
       status: currentStatus,
+      status_many: paymentStatus,
     });
   };
 
@@ -157,7 +192,10 @@ export default function WarehousesModal({ onClose, warehouse }) {
     setEditData({ ...editData, [id]: formatDateInput(value) });
   };
 
-  console.log(editData.country_of_origin.name);
+  const handleAddressClick = () => {
+    onAddressModalOpen();
+  };
+
   return (
     <div
       className={s.modal_backdrop}
@@ -183,7 +221,11 @@ export default function WarehousesModal({ onClose, warehouse }) {
                 </label>
               </div>
 
-              <img onClick={onOpen} src={previewImageUrl} alt="Preview img" />
+              <img
+                onClick={onImageModalOpen}
+                src={previewImageUrl}
+                alt="Preview img"
+              />
               <input
                 id="fileInput"
                 className="hidden"
@@ -213,6 +255,42 @@ export default function WarehousesModal({ onClose, warehouse }) {
                   ))}
                 </div>
               )}
+            </div>
+            <div className={s.input_label}>
+              <label htmlFor="">Статус оплаты</label>
+              <button
+                onClick={() =>
+                  setShowPaymentStatusOptions(!showPaymentStatusOptions)
+                }
+                className={s.button_default}
+              >
+                {paymentStatus ? "Оплачено" : "Не оплачено"}
+              </button>
+              {showPaymentStatusOptions && (
+                <div className={s.select_status}>
+                  <button
+                    className={s.green}
+                    onClick={() => handlePaymentStatusClick(true)}
+                  >
+                    Оплачено
+                  </button>
+                  <button
+                    className={s.red}
+                    onClick={() => handlePaymentStatusClick(false)}
+                  >
+                    Не оплачено
+                  </button>
+                </div>
+              )}
+            </div>
+            <div className={s.input_label}>
+              <button
+                className={s.button_default}
+                type="button"
+                onClick={handleAddressClick}
+              >
+                Адрес
+              </button>
             </div>
           </div>
           <form className={s.form} encType="multipart/form-data">
@@ -393,7 +471,60 @@ export default function WarehousesModal({ onClose, warehouse }) {
             )}
           </form>
         </div>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <Modal
+          isOpen={isAddressModalOpen}
+          onOpenChange={onAddressModalOpenChange}
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex text-right">Адрес</ModalHeader>
+                {selectedAddress ? (
+                  <div className={s.addressBlock}>
+                    <div>
+                      <img src="/assets/icons/user-icons/user.svg" alt="" />
+                      <p>{selectedAddress.full_name}</p>
+                    </div>
+                    <div>
+                      <img src="/assets/icons/user-icons/city.svg" alt="" />
+                      <p>
+                        {selectedAddress.country}, {selectedAddress.city}
+                      </p>
+                    </div>
+                    <div>
+                      <img
+                        src="/assets/icons/user-icons/maps-and-flags.svg"
+                        alt=""
+                      />
+                      <p>{selectedAddress.address}</p>
+                    </div>
+
+                    <div>
+                      <img
+                        src="/assets/icons/user-icons/phone-call.svg"
+                        alt=""
+                      />
+                      <p>{selectedAddress.phone_number}</p>
+                    </div>
+                    <div>
+                      <img src="/assets/icons/user-icons/email.svg" alt="" />
+                      <p>{selectedAddress.email}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <p>Загрузка адреса...</p>
+                )}
+                <ModalFooter>
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Закрыть
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+
+        <Modal isOpen={isImageModalOpen} onOpenChange={onImageModalOpenChange}>
           <ModalContent>
             {(onClose) => (
               <>

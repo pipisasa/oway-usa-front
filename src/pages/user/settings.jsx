@@ -3,6 +3,7 @@ import s from "@/styles/users/Tabs.module.scss";
 import UserData from "@/components/shared/users/settings/UserData";
 import ChangePassword from "@/components/shared/users/settings/ChangePassword";
 import useUserData from "@/hooks/user/useUserData";
+import AddressSetting from "@/components/shared/users/settings/AddressSetting";
 
 export default function UserSettingsPage() {
   const [activeTab, setActiveTab] = useState("userData");
@@ -28,10 +29,19 @@ export default function UserSettingsPage() {
           >
             Сменить пароль
           </button>
+          <button
+            className={
+              activeTab === "address" ? s.active_tabs : s.not_active_tabs
+            }
+            onClick={() => setActiveTab("address")}
+          >
+            Адреса
+          </button>
         </div>
         <div className={s.forms}>
           {activeTab === "userData" && <UserData />}
           {activeTab === "changePassword" && <ChangePassword />}
+          {activeTab === "address" && <AddressSetting />}
         </div>
       </div>
       <div className={s.user_code}>

@@ -81,6 +81,7 @@ export default function UserWarehouses() {
                     <img src="/assets/icons/delete.svg" alt="delete" />
                   </button>
                   <WarehouseProductsModalV2
+                    address={warehouse.address}
                     clientId={warehouse.user.unique_id}
                     country_of_origin1={warehouse.country_of_origin}
                     country_of_destination1={warehouse.country_of_destination}

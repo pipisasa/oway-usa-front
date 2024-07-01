@@ -13,6 +13,7 @@ export default function WarehouseProductsModalV2({
   clientId,
   warehouseId,
   warehouse,
+  address,
   comments,
   tracking_number,
   country_of_origin1,
@@ -25,14 +26,14 @@ export default function WarehouseProductsModalV2({
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
-    address: "",
+    address: address,
     weight: "",
     width: "",
     height: "",
     length: "",
     track_number: tracking_number || "",
     price: "",
-    warehouse: 0,
+    warehouse: warehouse || 0,
     country: "",
     status: "",
     image: "",
@@ -40,8 +41,8 @@ export default function WarehouseProductsModalV2({
     unique_id_user: clientId,
     date_sent: "",
     date_arrived: "",
-    country_of_origin: 0,
-    country_of_destination: 0,
+    country_of_origin: country_of_origin1 || 0,
+    country_of_destination: country_of_destination1 || 0,
   });
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -134,14 +135,14 @@ export default function WarehouseProductsModalV2({
       );
       setFormData({
         name: "",
-        address: "",
+        address: address,
         weight: "",
         width: "",
         height: "",
         length: "",
         track_number: tracking_number || "",
         price: "",
-        warehouse: 0,
+        warehouse: warehouse || 0,
         country: "",
         status: "",
         image: "",
@@ -149,7 +150,6 @@ export default function WarehouseProductsModalV2({
         unique_id_user: clientId,
         date_sent: "",
         date_arrived: "",
-        warehouse: "",
         country_of_origin: country_of_origin1 || 0,
         country_of_destination: country_of_destination1 || 0,
       });
@@ -189,6 +189,7 @@ export default function WarehouseProductsModalV2({
         return (
           <Step2
             formData={formData}
+            warehouse={warehouse}
             handleChange={handleChange}
             nextStep={nextStep}
             previousStep={previousStep}
@@ -205,6 +206,7 @@ export default function WarehouseProductsModalV2({
         return (
           <Step3
             formData={formData}
+            address={address}
             handleChange={handleChange}
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
