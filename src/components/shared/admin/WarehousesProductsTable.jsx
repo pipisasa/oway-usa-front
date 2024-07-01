@@ -88,7 +88,8 @@ export default function WarehousesProductsTable({
       <table>
         <thead>
           <tr>
-            <th>
+            <th className="flex gap-1">
+              <div className={s.hui}></div>
               <input
                 type="checkbox"
                 checked={selectAll}
@@ -123,11 +124,15 @@ export default function WarehousesProductsTable({
         </thead>
         <tbody>
           {warehouses.results?.map((warehouse) => (
-            <tr
-              className={warehouse.is_parcels === true ? s.parcel_tr : ""}
-              key={warehouse.id}
-            >
-              <td>
+            <tr key={warehouse.id}>
+              <td className="flex gap-1">
+                <div
+                  className={`${s.status_many} ${
+                    warehouse.status_many
+                      ? s.status_many_green
+                      : s.status_many_red
+                  }`}
+                ></div>
                 <input
                   type="checkbox"
                   checked={selectedWarehouses.includes(warehouse.id)}

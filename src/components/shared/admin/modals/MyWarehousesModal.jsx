@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
 import useWarehouses from "@/hooks/user/useWarehouses";
+import { useAddresses } from "@/hooks/useAddresses";
 import CustomSelect from "@/components/partials/Select";
 
 export default function MyWarehousesModal() {
@@ -11,15 +12,20 @@ export default function MyWarehousesModal() {
   const { addWarehouses } = useWarehouses();
   const [selectedWarehouse, setSelectedWarehouse] = useState("");
   const [selectedDestination, setSelectedDestination] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedOrigin, setSelectedOrigin] = useState("");
   const [selectedCourier, setSelectedCourier] = useState("");
+
+  const { addressList, fetchAddresses } = useAddresses();
+
+  useEffect(() => {
+    fetchAddresses();
+  }, []);
 
   const toggleModal = () => setIsOpen(!isOpen);
 
   const warehouses = [
     { id: 24, name: "Турция" },
-    { id: 23, name: "Москва" },
-    { id: 22, name: "Кыргызстан" },
     { id: 14, name: "Чикаго" },
   ];
 
@@ -29,6 +35,7 @@ export default function MyWarehousesModal() {
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ];
+
   const deliveryServices = [
     { name: "Fedex", id: 1 },
     { name: "USPS", id: 2 },
@@ -48,11 +55,12 @@ export default function MyWarehousesModal() {
         warehouse: selectedWarehouse.id,
         country_of_origin: selectedOrigin.id,
         country_of_destination: selectedDestination.id,
+        address: selectedAddress.id,
         comments: comments,
       });
       toggleModal();
     } catch (error) {
-      console.error("Ошибка при добавлении сайта:", error);
+      console.error("Ошибка при добавлении склада:", error);
     }
   };
 
@@ -81,7 +89,7 @@ export default function MyWarehousesModal() {
                   options={warehouses1}
                   selectedOption={selectedOrigin}
                   onChange={(e) => setSelectedOrigin(e)}
-                  span={"Выберите страну отправления"}
+                  span={"Cтрану отправления"}
                 />
               </div>
               <div>
@@ -90,7 +98,19 @@ export default function MyWarehousesModal() {
                   options={warehouses1}
                   selectedOption={selectedDestination}
                   onChange={(e) => setSelectedDestination(e)}
-                  span={"Выберите страну назначения"}
+                  span={"Cтрану назначения"}
+                />
+              </div>
+              <div>
+                <label htmlFor="address">Адрес назначения</label>
+                <CustomSelect
+                  options={addressList.results?.map((address) => ({
+                    id: address.id,
+                    name: `${address.address}`,
+                  }))}
+                  selectedOption={selectedAddress}
+                  onChange={(e) => setSelectedAddress(e)}
+                  span={"Выберите адрес"}
                 />
               </div>
               <div>
@@ -112,16 +132,16 @@ export default function MyWarehousesModal() {
                   span={"Курьерская служба"}
                 />
               </div>
-              <div>
-                <label htmlFor="comments">Комментарий</label>
-                <input
-                  id="comments"
-                  type="text"
-                  placeholder="Введите комментарий"
-                  value={comments}
-                  onChange={(e) => setComments(e.target.value)}
-                />
-              </div>
+            </div>
+            <div className={s.input}>
+              <label htmlFor="comments">Комментарий</label>
+              <input
+                id="comments"
+                type="text"
+                placeholder="Введите комментарий"
+                value={comments}
+                onChange={(e) => setComments(e.target.value)}
+              />
             </div>
           </div>
           <div className={s.btn_center}>

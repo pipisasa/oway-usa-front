@@ -4,6 +4,7 @@ import useWarehouses from "@/hooks/user/useWarehouses";
 import Loading from "@/components/shared/admin/Loading";
 import MyWarehousesEditModal from "@/components/shared/admin/modals/MyWarehousesEditModal";
 import { Pagination } from "@nextui-org/react";
+import { useAddresses } from "@/hooks/useAddresses";
 
 const deliveryServices = [
   { name: "Fedex", id: 1 },
@@ -23,6 +24,7 @@ const getCourierServiceName = (id) => {
 };
 
 export default function MyWarehouses() {
+  const { addressList } = useAddresses();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [isEditing, setIsEditing] = useState(false);

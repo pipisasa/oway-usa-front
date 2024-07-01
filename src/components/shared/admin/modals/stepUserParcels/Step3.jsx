@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
-import SearchSelect from "@/components/partials/SearchSelect";
+import { useAddresses } from "@/hooks/useAddresses";
 
 export default function Step3({
   handleChange,
@@ -10,10 +10,28 @@ export default function Step3({
   currentStep,
   setCurrentStep,
   clientId,
+  address,
 }) {
   const { warehouses } = useWarehousesFull();
+  const { selectedAddress, fetchAddressById } = useAddresses();
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [currentAddressId, setCurrentAddressId] = useState(null);
+
+  const fetchAddressIfNeeded = useCallback(
+    (addressId) => {
+      if (addressId && addressId !== currentAddressId) {
+        fetchAddressById(addressId);
+        setCurrentAddressId(addressId);
+      }
+    },
+    [fetchAddressById, currentAddressId]
+  );
+
+  useEffect(() => {
+    fetchAddressIfNeeded(address);
+  }, [address, fetchAddressIfNeeded]);
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
@@ -26,6 +44,7 @@ export default function Step3({
     }
     setSuggestions(filteredWarehouses);
   };
+
   useEffect(() => {
     if (inputValue === "") {
       setSuggestions([]);
@@ -82,6 +101,21 @@ export default function Step3({
             onChange={handleInputChange}
           />
         </div>
+        {selectedAddress && (
+          <div className={c.input}>
+            <label htmlFor="address" className="mt-2">
+              Адрес
+            </label>
+            <input
+              type="text"
+              name="address"
+              id="address"
+              placeholder="Адрес"
+              value={`${selectedAddress.full_name}, ${selectedAddress.city}, ${selectedAddress.country}, ${selectedAddress.address}`}
+              disabled
+            />
+          </div>
+        )}
       </form>
       <button className={c.submit_btn} onClick={handleSubmit}>
         Отправить

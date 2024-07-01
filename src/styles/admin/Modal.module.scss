@@ -288,6 +288,26 @@
     }
   }
 }
+.input {
+  display: block;
+  margin-top: 20px;
+  input {
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--gray, #a4a4a4);
+    padding: 12px 20px;
+    width: 100%;
+  }
+
+  label {
+    color: var(--black, #001526);
+    font-family: Helvetica;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+  }
+}
 @media (max-width: 768px) {
   .modal {
     h4 {

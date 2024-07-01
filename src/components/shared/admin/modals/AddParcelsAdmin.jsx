@@ -5,22 +5,36 @@ import CustomSelect from "@/components/partials/Select";
 import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import useWarehouses from "@/hooks/user/useWarehouses";
 import Arrow from "../../ui/Arrow";
+import { useAddresses } from "@/hooks/useAddresses";
 
 export default function AddParcelsAdmin() {
   const [isOpen, setIsOpen] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comments, setComments] = useState("");
+  const [selectedWarehouse, setSelectedWarehouse] = useState("");
+  const [selectedDestination, setSelectedDestination] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState("");
+  const [selectedOrigin, setSelectedOrigin] = useState("");
+  const [selectedCourier, setSelectedCourier] = useState("");
+  const { addressList, fetchAddresses } = useAddresses();
   const { addWarehouses } = useWarehouses();
   const { warehouses, fetchWarehouses, deleteWarehouse, loading, error } =
     useMainWarehouses();
   useEffect(() => {
     fetchWarehouses();
+    fetchAddresses();
   }, []);
   const [selectedOption, setSelectedOption] = useState("");
   const [courierOption, setCourierOption] = useState("");
 
   const toggleModal = () => setIsOpen(!isOpen);
 
+  const warehouses1 = [
+    { id: 3, name: "США" },
+    { id: 4, name: "Турция" },
+    { id: 8, name: "Кыргызстан" },
+    { id: 9, name: "Россия" },
+  ];
   const deliveryServices = [
     { name: "Fedex", id: 1 },
     { name: "USPS", id: 2 },
@@ -37,7 +51,10 @@ export default function AddParcelsAdmin() {
       await addWarehouses({
         courier_service: courierOption.name,
         tracking_number: trackingNumber,
-        warehouse: selectedOption.name,
+        warehouse: selectedOption.id,
+        country_of_origin: selectedOrigin.id,
+        country_of_destination: selectedDestination.id,
+        address: selectedAddress.id,
         comments: comments,
       });
       toggleModal();
@@ -86,7 +103,36 @@ export default function AddParcelsAdmin() {
                   span={"Курьерская служба"}
                 />
               </div>
-
+              <div>
+                <label htmlFor="origin">Страна отправления</label>
+                <CustomSelect
+                  options={warehouses1}
+                  selectedOption={selectedOrigin}
+                  onChange={(e) => setSelectedOrigin(e)}
+                  span={"Cтрану отправления"}
+                />
+              </div>
+              <div>
+                <label htmlFor="destination">Страна назначения</label>
+                <CustomSelect
+                  options={warehouses1}
+                  selectedOption={selectedDestination}
+                  onChange={(e) => setSelectedDestination(e)}
+                  span={"Cтрану назначения"}
+                />
+              </div>
+              <div>
+                <label htmlFor="address">Адрес назначения</label>
+                <CustomSelect
+                  options={addressList.results?.map((address) => ({
+                    id: address.id,
+                    name: `${address.address}`,
+                  }))}
+                  selectedOption={selectedAddress}
+                  onChange={(e) => setSelectedAddress(e)}
+                  span={"Выберите адрес"}
+                />
+              </div>
               <div>
                 <label htmlFor="comments">Комментарий</label>
                 <input

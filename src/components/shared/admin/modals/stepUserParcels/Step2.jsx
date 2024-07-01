@@ -3,6 +3,7 @@ import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 
 export default function Step2({
   formData,
+  warehouse,
   handleChange,
   nextStep,
   currentStep,
@@ -22,8 +23,6 @@ export default function Step2({
   ];
   const warehouses = [
     { id: 24, name: "Турция" },
-    { id: 23, name: "Москва" },
-    { id: 22, name: "Кыргызстан" },
     { id: 14, name: "Чикаго" },
   ];
 
@@ -95,7 +94,7 @@ export default function Step2({
           <select
             id="warehouses"
             name="warehouses"
-            value={selectedOption2}
+            value={selectedOption2 || warehouse}
             onChange={handleSelectChange1}
             className={c.select}
           >

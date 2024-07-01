@@ -178,7 +178,7 @@
 
     tbody {
       .parcel_tr {
-        background: #ebf6ff;
+        background: #f9ffeb;
       }
       tr {
         border-bottom: 1px solid rgba(2, 125, 219, 0.2);
@@ -204,7 +204,22 @@
     }
   }
 }
+.status_many {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+.hui {
+  width: 20px;
+  height: 20px;
+}
+.status_many_green {
+  background-color: #06db02;
+}
 
+.status_many_red {
+  background-color: #ff0000;
+}
 .qwemodalBackdrop {
   position: fixed;
   top: 0;
