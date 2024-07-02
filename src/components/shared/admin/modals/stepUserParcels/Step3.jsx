@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
+import q from "@/styles/admin/RequestsModal.module.scss";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
 import { useAddresses } from "@/hooks/useAddresses";
+import Arrow from "@/components/shared/ui/Arrow";
 
 export default function Step3({
   handleChange,
@@ -17,6 +19,7 @@ export default function Step3({
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [currentAddressId, setCurrentAddressId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchAddressIfNeeded = useCallback(
     (addressId) => {
@@ -57,6 +60,14 @@ export default function Step3({
     });
     setInputValue(warehouse.unique_id);
     setSuggestions([]);
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -103,23 +114,60 @@ export default function Step3({
         </div>
         {selectedAddress && (
           <div className={c.input}>
-            <label htmlFor="address" className="mt-2">
-              Адрес
-            </label>
-            <input
-              type="text"
-              name="address"
-              id="address"
-              placeholder="Адрес"
-              value={`${selectedAddress.full_name}, ${selectedAddress.city}, ${selectedAddress.country}, ${selectedAddress.address}`}
-              disabled
-            />
+            <button type="button" onClick={handleOpenModal}>
+              Адрес <Arrow />
+            </button>
           </div>
         )}
       </form>
       <button className={c.submit_btn} onClick={handleSubmit}>
         Отправить
       </button>
+
+      {isModalOpen && (
+        <div className={s.modalBackdrop} onClick={handleCloseModal}>
+          <div className={s.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={s.modalHeader}>
+              <h2>Адрес</h2>
+              <button onClick={handleCloseModal} className={s.closeButton}>
+                &times;
+              </button>
+            </div>
+            <div className={s.modalBody}>
+              {selectedAddress && (
+                <div className={q.addressBlock}>
+                  <div>
+                    <img src="/assets/icons/user-icons/user.svg" alt="" />
+                    <p>{selectedAddress.full_name}</p>
+                  </div>
+                  <div>
+                    <img src="/assets/icons/user-icons/city.svg" alt="" />
+                    <p>
+                      {selectedAddress.country}, {selectedAddress.city}
+                    </p>
+                  </div>
+                  <div>
+                    <img
+                      src="/assets/icons/user-icons/maps-and-flags.svg"
+                      alt=""
+                    />
+                    <p>{selectedAddress.address}</p>
+                  </div>
+
+                  <div>
+                    <img src="/assets/icons/user-icons/phone-call.svg" alt="" />
+                    <p>{selectedAddress.phone_number}</p>
+                  </div>
+                  <div>
+                    <img src="/assets/icons/user-icons/email.svg" alt="" />
+                    <p>{selectedAddress.email}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
