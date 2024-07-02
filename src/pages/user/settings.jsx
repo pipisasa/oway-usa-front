@@ -8,7 +8,7 @@ import AddressSetting from "@/components/shared/users/settings/AddressSetting";
 export default function UserSettingsPage() {
   const [activeTab, setActiveTab] = useState("userData");
   const { userData, loading, error } = useUserData();
-
+  console.log(userData);
   return (
     <section className={s.container}>
       <div className={s.settings}>
@@ -41,7 +41,7 @@ export default function UserSettingsPage() {
         <div className={s.forms}>
           {activeTab === "userData" && <UserData />}
           {activeTab === "changePassword" && <ChangePassword />}
-          {activeTab === "address" && <AddressSetting />}
+          {activeTab === "address" && <AddressSetting UserId={userData.id} />}
         </div>
       </div>
       <div className={s.user_code}>

@@ -64,7 +64,6 @@ export default function EditModal({ onClose, selectedWarehouses }) {
         },
       });
 
-      console.log("Form submitted:", data);
       onClose();
       window.location.reload();
     } catch (error) {

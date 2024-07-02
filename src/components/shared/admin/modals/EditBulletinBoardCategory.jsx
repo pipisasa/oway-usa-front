@@ -49,7 +49,6 @@ export default function EditBulletinBoardCategory({ bulletin }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting:", name, selectedColor); // Debug log
     const result = await updateBulletinBoard(bulletin.id, name, selectedColor);
     if (result) {
       toggleModal();

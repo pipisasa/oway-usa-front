@@ -11,7 +11,6 @@ export default function News() {
 
   if (loading) return <p>Загрузка...</p>;
   if (error) return <p>Ошибка: {error}</p>;
-  console.log(bulletins);
 
   const bulletinsByCity = bulletins.reduce((acc, bulletin) => {
     if (!acc[bulletin.city]) {

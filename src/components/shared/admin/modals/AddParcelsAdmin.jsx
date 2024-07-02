@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/admin/Modal.module.scss";
+import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import Modal from "../../Modal";
 import CustomSelect from "@/components/partials/Select";
 import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import useWarehouses from "@/hooks/user/useWarehouses";
 import Arrow from "../../ui/Arrow";
 import { useAddresses } from "@/hooks/useAddresses";
+import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
+import SearchSelect from "@/components/partials/SearchSelect";
+import { getCookie } from "@/utils/cookieHelpers";
 
 export default function AddParcelsAdmin() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,14 +22,68 @@ export default function AddParcelsAdmin() {
   const [selectedCourier, setSelectedCourier] = useState("");
   const { addressList, fetchAddresses } = useAddresses();
   const { addWarehouses } = useWarehouses();
+  const token = getCookie("accessToken");
   const { warehouses, fetchWarehouses, deleteWarehouse, loading, error } =
     useMainWarehouses();
+  const [userData, setUserData] = useState(null);
+  const [userId, setUserId] = useState(""); // Added state to store userId
+
   useEffect(() => {
     fetchWarehouses();
     fetchAddresses();
   }, []);
+
   const [selectedOption, setSelectedOption] = useState("");
   const [courierOption, setCourierOption] = useState("");
+  const { warehouses: warehouses12, fetchWarehouses: fetchWarehouses1 } =
+    useWarehousesFull();
+  const [inputValue, setInputValue] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSearchClick = () => {
+    if (inputValue.trim() !== "") {
+      fetchWarehouses1(inputValue);
+    }
+  };
+
+  useEffect(() => {
+    if (inputValue === "") {
+      setSuggestions([]);
+    } else {
+      setSuggestions(warehouses12?.results || []);
+    }
+  }, [warehouses12, inputValue]);
+
+  const fetchUserData = async (userId) => {
+    try {
+      const response = await fetch(
+        `https://api-owayusa.com/api/address/list/?user=${userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log("Received user data:", data);
+      setUserData(data);
+      setUserId(userId); // Store userId in state
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  const handleSelectWarehouse = (warehouse) => {
+    setInputValue(warehouse.unique_id);
+    setSuggestions([]);
+    fetchUserData(warehouse.id);
+  };
 
   const toggleModal = () => setIsOpen(!isOpen);
 
@@ -47,21 +105,26 @@ export default function AddParcelsAdmin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = {
+      courier_service: courierOption.name,
+      tracking_number: trackingNumber,
+      warehouse: selectedOption.id,
+      country_of_origin: selectedOrigin.id,
+      country_of_destination: selectedDestination.id,
+      address: selectedAddress.id,
+      comments: comments,
+      user: userId, // Correctly sending userId
+    };
+    console.log("Form data being sent:", formData);
     try {
-      await addWarehouses({
-        courier_service: courierOption.name,
-        tracking_number: trackingNumber,
-        warehouse: selectedOption.id,
-        country_of_origin: selectedOrigin.id,
-        country_of_destination: selectedDestination.id,
-        address: selectedAddress.id,
-        comments: comments,
-      });
+      await addWarehouses(formData);
       toggleModal();
     } catch (error) {
       console.error("Ошибка:", error);
     }
   };
+
+  console.log("Current inputValue (user ID):", inputValue);
 
   return (
     <div className={s.modal}>
@@ -121,10 +184,30 @@ export default function AddParcelsAdmin() {
                   span={"Cтрану назначения"}
                 />
               </div>
+              <div className={c.input}>
+                <label htmlFor="comments">Выбор клиента</label>
+                <div className={s.search_container}>
+                  <input
+                    type="text"
+                    name="unique_id_user"
+                    id="unique_id_user"
+                    placeholder="Напишите ID"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                  />
+                  <button type="button" onClick={handleSearchClick}>
+                    поиск
+                  </button>
+                </div>
+                <SearchSelect
+                  suggestions={suggestions}
+                  handleSelectWarehouse={handleSelectWarehouse}
+                />
+              </div>
               <div>
                 <label htmlFor="address">Адрес назначения</label>
                 <CustomSelect
-                  options={addressList.results?.map((address) => ({
+                  options={userData?.results?.map((address) => ({
                     id: address.id,
                     name: `${address.address}`,
                   }))}

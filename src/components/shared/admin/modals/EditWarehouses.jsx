@@ -92,7 +92,6 @@ export default function EditWarehouses({ warehouse }) {
           },
         }
       );
-      console.log(response.data);
       toggleReviewModal();
       toggleModal();
     } catch (error) {

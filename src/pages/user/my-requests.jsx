@@ -20,7 +20,6 @@ export default function IncommingRequests() {
     setCurrentRequestData(requestData);
     setIsModalVisible(true);
   };
-  console.log(data);
 
   const filteredRequests = data.results.filter((request) =>
     request.name_of_purchase

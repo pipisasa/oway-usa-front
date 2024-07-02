@@ -36,7 +36,6 @@ export default function Step2({
   const handleSelectChange1 = (e) => {
     const newSelectedId = e.target.value;
     setSelectedOption2(newSelectedId);
-    console.log(newSelectedId, "warehouse");
     handleChange({
       target: { name: "warehouse", value: newSelectedId },
     });

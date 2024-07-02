@@ -9,7 +9,6 @@ const CustomSelect = ({ options, selectedOption, onChange, span }) => {
     setIsOpen(false);
     onChange(option);
   };
-  console.log(options);
 
   const handleClickOutside = (event) => {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
@@ -43,7 +42,7 @@ const CustomSelect = ({ options, selectedOption, onChange, span }) => {
         </span>
         {isOpen && (
           <div className={styles.options}>
-            {options.map((option) => (
+            {options?.map((option) => (
               <div
                 key={option.id}
                 className={styles.option}

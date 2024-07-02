@@ -92,7 +92,6 @@ export const useAddresses = () => {
       );
 
       if (response.ok) {
-        console.log("Address created successfully");
         toggleCreateModal();
         fetchAddresses();
       } else {
@@ -121,7 +120,6 @@ export const useAddresses = () => {
       );
 
       if (response.ok) {
-        console.log("Address updated successfully");
         toggleEditModal();
         fetchAddresses();
       } else {
@@ -147,7 +145,6 @@ export const useAddresses = () => {
       );
 
       if (response.ok) {
-        console.log("Address deleted successfully");
         toggleDeleteModal();
         fetchAddresses();
       } else {
@@ -176,6 +173,7 @@ export const useAddresses = () => {
     handleSubmitEdit,
     handleDelete,
     fetchAddresses,
+    setSelectedAddress,
     fetchAddressById,
   };
 };
