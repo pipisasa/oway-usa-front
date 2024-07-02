@@ -22,8 +22,10 @@ export default function Step2({
     { id: 8, name: "Доставлено," },
   ];
   const warehouses = [
-    { id: 24, name: "Турция" },
     { id: 14, name: "Чикаго" },
+    { id: 26, name: "Москва" },
+    { id: 25, name: "Бишкек" },
+    { id: 24, name: "Стамбул" },
   ];
 
   const handleSelectChange = (e) => {

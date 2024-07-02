@@ -4,8 +4,9 @@ import Modal from "../../Modal";
 import useWarehouses from "@/hooks/user/useWarehouses";
 import { useAddresses } from "@/hooks/useAddresses";
 import CustomSelect from "@/components/partials/Select";
+import { getCookie } from "@/utils/cookieHelpers";
 
-export default function MyWarehousesModal() {
+export default function MyWarehousesModal({ UserId }) {
   const [isOpen, setIsOpen] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comments, setComments] = useState("");
@@ -16,20 +17,50 @@ export default function MyWarehousesModal() {
   const [selectedOrigin, setSelectedOrigin] = useState("");
   const [selectedCourier, setSelectedCourier] = useState("");
 
-  const { addressList, fetchAddresses } = useAddresses();
+  const { fetchAddresses } = useAddresses();
+  const [userData, setUserData] = useState(null);
+  const token = getCookie("accessToken");
 
   useEffect(() => {
-    fetchAddresses();
-  }, []);
+    fetchUserData(UserId);
+  }, [UserId]);
+
+  const fetchUserData = async (userId) => {
+    try {
+      const response = await fetch(
+        `https://api-owayusa.com/api/address/list/?user=${userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log("Received user data:", data);
+      setUserData(data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   const toggleModal = () => setIsOpen(!isOpen);
 
   const warehouses = [
-    { id: 24, name: "Турция" },
-    { id: 14, name: "Чикаго" },
+    { id: 26, country: "Россия (Москва)", city: "Москва" },
+    { id: 14, country: "США (Чикаго)", city: "Чикаго" },
+    { id: 24, country: "Турция (Стамбул)", city: "Стамбул" },
+    { id: 25, country: "Кыргызстан (Бишкек)", city: "Бишкек" },
   ];
 
-  const warehouses1 = [
+  const countries = [
+    { id: 3, name: "США (Чикаго)" },
+    { id: 4, name: "Турция (Стамбул)" },
+    { id: 8, name: "Кыргызстан (Бишкек)" },
+    { id: 9, name: "Россия (Москва)" },
+  ];
+  const countriess = [
     { id: 3, name: "США" },
     { id: 4, name: "Турция" },
     { id: 8, name: "Кыргызстан" },
@@ -45,6 +76,14 @@ export default function MyWarehousesModal() {
     { name: "Landmark", id: 6 },
     { name: "Amazon", id: 7 },
   ];
+
+  const handleOriginChange = (selectedOption) => {
+    setSelectedOrigin(selectedOption);
+    const warehouse = warehouses.find(
+      (warehouse) => warehouse.country === selectedOption.name
+    );
+    setSelectedWarehouse(warehouse || "");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,27 +114,31 @@ export default function MyWarehousesModal() {
           <div className={s.shops_form}>
             <div className={s.first_input_block}>
               <div>
-                <label htmlFor="warehouse">Склад</label>
-                <CustomSelect
-                  options={warehouses}
-                  selectedOption={selectedWarehouse}
-                  onChange={(e) => setSelectedWarehouse(e)}
-                  span={"Выберите склад"}
-                />
-              </div>
-              <div>
                 <label htmlFor="origin">Страна отправления</label>
                 <CustomSelect
-                  options={warehouses1}
+                  options={countries}
                   selectedOption={selectedOrigin}
-                  onChange={(e) => setSelectedOrigin(e)}
+                  onChange={handleOriginChange}
                   span={"Cтрану отправления"}
                 />
               </div>
+              {/* <div>
+                <label htmlFor="warehouse">Склад</label>
+                <CustomSelect
+                  options={warehouses.map((wh) => ({
+                    id: wh.id,
+                    name: `${wh.country} (${wh.city})`,
+                  }))}
+                  selectedOption={selectedWarehouse}
+                  onChange={(e) => setSelectedWarehouse(e)}
+                  span={"Выберите склад"}
+                  isDisabled
+                />
+              </div> */}
               <div>
                 <label htmlFor="destination">Страна назначения</label>
                 <CustomSelect
-                  options={warehouses1}
+                  options={countriess}
                   selectedOption={selectedDestination}
                   onChange={(e) => setSelectedDestination(e)}
                   span={"Cтрану назначения"}
@@ -104,7 +147,7 @@ export default function MyWarehousesModal() {
               <div>
                 <label htmlFor="address">Адрес назначения</label>
                 <CustomSelect
-                  options={addressList.results?.map((address) => ({
+                  options={userData?.results?.map((address) => ({
                     id: address.id,
                     name: `${address.address}`,
                   }))}

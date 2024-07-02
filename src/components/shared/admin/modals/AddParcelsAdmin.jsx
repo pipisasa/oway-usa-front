@@ -15,7 +15,7 @@ export default function AddParcelsAdmin() {
   const [isOpen, setIsOpen] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comments, setComments] = useState("");
-  const [selectedWarehouse, setSelectedWarehouse] = useState("");
+  const [selectedWarehouse, setSelectedWarehouse] = useState(null);
   const [selectedDestination, setSelectedDestination] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedOrigin, setSelectedOrigin] = useState("");
@@ -26,7 +26,7 @@ export default function AddParcelsAdmin() {
   const { warehouses, fetchWarehouses, deleteWarehouse, loading, error } =
     useMainWarehouses();
   const [userData, setUserData] = useState(null);
-  const [userId, setUserId] = useState(""); // Added state to store userId
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     fetchWarehouses();
@@ -73,7 +73,7 @@ export default function AddParcelsAdmin() {
       const data = await response.json();
       console.log("Received user data:", data);
       setUserData(data);
-      setUserId(userId); // Store userId in state
+      setUserId(userId);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -87,12 +87,25 @@ export default function AddParcelsAdmin() {
 
   const toggleModal = () => setIsOpen(!isOpen);
 
-  const warehouses1 = [
+  const countries = [
+    { id: 3, name: "США (Чикаго)" },
+    { id: 4, name: "Турция (Стамбул)" },
+    { id: 8, name: "Кыргызстан (Бишкек)" },
+    { id: 9, name: "Россия (Москва)" },
+  ];
+  const countriess = [
     { id: 3, name: "США" },
     { id: 4, name: "Турция" },
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ];
+  const warehouses1 = [
+    { id: 26, country: "Россия", city: "Москва" },
+    { id: 14, country: "США", city: "Чикаго" },
+    { id: 24, country: "Турция", city: "Стамбул" },
+    { id: 25, country: "Кыргызстан", city: "Бишкек" },
+  ];
+
   const deliveryServices = [
     { name: "Fedex", id: 1 },
     { name: "USPS", id: 2 },
@@ -103,17 +116,30 @@ export default function AddParcelsAdmin() {
     { name: "Amazon", id: 7 },
   ];
 
+  const handleOriginChange = (selectedOption) => {
+    setSelectedOrigin(selectedOption);
+    const warehouse = warehouses1.find(
+      (warehouse) =>
+        `${warehouse.country} (${warehouse.city})` === selectedOption.name
+    );
+    setSelectedWarehouse(warehouse || null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!selectedWarehouse) {
+      console.error("No warehouse selected");
+      return;
+    }
     const formData = {
-      courier_service: courierOption.name,
+      courier_service: courierOption.id,
       tracking_number: trackingNumber,
-      warehouse: selectedOption.id,
+      warehouse: selectedWarehouse.id,
       country_of_origin: selectedOrigin.id,
       country_of_destination: selectedDestination.id,
       address: selectedAddress.id,
       comments: comments,
-      user: userId, // Correctly sending userId
+      user: userId,
     };
     console.log("Form data being sent:", formData);
     try {
@@ -137,16 +163,6 @@ export default function AddParcelsAdmin() {
           <div className={s.shops_form}>
             <div className={s.first_input_block}>
               <div>
-                <label htmlFor="warehouse">Склад</label>
-                <CustomSelect
-                  options={warehouses}
-                  selectedOption={selectedOption}
-                  onChange={(e) => setSelectedOption(e)}
-                  span={"Выберите страну"}
-                />
-              </div>
-
-              <div>
                 <label htmlFor="tracking_number">Трeк-код</label>
                 <input
                   id="tracking_number"
@@ -169,16 +185,16 @@ export default function AddParcelsAdmin() {
               <div>
                 <label htmlFor="origin">Страна отправления</label>
                 <CustomSelect
-                  options={warehouses1}
+                  options={countries}
                   selectedOption={selectedOrigin}
-                  onChange={(e) => setSelectedOrigin(e)}
+                  onChange={handleOriginChange}
                   span={"Cтрану отправления"}
                 />
               </div>
               <div>
                 <label htmlFor="destination">Страна назначения</label>
                 <CustomSelect
-                  options={warehouses1}
+                  options={countriess}
                   selectedOption={selectedDestination}
                   onChange={(e) => setSelectedDestination(e)}
                   span={"Cтрану назначения"}

@@ -12,7 +12,7 @@ export default function OnTheWay() {
     useWarehousesUser(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
-
+  console.log(warehouses);
   useEffect(() => {
     fetchWarehouses(currentPage);
   }, [currentPage]);
@@ -22,7 +22,6 @@ export default function OnTheWay() {
     setIsModalVisible(true);
   };
 
-  const is_paid = false;
   return (
     <>
       <div className={s.product_table}>
@@ -58,7 +57,7 @@ export default function OnTheWay() {
                 <td>{item.price}</td>
                 <td>21.04.2024</td>
                 <td>
-                  {item.is_parcels === false ? (
+                  {item.status_many === false ? (
                     <p style={{ color: "red" }}>Не оплачено</p>
                   ) : (
                     <p style={{ color: "#06DB02" }}>Оплачено</p>

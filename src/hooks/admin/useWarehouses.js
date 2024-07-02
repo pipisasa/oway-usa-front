@@ -6,10 +6,10 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const warehouseSity = [
-  { id: 24, name: "Турция" },
-  { id: 23, name: "Москва" },
-  { id: 22, name: "Кыргызстан" },
   { id: 14, name: "Чикаго" },
+  { id: 26, name: "Москва" },
+  { id: 25, name: "Бишкек" },
+  { id: 24, name: "Стамбул" },
 ];
 
 const useWarehouses = (currentPage, initialFilters = {}) => {

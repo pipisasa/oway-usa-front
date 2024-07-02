@@ -16,11 +16,25 @@ const deliveryServices = [
   { name: "Amazon", id: 7 },
 ];
 
+const predefinedWarehouses = [
+  { id: 14, name: "Чикаго" },
+  { id: 26, name: "Москва" },
+  { id: 25, name: "Бишкек" },
+  { id: 24, name: "Стамбул" },
+];
+
 const getCourierServiceName = (id) => {
   const service = deliveryServices.find(
     (service) => service.id === parseInt(id, 10)
   );
   return service ? service.name : "Unknown";
+};
+
+const getWarehouseNameById = (id) => {
+  const warehouse = predefinedWarehouses.find(
+    (warehouse) => warehouse.id === parseInt(id, 10)
+  );
+  return warehouse ? warehouse.name : "Unknown";
 };
 
 export default function MyWarehouses() {
@@ -104,7 +118,7 @@ export default function MyWarehouses() {
             )
             .map((product) => (
               <tr key={product.id}>
-                <td>{product.warehouse}</td>
+                <td>{getWarehouseNameById(product.warehouse)}</td>
                 <td>{product.tracking_number}</td>
                 <td>{getCourierServiceName(product.courier_service)}</td>
                 <td>
