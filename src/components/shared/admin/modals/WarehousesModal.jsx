@@ -263,11 +263,12 @@ export default function WarehousesModal({ onClose, warehouse }) {
                   setShowPaymentStatusOptions(!showPaymentStatusOptions)
                 }
                 className={s.button_default}
+                readOnly={!isEditing}
               >
                 {paymentStatus ? "Оплачено" : "Не оплачено"}
               </button>
               {showPaymentStatusOptions && (
-                <div className={s.select_status}>
+                <div className={s.select_status} readOnly={!isEditing}>
                   <button
                     className={s.green}
                     onClick={() => handlePaymentStatusClick(true)}

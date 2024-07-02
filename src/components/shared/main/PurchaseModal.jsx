@@ -5,13 +5,17 @@ import { RxCross2 } from "react-icons/rx";
 const PurchaseModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
+  const handleClose = () => {
+    window.location.reload();
+  };
+
   return (
     <div className={s.modal_overlay} onClick={onClose}>
       <div className={s.modal_content} onClick={(e) => e.stopPropagation()}>
         <div className={s.modal_header}>
           <h3>Ваша заявка на выкуп принята!</h3>
           <div className={s.btn_center}>
-            <button onClick={onClose} className={s.close_btn}>
+            <button onClick={handleClose} className={s.close_btn}>
               <RxCross2 size={20} />
             </button>
           </div>
@@ -20,7 +24,7 @@ const PurchaseModal = ({ isOpen, onClose }) => {
         <div>
           <p>Она будет рассмотрена в течении 24 часов, пожалуйста ожидайте</p>
           <div className={s.btn}>
-            <button className={s.button} onClick={onClose}>
+            <button className={s.button} onClick={handleClose}>
               Закрыть
             </button>
           </div>

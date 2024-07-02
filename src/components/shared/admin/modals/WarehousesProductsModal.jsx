@@ -10,10 +10,10 @@ import { useRouter } from "next/router";
 import Arrow from "../../ui/Arrow";
 
 const warehouseSity = [
-  { id: 24, name: "Турция" },
-  { id: 23, name: "Москва" },
-  { id: 22, name: "Кыргызстан" },
   { id: 14, name: "Чикаго" },
+    { id: 26, name: "Москва" },
+    { id: 25, name: "Бишкек" },
+    { id: 24, name: "Стамбул" },
 ];
 
 export default function WarehouseProductsModal() {

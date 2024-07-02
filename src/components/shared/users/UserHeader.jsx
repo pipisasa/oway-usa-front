@@ -57,7 +57,7 @@ export default function UsersHeader() {
     } else if (router.pathname === "/admin/shops-catalog") {
       return <AddShopsModal />;
     } else if (router.pathname === "/user/my-parcels") {
-      return <MyWarehousesModal />;
+      return <MyWarehousesModal UserId={userData?.id} />;
     } else if (router.pathname === "/user/my-requests") {
       return <MyRequestsModal />;
     }

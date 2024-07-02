@@ -15,11 +15,25 @@ const deliveryServices = [
   { name: "Amazon", id: 7 },
 ];
 
+const predefinedWarehouses = [
+  { id: 14, name: "Чикаго" },
+  { id: 26, name: "Москва" },
+  { id: 25, name: "Бишкек" },
+  { id: 24, name: "Стамбул" },
+];
+
 const getCourierServiceName = (id) => {
   const service = deliveryServices.find(
     (service) => service.id === parseInt(id, 10)
   );
   return service ? service.name : "Unknown";
+};
+
+const getWarehouseNameById = (id) => {
+  const warehouse = predefinedWarehouses.find(
+    (warehouse) => warehouse.id === parseInt(id, 10)
+  );
+  return warehouse ? warehouse.name : "Unknown";
 };
 
 export default function UserWarehouses() {
@@ -68,7 +82,7 @@ export default function UserWarehouses() {
                 </td>
                 <td>{warehouse.user.first_name}</td>
                 <td>{warehouse.user.last_name}</td>
-                <td>{warehouse.warehouse}</td>
+                <td>{getWarehouseNameById(warehouse.warehouse)}</td>
                 <td>{warehouse.tracking_number}</td>
                 <td>{getCourierServiceName(warehouse.courier_service)}</td>
                 <td className={s.actions}>
@@ -84,7 +98,7 @@ export default function UserWarehouses() {
                     country_of_origin1={warehouse.country_of_origin}
                     country_of_destination1={warehouse.country_of_destination}
                     warehouseId={warehouse.id}
-                    warehouse={warehouse.warehouse}
+                    warehouse={getWarehouseNameById(warehouse.warehouse)}
                     comments={warehouse.comments}
                     tracking_number={warehouse.tracking_number}
                     closeModal={closeModal}
