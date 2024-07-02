@@ -22,11 +22,15 @@ export default function RequestsModal({ data, onClose }) {
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
   const [selectedImageSrc, setSelectedImageSrc] = useState("");
+  const [paymentStatus, setPaymentStatus] = useState(data.payment_status);
+  const [showPaymentStatusOptions, setShowPaymentStatusOptions] =
+    useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("price", price);
+    formData.append("status_request", paymentStatus);
 
     if (event.target.payment_confirmation.files[0]) {
       formData.append(
@@ -63,6 +67,11 @@ export default function RequestsModal({ data, onClose }) {
     }
   };
 
+  const handlePaymentStatusClick = (status) => {
+    setPaymentStatus(status);
+    setShowPaymentStatusOptions(false);
+  };
+
   return (
     <div
       className={s.modal_backdrop}
@@ -87,12 +96,34 @@ export default function RequestsModal({ data, onClose }) {
               />
             </div>
             <div className={s.input_label}>
-              <label htmlFor="">Статус запроса</label>
-
-              {data.payment_confirmation ? (
-                <button className={s.button_true}>Обработан</button>
-              ) : (
-                <button className={s.button_false}>В ожидании</button>
+              <label htmlFor="">Статус</label>
+              <button
+                onClick={() =>
+                  setShowPaymentStatusOptions(!showPaymentStatusOptions)
+                }
+                className={s.button_default}
+              >
+                {data.status_request ? (
+                  <p style={{ color: "#06DB02" }}>Обработан</p>
+                ) : (
+                  <p style={{ color: "red" }}>В ожидании</p>
+                )}
+              </button>
+              {showPaymentStatusOptions && (
+                <div className={s.select_status}>
+                  <button
+                    className={s.green}
+                    onClick={() => handlePaymentStatusClick(true)}
+                  >
+                    Обработан
+                  </button>
+                  <button
+                    className={s.red}
+                    onClick={() => handlePaymentStatusClick(false)}
+                  >
+                    Не ожидании
+                  </button>
+                </div>
               )}
             </div>
           </div>

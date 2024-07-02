@@ -111,7 +111,7 @@ export default function IncommingRequests() {
               </td>
               <td>{request.created_at}</td>
               <td>
-                {request.payment_confirmation ? (
+                {request.status_request ? (
                   <p style={{ color: "#06DB02" }}>Обработан</p>
                 ) : (
                   <p style={{ color: "red" }}>В ожидании</p>
