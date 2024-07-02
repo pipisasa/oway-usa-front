@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import s from "@/styles/users/Address.module.scss";
 import Modal from "./Modal";
 import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
 import { useAddresses } from "@/hooks/useAddresses";
 import { useModal } from "@/hooks/useModal";
+import { getCookie } from "@/utils/cookieHelpers";
 
-export default function AddressSetting() {
+export default function AddressSetting({ UserId }) {
   const {
-    addressList,
     formData,
     setFormData,
     editId,
@@ -19,6 +19,7 @@ export default function AddressSetting() {
     handleSubmitCreate,
     handleSubmitEdit,
     handleDelete,
+    fetchAddressById,
   } = useAddresses();
   const { isModalOpen: isCreateModalOpen, toggleModal: toggleCreateModal } =
     useModal();
@@ -26,6 +27,33 @@ export default function AddressSetting() {
     useModal();
   const { isModalOpen: isDeleteModalOpen, toggleModal: toggleDeleteModal } =
     useModal();
+
+  const [userData, setUserData] = useState(null);
+  const token = getCookie("accessToken");
+
+  useEffect(() => {
+    fetchUserData(UserId);
+  }, [UserId]);
+
+  const fetchUserData = async (userId) => {
+    try {
+      const response = await fetch(
+        `https://api-owayusa.com/api/address/list/?user=${userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log("Received user data:", data);
+      setUserData(data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   const handleEdit = (address) => {
     setFormData({
@@ -72,7 +100,7 @@ export default function AddressSetting() {
         handleDelete={() => handleDelete(deleteId, toggleDeleteModal)}
         deleteId={deleteId}
       />
-      {addressList.results?.map((address, index) => (
+      {userData?.results?.map((address, index) => (
         <div key={index} className={s.addressBlock}>
           <div>
             <img src="/assets/icons/user-icons/user.svg" alt="" />

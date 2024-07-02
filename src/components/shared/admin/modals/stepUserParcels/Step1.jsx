@@ -100,7 +100,6 @@ export default function Step1({
     const weight = parseFloat(formData.weight);
 
     if (isNaN(weight)) {
-      console.log("Invalid weight");
       return;
     }
     const volumeWeight =

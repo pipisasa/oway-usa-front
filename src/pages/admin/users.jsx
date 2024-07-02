@@ -33,7 +33,6 @@ export default function AdminUsersPage() {
     return <Loading />;
   }
 
-  console.log(users);
   const deselectUser = () => setSelectedUser(null);
 
   const handleEditUser = (userData) => {

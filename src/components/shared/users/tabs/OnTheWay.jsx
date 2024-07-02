@@ -23,7 +23,6 @@ export default function OnTheWay() {
   };
 
   const is_paid = false;
-  console.log(warehouses);
   return (
     <>
       <div className={s.product_table}>

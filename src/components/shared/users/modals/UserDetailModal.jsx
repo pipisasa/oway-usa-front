@@ -96,7 +96,6 @@ export default function UserDetailModal({ userData, close }) {
       console.error("Failed to update", await response.text());
     }
   };
-  console.log(viewImage);
   const handleCancel = () => {
     setFirstName(userData.first_name);
     setLastName(userData.last_name);
