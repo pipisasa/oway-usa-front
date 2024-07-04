@@ -90,8 +90,8 @@ export default function AddParcelsAdmin() {
   const countries = [
     { id: 3, name: "США (Чикаго)" },
     { id: 4, name: "Турция (Стамбул)" },
-    { id: 8, name: "Кыргызстан (Бишкек)" },
-    { id: 9, name: "Россия (Москва)" },
+    // { id: 8, name: "Кыргызстан (Бишкек)" },
+    // { id: 9, name: "Россия (Москва)" },
   ];
   const countriess = [
     { id: 3, name: "США" },

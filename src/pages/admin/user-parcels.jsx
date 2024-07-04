@@ -56,6 +56,9 @@ export default function UserWarehouses() {
 
   if (loading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
+
+  console.log(warehouses);
+
   return (
     <section>
       <div className={s.filter}>
@@ -98,7 +101,7 @@ export default function UserWarehouses() {
                     country_of_origin1={warehouse.country_of_origin}
                     country_of_destination1={warehouse.country_of_destination}
                     warehouseId={warehouse.id}
-                    warehouse={getWarehouseNameById(warehouse.warehouse)}
+                    warehouse={warehouse.warehouse}
                     comments={warehouse.comments}
                     tracking_number={warehouse.tracking_number}
                     closeModal={closeModal}

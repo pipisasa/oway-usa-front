@@ -11,9 +11,9 @@ import Arrow from "../../ui/Arrow";
 
 const warehouseSity = [
   { id: 14, name: "Чикаго" },
-    { id: 26, name: "Москва" },
-    { id: 25, name: "Бишкек" },
-    { id: 24, name: "Стамбул" },
+  { id: 26, name: "Москва" },
+  { id: 25, name: "Бишкек" },
+  { id: 24, name: "Стамбул" },
 ];
 
 export default function WarehouseProductsModal() {

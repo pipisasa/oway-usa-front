@@ -44,10 +44,10 @@ export default function Step1({
   const { countries } = useCountries();
 
   const country_of_origin = [
-    { id: 3, name: "США" },
-    { id: 4, name: "Турция" },
-    { id: 8, name: "Кыргызстан" },
-    { id: 9, name: "Россия" },
+    { id: 3, name: "США (Чикаго)" },
+    { id: 4, name: "Турция (Стамбул)" },
+    // { id: 8, name: "Кыргызстан (Бишкек)" },
+    // { id: 9, name: "Россия (Москва)" },
   ];
   const country_of_destination = [
     { id: 3, name: "США" },

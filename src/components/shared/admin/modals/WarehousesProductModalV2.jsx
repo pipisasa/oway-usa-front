@@ -142,7 +142,7 @@ export default function WarehouseProductsModalV2({
         length: "",
         track_number: tracking_number || "",
         price: "",
-        warehouse: warehouse || 0,
+        warehouse: warehouse,
         country: "",
         status: "",
         image: "",
