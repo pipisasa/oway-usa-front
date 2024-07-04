@@ -90,12 +90,12 @@ export default function Step2({
             ))}
           </select>
         </div>
-        <div className={c.input}>
+        {/* <div className={c.input}>
           <label htmlFor="warehouses">Выберите склад</label>
           <select
             id="warehouses"
             name="warehouses"
-            value={selectedOption2 || warehouse}
+            value={warehouse}
             onChange={handleSelectChange1}
             className={c.select}
           >
@@ -106,7 +106,7 @@ export default function Step2({
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
         <div className={c.input}>
           <label htmlFor="price">Стоимость к оплате ( $ )</label>
           <input

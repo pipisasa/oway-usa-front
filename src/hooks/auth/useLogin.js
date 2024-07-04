@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { setCookie, getCookie } from "@/utils/cookieHelpers";
+import { setCookie, getCookie, deleteCookie } from "@/utils/cookieHelpers";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -25,6 +25,7 @@ const useLogin = () => {
 
       if (response.ok) {
         setCookie("accessToken", data.access);
+        setCookie("refreshToken", data.refresh);
 
         if (data?.is_admin) {
           setCookie("isAdmin", "true");
@@ -42,14 +43,47 @@ const useLogin = () => {
     }
   };
 
+  const refreshAccessToken = async () => {
+    const refreshToken = getCookie("refreshToken");
+
+    if (!refreshToken) {
+      router.push("/auth/login");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_URL}/api/token/refresh/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refresh: refreshToken }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setCookie("accessToken", data.access);
+      } else {
+        deleteCookie("accessToken");
+        deleteCookie("refreshToken");
+        router.push("/auth/login");
+      }
+    } catch (error) {
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      router.push("/auth/login");
+    }
+  };
+
   useEffect(() => {
     const accessToken = getCookie("accessToken");
     if (!accessToken) {
-      router.push("/auth/login");
+      refreshAccessToken();
     }
   }, []);
 
-  return { login, error, isLoading };
+  return { login, error, isLoading, refreshAccessToken };
 };
 
 export default useLogin;

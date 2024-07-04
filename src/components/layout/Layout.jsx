@@ -6,6 +6,8 @@ import AdminLayout from "../shared/admin/AdminLayout";
 import UsersLayout from "../shared/users/UserLayout";
 import UserMobileHeader from "../shared/users/UserMobileHeader";
 import AdminMobileHeader from "../shared/admin/AdminMobileHeader";
+import useLogin from "@/hooks/auth/useLogin";
+import { getCookie } from "@/utils/cookieHelpers";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -13,6 +15,18 @@ export default function Layout({ children }) {
 
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileAdmin, setIsMobileAdmin] = useState(false);
+  const { refreshAccessToken } = useLogin();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const accessToken = getCookie("accessToken");
+      if (!accessToken) {
+        await refreshAccessToken();
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
