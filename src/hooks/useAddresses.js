@@ -59,6 +59,7 @@ export const useAddresses = () => {
       if (response.ok) {
         const data = await response.json();
         setSelectedAddress(data);
+        window.location.reload();
       } else {
         console.error("Error fetching address by ID");
       }
@@ -94,6 +95,7 @@ export const useAddresses = () => {
       if (response.ok) {
         toggleCreateModal();
         fetchAddresses();
+        window.location.reload();
       } else {
         console.error("Error creating address");
       }
@@ -122,6 +124,7 @@ export const useAddresses = () => {
       if (response.ok) {
         toggleEditModal();
         fetchAddresses();
+        window.location.reload();
       } else {
         console.error("Error updating address");
       }
@@ -147,6 +150,7 @@ export const useAddresses = () => {
       if (response.ok) {
         toggleDeleteModal();
         fetchAddresses();
+        window.location.reload();
       } else {
         console.error("Error deleting address");
       }
