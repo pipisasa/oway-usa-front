@@ -59,7 +59,6 @@ export const useAddresses = () => {
       if (response.ok) {
         const data = await response.json();
         setSelectedAddress(data);
-        window.location.reload();
       } else {
         console.error("Error fetching address by ID");
       }
