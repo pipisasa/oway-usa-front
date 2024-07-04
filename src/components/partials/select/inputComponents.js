@@ -28,7 +28,7 @@ const inputComponents = (handleSearch, inputs) => [
         onSearch={(input) => handleSearch(input, "trackNumberInput")}
       />
     ),
-    displayText: `по: ${inputs.trackNumberInput || "трек-номеру"}`,
+    displayText: `по: ${"трек-номеру"}`,
   },
   // {
   //   component: (
@@ -46,7 +46,7 @@ const inputComponents = (handleSearch, inputs) => [
         onSearch={(input) => handleSearch(input, "dateSentInput")}
       />
     ),
-    displayText: `по: ${inputs.dateSentInput || "дате"}`,
+    displayText: `по: ${"дате"}`,
   },
   // {
   //   component: (
@@ -74,7 +74,7 @@ const inputComponents = (handleSearch, inputs) => [
         onChoiceSelect={(choice) => handleSearch(choice.id, "statusInput")}
       />
     ),
-    displayText: `по: ${inputs.statusInput.name || "статусу"}`,
+    displayText: `по: ${"статусу"}`,
   },
 
   // {
