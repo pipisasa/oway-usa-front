@@ -25,7 +25,7 @@ export default function WarehousesProductsTable({
   const router = useRouter();
   const predefinedWarehouses = [
     { id: 14, name: "Чикаго" },
-    { id: 26, name: "Москва" },
+    { id: 28, name: "Delaware" },
     { id: 25, name: "Бишкек" },
     { id: 24, name: "Стамбул" },
   ];
