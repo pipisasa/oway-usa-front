@@ -94,8 +94,8 @@ export default function AddParcelsAdmin() {
     // { id: 9, name: "Россия (Москва)" },
   ];
   const countriess = [
-    { id: 3, name: "США" },
-    { id: 4, name: "Турция" },
+    // { id: 3, name: "США" },
+    // { id: 4, name: "Турция" },
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ];

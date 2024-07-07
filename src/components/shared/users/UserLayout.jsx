@@ -60,7 +60,7 @@ export default function UsersLayout({ children }) {
     },
     {
       href: "/user/my-requests",
-      label: "Мои заявки",
+      label: "Мои заявки на выкуп",
       icons: (
         <BiSolidMessageAltDetail
           size={22}

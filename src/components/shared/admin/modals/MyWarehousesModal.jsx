@@ -61,8 +61,8 @@ export default function MyWarehousesModal({ UserId }) {
     // { id: 9, name: "Россия (Москва)" },
   ];
   const countriess = [
-    { id: 3, name: "США" },
-    { id: 4, name: "Турция" },
+    // { id: 3, name: "США" },
+    // { id: 4, name: "Турция" },
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ];
@@ -114,12 +114,12 @@ export default function MyWarehousesModal({ UserId }) {
           <div className={s.shops_form}>
             <div className={s.first_input_block}>
               <div>
-                <label htmlFor="origin">Страна отправления</label>
+                <label htmlFor="origin">Страна отправки</label>
                 <CustomSelect
                   options={countries}
                   selectedOption={selectedOrigin}
                   onChange={handleOriginChange}
-                  span={"Cтрану отправления"}
+                  span={"Cтрану отправки"}
                 />
               </div>
               {/* <div>
@@ -136,12 +136,12 @@ export default function MyWarehousesModal({ UserId }) {
                 />
               </div> */}
               <div>
-                <label htmlFor="destination">Страна назначения</label>
+                <label htmlFor="destination">Страна прибытия</label>
                 <CustomSelect
                   options={countriess}
                   selectedOption={selectedDestination}
                   onChange={(e) => setSelectedDestination(e)}
-                  span={"Cтрану назначения"}
+                  span={"Cтрану прибытия"}
                 />
               </div>
               <div>

@@ -22,7 +22,10 @@ const PurchaseModal = ({ isOpen, onClose }) => {
         </div>
 
         <div>
-          <p>Она будет рассмотрена в течении 24 часов, пожалуйста ожидайте</p>
+          <p>
+            Уважаемый клиент ваша заявка принята, ожидайте обратную связь в
+            течении 6 часов.
+          </p>
           <div className={s.btn}>
             <button className={s.button} onClick={handleClose}>
               Закрыть
