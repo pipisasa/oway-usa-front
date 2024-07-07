@@ -100,7 +100,7 @@ export default function AddParcelsAdmin() {
     { id: 9, name: "Россия" },
   ];
   const warehouses1 = [
-    { id: 26, country: "Россия", city: "Москва" },
+    { id: 28, country: "Россия", city: "Москва" },
     { id: 14, country: "США", city: "Чикаго" },
     { id: 24, country: "Турция", city: "Стамбул" },
     { id: 25, country: "Кыргызстан", city: "Бишкек" },

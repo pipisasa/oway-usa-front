@@ -7,9 +7,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const warehouseSity = [
   { id: 14, name: "Чикаго" },
-  { id: 26, name: "Москва" },
+  { id: 28, name: "Online Warehouse (Delaware)" },
   { id: 25, name: "Бишкек" },
-  { id: 24, name: "Стамбул" },
+  { id: 24, name: "Online Warehouse (Turkey)" },
 ];
 
 const useWarehouses = (currentPage, initialFilters = {}) => {

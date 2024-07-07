@@ -28,6 +28,12 @@ export default function WarehousesModal({ onClose, warehouse }) {
     onOpen: onAddressModalOpen,
     onOpenChange: onAddressModalOpenChange,
   } = useDisclosure();
+  const {
+    isOpen: isImageCheckModalOpen,
+    onOpen: onImageCheckModalOpen,
+    onOpenChange: onImageCheckModalOpenChange,
+  } = useDisclosure();
+  const [previewImageCheckUrl, setPreviewImageCheckUrl] = useState(null);
   const { selectedAddress, fetchAddressById: fetchAddress } = useAddresses();
   const [isEditing, setIsEditing] = useState(false);
   const [imageFile, setImageFile] = useState(null);
@@ -35,6 +41,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
   const [originalStatus, setOriginalStatus] = useState(warehouse.status.id);
   const [showStatusOptions, setShowStatusOptions] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState(warehouse.status_many);
+  const [imageCheckFile, setImageCheckFile] = useState(null);
   const [showPaymentStatusOptions, setShowPaymentStatusOptions] =
     useState(false);
   const [countries, setCountries] = useState([
@@ -90,7 +97,21 @@ export default function WarehousesModal({ onClose, warehouse }) {
     country_of_origin: warehouse.country_of_origin.id,
     country_of_destination: warehouse.country_of_destination.id,
     status_many: paymentStatus,
+    image_check: warehouse.image_check,
   });
+
+  const handleImageCheckChange = (e) => {
+    const file = e.target.files[0];
+    setImageCheckFile(file);
+    const imageCheckUrl = URL.createObjectURL(file);
+    setPreviewImageCheckUrl(imageCheckUrl);
+  };
+
+  useEffect(() => {
+    if (editData.image_check) {
+      setPreviewImageCheckUrl(API_URL + editData.image_check);
+    }
+  }, [editData.image_check]);
 
   const statuses = [
     { id: 6, name: "Получен на складе" },
@@ -132,6 +153,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
       track_number: warehouse.track_number,
       status: currentStatus,
       status_many: paymentStatus,
+      image_check: warehouse.image_check,
     });
   };
 
@@ -146,6 +168,9 @@ export default function WarehousesModal({ onClose, warehouse }) {
     const formData = new FormData();
     if (imageFile) {
       formData.append("image", imageFile);
+    }
+    if (imageCheckFile) {
+      formData.append("image_check", imageCheckFile);
     }
     Object.keys(editData).forEach((key) => {
       if (key === "status" && currentStatus !== originalStatus) {
@@ -345,6 +370,24 @@ export default function WarehousesModal({ onClose, warehouse }) {
                   readOnly={!isEditing}
                 />
               </div>
+              <div className={s.input_label}>
+                <label htmlFor="image_check">Чек-пасылки</label>
+                <input
+                  id="image_check"
+                  type="file"
+                  onChange={handleImageCheckChange}
+                  disabled={!isEditing}
+                />
+                {editData.image_check && (
+                  <button
+                    type="button"
+                    onClick={onImageCheckModalOpen}
+                    className={s.view_button}
+                  >
+                    Посмотреть чек
+                  </button>
+                )}
+              </div>
             </div>
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
@@ -532,6 +575,26 @@ export default function WarehousesModal({ onClose, warehouse }) {
                 <ModalHeader className="flex flex-col gap-1"></ModalHeader>
                 <ModalBody>
                   <img src={previewImageUrl} alt="картинка" />
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Закрыть
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+        <Modal
+          isOpen={isImageCheckModalOpen}
+          onOpenChange={onImageCheckModalOpenChange}
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1"></ModalHeader>
+                <ModalBody>
+                  <img src={previewImageCheckUrl} alt="картинка" />
                 </ModalBody>
                 <ModalFooter>
                   <Button color="danger" variant="light" onPress={onClose}>

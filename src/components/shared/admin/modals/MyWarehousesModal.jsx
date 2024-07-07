@@ -48,7 +48,7 @@ export default function MyWarehousesModal({ UserId }) {
   const toggleModal = () => setIsOpen(!isOpen);
 
   const warehouses = [
-    { id: 26, country: "Россия (Москва)", city: "Москва" },
+    { id: 28, country: "Россия (Москва)", city: "Москва" },
     { id: 14, country: "США (Чикаго)", city: "Чикаго" },
     { id: 24, country: "Турция (Стамбул)", city: "Стамбул" },
     { id: 25, country: "Кыргызстан (Бишкек)", city: "Бишкек" },
