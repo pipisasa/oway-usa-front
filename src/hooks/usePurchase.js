@@ -14,6 +14,7 @@ const usePurchase = () => {
     telegram: "",
     phone_number: "",
     purchase_image: null,
+    purchase_image_2: null,
   };
 
   const [purchaseData, setPurchaseData] = useState(initialState);
@@ -23,7 +24,10 @@ const usePurchase = () => {
   const handleChange = (e) => {
     const { id, value, files } = e.target;
     setIsSubmitted(false);
-    if (id === "purchase_image" && files.length) {
+    if (
+      (id === "purchase_image" || id === "purchase_image_2") &&
+      files.length
+    ) {
       setPurchaseData({ ...purchaseData, [id]: files[0] });
     } else {
       setPurchaseData({ ...purchaseData, [id]: value });
@@ -35,8 +39,10 @@ const usePurchase = () => {
 
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
-      if (key === "purchase_image" && data[key]) {
-        formData.append(key, data[key]);
+      if (key === "purchase_image" || key === "purchase_image_2") {
+        if (data[key]) {
+          formData.append(key, data[key]);
+        }
       } else {
         formData.append(key, data[key]);
       }

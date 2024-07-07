@@ -79,7 +79,7 @@ export default function MyRequestsModal() {
       await submitPurchase({
         ...data,
         purchase_image: selectedFile1,
-        purchase_image_2: selectedFile2,
+        purchase_image_2: selectedFile2 || null,
       });
       reset();
     },
@@ -215,6 +215,7 @@ export default function MyRequestsModal() {
                       previewImage={previewImage1}
                       closeModal={closeImagePreview1}
                       isOpen={isImagePreview1Open}
+                      required
                     />
 
                     {selectedFile1 && (
@@ -285,9 +286,12 @@ const FileInputField = ({
   previewImage,
   closeModal,
   isOpen,
+  required,
 }) => (
   <div className={errors?.purchase_image ? s.errorr : s.purchase_inner_from}>
-    <label>{label}</label>
+    <label>
+      {label} {required && <span>*</span>}
+    </label>
     <label className="custom-file-upload" style={{ marginTop: "-3px" }}>
       <input type="file" onChange={handleChange} />
       <img src="/assets/icons/selectimg.svg" alt="select img" />
