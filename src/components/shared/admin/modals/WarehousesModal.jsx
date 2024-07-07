@@ -97,7 +97,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
     country_of_origin: warehouse.country_of_origin.id,
     country_of_destination: warehouse.country_of_destination.id,
     status_many: paymentStatus,
-    image_check: warehouse.image_check,
+    image_check: warehouse.image_check || editData.image_check,
   });
 
   const handleImageCheckChange = (e) => {
@@ -114,12 +114,10 @@ export default function WarehousesModal({ onClose, warehouse }) {
   }, [editData.image_check]);
 
   const statuses = [
-    { id: 6, name: "Получен на складе" },
-    { id: 5, name: "Отправлен" },
-    { id: 4, name: "Получен в ПВЗ" },
-    { id: 3, name: "Готов к выдаче" },
-    { id: 7, name: "Отправлено курьерской службой" },
-    { id: 8, name: "Доставлено" },
+    { id: 6, name: "отправлен = получен, готов к отправке" },
+    { id: 5, name: "отправлен = ваша посылка в пути" },
+    { id: 4, name: "получен в пвз = поступило в пвз, готов к выдаче" },
+    { id: 3, name: "отправлен кур службой = отправлено курьерской службой" },
   ];
 
   const handleInputChange = (e) => {
@@ -153,7 +151,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
       track_number: warehouse.track_number,
       status: currentStatus,
       status_many: paymentStatus,
-      image_check: warehouse.image_check,
+      image_check: warehouse.image_check || editData.image_check,
     });
   };
 
@@ -175,7 +173,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
     Object.keys(editData).forEach((key) => {
       if (key === "status" && currentStatus !== originalStatus) {
         formData.append(key, currentStatus);
-      } else {
+      } else if (key !== "image_check" || imageCheckFile) {
         formData.append(key, editData[key]);
       }
     });

@@ -27,9 +27,11 @@ export default function IncommingRequests() {
     is_paid: "",
     request_status: "",
   });
+
   useEffect(() => {
     fetchData({ currentPage, ...filters });
   }, [currentPage, filters]);
+
   const handleOpenModal = (requestData) => {
     setCurrentRequestData(requestData);
     setIsModalVisible(true);
@@ -60,6 +62,7 @@ export default function IncommingRequests() {
     }
     closeDeleteModal();
   };
+
   const handleFilterChange = (key, value) => {
     setFiltersState((prevFilters) => ({ ...prevFilters, [key]: value }));
     setFilters({ [key]: value });
@@ -93,53 +96,61 @@ export default function IncommingRequests() {
           </tr>
         </thead>
         <tbody>
-          {data.results.map((request) => (
-            <tr key={request.id}>
-              <td className={s.purchase_image}>
-                <img
-                  src={`${API_URL}${request.purchase_image}`}
-                  alt="Product"
-                  onClick={() =>
-                    handleImageClick(`${API_URL}${request.purchase_image}`)
-                  }
-                  style={{ cursor: "pointer" }}
-                />
-              </td>
-              <td>{request.name_of_purchase}</td>
-              <td>
-                {request.price === null ? "Цена не указана" : request.price}
-              </td>
-              <td>{request.created_at}</td>
-              <td>
-                {request.status_request ? (
-                  <p style={{ color: "#06DB02" }}>Обработан</p>
-                ) : (
-                  <p style={{ color: "red" }}>В ожидании</p>
-                )}
-              </td>
-              <td>
-                {request.payment_confirmation ? (
-                  <p style={{ color: "#06DB02" }}>Оплачено</p>
-                ) : (
-                  <p style={{ color: "red" }}>Не оплачено</p>
-                )}
-              </td>
-              <td className="flex">
-                <button
-                  className={s.btn}
-                  onClick={() => handleOpenModal(request)}
-                >
-                  <img src="/assets/icons/icon.svg" alt="more" />
-                </button>
-                <button
-                  className={s.delete}
-                  onClick={() => openDeleteModal(request.id)}
-                >
-                  <img src="/assets/icons/delete.svg" alt="Delete" />
-                </button>
+          {data.results.length > 0 ? (
+            data.results.map((request) => (
+              <tr key={request.id}>
+                <td className={s.purchase_image}>
+                  <img
+                    src={`${API_URL}${request.purchase_image}`}
+                    alt="Product"
+                    onClick={() =>
+                      handleImageClick(`${API_URL}${request.purchase_image}`)
+                    }
+                    style={{ cursor: "pointer" }}
+                  />
+                </td>
+                <td>{request.name_of_purchase}</td>
+                <td>
+                  {request.price === null ? "Цена не указана" : request.price}
+                </td>
+                <td>{request.created_at}</td>
+                <td>
+                  {request.status_request ? (
+                    <p style={{ color: "#06DB02" }}>Обработан</p>
+                  ) : (
+                    <p style={{ color: "red" }}>В ожидании</p>
+                  )}
+                </td>
+                <td>
+                  {request.payment_confirmation ? (
+                    <p style={{ color: "#06DB02" }}>Оплачено</p>
+                  ) : (
+                    <p style={{ color: "red" }}>Не оплачено</p>
+                  )}
+                </td>
+                <td className="flex">
+                  <button
+                    className={s.btn}
+                    onClick={() => handleOpenModal(request)}
+                  >
+                    <img src="/assets/icons/icon.svg" alt="more" />
+                  </button>
+                  <button
+                    className={s.delete}
+                    onClick={() => openDeleteModal(request.id)}
+                  >
+                    <img src="/assets/icons/delete.svg" alt="Delete" />
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="7">
+                <p className="maps">В ожидании пополнения товара!</p>
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
       <div className={s.pagination}>

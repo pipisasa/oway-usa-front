@@ -78,37 +78,45 @@ export default function UserWarehouses() {
             </tr>
           </thead>
           <tbody>
-            {warehouses.map((warehouse) => (
-              <tr key={warehouse.id}>
-                <td style={{ fontWeight: "bold" }}>
-                  #{warehouse.user.unique_id}
-                </td>
-                <td>{warehouse.user.first_name}</td>
-                <td>{warehouse.user.last_name}</td>
-                <td>{getWarehouseNameById(warehouse.warehouse)}</td>
-                <td>{warehouse.tracking_number}</td>
-                <td>{getCourierServiceName(warehouse.courier_service)}</td>
-                <td className={s.actions}>
-                  <button
-                    className={s.delete}
-                    onClick={() => deleteWarehouse(warehouse.id)}
-                  >
-                    <img src="/assets/icons/delete.svg" alt="delete" />
-                  </button>
-                  <WarehouseProductsModalV2
-                    address={warehouse.address}
-                    clientId={warehouse.user.unique_id}
-                    country_of_origin1={warehouse.country_of_origin}
-                    country_of_destination1={warehouse.country_of_destination}
-                    warehouseId={warehouse.id}
-                    warehouse={warehouse.warehouse}
-                    comments={warehouse.comments}
-                    tracking_number={warehouse.tracking_number}
-                    closeModal={closeModal}
-                  />
+            {warehouses.length > 0 ? (
+              warehouses.map((warehouse) => (
+                <tr key={warehouse.id}>
+                  <td style={{ fontWeight: "bold" }}>
+                    #{warehouse.user.unique_id}
+                  </td>
+                  <td>{warehouse.user.first_name}</td>
+                  <td>{warehouse.user.last_name}</td>
+                  <td>{getWarehouseNameById(warehouse.warehouse)}</td>
+                  <td>{warehouse.tracking_number}</td>
+                  <td>{getCourierServiceName(warehouse.courier_service)}</td>
+                  <td className={s.actions}>
+                    <button
+                      className={s.delete}
+                      onClick={() => deleteWarehouse(warehouse.id)}
+                    >
+                      <img src="/assets/icons/delete.svg" alt="delete" />
+                    </button>
+                    <WarehouseProductsModalV2
+                      address={warehouse.address}
+                      clientId={warehouse.user.unique_id}
+                      country_of_origin1={warehouse.country_of_origin}
+                      country_of_destination1={warehouse.country_of_destination}
+                      warehouseId={warehouse.id}
+                      warehouse={warehouse.warehouse}
+                      comments={warehouse.comments}
+                      tracking_number={warehouse.tracking_number}
+                      closeModal={closeModal}
+                    />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7">
+                  <p className="maps"> В ожидании пополнения товара!</p>
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

@@ -126,58 +126,66 @@ export default function WarehousesProductsTable({
           </tr>
         </thead>
         <tbody>
-          {warehouses.results?.map((warehouse) => (
-            <tr key={warehouse.id}>
-              <td className="flex gap-1">
-                <div
-                  className={`${s.status_many} ${
-                    warehouse.status_many
-                      ? s.status_many_green
-                      : s.status_many_red
-                  }`}
-                ></div>
-                <input
-                  type="checkbox"
-                  checked={selectedWarehouses.includes(warehouse.id)}
-                  onChange={() => toggleWarehouseSelection(warehouse.id)}
-                />
-              </td>
-              <td>{warehouse.name}</td>
-              <td>{warehouse.country_of_origin?.name}</td>
-              <td>{warehouse.country_of_destination?.name}</td>
-              <td>
-                {router.pathname === "/admin/warehouses/warehousesall"
-                  ? getWarehouseNameById(warehouse.warehouse)
-                  : warehouse.weight}
-              </td>
-              <td>{warehouse.track_number}</td>
-              <td
-                style={{
-                  color:
-                    warehouse.status?.name === "Доставлено"
-                      ? "#06DB02"
-                      : "inherit",
-                }}
-              >
-                {warehouse.status?.name}
-              </td>
-              <td className={s.btns}>
-                <button
-                  className={s.edit}
-                  onClick={() => handleDetailsClick(warehouse)}
+          {warehouses.results && warehouses.results.length > 0 ? (
+            warehouses.results.map((warehouse) => (
+              <tr key={warehouse.id}>
+                <td className="flex gap-1">
+                  <div
+                    className={`${s.status_many} ${
+                      warehouse.status_many
+                        ? s.status_many_green
+                        : s.status_many_red
+                    }`}
+                  ></div>
+                  <input
+                    type="checkbox"
+                    checked={selectedWarehouses.includes(warehouse.id)}
+                    onChange={() => toggleWarehouseSelection(warehouse.id)}
+                  />
+                </td>
+                <td>{warehouse.name}</td>
+                <td>{warehouse.country_of_origin?.name}</td>
+                <td>{warehouse.country_of_destination?.name}</td>
+                <td>
+                  {router.pathname === "/admin/warehouses/warehousesall"
+                    ? getWarehouseNameById(warehouse.warehouse)
+                    : warehouse.weight}
+                </td>
+                <td>{warehouse.track_number}</td>
+                <td
+                  style={{
+                    color:
+                      warehouse.status?.name === "Доставлено"
+                        ? "#06DB02"
+                        : "inherit",
+                  }}
                 >
-                  Подробнее
-                </button>
-                <button
-                  style={{ marginLeft: "10px" }}
-                  className={s.delete}
-                  onClick={() => handleDeleteConfirmation(warehouse)}
-                >
-                  <img src="/assets/icons/delete.svg" alt="" />
-                </button>
+                  {warehouse.status?.name}
+                </td>
+                <td className={s.btns}>
+                  <button
+                    className={s.edit}
+                    onClick={() => handleDetailsClick(warehouse)}
+                  >
+                    Подробнее
+                  </button>
+                  <button
+                    style={{ marginLeft: "10px" }}
+                    className={s.delete}
+                    onClick={() => handleDeleteConfirmation(warehouse)}
+                  >
+                    <img src="/assets/icons/delete.svg" alt="" />
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="8">
+                <p className="maps"> В ожидании пополнения товара!</p>
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
       <div className={s.pagination}>
