@@ -59,12 +59,10 @@ export default function WarehouseProductsModalV2({
   const [selectedOption, setSelectedOption] = useState("");
 
   const countries1 = [
-    { id: 6, name: "Получен на складе," },
-    { id: 5, name: "Отправлен," },
-    { id: 4, name: "Получен в ПВЗ," },
-    { id: 3, name: "Готов к выдаче," },
-    { id: 7, name: "Отправлено курьерской службой," },
-    { id: 8, name: "Доставлено," },
+    { id: 6, name: "отправлен = получен, готов к отправке" },
+    { id: 5, name: "отправлен = ваша посылка в пути" },
+    { id: 4, name: "получен в пвз = поступило в пвз, готов к выдаче" },
+    { id: 3, name: "отправлен кур службой = отправлено курьерской службой" },
   ];
 
   const [selectedOption1, setSelectedOption1] = useState("");
