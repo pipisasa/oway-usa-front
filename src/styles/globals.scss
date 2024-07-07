@@ -29,7 +29,12 @@
   border-radius: 8px;
   border: 1px solid var(--gray, #a4a4a4);
 }
-
+.maps {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 33px;
+  color: #027ddb;
+}
 .scrollbar-hide {
   z-index: 1;
 }
