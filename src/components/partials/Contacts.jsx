@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import s from "@/styles/partials/Contact.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
 import useContacts from "@/hooks/useContacts";
+import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
 export default function Contacts() {
   const [isAuthorized, setIsAuthorized] = useState(null);
   const { contacts, loading, error } = useContacts();
+  const [selected, setSelected] = useState("usa");
 
   useEffect(() => {
     setIsAuthorized(getCookie("accessToken") !== null);
@@ -13,7 +15,8 @@ export default function Contacts() {
 
   const warehouses = [
     {
-      img: "assets/icons/footer/usa.svg",
+      codename: "usa",
+      img: "/assets/icons/footer/usa.svg",
       title: "Главный офис",
       address: "4730DN Kimball Ave",
       state: "Illinois",
@@ -26,7 +29,8 @@ export default function Contacts() {
       logo: "/assets/icons/contact_email.svg",
     },
     {
-      img: "assets/icons/footer/usa.svg",
+      codename: "usa",
+      img: "/assets/icons/footer/usa.svg",
       title: "Пункты приема в Чикаго:",
       address: "1550 Oak Brook",
       state: "Illinois",
@@ -41,7 +45,8 @@ export default function Contacts() {
       logo: "/assets/icons/unit.svg",
     },
     {
-      img: "assets/icons/footer/usa.svg",
+      codename: "usa",
+      img: "/assets/icons/footer/usa.svg",
       title: "Пункт приема онлайн заказов в Delaware",
       address: "4730DN Kimball Ave",
       state: "Delaware",
@@ -56,7 +61,8 @@ export default function Contacts() {
       logo: "/assets/icons/unit.svg",
     },
     {
-      img: "assets/icons/footer/turkey.svg",
+      codename: "tr",
+      img: "/assets/icons/footer/turkey.svg",
       title: "Адрес склада в Турции",
       address: "Hemşire Sk. 17C,",
       state: "Fatih",
@@ -71,7 +77,8 @@ export default function Contacts() {
       logo: "/assets/icons/unit.svg",
     },
     {
-      img: "assets/icons/footer/1.svg",
+      codename: "ru",
+      img: "/assets/icons/footer/1.svg",
       title: "Пункты приема в Москве:",
       address: "Перовская 26 корпус 1",
       state: "Московский регион",
@@ -86,7 +93,8 @@ export default function Contacts() {
       logo: "/assets/icons/unit.svg",
     },
     {
-      img: "assets/icons/footer/2.svg",
+      codename: "kg",
+      img: "/assets/icons/footer/2.svg",
       title: "Пункты приема в Кыргызстане:",
       address: "ул. Токтогула 211",
       state: "Чуй",
@@ -125,6 +133,10 @@ export default function Contacts() {
     return <div>Загрузка...</div>;
   }
 
+  const filteredWarehouses = warehouses.filter(
+    (warehouse) => warehouse.codename === selected
+  );
+
   return (
     <section
       className={`${s.address_container} container`}
@@ -145,8 +157,60 @@ export default function Contacts() {
           </button>
         </div>
       </div>
+      <div className={s.mtcontact}>
+        <Tabs
+          aria-label="Options"
+          selectedKey={selected}
+          onSelectionChange={setSelected}
+        >
+          <Tab
+            key="usa"
+            className={s.mtcontact1}
+            title={
+              <img
+                className={s.tabsimage}
+                src={"/assets/icons/footer/usa.svg"}
+                alt="usa"
+              />
+            }
+          />
+          <Tab
+            key="tr"
+            className={s.mtcontact1}
+            title={
+              <img
+                className={s.tabsimage}
+                src={"/assets/icons/footer/turkey.svg"}
+                alt="tr"
+              />
+            }
+          />
+          <Tab
+            key="ru"
+            className={s.mtcontact1}
+            title={
+              <img
+                className={s.tabsimage}
+                src={"/assets/icons/footer/1.svg"}
+                alt="ru"
+              />
+            }
+          />
+          <Tab
+            className={s.mtcontact1}
+            key="kg"
+            title={
+              <img
+                className={s.tabsimage}
+                src={"/assets/icons/footer/2.svg"}
+                alt="kg"
+              />
+            }
+          />
+        </Tabs>
+      </div>
       <div ref={sliderRef} className={s.address_cards}>
-        {warehouses.map((data, index) => (
+        {filteredWarehouses.map((data, index) => (
           <div
             key={index}
             className={`${s.address_card} ${
@@ -231,78 +295,6 @@ export default function Contacts() {
                   <img src="/assets/icons/contact_zip-code.svg" alt="icons" />
                   <span>Zip code</span>
                   <h5>{data.zip}</h5>
-                </div>
-                <div>
-                  <img src="/assets/icons/contact_email.svg" alt="icons" />
-                  <span>Email</span>
-                  <h5>{data.email}</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-        {contacts.results?.map((data, index) => (
-          <div key={index} className={s.address_card}>
-            <div className={s.card_header}>
-              <div className={s.card_header_country}>
-                <img
-                  src={`https://api-owayusa.com/${data.image}`}
-                  alt={data.title}
-                />
-                <h3>Пункты приема в {data.name}:</h3>
-              </div>
-              {(isAuthorized ||
-                !data.title.includes(
-                  "Пункт приема онлайн заказов в Delaware"
-                )) && (
-                <button
-                  onClick={() =>
-                    copyToClipboard(
-                      `Address: ${data.address}, City: ${data.city}, State: ${data.state}, Number: ${data.phone}, Email: ${data.email}, Unit: ${data.unitcode}`
-                    )
-                  }
-                >
-                  <img src="/assets/icons/copy.svg" alt="copy address" />
-                </button>
-              )}
-            </div>
-
-            <div className={s.card_content}>
-              <div className={s.content}>
-                <div>
-                  <img src="/assets/icons/contact_address.svg" alt="icons" />
-                  <span>Address</span>
-                  <h5>{data.address}</h5>
-                </div>
-                <div>
-                  <img
-                    src="/assets/icons/united-states-of-america.svg"
-                    alt="icons"
-                  />
-                  <span>State</span>
-                  <h5>{data.state}</h5>
-                </div>
-                <div>
-                  <img src="/assets/icons/contact_call.svg" alt="icons" />
-                  <span>Number</span>
-                  <h5>{data.number}</h5>
-                </div>
-                <div className={s.unit}>
-                  <img src="/assets/icons/unit.svg" alt="icons" />
-                  <span>Unit</span>
-                  <h5>{data.unit}</h5>
-                </div>
-              </div>
-              <div className={s.content}>
-                <div>
-                  <img src="/assets/icons/city.svg" alt="icons" />
-                  <span>City</span>
-                  <h5>{data.city}</h5>
-                </div>
-                <div>
-                  <img src="/assets/icons/contact_zip-code.svg" alt="icons" />
-                  <span>Zip code</span>
-                  <h5>{data.zip_code}</h5>
                 </div>
                 <div>
                   <img src="/assets/icons/contact_email.svg" alt="icons" />

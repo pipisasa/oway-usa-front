@@ -26,7 +26,7 @@ export default function TableTabs({ onTabClick, activeTab }) {
         }
         onClick={() => onTabClick("delivered")}
       >
-        Доставлено ({countByStatus("Доставлено")})
+        Доставлено ({countByStatus("Отправлено курьерской службой")})
       </button>
     </div>
   );
