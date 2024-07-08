@@ -114,12 +114,10 @@ export default function WarehousesModal({ onClose, warehouse }) {
   }, [editData.image_check]);
 
   const statuses = [
-    { id: 6, name: "Получен на складе," },
-    { id: 5, name: "Отправлен," },
-    { id: 4, name: "Получен в ПВЗ," },
-    { id: 3, name: "Готов к выдаче," },
-    { id: 7, name: "Отправлено курьерской службой," },
-    { id: 8, name: "Доставлено," },
+    { id: 6, name: "Получен, готов к отправке" },
+    { id: 5, name: "Ваша посылка в пути" },
+    { id: 4, name: "Поступил в ПВЗ, готов к выдаче" },
+    { id: 3, name: "Отправлено курьерской службой" },
   ];
 
   const handleInputChange = (e) => {
