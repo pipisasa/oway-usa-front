@@ -125,7 +125,7 @@ export default function Step2({
               name="date_sent"
               id="date_sent"
               value={formData.date_sent}
-              placeholder="дд.мм.гггг"
+              placeholder="мм.дд.гггг"
               onChange={handleChange}
             />
           </div>
@@ -136,7 +136,7 @@ export default function Step2({
               name="date_arrived"
               id="date_arrived"
               value={formData.date_arrived}
-              placeholder="дд.мм.гггг"
+              placeholder="мм.дд.гггг"
               onChange={handleChange}
             />
           </div>

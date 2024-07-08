@@ -3,6 +3,7 @@ import s from "@/styles/components/shared/UsersProductTable.module.scss";
 import { Pagination } from "@nextui-org/react";
 import useWarehousesUser from "@/hooks/user/useWarehousesUser";
 import OnTheWayModal from "../../admin/modals/OnTheWayModal";
+import ImageModal from "../../admin/modals/ImageModal";
 
 const PAGE_SIZE = 5;
 
@@ -12,7 +13,9 @@ export default function OnTheWay() {
     useWarehousesUser(currentPage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentRequestData, setCurrentRequestData] = useState(null);
-  console.log(warehouses);
+  const [isImageModalVisible, setIsImageModalVisible] = useState(false);
+  const [currentImageSrc, setCurrentImageSrc] = useState("");
+
   useEffect(() => {
     fetchWarehouses(currentPage);
   }, [currentPage]);
@@ -22,6 +25,12 @@ export default function OnTheWay() {
     setIsModalVisible(true);
   };
 
+  const handleImageClick = (src) => {
+    setCurrentImageSrc(`https://api-owayusa.com${src}`);
+    setIsImageModalVisible(true);
+  };
+  console.log(warehouses);
+
   return (
     <>
       <div className={s.product_table}>
@@ -29,6 +38,13 @@ export default function OnTheWay() {
           <OnTheWayModal
             data={currentRequestData}
             onClose={() => setIsModalVisible(false)}
+          />
+        )}
+        {isImageModalVisible && (
+          <ImageModal
+            src={currentImageSrc}
+            isOpen={isImageModalVisible}
+            onClose={() => setIsImageModalVisible(false)}
           />
         )}
         <table>
@@ -51,11 +67,13 @@ export default function OnTheWay() {
                     width={64}
                     src={`https://api-owayusa.com${item.image}`}
                     alt="product img"
+                    onClick={() => handleImageClick(item.image)}
+                    style={{ cursor: "pointer" }}
                   />
                 </td>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
-                <td>21.04.2024</td>
+                <td>{item.created_at}</td>
                 <td>
                   {item.status_many === false ? (
                     <p style={{ color: "red" }}>Не оплачено</p>

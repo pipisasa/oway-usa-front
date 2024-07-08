@@ -15,8 +15,9 @@ export default function Delivered() {
     setIsModalVisible(true);
   };
   const totalDelivere = Math.ceil(
-    warehouses.results?.filter((item) => item.status.name === "Доставлено")
-      ?.length
+    warehouses.results?.filter(
+      (item) => item.status.name === "Отправлено курьерской службой"
+    )?.length
   );
 
   useEffect(() => {
@@ -47,7 +48,9 @@ export default function Delivered() {
           </thead>
           <tbody>
             {warehouses?.results
-              ?.filter((item) => item.status.name === "Доставлено")
+              ?.filter(
+                (item) => item.status.name === "Отправлено курьерской службой"
+              )
               .map((item, index) => (
                 <tr key={index}>
                   <td>
@@ -59,9 +62,9 @@ export default function Delivered() {
                   </td>
                   <td>{item.name}</td>
                   <td>{item.price}</td>
-                  <td>21.04.2024</td>
+                  <td>{item.created_at}</td>
                   <td>
-                    {is_paid === false ? (
+                    {item.status_many === false ? (
                       <p style={{ color: "red" }}>Не оплачено</p>
                     ) : (
                       <p style={{ color: "#06DB02" }}>Оплачено</p>

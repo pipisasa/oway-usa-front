@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   ModalContent,
@@ -8,42 +8,36 @@ import {
 } from "@nextui-org/react";
 import s from "@/styles/admin/modal/ImageModal.module.scss";
 
-export default function ImageModal({ src, onClose, onDelete }) {
-  const { isOpen, onOpen, onClose: closeModal } = useDisclosure();
-  const [backdrop, setBackdrop] = React.useState("opaque");
+export default function ImageModal({ src, isOpen, onClose, onDelete }) {
+  const [backdrop, setBackdrop] = useState("opaque");
 
-  const handleOpen = (backdrop) => {
-    setBackdrop(backdrop);
-    onOpen();
-  };
-
-  React.useEffect(() => {
-    handleOpen("blur");
-  }, []);
+  useEffect(() => {
+    if (isOpen) {
+      setBackdrop("blur");
+    }
+  }, [isOpen]);
 
   const handleDelete = () => {
     if (onDelete) {
       onDelete();
     }
-    closeModal();
+    onClose();
   };
 
   return (
-    <>
-      <Modal backdrop={backdrop} isOpen={isOpen} onClose={closeModal}>
-        <div className={s.modal_backdrop}>
-          <ModalContent>
-            <ModalHeader className="flex flex-col gap-1">
-              <button className={s.delete_button} onClick={handleDelete}>
-                Удалить
-              </button>
-            </ModalHeader>
-            <ModalBody>
-              <img src={src} alt="Zoomed" />
-            </ModalBody>
-          </ModalContent>
-        </div>
-      </Modal>
-    </>
+    <Modal backdrop={backdrop} isOpen={isOpen} onClose={onClose}>
+      <div className={s.modal_backdrop}>
+        <ModalContent>
+          <ModalHeader className="flex flex-col gap-1">
+            <button className={s.delete_button} onClick={handleDelete}>
+              Удалить
+            </button>
+          </ModalHeader>
+          <ModalBody>
+            <img src={src} alt="Zoomed" />
+          </ModalBody>
+        </ModalContent>
+      </div>
+    </Modal>
   );
 }

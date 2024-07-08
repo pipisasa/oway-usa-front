@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "@/styles/admin/RequestsModal.module.scss";
 import { RxCross1 } from "react-icons/rx";
+import ImageModal from "./ImageModal";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function OnTheWayModal({ data, onClose }) {
+  const [isImageModalVisible, setIsImageModalVisible] = useState(false);
+
+  const handleImageClick = () => {
+    setIsImageModalVisible(true);
+  };
+
   return (
     <div
       className={s.modal_backdrop}
@@ -19,7 +26,12 @@ export default function OnTheWayModal({ data, onClose }) {
           <div className={s.left_block}>
             <div className={s.input_label}>
               <label>Фотография</label>
-              <img src={`${API_URL}${data?.image}`} alt="" />
+              <img
+                src={`${API_URL}${data?.image}`}
+                alt=""
+                onClick={handleImageClick}
+                style={{ cursor: "pointer" }}
+              />
             </div>
             <div className={s.input_label}>
               <label htmlFor="">Статус</label>
@@ -54,6 +66,13 @@ export default function OnTheWayModal({ data, onClose }) {
           </form>
         </div>
       </section>
+      {isImageModalVisible && (
+        <ImageModal
+          src={`${API_URL}${data?.image}`}
+          isOpen={isImageModalVisible}
+          onClose={() => setIsImageModalVisible(false)}
+        />
+      )}
     </div>
   );
 }

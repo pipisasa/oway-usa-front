@@ -369,7 +369,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
                 />
               </div>
               <div className={s.input_label}>
-                <label htmlFor="image_check">Чек-пасылки</label>
+                <label htmlFor="image_check">Чек-посылки</label>
                 <input
                   id="image_check"
                   type="file"

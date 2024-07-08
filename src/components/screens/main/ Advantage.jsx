@@ -18,6 +18,23 @@ const calc = [
   },
 ];
 
+const illinois = [
+  {
+    icon: "/assets/icons/adv_world.svg",
+    img: "/assets/images/фактический-вес.png",
+    text: "Фактический вес",
+    answer:
+      "Фактический вес при экспресс доставке товаров — это просто вес посылки, который измеряется на весах.",
+  },
+  {
+    icon: "/assets/icons/adv_date.svg",
+    img: "/assets/images/объемный-вес.png",
+    text: "Объемный вес",
+    answer:
+      "Объемный вес рассчитывается по формуле: Объемный вес = Длина×Ширина×Высота Делитель Объемный вес = Делитель Длина×Ширина×Высота где размеры берутся в сантиметрах, а делитель зависит от компании перевозчика (часто это число находится в диапазоне от 5000 до 6000).",
+  },
+];
+
 const menu = [
   {
     icon: "/assets/icons/adv_world.svg",
@@ -87,6 +104,23 @@ export default function Advantage(props) {
     setSelectedItem(index);
   };
 
+  const getMenuItems = () => {
+    switch (props.menu) {
+      case "calc":
+        return calc;
+      case "illinois":
+        return illinois;
+      case "menu":
+        return menu;
+      case "service":
+        return service;
+      default:
+        return [];
+    }
+  };
+
+  const menuItems = getMenuItems();
+
   return (
     <div className={props?.menu === "menu" ? s.advantage : s.advantage_calc}>
       <div
@@ -99,46 +133,18 @@ export default function Advantage(props) {
           <p>{props.p}</p>
           <h2>{props.h2}</h2>
           <div className={s.menu}>
-            {props.menu === "calc" &&
-              calc.map((item, index) => (
-                <div
-                  key={index}
-                  className={`${s["menu-item"]} ${
-                    selectedItem === index ? s.active : ""
-                  }`}
-                  onClick={() => handleItemClick(index)}
-                >
-                  <img src={item.icon} alt="" />
-                  <span>{item.text}</span>
-                </div>
-              ))}
-
-            {props.menu === "menu" &&
-              menu.map((item, index) => (
-                <div
-                  key={index}
-                  className={`${s["menu-item"]} ${
-                    selectedItem === index ? s.active : ""
-                  }`}
-                  onClick={() => handleItemClick(index)}
-                >
-                  <img src={item.icon} alt="" />
-                  <span>{item.text}</span>
-                </div>
-              ))}
-            {props.menu === "service" &&
-              service.map((item, index) => (
-                <div
-                  key={index}
-                  className={`${s["menu-item"]} ${
-                    selectedItem === index ? s.active : ""
-                  }`}
-                  onClick={() => handleItemClick(index)}
-                >
-                  <img src={item.icon} alt="" />
-                  <span>{item.text}</span>
-                </div>
-              ))}
+            {menuItems.map((item, index) => (
+              <div
+                key={index}
+                className={`${s["menu-item"]} ${
+                  selectedItem === index ? s.active : ""
+                }`}
+                onClick={() => handleItemClick(index)}
+              >
+                <img src={item.icon} alt="" />
+                <span>{item.text}</span>
+              </div>
+            ))}
           </div>
         </div>
         <div className={s.info}>
@@ -149,24 +155,12 @@ export default function Advantage(props) {
           >
             <img
               data-aos="zoom-in"
-              src={
-                props.menu === "service"
-                  ? service[selectedItem].img
-                  : props.menu === "menu"
-                  ? menu[selectedItem].img
-                  : calc[selectedItem].img
-              }
+              src={menuItems[selectedItem].img}
               width={825}
               height={327}
               alt="logo"
             />
-            <p data-aos="zoom-in">
-              {props.menu === "service"
-                ? service[selectedItem].answer
-                : props.menu === "menu"
-                ? menu[selectedItem].answer
-                : calc[selectedItem].answer}
-            </p>
+            <p data-aos="zoom-in">{menuItems[selectedItem].answer}</p>
           </div>
         </div>
       </div>
