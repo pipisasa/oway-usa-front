@@ -97,7 +97,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
     country_of_origin: warehouse.country_of_origin.id,
     country_of_destination: warehouse.country_of_destination.id,
     status_many: paymentStatus,
-    image_check: warehouse.image_check || editData.image_check,
+    image_check: warehouse.image_check,
   });
 
   const handleImageCheckChange = (e) => {
@@ -114,10 +114,10 @@ export default function WarehousesModal({ onClose, warehouse }) {
   }, [editData.image_check]);
 
   const statuses = [
-    { id: 6, name: "отправлен = получен, готов к отправке" },
-    { id: 5, name: "отправлен = ваша посылка в пути" },
-    { id: 4, name: "получен в пвз = поступило в пвз, готов к выдаче" },
-    { id: 3, name: "отправлен кур службой = отправлено курьерской службой" },
+    { id: 6, name: "Получен, готов к отправке" },
+    { id: 5, name: "Ваша посылка в пути" },
+    { id: 4, name: "Поступил в ПВЗ, готов к выдаче" },
+    { id: 3, name: "Отправлено курьерской службой" },
   ];
 
   const handleInputChange = (e) => {
@@ -151,7 +151,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
       track_number: warehouse.track_number,
       status: currentStatus,
       status_many: paymentStatus,
-      image_check: warehouse.image_check || editData.image_check,
+      image_check: warehouse.image_check,
     });
   };
 
