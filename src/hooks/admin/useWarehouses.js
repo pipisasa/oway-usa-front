@@ -129,8 +129,8 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
       );
 
       await fetchWarehouses();
-      setIsSuccess(true);
       window.location.reload();
+      setIsSuccess(true);
       return response.data;
     } catch (error) {
       setError(error.message);
@@ -158,6 +158,7 @@ const useWarehouses = (currentPage, initialFilters = {}) => {
       });
       await fetchWarehouses();
       setIsSuccess(true);
+      window.location.reload();
     } catch (err) {
       if (err.response && err.response.status === 401) {
         setError("Unauthorized. Please log in again.");

@@ -60,6 +60,7 @@ const illinois = [
 ];
 
 export default function AdvantageSteps(props) {
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["1"]));
   const [selectedItem, setSelectedItem] = useState(0);
 
   const handleItemClick = (index) => {
@@ -120,7 +121,10 @@ export default function AdvantageSteps(props) {
               height={327}
               alt="logo"
             />
-            <Accordion>
+            <Accordion
+              selectedKeys={selectedKeys}
+              onSelectionChange={setSelectedKeys}
+            >
               <AccordionItem
                 key="1"
                 aria-label="Accordion 1"
