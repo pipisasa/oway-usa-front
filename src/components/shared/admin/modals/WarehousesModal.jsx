@@ -219,7 +219,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
   const handleAddressClick = () => {
     onAddressModalOpen();
   };
-
+  console.log(statuses);
   return (
     <div
       className={s.modal_backdrop}

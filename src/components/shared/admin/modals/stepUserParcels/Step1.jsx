@@ -50,8 +50,8 @@ export default function Step1({
     // { id: 9, name: "Россия (Москва)" },
   ];
   const country_of_destination = [
-    { id: 3, name: "США" },
-    { id: 4, name: "Турция" },
+    // { id: 3, name: "США" },
+    // { id: 4, name: "Турция" },
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ];
