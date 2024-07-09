@@ -9,7 +9,7 @@ export const DateInputField = ({ label, name, value, onChange }) => {
         type="text"
         name={name}
         id={name}
-        placeholder="dd.mm.yyyy"
+        placeholder="ММ.ДД.ГГГГ"
         value={value}
         onChange={onChange}
       />

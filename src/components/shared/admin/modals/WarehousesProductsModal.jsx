@@ -72,7 +72,6 @@ export default function WarehouseProductsModal() {
     if (
       name === "country_of_origin" ||
       name === "country_of_destination" ||
-      name === "weight" ||
       name === "track_number" ||
       name === "price"
     ) {

@@ -113,6 +113,8 @@ export default function Step2({
             id="price"
             placeholder="Стандартная стоимость"
             value={formData.price}
+            onChange={handleChange}
+
             // readOnly
           />
         </div>
@@ -125,7 +127,7 @@ export default function Step2({
               name="date_sent"
               id="date_sent"
               value={formData.date_sent}
-              placeholder="мм.дд.гггг"
+              placeholder="ММ.ДД.ГГГГ"
               onChange={handleChange}
             />
           </div>
@@ -136,7 +138,7 @@ export default function Step2({
               name="date_arrived"
               id="date_arrived"
               value={formData.date_arrived}
-              placeholder="мм.дд.гггг"
+              placeholder="ММ.ДД.ГГГГ"
               onChange={handleChange}
             />
           </div>

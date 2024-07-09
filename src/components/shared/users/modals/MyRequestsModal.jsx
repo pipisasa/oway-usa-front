@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import usePurchase from "@/hooks/usePurchase";
 import s from "@/styles/components/shared/modals/MyRequests.module.scss";
 import { useModal } from "@/hooks/modals/useModal";
-import ImagePreviewModal from "../../ImagePreviewModal";
 import PurchaseModal from "../../main/PurchaseModal";
 import { RxCross1 } from "react-icons/rx";
+import ImageModal from "../../admin/modals/ImageModal";
 
 export default function MyRequestsModal() {
   const { handleChange, submitPurchase, isSubmitted, isLoading } =
@@ -16,26 +16,17 @@ export default function MyRequestsModal() {
     closeModal: closeMainModal,
   } = useModal();
   const {
-    isOpen: isImagePreview1Open,
-    openModal: openImagePreview1,
-    closeModal: closeImagePreview1,
-  } = useModal();
-  const {
-    isOpen: isImagePreview2Open,
-    openModal: openImagePreview2,
-    closeModal: closeImagePreview2,
-  } = useModal();
-  const {
     isOpen: isPurchaseModalOpen,
     openModal: openPurchaseModal,
     closeModal: closePurchaseModal,
   } = useModal();
 
-  const [mobileForm, setMobileForm] = useState(false);
   const [previewImage1, setPreviewImage1] = useState(null);
   const [previewImage2, setPreviewImage2] = useState(null);
   const [selectedFile1, setSelectedFile1] = useState(null);
   const [selectedFile2, setSelectedFile2] = useState(null);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [selectedImageSrc, setSelectedImageSrc] = useState(null);
 
   const {
     register,
@@ -44,35 +35,17 @@ export default function MyRequestsModal() {
     formState: { errors },
   } = useForm();
 
-  const handleMobileForm = useCallback(() => {
-    setMobileForm((prev) => !prev);
+  const handleFileChange1 = useCallback((e) => {
+    const file = e.target.files[0];
+    setSelectedFile1(file);
+    setPreviewImage1(URL.createObjectURL(file));
   }, []);
 
-  useEffect(() => {
-    if (isSubmitted) {
-      openPurchaseModal();
-    }
-  }, [isSubmitted, openPurchaseModal]);
-
-  const handleFileChange1 = useCallback(
-    (e) => {
-      const file = e.target.files[0];
-      setSelectedFile1(file);
-      setPreviewImage1(URL.createObjectURL(file));
-      openImagePreview1();
-    },
-    [openImagePreview1]
-  );
-
-  const handleFileChange2 = useCallback(
-    (e) => {
-      const file = e.target.files[0];
-      setSelectedFile2(file);
-      setPreviewImage2(URL.createObjectURL(file));
-      openImagePreview2();
-    },
-    [openImagePreview2]
-  );
+  const handleFileChange2 = useCallback((e) => {
+    const file = e.target.files[0];
+    setSelectedFile2(file);
+    setPreviewImage2(URL.createObjectURL(file));
+  }, []);
 
   const onSubmitHandler = useCallback(
     async (data) => {
@@ -85,6 +58,28 @@ export default function MyRequestsModal() {
     },
     [submitPurchase, selectedFile1, selectedFile2, reset]
   );
+
+  useEffect(() => {
+    if (isSubmitted) {
+      openPurchaseModal();
+    }
+  }, [isSubmitted, openPurchaseModal]);
+
+  const closeModal = () => {
+    setIsImageModalOpen(false);
+    setSelectedImageSrc(null);
+  };
+
+  const handleDeleteImage = () => {
+    if (selectedImageSrc === previewImage1) {
+      setSelectedFile1(null);
+      setPreviewImage1(null);
+    } else if (selectedImageSrc === previewImage2) {
+      setSelectedFile2(null);
+      setPreviewImage2(null);
+    }
+    closeModal();
+  };
 
   return (
     <>
@@ -114,11 +109,15 @@ export default function MyRequestsModal() {
                         id="full_name"
                         name="full_name"
                         label="ФИО"
+                        type="text"
                         placeholder="Введите ФИО"
-                        errors={errors}
+                        errors={errors.full_name}
                         handleChange={handleChange}
                         register={register}
-                        required
+                        validation={{
+                          required: "Это поле обязательно к заполнению",
+                          minLength: { value: 3, message: "Минимум 3 символа" },
+                        }}
                       />
                     </div>
                     <div className={s.purchase_inner_froms}>
@@ -126,24 +125,29 @@ export default function MyRequestsModal() {
                         id="url"
                         name="url"
                         label="Ссылка на товар"
+                        type="text"
                         placeholder="https://"
-                        errors={errors}
+                        errors={errors.url}
                         handleChange={handleChange}
                         register={register}
-                        required
+                        validation={{
+                          required: "Это поле обязательно к заполнению",
+                        }}
                       />
                     </div>
-
                     <div className={s.purchase_inner_froms}>
                       <InputField
                         id="name_of_purchase"
                         name="name_of_purchase"
                         label="Название товара, как в магазине"
+                        type="text"
                         placeholder="Введите название товара"
-                        errors={errors}
+                        errors={errors.name_of_purchase}
                         handleChange={handleChange}
                         register={register}
-                        required
+                        validation={{
+                          required: "Это поле обязательно к заполнению",
+                        }}
                       />
                     </div>
                     <div className={s.purchase_inner_froms}>
@@ -151,24 +155,35 @@ export default function MyRequestsModal() {
                         id="count"
                         name="count"
                         label="Количество"
+                        type="number"
                         placeholder="Введите количество"
-                        errors={errors}
+                        errors={errors.count}
                         handleChange={handleChange}
                         register={register}
-                        required
+                        validation={{
+                          required: "Это поле обязательно к заполнению",
+                          min: { value: 1, message: "Минимум 1" },
+                        }}
                       />
                     </div>
-
                     <div className={s.purchase_inner_froms}>
                       <InputField
                         id="email"
                         name="email"
                         label="Электронная почта"
+                        type="email"
                         placeholder="Введите электронную почту"
-                        errors={errors}
+                        errors={errors.email}
                         handleChange={handleChange}
                         register={register}
-                        required
+                        validation={{
+                          required: "Это поле обязательно к заполнению",
+                          pattern: {
+                            value:
+                              /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                            message: "Некорректный email",
+                          },
+                        }}
                       />
                     </div>
                     <div className={s.purchase_inner_froms}>
@@ -176,11 +191,14 @@ export default function MyRequestsModal() {
                         id="description"
                         name="description"
                         label="Комментарий к товару"
+                        type="text"
                         placeholder="Введите комментарий"
-                        errors={errors}
+                        errors={errors.description}
                         handleChange={handleChange}
                         register={register}
-                        required
+                        validation={{
+                          required: "Это поле обязательно к заполнению",
+                        }}
                       />
                     </div>
                     <div className={s.purchase_inner_froms}>
@@ -188,10 +206,17 @@ export default function MyRequestsModal() {
                         id="telegram"
                         name="telegram"
                         label="Telegram"
+                        type="text"
                         placeholder="Введите @username"
-                        errors={errors}
+                        errors={errors.telegram}
                         handleChange={handleChange}
                         register={register}
+                        validation={{
+                          pattern: {
+                            value: /^@?(\w){1,15}$/,
+                            message: "Некорректный username",
+                          },
+                        }}
                         icon="/assets/icons/telegram.svg"
                       />
                     </div>
@@ -200,32 +225,38 @@ export default function MyRequestsModal() {
                         id="phone_number"
                         name="phone_number"
                         label="WhatsApp"
+                        type="number"
                         placeholder="Введите номер телефона"
-                        errors={errors}
+                        errors={errors.phone_number}
                         handleChange={handleChange}
                         register={register}
+                        validation={{
+                          required: "Это поле обязательно к заполнению",
+                          pattern: {
+                            value: /^\+?[1-9]\d{1,14}$/,
+                            message: "Некорректный номер телефона",
+                          },
+                        }}
                         icon="/assets/icons/whatsapp.svg"
                       />
                     </div>
-
                     <FileInputField
                       label="Добавьте первый скриншот"
                       handleChange={handleFileChange1}
-                      errors={errors}
+                      errors={errors.purchase_image}
                       previewImage={previewImage1}
-                      closeModal={closeImagePreview1}
-                      isOpen={isImagePreview1Open}
+                      setIsImageModalOpen={setIsImageModalOpen}
+                      setSelectedImageSrc={setSelectedImageSrc}
                       required
                     />
-
                     {selectedFile1 && (
                       <FileInputField
                         label="Добавьте второй скриншот"
                         handleChange={handleFileChange2}
-                        errors={errors}
+                        errors={errors.purchase_image_2}
                         previewImage={previewImage2}
-                        closeModal={closeImagePreview2}
-                        isOpen={isImagePreview2Open}
+                        setIsImageModalOpen={setIsImageModalOpen}
+                        setSelectedImageSrc={setSelectedImageSrc}
                       />
                     )}
                   </div>
@@ -245,6 +276,12 @@ export default function MyRequestsModal() {
           </div>
         </div>
       )}
+      <ImageModal
+        src={selectedImageSrc}
+        isOpen={isImageModalOpen}
+        onClose={closeModal}
+        onDelete={handleDeleteImage}
+      />
     </>
   );
 }
@@ -257,25 +294,26 @@ const InputField = ({
   errors,
   handleChange,
   register,
-  required,
+  validation,
   icon,
+  type,
 }) => (
-  <div className={errors?.[name] ? s.error : s.purchase_inner_froms_inputs}>
+  <div className={errors ? s.error : s.purchase_inner_froms_inputs}>
     <label>
-      {label} {required && <span>*</span>}
+      {label} {validation.required && <span>*</span>}
     </label>
     <div className={icon ? s.icon_input : ""}>
       {icon && <img src={icon} alt={name} />}
       <input
         id={id}
         name={name}
-        type="text"
+        type={type}
         placeholder={placeholder}
         onChange={handleChange}
-        {...register(name, { required })}
+        {...register(name, validation)}
       />
     </div>
-    {errors?.[name] && <p>Это поле обязательно к заполнению!</p>}
+    {errors && <p>{errors.message}</p>}
   </div>
 );
 
@@ -284,11 +322,11 @@ const FileInputField = ({
   handleChange,
   errors,
   previewImage,
-  closeModal,
-  isOpen,
+  setIsImageModalOpen,
+  setSelectedImageSrc,
   required,
 }) => (
-  <div className={errors?.purchase_image ? s.errorr : s.purchase_inner_from}>
+  <div className={errors ? s.error : s.purchase_inner_from}>
     <label>
       {label} {required && <span>*</span>}
     </label>
@@ -297,9 +335,18 @@ const FileInputField = ({
       <img src="/assets/icons/selectimg.svg" alt="select img" />
       <span>Выбрать картинку</span>
     </label>
-    {errors?.purchase_image && <p>Выберите фото обязательно!</p>}
-    {isOpen && previewImage && (
-      <ImagePreviewModal previewImage={previewImage} onClose={closeModal} />
+    {errors && <p>{errors.message}</p>}
+    {previewImage && (
+      <button
+        className={s.view_selected_image_btn}
+        type="button"
+        onClick={() => {
+          setIsImageModalOpen(true);
+          setSelectedImageSrc(previewImage);
+        }}
+      >
+        Посмотреть выбранную картинку
+      </button>
     )}
   </div>
 );

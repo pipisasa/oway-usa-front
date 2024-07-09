@@ -131,6 +131,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
   const handleEdit = () => {
     setIsEditing(true);
   };
+  setEditData;
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -422,7 +423,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
                 <input
                   type="text"
                   id="date_sent"
-                  placeholder="dd.mm.yyyy"
+                  placeholder="ММ.ДД.ГГГГ"
                   value={editData.date_sent || ""}
                   onChange={handleDateChange}
                   readOnly={!isEditing}
@@ -433,7 +434,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
                 <input
                   type="text"
                   id="date_arrived"
-                  placeholder="dd.mm.yyyy"
+                  placeholder="ММ.ДД.ГГГГ"
                   value={editData.date_arrived || ""}
                   onChange={handleDateChange}
                   readOnly={!isEditing}
