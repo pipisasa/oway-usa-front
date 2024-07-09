@@ -57,7 +57,7 @@ const Modal = ({
             <input
               type="text"
               name="address"
-              placeholder="Напишите домашний адрес или ближайщий пвз сдэк"
+              placeholder="Напишите домашний адрес или ближайщий ПВЗ СДЭК"
               // value={formData.address}
               onChange={handleChange}
               required

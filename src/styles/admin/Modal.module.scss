@@ -121,6 +121,21 @@
       }
     }
   }
+  .password_wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--gray, #a4a4a4);
+    padding: 0 10px;
+
+    input {
+      padding: 12px 20px;
+      width: 100%;
+      border: 0px solid var(--gray, #a4a4a400) !important;
+    }
+  }
   .notifications_form {
     display: flex;
     flex-direction: column;
@@ -287,6 +302,9 @@
       margin-bottom: 10px;
     }
   }
+}
+.error {
+  color: red;
 }
 .modalBackdrop {
   position: fixed;

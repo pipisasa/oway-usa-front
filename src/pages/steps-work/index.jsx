@@ -4,7 +4,7 @@ import React from "react";
 import Contacts from "@/components/partials/Contacts";
 import Join from "@/components/screens/main/Join";
 import Illinois from "../size-chart/Illinois";
-import Advantage from "@/components/screens/main/ Advantage";
+import AdvantageSteps from "@/components/screens/main/ AdvantageSteps";
 
 export default function StepsWork() {
   return (
@@ -13,9 +13,9 @@ export default function StepsWork() {
       <MoreServices />
       <Join />
       <Illinois />
-      <Advantage
-        p="Расчет веса"
-        h2="Как рассчитываются фактический и объемный вес."
+      <AdvantageSteps
+        p="Калькулятор usps"
+        h2="Как посчитать доставку через usps"
         menu="illinois"
       />
       <Contacts />

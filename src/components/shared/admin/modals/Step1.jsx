@@ -3,14 +3,7 @@ import s from "@/styles/admin/Modal.module.scss";
 import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import ImageModal from "./ImageModal";
 
-const InputField = ({
-  id,
-  label,
-  value,
-  onChange,
-  placeholder,
-  type = "text",
-}) => (
+const InputField = ({ id, label, value, onChange, placeholder, type }) => (
   <div className={c.input}>
     <label htmlFor={id}>{label}</label>
     <input
@@ -169,6 +162,7 @@ export default function Step1({
         <div className={c.first_block}>
           <InputField
             id="name"
+            type="text"
             label="Название посылки"
             value={formData.name}
             onChange={handleChange}

@@ -19,7 +19,7 @@ const ImagePreviewModal = ({ previewImage, onClose, onDelete }) => {
     if (onDelete) {
       onDelete();
     }
-    closeModal();
+    setModalIsOpen(false);
   };
 
   return (
