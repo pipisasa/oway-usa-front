@@ -199,7 +199,7 @@ export default function UserData() {
             </>
           )}
         </div>
-        <div>
+        {/* <div>
           <label>Адрес</label>
           <input
             type="text"
@@ -215,7 +215,7 @@ export default function UserData() {
             disabled={!isEditing}
             className={isEditing ? s.blackInput : ""}
           />
-        </div>
+        </div> */}
       </div>
       {isEditing ? (
         <div className={s.edit_submit_btns}>
