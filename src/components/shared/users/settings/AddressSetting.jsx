@@ -48,7 +48,6 @@ export default function AddressSetting({ UserId }) {
         }
       );
       const data = await response.json();
-      console.log("Received user data:", data);
       setUserData(data);
     } catch (error) {
       console.error("Error fetching user data:", error);

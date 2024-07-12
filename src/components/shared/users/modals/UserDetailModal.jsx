@@ -136,7 +136,6 @@ export default function UserDetailModal({ userData, close }) {
       );
       const data = await response.json();
       setAddressData(data.results);
-      console.log(data.results, 11111);
       setIsAddressModalOpen(true);
     } catch (error) {
       console.error("Error fetching user address data:", error);
@@ -240,6 +239,7 @@ export default function UserDetailModal({ userData, close }) {
                 )}
                 {userData.front_image && !imagePreviews.front_image && (
                   <>
+                    <label htmlFor="">Лицевая сторона паспорта</label>
                     <button
                       type="button"
                       onClick={() =>
@@ -283,12 +283,12 @@ export default function UserDetailModal({ userData, close }) {
                 )}
                 {userData.back_image && !imagePreviews.back_image && (
                   <>
+                    <label htmlFor="">Обратная сторона паспорта</label>
                     <button
                       type="button"
                       onClick={() =>
                         handleViewImage(userData.back_image, "back_image")
                       }
-                      // disabled={!isEditing}
                     >
                       Посмотреть картинку
                     </button>

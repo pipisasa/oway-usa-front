@@ -57,8 +57,6 @@ export default function UserWarehouses() {
   if (loading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
 
-  console.log(warehouses);
-
   return (
     <section>
       <div className={s.filter}>

@@ -11,13 +11,13 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
     warehouse?.tracking_number || ""
   );
   const [comments, setComments] = useState(warehouse?.comments || "");
-  const { updateWarehouses } = useWarehouses();
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
   const [selectedDestination, setSelectedDestination] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [selectedOrigin, setSelectedOrigin] = useState(null);
   const [selectedCourier, setSelectedCourier] = useState(null);
 
+  const { updateWarehouses } = useWarehouses();
   const { fetchAddresses } = useAddresses();
   const [userData, setUserData] = useState(null);
   const token = getCookie("accessToken");
@@ -62,7 +62,7 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
         countries.find((c) => c.id === warehouse?.country_of_origin)
       );
       setSelectedDestination(
-        countriess.find((c) => c.id === warehouse?.country_of_destination)
+        countries.find((c) => c.id === warehouse?.country_of_destination)
       );
       setSelectedCourier(
         deliveryServices.find((d) => d.name === warehouse?.courier_service)
@@ -71,7 +71,7 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
   }, [warehouse]);
 
   const warehouses = [
-    { id: 28, country: "Россия (Москва)", city: "Москва" },
+    { id: 28, country: "США (Делавэр)", city: "Делавэр" },
     { id: 14, country: "США (Чикаго)", city: "Чикаго" },
     { id: 24, country: "Турция (Стамбул)", city: "Стамбул" },
     { id: 25, country: "Кыргызстан (Бишкек)", city: "Бишкек" },
@@ -79,10 +79,8 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
 
   const countries = [
     { id: 3, name: "США (Чикаго)" },
+    { id: 10, name: "США (Делавэр)" },
     { id: 4, name: "Турция (Стамбул)" },
-  ];
-
-  const countriess = [
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ];
@@ -99,16 +97,29 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      !selectedWarehouse ||
+      !selectedOrigin ||
+      !selectedDestination ||
+      !selectedAddress ||
+      !selectedCourier
+    ) {
+      console.error("All fields must be selected");
+      return;
+    }
+
+    const updatedData = {
+      tracking_number: trackingNumber,
+      courier_service: selectedCourier.id || warehouse.courier_service,
+      warehouse: selectedWarehouse.id,
+      country_of_origin: selectedOrigin.id,
+      country_of_destination: selectedDestination.id,
+      address: selectedAddress.id || warehouse.address,
+      comments: comments,
+    };
+
     try {
-      await updateWarehouses(warehouse?.id, {
-        tracking_number: trackingNumber,
-        courier_service: selectedCourier.name,
-        warehouse: selectedWarehouse.id,
-        country_of_origin: selectedOrigin.id,
-        country_of_destination: selectedDestination.id,
-        address: selectedAddress.id,
-        comments: comments,
-      });
+      await updateWarehouses(warehouse?.id, updatedData);
       onClose();
     } catch (error) {
       console.error("Ошибка при обновлении склада:", error);
@@ -134,7 +145,7 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
               <div>
                 <label htmlFor="destination">Страна прибытия</label>
                 <CustomSelect
-                  options={countriess}
+                  options={countries}
                   selectedOption={selectedDestination}
                   onChange={setSelectedDestination}
                   span={selectedDestination?.name || "Выберите страну прибытия"}
@@ -149,7 +160,7 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
                   }))}
                   selectedOption={selectedAddress}
                   onChange={setSelectedAddress}
-                  span={selectedAddress?.name || "Выберите адрес"}
+                  span={selectedAddress?.address || "Выберите адрес"}
                 />
               </div>
               <div>

@@ -47,7 +47,6 @@ export default function Step3({
         }
       );
       const data = await response.json();
-      console.log("User Addresses:", data);
       setUserAddresses(data.results || []);
     } catch (error) {
       console.error("Error fetching user addresses:", error);

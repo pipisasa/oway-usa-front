@@ -21,8 +21,8 @@ export default function AddUsersModal() {
     phone_number: "",
     password: "",
     password2: "",
-    front_image: null,
-    back_image: null,
+    front_image: "",
+    back_image: "",
   });
   const [formErrors, setFormErrors] = useState({});
   const [showPassword, setShowPassword] = useState({
@@ -113,8 +113,8 @@ export default function AddUsersModal() {
         phone_number: "",
         password: "",
         password2: "",
-        front_image: null,
-        back_image: null,
+        front_image: "",
+        back_image: "",
       });
       setImagePreviews({});
     } else {
@@ -136,17 +136,17 @@ export default function AddUsersModal() {
   };
 
   const closeImageModal = () => {
-    setImageModal({ src: null, isOpen: false });
+    setImageModal({ src: "", isOpen: false });
   };
 
   const deleteImage = (name) => {
     setFormData((prevData) => ({
       ...prevData,
-      [name]: null,
+      [name]: "",
     }));
     setImagePreviews((prevPreviews) => ({
       ...prevPreviews,
-      [name]: null,
+      [name]: "",
     }));
     closeImageModal();
   };

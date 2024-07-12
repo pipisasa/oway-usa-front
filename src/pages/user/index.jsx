@@ -34,7 +34,6 @@ export default function UserMainPage() {
           }
         );
         const data = await response.json();
-        console.log("Received user address data:", data);
         setAddressData(data);
       } catch (error) {
         console.error("Error fetching user address data:", error);
@@ -47,7 +46,6 @@ export default function UserMainPage() {
   }, [userData]);
 
   useEffect(() => {
-    console.log("Address data updated:", addressData);
   }, [addressData]);
 
   return (

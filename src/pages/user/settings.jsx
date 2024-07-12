@@ -8,7 +8,6 @@ import AddressSetting from "@/components/shared/users/settings/AddressSetting";
 export default function UserSettingsPage() {
   const [activeTab, setActiveTab] = useState("userData");
   const { userData, loading, error } = useUserData();
-  console.log(userData);
   return (
     <section className={s.container}>
       <div className={s.settings}>
