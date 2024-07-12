@@ -68,7 +68,7 @@ export default function Contacts() {
       title: "Адрес склада в Турции",
       address: "Hemşire Sk. 17C,",
       state: "Fatih",
-      phone: "+1 872 710 07 10",
+      phone: "+90 501 339 6379",
       city: "Istanbul",
       zip: "34130",
       text: "Unit",
