@@ -32,8 +32,13 @@ export default function MyRequestsModal() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    setValue("phone_number", "+");
+  }, [setValue]);
 
   const handleFileChange1 = useCallback((e) => {
     const file = e.target.files[0];
@@ -80,6 +85,18 @@ export default function MyRequestsModal() {
     }
     closeModal();
   };
+
+  const handlePhoneNumberChange = useCallback(
+    (e) => {
+      let value = e.target.value;
+      if (!value.startsWith("+")) {
+        value = "+" + value.replace(/^\+?/, "");
+      }
+      e.target.value = value;
+      handleChange(e);
+    },
+    [handleChange]
+  );
 
   return (
     <>
@@ -225,15 +242,15 @@ export default function MyRequestsModal() {
                         id="phone_number"
                         name="phone_number"
                         label="WhatsApp"
-                        type="number"
+                        type="text"
                         placeholder="Введите номер телефона"
                         errors={errors.phone_number}
-                        handleChange={handleChange}
+                        handleChange={handlePhoneNumberChange}
                         register={register}
                         validation={{
                           required: "Это поле обязательно к заполнению",
                           pattern: {
-                            value: /^\+?[1-9]\d{1,14}$/,
+                            value: /^\+\d{1,14}$/,
                             message: "Некорректный номер телефона",
                           },
                         }}

@@ -11,6 +11,7 @@ export default function OnTheWayModal({ data, onClose }) {
   const handleImageClick = () => {
     setIsImageModalVisible(true);
   };
+  console.log(data);
 
   return (
     <div
@@ -45,15 +46,24 @@ export default function OnTheWayModal({ data, onClose }) {
                 <input id="name_of_purchase" value={data.name || ""} readOnly />
               </div>
             </div>
-
+            <div className={s.flex_inputs}>
+              <div className={s.input_label}>
+                <label htmlFor="name_of_purchase">Трек код</label>
+                <input
+                  id="name_of_purchase"
+                  value={data.track_number || ""}
+                  readOnly
+                />
+              </div>
+            </div>
             <div className={s.flex_inputs}>
               <div className={s.input_label}>
                 <label htmlFor="price">Цена ($)</label>
                 <input id="price" name="price" type="text" value={data.price} />
               </div>
               <div className={s.input_label}>
-                <label htmlFor="count">Дата покупки</label>
-                <input id="count" value={"23.04.2024"} readOnly />
+                <label htmlFor="count">Дата отправки</label>
+                <input id="count" value={data.date_sent || ""} readOnly />
               </div>
             </div>
 

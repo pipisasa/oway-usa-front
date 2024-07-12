@@ -43,6 +43,9 @@ export default function WarehouseProductsModal() {
     expressCost: 0,
   });
 
+  const [selectedWarehouse, setSelectedWarehouse] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+
   const toggleModal = () => setIsOpen(!isOpen);
   const { countries } = useCountries();
 
@@ -152,6 +155,8 @@ export default function WarehouseProductsModal() {
         country_of_origin: 0,
         country_of_destination: 0,
       });
+      setSelectedWarehouse(null);
+      setSelectedAddress(null);
       setCurrentStep(1);
       setIsOpen(false);
     } catch (error) {
@@ -161,6 +166,22 @@ export default function WarehouseProductsModal() {
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  const handleSelectWarehouse = (warehouse) => {
+    setSelectedWarehouse(warehouse);
+    setFormData((prevData) => ({
+      ...prevData,
+      unique_id_user: warehouse.unique_id,
+    }));
+  };
+
+  const handleSelectAddress = (address) => {
+    setSelectedAddress(address);
+    setFormData((prevData) => ({
+      ...prevData,
+      address: address.id,
+    }));
   };
 
   const renderStep = () => {
@@ -202,6 +223,10 @@ export default function WarehouseProductsModal() {
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
             handleSubmit={handleSubmit}
+            initialSelectedWarehouse={selectedWarehouse}
+            initialSelectedAddress={selectedAddress}
+            handleSelectWarehouse={handleSelectWarehouse}
+            handleSelectAddress={handleSelectAddress}
           />
         );
       default:
