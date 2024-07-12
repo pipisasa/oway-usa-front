@@ -81,10 +81,11 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
     { id: 3, name: "США (Чикаго)" },
     { id: 10, name: "США (Делавэр)" },
     { id: 4, name: "Турция (Стамбул)" },
+  ];
+  const countriess = [
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ];
-
   const deliveryServices = [
     { name: "Fedex", id: 1 },
     { name: "USPS", id: 2 },
@@ -145,7 +146,7 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
               <div>
                 <label htmlFor="destination">Страна прибытия</label>
                 <CustomSelect
-                  options={countries}
+                  options={countriess}
                   selectedOption={selectedDestination}
                   onChange={setSelectedDestination}
                   span={selectedDestination?.name || "Выберите страну прибытия"}
