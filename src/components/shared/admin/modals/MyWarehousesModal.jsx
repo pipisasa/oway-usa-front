@@ -48,14 +48,15 @@ export default function MyWarehousesModal({ UserId }) {
   const toggleModal = () => setIsOpen(!isOpen);
 
   const warehouses = [
-    { id: 28, country: "Россия (Москва)", city: "Москва" },
     { id: 14, country: "США (Чикаго)", city: "Чикаго" },
     { id: 24, country: "Турция (Стамбул)", city: "Стамбул" },
     { id: 25, country: "Кыргызстан (Бишкек)", city: "Бишкек" },
+    { id: 28, country: "США (Делавэр)", city: "Делавэр" },
   ];
 
   const countries = [
     { id: 3, name: "США (Чикаго)" },
+    { id: 10, name: "США (Делавэр)" },
     { id: 4, name: "Турция (Стамбул)" },
     // { id: 8, name: "Кыргызстан (Бишкек)" },
     // { id: 9, name: "Россия (Москва)" },
@@ -106,10 +107,10 @@ export default function MyWarehousesModal({ UserId }) {
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
-        Добавить товар
+        Добавить посылку
       </button>
       <Modal isOpen={isOpen} onClose={toggleModal}>
-        <h3>Добавить товар</h3>
+        <h3>Добавить посылку</h3>
         <form onSubmit={handleSubmit}>
           <div className={s.shops_form}>
             <div className={s.first_input_block}>
@@ -122,19 +123,7 @@ export default function MyWarehousesModal({ UserId }) {
                   span={"Cтрану отправки"}
                 />
               </div>
-              {/* <div>
-                <label htmlFor="warehouse">Склад</label>
-                <CustomSelect
-                  options={warehouses.map((wh) => ({
-                    id: wh.id,
-                    name: `${wh.country} (${wh.city})`,
-                  }))}
-                  selectedOption={selectedWarehouse}
-                  onChange={(e) => setSelectedWarehouse(e)}
-                  span={"Выберите склад"}
-                  isDisabled
-                />
-              </div> */}
+
               <div>
                 <label htmlFor="destination">Страна прибытия</label>
                 <CustomSelect

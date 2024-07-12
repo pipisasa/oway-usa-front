@@ -45,13 +45,10 @@ export default function Step1({
 
   const country_of_origin = [
     { id: 3, name: "США (Чикаго)" },
+    { id: 10, name: "США (Делавэр)" },
     { id: 4, name: "Турция (Стамбул)" },
-    // { id: 8, name: "Кыргызстан (Бишкек)" },
-    // { id: 9, name: "Россия (Москва)" },
   ];
   const country_of_destination = [
-    // { id: 3, name: "США" },
-    // { id: 4, name: "Турция" },
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ];
@@ -110,8 +107,10 @@ export default function Step1({
 
     let standardRate = 0;
     if (
-      String(formData.country_of_origin || country_of_origin1) === "3" &&
-      String(formData.country_of_destination || country_of_destination1) === "8"
+      String(formData.country_of_origin || country_of_origin1) === "3" ||
+      ("10" &&
+        String(formData.country_of_destination || country_of_destination1) ===
+          "8")
     ) {
       standardRate = 12;
     } else if (
@@ -120,8 +119,10 @@ export default function Step1({
     ) {
       standardRate = 9.5;
     } else if (
-      String(formData.country_of_origin || country_of_origin1) === "3" &&
-      String(formData.country_of_destination || country_of_destination1) === "9"
+      String(formData.country_of_origin || country_of_origin1) === "3" ||
+      ("10" &&
+        String(formData.country_of_destination || country_of_destination1) ===
+          "9")
     ) {
       standardRate = 16;
     }

@@ -10,13 +10,18 @@ export default function Step3({
   handleSubmit,
   currentStep,
   setCurrentStep,
+  initialSelectedWarehouse,
+  initialSelectedAddress,
+  handleSelectWarehouse,
+  handleSelectAddress,
 }) {
   const { warehouses, fetchWarehouses } = useWarehousesFull();
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(
+    initialSelectedWarehouse?.unique_id || ""
+  );
   const [suggestions, setSuggestions] = useState([]);
-  const [selectedWarehouse, setSelectedWarehouse] = useState(null);
   const [userAddresses, setUserAddresses] = useState([]);
-  const [selectedAddress, setSelectedAddress] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const token = getCookie("accessToken");
 
   const handleInputChange = (e) => {
@@ -43,7 +48,7 @@ export default function Step3({
       );
       const data = await response.json();
       console.log("User Addresses:", data);
-      setUserAddresses(data.results || []); // Assuming `results` is the array of addresses
+      setUserAddresses(data.results || []);
     } catch (error) {
       console.error("Error fetching user addresses:", error);
     }
@@ -58,16 +63,16 @@ export default function Step3({
   }, [warehouses]);
 
   useEffect(() => {
-    if (selectedWarehouse) {
-      fetchUserAddresses(selectedWarehouse.id);
+    if (initialSelectedWarehouse) {
+      fetchUserAddresses(initialSelectedWarehouse.id);
     }
-  }, [selectedWarehouse]);
+  }, [initialSelectedWarehouse]);
 
-  const handleSelectWarehouse = (warehouse) => {
+  const handleSelectWarehouseInternal = (warehouse) => {
+    handleSelectWarehouse(warehouse);
     handleChange({
       target: { name: "unique_id_user", value: warehouse.unique_id },
     });
-    setSelectedWarehouse(warehouse);
     setInputValue(warehouse.unique_id);
     setSuggestions([]);
   };
@@ -76,10 +81,18 @@ export default function Step3({
     const address = userAddresses.find(
       (address) => address.id === parseInt(e.target.value)
     );
-    setSelectedAddress(address);
+    handleSelectAddress(address);
     handleChange({
       target: { name: "address", value: address.id },
     });
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (!isSubmitting) {
+      setIsSubmitting(true);
+      handleSubmit();
+    }
   };
 
   return (
@@ -111,7 +124,7 @@ export default function Step3({
         </button>
         <div className={c.line}></div>
       </div>
-      <form action="" className={s.step_form}>
+      <form action="" className={s.step_form} onSubmit={handleFormSubmit}>
         <div className={c.input}>
           <label htmlFor="comments">Выбор клиента</label>
           <div className={s.search_container}>
@@ -131,7 +144,7 @@ export default function Step3({
           </div>
           <SearchSelect
             suggestions={suggestions}
-            handleSelectWarehouse={handleSelectWarehouse}
+            handleSelectWarehouse={handleSelectWarehouseInternal}
           />
         </div>
         {userAddresses.length > 0 && (
@@ -142,7 +155,7 @@ export default function Step3({
               name="addressSelect"
               className={c.selectAddress}
               onChange={handleAddressChange}
-              value={selectedAddress.id || ""}
+              value={initialSelectedAddress?.id || ""}
             >
               <option value="">Выберите адрес</option>
               {userAddresses.map((address) => (
@@ -153,10 +166,10 @@ export default function Step3({
             </select>
           </div>
         )}
+        <button className={c.submit_btn} type="submit" disabled={isSubmitting}>
+          Отправить
+        </button>
       </form>
-      <button className={c.submit_btn} onClick={handleSubmit}>
-        Отправить
-      </button>
     </div>
   );
 }

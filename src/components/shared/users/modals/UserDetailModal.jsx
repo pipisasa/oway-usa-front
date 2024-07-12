@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import s from "@/styles/pages/admin/AdminUsersPage.module.scss";
 import { RxCross2 } from "react-icons/rx";
 import Modal from "../../Modal";
@@ -17,6 +17,8 @@ export default function UserDetailModal({ userData, close }) {
   const [isEditing, setIsEditing] = useState(false);
   const [viewImage, setViewImage] = useState(null);
   const [viewImageType, setViewImageType] = useState(null);
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [addressData, setAddressData] = useState([]);
 
   const handleImageChange = async (event, type) => {
     const file = event.target.files[0];
@@ -96,6 +98,7 @@ export default function UserDetailModal({ userData, close }) {
       console.error("Failed to update", await response.text());
     }
   };
+
   const handleCancel = () => {
     setFirstName(userData.first_name);
     setLastName(userData.last_name);
@@ -116,6 +119,28 @@ export default function UserDetailModal({ userData, close }) {
   const closeModal = () => {
     setViewImage(null);
     setViewImageType(null);
+  };
+
+  const fetchUserAddresses = async () => {
+    try {
+      const token = getCookie("accessToken");
+      const response = await fetch(
+        `https://api-owayusa.com/api/address/list/?user=${userData.id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setAddressData(data.results);
+      console.log(data.results, 11111);
+      setIsAddressModalOpen(true);
+    } catch (error) {
+      console.error("Error fetching user address data:", error);
+    }
   };
 
   return (
@@ -176,14 +201,9 @@ export default function UserDetailModal({ userData, close }) {
                 />
               </div>
               <div>
-                <label>Адрес</label>
-                <input
-                  type="text"
-                  value={address}
-                  placeholder="Адрес не указан"
-                  onChange={(e) => setaddress(e.target.value)}
-                  disabled={!isEditing}
-                />
+                <button type="button" onClick={fetchUserAddresses}>
+                  Все адреса
+                </button>
               </div>
 
               <div>
@@ -365,6 +385,60 @@ export default function UserDetailModal({ userData, close }) {
             </div>
           </Modal>
         </div>
+      )}
+      {isAddressModalOpen && (
+        <Modal
+          isOpen={isAddressModalOpen}
+          onClose={() => setIsAddressModalOpen(false)}
+        >
+          <div className={s.modalContent}>
+            <div>
+              <h3>Адреса пользователя</h3>
+              <button onClick={() => setIsAddressModalOpen(false)}>
+                Закрыть
+              </button>
+            </div>
+            {addressData.length > 0 ? (
+              <div className={s.addressBlock11}>
+                {addressData.map((address) => (
+                  <div className={s.addressBlock} key={address.id}>
+                    <div>
+                      <img src="/assets/icons/user-icons/user.svg" alt="" />
+                      <p>{address.full_name}</p>
+                    </div>
+                    <div>
+                      <img src="/assets/icons/user-icons/city.svg" alt="" />
+                      <p>
+                        {address.country}, {address.city}
+                      </p>
+                    </div>
+                    <div>
+                      <img
+                        src="/assets/icons/user-icons/maps-and-flags.svg"
+                        alt=""
+                      />
+                      <p>{address.address}</p>
+                    </div>
+
+                    <div>
+                      <img
+                        src="/assets/icons/user-icons/phone-call.svg"
+                        alt=""
+                      />
+                      <p>{address.phone_number}</p>
+                    </div>
+                    <div>
+                      <img src="/assets/icons/user-icons/email.svg" alt="" />
+                      <p>{address.email}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>Адреса не найдены.</p>
+            )}
+          </div>
+        </Modal>
       )}
     </form>
   );
