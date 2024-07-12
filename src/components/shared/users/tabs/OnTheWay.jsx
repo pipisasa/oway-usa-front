@@ -29,7 +29,6 @@ export default function OnTheWay() {
     setCurrentImageSrc(`https://api-owayusa.com${src}`);
     setIsImageModalVisible(true);
   };
-  console.log(warehouses);
 
   return (
     <>

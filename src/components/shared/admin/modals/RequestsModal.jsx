@@ -25,7 +25,6 @@ export default function RequestsModal({ data, onClose }) {
   const [paymentStatus, setPaymentStatus] = useState(data.payment_status);
   const [showPaymentStatusOptions, setShowPaymentStatusOptions] =
     useState(false);
-  console.log(data);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();

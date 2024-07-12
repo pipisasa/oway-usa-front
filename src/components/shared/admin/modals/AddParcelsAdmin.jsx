@@ -90,17 +90,14 @@ export default function AddParcelsAdmin() {
   const countries = [
     { id: 3, name: "США (Чикаго)" },
     { id: 4, name: "Турция (Стамбул)" },
-    // { id: 8, name: "Кыргызстан (Бишкек)" },
-    // { id: 9, name: "Россия (Москва)" },
+    { id: 10, name: "США (Делавэр)" },
   ];
   const countriess = [
-    // { id: 3, name: "США" },
-    // { id: 4, name: "Турция" },
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ];
   const warehouses1 = [
-    { id: 28, country: "Россия", city: "Москва" },
+    { id: 28, country: "США", city: "Делавэр" },
     { id: 14, country: "США", city: "Чикаго" },
     { id: 24, country: "Турция", city: "Стамбул" },
     { id: 25, country: "Кыргызстан", city: "Бишкек" },

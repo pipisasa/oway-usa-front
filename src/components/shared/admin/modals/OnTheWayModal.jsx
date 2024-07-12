@@ -11,7 +11,6 @@ export default function OnTheWayModal({ data, onClose }) {
   const handleImageClick = () => {
     setIsImageModalVisible(true);
   };
-  console.log(data);
 
   return (
     <div

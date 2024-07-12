@@ -38,7 +38,6 @@ export default function MyWarehousesModal({ UserId }) {
         }
       );
       const data = await response.json();
-      console.log("Received user data:", data);
       setUserData(data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -161,7 +160,7 @@ export default function MyWarehousesModal({ UserId }) {
                   options={deliveryServices}
                   selectedOption={selectedCourier}
                   onChange={(e) => setSelectedCourier(e)}
-                  span={"Курьерская служба"}
+                  span={selectedCourier?.name || "Курьерская служба"}
                 />
               </div>
             </div>
