@@ -75,7 +75,6 @@ export default function WarehouseProductsModal() {
     if (
       name === "country_of_origin" ||
       name === "country_of_destination" ||
-      name === "track_number" ||
       name === "price"
     ) {
       parsedValue = parseInt(value, 10);

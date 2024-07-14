@@ -163,7 +163,7 @@ export default function AddParcelsAdmin() {
                 <label htmlFor="tracking_number">Трeк-код</label>
                 <input
                   id="tracking_number"
-                  type="number"
+                  type="text"
                   placeholder="Вставьте трeк-код"
                   value={trackingNumber}
                   onChange={(e) => setTrackingNumber(e.target.value)}
