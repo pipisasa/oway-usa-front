@@ -50,6 +50,7 @@ export default function OnTheWayModal({ data, onClose }) {
                 <label htmlFor="name_of_purchase">Трек код</label>
                 <input
                   id="name_of_purchase"
+                  type="text"
                   value={data.track_number || ""}
                   readOnly
                 />
