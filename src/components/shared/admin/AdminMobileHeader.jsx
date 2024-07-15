@@ -63,7 +63,7 @@ export default function AdminMobileHeader({ children }) {
     },
     {
       href: "/admin/illinois",
-      label: "Клиенты за Иллинойс",
+      label: "Межштатные",
       icons: "/assets/icons/united-states-of-america.svg",
     },
     {

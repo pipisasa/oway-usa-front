@@ -220,6 +220,8 @@
 
     thead {
       tr {
+        border-bottom: 1px solid #027ddb33;
+
         th {
           color: var(--black, #000000);
           font-size: 14px;
@@ -228,7 +230,7 @@
           line-height: 140%;
           padding: 24px;
           text-align: left;
-          border-bottom: 1px solid #027ddb33;
+          // border-bottom: 1px solid #027ddb33;
           text-wrap: nowrap;
         }
       }
