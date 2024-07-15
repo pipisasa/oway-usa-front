@@ -104,7 +104,7 @@ export default function AdminUsersPage() {
               <th>Номер телефона</th>
               <th>Уникальный ID</th>
               <th>Дата регистрации</th>
-              <th className={s.gap}>
+              <th className={s.gap} style={{ display: "flex", gap: "10px" }}>
                 Действия{" "}
                 <button
                   className={s.all_delete}

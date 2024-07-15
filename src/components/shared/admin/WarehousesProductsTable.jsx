@@ -109,10 +109,8 @@ export default function WarehousesProductsTable({
             </th>
             <th>Трек-номер</th>
             <th>Статус</th>
-            <th>Действие</th>
-          </tr>
-          <tr>
-            <th className={s.actions_btn}>
+            <th style={{ display: "flex", gap: "10px" }}>
+              Действие{" "}
               <button
                 className={s.all_delete}
                 onClick={handleMultipleDeleteClick}

@@ -47,6 +47,8 @@ export default function WarehousesModal({ onClose, warehouse }) {
   const [countries, setCountries] = useState([
     { id: 3, name: "США" },
     { id: 4, name: "Турция" },
+  ]);
+  const [countriess, setCountriess] = useState([
     { id: 8, name: "Кыргызстан" },
     { id: 9, name: "Россия" },
   ]);
@@ -468,7 +470,7 @@ export default function WarehousesModal({ onClose, warehouse }) {
                   disabled={!isEditing}
                 >
                   <option value="">Выберите страну</option>
-                  {countries.map((option) => (
+                  {countriess.map((option) => (
                     <option key={option.id} value={option.id}>
                       {option.name}
                     </option>
