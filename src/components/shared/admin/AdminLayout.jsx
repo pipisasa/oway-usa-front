@@ -54,7 +54,7 @@ export default function AdminLayout({ children }) {
     },
     {
       href: "/admin/illinois",
-      label: "Клиенты за Иллинойс",
+      label: "Межштатные",
       icon: "/assets/icons/united-states-of-america.svg",
     },
     {

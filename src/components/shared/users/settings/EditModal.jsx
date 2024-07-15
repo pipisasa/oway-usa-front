@@ -1,4 +1,5 @@
 import React from "react";
+import InputMask from "react-input-mask";
 import s from "@/styles/users/Address.module.scss";
 import Arrow from "../../ui/Arrow";
 import CloseModal from "../../ui/CloseModal";
@@ -66,14 +67,20 @@ const EditModal = ({
           <div className={s.df}>
             <div className={s.input}>
               <label>Номер телефона</label>
-              <input
-                type="text"
-                name="phone_number"
-                placeholder="Введите номер телефона"
+              <InputMask
+                mask="+\9\9\9 (99) 999-9999"
                 value={formData.phone_number}
                 onChange={handleChange}
-                required
-              />
+              >
+                {() => (
+                  <input
+                    type="text"
+                    name="phone_number"
+                    placeholder="Введите номер телефона"
+                    required
+                  />
+                )}
+              </InputMask>
             </div>
             <div className={s.input}>
               <label>Электронная почта</label>
@@ -101,7 +108,7 @@ const EditModal = ({
           </div>
         </form>
         <button className={s.closeButton} onClick={toggleModal}>
-          <img src="/assets/icons/ui/closemodal.svg" alt="closemoadal" />
+          <img src="/assets/icons/ui/closemodal.svg" alt="closemodal" />
         </button>
       </div>
     </div>
