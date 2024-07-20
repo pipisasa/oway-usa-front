@@ -5,6 +5,39 @@
     position: absolute;
     right: 85px;
     top: -90px;
+    img {
+      -webkit-animation: pulsing 6s infinite;
+      animation: pulsing 6s infinite;
+      @-webkit-keyframes pulsing {
+        0% {
+          -webkit-transform: scale(0.9, 0.9);
+          transform: scale(0.9, 0.9);
+        }
+        50% {
+          -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+        }
+        100% {
+          -webkit-transform: scale(0.9, 0.9);
+          transform: scale(0.9, 0.9);
+        }
+      }
+
+      @keyframes pulsing {
+        0% {
+          -webkit-transform: scale(0.9, 0.9);
+          transform: scale(0.9, 0.9);
+        }
+        50% {
+          -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+        }
+        100% {
+          -webkit-transform: scale(0.9, 0.9);
+          transform: scale(0.9, 0.9);
+        }
+      }
+    }
   }
 
   .track_info {
@@ -22,6 +55,12 @@
         font-weight: 700;
         line-height: normal;
         margin-top: 12px;
+        transition: transform 0.8s ease-in-out;
+        transform: scale(1);
+        &:hover {
+          color: #ff7c00;
+          transform: scale(1.05);
+        }
       }
 
       span {

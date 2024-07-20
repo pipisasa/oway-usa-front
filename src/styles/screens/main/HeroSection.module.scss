@@ -13,6 +13,14 @@
   right: -50px;
   top: 130px;
   animation: rotateImage 200s infinite linear;
+  img {
+    transition: transform 0.8s ease-in-out;
+    transform: scale(1);
+    &:hover {
+      color: #ff7c00;
+      transform: scale(1.1);
+    }
+  }
 }
 
 .header_hero {
@@ -35,6 +43,12 @@
           color: var(--white, var(--Colors-Grey-White, #fff));
           font-size: 80px;
           font-weight: 700;
+          transition: opacity 0.5s ease-in-out;
+          opacity: 0.8;
+          &:hover {
+            color: #ff7c00;
+            opacity: 1;
+          }
         }
       }
       .heroSection_info_span {

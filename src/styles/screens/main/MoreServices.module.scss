@@ -13,6 +13,12 @@
       font-size: 32px;
       font-weight: 700;
       margin-top: 12px;
+      transition: transform 0.8s ease-in-out;
+      transform: scale(1);
+      &:hover {
+        color: #ff7c00;
+        transform: scale(1.05);
+      }
     }
     p {
       color: var(--black, #001526);
@@ -43,6 +49,9 @@
             span {
               font-size: 16px;
               line-height: 140%;
+              &:hover {
+                color: #ff7c00;
+              }
             }
             .services_span_each {
               font-size: 18px;
@@ -79,6 +88,9 @@
             span {
               font-size: 16px;
               line-height: 140%;
+              &:hover {
+                color: #027ddb;
+              }
             }
             .services_span_each {
               font-size: 18px;

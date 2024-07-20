@@ -23,6 +23,12 @@
         font-weight: 700;
         margin-top: 12px;
         font-family: Helvetica;
+        transition: transform 0.8s ease-in-out;
+        transform: scale(1);
+        &:hover {
+          color: #ff7c00;
+          transform: scale(1.05);
+        }
       }
 
       .menu {
@@ -74,6 +80,11 @@
 
         img {
           border-radius: 10px;
+          transition: transform 0.8s ease-in-out;
+          transform: scale(1);
+          &:hover {
+            transform: scale(1.02);
+          }
         }
 
         p {
@@ -81,6 +92,13 @@
           font-size: 14px;
           line-height: 140%;
           margin-top: 16px;
+          transition: transform 0.8s ease-in-out;
+          transform: scale(1);
+          &:hover {
+            color: #ff7c00;
+            transform: scale(1.02);
+            font-weight: 600;
+          }
         }
       }
     }
@@ -131,6 +149,14 @@
           border-radius: 16px;
           background: var(--bue_light_2, #f7f9fc);
           line-height: 140%;
+
+          transition: transform 0.8s ease-in-out;
+          transform: scale(1);
+          &:hover {
+            position: relative;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
 
           &.active {
             display: flex;
