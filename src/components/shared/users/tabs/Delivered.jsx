@@ -16,7 +16,8 @@ export default function Delivered() {
   };
   const totalDelivere = Math.ceil(
     warehouses.results?.filter(
-      (item) => item.status.name === "Отправлено курьерской службой"
+      (item) => item.status.name === "Отправлено курьерской службой",
+      (item) => item.status.name === "Поступил в ПВЗ, готов к выдаче"
     )?.length
   );
 

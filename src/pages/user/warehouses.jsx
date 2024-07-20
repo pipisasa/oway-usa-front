@@ -55,7 +55,7 @@ export default function Contacts() {
       phone: "+1 872 710 0710",
       city: "Rolling Meadows",
       zip: "60008",
-      unitcode: "no",
+      unitcode: "",
       text: "Unit",
       qwe: "State",
       email: "owaycargo@gmail.com",
@@ -222,7 +222,17 @@ export default function Contacts() {
             <div className={s.card_header}>
               <div className={s.card_header_country}>
                 <img src={data.img} alt={data.title} />
-                <h3>{data.title}</h3>
+                <h3
+                  className={
+                    data.title.includes(
+                      "Пункт приема онлайн заказов в Delaware"
+                    )
+                      ? s.redText
+                      : ""
+                  }
+                >
+                  {data.title}
+                </h3>
               </div>
               {(isAuthorized ||
                 !data.title.includes(
