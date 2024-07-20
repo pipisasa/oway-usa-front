@@ -45,8 +45,7 @@ export default function UserMainPage() {
     }
   }, [userData]);
 
-  useEffect(() => {
-  }, [addressData]);
+  useEffect(() => {}, [addressData]);
 
   return (
     <section className={s.user_page}>
@@ -73,7 +72,6 @@ export default function UserMainPage() {
               </p>
               <p>
                 <img src="/assets/icons/locations.svg" alt="address" />
-                {/* {userData.address ? userData?.address : "Адрес не указан"} */}
                 {addressData.results && addressData.results.length > 0 ? (
                   <div>
                     <p>{addressData.results[0].address}</p>
