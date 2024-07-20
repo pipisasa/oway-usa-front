@@ -12,6 +12,12 @@
         font-size: 40px;
         font-weight: 700;
         margin-top: 12px;
+        transition: transform 0.8s ease-in-out;
+        transform: scale(1);
+        &:hover {
+          color: #ff7c00;
+          transform: scale(1.05);
+        }
       }
     }
 

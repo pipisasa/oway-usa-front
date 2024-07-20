@@ -12,6 +12,12 @@
       font-weight: 700;
       line-height: normal;
       margin-top: 12px;
+      transition: transform 0.8s ease-in-out;
+      transform: scale(1);
+      &:hover {
+        color: #ff7c00;
+        transform: scale(1.05);
+      }
     }
 
     span {
@@ -76,6 +82,13 @@
       padding: 24px;
       border-radius: 16px;
       background: var(--bue_light_2, #f7f9fc);
+      transition: transform 0.8s ease-in-out;
+      transform: scale(1);
+      &:hover {
+        background: #ff7c00;
+        transform: scale(1.1);
+        color: #f7f9fc;
+      }
 
       h3 {
         font-size: 18px;
@@ -116,7 +129,7 @@
       flex-direction: column;
       gap: 20px;
     }
-    .mission_blockd{
+    .mission_blockd {
       display: none;
     }
   }

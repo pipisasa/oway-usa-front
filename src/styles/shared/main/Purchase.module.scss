@@ -10,7 +10,12 @@
     border: 1px solid var(--gray, #a4a4a4);
     padding: 12px 20px;
     width: 100%;
-
+    &:hover {
+      border: 1px solid var(--gray, #ff7c00);
+    }
+    &:focus {
+      border: 2px solid var(--gray, #ff7c00);
+    }
     input {
       border: none !important;
       padding: 0 !important;
@@ -29,7 +34,7 @@
     margin-top: 24px;
     font-size: 16px;
     gap: 20px;
-    transition: background-color 0.3s; /* добавляем плавный переход для цвета фона */
+    transition: background-color 0.3s;
 
     span {
       font-family: Helvetica;
@@ -41,7 +46,7 @@
     }
 
     &:hover {
-      background-color: #01579b; /* новый цвет фона при наведении */
+      background-color: #01579b;
     }
   }
   .purchase_img {
@@ -50,6 +55,11 @@
     top: -60px;
     img {
       transform: rotate(7.912deg);
+      transition: transform 0.8s ease-in-out;
+      transform: scale(1), rotate (7.912deg);
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
   .purchase_container {
@@ -67,6 +77,12 @@
       font-style: normal;
       font-weight: 700;
       line-height: normal;
+      transition: transform 1s ease-in-out;
+      transform: scale(1);
+      &:hover {
+        color: #ff7c00;
+        transform: scale(1.05);
+      }
     }
     p {
       color: var(--black, #001526);
@@ -145,6 +161,12 @@
           border: 1px solid var(--gray, #a4a4a4);
           padding: 12px 20px;
           width: 100%;
+          &:hover {
+            border: 1px solid var(--gray, #ff7c00);
+          }
+          &:focus {
+            border: 2px solid var(--gray, #ff7c00);
+          }
         }
 
         label {
@@ -218,6 +240,12 @@
         border: 1px solid var(--gray, #a4a4a4);
         padding: 12px 20px;
         width: 100%;
+        &:hover {
+          border: 1px solid var(--gray, #ff7c00);
+        }
+        &:focus {
+          border: 2px solid var(--gray, #ff7c00);
+        }
       }
 
       label {
@@ -275,6 +303,12 @@
         border: 1px solid var(--gray, #a4a4a4);
         padding: 12px 20px 64px 20px;
         width: 100%;
+        &:hover {
+          border: 1px solid var(--gray, #ff7c00);
+        }
+        &:focus {
+          border: 2px solid var(--gray, #ff7c00);
+        }
       }
 
       label {

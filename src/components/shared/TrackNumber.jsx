@@ -41,7 +41,7 @@ export default function TrackNumber() {
       setError(
         "Произошла ошибка при отслеживании. Пожалуйста, проверьте трек-номер и попробуйте снова."
       );
-      setStatus("not-found"); // Устанавливаем статус, чтобы показать, что товар не найден
+      setStatus("not-found");
       onOpen();
     } finally {
       setLoading(false);

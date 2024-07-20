@@ -8,12 +8,51 @@
       top: -60px;
       z-index: 1;
       transform: rotate(9.779deg);
+      img {
+        -webkit-animation: pulsing 5s infinite;
+        animation: pulsing 5s infinite;
+        @-webkit-keyframes pulsing {
+          0% {
+            -webkit-transform: scale(0.9, 0.9);
+            transform: scale(0.9, 0.9);
+          }
+          50% {
+            -webkit-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+          }
+          100% {
+            -webkit-transform: scale(0.9, 0.9);
+            transform: scale(0.9, 0.9);
+          }
+        }
+
+        @keyframes pulsing {
+          0% {
+            -webkit-transform: scale(0.9, 0.9);
+            transform: scale(0.9, 0.9);
+          }
+          50% {
+            -webkit-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+          }
+          100% {
+            -webkit-transform: scale(0.9, 0.9);
+            transform: scale(0.9, 0.9);
+          }
+        }
+      }
     }
 
     h1 {
       color: var(--black, #001526);
       font-size: 64px;
       width: 50%;
+      transition: transform 0.8s ease-in-out;
+      transform: scale(1);
+      &:hover {
+        color: #ff7c00;
+        transform: scale(1.05);
+      }
     }
 
     .calc_inner {
@@ -45,6 +84,12 @@
               background: var(--white, #fff);
               width: 100%;
               font-size: 14px;
+              &:hover {
+                border: 1px solid var(--blue_light, #ff7c00);
+              }
+              &:focus {
+                border: 2px solid var(--blue_light, #ff7c00);
+              }
             }
 
             label {
@@ -73,6 +118,12 @@
               padding: 20px 20px;
               width: 100%;
               font-size: 14px;
+              &:hover {
+                border: 1px solid var(--blue_light, #ff7c00);
+              }
+              &:focus {
+                border: 2px solid var(--blue_light, #ff7c00);
+              }
             }
 
             label {
@@ -95,6 +146,12 @@
             padding: 12px 20px;
             width: 100%;
             font-size: 14px;
+            &:hover {
+              border: 1px solid var(--blue_light, #ff7c00);
+            }
+            &:focus {
+              border: 2px solid var(--blue_light, #ff7c00);
+            }
           }
 
           label {
