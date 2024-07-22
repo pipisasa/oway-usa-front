@@ -9,9 +9,7 @@ const deliveryServices = [
   { name: "Fedex", id: 1 },
   { name: "USPS", id: 2 },
   { name: "UPS", id: 3 },
-  { name: "DHL", id: 4 },
-  { name: "Lasership", id: 5 },
-  { name: "Landmark", id: 6 },
+  { name: "Europe", id: 6 },
   { name: "Amazon", id: 7 },
 ];
 

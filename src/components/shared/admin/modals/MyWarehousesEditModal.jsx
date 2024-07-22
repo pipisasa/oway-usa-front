@@ -1,71 +1,77 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import s from "@/styles/admin/Modal.module.scss";
 import Modal from "../../Modal";
 import useWarehouses from "@/hooks/user/useWarehouses";
 import { useAddresses } from "@/hooks/useAddresses";
-import CustomSelect from "@/components/partials/Select";
 import { getCookie } from "@/utils/cookieHelpers";
 
 export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
-  const [trackingNumber, setTrackingNumber] = useState(
-    warehouse?.tracking_number || ""
-  );
-  const [comments, setComments] = useState(warehouse?.comments || "");
-  const [selectedWarehouse, setSelectedWarehouse] = useState(null);
-  const [selectedDestination, setSelectedDestination] = useState(null);
-  const [selectedAddress, setSelectedAddress] = useState(null);
-  const [selectedOrigin, setSelectedOrigin] = useState(null);
-  const [selectedCourier, setSelectedCourier] = useState(null);
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const [comments, setComments] = useState("");
+  const [selectedWarehouse, setSelectedWarehouse] = useState("");
+  const [selectedDestination, setSelectedDestination] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState("");
+  const [selectedOrigin, setSelectedOrigin] = useState("");
+  const [selectedCourier, setSelectedCourier] = useState("");
 
   const { updateWarehouses } = useWarehouses();
   const { fetchAddresses } = useAddresses();
   const [userData, setUserData] = useState(null);
   const token = getCookie("accessToken");
 
+  console.log(warehouse);
+
+  const fetchUserData = useCallback(
+    async (userId) => {
+      try {
+        const response = await fetch(
+          `https://api-owayusa.com/api/address/list/?user=${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setUserData(data);
+        if (warehouse?.address) {
+          const selectedAddress = data.results.find(
+            (address) => address.id === warehouse.address
+          );
+          setSelectedAddress(selectedAddress.id);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    },
+    [token, warehouse?.address]
+  );
+
   useEffect(() => {
     if (warehouse?.user) {
       fetchUserData(warehouse.user);
     }
-  }, [warehouse]);
-
-  const fetchUserData = async (userId) => {
-    try {
-      const response = await fetch(
-        `https://api-owayusa.com/api/address/list/?user=${userId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data = await response.json();
-      setUserData(data);
-      if (warehouse?.address) {
-        const selectedAddress = data.results.find(
-          (address) => address.id === warehouse.address
-        );
-        setSelectedAddress(selectedAddress);
-      }
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
+  }, [warehouse, fetchUserData]);
 
   useEffect(() => {
     if (warehouse) {
+      setTrackingNumber(warehouse.tracking_number || "");
+      setComments(warehouse.comments || "");
       setSelectedWarehouse(
-        warehouses.find((w) => w.id === warehouse?.warehouse)
+        warehouses.find((w) => w.id === warehouse?.warehouse)?.id || ""
       );
       setSelectedOrigin(
-        countries.find((c) => c.id === warehouse?.country_of_origin)
+        countries.find((c) => c.id === warehouse?.country_of_origin)?.id || ""
       );
       setSelectedDestination(
-        countries.find((c) => c.id === warehouse?.country_of_destination)
+        countriess.find((c) => c.id === warehouse?.country_of_destination)
+          ?.id || ""
       );
       setSelectedCourier(
-        deliveryServices.find((d) => d.name === warehouse?.courier_service)
+        deliveryServices.find((d) => d.id === warehouse?.courier_service)?.id ||
+          ""
       );
     }
   }, [warehouse]);
@@ -90,9 +96,7 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
     { name: "Fedex", id: 1 },
     { name: "USPS", id: 2 },
     { name: "UPS", id: 3 },
-    { name: "DHL", id: 4 },
-    { name: "Lasership", id: 5 },
-    { name: "Landmark", id: 6 },
+    { name: "Europe", id: 6 },
     { name: "Amazon", id: 7 },
   ];
 
@@ -111,11 +115,11 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
 
     const updatedData = {
       tracking_number: trackingNumber,
-      courier_service: selectedCourier.id || warehouse.courier_service,
-      warehouse: selectedWarehouse.id,
-      country_of_origin: selectedOrigin.id,
-      country_of_destination: selectedDestination.id,
-      address: selectedAddress.id || warehouse.address,
+      courier_service: selectedCourier || warehouse.courier_service,
+      warehouse: selectedWarehouse,
+      country_of_origin: selectedOrigin,
+      country_of_destination: selectedDestination,
+      address: selectedAddress || warehouse.address,
       comments: comments,
     };
 
@@ -136,33 +140,54 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
             <div className={s.first_input_block}>
               <div>
                 <label htmlFor="origin">Страна отправки</label>
-                <CustomSelect
-                  options={countries}
-                  selectedOption={selectedOrigin}
-                  onChange={setSelectedOrigin}
-                  span={selectedOrigin?.name || "Выберите страну отправки"}
-                />
+                <select
+                  id="origin"
+                  value={selectedOrigin}
+                  onChange={(e) => setSelectedOrigin(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Выберите страну отправки
+                  </option>
+                  {countries.map((country) => (
+                    <option key={country.id} value={country.id}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label htmlFor="destination">Страна прибытия</label>
-                <CustomSelect
-                  options={countriess}
-                  selectedOption={selectedDestination}
-                  onChange={setSelectedDestination}
-                  span={selectedDestination?.name || "Выберите страну прибытия"}
-                />
+                <select
+                  id="destination"
+                  value={selectedDestination}
+                  onChange={(e) => setSelectedDestination(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Выберите страну прибытия
+                  </option>
+                  {countriess.map((country) => (
+                    <option key={country.id} value={country.id}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label htmlFor="address">Адрес назначения</label>
-                <CustomSelect
-                  options={userData?.results?.map((address) => ({
-                    id: address.id,
-                    name: address.address,
-                  }))}
-                  selectedOption={selectedAddress}
-                  onChange={setSelectedAddress}
-                  span={selectedAddress?.address || "Выберите адрес"}
-                />
+                <select
+                  id="address"
+                  value={selectedAddress}
+                  onChange={(e) => setSelectedAddress(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Выберите адрес
+                  </option>
+                  {userData?.results?.map((address) => (
+                    <option key={address.id} value={address.id}>
+                      {address.address}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label htmlFor="tracking_number">Трeк-код</label>
@@ -176,12 +201,20 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
               </div>
               <div>
                 <label htmlFor="courier_service">Курьерская служба</label>
-                <CustomSelect
-                  options={deliveryServices}
-                  selectedOption={selectedCourier}
-                  onChange={setSelectedCourier}
-                  span={selectedCourier?.name || "Курьерская служба"}
-                />
+                <select
+                  id="courier_service"
+                  value={selectedCourier}
+                  onChange={(e) => setSelectedCourier(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Курьерская служба
+                  </option>
+                  {deliveryServices.map((service) => (
+                    <option key={service.id} value={service.id}>
+                      {service.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className={s.input}>

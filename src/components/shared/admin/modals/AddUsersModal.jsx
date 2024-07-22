@@ -29,6 +29,7 @@ export default function AddUsersModal() {
     password: false,
     password2: false,
   });
+  const [successModal, setSuccessModal] = useState(false);
 
   const validateForm = () => {
     const errors = {};
@@ -117,6 +118,10 @@ export default function AddUsersModal() {
         back_image: "",
       });
       setImagePreviews({});
+      setSuccessModal(true);
+      setTimeout(() => {
+        setSuccessModal(false);
+      }, 3000);
     } else {
       setFormErrors(errors);
     }
@@ -150,7 +155,6 @@ export default function AddUsersModal() {
     }));
     closeImageModal();
   };
-
   return (
     <div className={s.modal}>
       <button onClick={toggleModal} className={s.add_btn}>
@@ -329,6 +333,11 @@ export default function AddUsersModal() {
             )
           }
         />
+      )}
+      {successModal && (
+        <div className={s.success_modal}>
+          <p>Пользователь успешно добавлен!</p>
+        </div>
       )}
     </div>
   );

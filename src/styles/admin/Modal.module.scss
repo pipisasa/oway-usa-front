@@ -373,6 +373,42 @@
     line-height: 140%;
   }
 }
+
+.success_modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #dff0d8;
+  color: #3c763d;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.custom-file-upload {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  img {
+    margin-right: 10px;
+  }
+
+  span {
+    color: #007bff;
+    text-decoration: underline;
+  }
+}
 @media (max-width: 768px) {
   .modal {
     h4 {
