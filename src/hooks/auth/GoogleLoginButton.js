@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID;
 
 const GoogleLoginButton = () => {
   const [token, setToken] = useState(null);
@@ -50,7 +51,7 @@ const GoogleLoginButton = () => {
   };
 
   return (
-    <GoogleOAuthProvider clientId="1093979259932-crrapug660vsftv9pclko1o2nata4kgu.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
     </GoogleOAuthProvider>
   );
