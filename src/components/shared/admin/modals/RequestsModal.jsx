@@ -12,8 +12,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import ImageModal from "@/components/shared/admin/modals/ImageModal";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 export default function RequestsModal({ data, onClose }) {
   const { updateRequest } = useRequests();

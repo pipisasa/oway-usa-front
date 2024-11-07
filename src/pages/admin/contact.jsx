@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import s from "@/styles/pages/user/UserWarehouses.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
 import useContacts from "@/hooks/useContacts";
+import { API_URL } from "@/constants";
 
 export default function ContactsAdmin() {
   const [isAuthorized, setIsAuthorized] = useState(null);
@@ -96,10 +97,7 @@ export default function ContactsAdmin() {
           <div key={index} className={s.address_card}>
             <div className={s.card_header}>
               <div>
-                <img
-                  src={`https://api-owayusa.com/${data.image}`}
-                  alt={data.title}
-                />
+                <img src={`${API_URL}/${data.image}`} alt={data.title} />
                 <h3>Пункты приема в {data.name}:</h3>
               </div>
               <button

@@ -1,8 +1,7 @@
 import { getCookie } from "@/utils/cookieHelpers";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 const useUserData = () => {
   const [userData, setUserData] = useState(null);

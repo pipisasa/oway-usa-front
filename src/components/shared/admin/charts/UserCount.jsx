@@ -10,7 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import s from "@/styles/admin/UserCount.module.scss";
-import { getCookie } from "@/utils/cookieHelpers";
+import { baseAxios } from "../../../../utils/baseAxios";
 
 ChartJS.register(
   CategoryScale,
@@ -54,16 +54,7 @@ export default function UserCount() {
   }, [activePeriod]);
 
   const fetchData = async (period) => {
-    const accessToken = getCookie("accessToken");
-    const response = await fetch(
-      `https://api-owayusa.com/api/statics/admin_panel/users/`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    const data = await response.json();
+    const { data } = await baseAxios.get("/statics/admin_panel/users/");
     updateChartData(data, period);
   };
 

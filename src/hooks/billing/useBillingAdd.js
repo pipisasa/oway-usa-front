@@ -1,8 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { getCookie } from "../../utils/cookieHelpers";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 export const useBillingAdd = () => {
   const [isLoading, setIsLoading] = useState(false);

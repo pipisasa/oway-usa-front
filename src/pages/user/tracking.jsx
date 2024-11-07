@@ -11,6 +11,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
+import { API_URL } from "@/constants";
 
 export default function TrackingPage() {
   const [trackingNumber, setTrackingNumber] = useState("");
@@ -40,7 +41,7 @@ export default function TrackingPage() {
 
     try {
       const response = await axios.get(
-        `https://api-owayusa.com/api/warehouses/product/get/${trackingNumber}/`
+        `${API_URL}/api/warehouses/product/get/${trackingNumber}/`
       );
       setStatus(response.data);
       onOpen();

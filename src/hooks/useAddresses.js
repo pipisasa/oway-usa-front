@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 export const useAddresses = () => {
   const [addressList, setAddressList] = useState([]);
@@ -19,16 +20,13 @@ export const useAddresses = () => {
     const token = getCookie("accessToken");
 
     try {
-      const response = await fetch(
-        "https://api-owayusa.com/api/address/list/",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/address/list/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -45,16 +43,13 @@ export const useAddresses = () => {
     const token = getCookie("accessToken");
 
     try {
-      const response = await fetch(
-        `https://api-owayusa.com/api/address/get/${id}/`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/address/get/${id}/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -79,17 +74,14 @@ export const useAddresses = () => {
     const token = getCookie("accessToken");
 
     try {
-      const response = await fetch(
-        "https://api-owayusa.com/api/address/create/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/address/create/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         toggleCreateModal();
@@ -108,17 +100,14 @@ export const useAddresses = () => {
     const token = getCookie("accessToken");
 
     try {
-      const response = await fetch(
-        `https://api-owayusa.com/api/address/update/${editId}/`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/address/update/${editId}/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         toggleEditModal();
@@ -136,15 +125,12 @@ export const useAddresses = () => {
     const token = getCookie("accessToken");
 
     try {
-      const response = await fetch(
-        `https://api-owayusa.com/api/address/delete/${id}/`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/address/delete/${id}/`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         toggleDeleteModal();

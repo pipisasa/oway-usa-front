@@ -3,6 +3,7 @@ import s from "@/styles/components/shared/UsersProductTable.module.scss";
 import { Pagination } from "@nextui-org/react";
 import useWarehousesUser from "@/hooks/user/useWarehousesUser";
 import OnTheWayModal from "../../admin/modals/OnTheWayModal";
+import { API_URL } from "@/constants";
 
 export default function Delivered() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,7 +58,7 @@ export default function Delivered() {
                   <td>
                     <img
                       width={64}
-                      src={`https://api-owayusa.com${item.image}`}
+                      src={`${API_URL}${item.image}`}
                       alt="product img"
                     />
                   </td>

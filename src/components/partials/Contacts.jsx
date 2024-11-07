@@ -6,7 +6,6 @@ import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
 export default function Contacts() {
   const [isAuthorized, setIsAuthorized] = useState(null);
-  const { contacts, loading, error } = useContacts();
   const [selected, setSelected] = useState("usa");
 
   useEffect(() => {

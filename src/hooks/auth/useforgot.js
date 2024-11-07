@@ -1,8 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 export const useForgot = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +11,7 @@ export const useForgot = () => {
   const sendCodeToEmail = async (email) => {
     try {
       const response = await axios.post(
-        `https://api-owayusa.com/api/users/forgot_pass_send_activation_code/`,
+        `${API_URL}/api/users/forgot_pass_send_activation_code/`,
         { email }
       );
     } catch (error) {

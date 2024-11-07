@@ -5,6 +5,7 @@ import useWarehouses from "@/hooks/user/useWarehouses";
 import { useAddresses } from "@/hooks/useAddresses";
 import CustomSelect from "@/components/partials/Select";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 export default function MyWarehousesModal({ UserId }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ export default function MyWarehousesModal({ UserId }) {
   const fetchUserData = async (userId) => {
     try {
       const response = await fetch(
-        `https://api-owayusa.com/api/address/list/?user=${userId}`,
+        `${API_URL}/api/address/list/?user=${userId}`,
         {
           method: "GET",
           headers: {

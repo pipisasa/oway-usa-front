@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 const axiosInstance = axios.create({
   baseURL: `${API_URL}/api/add_user_for_admin/`,
@@ -102,7 +102,7 @@ const useUsersAdmin = (currentPage, initialFilters) => {
     setError(null);
 
     try {
-      await axios.put(`https://api-owayusa.com/api/users/delete/`, ids, {
+      await axios.put(`${API_URL}/api/users/delete/`, ids, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

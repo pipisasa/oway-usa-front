@@ -4,8 +4,7 @@ import { Pagination } from "@nextui-org/react";
 import useWarehousesUser from "@/hooks/user/useWarehousesUser";
 import OnTheWayModal from "../../admin/modals/OnTheWayModal";
 import ImageModal from "../../admin/modals/ImageModal";
-
-const PAGE_SIZE = 5;
+import { API_URL } from "@/constants";
 
 export default function OnTheWay() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +25,7 @@ export default function OnTheWay() {
   };
 
   const handleImageClick = (src) => {
-    setCurrentImageSrc(`https://api-owayusa.com${src}`);
+    setCurrentImageSrc(`${API_URL}${src}`);
     setIsImageModalVisible(true);
   };
 
@@ -64,7 +63,7 @@ export default function OnTheWay() {
                 <td>
                   <img
                     width={64}
-                    src={`https://api-owayusa.com${item.image}`}
+                    src={`${API_URL}${item.image}`}
                     alt="product img"
                     onClick={() => handleImageClick(item.image)}
                     style={{ cursor: "pointer" }}

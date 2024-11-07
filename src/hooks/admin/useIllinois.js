@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-// import Form from "./Form";
-import Illinois from "@/pages/size-chart/Illinois";
+import { API_URL } from "@/constants";
 
 function useIllinois() {
   const [formData, setFormData] = useState({
@@ -22,7 +21,7 @@ function useIllinois() {
 
     try {
       const response = await axios.post(
-        "https://api-owayusa.com/api/otside_of_illinois/add/",
+        `${API_URL}/api/otside_of_illinois/add/`,
         formData
       );
     } catch (error) {

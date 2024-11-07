@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 const useContacts = () => {
   const [contacts, setContacts] = useState([]);
@@ -11,9 +12,7 @@ const useContacts = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await axios.get(
-          "https://api-owayusa.com/api/contacts/list/"
-        );
+        const response = await axios.get(`${API_URL}/api/contacts/list/`);
         setContacts(response.data);
       } catch (err) {
         setError(err);
@@ -27,7 +26,7 @@ const useContacts = () => {
 
   const deleteContact = async (id) => {
     try {
-      await axios.delete(`https://api-owayusa.com/api/contacts/delete/${id}/`, {
+      await axios.delete(`${API_URL}/api/contacts/delete/${id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -45,7 +44,7 @@ const useContacts = () => {
   const updateContact = async (id, updatedData) => {
     try {
       const response = await axios.patch(
-        `https://api-owayusa.com/api/contacts/update/${id}/`,
+        `${API_URL}/api/contacts/update/${id}/`,
         updatedData,
         {
           headers: {

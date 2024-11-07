@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 const useRequests = (currentPage, initialFilters) => {
   const [data, setData] = useState({ results: [], count: 0 });

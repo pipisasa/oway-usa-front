@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 const useLogo = () => {
   const [logos, setLogos] = useState([]);
@@ -9,7 +10,7 @@ const useLogo = () => {
   const fetchLogos = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("https://api-owayusa.com/api/logos/list/");
+      const response = await fetch(`${API_URL}/api/logos/list/`);
       const data = await response.json();
       if (response.ok) {
         setLogos(data);
@@ -32,7 +33,7 @@ const useLogo = () => {
     formData.append("logo", file);
 
     try {
-      const response = await fetch("https://api-owayusa.com/api/logos/add/", {
+      const response = await fetch(`${API_URL}/api/logos/add/`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -63,7 +64,7 @@ const useLogo = () => {
 
     try {
       const response = await fetch(
-        `https://api-owayusa.com/api/logos/update_delete/${id}/`,
+        `${API_URL}/api/logos/update_delete/${id}/`,
         {
           method: "PATCH",
           headers: {
@@ -92,7 +93,7 @@ const useLogo = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://api-owayusa.com/api/logos/update_delete/${id}/`,
+        `${API_URL}/api/logos/update_delete/${id}/`,
         {
           method: "DELETE",
           headers: {

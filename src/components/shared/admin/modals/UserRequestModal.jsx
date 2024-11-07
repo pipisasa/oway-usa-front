@@ -3,8 +3,7 @@ import s from "@/styles/admin/RequestsModal.module.scss";
 import { RxCross1 } from "react-icons/rx";
 import useRequests from "@/hooks/admin/useRequests";
 import ImageModal from "./ImageModal";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 export default function UserRequestsModal({ data, onClose }) {
   const { updateRequest } = useRequests();

@@ -4,6 +4,7 @@ import c from "@/styles/admin/WarehouseProductsModal.module.scss";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
 import SearchSelect from "@/components/partials/SearchSelect";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 export default function Step3({
   handleChange,
@@ -37,7 +38,7 @@ export default function Step3({
   const fetchUserAddresses = async (userId) => {
     try {
       const response = await fetch(
-        `https://api-owayusa.com/api/address/list/?user=${userId}`,
+        `${API_URL}/api/address/list/?user=${userId}`,
         {
           method: "GET",
           headers: {

@@ -1,30 +1,21 @@
-import { getCookie } from "@/utils/cookieHelpers";
 import React, { useState } from "react";
+import { baseAxios } from "../../utils/baseAxios";
+import { useQuery } from "@tanstack/react-query";
 
 function UserSearch() {
   const [query, setQuery] = useState("");
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
 
-  const handleSearch = async () => {
-    const accessToken = getCookie("accessToken");
-    setLoading(true);
-    const response = await fetch(
-      `https://api-owayusa.com/api/add_user_for_admin/list/?unique_id=${query}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+  const { data, isLoading } = useQuery({
+    queryFn: async () => {
+      const { data } = await baseAxios.get(`/add_user_for_admin/list/`, {
+        params: {
+          unique_id: query,
         },
-      }
-    );
-    if (response.ok) {
-      const data = await response.json();
-      setUsers(data.results);
-    } else {
-      alert("Failed to fetch users");
-    }
-    setLoading(false);
-  };
+      });
+      return data;
+    },
+    queryKey: ["users-search", { query }],
+  });
 
   return (
     <div>
@@ -34,11 +25,10 @@ function UserSearch() {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Enter unique ID"
       />
-      <button onClick={handleSearch} disabled={loading}>
-        {loading ? "Searching..." : "Search"}
-      </button>
+      {isLoading && <p>Searching...</p>}
+      {!isLoading && !data && <p>No results</p>}
       <ul>
-        {users?.map((user) => (
+        {data?.results?.map((user) => (
           <li key={user.id}>{user.first_name}</li>
         ))}
       </ul>

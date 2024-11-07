@@ -11,6 +11,7 @@ import {
   Filler,
 } from "chart.js";
 import s from "@/styles/admin/LineChart.module.scss";
+import { baseAxios } from "../../../../utils/baseAxios";
 
 ChartJS.register(
   CategoryScale,
@@ -21,12 +22,6 @@ ChartJS.register(
   Tooltip,
   Filler
 );
-
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-}
 
 export default function ImportedProducts() {
   const [activePeriod, setActivePeriod] = useState("month");
@@ -77,14 +72,14 @@ export default function ImportedProducts() {
   }, [activePeriod, currentCountry]);
 
   const fetchData = async (period, countryId) => {
-    const accessToken = getCookie("accessToken");
-    const url = `https://api-owayusa.com/api/statics/admin_panel/warehouse-delivered/?country=${countryId}`;
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const data = await response.json();
+    const { data } = await baseAxios.get(
+      "/statics/admin_panel/warehouse-delivered/",
+      {
+        params: {
+          country: countryId,
+        },
+      }
+    );
     updateChartData(data, period);
   };
 

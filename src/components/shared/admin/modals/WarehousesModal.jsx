@@ -14,8 +14,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { useAddresses } from "@/hooks/useAddresses";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 export default function WarehousesModal({ onClose, warehouse }) {
   const {

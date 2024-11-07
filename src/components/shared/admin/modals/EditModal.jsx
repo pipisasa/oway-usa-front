@@ -3,8 +3,7 @@ import axios from "axios";
 import s from "@/styles/components/shared/modals/EditModal.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
 import Arrow from "../../ui/Arrow";
-
-const API_URL = "https://api-owayusa.com";
+import { API_URL } from "@/constants";
 
 const statusOptions = [
   { id: 6, name: "Получен, готов к отправке" },

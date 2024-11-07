@@ -7,6 +7,7 @@ import { useMainWarehouses } from "@/hooks/admin/warehouses/useWarehouses";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 const InputField = memo(function InputField({
   label,
@@ -84,7 +85,7 @@ export default function EditWarehouses({ warehouse }) {
       }
 
       const response = await axios.post(
-        "https://api-owayusa.com/api/contacts/create/",
+        `${API_URL}/api/contacts/create/`,
         formDataToSend,
         {
           headers: {

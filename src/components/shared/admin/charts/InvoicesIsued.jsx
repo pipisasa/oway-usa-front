@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import s from "@/styles/admin/UserCount.module.scss";
 import { getCookie } from "@/utils/cookieHelpers";
+import { baseAxios } from "../../../../utils/baseAxios";
 
 ChartJS.register(
   CategoryScale,
@@ -55,16 +56,14 @@ export default function InvoicesIssued() {
   }, [activePeriod, currentCountry]);
 
   const fetchData = async (period, countryId) => {
-    const accessToken = getCookie("accessToken");
-    const response = await fetch(
-      `https://api-owayusa.com/api/statics/admin_panel/warehouse-paid/?country=${countryId}`,
+    const { data } = await baseAxios.get(
+      "/statics/admin_panel/warehouse-paid/",
       {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+        params: {
+          country: countryId,
         },
       }
     );
-    const data = await response.json();
     updateChartData(data, period);
   };
 

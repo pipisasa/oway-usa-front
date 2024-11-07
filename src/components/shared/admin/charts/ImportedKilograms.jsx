@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -11,6 +11,8 @@ import {
   Filler,
 } from "chart.js";
 import s from "@/styles/admin/LineChart.module.scss";
+import { baseAxios } from "@/utils/baseAxios";
+import { useQuery } from "@tanstack/react-query";
 
 ChartJS.register(
   CategoryScale,
@@ -22,81 +24,106 @@ ChartJS.register(
   Filler
 );
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-}
+const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+    tooltip: {
+      enabled: true,
+      mode: "index",
+      intersect: false,
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        drawBorder: false,
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        drawBorder: true,
+        display: true,
+      },
+      beginAtZero: true,
+    },
+  },
+  interaction: {
+    mode: "nearest",
+    axis: "x",
+    intersect: false,
+  },
+};
+
+const monthNames = {
+  "01": "янв",
+  "02": "фев",
+  "03": "мар",
+  "04": "апр",
+  "05": "май",
+  "06": "июн",
+  "07": "июл",
+  "08": "авг",
+  "09": "сен",
+  10: "окт",
+  11: "ноя",
+  12: "дек",
+};
+
+const formatLabel = (label, period) => {
+  if (period === "today") {
+    return `${label}:00`;
+  } else {
+    const [year, month, day] = label.split("-");
+    return `${parseInt(day, 10)} ${monthNames[month]}`;
+  }
+};
 
 export default function ImportedKilograms() {
   const [activePeriod, setActivePeriod] = useState("month");
-  const [percentageChange, setPercentageChange] = useState(0);
-  const [currentCountry, setCurrentCountry] = useState(3);
+  const [currentCountry, setCurrentCountry] = useState(null);
 
-  const [chartData, setChartData] = useState({
-    labels: [],
-    datasets: [
-      {
-        label: "Кг было провезено",
-        data: [],
-        fill: true,
-        backgroundColor: "rgba(2, 125, 219, 0.2)",
-        borderColor: "rgba(2, 125, 219, 1)",
-        pointBackgroundColor: "rgba(2, 125, 219, 1)",
-        pointBorderColor: "#fff",
-        tension: 0.4,
-      },
-    ],
+  const { data, isLoading } = useQuery({
+    queryFn: async () => {
+      const { data } = await baseAxios.get(
+        "/statics/admin_panel/warehouse-weight/",
+        {
+          params: {
+            country: currentCountry,
+          },
+        }
+      );
+      return data;
+    },
+    queryKey: ["warehouses-weight", { currentCountry }],
   });
 
-  const monthNames = {
-    "01": "янв",
-    "02": "фев",
-    "03": "мар",
-    "04": "апр",
-    "05": "май",
-    "06": "июн",
-    "07": "июл",
-    "08": "авг",
-    "09": "сен",
-    10: "окт",
-    11: "ноя",
-    12: "дек",
-  };
+  const selectedPeriodData = data[activePeriod];
 
-  const formatLabel = (label, period) => {
-    if (period === "today") {
-      return `${label}:00`;
-    } else {
-      const [year, month, day] = label.split("-");
-      return `${parseInt(day, 10)} ${monthNames[month]}`;
+  const chartData = useMemo(() => {
+    if (!selectedPeriodData) {
+      return {
+        labels: [],
+        datasets: [
+          {
+            label: "Кг было провезено",
+            data: [],
+            fill: true,
+            backgroundColor: "rgba(2, 125, 219, 0.2)",
+            borderColor: "rgba(2, 125, 219, 1)",
+            pointBackgroundColor: "rgba(2, 125, 219, 1)",
+            pointBorderColor: "#fff",
+            tension: 0.4,
+          },
+        ],
+      };
     }
-  };
 
-  useEffect(() => {
-    fetchData(activePeriod, currentCountry);
-  }, [activePeriod, currentCountry]);
-
-  const fetchData = async (period, countryId) => {
-    const accessToken = getCookie("accessToken");
-    const url = `https://api-owayusa.com/api/statics/admin_panel/warehouse-weight/?country=${countryId}`;
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const data = await response.json();
-    updateChartData(data, period);
-  };
-
-  const handleCountryChange = (countryId) => {
-    setCurrentCountry(countryId);
-  };
-
-  const updateChartData = (data, period) => {
-    const periodData = data[period];
-    const labels = Object?.keys(periodData);
-    const values = Object.values(periodData);
+    const labels = Object?.keys(selectedPeriodData);
+    const values = Object.values(selectedPeriodData);
 
     const currentTotal = values.reduce((a, b) => a + b, 0);
     const previousTotal = chartData.datasets[0].data.reduce((a, b) => a + b, 0);
@@ -105,10 +132,10 @@ export default function ImportedKilograms() {
       previousTotal > 0
         ? ((currentTotal - previousTotal) / previousTotal) * 100
         : 0;
-    setPercentageChange(change.toFixed(2));
 
-    setChartData({
+    return {
       ...chartData,
+      change,
       labels: labels.map((label) => formatLabel(label, period)),
       datasets: [
         {
@@ -116,46 +143,8 @@ export default function ImportedKilograms() {
           data: values,
         },
       ],
-    });
-  };
-
-  const handlePeriodClick = (period) => {
-    setActivePeriod(period);
-  };
-
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        enabled: true,
-        mode: "index",
-        intersect: false,
-      },
-    },
-    scales: {
-      x: {
-        grid: {
-          drawBorder: false,
-          display: false,
-        },
-      },
-      y: {
-        grid: {
-          drawBorder: true,
-          display: true,
-        },
-        beginAtZero: true,
-      },
-    },
-    interaction: {
-      mode: "nearest",
-      axis: "x",
-      intersect: false,
-    },
-  };
+    };
+  }, [selectedPeriodData]);
 
   return (
     <div className={s.chart_container}>
@@ -164,14 +153,14 @@ export default function ImportedKilograms() {
         <div className={s.country}>
           <button
             className={currentCountry === 3 ? s.active : s.not_active}
-            onClick={() => handleCountryChange(3)}
+            onClick={() => setCurrentCountry(3)}
           >
             <img src="/assets/icons/usa.svg" alt="USA" />
             США
           </button>
           <button
             className={currentCountry === 4 ? s.active : s.not_active}
-            onClick={() => handleCountryChange(4)}
+            onClick={() => setCurrentCountry(4)}
           >
             <img src="/assets/icons/turkey.svg" alt="Turkey" />
             Турция
@@ -181,24 +170,24 @@ export default function ImportedKilograms() {
       <div className={s.line}></div>
       <div className={s.chart_nav}>
         <div className={s.percentage}>
-          <span>{percentageChange}%</span>
+          <span>{chartData.change.toFixed(2)}%</span>
         </div>
         <div className={s.date_btn}>
           <button
             className={activePeriod === "today" ? s.active : s.not_active}
-            onClick={() => handlePeriodClick("today")}
+            onClick={() => setActivePeriod("today")}
           >
             Сегодня
           </button>
           <button
             className={activePeriod === "week" ? s.active : s.not_active}
-            onClick={() => handlePeriodClick("week")}
+            onClick={() => setActivePeriod("week")}
           >
             Неделя
           </button>
           <button
             className={activePeriod === "month" ? s.active : s.not_active}
-            onClick={() => handlePeriodClick("month")}
+            onClick={() => setActivePeriod("month")}
           >
             Месяц
           </button>

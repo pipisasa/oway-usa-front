@@ -5,6 +5,7 @@ import TableTabs from "@/components/shared/users/tabs/TableTabs";
 import Delivered from "@/components/shared/users/tabs/Delivered";
 import useUserData from "@/hooks/user/useUserData";
 import Loading from "@/components/shared/admin/Loading";
+import { API_URL } from "@/constants";
 
 export default function UserMainPage() {
   const [activeTab, setActiveTab] = useState("onTheWay");
@@ -24,7 +25,7 @@ export default function UserMainPage() {
           ?.split("=")[1];
 
         const response = await fetch(
-          `https://api-owayusa.com/api/address/list/?user=${userId}`,
+          `${API_URL}/api/address/list/?user=${userId}`,
           {
             method: "GET",
             headers: {

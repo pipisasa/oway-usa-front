@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import s from "@/styles/screens/main/Search.module.scss";
 import useSites from "@/hooks/useSites";
-import Link from "next/link"
+import Link from "next/link";
 
 export default function Search() {
   const [searchQuery, setSearchQuery] = useState("");
   const { sites, isLoading, error } = useSites();
 
-  const filteredSites = sites.filter(site =>
+  const filteredSites = sites.filter((site) =>
     site.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleSearchInputChange = event => {
+  const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
   return (
@@ -27,13 +27,19 @@ export default function Search() {
               value={searchQuery}
               onChange={handleSearchInputChange}
             />
-            {searchQuery && filteredSites.length > 0 && filteredSites.map(site => (
-              <Link href={site.url} target="_blank" key={site.id} className={s.poisk}> <span>
-                {/* <img src={`https://api-owayusa.com/${site.icon}`} alt="as" />  */}
-                {site.name}
-              </span>
-              </Link>
-            ))}
+            {searchQuery &&
+              filteredSites.length > 0 &&
+              filteredSites.map((site) => (
+                <Link
+                  href={site.url}
+                  target="_blank"
+                  key={site.id}
+                  className={s.poisk}
+                >
+                  {" "}
+                  <span>{site.name}</span>
+                </Link>
+              ))}
             {isLoading && <div>Loading...</div>}
             {error && <div>Error: {error.message}</div>}
             <span>Например apple, samsung или zara</span>

@@ -6,8 +6,7 @@ import RequestsModal from "@/components/shared/admin/modals/RequestsModal";
 import Loading from "@/components/shared/admin/Loading";
 import ImageModal from "@/components/shared/admin/modals/ImageModal";
 import RequestsAdminSearch from "@/components/partials/requestsSelect/RequestsAdminSearch";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 export default function IncommingRequests() {
   const [currentPage, setCurrentPage] = useState(1);

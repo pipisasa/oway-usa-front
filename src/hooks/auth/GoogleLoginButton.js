@@ -4,9 +4,7 @@ import { setCookie } from "@/utils/cookieHelpers";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import axios from "axios";
 import { useRouter } from "next/router";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID;
+import { API_URL, GOOGLE_CLIENT_ID } from "@/constants";
 
 const GoogleLoginButton = () => {
   const [token, setToken] = useState(null);

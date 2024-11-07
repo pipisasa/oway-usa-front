@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import s from "@/styles/admin/RequestsModal.module.scss";
 import { RxCross1 } from "react-icons/rx";
 import ImageModal from "./ImageModal";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 export default function OnTheWayModal({ data, onClose }) {
   const [isImageModalVisible, setIsImageModalVisible] = useState(false);

@@ -4,6 +4,7 @@ import Modal from "../../Modal";
 import useWarehouses from "@/hooks/user/useWarehouses";
 import { useAddresses } from "@/hooks/useAddresses";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
   const [trackingNumber, setTrackingNumber] = useState("");
@@ -25,7 +26,7 @@ export default function MyWarehousesEditModal({ isOpen, onClose, warehouse }) {
     async (userId) => {
       try {
         const response = await fetch(
-          `https://api-owayusa.com/api/address/list/?user=${userId}`,
+          `${API_URL}/api/address/list/?user=${userId}`,
           {
             method: "GET",
             headers: {

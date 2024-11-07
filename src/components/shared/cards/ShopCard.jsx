@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import s from "@/styles/components/shared/cards/ShopCard.module.scss";
 import Link from "next/link";
+import { API_URL } from "@/constants";
 
 export default function ShopCard({ shop, onEdit, onDelete }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -25,7 +26,7 @@ export default function ShopCard({ shop, onEdit, onDelete }) {
   return (
     <div className={s.card}>
       <div className={s.cards_img}>
-        <img src={`https://api-owayusa.com/${shop?.logo}`} alt={shop.name} />
+        <img src={`${API_URL}/${shop?.logo}`} alt={shop.name} />
       </div>
       <div className={s.card_text}>
         <Link target={shop?.url ? "_blank" : ""} href={shop?.url || ""}>

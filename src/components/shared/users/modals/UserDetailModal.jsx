@@ -3,6 +3,7 @@ import s from "@/styles/pages/admin/AdminUsersPage.module.scss";
 import { RxCross2 } from "react-icons/rx";
 import Modal from "../../Modal";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 export default function UserDetailModal({ userData, close }) {
   const [imagePreviews, setImagePreviews] = useState({});
@@ -47,7 +48,7 @@ export default function UserDetailModal({ userData, close }) {
       formData.append(type, file);
 
       const response = await fetch(
-        `https://api-owayusa.com/api/users/profile/${userData.id}/`,
+        `${API_URL}/api/users/profile/${userData.id}/`,
         {
           method: "PATCH",
           headers: {
@@ -82,7 +83,7 @@ export default function UserDetailModal({ userData, close }) {
     }
 
     const response = await fetch(
-      `https://api-owayusa.com/api/users/profile/${userData.id}/`,
+      `${API_URL}/api/users/profile/${userData.id}/`,
       {
         method: "PATCH",
         headers: {
@@ -125,7 +126,7 @@ export default function UserDetailModal({ userData, close }) {
     try {
       const token = getCookie("accessToken");
       const response = await fetch(
-        `https://api-owayusa.com/api/address/list/?user=${userData.id}`,
+        `${API_URL}/api/address/list/?user=${userData.id}`,
         {
           method: "GET",
           headers: {
@@ -329,7 +330,7 @@ export default function UserDetailModal({ userData, close }) {
                   src={
                     viewImage instanceof File
                       ? URL.createObjectURL(imagePreviews)
-                      : `https://api-owayusa.com${viewImage}`
+                      : `${API_URL}${viewImage}`
                   }
                   alt="Image Ptrytyrtyrtreview"
                 />

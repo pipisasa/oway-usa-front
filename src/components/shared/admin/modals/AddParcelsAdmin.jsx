@@ -10,6 +10,7 @@ import { useAddresses } from "@/hooks/useAddresses";
 import useWarehousesFull from "@/hooks/admin/useWarehousesFull";
 import SearchSelect from "@/components/partials/SearchSelect";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 export default function AddParcelsAdmin() {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +62,7 @@ export default function AddParcelsAdmin() {
   const fetchUserData = async (userId) => {
     try {
       const response = await fetch(
-        `https://api-owayusa.com/api/address/list/?user=${userId}`,
+        `${API_URL}/api/address/list/?user=${userId}`,
         {
           method: "GET",
           headers: {

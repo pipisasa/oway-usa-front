@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
-
-const API_URL = "https://api-owayusa.com/api/otside_of_illinois";
+import { API_URL } from "@/constants";
 
 export const useIllinois = () => {
   const [data, setData] = useState([]);
@@ -17,11 +16,14 @@ export const useIllinois = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${API_URL}/list/`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        const response = await axios.get(
+          `${API_URL}/api/otside_of_illinois/list/`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
 
         setData(response.data.results || []);
         setError(null);
@@ -38,7 +40,7 @@ export const useIllinois = () => {
   const updateData = async (updatedData) => {
     try {
       await axios.put(
-        `${API_URL}/update_delete/${currentItem.id}/`,
+        `${API_URL}/api/otside_of_illinois/update_delete/${currentItem.id}/`,
         updatedData,
         {
           headers: {
@@ -55,11 +57,14 @@ export const useIllinois = () => {
 
   const deleteData = async (id) => {
     try {
-      await axios.delete(`${API_URL}/update_delete/${id}/`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      await axios.delete(
+        `${API_URL}/api/otside_of_illinois/update_delete/${id}/`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       setDeleteModalOpen(false);
       window.location.reload();
     } catch (err) {

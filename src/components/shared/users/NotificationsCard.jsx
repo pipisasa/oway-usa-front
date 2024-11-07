@@ -1,5 +1,6 @@
 import React from "react";
 import s from "@/styles/components/shared/UserNotificationsCard.module.scss";
+import { API_URL } from "@/constants";
 
 export default function NotificationsCard({ notification }) {
   return (
@@ -7,7 +8,7 @@ export default function NotificationsCard({ notification }) {
       <div className={s.card_title}>
         <div className={s.ntf_img}>
           <img
-            src={`https://api-owayusa.com${notification?.notification?.icon}`}
+            src={`${API_URL}${notification?.notification?.icon}`}
             alt="Иконка уведомления"
           />
         </div>

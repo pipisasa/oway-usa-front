@@ -4,8 +4,7 @@ import { Pagination } from "@nextui-org/react";
 import Loading from "@/components/shared/admin/Loading";
 import useMyRequests from "@/hooks/user/useMyRequest";
 import UserRequestsModal from "@/components/shared/admin/modals/UserRequestModal";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 export default function IncommingRequests() {
   const [currentPage, setCurrentPage] = useState(1);

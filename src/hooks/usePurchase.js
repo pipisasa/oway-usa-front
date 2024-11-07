@@ -1,7 +1,6 @@
 import { getCookie } from "@/utils/cookieHelpers";
 import { useState } from "react";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from "@/constants";
 
 const usePurchase = () => {
   const initialState = {

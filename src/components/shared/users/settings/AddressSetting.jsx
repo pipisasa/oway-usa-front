@@ -6,6 +6,7 @@ import DeleteModal from "./DeleteModal";
 import { useAddresses } from "@/hooks/useAddresses";
 import { useModal } from "@/hooks/useModal";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 export default function AddressSetting({ UserId }) {
   const {
@@ -38,7 +39,7 @@ export default function AddressSetting({ UserId }) {
   const fetchUserData = async (userId) => {
     try {
       const response = await fetch(
-        `https://api-owayusa.com/api/address/list/?user=${userId}`,
+        `${API_URL}/api/address/list/?user=${userId}`,
         {
           method: "GET",
           headers: {

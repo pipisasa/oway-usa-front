@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 const useWarehouses = (currentPage) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState([]);
-
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const fetchWarehouses = async () => {
     setIsLoading(true);

@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 const useUserWarehouses = (initialFilters = {}) => {
   const [warehouses, setWarehouses] = useState([]);
@@ -17,7 +18,7 @@ const useUserWarehouses = (initialFilters = {}) => {
     try {
       const accessToken = getCookie("accessToken");
       const response = await axios.get(
-        "https://api-owayusa.com/api/my_warehouse/list_for_admin/",
+        `${API_URL}/api/my_warehouse/list_for_admin/`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -36,10 +37,9 @@ const useUserWarehouses = (initialFilters = {}) => {
   const deleteWarehouse = async (id) => {
     try {
       const accessToken = getCookie("accessToken");
-      await axios.delete(
-        `https://api-owayusa.com/api/my_warehouse/delete/${id}/`,
-        { headers: { Authorization: `Bearer ${accessToken}` } }
-      );
+      await axios.delete(`${API_URL}/api/my_warehouse/delete/${id}/`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
       setWarehouses((currentWarehouses) =>
         currentWarehouses.filter((warehouse) => warehouse.id !== id)
       );

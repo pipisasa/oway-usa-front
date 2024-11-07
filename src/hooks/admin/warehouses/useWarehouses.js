@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 export const useMainWarehouses = () => {
   const [warehouses, setWarehouses] = useState([]);
@@ -11,15 +12,12 @@ export const useMainWarehouses = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(
-        "https://api-owayusa.com/api/warehouses/list/",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/warehouses/list/`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       if (!response.ok) throw new Error("Не удалось загрузить данные складов");
       const data = await response.json();
       setWarehouses(data.results);
@@ -33,17 +31,14 @@ export const useMainWarehouses = () => {
   const createWarehouse = async (warehouseData) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        "https://api-owayusa.com/api/warehouses/create/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify(warehouseData),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/warehouses/create/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(warehouseData),
+      });
       if (!response.ok) throw new Error("Ошибка при создании склада");
       await fetchWarehouses();
       window.location.reload();
@@ -57,17 +52,14 @@ export const useMainWarehouses = () => {
   const updateWarehouse = async (id, warehouseData) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://api-owayusa.com/api/warehouses/update/${id}/`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify(warehouseData),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/warehouses/update/${id}/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(warehouseData),
+      });
       if (!response.ok) throw new Error("Ошибка при обновлении склада");
       await fetchWarehouses();
       window.location.reload();
@@ -81,15 +73,12 @@ export const useMainWarehouses = () => {
   const deleteWarehouse = async (id) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://api-owayusa.com/api/warehouses/delete/${id}/`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/warehouses/delete/${id}/`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       await fetchWarehouses();
       window.location.reload();
     } catch (error) {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 const useBulletinBoardCategory = () => {
   const [bulletins1, setBulletins] = useState([]);
@@ -14,7 +15,7 @@ const useBulletinBoardCategory = () => {
     try {
       const accessToken = getCookie("accessToken");
       const response = await axios.post(
-        "https://api-owayusa.com/api/items/category/create/",
+        `${API_URL}/api/items/category/create/`,
         { name, color },
         {
           headers: {
@@ -37,9 +38,7 @@ const useBulletinBoardCategory = () => {
     setError(null);
 
     try {
-      const response = await axios.get(
-        "https://api-owayusa.com/api/items/category/list/"
-      );
+      const response = await axios.get(`${API_URL}/api/items/category/list/`);
       setBulletins(response.data.results);
       setLoading(false);
     } catch (err) {
@@ -55,7 +54,7 @@ const useBulletinBoardCategory = () => {
     try {
       const accessToken = getCookie("accessToken");
       const response = await axios.patch(
-        `https://api-owayusa.com/api/items/category/update/${id}/`,
+        `${API_URL}/api/items/category/update/${id}/`,
         { name, color },
         {
           headers: {
@@ -79,14 +78,11 @@ const useBulletinBoardCategory = () => {
 
     try {
       const accessToken = getCookie("accessToken");
-      await axios.delete(
-        `https://api-owayusa.com/api/items/category/delete/${id}/`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      await axios.delete(`${API_URL}/api/items/category/delete/${id}/`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       setLoading(false);
       getBulletinBoards();

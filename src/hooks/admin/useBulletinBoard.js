@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie } from "@/utils/cookieHelpers";
+import { API_URL } from "@/constants";
 
 const useBulletinBoard = () => {
   const [bulletins, setBulletins] = useState([]);
@@ -14,7 +15,7 @@ const useBulletinBoard = () => {
     try {
       const accessToken = getCookie("accessToken");
       const response = await axios.post(
-        "https://api-owayusa.com/api/items/create/",
+        `${API_URL}/api/items/create/`,
         { text, item_category, color, city },
         {
           headers: {
@@ -37,14 +38,11 @@ const useBulletinBoard = () => {
     setError(null);
 
     try {
-      const response = await axios.get(
-        "https://api-owayusa.com/api/items/list/",
-        {
-          params: {
-            text: searchText,
-          },
-        }
-      );
+      const response = await axios.get(`${API_URL}/api/items/list/`, {
+        params: {
+          text: searchText,
+        },
+      });
       setBulletins(response.data.results);
       setLoading(false);
     } catch (err) {
@@ -61,7 +59,7 @@ const useBulletinBoard = () => {
       const accessToken = getCookie("accessToken");
 
       const response = await axios.patch(
-        `https://api-owayusa.com/api/items/update/${id}/`,
+        `${API_URL}/api/items/update/${id}/`,
         { text, item_category, color, city },
         {
           headers: {
@@ -85,7 +83,7 @@ const useBulletinBoard = () => {
 
     try {
       const accessToken = getCookie("accessToken");
-      await axios.delete(`https://api-owayusa.com/api/items/delete/${id}/`, {
+      await axios.delete(`${API_URL}/api/items/delete/${id}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
