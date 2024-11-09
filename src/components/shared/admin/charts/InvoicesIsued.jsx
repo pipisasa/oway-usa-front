@@ -60,7 +60,7 @@ export default function InvoicesIssued() {
       "/statics/admin_panel/warehouse-paid/",
       {
         params: {
-          country: countryId,
+          country_of_destination_id: countryId,
         },
       }
     );

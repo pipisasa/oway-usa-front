@@ -76,7 +76,7 @@ export default function ImportedProducts() {
       "/statics/admin_panel/warehouse-delivered/",
       {
         params: {
-          country: countryId,
+          country_of_destination_id: countryId,
         },
       }
     );

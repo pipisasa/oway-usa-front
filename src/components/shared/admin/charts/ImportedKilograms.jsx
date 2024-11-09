@@ -101,12 +101,13 @@ export default function ImportedKilograms() {
     queryKey: ["warehouses-weight", { currentCountry }],
   });
 
-  const selectedPeriodData = data[activePeriod];
+  const selectedPeriodData = data?.[activePeriod];
 
   const chartData = useMemo(() => {
     if (!selectedPeriodData) {
       return {
         labels: [],
+        change: 0,
         datasets: [
           {
             label: "Кг было провезено",
@@ -125,26 +126,26 @@ export default function ImportedKilograms() {
     const labels = Object?.keys(selectedPeriodData);
     const values = Object.values(selectedPeriodData);
 
-    const currentTotal = values.reduce((a, b) => a + b, 0);
-    const previousTotal = chartData.datasets[0].data.reduce((a, b) => a + b, 0);
+    // const currentTotal = values.reduce((a, b) => a + b, 0);
+    // const previousTotal = chartData.datasets[0].data.reduce((a, b) => a + b, 0);
 
-    const change =
-      previousTotal > 0
-        ? ((currentTotal - previousTotal) / previousTotal) * 100
-        : 0;
+    // const change =
+    //   previousTotal > 0
+    //     ? ((currentTotal - previousTotal) / previousTotal) * 100
+    //     : 0;
 
     return {
-      ...chartData,
-      change,
-      labels: labels.map((label) => formatLabel(label, period)),
+      // ...chartData,
+      change: 0,
+      labels: labels.map((label) => formatLabel(label, activePeriod)),
       datasets: [
         {
-          ...chartData.datasets[0],
+          // ...chartData.datasets[0],
           data: values,
         },
       ],
     };
-  }, [selectedPeriodData]);
+  }, [selectedPeriodData, activePeriod]);
 
   return (
     <div className={s.chart_container}>
